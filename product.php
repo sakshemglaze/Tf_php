@@ -26,7 +26,7 @@
                             <img src="<?php echo $newsto; ?>" alt="Your Image" width="140px">
                                 <div class="d-flex mt-3 d-center">
                                
-                                <button class="btn-primary-gradiant btn btn-sm w-100 d-center">
+                                <button onclick="openPopup()" class="btn-primary-gradiant btn btn-sm w-100 d-center">
                                             Ask price</button>
                                 </div>
                             </div>
@@ -155,7 +155,7 @@
                                 </div>
                                 <div class="col-md-4">
                                  
-                                    <button 
+                                    <button onclick="openPopup()"
                                         class="btn-outline-gradiant btn btn-sm w-100 d-center">
                                         <img src="assets/images/mail-black.png" width="14" height="12"
                                             class="me-2 w-18" alt="Mail_" />
@@ -171,6 +171,15 @@
         </div>
     </div>
  </div>
+ <?php include 'enquery.php'; ?>
+
+<!-- JavaScript code -->
+<script>
+  // Function to open the popup card
+  function openPopup() {
+    document.getElementById("popup-card").style.display = "block";
+  }
+</script>
  
 
                             

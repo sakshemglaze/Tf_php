@@ -70,8 +70,51 @@
 .swiper-slide a {
   font-size: 13px !important;
 }
-.footer{
+.search-product-text{
   margin-top: 200px;
+}
+
+.popup-card {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  max-height: 80vh; 
+  overflow-y: auto;
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 99999999;
+}
+.shadow2 {
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0px 3px 4.85px 0.15px rgba(0, 0, 0, 0.25);
+}
+.rightnav {
+  padding: 0;
+  margin: 0;
+}
+
+.rightnav li a {
+  display: block;
+  padding: 12px;
+}
+
+.rightnav li a {
+  position: relative;
+}
+
+.rightnav li a.active:after {
+  content: "";
+  height: 4px;
+  width: 100%;
+  left: 50%;
+  position: absolute;
+  background-color: #bd3838;
+  transform: translate(-50%, 31px);
 }
 
 
