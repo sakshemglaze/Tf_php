@@ -16,7 +16,7 @@
 
     <?php
     include "header-sub.php";
-  
+    $index=0;
             class FilterDTO {}
             $name= $_POST['searchText']? $_POST['searchText']:"cleaning services";
 
@@ -56,16 +56,49 @@
             <?php
            }
             ?>
-            
-
 </div>   
         </div>
         
               </section>
               <hr  size="5" width="100%">  
-              <small class="fwbold">
-                
-                 </small>
+              <section class="p-2">
+
+<div style="text-align: center;">
+  <h1 class="me-2 fwbold  text-capitalize mb-0"><?php echo $name?>
+    <span *ngIf="location=='null'"> in UAE</span>
+    <!-- <span *ngIf="location != 'null'"> in {{ location }}</span> -->
+  </h1>
+  <small class="fwbold"><?php print_r($index)?> </small>
+</div>
+<div *ngIf="subcategoryDetails && this.location == 'null' && subcategoryDetails.shortDescription ">
+  <span
+    [innerHTML]="this.showMore1?
+    subcategoryDetails.shortDescription.length > shortDesc
+    ? subcategoryDetails.shortDescription.substring(0,shortDesc) : subcategoryDetails.shortDescription: subcategoryDetails.shortDescription">
+
+  </span>
+  <span *ngIf="subcategoryDetails.shortDescription.length > shortDesc"
+    style="color:brown; position: absolute;">&nbsp;<b> <a (click)="this.toggleShowMore1()">{{
+        this.showMore1 ? '... View more' : 'View less' }} </a> </b></span>
+</div>
+<br>
+<nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb" *ngIf="products">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">TradersFind</a></li>
+    <li class="breadcrumb-item" *ngIf="industryDetails"><a
+        [href]="getIndustryUrl(industryDetails.industryName, industryDetails.id)">{{industryDetails.industryName}}</a>
+    </li>
+
+    <li class="breadcrumb-item" *ngIf="categoryDetails"><a
+        [href]="getCategoryUrl(categoryDetails.categoryName, categoryDetails.id)">{{categoryDetails.categoryName}}</a>
+    </li>
+
+    <li class="breadcrumb-item active fwbold text-capitalize " aria-current="page" >
+      {{this.searchText}} <span *ngIf="location !== 'null'"> &nbsp;>&nbsp; {{location}} </span>
+    </li>
+  </ol>
+</nav>
+</section>
 <div class="row gy-2">
     <div class="col-lg-3 col-xxl-2">
         
@@ -104,12 +137,14 @@
                           $premiumprod=$data->sponsoredProduct;
                         include "premiumProd.php";
                            }
-              foreach ($data as $prod) {
+              foreach ($data as $inde1 => $prod) {
+                $index=$inde1;
                 if (is_array($prod)) {
                     ?>
                     <div class="row gy-4">
                         <?php
-                      foreach ($prod as $onep) {
+                      foreach ($prod as $inde => $onep) {
+                       
                         if (is_object($onep) && isset($onep->id)) {
                            $prodData=$onep;
                            ?>
@@ -123,20 +158,27 @@
                           <?php
                       }
                           ?>
-                    </div>
+                    </div>                    
                     <?php
                 }
             }
            
           ?> 
+          <div class="row">
+          <p class="search-product-text">
+        
+        <?php
+        if(isset($data->sponsoredProduct->productsSubcategory->categoryDescriptionPage)){
+                      print_r( $data->sponsoredProduct->productsSubcategory->categoryDescriptionPage);
+                         ?>
+        </p>
+        <?php
+        }
+        ?>
+        </div>
     </div>    
 </div>
-<p class="search-product-text">
-        
-<?php
-              print_r( $data->sponsoredProduct->productsSubcategory->categoryDescriptionPage);
-                 ?>
-</p>
+
     <script src="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   
 </body>
