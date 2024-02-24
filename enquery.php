@@ -49,8 +49,17 @@
                                     <label>Unit</label>
                                     <select formControlName="quantityUnit" class="form-control"
                                         placeholder="eg:  Dozen,  Piece(s),  Tonr">
-                                        <option *ngFor="let unit of this.requirementService.units" value="{{unit}}">
-                                            {{unit}}</option>
+                                        <?php
+                      $resUnit=file_get_contents('./assets/testingJson/Units.json');
+                      $allunit=json_decode($resUnit);
+                      foreach($allunit as $unit){
+                             ?>
+                             <option value="<?php echo $unit;?>">
+                            <?php echo $unit;?>
+                            </option>
+                             <?php
+                      }
+                      ?>
                                     </select>
 
                                 </div>

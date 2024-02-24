@@ -4,11 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>TradersFind Result page</title>
     <link rel="stylesheet" href=" 	https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="./assets/css/style.css" >
-    <link rel="stylesheet" href="./assets/css/foot.css" >
-    <link rel="stylesheet" href="./assets/css/headsub.css" >
     <link rel="stylesheet" href="./assets/css/enquery.css" >
 </head>
 <body>
@@ -16,7 +14,7 @@
 
     <?php
     include "header-sub.php";
-    $index=0;
+    $indexr=0;
             class FilterDTO {}
             $name= $_POST['searchText']? $_POST['searchText']:"cleaning services";
 
@@ -35,6 +33,7 @@
                 $queryParams,
                 false
               );
+              $length = count(($data->products));
               ?>
               <section class="container-fluid mt-1">
               <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
@@ -68,7 +67,7 @@
     <span *ngIf="location=='null'"> in UAE</span>
     <!-- <span *ngIf="location != 'null'"> in {{ location }}</span> -->
   </h1>
-  <small class="fwbold"><?php print_r($index)?> </small>
+  <small class="fwbold">(<?php print_r($length)?>+ products available) </small>
 </div>
 <div *ngIf="subcategoryDetails && this.location == 'null' && subcategoryDetails.shortDescription ">
   <span
@@ -138,13 +137,13 @@
                         include "premiumProd.php";
                            }
               foreach ($data as $inde1 => $prod) {
-                $index=$inde1;
+                
                 if (is_array($prod)) {
                     ?>
                     <div class="row gy-4">
                         <?php
                       foreach ($prod as $inde => $onep) {
-                       
+                        $indexr=$inde;
                         if (is_object($onep) && isset($onep->id)) {
                            $prodData=$onep;
                            ?>
@@ -162,8 +161,15 @@
                     <?php
                 }
             }
-           
+          
           ?> 
+          <div class="post-request-text ">
+          <section class="easysource my-4 py-2">
+            <?php
+             include "post-request.php";
+              ?>
+               </section>
+          </div>
           <div class="row">
           <p class="search-product-text">
         

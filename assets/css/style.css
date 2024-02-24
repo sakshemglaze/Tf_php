@@ -70,8 +70,15 @@
 .swiper-slide a {
   font-size: 13px !important;
 }
-.search-product-text{
-  margin-top: 200px;
+.post-request-text{
+  margin-top: 100px;
+}
+.easysource {
+  background-image: url("../images/middle-banner.webp");
+  background-size: cover;
+  min-height: 200px;
+  width: 100%;
+  background-repeat: no-repeat;
 }
 
 .popup-card {
