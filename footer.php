@@ -1,4 +1,4 @@
-
+<link rel="stylesheet" href="./assets/css/foot.css" >
 <footer class="footer pt-5 pb-1">
 
     <div class="container-fluid">
@@ -103,16 +103,16 @@
     <div class="carousel-item active">
       <div class="row justify-content-center"> 
         <div class="col-md-3"> 
-          <img src="assets/images/brands/footer-brands/1.webp" class="d-block w-100 img-fluid" alt="" />
+          <img src="assets/images/brands/footer-brands/1.webp" class="d-block img-fluid" alt="" />
         </div>
         <div class="col-md-3">
-          <img src="assets/images/brands/footer-brands/2.webp" class="d-block w-100 img-fluid" alt="" />
+          <img src="assets/images/brands/footer-brands/2.webp" class="d-block  img-fluid" alt="" />
         </div>
         <div class="col-md-3">
-          <img src="assets/images/brands/footer-brands/3.webp" class="d-block w-100 img-fluid" alt="" />
+          <img src="assets/images/brands/footer-brands/3.webp" class="d-block  img-fluid" alt="" />
         </div>
         <div class="col-md-3">
-          <img src="assets/images/brands/footer-brands/4.webp" class="d-block w-100 img-fluid" alt="" />
+          <img src="assets/images/brands/footer-brands/4.webp" class="d-block img-fluid" alt="" />
         </div>
       </div>
     </div>

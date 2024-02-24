@@ -5,10 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href=" 	https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="./assets/bootstrap/bootstrap.min.css">-->
     <link rel="stylesheet" href="./assets/css/style.css" >
-    <link rel="stylesheet" href="./assets/css/foot.css" >
-    <link rel="stylesheet" href="./assets/css/headsub.css" >
     <link rel="stylesheet" href="./assets/css/enquery.css" >
 </head>
 <body>
@@ -37,28 +36,7 @@
               );
               ?>
               <section class="container-fluid mt-1">
-              <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-inner">
-                <?php
-          $webPageName = 'Search Product Top';
-           $responseBanner = post('api/keywords-banner', array($name, $webPageName));
-           foreach($responseBanner as $index => $ban){
-            $banner = $ban;
-              ?>
-              <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">
-   
-              <?php
-            $newban = "https://doc.tradersfind.com/images/" . $banner->image->id . ".webp";
-           
-            echo '<img src="' . $newban . '" alt="Banner Image" width="100%">';
-            ?>
-            </div>
-            <?php
-           }
-            ?>
-</div>   
-        </div>
-        
+              <?php include "banner.php";     ?>
               </section>
               <hr  size="5" width="100%">  
               <section class="p-2">
@@ -101,10 +79,16 @@
 </section>
 <div class="row gy-2">
     <div class="col-lg-3 col-xxl-2">
-        
+       <?php
+        $userAgent = $_SERVER['HTTP_USER_AGENT'];
+        $isMobile = preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i', $userAgent);
+        //$imagePath = $isMobile ? 'assets/images/poster1.webp' : 'assets/images/poster1.gif';
+        if(!$isMobile ) {
+      ?>
       <div class="sticky-top" style="top:12%;"> <a href="https://wa.link/hy8kan" title="TradersFind" target="_blank">
         <img src="assets/images/poster1.webp" class="img-fluid mt-4 w-100" alt="Poster" /></a>
       </div>
+      <?php } ?>
     </p></div>
     <div class="col-lg-9 col-xxl-10 home-cleaning-Bg">
     <div class="row">
