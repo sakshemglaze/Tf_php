@@ -358,11 +358,11 @@
   
   .about_text2 {
     position: relative;
-    padding-left: 82px;
+    
   }
   
   .about_text2 b {
-    position: absolute;
+    position: relative;
     left: 0;
   }
   

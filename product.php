@@ -44,7 +44,7 @@
                                     <div class="two-lines small">
                                         <ul class="two-line-containers" role="list">
                                             <?php if (!empty($prodData->productDescription)) { ?>
-                                                  <?php foreach (array_slice(json_decode($prodData->specifications, true), 0, 2) as $spec) { ?>
+                                                  <?php foreach (array_slice(json_decode($prodData->specifications, true), 0, 4) as $spec) { ?>
                                                       <li role="listitem" tabindex="0">
                                                         <span><b><?php echo $spec['SpecificationName']; ?> :</b> <?php echo $spec['SpecValue']; ?></span>
                                                       </li>
@@ -62,16 +62,7 @@
 
 
                                     <br>
-                                    <div class="two-lines small">
-                                        <span *ngIf="product.productDescription">
-                                            <p class="about_text2">
-                                                <b>Description : </b>
-                                                <?php
-                                               print_r( $prodData->productDescription);
-                                                ?>
-                                            </p>
-                                        </span>
-                                    </div>
+                                    
                                     <div class="d-flex mt-1 small about_text2">
                                         <!--<img src="assets/images/house.png" alt="Location_seller" width="18" height="19" class="me-3 w-18" />-->
                                         <b>Company :
