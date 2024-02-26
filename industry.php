@@ -1,9 +1,20 @@
+<?php
+    $currentUrl = $_SERVER['REQUEST_URI'];
+    $urlParts = explode('/', $currentUrl);
+    $industryName = $urlParts[2];
+    $id = $urlParts[3];
+    print_r ($id);
+    if ($industryName != '') {
+      include "industryDetail.php/industry/" . $id;
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Industry</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <!--<link rel="stylesheet" href="./assets/bootstrap/bootstrap.min.css">-->
     <link rel="stylesheet" href="/assets/css/indus.css" />
@@ -12,6 +23,7 @@
 <script src="./assets/js/lazy-load.js"></script>
 <?php
     include "header-sub.php";
+    
     $index=0;
             class FilterDTO {}
             //$name= $_POST['searchText']? $_POST['searchText']:"cleaning services";
@@ -28,7 +40,7 @@
              // $data = findActive($data1);
               //print_r($data);
               ?>
-<section class="hidden-content container-fluid ">
+<section class="container-fluid ">
   <?php include "banner.php"; ?>
 </section>
 <section class="p-3">
@@ -50,7 +62,7 @@
 foreach ($data1 as $category) {
     echo '<div class="row  gy-4 bg-white">';
     echo '<div class="col-lg-12">';
-    echo '<h3 class="text-center fwbold text-uppercase text-black-50"><a href="">' . $category->industryName . '</a></h3>';
+    echo '<h3 class="text-center fwbold text-uppercase text-black-50"><a href="industry/' . preg_replace('/[,&\s]+/', '-',$category->industryName) . '/' . $category->id .'">' . $category->industryName . '</a></h3>';
     echo '</div>';
     echo '<div class="col-lg-3 text-center">';
     if (!empty($category->image)) { 
@@ -80,6 +92,27 @@ foreach ($data1 as $category) {
     echo '</div>';
     echo '</div>';
     echo '</div>';
+
+    echo '<div class="col-lg-12">';
+      echo '<div class="row bg-grey">';
+        echo '<div class="col-lg-12 position-relative sub_category_list2 ">';
+         echo '<ul class="sub_category_list">';
+          foreach (array_slice($category->productsCategories, 0, 4) as $cat) {
+            echo '<li>';
+              echo '<a [href]="" class="align-items-center flex-row d-flex gap-3 flex-wrap flex-md-nowrap  justify-content-md-start">';
+                echo '<div class="pro_image">';
+                  echo'<img data-src="https://doc.tradersfind.com/images/' . $cat->image->id . '.webp" class="lazy"' . 'alt="Category" width="140px"/>';
+                echo'</div>';
+                echo'<h2 class="fs-6 fw-bold">' . $cat->categoryName .'</h2>';
+              echo'</a>';
+            echo '</li>';
+          }
+          echo '</ul>';
+          echo '<a [href]="" class="btn-primary-gradiant subcatbtn">View More</a>';
+      echo '</div>';
+     echo '</div>';
+    echo '</div>';
+
     echo '</div>';
     echo '<br />';
     echo '<br />';
@@ -97,81 +130,8 @@ foreach ($data1 as $category) {
     </div>
   </div>
 </section>
-<section class="bg-grey2 mt-5" *ngIf="popular_categories">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="p-md-4 my-3">
-          <div class="card border-0 shadow-lg">
-            <div class="card-header text-center bg-gradiant">
-              <h5 class="mb-0 py-1 fs-3">
-                INQUIRE FOR YOUR BUYING REQUIREMENT
-              </h5>
-            </div>
-            <div class="card-body p-md-5">
-              <h4 class="text-uppercase mb-5 fw-semibold">
-                Tell us about your requirement
-              </h4>
-              <form *ngIf="this.requirementService.prodDetailFrom"
-              [ngClass]="!this.requirementService.isFormvalid?'was-validated':''"
-              [formGroup]="this.requirementService.prodDetailFrom">
-              <div class="row">
-                <div class="col-lg-6">
-                  <label for="" class="form-label fw-semibold fs-5">Describe in few words *</label>
-                  <textarea name=""  formControlName="description" class="form-control" id="" cols="30" rows="6"
-                    placeholder="Please include product name, order quantity, usage, special request if any in your inquery."></textarea>
-                  <button class="p-0 text-blue bg-transparent border-0 mt-3 fs-5">
-                    + Add Attachment
-                  </button>
-                </div>
-                <div class="col-lg-6">
-                  <div class="row gy-4">
-                    <div class="col-lg-6">
-                      <label for="" class="form-label fw-semibold fs-5">Email ID*</label>
-                      <input type="text" formControlName="enquirerEmail" class="form-control" placeholder="Email ID" />
-                    </div>
-                    <div class="input-group">
-                      <select formControlName="noCode" class="form-control mxw-50">
-                        <option *ngFor="let opt of this.requirementService.countries"
-                          value="{{opt.code}}">{{ opt.code }}- {{ opt.name }}
-                        </option>
-                      </select>
-                      <!--</div>
-                <div class="col-lg-6">-->
-                      <input type="text" formControlName="mobileNo" class="form-control"
-                        placeholder="Mobile number" width="" />
-                    </div>
-                    <div class="col-lg-12">
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked />
-                        <label class="form-check-label" for="flexCheckChecked">
-                          I agree to
-                          <a href="https://www.tradersfind.com/term-and-conditions" target="_blank" class="text-decoration-underline">terms and conditions</a>
-                        </label>
-                      </div>
-                    </div>
-                    <app-loadp *ngIf="requirementService.spannerval" style="height: 50%; width: 60%; margin-left: -5px;"></app-loadp>
-                    <div class="col-lg-12">
-                      <button (click)="this.requirementService.onClickSubmitRequirement()"
-              class="btn-primary-gradiant px-md-5 py-2 rounded-10 fs-5 fwbold mt-3 mb-3">Send Inquiry</button>
-            
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </form>
-          
-            <app-otp *ngIf="this.requirementService.isVerification"
-            [countryCode]="this.requirementService.prodDetailFrom.value.noCode"
-            [mobileNo]="this.requirementService.prodDetailFrom.value.mobileNo"></app-otp>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
+<?php 
+include "inquiry.php" ?>
         </body></html>
 <?php
 include "footer.php";
