@@ -5,8 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seller Details </title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    <!--<link rel="stylesheet" href="./assets/bootstrap/bootstrap.min.css">-->
+    <link rel="stylesheet" href="./assets/vendors/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/sellweb.css" />
 </head>
 <body>
@@ -19,7 +18,7 @@
             $companyName= $_POST['searchText']? $_POST['searchText']:"globe-trading-agency-limited";
             require_once 'post.php';
         $data =  get(
-                'api/guest/search-sellers-company-name/globe trading agency limited', true
+                'api/guest/search-sellers-company-name/clean well facilities management', true
               );
               $data1 = json_decode($data);
              // $data = findActive($data1);
@@ -517,4 +516,5 @@
   </div>
 </section>
                                 </body></html>
+                                <script src="./assets/vendors/bootstrap/bootstrap.bundle.min.js"></script>
 <?php include "footer.php"; ?>

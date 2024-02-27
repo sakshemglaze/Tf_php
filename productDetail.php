@@ -4,10 +4,9 @@
   
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seller Details </title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    <!--<link rel="stylesheet" href="./assets/bootstrap/bootstrap.min.css">-->
-    <link rel="stylesheet" href="/assets/css/prod.css" />
+    <title>Product Details </title>
+    <link rel="stylesheet" href="./assets/vendors/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/css/prod.css" />
 </head>
 <body>
 <script src="./assets/js/lazy-load.js"></script>
@@ -16,15 +15,15 @@
     
     $index=0;
             class FilterDTO {}
-            $companyName= $_POST['searchText']? $_POST['searchText']:"globe-trading-agency-limited";
+            $productName= $_POST['searchText']? $_POST['searchText']:"globe-trading-agency-limited";
             require_once 'post.php';
         $data =  get(
-                'api/products/64c10580ff54cd4f625e2aac', 
+                'api/guest/products/647dcf429d126d0588ea6e3a/carpet-dry-cleaning-services', 
                 true
               );
               $data1 = json_decode($data);
-             // $data = findActive($data1);
-              print_r($data1);
+              //$data = findActive($data1);
+              //print_r($data1->seller->logo->id);
               ?>
 
 <section class="container-fluid ">
@@ -34,7 +33,7 @@
   <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="/">TradersFind </a></li>
-      <li class="breadcrumb-item active" aria-current="page"> <?php echo $data1->industryName; ?> </li>
+      <li class="breadcrumb-item active" aria-current="page"> <?php echo $data1->productName; ?> </li>
     </ol>
   </nav>
 </section>
@@ -46,53 +45,46 @@
         <div class="card-body">
           <div class="row">
             <div class="col-lg-3 product_details_img">
-              <div class="fotorama" *ngIf="prodDetails" data-nav="thumbs" data-thumbmargin="20" data-width="100%"
+              <?php if ($data1 != null ) : ?>
+              <div class="fotorama" data-nav="thumbs" data-thumbmargin="20" data-width="100%"
                 data-allowfullscreen="true" data-height="auto" data-ratio="800/600">
-                <app-traders-img [id]="prodDetails && prodDetails.images && prodDetails.images.length > 0
-                                      ? prodDetails.images[0].id
-                                      : null" [imageContent]="prodDetails && prodDetails.images && prodDetails.images.length > 0 && 
-                                      (prodDetails.images[0].imageContentContentType === null) ? null: ''"
-                  [prodName]="prodDetails.altText ? prodDetails.altText : prodDetails.productName" target="_blank"
-                  [class]="'img-fluid'" width="60" height="60"></app-traders-img>
-
-              
-
-
-              </div>
+                <img data-src="image.php?image=<?php echo $data1->images[0]->id?>" alt="<?php echo $data1->productName ?>" class="lazy" >
+             </div>
+             <?php endif; ?>
             </div>
             <div class="col-lg-5">
               <h1 class="fwbold fs-3" *ngIf="prodDetails">
-                {{prodDetails.productName}}
+               <?php echo $data1->productName ?>
               </h1>
+              <span class="fwbold fs-3 text-red">
+                <?php if ($data1->Price && ($data1->maxPrice == null || $data1->maxPrice == '')) : ?>
+                  <strong>Price:</strong> <?php echo $prodDetails['price']; ?>
+                <?php endif; ?>
+                <?php if ($data1->maxPrice && ($data1->Price == null || $data1->Price == '')) : ?> 
+                <strong>Price:</strong><?php echo $data1.maxPrice; 
+                endif; ?> 
 
-
-              <span class="fwbold fs-3 text-red" *ngIf="prodDetails && (prodDetails.price || prodDetails.maxPrice)">
-
-                <span
-                  *ngIf="prodDetails.price && (prodDetails.maxPrice == null || prodDetails.maxPrice == '')"><strong>Price:</strong>
-                  {{prodDetails.price}}</span>
-                <span
-                  *ngIf="prodDetails.maxPrice && (prodDetails.price == null || prodDetails.price == '')"><strong>Price:</strong>
-                  {{prodDetails.maxPrice}}</span>
-                <span
-                  *ngIf="prodDetails.price && prodDetails.price != '' && prodDetails.maxPrice && prodDetails.maxPrice != ''"><strong>Price:</strong>
-                  {{prodDetails.price}} - {{prodDetails.maxPrice}}</span>
-                <span *ngIf="prodDetails.currency">{{prodDetails.currency}} / Piece</span>
-                <span *ngIf="!prodDetails.currency">AED / Piece</span>
-
+                <?php if ($data1->price && $data1->price != '' && $data1->maxPrice && $data1->maxPrice != '') : ?>  
+                  <strong>Price:</strong> <?php echo $data1->price . '-' . $data1->maxPrice; ?> <?php endif; ?>
+                <?php if ($data1->currency != '') : ?>  
+                 <?php echo $data1->currency?> / Piece
+                <?php else: ?>
+                  AED / Piece
+                <?php endif; ?>
               </span>
-              <!-- <a href="#" class="text-blue border-bottom">Get latest price</a> -->
+              
               <ul class="pro-details my-4">
-
-                <li *ngFor="let spec of $any(prodSpecs | slice:0:5); let i=index;">
-                  <span>{{spec.SpecificationName}}</span> <span>:</span>
-                  <span>{{spec.SpecValue}}</span>
-                </li>
-
+               <?php 
+               $array = json_decode($data1->specifications);
+               foreach( $array as $spec ) {
+                echo '<li>';
+                 echo '<span>' . $spec->SpecificationName . '</span> <span>:</span> <span>' . $spec->SpecValue . '</span>';
+                echo '</li>';
+               } ?> 
               </ul>
               <!-- <a href="#" class="mt-4 text-blue">View more details</a> -->
 
-              <app-ratings *ngIf="prodDetails" [rate]="prodDetails.rating"></app-ratings>
+         <!--     <app-ratings *ngIf="prodDetails" [rate]="prodDetails.rating"></app-ratings>-->
               <div class="text-center mt-4">
                 <button (click)="openPostRequirement(prodDetails.productName)"
                   class="btn-primary-gradiant rounded-2 py-2 lh-1 px-4">
@@ -107,20 +99,17 @@
                 <div class="card-body">
                   <div class="d-flex flex-column align-items-center">
                     <span class="bg-white px-3 rounded-10 py-5">
-                      <!-- <img src="assets/images/Apex-logo.png" alt="" /> -->
-                      <app-traders-img *ngIf="prodDetails" [id]="
-                      prodDetails && prodDetails.seller.logo
-                        ? prodDetails.seller.logo.id
-                        : null"
-                        [prodName]="prodDetails.seller.sellerCompanyName ? prodDetails.seller.sellerCompanyName : prodDetails.productName"
-                        target="_blank" [class]="" height="20" ></app-traders-img>
+                      <img data-src="image.php?image=<?php echo $data1->seller->logo->id ?>" alt="<?php echo $data1->seller->sellerCompanyName ?>" class="lazy" width="160"/> 
                     </span>
 
-                    <h2 class="fwbold fs-4 mt-3"
-                      *ngIf="prodDetails && prodDetails.seller && prodDetails.seller.sellerCompanyName">
-                     <a [href]="urlService.getSellerUrl(prodDetails.seller.sellerUrl,prodDetails.seller.id)" target="_blank" class="text-blue"> {{prodDetails.seller.sellerCompanyName}} </a></h2>
+                    <h2 class="fwbold fs-4 mt-3">
+                      <?php if($data1->seller && $data1->seller->sellerCompanyName ) : ?>
+                     <a [href]="url.php?getSellerUrl($data1->seller->sellerUrl,$data1->seller->id)" target="_blank" class="text-blue"> <?php echo $data1->seller->sellerCompanyName ?> </a></h2>
+                     <?php endif; ?>
                     <div class="fs-5 mt-2">
-                      <img class="me-2" src="assets/images/location-3.svg" width="15" alt="" />
+                      <img class="lazy me-2" data-src="assets/images/location-3.svg" width="15" alt="location" />
+                      <?php join($data1->seller->mainMarkets,',') .', ' . $data1->seller->state . $data1->seller->city . $data1->seller->country ?>
+                      <!--
                       <a *ngIf="prodDetails" [href]="
                       urlService.getSellerUrl(prodDetails.seller.sellerUrl,prodDetails.seller.id)" target="_blank">
                         <span *ngIf="
@@ -144,7 +133,7 @@
                           {{ prodDetails.seller.city ? prodDetails.seller.city + ", " : "" }}
                           {{ prodDetails.seller.state ? prodDetails.seller.state + ", " : "" }}
                           {{ prodDetails.seller.country ? prodDetails.seller.country : "" }}</span>
-                      </a>
+                      </a> -->
                     </div>
                     <div class="d-flex align-items-center flex-wrap mt-3">
                       <div class="d-flex align-items-center me-3">
@@ -156,13 +145,9 @@
 
                       </div>
                     </div>
-                    <button *ngIf="prodDetails" class="btn btn-light mt-5 bg-white"
+                    <button class="btn btn-light mt-5 bg-white"
                       (click)="this.maskingService.onClickPhoneNum(prodDetails.seller, 'sellerVirtualContactPhone', this.urlService.getProductUrl(prodDetails.productName,prodDetails.id), prodDetails)">
-                      <img src="assets/images/phone.png" width="15" alt="" />
-                      {{this.maskingService.getMaskedNumber(prodDetails.seller,
-                      'sellerVirtualContactPhone')}}
-
-                    </button>
+                      <img src="assets/images/phone.png" width="15" alt="phone" />  <?php echo $data1->seller->maskedNum ?> </button>
                     <div class="d-flex align-items-center w-100 mt-3 gap-2">
                       <a *ngIf="prodDetails"
                         [href]="this.urlService.getProductToWhatsapp(prodDetails.productName, prodDetails.id, prodDetails.seller)"
@@ -193,10 +178,7 @@
           More products from this seller
         </h2>
       </div>
-
-
-      <app-more-products *ngIf="prodDetails && prodDetails.seller" [productId]="prodDetails.id"
-        [seller]="prodDetails.seller"></app-more-products>
+      <?php include "moreproduct.php" ?>
     </div>
   </div>
 </section>
@@ -227,23 +209,23 @@
 
           <table class="table producttable fs-5">
          
-            <tbody *ngIf="prodDetails">
+            <tbody >
               <td [width]="250">Brand</td>
-              <td>{{prodDetails.brand}}</td>
+              <td><?php echo $data1->brand ?></td>
             </tbody>
-            <tbody *ngFor="let spec of prodSpecs">
-              <td>{{spec.SpecificationName}}</td>
-              <td>{{spec.SpecValue}}</td>
-            </tbody>
-  
+            <?php
+            $array = json_decode($data1->specifications);
+               foreach( $array as $spec ) {
+                echo '<tbody>';
+                 echo '<td>' . $spec->SpecificationName . '</td> <td>' . $spec->SpecValue . '</td>';
+                echo '</tbody>';
+               } 
+               ?> 
           </table>
 
           <h3 class="fwbold mt-4 fs-3">Product Description</h3>
-
-
-
-          <p *ngIf="prodDetails && prodDetails.productDescription">
-            {{prodDetails.productDescription}}</p>
+          <p >
+           <?php echo $data1->productDescription; ?> </p>
         </div>
         <div class="tab-pane fade fs-5" id="pills-company" role="tabpanel" aria-labelledby="pills-company-tab"
           tabindex="0">
@@ -254,45 +236,30 @@
             <tbody>
               <td>
                 Nature of Business <br />
-                {{
-                prodDetails.seller.sellerCompanyType
-                }}
+                <?php echo $data1->seller->sellerCompanyType; ?>
               </td>
               <td>
-                Year of Establishment <br />
-                {{prodDetails.seller.sellerInceptionYear}}
+                Year of Establishment <br /> 
+                <?php echo $data1->seller->sellerInceptionYear; ?>
               </td>
               <td>
                 Website <br />
-                <a [href]="prodDetails.seller.sellerWebsite" title="Seller Website" target="_blank" class="text-blue">{{prodDetails.seller.sellerWebsite}} </a>
+                <a [href]="<?php echo $data1->seller->sellerWebsite; ?>" title="Seller Website" target="_blank" class="text-blue">
+                <?php echo $data1->seller->sellerWebsite; ?> </a>
               </td>
             </tbody>
             <tbody>
               <td>
                 Working Days <br />
-                <span *ngIf="this.businessDays">{{businessDays}}</span><span
-                  *ngIf="this.businessHours">{{businessHours}}</span>
+                <?php 
+                 echo $data1->seller->sellerBusinessHours //. $data1->seller->sellerBusinessDay
+                  ?>
               </td>
               <td>
-                Trade License <br />
-                {{prodDetails.seller.tradeLicenseNumber}}
+                Trade License <br />  <?php echo $data1->seller->tradeLicenseNumber; ?>
               </td>
               <td>
-                Service Area <br />
-                <span title="{{ prodDetails.seller.mainMarkets.join(', ') }}" *ngIf="
-                prodDetails.seller.mainMarkets &&
-                prodDetails.seller.mainMarkets.length > 0 &&
-                prodDetails.seller.mainMarkets[0] &&
-                prodDetails.seller.mainMarkets[0] != ''
-              ">{{ prodDetails.seller.mainMarkets.join(", ") }}</span>
-                <span title="{{ prodDetails.seller?.sellerState }}, {{ prodDetails.seller?.sellerCountry }}" *ngIf="
-                !(
-                  prodDetails.seller.mainMarkets &&
-                  prodDetails.seller.mainMarkets.length > 0 &&
-                  prodDetails.seller.mainMarkets[0] &&
-                  prodDetails.seller.mainMarkets[0] != ''
-                )
-              ">{{ prodDetails.seller?.sellerState }}, {{ prodDetails.seller?.sellerCountry }}</span>
+                Service Area <br /> <?php echo $data1->seller->sellerState . ', ' . $data1->seller->sellerCountry ?> 
               </td>
             </tbody>
             <tbody>
@@ -307,12 +274,10 @@
               </td> -->
             </tbody>
           </table>
-          <div *ngIf="prodDetails">
-            {{prodDetails.seller.sellerCompanyName}}
+          <div >
+          <?php echo $data1->seller->sellerCompanyName; ?>
           </div>
-          <div *ngIf="prodDetails && prodDetails.seller && prodDetails.seller.sellerTagline" [innerHTML] = "prodDetails.seller.sellerTagline">
-            
-          </div>
+          <div> <?php echo $data1->seller->sellerTagline; ?>     </div><br>
           <a *ngIf="prodDetails && prodDetails.seller" [href]="this.urlService.getSellerUrl(prodDetails.seller.sellerUrl,prodDetails.seller.id)
           " target="_blank" title="{{ prodDetails.seller.sellerCompanyName }}" target="_blank"
             class="btn-primary-gradiant rounded-10 mt-4 px-md-5">
@@ -327,10 +292,10 @@
       [formGroup]="this.requirementService.prodDetailFrom">
         <div class="card fs-5 rounded-20">
           <div class="card-header py-3 bg-gradiant rounded-header text-center">
-            <span class="mb-0 fwbold">Send Enquiry to Supplier</span>>
+            <span class="mb-0 fwbold">Send Enquiry to Supplier</span>
           </div>
           <div class="card-body px-md-5 pt-4 pb-5">
-            <h3 class="fs-4">TO: {{prodDetails?prodDetails.sellerCompanyName:'TradersFind'}}</h3>
+            <h3 class="fs-4">TO: <?php echo $data1->seller->sellerCompanyName; ?></h3>
             <hr class="mt-4" />
             <div class="form-group mt-4">
               <label for="description" class="form-label">Describe in few words *</label>
@@ -378,6 +343,7 @@
     </div>
   </div>
 </section>
+<!--
 <section class="bg-grey4 mt-5 py-4">
   <div class="container-fluid">
     <div class="row">
@@ -394,22 +360,23 @@
                   ? product.images[0].id
                   : null" [prodName]="product.altText ? product.altText : product.productName" target="_blank"
                 [class]="'img-fluid'"></app-traders-img>
-              <!-- <img src="assets/images/product3.png" class="img-fluid" alt="" /> -->
             </span>
             <h3 class="mt-1 fs-6 fwbold"><a
                 [href]="this.urlService.getProductUrl(prodDetails.productName, prodDetails.id)">
-                {{product.productName}}</a></h3>
+                echo $data1->productName; ?></a></h3>
           </div>
         </div>
       </div>
 
 
-      <!-- <div class="col-lg-12 text-center">
+      <div class="col-lg-12 text-center">
         <button class="btn-primary-gradiant rounded-10 mt-4 px-md-5">
           View More
         </button>
-      </div> -->
+      </div> 
     </div>
   </div>
-</section>
+</section> -->
+<script src="./assets/vendors/bootstrap/bootstrap.bundle.min.js"></script>
+                </body></html>
 <?php include "footer.php" ?>
