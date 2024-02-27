@@ -1,8 +1,9 @@
 <link rel="stylesheet" href="./assets/css/headsub.css" >
+<link rel="stylesheet" href=" 	https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 <header class="container-fluid shadow-sm border-bottom bg-white sticky-top inner_header1 ">
     <div class="d-flex align-items-center position-relative flex-wrap">
 
-        <a href="index.php" title="TradersFind" aria-label="TradersFind - Largest B2B online Portal">
+        <a href="home.php" title="TradersFind" aria-label="TradersFind - Largest B2B online Portal">
           <img src="assets/images/TradersFind.webp" alt="TradersFind" class="order-1 inner_header_logo" width="110" height="70" Rel="Nofollow" />
         </a>
        
