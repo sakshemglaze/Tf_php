@@ -16,7 +16,12 @@
     include "header-sub.php";
     $indexr=0;
             class FilterDTO {}
-            $name= $_POST['searchText']? $_POST['searchText']:"cleaning services";
+            if(isset($_POST['searchText'])){
+              $name= $_POST['searchText'];
+            }else{
+              $name= $_POST['search'];
+            }
+          
 
             $filterDto = new FilterDTO();
             $payload = array(
@@ -38,7 +43,7 @@
               <section class="container-fluid mt-1">
               <?php include "banner.php";     ?>
               </section>
-              <hr  size="5" width="100%">  
+            
               <section class="p-2">
 
 <div style="text-align: center;">
