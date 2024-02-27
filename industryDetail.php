@@ -12,8 +12,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Industry </title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    <!--<link rel="stylesheet" href="./assets/bootstrap/bootstrap.min.css">-->
-    <link rel="stylesheet" href="/assets/css/indusdetails.css" />
+   
+    <link rel="stylesheet" href="./assets/css/indusdetails.css" />
 </head>
 <body>
 <script src="./assets/js/lazy-load.js"></script>
@@ -87,6 +87,9 @@
     </div>
 </section>
 <?php
-include "inquiry.php" ?>
+include "inquiry.php";
+
+include "footer.php";
+?>
                                     </body>
                                     </html>

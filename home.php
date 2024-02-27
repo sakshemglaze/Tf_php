@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="./assets/css/home.css" />
 <!-- <link rel="stylesheet" href="./assets/css/style.css" > -->
+<link rel="stylesheet" href=" 	https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 <link rel="preload" href="./assets/images/header-bg.webp" as="image" type="image/webp" fetchpriority="high" >
 <?php
 include "header.php";
@@ -48,7 +49,7 @@ include "home-search.php"
           <img src="assets/images/brands/new1.webp" alt="" width="271" height="193" class="w-100 img-fluid" />
           <div class="hading2">
             <p>Looking for a <br> product ?</p>
-            <a routerLink="post-buy-requirements">Post Buy Requirement</a>
+            <a href="post-buy-requirements.php">Post Buy Requirement</a>
           </div>
         </div>
 
@@ -56,7 +57,7 @@ include "home-search.php"
           <img src="assets/images/brands/new2.webp" alt="" width="271" height="193" class="w-100 img-fluid" />
           <div class="hading2">
             <p>Want to grow your <br> business 10X Faster?</p>
-            <a routerLink="register-your-business">Sell on TradersFind</a>
+            <a href="registration.php">Sell on TradersFind</a>
           </div>
         </div>
       </div>
@@ -83,7 +84,7 @@ include "home-search.php"
                   and driving your business forward.
                 </p>
                 
-                <button class="btn-primary-gradiant rounded-2" routerLink="/about-us">LEARN MORE ABOUT US</button>
+                <a class="btn-primary-gradiant rounded-2" href="about-us.php">LEARN MORE ABOUT US</a>
 
               </div>
     </div>
@@ -97,7 +98,7 @@ include "home-search.php"
                   and service providers in UAE within a single marketplace. Whether you are a local business looking for suppliers 
                   in UAE or an international company seeking trade opportunities in UAE’s thriving market, TradersFind is your gateway to expand your business in UAE.
                 </p>
-                <button class="btn-primary-gradiant rounded-2" routerLink="/about-us">LEARN MORE ABOUT US</button>
+                <a class="btn-primary-gradiant rounded-2" href="about-us.php">LEARN MORE ABOUT US</a>
               </div>
     </div>
     <div class="carousel-item">
@@ -110,7 +111,7 @@ include "home-search.php"
                   you need to thrive in the competitive market. Our business directory of UAE companies is updated at regular intervals to ensure 
                   that you have access to the most relevant and up-to-date information.
                 </p>
-                <button class="btn-primary-gradiant rounded-2" routerLink="/about-us">LEARN MORE ABOUT US</button>
+                <a class="btn-primary-gradiant rounded-2" href="about-us.php">LEARN MORE ABOUT US</a>
               </div>
     </div>
     <div class="carousel-item">
@@ -122,7 +123,7 @@ include "home-search.php"
                   buyers on our platform meet the highest standards of quality, authenticity, and ethical practices. 
                   When you connect with a verified  supplier or buyer through TradersFind, you can have confidence in the credibility and reliability of your business partners.
                 </p>
-                <button class="btn-primary-gradiant rounded-2" routerLink="/about-us">LEARN MORE ABOUT US</button>
+                <a class="btn-primary-gradiant rounded-2" href="about-us.php">LEARN MORE ABOUT US</a>
               </div>
     </div>
     <div class="carousel-item">
@@ -134,7 +135,7 @@ include "home-search.php"
                   allowing them to reach a wider audience. Our efficient interface allows free business listings that increase 
                   their visibility among potential customers without hurting their pockets.
                 </p>
-                <button class="btn-primary-gradiant rounded-2" routerLink="/about-us">LEARN MORE ABOUT US</button>
+                <a class="btn-primary-gradiant rounded-2" href="about-us.php">LEARN MORE ABOUT US</a>
               </div>
     </div>
     <div class="carousel-item">
@@ -147,7 +148,7 @@ include "home-search.php"
                   textiles, or raw materials, our platform has a diverse selection to cater to your needs. TradersFind 
                   is a place where you can connect with suppliers at one click.
                 </p>
-                <button class="btn-primary-gradiant rounded-2" routerLink="/about-us">LEARN MORE ABOUT US</button>
+                <a class="btn-primary-gradiant rounded-2" href="about-us.php">LEARN MORE ABOUT US</a>
               </div>
     </div>
     <div class="carousel-item">
@@ -159,7 +160,7 @@ include "home-search.php"
                   Join now to expand your business reach, explore new opportunities, and take your business to new heights. 
                   One Click 3 options to fulfill all your requirements. Option 1: Click to Call, Option 2: Click to Connect on Whatsapp, Option 3: Click to Send your Requirement.
                 </p>
-                <button class="btn-primary-gradiant rounded-2" routerLink="/about-us">LEARN MORE ABOUT US</button>
+                <a class="btn-primary-gradiant rounded-2" href="about-us.php">LEARN MORE ABOUT US</a>
               </div>
     </div>
   </div>
@@ -189,9 +190,7 @@ include "home-search.php"
       <div class="col-lg-6">
         <div class="card-transparent">
           <h3 class="fs-4">Let us know what you need</h3>
-          <form *ngIf="this.requirementService.productSellerForm"
-            [ngClass]="!this.requirementService.isFormvalid?'was-validated':''"
-            [formGroup]="this.requirementService.productSellerForm">
+          <form >
 
             <input type="text" class="form-control" formControlName="productName"
               placeholder="Product Name / Service" />
@@ -210,8 +209,17 @@ include "home-search.php"
                   <label for="unit">Unit</label>
                   <select formControlName="quantityUnit" class="form-control"
                     placeholder="eg:  Dozen,  Piece(s),  Tonr">
-                    <option *ngFor="let unit of this.requirementService.units" value="{{unit}}">{{unit}}</option>
-                  </select>
+                    <?php
+                      $resUnit=file_get_contents('./assets/testingJson/Units.json');
+                      $allunit=json_decode($resUnit);
+                      foreach($allunit as $unit){
+                             ?>
+                             <option value="<?php echo $unit;?>">
+                            <?php echo $unit;?>
+                            </option>
+                             <?php
+                      }
+                      ?>                  </select>
 
                 </div>
               </div>
@@ -235,11 +243,20 @@ include "home-search.php"
                 <div class="input-group">
 
                   <select area-label="countryCode" formControlName="countryCode" class="form-control mxw-50">
-                    <ng-container *ngFor="let opt of this.requirementService.countries">
-                      <ng-container *ngIf="opt.code === '+971' || opt.code === '+91'">
-                        <option value="{{opt.code}}">{{ opt.code }} - {{ opt.name }}</option>
-                      </ng-container>
-                    </ng-container>
+                
+                  <?php
+                      $rescuntrycode=file_get_contents('./assets/testingJson/country_codes_v1.json');
+                      $allcuntrycode=json_decode($rescuntrycode);
+                      foreach($allcuntrycode as $unit){
+                             ?>
+                             <option value="<?php echo $unit->code;?>">
+                            <?php echo $unit->code.'-'.$unit->name;?>
+                            </option>
+                             <?php
+                      }
+                      ?>
+                  
+                    
                   </select>
 
                   <input type="number" formControlName="contactNumber" class="form-control" placeholder="Mobile"
@@ -271,83 +288,53 @@ include "home-search.php"
 
 <section class="bg-grey bg-grey_22 p-4 my-5">
   <h3 class="border-center text-center mb-4">FIND SELLERS FROM TOP EMIRATES </h3>
-
   <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="..." class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="..." class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="..." class="d-block w-100" alt="...">
-    </div>
-  </div>
+    <?php
+   $items=array('./assets/images/c1.png','./assets/images/c2.png',
+   './assets/images/c3.png','./assets/images/c4.png',
+   './assets/images/c5.png','./assets/images/c1.png','./assets/images/c3.png');
+   $state=array('DUBAI','ABU DHABI','SHARJAH','AJMAN','FUJAIRAH','RAS AL KHAIMAH','UMM AL QUWAIN');
+    $totalItems = count($items);
+    $itemsPerSlide = 4;
+    $numSlides = ceil($totalItems / $itemsPerSlide);
     
-      <ng-template carouselSlide>
-        <div class="position-relative bg-transparent swiper2 p-2">
-          <img ngSrc="assets/images/c1.png" width="229" height="88" alt="" class="w-100 img-fluid" />
-          <a href="/search/dubai?field=bkeyword">
-            <h4>DUBAI</h4>
-          </a>
-        </div>
-      </ng-template>
-      <ng-template carouselSlide>
-        <div class="position-relative bg-transparent swiper2 p-2">
-          <img ngSrc="assets/images/c2.png" width="209" height="80" alt="" class="w-100 img-fluid" />
-          <a href="/search/abu-dhabi?field=bkeyword">
-            <h4>ABU DHABI</h4>
-          </a>
-        </div>
-      </ng-template>
-      <ng-template carouselSlide>
-        <div class="position-relative bg-transparent swiper2 p-2">
-          <img ngSrc="assets/images/c3.png" width="209" height="80" alt="" class="w-100 img-fluid" />
-          <a href="/search/sharjah?field=bkeyword">
-            <h4>SHARJAH</h4>
-          </a>
-        </div>
-      </ng-template>
-      <ng-template carouselSlide>
-        <div class="position-relative bg-transparent swiper2 p-2">
-          <img ngSrc="assets/images/c4.png" width="209" height="80" alt="" class="w-100 img-fluid" />
-          <a href="/search/ajman?field=bkeyword">
-            <h4>AJMAN</h4>
-          </a>
-        </div>
-      </ng-template>
-      <ng-template carouselSlide>
-        <div class="position-relative bg-transparent swiper2 p-2">
-          <img ngSrc="assets/images/c5.png" width="209" height="80" alt="" class="w-100 img-fluid" />
-          <a href="/search/fujairah?field=bkeyword">
-            <h4>FUJAIRAH</h4>
-          </a>
-        </div>
-      </ng-template>
-      <ng-template carouselSlide>
-        <div class="position-relative bg-transparent swiper2 p-2">
-          <img ngSrc="assets/images/c1.png" width="209" height="80" alt="" class="w-100 img-fluid" />
-          <a href="/search/ras-al-khaimah?field=bkeyword">
-            <h4>RAS AL KHAIMAH</h4>
-          </a>
-        </div>
-      </ng-template>
-      <ng-template carouselSlide>
-        <div class="position-relative bg-transparent swiper2 p-2">
-          <img ngSrc="assets/images/c3.png" width="209" height="80" alt="" class="w-100 img-fluid" />
-          <a href="/search/umm-al-quwain?field=bkeyword">
-            <h4>UMM AL QUWAIN</h4>
-          </a>
-        </div>
-      </ng-template>
 
-  
-  </owl-carousel-o>
+    for ($i = 0; $i < $numSlides; $i++) {
+        echo '<div class="carousel-item';
+        if ($i == 0) {
+            echo ' active';
+        }
+        echo '">';
+        echo '<div class="row">';
+        
+        // Loop through items for this slide
+        for ($j = $i * $itemsPerSlide; $j < min(($i + 1) * $itemsPerSlide, $totalItems); $j++) {
+            echo '<div class="col-md-3">';
+            // Output item content here, you can access $items[$j] to get each item
+            echo '<div class="position-relative bg-transparent swiper2 p-2">';
+            echo '<img src="' . $items[$j] . '" width="209" height="80" alt="" class="w-100 img-fluid" />';
+           
+            echo '<h4>' . $state[$j] . '</h4>';
+       
+            echo '</div>';
+            echo '</div>';
+        }
+        
+        echo '</div>'; // Close row
+        echo '</div>'; // Close carousel-item
+    }
+    ?>
+  </div>
+</div>
+
+
 </section>
 
 <section>
-  <div appIntersectionObserver>  <app-home-blog></app-home-blog> </div>
+ <?php
+ include "home-blog.php";
+ ?>
 </section>
 
 <section class="bg-grey bg-grey_22 new_img  p-4 my-5  ">
@@ -355,34 +342,34 @@ include "home-search.php"
   <h3 class="border-center text-center mb-4">
     EXPLORE PREMIUM SELLERS
   </h3>
-   
-  <owl-carousel-o [options]="customOptionsCities4">
-   
-      <ng-template carouselSlide>
-        <div class="p-2">
-          <span class=""><img ngSrc="assets/images/brands/101.webp" width="302" height="159" class="img-fluid" alt=""></span>
+
+  <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel" data-bs-ride="true">
+  <div class="carousel-inner row">
+    <div class="carousel-item active">
+    <div class="p-2 col-md-3">
+          <span class=""><img src="./assets/images/brands/101.png" width="302" height="159" class="img-fluid" alt=""></span>
         </div>
-      </ng-template>
-      <ng-template carouselSlide>
-        <div class="p-2">
-          <span class=""><img ngSrc="assets/images/brands/102.webp" width="302" height="159" class="img-fluid" alt=""></span>
+       </div>
+    <div class="carousel-item">
+    <div class="p-2 col-md-3">
+          <span class=""><img src="./assets/images/brands/102.png" width="302" height="159" class="img-fluid" alt=""></span>
         </div>
-      </ng-template>
-      <ng-template carouselSlide>
-        <div class="p-2">
-          <span class=""><img ngSrc="assets/images/brands/103.webp" width="302" height="159" class="img-fluid" alt=""></span>
+    </div>
+    <div class="carousel-item">
+    <div class="p-2 col-md-3">
+          <span class=""><img src="./assets/images/brands/103.png" width="302" height="159" class="img-fluid" alt=""></span>
         </div>
-      </ng-template>
-      <ng-template carouselSlide>
-        <div class="p-2">
-          <span class=""><img ngSrc="assets/images/brands/104.webp" width="302" height="159" class="img-fluid" alt=""></span>
+    </div>
+
+  <div class="carousel-item">
+  <div class="p-2 col-md-3">
+          <span class=""><img src="./assets/images/brands/104.png" width="302" height="159" class="img-fluid" alt=""></span>
         </div>
-      </ng-template>
+    </div>
+  </div>
+  </div>
+</div>
   
-  </owl-carousel-o>
-
-
-
 </section>
 
 <section class="my-5 logo_slider">
@@ -391,9 +378,7 @@ include "home-search.php"
   </h3>
   <div class="container">
 
-    <owl-carousel-o [options]="customOptionsCities3">
-    
-        <ng-template carouselSlide>
+  
             <div class="card ml15">
               <div class="card-body">
                 <div class="row">
@@ -419,8 +404,7 @@ include "home-search.php"
               </div>
             </div>
 
-        </ng-template>
-        <ng-template carouselSlide>
+    
           <div class="card ml15">
             <div class="card-body">
               <div class="row">
@@ -447,58 +431,60 @@ include "home-search.php"
             </div>
           </div>
 
-        </ng-template>
-     
-    </owl-carousel-o>
+   
   </div>
 </section>
 
 <section class="bg-grey bg-grey_22 p-4 my-5 logo_slider">
   <h3 class="border-center text-center mb-5">EXPLORE PREMIUM BRANDS</h3>
  
-  <owl-carousel-o [options]="customOptionsCities2">
+  <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel" data-bs-ride="true">
+  <div class="carousel-inner row">
+    <div class="carousel-item active">
     
-      <ng-template carouselSlide>
         <span class="brand-box brand-box2">
-          <img ngSrc="assets/images/brands/1.png" width="180" height="48" class=""
+          <img src="assets/images/brands/1.png" width="180" height="48" class=""
                alt="" />
         </span>
-      </ng-template>
-      <ng-template carouselSlide>
+    </div>
+    <div class="carousel-item">
         <span class="brand-box brand-box2">
-          <img ngSrc="assets/images/brands/2.png" width="185" height="124" class=""
+          <img src="assets/images/brands/2.png" width="185" height="124" class=""
                alt="" />
         </span>
-      </ng-template>
-      <ng-template carouselSlide>
+  </div>
+  <div class="carousel-item">
         <span class="brand-box brand-box2">
-          <img ngSrc="assets/images/brands/3.png" width="185" height="124" class=""
+          <img src="assets/images/brands/3.png" width="185" height="124" class=""
                alt="" />
         </span>
-      </ng-template>
-      <ng-template carouselSlide>
+  </div>
+  <div class="carousel-item">
         <span class="brand-box brand-box2">
-          <img ngSrc="assets/images/brands/4.png" width="185" height="124" class=""
+          <img src="assets/images/brands/4.png" width="185" height="124" class=""
                alt="" />
         </span>
-      </ng-template>
-      <ng-template carouselSlide>
+  </div>
+  <div class="carousel-item">
         <span class="brand-box brand-box2">
-          <img ngSrc="assets/images/brands/5.png" width="185" height="124" class=""
+          <img src="assets/images/brands/5.png" width="185" height="124" class=""
                alt="" />
         </span>
-      </ng-template>
-      <ng-template carouselSlide>
+  </div>
+  <div class="carousel-item">
         <span class="brand-box brand-box2">
-          <img ngSrc="assets/images/brands/6.png" width="185" height="124" class=""
+          <img src="assets/images/brands/6.png" width="185" height="124" class=""
                alt="" />
         </span>
-      </ng-template>
+  </div>
    
-  </owl-carousel-o>
+  </div>
+  </div>
 
 
 
 </section>
 <p-toast position="top-right"></p-toast>
-<app-footer></app-footer>
+<?php
+include "footer.php";
+?>
