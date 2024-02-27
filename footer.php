@@ -45,7 +45,7 @@
               <h4 class="text-white">BUYERS</h4>
               <ul class="footermenu">
                 <li><a href="post-buy-requirements.php">Post Your Requirement</a></li>
-                <li><a href="industry">Browse Sellers</a></li>
+                <li><a href="industry.php">Browse Sellers</a></li>
                 <li><a href="buyer-faq.php">Buyer FAQ</a></li>
               </ul>
             </div>

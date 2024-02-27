@@ -3,6 +3,7 @@
         <div class="carousel-inner">
           <?php
           $webPageName = 'Search Product Top';
+          require_once 'post.php';
            $responseBanner = post('api/keywords-banner', array($name, $webPageName));
            foreach($responseBanner as $index => $ban){
             $banner = $ban;

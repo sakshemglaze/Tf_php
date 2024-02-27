@@ -4,7 +4,7 @@
     <div class="d-flex align-items-center position-relative flex-wrap">
 
         <a href="home.php" title="TradersFind" aria-label="TradersFind - Largest B2B online Portal">
-          <img src="assets/images/TradersFind.webp" alt="TradersFind" class="order-1 inner_header_logo" width="110" height="70" Rel="Nofollow" />
+          <img src="./assets/images/TradersFind.webp" alt="TradersFind" class="order-1 inner_header_logo" width="110" height="70" Rel="Nofollow" />
         </a>
        
     <form method="post" action="index.php" class="w-100 position-relative ms-auto mw-600 order-3 order-md-2 mt-md-0 ddd">
@@ -15,7 +15,7 @@
           <div class="submit-button">
            
             <button  type="submit" class="btn-primary-gradiant w-100 h-100 px-2 px-lg-5">
-              <img src="assets/images/search-icon.png" width="18" class="me-lg-2" alt="" />
+              <img src="./assets/images/search-icon.png" width="18" class="me-lg-2" alt="" />
               <div class="d-none d-lg-inline">Search</div>
             </button>
           </div>

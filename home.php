@@ -49,7 +49,7 @@ include "home-search.php"
           <img src="assets/images/brands/new1.webp" alt="" width="271" height="193" class="w-100 img-fluid" />
           <div class="hading2">
             <p>Looking for a <br> product ?</p>
-            <a routerLink="post-buy-requirements">Post Buy Requirement</a>
+            <a href="post-buy-requirements.php">Post Buy Requirement</a>
           </div>
         </div>
 
@@ -57,7 +57,7 @@ include "home-search.php"
           <img src="assets/images/brands/new2.webp" alt="" width="271" height="193" class="w-100 img-fluid" />
           <div class="hading2">
             <p>Want to grow your <br> business 10X Faster?</p>
-            <a routerLink="register-your-business">Sell on TradersFind</a>
+            <a href="registration.php">Sell on TradersFind</a>
           </div>
         </div>
       </div>
@@ -84,7 +84,7 @@ include "home-search.php"
                   and driving your business forward.
                 </p>
                 
-                <button class="btn-primary-gradiant rounded-2" routerLink="/about-us">LEARN MORE ABOUT US</button>
+                <a class="btn-primary-gradiant rounded-2" href="about-us.php">LEARN MORE ABOUT US</a>
 
               </div>
     </div>
@@ -98,7 +98,7 @@ include "home-search.php"
                   and service providers in UAE within a single marketplace. Whether you are a local business looking for suppliers 
                   in UAE or an international company seeking trade opportunities in UAE’s thriving market, TradersFind is your gateway to expand your business in UAE.
                 </p>
-                <button class="btn-primary-gradiant rounded-2" routerLink="/about-us">LEARN MORE ABOUT US</button>
+                <a class="btn-primary-gradiant rounded-2" href="about-us.php">LEARN MORE ABOUT US</a>
               </div>
     </div>
     <div class="carousel-item">
@@ -111,7 +111,7 @@ include "home-search.php"
                   you need to thrive in the competitive market. Our business directory of UAE companies is updated at regular intervals to ensure 
                   that you have access to the most relevant and up-to-date information.
                 </p>
-                <button class="btn-primary-gradiant rounded-2" routerLink="/about-us">LEARN MORE ABOUT US</button>
+                <a class="btn-primary-gradiant rounded-2" href="about-us.php">LEARN MORE ABOUT US</a>
               </div>
     </div>
     <div class="carousel-item">
@@ -123,7 +123,7 @@ include "home-search.php"
                   buyers on our platform meet the highest standards of quality, authenticity, and ethical practices. 
                   When you connect with a verified  supplier or buyer through TradersFind, you can have confidence in the credibility and reliability of your business partners.
                 </p>
-                <button class="btn-primary-gradiant rounded-2" routerLink="/about-us">LEARN MORE ABOUT US</button>
+                <a class="btn-primary-gradiant rounded-2" href="about-us.php">LEARN MORE ABOUT US</a>
               </div>
     </div>
     <div class="carousel-item">
@@ -135,7 +135,7 @@ include "home-search.php"
                   allowing them to reach a wider audience. Our efficient interface allows free business listings that increase 
                   their visibility among potential customers without hurting their pockets.
                 </p>
-                <button class="btn-primary-gradiant rounded-2" routerLink="/about-us">LEARN MORE ABOUT US</button>
+                <a class="btn-primary-gradiant rounded-2" href="about-us.php">LEARN MORE ABOUT US</a>
               </div>
     </div>
     <div class="carousel-item">
@@ -148,7 +148,7 @@ include "home-search.php"
                   textiles, or raw materials, our platform has a diverse selection to cater to your needs. TradersFind 
                   is a place where you can connect with suppliers at one click.
                 </p>
-                <button class="btn-primary-gradiant rounded-2" routerLink="/about-us">LEARN MORE ABOUT US</button>
+                <a class="btn-primary-gradiant rounded-2" href="about-us.php">LEARN MORE ABOUT US</a>
               </div>
     </div>
     <div class="carousel-item">
@@ -160,7 +160,7 @@ include "home-search.php"
                   Join now to expand your business reach, explore new opportunities, and take your business to new heights. 
                   One Click 3 options to fulfill all your requirements. Option 1: Click to Call, Option 2: Click to Connect on Whatsapp, Option 3: Click to Send your Requirement.
                 </p>
-                <button class="btn-primary-gradiant rounded-2" routerLink="/about-us">LEARN MORE ABOUT US</button>
+                <a class="btn-primary-gradiant rounded-2" href="about-us.php">LEARN MORE ABOUT US</a>
               </div>
     </div>
   </div>

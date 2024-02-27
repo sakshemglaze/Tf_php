@@ -33,7 +33,7 @@
   }
   ?>
     </div>
-    <div class="text-center"> <a href="blog">
+    <div class="text-center"> <a href="blog-listing.php">
         <button class="btn-primary-gradiant rounded-2 btn-auto">VIEW ALL</button> </a>
     </div>
   </section>
