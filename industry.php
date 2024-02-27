@@ -3,10 +3,10 @@
     $urlParts = explode('/', $currentUrl);
     $industryName = $urlParts[2];
     $id = $urlParts[3];
-    print_r ($id);
-    if ($industryName != '') {
-      include "industryDetail.php/industry/" . $id;
-    }
+    // print_r ($industryName);
+    // if ($industryName != '') {
+    //   include "industryDetail.php/industry/" . $id;
+    // }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +17,7 @@
     <title>Industry</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <!--<link rel="stylesheet" href="./assets/bootstrap/bootstrap.min.css">-->
-    <link rel="stylesheet" href="/assets/css/indus.css" />
+    <link rel="stylesheet" href="./assets/css/indus.css" />
 </head>
 <body>
 <script src="./assets/js/lazy-load.js"></script>
@@ -78,12 +78,12 @@ foreach ($data1 as $category) {
         $catImage = "https://doc.tradersfind.com/images/" . $cat->image->id . ".webp";
         echo '<img data-src="' . $catImage . '" class="lazy" alt="Category" width="140px" />';
         echo '<div class="inddetails">';
-        echo '<h4 class="fs-6 fwbold"><a href="' . $cat->categoryUrl . '" title="' . $cat->categoryName . '">' . $cat->categoryName . '</a></h4>';
+        echo '<h4 class="fs-6 fwbold"><a href="/" title="' . $cat->categoryName . '">' . $cat->categoryName . '</a></h4>';
         echo '<ul class="mt-4 text-black-50">';
         foreach (array_slice($cat->productsSubcategories, 0, 3) as $subcat) {
-            echo '<li><a href="' . $subcat->subCategoryUrl . '" title="' . $subcat->subCategoryName . '">' . $subcat->subCategoryName . '</a></li>';
+            echo '<li><a href="/" title="' . $subcat->subCategoryName . '">' . $subcat->subCategoryName . '</a></li>';
         }
-        echo '<li><a href="' . $cat->categoryUrl . '"> + View All</a></li>';
+        echo '<li><a href="/"> + View All</a></li>';
         echo '</ul>';
         echo '</div>';
         echo '</div>';
@@ -99,7 +99,7 @@ foreach ($data1 as $category) {
          echo '<ul class="sub_category_list">';
           foreach (array_slice($category->productsCategories, 0, 4) as $cat) {
             echo '<li>';
-              echo '<a [href]="" class="align-items-center flex-row d-flex gap-3 flex-wrap flex-md-nowrap  justify-content-md-start">';
+              echo '<a href="" class="align-items-center flex-row d-flex gap-3 flex-wrap flex-md-nowrap  justify-content-md-start">';
                 echo '<div class="pro_image">';
                   echo'<img data-src="https://doc.tradersfind.com/images/' . $cat->image->id . '.webp" class="lazy"' . 'alt="Category" width="140px"/>';
                 echo'</div>';
@@ -108,7 +108,7 @@ foreach ($data1 as $category) {
             echo '</li>';
           }
           echo '</ul>';
-          echo '<a [href]="" class="btn-primary-gradiant subcatbtn">View More</a>';
+          echo '<a href="" class="btn-primary-gradiant subcatbtn">View More</a>';
       echo '</div>';
      echo '</div>';
     echo '</div>';
