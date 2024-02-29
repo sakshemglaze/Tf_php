@@ -1,4 +1,9 @@
-<?php include_once 'config.php'; ?>
+
+<?php include 'config.php'; 
+  include 'services/url.php';
+  $urlService = new UrlService();
+?>
+
 <?php
     $currentUrl = $_SERVER['REQUEST_URI'];
     $urlParts = explode('/', $currentUrl);
@@ -62,12 +67,12 @@
 foreach ($data1 as $category) {
     echo '<div class="row  gy-4 bg-white">';
     echo '<div class="col-lg-12">';
-    echo '<h3 class="text-center fwbold text-uppercase text-black-50"><a href="industry/' . preg_replace('/[,&\s]+/', '-',$category->industryName) . '/' . $category->id .'">' . $category->industryName . '</a></h3>';
+    echo '<h3 class="text-center fwbold text-uppercase text-black-50"><a href="' . $urlService->getIndustryUrl($category->industryName, $category->id) .'">' . $category->industryName . '</a></h3>';
     echo '</div>';
     echo '<div class="col-lg-3 text-center">';
     if (!empty($category->image)) { 
         $indImage = IMAGE_URL . $category->image->id . ".webp";
-        echo '<img data-src="' . $indImage . '" class="img-fluid lazy" alt="Industry" width="70%" />';
+        echo '<a href="' . $urlService->getIndustryUrl($category->industryName, $category->id) . '"> <img data-src="' . $indImage . '" class="img-fluid lazy" alt="Industry" width="70%" /></a>';
     }
     echo '</div>';
     echo '<div class="col-lg-9">';
@@ -76,14 +81,14 @@ foreach ($data1 as $category) {
         echo '<div class="col-lg-4">';
         echo '<div class="d-flex align-items-center gap-3">';
         $catImage = IMAGE_URL . $cat->image->id . ".webp";
-        echo '<img data-src="' . $catImage . '" class="lazy" alt="Category" width="140px" />';
+        echo '<a href="' . $urlService->getGroupCategoryUrl($cat->categoryName, $cat->id) . '"> <img data-src="' . $catImage . '" class="lazy" alt="Category" width="140px" /> </a>';
         echo '<div class="inddetails">';
-        echo '<h4 class="fs-6 fwbold"><a href="/" title="' . $cat->categoryName . '">' . $cat->categoryName . '</a></h4>';
+        echo '<h4 class="fs-6 fwbold"><a href="' . $urlService->getGroupCategoryUrl($cat->categoryName, $cat->id) . '" title="' . $cat->categoryName . '">' . $cat->categoryName . '</a></h4>';
         echo '<ul class="mt-4 text-black-50">';
         foreach (array_slice($cat->productsSubcategories, 0, 3) as $subcat) {
-            echo '<li><a href="/" title="' . $subcat->subCategoryName . '">' . $subcat->subCategoryName . '</a></li>';
+            echo '<li><a href="' . $urlService->getCategoryUrl($subcat->subCategoryName, $subcat->id) . '" title="' . $subcat->subCategoryName . '">' . $subcat->subCategoryName . '</a></li>';
         }
-        echo '<li><a href="/"> + View All</a></li>';
+        echo '<li><a href="' . $urlService->getGroupCategoryUrl($cat->categoryName, $cat->id) . '"> + View All</a></li>';
         echo '</ul>';
         echo '</div>';
         echo '</div>';
@@ -99,7 +104,7 @@ foreach ($data1 as $category) {
          echo '<ul class="sub_category_list">';
           foreach (array_slice($category->productsCategories, 0, 4) as $cat) {
             echo '<li>';
-              echo '<a href="" class="align-items-center flex-row d-flex gap-3 flex-wrap flex-md-nowrap  justify-content-md-start">';
+              echo '<a href="' . $urlService->getGroupCategoryUrl($cat->categoryName, $cat->id) . '" class="align-items-center flex-row d-flex gap-3 flex-wrap flex-md-nowrap  justify-content-md-start">';
                 echo '<div class="pro_image">';
                   echo'<img data-src="' . IMAGE_URL . $cat->image->id . '.webp" class="lazy"' . 'alt="Category" width="140px"/>';
                 echo'</div>';
@@ -108,7 +113,7 @@ foreach ($data1 as $category) {
             echo '</li>';
           }
           echo '</ul>';
-          echo '<a href="" class="btn-primary-gradiant subcatbtn">View More</a>';
+          echo '<a href="' . $urlService->getIndustryUrl($category->industryName, $category->id) .'" class="btn-primary-gradiant subcatbtn">View More</a>';
       echo '</div>';
      echo '</div>';
     echo '</div>';
