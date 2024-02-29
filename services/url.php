@@ -2,12 +2,12 @@
 
 class UrlService {
 
-private $router;
-private $platformId;
+//private $router;
+//private $platformId;
 
-public function __construct($router, $platformId) {
-  $this->router = $router;
-  $this->platformId = $platformId;
+public function __construct() {
+  // $this->router = $router;
+  // $this->platformId = $platformId;
 }
 
 public function getIndustryUrl($indName,$iid) {

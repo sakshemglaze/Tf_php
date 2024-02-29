@@ -1,4 +1,4 @@
-<?php include 'config.php'; ?>
+<?php include_once 'config.php'; ?>
 <?php
     $currentUrl = $_SERVER['REQUEST_URI'];
     $urlParts = explode('/', $currentUrl);

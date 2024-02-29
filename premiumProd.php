@@ -1,4 +1,4 @@
-<?php include 'config.php'; ?>
+<?php include_once 'config.php'; ?>
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/searchPremium.css" />
 
 <div class="bg-gradiant rounded-20 position-relative shadow-sm mb-4">

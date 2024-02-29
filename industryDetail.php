@@ -1,5 +1,5 @@
 <?php
-    include 'config.php';
+    include_once 'config.php';
     $currentUrl = $_SERVER['REQUEST_URI'];
     $urlParts = explode('/', $currentUrl);
     $industryName = $matches[1];

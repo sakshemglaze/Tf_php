@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-md-8 offset-md-2">
                     <form  class="search-form"
-                        id="homepageSearch" inViewport  action="index.php" method="post" >
+                        id="homepageSearch" inViewport  action="search.php" method="post" >
 
                         <div class="input-group mb-3 w-100 position-relative">
                             <span class="input-group-text bg-white" id="basic-addon1"><img

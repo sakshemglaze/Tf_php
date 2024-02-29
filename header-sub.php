@@ -1,4 +1,4 @@
-<?php include 'config.php'; ?>
+<?php include_once 'config.php'; ?>
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/headsub.css" >
 <link rel="stylesheet" href=" 	https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 <header class="container-fluid shadow-sm border-bottom bg-white sticky-top inner_header1 ">
@@ -7,7 +7,17 @@
         <a href="/" title="TradersFind" aria-label="TradersFind - Largest B2B online Portal">
           <img src="<?php echo BASE_URL; ?>assets/images/TradersFind.webp" alt="TradersFind" class="order-1 inner_header_logo" width="110" height="70" Rel="Nofollow" />
         </a>
-
+        <?php
+       if(isset($_POST['search'])){
+        $searchText=$_POST['search'];
+       }
+       else if(isset($_POST['searchText'])){
+        $searchText=$_POST['searchText'];
+       }else{
+        $searchText='';
+       }
+     
+       ?>
        
     <form method="post" action="search.php" class="w-100 position-relative ms-auto mw-600 order-3 order-md-2 mt-md-0 ddd">
 
