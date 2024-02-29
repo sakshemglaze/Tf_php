@@ -6,10 +6,20 @@
         <a href="home.php" title="TradersFind" aria-label="TradersFind - Largest B2B online Portal">
           <img src="./assets/images/TradersFind.webp" alt="TradersFind" class="order-1 inner_header_logo" width="110" height="70" Rel="Nofollow" />
         </a>
-       
+       <?php
+       if(isset($_POST['search'])){
+        $searchText=$_POST['search'];
+       }
+       else if(isset($_POST['searchText'])){
+        $searchText=$_POST['searchText'];
+       }else{
+        $searchText='';
+       }
+     
+       ?>
     <form method="post" action="index.php" class="w-100 position-relative ms-auto mw-600 order-3 order-md-2 mt-md-0 ddd">
     <div class="input-group input-group-lg w-100 position-relative ms-auto mw-600 order-3 order-md-2 mt-md-0">
-          <input  autofocus type="text" class="form-control " name="searchText" placeholder="What are you looking for.."
+          <input  autofocus type="text" class="form-control " name="searchText" value="<?php echo $searchText; ?>" placeholder="What are you looking for.."
                   style="height: 45px; border-top-right-radius: 10px; border-bottom-right-radius: 10px;">
 
           <div class="submit-button">
