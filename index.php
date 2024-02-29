@@ -32,7 +32,9 @@ if (preg_match('~^/industry/([^/]+)/([^/]+)$~', $url, $matches)) {
 if (preg_match('~^/group-category/([^/]+)/([^/]+)$~', $url, $matches)) {
   include 'group-category.php'; //. $matches[1] . '/' . $matches[2];
 }
-
+if (preg_match('~^/category/([^/]+)/([^/]+)$~', $url, $matches)) {
+  include 'search.php'; //. $matches[1] . '/' . $matches[2];
+}
 
 if (isset($routes[$url])) {
   include $routes[$url];
@@ -41,6 +43,6 @@ if (isset($routes[$url])) {
 } else {
   // Redirect to /not-found for all other URLs
   //header("HTTP/1.1 404 Not Found");
-  include 'not-found.php';
+  //include 'not-found.php';
 }
 ?>

@@ -3,7 +3,6 @@
     include_once 'services/url.php';
     $urlService = new UrlService();
     $currentUrl = $_SERVER['REQUEST_URI'];
-    $urlParts = explode('/', $currentUrl);
     $industryName = $matches[1];
     $id = $matches[2];
 ?>
@@ -32,7 +31,7 @@
             $size = 6;
             require_once 'post.php';
         $data =  get(
-                'api/industries/6450d5651381f473d7f9da2f?size=' . $size . '&page=' . $page . '&sort=industryName,asc',
+                'api/industries/' . $matches[2] .'?size=' . $size . '&page=' . $page . '&sort=industryName,asc',
                  true
               );
               $data1 = json_decode($data);

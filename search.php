@@ -1,11 +1,16 @@
-<?php include 'config.php'; ?>
+<?php include_once 'config.php'; 
+  include_once 'services/url.php';
+  //$urlService = new $urlService();
+  $name = str_replace("-", " ", $matches[1]);
+  //print_r($name);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex nofollow" >
-    <title>Document</title>
+    <title>Search Results</title>
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css" >
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/enquery.css" > 
@@ -19,18 +24,20 @@
             class FilterDTO {}
             if(isset($_POST['searchText'])){
               $name= $_POST['searchText'];
-            }else{
-              $name= $_POST['search'];
-            }
-          
-
+              print_r('post');
+            } /*
+            else{
+               $name= $_POST['search'];
+               print_r($name);
+            }*/
+         
             $filterDto = new FilterDTO();
             $payload = array(
                 'searchText' => $name ,
                 'searchTextType' => 'subcategory',
                 'filterDto' => $filterDto
-            );
-            $queryParams= array('page'=>0, 'size'=> 10) ;
+            );  
+            $queryParams= array('page'=>0, 'size'=> 12) ;
             require_once 'post.php';
         $data =   post(
                 'api/new-search-products',
@@ -40,6 +47,7 @@
                 false
               );
               $length = count(($data->products));
+              //print_r($data);
               ?>
               <section class="container-fluid mt-1">
               <?php include "banner.php";     ?>
