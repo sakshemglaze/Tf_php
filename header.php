@@ -1,8 +1,10 @@
-<link rel="stylesheet" href=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="./assets/css/head.css" >
+<?php include 'config.php'; ?>
+
+<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
+<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/head.css" >
 <nav class="navbar sticky-top navbar-expand-lg bg-white">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/"><img src="assets/images/TradersFind.webp" alt="TradersFind" width="110" height="70" />
+      <a class="navbar-brand" href="/"><img src="<?php echo BASE_URL; ?>assets/images/TradersFind.webp" alt="TradersFind" width="110" height="70" />
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -11,12 +13,12 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <div class="sidemenu ms-auto align-items-center ">
   
-        <button class="btn-primary-gradiant" routerLink="post-buy-requirements" >Post Buy Requirements</button>
+        <a class="btn-primary-gradiant" href="post-buy-requirements">Post Buy Requirements</a>
         <ul class="navigation">
           <li class="has-sub-menu">
             For Buyer
             <ul>
-              <li><a href="browse-sellers">Browse Sellers</a></li>
+              <li><a href="industry">Browse Sellers</a></li>
               <li><a href="buyer-faq">Buyer FAQ </a></li>
             </ul>
           </li>
@@ -43,21 +45,17 @@
           </li>
         </ul>
         <a target="_blank" href="https://api.whatsapp.com/send?phone=971569773623&text=Browsed TradersFind" title="Whatsapp Chat" class="mx-4 whatsappBg">
-          <img src="assets/images/whatsapp-chat.webp" alt="" width="186" height="44" /></a>
+          <img src="<?php echo BASE_URL; ?>assets/images/whatsapp-chat.webp" alt="" width="186" height="44" /></a>
         <div class="login-button-top" *ngIf="this.userName==''">
-          <img src="assets/images/user.png" alt="" width="16" height="16" />
-          <a routerLink="login" class="border-end-black px-3 me-3 lh-sm">Sign In</a>
-          <a routerLink="register-your-business">Join Free</a>
-        </div>
-        
-        
-  
-  
+          <img src="<?php echo BASE_URL; ?>assets/images/user.png" alt="" width="16" height="16" />
+          <a href="login" class="border-end-black px-3 me-3 lh-sm">Sign In</a>
+          <a href="register-your-business">Join Free</a>
+        </div>  
         </div>
   
       </div>
     </div>
   </nav>
-  <script src="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.bundle.min.js"></script>
 
   

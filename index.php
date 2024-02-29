@@ -1,194 +1,46 @@
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TradersFind Result page</title>
-    <link rel="stylesheet" href=" 	https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./assets/css/style.css" >
-    <link rel="stylesheet" href="./assets/css/enquery.css" >
-</head>
-<body>
-
-
-    <?php
-    include "header-sub.php";
-    $indexr=0;
-            class FilterDTO {}
-            $name= $_POST['searchText']? $_POST['searchText']:"cleaning services";
-
-            $filterDto = new FilterDTO();
-            $payload = array(
-                'searchText' => $name ,
-                'searchTextType' => 'subcategory',
-                'filterDto' => $filterDto
-            );
-            $queryParams= array('page'=>0, 'size'=> 10) ;
-            require_once 'post.php';
-        $data =   post(
-                'api/new-search-products',
-                $payload,
-                true,
-                $queryParams,
-                false
-              );
-              $length = count(($data->products));
-              ?>
-              <section class="container-fluid mt-1">
-              <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-inner">
-                <?php
-          $webPageName = 'Search Product Top';
-           $responseBanner = post('api/keywords-banner', array($name, $webPageName));
-           foreach($responseBanner as $index => $ban){
-            $banner = $ban;
-              ?>
-              <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">
-   
-              <?php
-            $newban = "https://doc.tradersfind.com/images/" . $banner->image->id . ".webp";
-           
-            echo '<img src="' . $newban . '" alt="Banner Image" width="100%">';
-            ?>
-            </div>
-            <?php
-           }
-            ?>
-</div>   
-        </div>
-        
-              </section>
-              <hr  size="5" width="100%">  
-              <section class="p-2">
-
-<div style="text-align: center;">
-  <h1 class="me-2 fwbold  text-capitalize mb-0"><?php echo $name?>
-    <span *ngIf="location=='null'"> in UAE</span>
-    <!-- <span *ngIf="location != 'null'"> in {{ location }}</span> -->
-  </h1>
-  <small class="fwbold">(<?php print_r($length)?>+ products available) </small>
-</div>
-<div *ngIf="subcategoryDetails && this.location == 'null' && subcategoryDetails.shortDescription ">
-  <span
-    [innerHTML]="this.showMore1?
-    subcategoryDetails.shortDescription.length > shortDesc
-    ? subcategoryDetails.shortDescription.substring(0,shortDesc) : subcategoryDetails.shortDescription: subcategoryDetails.shortDescription">
-
-  </span>
-  <span *ngIf="subcategoryDetails.shortDescription.length > shortDesc"
-    style="color:brown; position: absolute;">&nbsp;<b> <a (click)="this.toggleShowMore1()">{{
-        this.showMore1 ? '... View more' : 'View less' }} </a> </b></span>
-</div>
-<br>
-<nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb" *ngIf="products">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/">TradersFind</a></li>
-    <li class="breadcrumb-item" *ngIf="industryDetails"><a
-        [href]="getIndustryUrl(industryDetails.industryName, industryDetails.id)">{{industryDetails.industryName}}</a>
-    </li>
-
-    <li class="breadcrumb-item" *ngIf="categoryDetails"><a
-        [href]="getCategoryUrl(categoryDetails.categoryName, categoryDetails.id)">{{categoryDetails.categoryName}}</a>
-    </li>
-
-    <li class="breadcrumb-item active fwbold text-capitalize " aria-current="page" >
-      {{this.searchText}} <span *ngIf="location !== 'null'"> &nbsp;>&nbsp; {{location}} </span>
-    </li>
-  </ol>
-</nav>
-</section>
-<div class="row gy-2">
-    <div class="col-lg-3 col-xxl-2">
-        
-      <div class="sticky-top" style="top:12%;"> <a href="https://wa.link/hy8kan" title="TradersFind" target="_blank">
-        <img src="assets/images/poster1.webp" class="img-fluid mt-4 w-100" alt="Poster" /></a>
-      </div>
-    </p></div>
-    <div class="col-lg-9 col-xxl-10 home-cleaning-Bg">
-    <div class="row">
-        <div class="col-lg-12">
-          <div class="shadow2 row align-items-center mx-1">
-            <div class="col-lg-8">
-              <ul class="d-flex align-items-center flex-wrap rightnav" *ngIf="filters">
-
-                <li><a
-                href='#'
-                   >All UAE</a></li>
-
-                
-                  <?php
-                  foreach(($data->states) as $state){
-                    echo'<li >';
-                    echo '<a href=\'#\'>'. $state .'</a>';
-                    echo' </li>';
-                  };
-                  ?>
-               
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-   
-                           <?php
-                           if($data->sponsoredProduct!=null){
-                          $premiumprod=$data->sponsoredProduct;
-                        include "premiumProd.php";
-                           }
-              foreach ($data as $inde1 => $prod) {
-                
-                if (is_array($prod)) {
-                    ?>
-                    <div class="row gy-4">
-                        <?php
-                      foreach ($prod as $inde => $onep) {
-                        $indexr=$inde;
-                        if (is_object($onep) && isset($onep->id)) {
-                           $prodData=$onep;
-                           ?>
-                           <div class= "col-lg-6 ">
-                            <?php
-                           include 'product.php';
-                           
-                        }
-                        ?>
-                          </div>
-                          <?php
-                      }
-                          ?>
-                    </div>                    
-                    <?php
-                }
-            }
-          
-          ?> 
-          <div class="post-request-text ">
-          <section class="easysource my-4 py-2">
-            <?php
-             include "post-request.php";
-              ?>
-               </section>
-          </div>
-          <div class="row">
-          <p class="search-product-text">
-        
-        <?php
-        if(isset($data->sponsoredProduct->productsSubcategory->categoryDescriptionPage)){
-                      print_r( $data->sponsoredProduct->productsSubcategory->categoryDescriptionPage);
-                         ?>
-        </p>
-        <?php
-        }
-        ?>
-        </div>
-    </div>    
-</div>
-
-    <script src="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  
-</body>
-</html>
 <?php
-include "footer.php"
+$routes = [
+    '/' => 'home.php',
+    '/about-us' => 'about-us.php',
+    '/contact-us' => 'Contact-Us.php',
+    '/blog' => 'blog-listing.php',
+    '/buyer-faq' => 'buyer-faq.php',
+    '/group-category' => 'group-category.php',
+    '/industry' => 'industry.php',
+    '/industry/' => 'industrydetail.php',
+    '/post-buy-requirements' => 'post-buy-requirements.php',
+    '/privacy-policy' => 'privacy-policy.php',
+    '/product' => 'productdetail.php',
+    '/register-your-business' => 'registration.php',
+    '/seller-faq' => 'seller-faq.php',
+    '/seller/' => 'sellerdetail.php',
+    '/feedback' => 'send-feedback.php',
+    '/complaint' => 'send-feedback.php',
+    '/login' => 'signIn.php',
+    '/term-and-conditions' => 'termcondition.php',
+    '/browse-sellers' => 'industry.php',
+];
+
+// Get the current URL
+$url = $_SERVER['REQUEST_URI'];
+// Remove query string
+$url = strtok($url, '?');
+
+if (preg_match('~^/industry/([^/]+)/([^/]+)$~', $url, $matches)) {
+  include 'industrydetail.php'; //. $matches[1] . '/' . $matches[2];
+}
+if (preg_match('~^/group-category/([^/]+)/([^/]+)$~', $url, $matches)) {
+  include 'group-category.php'; //. $matches[1] . '/' . $matches[2];
+}
+
+
+if (isset($routes[$url])) {
+  include $routes[$url];
+} elseif ($url === '/not-found') {
+  include 'not-found.php';
+} else {
+  // Redirect to /not-found for all other URLs
+  //header("HTTP/1.1 404 Not Found");
+  include 'not-found.php';
+}
 ?>
