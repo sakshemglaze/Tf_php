@@ -2,16 +2,16 @@
 
 class UrlService {
 
-private $router;
-private $platformId;
+//private $router;
+//private $platformId;
 
-public function __construct($router, $platformId) {
-  $this->router = $router;
-  $this->platformId = $platformId;
+public function __construct() {
+  //$this->router = $router;
+  //$this->platformId = $platformId;
 }
 
 public function getIndustryUrl($indName,$iid) {
-  $url = 'industry/' . preg_replace('/[&,\s]+/', '-', strtolower(trim($indName))) . '/' . $iid;
+  $url = 'industry/' . preg_replace('/[&,\s]+/', '-', strtolower($indName)) . '/' . $iid;
   return $url;
 }
 public function getProductUrl($pname, $pid) {
@@ -19,12 +19,12 @@ public function getProductUrl($pname, $pid) {
   return $url;
 }
 
-public function getCategoryUrl($name, $id) {
+public function getGroupCategoryUrl($name, $id) {
   $url = 'group-category/' . preg_replace('/[&,\s]+/', '-', strtolower(trim($name))) . '/' . $id;
   return $url;
 }
 
-public function getSubcategoryUrl($category, $subcategory, $id) {
+public function getCategoryUrl($subcategory, $id) {
   $url =  'category/' . preg_replace('/[&,\s]+/', '-', strtolower(trim($subcategory))) . '/' . $id;
   return $url;
 }

@@ -1,4 +1,4 @@
-<?php include 'config.php'; ?>
+<?php include_once 'config.php'; ?>
 
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/head.css" >
