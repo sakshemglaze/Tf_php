@@ -1,6 +1,6 @@
 <?php include 'config.php'; ?>
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/headsub.css" >
-<link rel="stylesheet" href=" 	https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
 <header class="container-fluid shadow-sm border-bottom bg-white sticky-top inner_header1 ">
     <div class="d-flex align-items-center position-relative flex-wrap">
 
@@ -16,7 +16,7 @@
           <div class="submit-button">
            
             <button  type="submit" class="btn-primary-gradiant w-100 h-100 px-2 px-lg-5">
-              <img src="<?php echo BASE_URL; ?><?php echo BASE_URL; ?>assets/images/search-icon.png" width="18" class="me-lg-2" alt="" />
+              <img src="<?php echo BASE_URL; ?>assets/images/search-icon.png" width="18" class="me-lg-2" alt="" />
               <div class="d-none d-lg-inline">Search</div>
             </button>
           </div>

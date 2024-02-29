@@ -17,9 +17,8 @@ array_push($industry, array("Industrial Supplies", "6450d5651381f473d7f9da51", "
     <ul>
       <li class="has-category" >
         <?php
-
         include_once 'services/url.php';
-        $urlService = new UrlService($router,$platformId);
+        $urlService = new UrlService();
         
         foreach($industry as $indus){
             ?>
