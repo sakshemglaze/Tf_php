@@ -3,11 +3,11 @@
 <header class="container-fluid shadow-sm border-bottom bg-white sticky-top inner_header1 ">
     <div class="d-flex align-items-center position-relative flex-wrap">
 
-        <a href="home.php" title="TradersFind" aria-label="TradersFind - Largest B2B online Portal">
+        <a href="/" title="TradersFind" aria-label="TradersFind - Largest B2B online Portal">
           <img src="./assets/images/TradersFind.webp" alt="TradersFind" class="order-1 inner_header_logo" width="110" height="70" Rel="Nofollow" />
         </a>
        
-    <form method="post" action="index.php" class="w-100 position-relative ms-auto mw-600 order-3 order-md-2 mt-md-0 ddd">
+    <form method="post" action="search.php" class="w-100 position-relative ms-auto mw-600 order-3 order-md-2 mt-md-0 ddd">
     <div class="input-group input-group-lg w-100 position-relative ms-auto mw-600 order-3 order-md-2 mt-md-0">
           <input  autofocus type="text" class="form-control " name="searchText" placeholder="What are you looking for.."
                   style="height: 45px; border-top-right-radius: 10px; border-bottom-right-radius: 10px;">
@@ -28,8 +28,8 @@
           <img src="assets/images/whatsapp-chat.webp" alt="Whatsapp_chat" style="height: 46px;"></a>
         <div class="login-button-top d-flex align-items-center mw-200" *ngIf="!this.storageService.getItem('login')">
           <img src="assets/images/user.png" alt="" />
-          <a href="signIn.php" class="border-end-black px-3 me-3 lh-sm nowrap">Sign In </a>
-          <a href="registration.php">Join Free</a>
+          <a href="login" class="border-end-black px-3 me-3 lh-sm nowrap">Sign In </a>
+          <a href="register-your-business">Join Free</a>
         </div>
 </div>
 </div>

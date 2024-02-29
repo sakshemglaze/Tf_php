@@ -17,10 +17,14 @@ array_push($industry, array("Industrial Supplies", "6450d5651381f473d7f9da51", "
     <ul>
       <li class="has-category" >
         <?php
+
+        include_once 'services/url.php';
+        $urlService = new UrlService($router,$platformId);
+        
         foreach($industry as $indus){
             ?>
             <h5>
-            <a [href]="#" title="<?php echo $indus[0];?>">
+            <a href="<?php echo $urlService->getIndustryUrl($indus[0],$indus[1]); ?>" title="<?php echo $indus[0];?>">
               <span><img src="<?php echo $indus[2];?>" alt="I" width="30" height="30" /></span>&nbsp; 
              
               <?php if (strlen($indus[0]) > 200) {

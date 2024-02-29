@@ -18,7 +18,7 @@
                             </h4>
                             <p class="mt-4 text-white">Sign in to continue to your account</p>
                         </div>
-                        <div class="logo-login-fotter"> <a href="index.php">
+                        <div class="logo-login-fotter"> <a href="/">
                                 <img src="assets/images/footer-logo.webp" width="200" alt=""> </a>
                         </div>
                     </div>

@@ -1,3 +1,5 @@
+<?php
+
 class UrlService {
 
 private $router;
@@ -9,10 +11,8 @@ public function __construct($router, $platformId) {
 }
 
 public function getIndustryUrl($indName,$iid) {
-  return $this->rounter->createUrlTree([
-    'industry', preg_replace('/\s+/', '-', strtolower(trim($indName))),
-    @iid,
-    ])->toString();
+  $url = 'industry/' . preg_replace('/[&,\s]+/', '-', strtolower(trim($indName))) . '/' . $iid;
+  return $url;
 }
 public function getProductUrl($pname, $pid) {
   return $this->router->createUrlTree([
@@ -107,3 +107,5 @@ public function navigateToProductUrl($pname, $pid) {
   $this->router->navigate(['/product', preg_replace('/\s+/', '-', strtolower(trim($pname))), $pid]);
 }
 }
+
+?>
