@@ -1,4 +1,5 @@
-<link rel="stylesheet" href="./assets/css/post-request.css" />
+<?php include 'config.php'; ?>
+<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/post-request.css" />
 
 <div class="container">
     <div class="row gy-1">
@@ -36,7 +37,7 @@
                   <select id="quantityUnit" formControlName="quantityUnit" class="form-control" placeholder="eg: Dozen, Piece(s), Tonr">
                       <!-- <option *ngFor="let unit of this.requirementService.units" [value]="unit">{{unit}}</option> -->
                       <?php
-                      $resUnit=file_get_contents('./assets/testingJson/Units.json');
+                      $resUnit=file_get_contents('<?php echo BASE_URL; ?>assets/testingJson/Units.json');
                       $allunit=json_decode($resUnit);
                       foreach($allunit as $unit){
                              ?>

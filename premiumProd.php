@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="./assets/css/searchPremium.css" />
-
+<?php include 'config.php'; ?>
+<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/searchPremium.css" />
 
 <div class="bg-gradiant rounded-20 position-relative shadow-sm mb-4">
         <div class="premium_listing">

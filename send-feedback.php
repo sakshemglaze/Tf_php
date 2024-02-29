@@ -1,4 +1,5 @@
-<link rel="stylesheet" href="./assets/css/sendfeed.css" />
+<?php include 'config.php'; ?>
+<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/sendfeed.css" />
 <?php
 include 'header-sub.php';
 ?>

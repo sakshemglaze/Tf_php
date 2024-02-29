@@ -1,3 +1,4 @@
+<?php include 'config.php'; ?>
 <?php
     $currentUrl = $_SERVER['REQUEST_URI'];
     $urlParts = explode('/', $currentUrl);
@@ -15,12 +16,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Industry</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    <!--<link rel="stylesheet" href="./assets/bootstrap/bootstrap.min.css">-->
-    <link rel="stylesheet" href="./assets/css/indus.css" />
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/indus.css" />
 </head>
 <body>
-<script src="./assets/js/lazy-load.js"></script>
+<script src="<?php echo BASE_URL; ?>assets/js/lazy-load.js"></script>
 <?php
     include "header-sub.php";
     
@@ -66,7 +66,7 @@ foreach ($data1 as $category) {
     echo '</div>';
     echo '<div class="col-lg-3 text-center">';
     if (!empty($category->image)) { 
-        $indImage = "https://doc.tradersfind.com/images/" . $category->image->id . ".webp";
+        $indImage = IMAGE_URL . $category->image->id . ".webp";
         echo '<img data-src="' . $indImage . '" class="img-fluid lazy" alt="Industry" width="70%" />';
     }
     echo '</div>';
@@ -75,7 +75,7 @@ foreach ($data1 as $category) {
     foreach (array_slice($category->productsCategories, 0, 6) as $cat) {
         echo '<div class="col-lg-4">';
         echo '<div class="d-flex align-items-center gap-3">';
-        $catImage = "https://doc.tradersfind.com/images/" . $cat->image->id . ".webp";
+        $catImage = IMAGE_URL . $cat->image->id . ".webp";
         echo '<img data-src="' . $catImage . '" class="lazy" alt="Category" width="140px" />';
         echo '<div class="inddetails">';
         echo '<h4 class="fs-6 fwbold"><a href="/" title="' . $cat->categoryName . '">' . $cat->categoryName . '</a></h4>';
@@ -101,7 +101,7 @@ foreach ($data1 as $category) {
             echo '<li>';
               echo '<a href="" class="align-items-center flex-row d-flex gap-3 flex-wrap flex-md-nowrap  justify-content-md-start">';
                 echo '<div class="pro_image">';
-                  echo'<img data-src="https://doc.tradersfind.com/images/' . $cat->image->id . '.webp" class="lazy"' . 'alt="Category" width="140px"/>';
+                  echo'<img data-src="' . IMAGE_URL . $cat->image->id . '.webp" class="lazy"' . 'alt="Category" width="140px"/>';
                 echo'</div>';
                 echo'<h2 class="fs-6 fw-bold">' . $cat->categoryName .'</h2>';
               echo'</a>';

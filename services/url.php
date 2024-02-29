@@ -15,60 +15,39 @@ public function getIndustryUrl($indName,$iid) {
   return $url;
 }
 public function getProductUrl($pname, $pid) {
-  return $this->router->createUrlTree([
-    'product',
-    preg_replace('/\s+/', '-', strtolower(trim($pname))),
-    $pid,
-  ])->toString();
+  $url = 'product/' . preg_replace('/[&,\s]+/', '-', strtolower(trim($pname))) . '/'. $pid;
+  return $url;
 }
 
 public function getCategoryUrl($name, $id) {
-  return $this->router->createUrlTree([
-    'group-category',
-    preg_replace('/\s+/', '-', strtolower(trim($name))),
-    $id,
-  ])->toString();
+  $url = 'group-category/' . preg_replace('/[&,\s]+/', '-', strtolower(trim($name))) . '/' . $id;
+  return $url;
 }
 
 public function getSubcategoryUrl($category, $subcategory, $id) {
-  return $category ? $this->router->createUrlTree([
-    'category',
-    preg_replace('/\s+/', '-', strtolower(trim($subcategory))),
-    $id,
-  ])->toString() : '/';
+  $url =  'category/' . preg_replace('/[&,\s]+/', '-', strtolower(trim($subcategory))) . '/' . $id;
+  return $url;
 }
 
 public function getSubcategoryLocUrl($category, $subcategory, $loc, $id) {
-  return $category ? $this->router->createUrlTree([
-    'category',
-    preg_replace('/\s+/', '-', strtolower(trim($subcategory))),
-    preg_replace('/\s+/', '-', strtolower(trim($loc))),
-    $id,
-  ])->toString() : '/';
+  $url = 'category/' . preg_replace('/[&,\s]+/', '-', strtolower(trim($subcategory))) . '/' . preg_replace('/[&,\s]+/', '-', strtolower(trim($loc))) . '/' . $id;
+  return $url;
 }
 
 public function getSubcategoryAllLocUrl($category, $subcategory, $loc, $id) {
-  return $category ? $this->router->createUrlTree([
-    'category',
-    preg_replace('/[&\s]+/', '-', strtolower(trim($subcategory))),
-    $id,
-  ])->toString() : '/';
+  $url = 'category/' . preg_replace('/[&,\s]+/', '-', strtolower(trim($subcategory))) . '/' . $id;
+  return $url;
 }
 
 public function getSellerUrl($sellerUrl, $id) {
-  if ($sellerUrl == 'null') { return $this->router->createUrlTree(['/']); }
-  return $this->router->createUrlTree([
-    'seller',
-    $sellerUrl == null || $sellerUrl == '' ? '/' : preg_replace('/\s+/', '-', strtolower(trim($sellerUrl))),
-    $id,
-  ])->toString();
+  if ($sellerUrl === 'null' || $sellerUrl === '') { return '/'; }
+  $url = 'seller/' . preg_replace('/[&,\s]+/', '-', strtolower(trim($sellerUrl))) . $id;
+  return $url;
 }
 
 public function getBlogUrl($title) {
-  return $this->router->createUrlTree([
-    'blog',
-    preg_replace('/\s+/', '-', strtolower(trim($title))),
-  ])->toString();
+  $url = 'blog/' . preg_replace('/[&,\s]+/', '-', strtolower(trim($title)));
+  return $url;
 }
 
 public function getProductToWhatsapp($prodName, $id, $seller, $isPackage = false) {
@@ -104,7 +83,7 @@ public function getProductToWhatsapp($prodName, $id, $seller, $isPackage = false
 }
 
 public function navigateToProductUrl($pname, $pid) {
-  $this->router->navigate(['/product', preg_replace('/\s+/', '-', strtolower(trim($pname))), $pid]);
+  $this->router->navigate(['/product', preg_replace('/[&,\s]+/', '-', strtolower(trim($pname))), $pid]);
 }
 }
 

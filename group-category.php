@@ -1,3 +1,4 @@
+<?php include 'config.php'; ?>
 <?php
     $currentUrl = $_SERVER['REQUEST_URI'];
     $urlParts = explode('/', $currentUrl);
@@ -12,12 +13,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Industry</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    <!--<link rel="stylesheet" href="./assets/bootstrap/bootstrap.min.css">-->
-    <link rel="stylesheet" href="/assets/css/cate.css" />
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/cate.css" />
 </head>
 <body>
-<script src="./assets/js/lazy-load.js"></script>
+<script src="<?php echo BASE_URL; ?>assets/js/lazy-load.js"></script>
 <?php
     include "header-sub.php";
     

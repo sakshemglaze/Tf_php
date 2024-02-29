@@ -1,6 +1,7 @@
-<link rel="stylesheet" href="./assets/css/userlogin.css" />
+<?php include 'config.php'; ?>
+<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/userlogin.css" />
 
-    <link rel="stylesheet" href="./assets/css/footer.css" >
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/footer.css" >
     <link rel="stylesheet" href=" 	https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <script src="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     
@@ -63,7 +64,7 @@
                                 <span *ngIf="this.loginMethod != 'EMAIL'">
                                     <select formControlName="countryCode" id="ccId" name="countryCode" class="form-control mxw-50" style="width: auto;">
                                     <?php
-                $json_data = file_get_contents('./assets/testingJson/country_codes_v1.json');
+                $json_data = file_get_contents('<?php echo BASE_URL; ?>assets/testingJson/country_codes_v1.json');
                 $countries = json_decode($json_data);
 
                 foreach ($countries as $code) {

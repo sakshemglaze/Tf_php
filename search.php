@@ -1,4 +1,4 @@
-
+<?php include 'config.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,8 +7,8 @@
     <meta name="robots" content="noindex nofollow" >
     <title>Document</title>
     <link rel="stylesheet" href=" 	https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./assets/css/style.css" >
-    <link rel="stylesheet" href="./assets/css/enquery.css" > 
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css" >
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/enquery.css" > 
 </head>
 <body>
 
