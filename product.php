@@ -1,6 +1,4 @@
-<link rel="stylesheet" href="./assets/css/prod.css" > 
-
-
+<?php include 'config.php'; ?>
 <div class="cardproduct card-shadow rounded-10 bg-white" style="border: 0.5px solid #ddd;">
     <div class="swiper swiper4">
         <div class="swiper-wrapper">

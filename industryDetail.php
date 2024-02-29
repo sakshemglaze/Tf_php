@@ -1,8 +1,9 @@
 <?php
+    include 'config.php';
     $currentUrl = $_SERVER['REQUEST_URI'];
     $urlParts = explode('/', $currentUrl);
-    $industryName = $urlParts[2];
-    $id = $urlParts[3];
+    $industryName = $matches[1];
+    $id = $matches[2];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,12 +12,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Industry </title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
    
-    <link rel="stylesheet" href="./assets/css/indusdetails.css" />
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/indusdetails.css" />
 </head>
 <body>
-<script src="./assets/js/lazy-load.js"></script>
+<script src="<?php echo BASE_URL; ?>assets/js/lazy-load.js"></script>
 <?php
     include "header-sub.php";
     
@@ -64,14 +65,14 @@
                     echo '<div class="card border-0 category-hover">';
                         echo '<div class="card-body">';
                             echo '<h2 class="mb-3 fw-semibold fs-4">';
-                                echo '<a href="group-category/'. $cat->id .'">'. $cat->categoryName .'</a>';
+                                echo '<a href="/group-category/'. $cat->id .'">'. $cat->categoryName .'</a>';
                             echo '</h2>';
                             echo '<div class="d-flex align-items-start">';
-                               echo '<img data-src="https://doc.tradersfind.com/images/'. $cat->image->id .'.webp" class="lazy me-3 rounded-10 img-fluid" height="70" width="70" alt="Category">' ;
+                               echo '<img data-src="' . IMAGE_URL . $cat->image->id .'.webp" class="lazy me-3 rounded-10 img-fluid" height="70" width="70" alt="Category">' ;
                                 echo '<ul class="list-style-disc ms-4">';
                                     foreach (array_slice($cat->productsSubcategories, 0, 5) as $subcat) {
                                         echo '<li>';
-                                            echo '<a href="">' . $subcat->subCategoryName . '</a>';
+                                            echo '<a href="/category/">' . $subcat->subCategoryName . '</a>';
                                         echo '</li>';
                                                                         }
                                     echo '<li>';
@@ -89,7 +90,7 @@
 <?php
 include "inquiry.php";
 
-include "footer.php";
+//include "footer.php";
 ?>
                                     </body>
                                     </html>

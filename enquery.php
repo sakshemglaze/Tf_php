@@ -1,4 +1,4 @@
-
+<?php include 'config.php'; ?>
 <div id="popup-card" class="popup-card">
   
 
@@ -50,7 +50,7 @@
                                     <select formControlName="quantityUnit" class="form-control"
                                         placeholder="eg:  Dozen,  Piece(s),  Tonr">
                                         <?php
-                      $resUnit=file_get_contents('./assets/testingJson/Units.json');
+                      $resUnit=file_get_contents('<?php echo BASE_URL; ?>assets/testingJson/Units.json');
                       $allunit=json_decode($resUnit);
                       foreach($allunit as $unit){
                              ?>

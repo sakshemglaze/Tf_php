@@ -1,3 +1,4 @@
+<?php include 'config.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,11 +6,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seller Details </title>
-    <link rel="stylesheet" href="./assets/vendors/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/css/sellweb.css" />
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/sellweb.css" />
 </head>
 <body>
-<script src="./assets/js/lazy-load.js"></script>
+<script src="<?php echo BASE_URL; ?>assets/js/lazy-load.js"></script>
 <?php
     include "header-sub.php";
     
@@ -516,5 +517,5 @@
   </div>
 </section>
                                 </body></html>
-                                <script src="./assets/vendors/bootstrap/bootstrap.bundle.min.js"></script>
+                                <script src="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.bundle.min.js"></script>
 <?php include "footer.php"; ?>

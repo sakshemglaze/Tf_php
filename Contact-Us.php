@@ -1,4 +1,5 @@
-<link rel="stylesheet" href="./assets/css/contact.css" />
+<?php include 'config.php'; ?>
+<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/contact.css" />
 
 <?php
 include 'header-sub.php';
@@ -19,17 +20,17 @@ include 'header-sub.php';
                 <div class="col-sm-8">
                     <ul>
                         <li>
-                            <img src="./assets/img/map1.png" width="40" height="40" alt="" /> 
+                            <img src="<?php echo BASE_URL; ?>assets/img/map1.png" width="40" height="40" alt="" /> 
                             <div class="text_11" style="color: #333;">606 Binary Tower by Omniyat Business Bay, Dubai</div>
                             <div class="text_11">&nbsp;</div>
                         </li>
                         <li>
-                            <img src="./assets/img/phone11.png" width="40" height="40" alt="" />
+                            <img src="<?php echo BASE_URL; ?>assets/img/phone11.png" width="40" height="40" alt="" />
                             <div class="text_11" style="color: #333;">Sales : +971 502943313</div>
                             <div class="text_11" style="color: #333;">Support : +971 502943313</div>
                         </li>
                         <li>
-                            <img src="./assets/img/email1.png" width="40" height="40" alt="" />
+                            <img src="<?php echo BASE_URL; ?>assets/img/email1.png" width="40" height="40" alt="" />
                             <a href="/post-buy-requirements" title="post-buy-requirements" style="color: #333;">Click here to share your queries.</a>
                         </li>
                     </ul>
@@ -41,7 +42,7 @@ include 'header-sub.php';
                 </div>
                 <div class="col-sm-3">
                     <div class="right_box_img">
-                        <img src="./assets/img/email2.webp" style="max-width: 100%; height: auto; display: block; margin: 0 auto;" alt="" />
+                        <img src="<?php echo BASE_URL; ?>assets/img/email2.webp" style="max-width: 100%; height: auto; display: block; margin: 0 auto;" alt="" />
                     </div>
                 </div>
             </div>

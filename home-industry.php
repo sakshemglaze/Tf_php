@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="./assets/css/hi.css" />
+<link rel="stylesheet" href="assets/css/hi.css" />
 <div class="categories card-shadow rounded-10">
     <div class="d-flex align-items-center ps-2 mb-3">
       <img src="assets/images/Category-icon2.png" alt="Industry" width="19" height="12"  />
@@ -17,10 +17,14 @@ array_push($industry, array("Industrial Supplies", "6450d5651381f473d7f9da51", "
     <ul>
       <li class="has-category" >
         <?php
+
+        include_once 'services/url.php';
+        $urlService = new UrlService($router,$platformId);
+        
         foreach($industry as $indus){
             ?>
             <h5>
-            <a [href]="#" title="<?php echo $indus[0];?>">
+            <a href="<?php echo $urlService->getIndustryUrl($indus[0],$indus[1]); ?>" title="<?php echo $indus[0];?>">
               <span><img src="<?php echo $indus[2];?>" alt="I" width="30" height="30" /></span>&nbsp; 
              
               <?php if (strlen($indus[0]) > 200) {
@@ -39,7 +43,7 @@ array_push($industry, array("Industrial Supplies", "6450d5651381f473d7f9da51", "
       </li>
   
       <li class="has-category"> <h5>
-        <a href="industry.php">
+        <a href="industry">
           <span><img src="./assets/images/browse-icon.png" alt="" width="30" height="30" /></span>
           &nbsp;All Categories
         </a> </h5>

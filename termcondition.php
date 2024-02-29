@@ -1,4 +1,5 @@
-<link rel="stylesheet" href="./assets/css/tnc.css" />
+<?php include 'config.php'; ?>
+<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/tnc.css" />
 <?Php
 include "header-sub.php";
 ?>

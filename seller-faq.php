@@ -1,4 +1,5 @@
-<link rel="stylesheet" href="./assets/css/sellfaq.css" />
+<?php include 'config.php'; ?>
+<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/sellfaq.css" />
 <link rel="stylesheet" href=" 	https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 <?php
 include "header-sub.php";

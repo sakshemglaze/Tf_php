@@ -1,7 +1,8 @@
-<link rel="stylesheet" href="./assets/css/home.css" />
-<!-- <link rel="stylesheet" href="./assets/css/style.css" > -->
-<link rel="stylesheet" href=" 	https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-<link rel="preload" href="./assets/images/header-bg.webp" as="image" type="image/webp" fetchpriority="high" >
+<?php include_once 'config.php'; ?>
+<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/home.css" />
+<!-- <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css" > -->
+<link rel="stylesheet" href="<?php echo BASE_URL; ?>bssets/vendors/bootstrap/bootstrap.min.css">
+<link rel="preload" href="<?php echo BASE_URL; ?>assets/images/header-bg.webp" as="image" type="image/webp" fetchpriority="high" >
 <?php
 include "header.php";
 include "home-search.php"
@@ -46,7 +47,7 @@ include "home-search.php"
     <div class="col">
       <div class="swiper2 new_img ">
         <div class="position-relative bg-transparent new_img_11">
-          <img src="assets/images/brands/new1.webp" alt="" width="271" height="193" class="w-100 img-fluid" />
+          <img src="<?php echo BASE_URL; ?>assets/images/brands/new1.webp" alt="" width="271" height="193" class="w-100 img-fluid" />
           <div class="hading2">
             <p>Looking for a <br> product ?</p>
             <a href="post-buy-requirements.php">Post Buy Requirement</a>
@@ -54,7 +55,7 @@ include "home-search.php"
         </div>
 
         <div class="position-relative   py-1	 bg-transparent new_img_11">
-          <img src="assets/images/brands/new2.webp" alt="" width="271" height="193" class="w-100 img-fluid" />
+          <img src="<?php echo BASE_URL; ?>assets/images/brands/new2.webp" alt="" width="271" height="193" class="w-100 img-fluid" />
           <div class="hading2">
             <p>Want to grow your <br> business 10X Faster?</p>
             <a href="registration.php">Sell on TradersFind</a>
@@ -210,7 +211,7 @@ include "home-search.php"
                   <select formControlName="quantityUnit" class="form-control"
                     placeholder="eg:  Dozen,  Piece(s),  Tonr">
                     <?php
-                      $resUnit=file_get_contents('./assets/testingJson/Units.json');
+                      $resUnit=file_get_contents('<?php echo BASE_URL; ?>assets/testingJson/Units.json');
                       $allunit=json_decode($resUnit);
                       foreach($allunit as $unit){
                              ?>
@@ -245,7 +246,7 @@ include "home-search.php"
                   <select area-label="countryCode" formControlName="countryCode" class="form-control mxw-50">
                 
                   <?php
-                      $rescuntrycode=file_get_contents('./assets/testingJson/country_codes_v1.json');
+                      $rescuntrycode=file_get_contents('<?php echo BASE_URL; ?>assets/testingJson/country_codes_v1.json');
                       $allcuntrycode=json_decode($rescuntrycode);
                       foreach($allcuntrycode as $unit){
                              ?>
@@ -291,7 +292,7 @@ include "home-search.php"
   <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <?php
-   $items=array('./assets/images/c1.png','./assets/images/c2.png',
+   $items=array(BASE_URL . 'assets/images/c1.png','./assets/images/c2.png',
    './assets/images/c3.png','./assets/images/c4.png',
    './assets/images/c5.png','./assets/images/c1.png','./assets/images/c3.png');
    $state=array('DUBAI','ABU DHABI','SHARJAH','AJMAN','FUJAIRAH','RAS AL KHAIMAH','UMM AL QUWAIN');
@@ -347,23 +348,23 @@ include "home-search.php"
   <div class="carousel-inner row">
     <div class="carousel-item active">
     <div class="p-2 col-md-3">
-          <span class=""><img src="./assets/images/brands/101.png" width="302" height="159" class="img-fluid" alt=""></span>
+          <span class=""><img src="<?php echo BASE_URL; ?>assets/images/brands/101.png" width="302" height="159" class="img-fluid" alt=""></span>
         </div>
        </div>
     <div class="carousel-item">
     <div class="p-2 col-md-3">
-          <span class=""><img src="./assets/images/brands/102.png" width="302" height="159" class="img-fluid" alt=""></span>
+          <span class=""><img src="<?php echo BASE_URL; ?>assets/images/brands/102.png" width="302" height="159" class="img-fluid" alt=""></span>
         </div>
     </div>
     <div class="carousel-item">
     <div class="p-2 col-md-3">
-          <span class=""><img src="./assets/images/brands/103.png" width="302" height="159" class="img-fluid" alt=""></span>
+          <span class=""><img src="<?php echo BASE_URL; ?>assets/images/brands/103.png" width="302" height="159" class="img-fluid" alt=""></span>
         </div>
     </div>
 
   <div class="carousel-item">
   <div class="p-2 col-md-3">
-          <span class=""><img src="./assets/images/brands/104.png" width="302" height="159" class="img-fluid" alt=""></span>
+          <span class=""><img src="<?php echo BASE_URL; ?>assets/images/brands/104.png" width="302" height="159" class="img-fluid" alt=""></span>
         </div>
     </div>
   </div>
@@ -383,12 +384,12 @@ include "home-search.php"
               <div class="card-body">
                 <div class="row">
                   <div class="col-3">
-                    <img ngSrc="assets/images/client.png" class="img-fluid w-100" alt="" width="165" height="162">
+                    <img ngSrc="<?php echo BASE_URL; ?>assets/images/client.png" class="img-fluid w-100" alt="" width="165" height="162">
                   </div>
                   <div class="col-9">
                     <h4>Mr. Imtiaz</h4>
                     <div class="d-flex gap-4 align-items-center mb-3">
-                      <img ngSrc="assets/images/location-2.png" alt="" width="25" height="28">
+                      <img ngSrc="<?php echo BASE_URL; ?>assets/images/location-2.png" alt="" width="25" height="28">
                       <address class="mb-0"> UAE, Dubai</address>
                       <div class="clientTime">8 Months</div>
 
@@ -409,12 +410,12 @@ include "home-search.php"
             <div class="card-body">
               <div class="row">
                 <div class="col-3">
-                  <img ngSrc="assets/images/client.png" class="img-fluid w-100" alt="" width="165" height="162">
+                  <img ngSrc="<?php echo BASE_URL; ?>assets/images/client.png" class="img-fluid w-100" alt="" width="165" height="162">
                 </div>
                 <div class="col-9">
                   <h4>Mr. Ahmed Ali</h4>
                   <div class="d-flex gap-4 align-items-center mb-3">
-                    <img ngSrc="assets/images/location-2.png" alt="" width="25" height="28">
+                    <img ngSrc="<?php echo BASE_URL; ?>assets/images/location-2.png" alt="" width="25" height="28">
                     <address class="mb-0"> UAE, Abu Dhabi</address>
                     <div class="clientTime">3 Months</div>
 
@@ -443,37 +444,37 @@ include "home-search.php"
     <div class="carousel-item active">
     
         <span class="brand-box brand-box2">
-          <img src="assets/images/brands/1.png" width="180" height="48" class=""
+          <img src="<?php echo BASE_URL; ?>assets/images/brands/1.png" width="180" height="48" class=""
                alt="" />
         </span>
     </div>
     <div class="carousel-item">
         <span class="brand-box brand-box2">
-          <img src="assets/images/brands/2.png" width="185" height="124" class=""
+          <img src="<?php echo BASE_URL; ?>assets/images/brands/2.png" width="185" height="124" class=""
                alt="" />
         </span>
   </div>
   <div class="carousel-item">
         <span class="brand-box brand-box2">
-          <img src="assets/images/brands/3.png" width="185" height="124" class=""
+          <img src="<?php echo BASE_URL; ?>assets/images/brands/3.png" width="185" height="124" class=""
                alt="" />
         </span>
   </div>
   <div class="carousel-item">
         <span class="brand-box brand-box2">
-          <img src="assets/images/brands/4.png" width="185" height="124" class=""
+          <img src="<?php echo BASE_URL; ?>assets/images/brands/4.png" width="185" height="124" class=""
                alt="" />
         </span>
   </div>
   <div class="carousel-item">
         <span class="brand-box brand-box2">
-          <img src="assets/images/brands/5.png" width="185" height="124" class=""
+          <img src="<?php echo BASE_URL; ?>assets/images/brands/5.png" width="185" height="124" class=""
                alt="" />
         </span>
   </div>
   <div class="carousel-item">
         <span class="brand-box brand-box2">
-          <img src="assets/images/brands/6.png" width="185" height="124" class=""
+          <img src="<?php echo BASE_URL; ?>assets/images/brands/6.png" width="185" height="124" class=""
                alt="" />
         </span>
   </div>

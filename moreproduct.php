@@ -1,3 +1,4 @@
+<?php include 'config.php'; ?>
 <?php
    $prodId = "647dcf429d126d0588ea6e3a"; //$_GET['id'];
     require_once 'post.php';
@@ -9,7 +10,7 @@
               //print_r($datap->products);
               ?>
 
-<link rel="stylesheet" href="/assets/css/moreprod.css" />
+<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/moreprod.css" />
 <div class="row">
     <?php foreach ($datap->products as $product): ?>
     <div class="col-lg-3">
