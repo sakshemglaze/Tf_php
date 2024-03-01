@@ -1,3 +1,4 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <?php include_once 'config.php'; ?>
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/home.css" />
 <!-- <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css" > -->
@@ -429,7 +430,7 @@ include "home-search.php"
 
     
 </section>
-<p-toast position="top-right"></p-toast>
+
 <?php
 include "footer.php";
 ?>

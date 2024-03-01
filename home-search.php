@@ -68,7 +68,7 @@
                             <!-- <input type="text" class="form-control border-rounded-end"
                                 placeholder="What are you looking for.." /> -->
 
-                                <input type="text" id="search" name="search" autofocus class="form-control border-rounded-end" placeholder="What are you looking for..">
+                                <input type="text" id="search" name="search" formControlName="name" autofocus class="form-control border-rounded-end" placeholder="What are you looking for..">
     <div class="submit-button">
   
 <script>
