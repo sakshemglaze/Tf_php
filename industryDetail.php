@@ -1,11 +1,8 @@
 <?php
     include_once 'config.php';
-
     include_once 'services/url.php';
     $urlService = new UrlService();
-
     $currentUrl = $_SERVER['REQUEST_URI'];
-    $urlParts = explode('/', $currentUrl);
     $industryName = $matches[1];
     $id = $matches[2];
 ?>
@@ -34,7 +31,7 @@
             $size = 6;
             require_once 'post.php';
         $data =  get(
-                'api/industries/6450d5651381f473d7f9da2f?size=' . $size . '&page=' . $page . '&sort=industryName,asc',
+                'api/industries/' . $matches[2] .'?size=' . $size . '&page=' . $page . '&sort=industryName,asc',
                  true
               );
               $data1 = json_decode($data);
@@ -48,7 +45,7 @@
   <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="/">TradersFind </a></li>
-      <li class="breadcrumb-item" aria-current="page"><a href="<?php echo B_URL;?>/industry"> Industry </a> </li>
+      <li class="breadcrumb-item" aria-current="page"><a href="/industry"> Industry </a> </li>
       <li class="breadcrumb-item active" aria-current="page"> <?php echo $data1->industryName; ?> </li>
     </ol>
   </nav>
@@ -69,18 +66,18 @@
                     echo '<div class="card border-0 category-hover">';
                         echo '<div class="card-body">';
                             echo '<h2 class="mb-3 fw-semibold fs-4">';
-                            echo '<a href="' . B_URL . '/' . $urlService->getGroupCategoryUrl($cat->categoryName, $cat->id) . '">' . $cat->categoryName . '</a>';
+                                echo '<a href="/' . $urlService->getGroupCategoryUrl($cat->categoryName, $cat->id) . '">'. $cat->categoryName .'</a>';
                             echo '</h2>';
                             echo '<div class="d-flex align-items-start">';
                                echo '<img data-src="' . IMAGE_URL . $cat->image->id .'.webp" class="lazy me-3 rounded-10 img-fluid" height="70" width="70" alt="Category">' ;
                                 echo '<ul class="list-style-disc ms-4">';
                                     foreach (array_slice($cat->productsSubcategories, 0, 5) as $subcat) {
                                         echo '<li>';
-                                            echo '<a href="' . B_URL . '/' . $urlService->getCategoryUrl($subcat->subCategoryName, $subcat->id) . '">' . $subcat->subCategoryName . '</a>';
+                                            echo '<a href="/' . $urlService->getCategoryUrl($subcat->subCategoryName, $subcat->id) . '">' . $subcat->subCategoryName . '</a>';
                                         echo '</li>';
                                                                         }
                                     echo '<li>';
-                                        echo '<a href="' . B_URL . '/' . $urlService->getGroupCategoryUrl($cat->categoryName, $cat->id) . '"> + View All</a>';
+                                        echo '<a href="/' . $urlService->getGroupCategoryUrl($cat->categoryName, $cat->id) . '"> + View All</a>';
                                     echo '</li>';
                                 echo '</ul>';
                             echo '</div>';

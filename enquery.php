@@ -1,4 +1,4 @@
-<?php include_once 'config.php'; ?>
+<?php include 'config.php'; ?>
 <div id="popup-card" class="popup-card">
   
 

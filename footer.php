@@ -100,21 +100,26 @@
         <div class="card-body">
           <div class="btn btn-primary-gradiant powerby">Sponsored by</div>
   
-  <div class="owl-carousel carousel-main4">
-       
-          <img src="<?php echo BASE_URL; ?>assets/images/brands/footer-brands/1.webp"  alt="" />
-       
-        
-          <img src="<?php echo BASE_URL; ?>assets/images/brands/footer-brands/2.webp" alt="" />
-        
-       
-          <img src="<?php echo BASE_URL; ?>assets/images/brands/footer-brands/3.webp"  alt="" />
-        
-        
-          <img src="<?php echo BASE_URL; ?>assets/images/brands/footer-brands/4.webp"  alt="" />
-       
+          <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <div class="row justify-content-center"> 
+        <div class="col-md-3"> 
+          <img src="<?php echo BASE_URL; ?>assets/images/brands/footer-brands/1.webp" class="d-block img-fluid" alt="" />
+        </div>
+        <div class="col-md-3">
+          <img src="<?php echo BASE_URL; ?>assets/images/brands/footer-brands/2.webp" class="d-block  img-fluid" alt="" />
+        </div>
+        <div class="col-md-3">
+          <img src="<?php echo BASE_URL; ?>assets/images/brands/footer-brands/3.webp" class="d-block  img-fluid" alt="" />
+        </div>
+        <div class="col-md-3">
+          <img src="<?php echo BASE_URL; ?>assets/images/brands/footer-brands/4.webp" class="d-block img-fluid" alt="" />
+        </div>
       </div>
-    
+    </div>
+
+  </div>
 </div>
 
         </div>
@@ -124,6 +129,4 @@
       Copyright &copy; 2023 Interconnect Marketing Management L.L.C All rights reserved.
     </p>
   </footer>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
-<script src='<?php echo BASE_URL; ?>assets/js/owl.carousel.min.js'></script>
-<script  src="<?php echo BASE_URL; ?>assets/js/script.js"></script>
+  

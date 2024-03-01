@@ -1,9 +1,7 @@
-
 <?php include 'config.php'; 
   include 'services/url.php';
   $urlService = new UrlService();
 ?>
-
 <?php
     $currentUrl = $_SERVER['REQUEST_URI'];
     $urlParts = explode('/', $currentUrl);
@@ -124,25 +122,8 @@ foreach ($data1 as $category) {
 }
 ?>
 
-<div class="row mt-4">
-                <div class="col-lg-6">
-                  <nav aria-label="...">
-                    <ul class="pagination">
-                      <li class="page-item disabled">
-                        <a class="page-link">Previous</a>
-                      </li>
-                      <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                      <li class="page-item " aria-current="page">
-                        <a class="page-link" href="#">2</a>
-                      </li>
-                      <li class="page-item"><a class="page-link" href="#">3</a></li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                      </li>
-                    </ul>
-                  </nav>
-                </div>
-            </div>
+  <pagination-controls id="industry_listing_pagination" (pageChange)="getNext($event)" [responsive]="true"
+    [maxSize]="20"></pagination-controls>
 </section>
 
 <section class="container-fluid mt-4" *ngIf="popular_categories">

@@ -1,4 +1,7 @@
-
+<?php include 'config.php'; 
+    include_once 'services/url.php';
+    $urlService = new UrlService(); 
+?>
 <div class="cardproduct card-shadow rounded-10 bg-white" style="border: 0.5px solid #ddd;">
     <div class="swiper swiper4">
         <div class="swiper-wrapper">
@@ -10,21 +13,21 @@
                            <?php
                             if ($prodData->seller && $prodData->seller->isVerifiedSeller) {
                                 echo '<div style="margin: auto; display: table;">';
-                                echo '<img src="assets/images/verified2.png" width="74" height="27" alt="Verified_Product" style="float: left; width: 60px;">';
+                                echo '<img class="lazy" data-src="' . BASE_URL . 'assets/images/verified2.png" width="74" height="22" alt="Verified_Product" style="float: left; width: 60px;">';
                                 if ($prodData->isFeatured) {
-                                    echo '<img src="assets/images/Star_listing.png" width="80" height="27" alt="Start_Listing" style="width: 70px; float: left; padding-left: 10px;">';
+                                    echo '<img class="lazy" data-src="' . BASE_URL . 'assets/images/Star_listing.png" width="80" height="22" alt="Start_Listing" style="width: 70px; float: left; padding-left: 10px;">';
                                 }
                                 echo '</div>';
                             }
                             ?>
                               <?php
-                               $newsto = "https://doc.tradersfind.com/images/" . $prodData->images[0]->id . ".webp";
+                               $newsto = IMAGE_URL . $prodData->images[0]->id . ".webp";
 
                                 
                                  ?>
                                </div> 
-                            <div class="border-end p-3 pt-5 h-100 border_img border_img2 ">
-                            <img src="<?php echo $newsto; ?>" alt="Your Image" width="140px">
+                            <div class="border-end p-3 pt-5 border_img border_img2">
+                            <img data-src="<?php echo $newsto; ?>" alt="<?php echo $prodData->productName ?>" class="lazy" style="width: 160px;">
                                 <div class="d-flex mt-3 d-center">
                                
                                 <button onclick="openPopup()" class="btn-primary-gradiant btn btn-sm w-100 d-center">
@@ -33,14 +36,13 @@
                             </div>
                         </div>
                             <div class="col-md-7 position-relative p-3">
-                                  
                                     <div class="single-line">
-                                      
+                                    <a href="<?php echo $urlService->getProductUrl($prodData->productName, $prodData->id) ?>" target="_blank" title="Product Page">
                                             <h2 class="fs-5 about_text2" style="color:rgb(216, 71, 119);">
                                             <?php    
                                             print_r( $prodData->productName);
                                             ?>
-                                            </h2>
+                                            </h2> </a>
                                     </div>
                                     <div class="two-lines small">
                                         <ul class="two-line-containers" role="list">
@@ -58,6 +60,7 @@
                                                   <?php } ?>
                                              <?php } ?>
                                          </ul>
+                                         <a href="<?php echo $urlService->getProductUrl($prodData->productName, $prodData->id)?>" title="Product Page" target="_blank" style="color: palevioletred;" > View more...</a>
                                     </div>
 
 
@@ -65,23 +68,16 @@
                                     <br>
                                     
                                     <div class="d-flex mt-1 small about_text2">
-                                        <!--<img src="assets/images/house.png" alt="Location_seller" width="18" height="19" class="me-3 w-18" />-->
-                                        <b>Company :
-                                        
-                                            <a style="color: palevioletred;"> <span
-                                                    class="single-line"
-                                                   >
-                                                   <p class="about_text2">
-                                                   <?php
-                                                   print_r($prodData->seller->sellerCompanyName);
-                                                   ?>
-                                                     </p>
+                                        <img src="<?php echo BASE_URL ?>assets/images/house.png" alt="Location_seller" width="18" height="19" class="me-3 w-18" />
+                                        <b>Company :</b>
+                                            <a href="/<?php echo $urlService->getSellerUrl($prodData->seller->sellerCompanyName,$prodData->seller->id) ?>" style="color: palevioletred;" target="_blank"> 
+                                            <span class="single-line">
+                                                <?php print_r($prodData->seller->sellerCompanyName); ?>
                                                 </span>
                                             </a>
-                                            </b>
                                     </div>
                                     <div class="d-flex small mt-1 about_text2">
-                                        <!--<img src="assets/images/location-3.svg" width="18" height="19" alt="Seller_Location" class="me-3 w-18" />-->
+                                        <img src="<?php echo BASE_URL ?>assets/images/location-3.svg" width="18" height="19" alt="Seller_Location" class="me-3 w-18" />
                                         <b>Office : </b>
                                         <a 
                                             target="_blank">
@@ -94,7 +90,7 @@
                                     </div>
 
                                     <div class="d-flex small mt-1 about_text2">
-                                        <!--<img src="assets/images/service_area.png" width="18" height="19" alt="Service_area" class="me-3 w-18" />-->
+                                        <img src="<?php echo BASE_URL ?>assets/images/service_area.png" width="18" height="19" alt="Service_area" class="me-3 w-18" />
                                         <b>Service Area : </b>
                                         <a  target="_blank">
                                             <span 
@@ -134,7 +130,7 @@
                     <div class="row gx-2 mb-5 mt-1 gy-3 gy-md-2">
                                 <div class="col-md-4">
                                     <button class="btn btn-sm btn-light w-100 d-center"  title="Seller_Phone" href="#">
-                                        <img src="assets/images/phone.png" width="18" height="17" class="w-18 me-2"
+                                        <img src="<?php echo BASE_URL ?>assets/images/phone.png" width="18" height="17" class="w-18 me-2"
                                             alt="Phone" />
                                        
                                     </button>
@@ -149,7 +145,7 @@
                                  
                                     <button onclick="openPopup()"
                                         class="btn-outline-gradiant btn btn-sm w-100 d-center">
-                                        <img src="assets/images/mail-black.png" width="14" height="12"
+                                        <img src="<?php echo BASE_URL ?>assets/images/mail-black.png" width="14" height="12"
                                             class="me-2 w-18" alt="Mail_" />
                                          
                                         Send Inquiry
@@ -172,6 +168,7 @@
     document.getElementById("popup-card").style.display = "block";
   }
 </script>
+<script src="<?php echo BASE_URL; ?>assets/js/lazy-load.js"></script>
  
 
                             
