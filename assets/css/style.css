@@ -71,7 +71,7 @@
   font-size: 13px !important;
 }
 .post-request-text{
-  margin-top: 100px;
+  margin-top: 200px;
 }
 .easysource {
   background-image: url("../images/middle-banner.webp");
@@ -124,5 +124,12 @@
   background-color: #bd3838;
   transform: translate(-50%, 31px);
 }
+.owl-prev span, .owl-next span {color: #FFF;}
+.owl-prev span:hover, 
+.owl-next span:hover {color: #8199A3;}
+.owl-prev, .owl-next {position: absolute;top: 0; height: 100%;}
+.owl-prev {left: 7px;}
+.owl-next {right: 7px;}
+button:focus, button:active { outline: none;}
 
 

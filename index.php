@@ -13,7 +13,6 @@ $routes = [
     '/product' => 'productdetail.php',
     '/register-your-business' => 'registration.php',
     '/seller-faq' => 'seller-faq.php',
-    '/seller/' => 'sellerdetail.php',
     '/feedback' => 'send-feedback.php',
     '/complaint' => 'send-feedback.php',
     '/login' => 'signIn.php',
@@ -35,6 +34,13 @@ if (preg_match('~^/group-category/([^/]+)/([^/]+)$~', $url, $matches)) {
 if (preg_match('~^/category/([^/]+)/([^/]+)$~', $url, $matches)) {
   include 'search.php'; //. $matches[1] . '/' . $matches[2];
 }
+if (preg_match('~^/seller/([^/]+)/([^/]+)$~', $url, $matches)) {
+  include 'sellerdetail.php'; //. $matches[1] . '/' . $matches[2];
+}
+if (preg_match('~^/product/([^/]+)/([^/]+)$~', $url, $matches)) {
+  include 'productdetail.php'; //. $matches[1] . '/' . $matches[2];
+}
+
 
 if (isset($routes[$url])) {
   include $routes[$url];

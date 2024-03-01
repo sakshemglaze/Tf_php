@@ -48,7 +48,9 @@
                             <!-- <input type="text" class="form-control border-rounded-end"
                                 placeholder="What are you looking for.." /> -->
 
+
                                 <input type="text" name="search" autofocus class="form-control border-rounded-end" placeholder="What are you looking for..">
+
     <div class="submit-button">
         <!-- <img src="assets/images/Voice-icon.png" alt="" class="me-lg-3 me-1 img-fluid" width="15"> -->
         <button type="submit" class="btn-primary-gradiant w-100 h-100 px-2 px-lg-5">

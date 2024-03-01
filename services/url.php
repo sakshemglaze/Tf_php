@@ -6,8 +6,10 @@ class UrlService {
 //private $platformId;
 
 public function __construct() {
+
   //$this->router = $router;
   //$this->platformId = $platformId;
+
 }
 
 public function getIndustryUrl($indName,$iid) {

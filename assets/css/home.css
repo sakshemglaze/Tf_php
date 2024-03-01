@@ -402,9 +402,6 @@ input:focus,textarea:focus {
   padding: 60px 0;
 }
 
-.new_img img {
-  width: 100%;
-}
 
 .hading2 {
   position: absolute;
@@ -630,9 +627,7 @@ input:focus,textarea:focus {
   margin: 0 5px;
 }
 
-.logo_slider .owl-carousel .owl-item img {
-  width: auto;
-}
+
 
 .ml15 {
   margin: 0 15px;

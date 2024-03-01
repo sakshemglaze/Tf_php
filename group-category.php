@@ -1,4 +1,7 @@
-<?php include 'config.php'; ?>
+<?php include 'config.php'; 
+    include_once 'services/url.php';
+    $urlService = new UrlService();
+?>
 <?php
     $currentUrl = $_SERVER['REQUEST_URI'];   
     $industryName = $matches[1];
@@ -91,7 +94,7 @@
             foreach ($data1->productsSubcategories as $subCat) {
               //print_r($subCat);
             echo '<li>';
-              echo '<a [href]="" class="product-box">';
+              echo '<a href="/' . $urlService->getCategoryUrl($subCat->subCategoryName, $subCat->id) . '" class="product-box">';
                 echo '<div class="pro_image">';
                   echo '<img data-src="' . IMAGE_URL . $subCat->image->id .'.webp" class="lazy w-100" alt="Category" />';
                 echo '</div>';
