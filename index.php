@@ -41,6 +41,7 @@ if (preg_match('~^/product/([^/]+)/([^/]+)$~', $url, $matches)) {
   include 'productdetail.php'; //. $matches[1] . '/' . $matches[2];
 }
 
+
 if (isset($routes[$url])) {
   include $routes[$url];
 } elseif ($url === '/not-found') {
