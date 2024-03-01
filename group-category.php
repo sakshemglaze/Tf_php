@@ -4,7 +4,7 @@
     $urlParts = explode('/', $currentUrl);
     $industryName = $urlParts[2];
     $id = $urlParts[3];
-    print_r ($id);   
+      
 ?>
 <!DOCTYPE html>
 <html lang="en">

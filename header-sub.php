@@ -4,7 +4,7 @@
 <header class="container-fluid shadow-sm border-bottom bg-white sticky-top inner_header1 ">
     <div class="d-flex align-items-center position-relative flex-wrap">
 
-        <a href="/" title="TradersFind" aria-label="TradersFind - Largest B2B online Portal">
+        <a href="<?php echo BASE_URL; ?>" title="TradersFind" aria-label="TradersFind - Largest B2B online Portal">
           <img src="<?php echo BASE_URL; ?>assets/images/TradersFind.webp" alt="TradersFind" class="order-1 inner_header_logo" width="110" height="70" Rel="Nofollow" />
         </a>
         <?php

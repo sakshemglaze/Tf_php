@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-md-8 offset-md-2">
                     <form  class="search-form"
-                        id="homepageSearch" inViewport  action="search.php" method="post" >
+                        id="homepageSearch" inViewport  action="search" method="post" >
 
                         <div class="input-group mb-3 w-100 position-relative">
                             <span class="input-group-text bg-white" id="basic-addon1"><img
@@ -70,7 +70,7 @@
 
                                 <input type="text" id="search" name="search" autofocus class="form-control border-rounded-end" placeholder="What are you looking for..">
     <div class="submit-button">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  
 <script>
 $(document).ready(function() {
     $('#search').keyup(function() {
