@@ -1,10 +1,11 @@
-<?php include_once 'config.php'; ?>
+<?php include 'config.php'; 
+    include_once 'services/url.php';
+    $urlService = new UrlService();
+?>
 <?php
-    $currentUrl = $_SERVER['REQUEST_URI'];
-    $urlParts = explode('/', $currentUrl);
-    $industryName = $urlParts[2];
-    $id = $urlParts[3];
-      
+    $currentUrl = $_SERVER['REQUEST_URI'];   
+    $industryName = $matches[1];
+    $id = $matches[2];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,7 +31,7 @@
             $size = 6;
             require_once 'post.php';
         $data =  get(
-                'api/guest/products-categories/6450d35b1381f473d7f9d7a4'.'?size=' . $size . '&page=' . $page . '&sort=categoryName,asc',
+                'api/guest/products-categories/' . $matches[2] .'?size=' . $size . '&page=' . $page . '&sort=categoryName,asc',
                  true
               );
               $data1 = json_decode($data);
@@ -81,7 +82,7 @@
         <div class="col-lg-2 bg-grey" *ngIf="categoryDetails">
           <div class="d-flex flex-wrap p-4 flex-column align-items-center h-100">
             <div class="pro_image w-100">
-              <img data-src="https://doc.tradersfind.com/images/<?php echo $data1->image->id;?>.webp" class="lazy w-100" alt="Group-Category" />
+              <img data-src="<?php echo IMAGE_URL . $data1->image->id;?>.webp" class="lazy w-100" alt="Group-Category" />
 
             </div>
             <h2 class="fs-4 fwbold mt-4"><?php echo $data1->subCategoryName; ?></h2>
@@ -91,10 +92,11 @@
           <ul class="sub_category_list">
             <?php
             foreach ($data1->productsSubcategories as $subCat) {
+              //print_r($subCat);
             echo '<li>';
-              echo '<a [href]="" class="product-box">';
+              echo '<a href="/' . $urlService->getCategoryUrl($subCat->subCategoryName, $subCat->id) . '" class="product-box">';
                 echo '<div class="pro_image">';
-                  echo '<img data-src="https://doc.tradersfind.com/images/' . $subCat->id .'.webp" class="lazy w-100" alt="Category" />';
+                  echo '<img data-src="' . IMAGE_URL . $subCat->image->id .'.webp" class="lazy w-100" alt="Category" />';
                 echo '</div>';
                 echo '<h2 class="fs-18">'. $subCat->subCategoryName . '</h2>';
               echo '</a>';

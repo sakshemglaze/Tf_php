@@ -1,14 +1,20 @@
-<?php include_once 'config.php'; ?>
+<?php include_once 'config.php'; 
+     include_once 'services/url.php';
+     $urlService = new UrlService(); 
+    $name = str_replace("-", " ", $matches[1]);
+  //print_r($name);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex nofollow" >
-    <title>Document</title>
+    <title>Search Results</title>
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css" >
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/enquery.css" > 
+    
 </head>
 <body>
 
@@ -19,18 +25,20 @@
             class FilterDTO {}
             if(isset($_POST['searchText'])){
               $name= $_POST['searchText'];
-            }else{
-              $name= $_POST['search'];
-            }
-          
-
+              print_r('post');
+            } /*
+            else{
+               $name= $_POST['search'];
+               print_r($name);
+            }*/
+         
             $filterDto = new FilterDTO();
             $payload = array(
                 'searchText' => $name ,
                 'searchTextType' => 'subcategory',
                 'filterDto' => $filterDto
-            );
-            $queryParams= array('page'=>0, 'size'=> 10) ;
+            );  
+            $queryParams= array('page'=>0, 'size'=> 12) ;
             require_once 'post.php';
         $data =   post(
                 'api/new-search-products',
@@ -40,48 +48,56 @@
                 false
               );
               $length = count(($data->products));
+              print_r($data->productsCategories);
+              $category =   get(
+                'api/guest/products-categories-na/' . $data->title,
+                true,
+                $queryParams
+              );
+              print_r('category ' . $category[0]->title);
+              $industry =   get(
+                'api/industries-na/' . $category[0]->title,true,$queryParams
+              );
+              //print_r($industry);
               ?>
               <section class="container-fluid mt-1">
               <?php include "banner.php";     ?>
               </section>
             
-              <section class="p-2">
-
-<div style="text-align: center;">
-  <h1 class="me-2 fwbold  text-capitalize mb-0"><?php echo $name?>
-    <span *ngIf="location=='null'"> in UAE</span>
-    <!-- <span *ngIf="location != 'null'"> in {{ location }}</span> -->
-  </h1>
-  <small class="fwbold">(<?php print_r($length)?>+ products available) </small>
-</div>
-<div *ngIf="subcategoryDetails && this.location == 'null' && subcategoryDetails.shortDescription ">
-  <span
-    [innerHTML]="this.showMore1?
-    subcategoryDetails.shortDescription.length > shortDesc
-    ? subcategoryDetails.shortDescription.substring(0,shortDesc) : subcategoryDetails.shortDescription: subcategoryDetails.shortDescription">
-
-  </span>
-  <span *ngIf="subcategoryDetails.shortDescription.length > shortDesc"
-    style="color:brown; position: absolute;">&nbsp;<b> <a (click)="this.toggleShowMore1()">{{
-        this.showMore1 ? '... View more' : 'View less' }} </a> </b></span>
-</div>
-<br>
+<section class="p-2">
 <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb" *ngIf="products">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/">TradersFind</a></li>
     <li class="breadcrumb-item" *ngIf="industryDetails"><a
-        [href]="getIndustryUrl(industryDetails.industryName, industryDetails.id)">{{industryDetails.industryName}}</a>
+        [href]="getIndustryUrl(industryDetails.industryName, industryDetails.id)"><?php echo $industry[0]->industryName ?></a>
     </li>
 
     <li class="breadcrumb-item" *ngIf="categoryDetails"><a
-        [href]="getCategoryUrl(categoryDetails.categoryName, categoryDetails.id)">{{categoryDetails.categoryName}}</a>
+        [href]="getCategoryUrl(categoryDetails.categoryName, categoryDetails.id)"><?php echo $category->categoryName ?></a>
     </li>
 
     <li class="breadcrumb-item active fwbold text-capitalize " aria-current="page" >
-      {{this.searchText}} <span *ngIf="location !== 'null'"> &nbsp;>&nbsp; {{location}} </span>
+    <?php echo $name  ;
+    if ($location != '') {
+     echo $location; } ?>
     </li>
   </ol>
 </nav>
+<div style="text-align: center;">
+  <h1 class="me-2 fwbold  text-capitalize mb-0"><?php echo $name?>
+    <span *ngIf="location=='null'"> in UAE</span>
+  </h1>
+  <small class="fwbold">(<?php print_r($length)?> products available) </small>
+</div>
+<?php 
+  if ($data->shortDescription != '' && $location === 'null') {
+ echo '<div>';
+  echo '<span [innerHTML]=""> </span>';
+  echo '<span style="color:brown; position: absolute;">&nbsp;<b> <a (click)=""> View more : View less</a> </b></span>';
+  echo '</div>';
+  } ?>
+<br>
+
 </section>
 <div class="row gy-2">
     <div class="col-lg-3 col-xxl-2">
@@ -92,7 +108,7 @@
         if(!$isMobile ) {
       ?>
       <div class="sticky-top" style="top:12%;"> <a href="https://wa.link/hy8kan" title="TradersFind" target="_blank">
-        <img src="assets/images/poster1.webp" class="img-fluid mt-4 w-100" alt="Poster" /></a>
+        <img data-src="<?php echo BASE_URL; ?>assets/images/poster1.webp" class="lazy img-fluid mt-4 w-100" alt="Poster" /></a>
       </div>
       <?php } ?>
     </p></div>
@@ -177,7 +193,7 @@
 </div>
 
     <script src="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.bundle.min.js"></script>
-  
+  <script src="<?php echo BASE_URL; ?>assets/js/lazy-load.js"></script> 
 </body>
 </html>
 <?php

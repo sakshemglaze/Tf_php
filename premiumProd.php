@@ -1,10 +1,13 @@
-<?php include_once 'config.php'; ?>
+<?php include 'config.php'; 
+    include_once 'services/url.php';
+    $urlService = new UrlService(); 
+?>
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/searchPremium.css" />
 
 <div class="bg-gradiant rounded-20 position-relative shadow-sm mb-4">
         <div class="premium_listing">
-            <img src="assets/images/verifiedw2.png" alt="verified_image" width="80" height="30" />
-            <img src="assets/images/Premium_listing.png" alt="Premium_listing" width="80" height="30" style="margin-left: 90px;" />
+            <img src="<?php echo BASE_URL; ?>assets/images/verifiedw2.png" alt="verified_image" width="80" height="30" />
+            <img src="<?php echo BASE_URL; ?>assets/images/Premium_listing.png" alt="Premium_listing" width="80" height="30" style="margin-left: 90px;" />
         </div>
         <div class="card bg-transparent border-0">
             <div class="card-body">
@@ -58,7 +61,7 @@
                                         <p class="about_text about_text2"><b>Description: </b><?php echo $premiumprod->productDescription ?></p>
                                     </div>
                                 <?php endif; ?>
-                                <a href="#" target="_blank" title="<?php echo $premiumprod->seller->sellerCompanyName ?>" class="fwbold d-block" style="padding-left: 82px; color: yellow;">
+                                <a href="<?php echo $urlService->getProductUrl($premiumprod->productName,$premiumprod->id) ?>" target="_blank" title="<?php echo $premiumprod->seller->sellerCompanyName ?>" class="fwbold d-block" style="padding-left: 82px; color: yellow;">
                                     ...View more
                                 </a>
                                 <div class="text-white mt-3">
@@ -79,20 +82,20 @@
                     <div class="col-lg-5 mt-0 text-white">
                         <span class="verified2">
                             <?php if ($premiumprod->rating === 1) : ?>
-                                <img src="assets/images/level/lw1.png" alt="Rating1" width="15" height="20"/>
+                                <img src="<?php echo BASE_URL; ?>assets/images/level/lw1.png" alt="Rating1" width="15" height="20"/>
                             <?php elseif ($premiumprod->rating === 2) : ?>
-                                <img src="assets/images/level/lw2.png" alt="Rating2" width="15" height="20"/>
+                                <img src="<?php echo BASE_URL; ?>assets/images/level/lw2.png" alt="Rating2" width="15" height="20"/>
                             <?php elseif ($premiumprod->rating === 3) : ?>
-                                <img src="assets/images/level/lw3.png" alt="Rating3" width="15" height="20"/>
+                                <img src="<?php echo BASE_URL; ?>assets/images/level/lw3.png" alt="Rating3" width="15" height="20"/>
                             <?php elseif ($premiumprod->rating === 4) : ?>
-                                <img src="assets/images/level/lw4.png" alt="Rating4" width="15" height="20"/>
+                                <img src="<?php echo BASE_URL; ?>assets/images/level/lw4.png" alt="Rating4" width="15" height="20"/>
                             <?php elseif ($premiumprod->rating === 5) : ?>
-                                <img src="assets/images/level/lw5.png" alt="Rating5" width="15" height="20"/>
+                                <img src="<?php echo BASE_URL; ?>assets/images/level/lw5.png" alt="Rating5" width="15" height="20"/>
                             <?php endif; ?>
                         </span>
                         <h3 class="text-uppercase fwbold fs-6 mt-0">
                             <u>
-                                <a href="#" target="_blank" class="text-white fs-5" title="<?php echo $premiumprod->seller->sellerCompanyName ?>">
+                                <a href="/<?php echo $urlService->getSellerUrl($premiumprod->seller->sellerCompanyName, $premiumprod->seller->id) ?>" target="_blank" class="text-white fs-5" title="<?php echo $premiumprod->seller->sellerCompanyName ?>">
                                     <?php echo strlen($premiumprod->seller->sellerCompanyName) > 40 ? substr($premiumprod->seller->sellerCompanyName, 0, $SAWidth) : $premiumprod->seller->sellerCompanyName ?>
                                     <?php if (strlen($premiumprod->seller->sellerCompanyName) > 40) : ?>...<?php endif; ?>
                                 </a>
@@ -102,19 +105,18 @@
     <div class="col-6">
         <div class="">
             <div class="card-body pt-0 text-center">
+            <img data-src="<?php echo BASE_URL?>image.php?image=<?php echo $premiumprod->seller->logo->id?>" alt="<?php echo $premiumprod->seller->sellerCompanyName ?>" class="lazy img-fluid rounded-10" style="width:160px;" >
                 <?php
-                $id = !empty($premiumprod->seller->logo) ? $premiumprod->seller->logo->id : null;
-                $prodName = !empty($premiumprod->seller->sellerCompanyName) ? $premiumprod->seller->sellerCompanyName: $premiumprod->productName;
-               $class='img-fluid rounded-10';
-               print_r("hello seller image");
-               include_once "tradersImg.php";
+                //$id = !empty($premiumprod->seller->logo) ? $premiumprod->seller->logo->id : null;
+                //$prodName = !empty($premiumprod->seller->sellerCompanyName) ? $premiumprod->seller->sellerCompanyName: $premiumprod->productName;
+               //$class='img-fluid rounded-10';
                ?>
             </div>
         </div>
     </div>
     <div class="col-6" style="vertical-align: middle;">
         <div class="grid2" style="line-height:30px">
-            <img src="assets/images/location-white.png" alt="location" width="15" height="17" />
+            <img src="<?php echo BASE_URL?>assets/images/location-white.png" alt="location" width="15" height="17" />
             <a href="#" target="_blank">
                 <?php if (!empty($premiumprod->seller->mainMarkets) && count($premiumprod->seller->mainMarkets) > 0 && (!empty($premiumprod->seller->mainMarkets[0]) || $premiumprod->seller->mainMarkets[0] !== null)) : ?>
                     <span class="service-area text-white"><?php echo implode(', ', $premiumprod->seller->mainMarkets) ?></span>
@@ -122,12 +124,11 @@
                     <span class="service-area"><?php echo $premiumprod->seller->city ? $premiumprod->seller->city. ", " : "" ?><?php echo $premiumprod->seller->state ? $premiumprod->seller->state. ", " : "" ?><?php echo $premiumprod->seller->country ? $premiumprod->seller->country : "" ?></span>
                 <?php endif; ?>
             </a>
-            <img src="assets/images/crown-white.png" width="18" height="12" alt="Premium Seller" />
+            <img src="<?php echo BASE_URL?>assets/images/crown-white.png" width="18" height="12" alt="Premium Seller" />
             Premium Seller
-            <img src="assets/images/phone-white.png" alt="Premium_Phone" width="16" height="16" />
-            <a class="btn-sm text-white" style="text-align: left;" 
-            >
-                mobile no
+            <img src="<?php echo BASE_URL?>assets/images/phone-white.png" alt="Premium_Phone" width="16" height="16" />
+            <a class="btn-sm text-white" style="text-align: left;" >
+                &nbsp;
             </a>
         </div>
     </div>
@@ -138,7 +139,7 @@
     </div>
     <div class="col-sm-6">
         <button onclick="openPopup()" class="btn-outline-gradiant btn btn-sm w-100 d-center">
-            <img src="assets/images/mail-solid.png" alt="Mail" width="17" height="9" /> Send Inquiry
+            <img src="<?php echo BASE_URL?>assets/images/mail-solid.png" alt="Mail" width="17" height="9" /> Send Inquiry
         </button>
     </div>
                     </div>
@@ -159,3 +160,4 @@
     document.getElementById("popup-card").style.display = "block";
   }
 </script>
+<script src="<?php echo BASE_URL; ?>assets/js/lazy-load.js"></script>

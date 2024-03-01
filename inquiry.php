@@ -1,4 +1,4 @@
-<?php include_once 'config.php'; ?>
+<?php include 'config.php'; ?>
 <section class="bg-grey2 mt-5" *ngIf="popular_categories">
   <div class="container-fluid">
     <div class="row">
