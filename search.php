@@ -2,6 +2,7 @@
      include_once 'services/url.php';
      $urlService = new UrlService(); 
     $name = str_replace("-", " ", $matches[1]);
+    $id = str_replace("-", " ", $matches[2]);
   //print_r($name);
 ?>
 <!DOCTYPE html>
@@ -23,15 +24,8 @@
     include "header-sub.php";
     $indexr=0;
             class FilterDTO {}
-            if(isset($_POST['searchText'])){
-              $name= $_POST['searchText'];
-              print_r('post');
-            } /*
-            else{
-               $name= $_POST['search'];
-               print_r($name);
-            }*/
-         
+           
+         $location="";
             $filterDto = new FilterDTO();
             $payload = array(
                 'searchText' => $name ,
@@ -48,16 +42,21 @@
                 false
               );
               $length = count(($data->products));
-              print_r($data->productsCategories);
-              $category =   get(
-                'api/guest/products-categories-na/' . $data->title,
+
+              $subcatById1=get("api/guest/products-subcategories/" .$id);
+              $subcatById2=json_decode($subcatById1);
+             // print_r($data);
+               $category1 =   get(
+                'api/guest/products-categories-na/' . $subcatById2->title,
                 true,
                 $queryParams
               );
-              print_r('category ' . $category[0]->title);
-              $industry =   get(
-                'api/industries-na/' . $category[0]->title,true,$queryParams
-              );
+              $category2=json_decode($category1);
+              //  print_r($category);
+               $industry =   get(
+                 'api/industries-na/' . $category2[0]->title,true,$queryParams
+               );
+               $industry1=json_decode($industry);
               //print_r($industry);
               ?>
               <section class="container-fluid mt-1">
@@ -69,11 +68,11 @@
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/">TradersFind</a></li>
     <li class="breadcrumb-item" *ngIf="industryDetails"><a
-        [href]="getIndustryUrl(industryDetails.industryName, industryDetails.id)"><?php echo $industry[0]->industryName ?></a>
+        [href]="getIndustryUrl(industryDetails.industryName, industryDetails.id)"><?php echo $industry1[0]->industryName ?></a>
     </li>
 
     <li class="breadcrumb-item" *ngIf="categoryDetails"><a
-        [href]="getCategoryUrl(categoryDetails.categoryName, categoryDetails.id)"><?php echo $category->categoryName ?></a>
+        [href]="getCategoryUrl(categoryDetails.categoryName, categoryDetails.id)"><?php echo $category2[0]->categoryName ?></a>
     </li>
 
     <li class="breadcrumb-item active fwbold text-capitalize " aria-current="page" >
@@ -90,9 +89,9 @@
   <small class="fwbold">(<?php print_r($length)?> products available) </small>
 </div>
 <?php 
-  if ($data->shortDescription != '' && $location === 'null') {
+  if ($subcatById2->shortDescription != '' && $location === '') {
  echo '<div>';
-  echo '<span [innerHTML]=""> </span>';
+ echo '<span [innerHTML]="' . substr($subcatById2->shortDescription, 0, 400) . '"> </span>';
   echo '<span style="color:brown; position: absolute;">&nbsp;<b> <a (click)=""> View more : View less</a> </b></span>';
   echo '</div>';
   } ?>

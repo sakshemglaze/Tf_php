@@ -1,18 +1,18 @@
 @font-face {
     font-family: "Calibri";
-    src: url("/assets/fonts/Calibri.woff2") format('woff');
+    src: url("http://localhost/tf_result/assets/fonts/Calibri.woff2") format('woff');
     font-display: swap;
   }
   
   @font-face {
     font-family: "Calibrib";
-    src: url("/assets/fonts/Calibri.woff2") format('woff');
+    src: url("http://localhost/tf_result/assets/fonts/Calibri.woff2") format('woff');
     font-display: swap;
   }
   
   @font-face {
     font-family: "Calibril";
-    src: url("/assets/fonts/Calibri.woff2") format('woff');
+    src: url("http://localhost/tf_result/assets/fonts/Calibri.woff2") format('woff');
     font-display: swap;
   }
   

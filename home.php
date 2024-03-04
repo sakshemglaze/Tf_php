@@ -1,9 +1,11 @@
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <?php include_once 'config.php'; ?>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/home.css" />
 <!-- <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css" > -->
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>bssets/vendors/bootstrap/bootstrap.min.css">
 <link rel="preload" href="<?php echo BASE_URL; ?>assets/images/header-bg.webp" as="image" type="image/webp" fetchpriority="high" >
+<link rel='stylesheet' href='<?php echo BASE_URL; ?>assets/css/owl.carousel.css'>
+    <link rel='stylesheet' href='<?php echo BASE_URL; ?>assets/css/style.css'>
 <?php
 include "header.php";
 include "home-search.php"
@@ -21,8 +23,8 @@ include "home-search.php"
     <div class="col-lg-7 border_img">
       <!-- banner -->
 
-      <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-inner">
+      <div class="owl-carousel carousel-main1">
+ 
     <?php
     include_once "post.php";
     $midBanner=get('api/guest/banners-by-header',false,false);
@@ -32,15 +34,15 @@ include "home-search.php"
       
       $midbanUrl='https://d1o1xqr29l8ebx.cloudfront.net/images/'.$mbanner->image->id.'.webp';
         ?>
-       <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">
+ 
     
         <img src="<?php echo $midbanUrl; ?>" class="d-block w-100" alt="banner">
-      </div> 
+     
 
       <?php
     }
     ?>
-    </div>
+    
     </div>
       
         
@@ -74,10 +76,8 @@ include "home-search.php"
   <div class="container">
     <div class="row">
       <div class="col-12">
-      <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-    <div class="text-center">
+      <div class="owl-carousel carousel-main1">
+             <div class="text-center">
                 <h4 class="text-red">UAE’s Largest Online B2B Portal & Business Directory in UAE</h4>
                 <p class="my-4">Welcome to TradersFind, the UAE’s Largest Online B2B portal & business directory in UAE. 
                   As a comprehensive B2B marketplace for buyers and sellers in UAE, we are here to revolutionize the way businesses connect, 
@@ -86,12 +86,12 @@ include "home-search.php"
                   and driving your business forward.
                 </p>
                 
-                <a class="btn-primary-gradiant rounded-2" href="about-us.php">LEARN MORE ABOUT US</a>
+                <a class="btn-primary-gradiant rounded-2" href="about-us">LEARN MORE ABOUT US</a>
 
               </div>
-    </div>
-    <div class="carousel-item">
-    <div class="text-center">
+    
+    
+               <div class="text-center">
                 <h4 class="text-red">Connecting Businesses Across UAE: A Powerful B2B Marketplace</h4>
                 <p class="my-4">
                   TradersFind is more than just a directory of UAE companies; it is a powerful online B2B marketplace in UAE  
@@ -100,11 +100,10 @@ include "home-search.php"
                   and service providers in UAE within a single marketplace. Whether you are a local business looking for suppliers 
                   in UAE or an international company seeking trade opportunities in UAE’s thriving market, TradersFind is your gateway to expand your business in UAE.
                 </p>
-                <a class="btn-primary-gradiant rounded-2" href="about-us.php">LEARN MORE ABOUT US</a>
+                <a class="btn-primary-gradiant rounded-2" href="about-us">LEARN MORE ABOUT US</a>
               </div>
-    </div>
-    <div class="carousel-item">
-    <div class="text-center">
+   
+              <div class="text-center">
                 <h4 class="text-red">Your Comprehensive Business Directory in UAE</h4>
                 <p class="my-4">
                   With our extensive list of companies in UAE, including manufacturers, suppliers, and service providers, 
@@ -113,11 +112,11 @@ include "home-search.php"
                   you need to thrive in the competitive market. Our business directory of UAE companies is updated at regular intervals to ensure 
                   that you have access to the most relevant and up-to-date information.
                 </p>
-                <a class="btn-primary-gradiant rounded-2" href="about-us.php">LEARN MORE ABOUT US</a>
+                <a class="btn-primary-gradiant rounded-2" href="about-us">LEARN MORE ABOUT US</a>
               </div>
-    </div>
-    <div class="carousel-item">
-    <div class="text-center">
+    
+          
+              <div class="text-center">
                 <h4 class="text-red">Connect with Verified Suppliers and Buyers in UAE</h4>
                 <p class="my-4">
                   At TradersFind, we prioritize quality and trust. We understand that the success of your business depends on the reliability of your partners. 
@@ -125,11 +124,10 @@ include "home-search.php"
                   buyers on our platform meet the highest standards of quality, authenticity, and ethical practices. 
                   When you connect with a verified  supplier or buyer through TradersFind, you can have confidence in the credibility and reliability of your business partners.
                 </p>
-                <a class="btn-primary-gradiant rounded-2" href="about-us.php">LEARN MORE ABOUT US</a>
+                <a class="btn-primary-gradiant rounded-2" href="about-us">LEARN MORE ABOUT US</a>
               </div>
-    </div>
-    <div class="carousel-item">
-    <div class="text-center">
+    
+              <div class="text-center">
                 <h4 class="text-red">Expand Your Reach and Boost Visibility</h4>
                 <p class="my-4">
                   At TradersFind, we understand the importance of accessibility and convenience in the digital age. 
@@ -137,11 +135,10 @@ include "home-search.php"
                   allowing them to reach a wider audience. Our efficient interface allows free business listings that increase 
                   their visibility among potential customers without hurting their pockets.
                 </p>
-                <a class="btn-primary-gradiant rounded-2" href="about-us.php">LEARN MORE ABOUT US</a>
+                <a class="btn-primary-gradiant rounded-2" href="about-us">LEARN MORE ABOUT US</a>
               </div>
-    </div>
-    <div class="carousel-item">
-    <div class="text-center">
+   
+             <div class="text-center">
                 <h4 class="text-red">Find Everything You Need at One Place:</h4>
                 <p class="my-4">
                   TradersFind offers a comprehensive platform where you can find everything you need in one place. 
@@ -150,11 +147,10 @@ include "home-search.php"
                   textiles, or raw materials, our platform has a diverse selection to cater to your needs. TradersFind 
                   is a place where you can connect with suppliers at one click.
                 </p>
-                <a class="btn-primary-gradiant rounded-2" href="about-us.php">LEARN MORE ABOUT US</a>
+                <a class="btn-primary-gradiant rounded-2" href="about-us">LEARN MORE ABOUT US</a>
               </div>
-    </div>
-    <div class="carousel-item">
-    <div class="text-center">
+    
+              <div class="text-center">
                 <h4 class="text-red">Get Started with TradersFind Today: Your Gateway to Success</h4>
                 <p class="my-4">
                   Get Started with TradersFind, UAE’s leading B2B website connecting buyers with sellers. 
@@ -162,14 +158,13 @@ include "home-search.php"
                   Join now to expand your business reach, explore new opportunities, and take your business to new heights. 
                   One Click 3 options to fulfill all your requirements. Option 1: Click to Call, Option 2: Click to Connect on Whatsapp, Option 3: Click to Send your Requirement.
                 </p>
-                <a class="btn-primary-gradiant rounded-2" href="about-us.php">LEARN MORE ABOUT US</a>
+                <a class="btn-primary-gradiant rounded-2" href="about-us">LEARN MORE ABOUT US</a>
               </div>
     </div>
   </div>
-              
-      </div>
-    </div>
   </div>
+  </div>          
+      
 </section>
 
 <section class="easysource my-4 py-2">
@@ -187,7 +182,7 @@ include "home-search.php"
           <li>Competitive Pricing</li>
         </ul>
         <br>
-        <a href="about-us" title="Learn More" class="mt-5"><b>Learn More </b></a>
+        <a  href="about-us" title="Learn More" class="mt-5"><b>Learn More </b></a>
       </div>
       <div class="col-lg-6">
         <div class="card-transparent">
@@ -290,8 +285,7 @@ include "home-search.php"
 
 <section class="bg-grey bg-grey_22 p-4 my-5">
   <h3 class="border-center text-center mb-4">FIND SELLERS FROM TOP EMIRATES </h3>
-  <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-inner">
+  <div class="owl-carousel carousel-main4">
     <?php
    $items=array(BASE_URL . 'assets/images/c1.png','./assets/images/c2.png',
    './assets/images/c3.png','./assets/images/c4.png',
@@ -303,16 +297,12 @@ include "home-search.php"
     
 
     for ($i = 0; $i < $numSlides; $i++) {
-        echo '<div class="carousel-item';
-        if ($i == 0) {
-            echo ' active';
-        }
-        echo '">';
-        echo '<div class="row">';
+       
+        
         
         // Loop through items for this slide
         for ($j = $i * $itemsPerSlide; $j < min(($i + 1) * $itemsPerSlide, $totalItems); $j++) {
-            echo '<div class="col-md-3">';
+           
             // Output item content here, you can access $items[$j] to get each item
             echo '<div class="position-relative bg-transparent swiper2 p-2">';
             echo '<img src="' . $items[$j] . '" width="209" height="80" alt="" class="w-100 img-fluid" />';
@@ -320,14 +310,14 @@ include "home-search.php"
             echo '<h4>' . $state[$j] . '</h4>';
        
             echo '</div>';
-            echo '</div>';
+          
         }
         
-        echo '</div>'; // Close row
-        echo '</div>'; // Close carousel-item
+       
+        
     }
     ?>
-  </div>
+  
 </div>
 
 
@@ -344,32 +334,19 @@ include "home-search.php"
   <h3 class="border-center text-center mb-4">
     EXPLORE PREMIUM SELLERS
   </h3>
-
-  <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel" data-bs-ride="true">
-  <div class="carousel-inner row">
-    <div class="carousel-item active">
+  <div class="owl-carousel carousel-main4">
     <div class="p-2 col-md-3">
-          <span class=""><img src="<?php echo BASE_URL; ?>assets/images/brands/101.png" width="302" height="159" class="img-fluid" alt=""></span>
+          <span class=""><img src="<?php echo BASE_URL; ?>assets/images/brands/101.png" width="302px" height="159"  alt=""></span>
         </div>
-       </div>
-    <div class="carousel-item">
     <div class="p-2 col-md-3">
-          <span class=""><img src="<?php echo BASE_URL; ?>assets/images/brands/102.png" width="302" height="159" class="img-fluid" alt=""></span>
+          <span class=""><img src="<?php echo BASE_URL; ?>assets/images/brands/102.png" width="302px" height="159"alt=""></span>
         </div>
-    </div>
-    <div class="carousel-item">
     <div class="p-2 col-md-3">
-          <span class=""><img src="<?php echo BASE_URL; ?>assets/images/brands/103.png" width="302" height="159" class="img-fluid" alt=""></span>
+          <span class=""><img src="<?php echo BASE_URL; ?>assets/images/brands/103.png" width="302px" height="159"  alt=""></span>
         </div>
-    </div>
-
-  <div class="carousel-item">
   <div class="p-2 col-md-3">
-          <span class=""><img src="<?php echo BASE_URL; ?>assets/images/brands/104.png" width="302" height="159" class="img-fluid" alt=""></span>
+          <span class=""><img src="<?php echo BASE_URL; ?>assets/images/brands/104.png" width="302" height="159"  alt=""></span>
         </div>
-    </div>
-  </div>
-  </div>
 </div>
   
 </section>
@@ -379,7 +356,7 @@ include "home-search.php"
     WHAT OUR HAPPY CLIENTS SAY ABOUT US
   </h3>
   <div class="container">
-
+  <div class="owl-carousel carousel-main12">
   
             <div class="card ml15">
               <div class="card-body">
@@ -433,58 +410,25 @@ include "home-search.php"
             </div>
           </div>
 
-   
+          </div>
   </div>
 </section>
 
 <section class="bg-grey bg-grey_22 p-4 my-5 logo_slider">
   <h3 class="border-center text-center mb-5">EXPLORE PREMIUM BRANDS</h3>
- 
-  <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel" data-bs-ride="true">
-  <div class="carousel-inner row">
-    <div class="carousel-item active">
-    
-        <span class="brand-box brand-box2">
-          <img src="<?php echo BASE_URL; ?>assets/images/brands/1.png" width="180" height="48" class=""
-               alt="" />
-        </span>
+
+
+    <div class="owl-carousel carousel-main">
+        <div><img src="<?php echo BASE_URL; ?>assets/images/brands/1.png" width="185" height="124" ></div>
+        <div><img src="<?php echo BASE_URL; ?>assets/images/brands/2.png" width="185" height="124" ></div>
+        <div><img src="<?php echo BASE_URL; ?>assets/images/brands/3.png" width="185" height="124" ></div>
+        <div><img src="<?php echo BASE_URL; ?>assets/images/brands/4.png" width="185" height="124" ></div>
+        <div><img src="<?php echo BASE_URL; ?>assets/images/brands/5.png" width="185" height="124" ></div>
+        <div><img src="<?php echo BASE_URL; ?>assets/images/brands/6.png" width="185" height="124" ></div>
+       
     </div>
-    <div class="carousel-item">
-        <span class="brand-box brand-box2">
-          <img src="<?php echo BASE_URL; ?>assets/images/brands/2.png" width="185" height="124" class=""
-               alt="" />
-        </span>
-  </div>
-  <div class="carousel-item">
-        <span class="brand-box brand-box2">
-          <img src="<?php echo BASE_URL; ?>assets/images/brands/3.png" width="185" height="124" class=""
-               alt="" />
-        </span>
-  </div>
-  <div class="carousel-item">
-        <span class="brand-box brand-box2">
-          <img src="<?php echo BASE_URL; ?>assets/images/brands/4.png" width="185" height="124" class=""
-               alt="" />
-        </span>
-  </div>
-  <div class="carousel-item">
-        <span class="brand-box brand-box2">
-          <img src="<?php echo BASE_URL; ?>assets/images/brands/5.png" width="185" height="124" class=""
-               alt="" />
-        </span>
-  </div>
-  <div class="carousel-item">
-        <span class="brand-box brand-box2">
-          <img src="<?php echo BASE_URL; ?>assets/images/brands/6.png" width="185" height="124" class=""
-               alt="" />
-        </span>
-  </div>
-   
-  </div>
-  </div>
 
-
-
+    
 </section>
 
 <?php

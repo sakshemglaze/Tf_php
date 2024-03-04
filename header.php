@@ -1,10 +1,12 @@
 <?php include_once 'config.php'; ?>
 
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
+<link rel='stylesheet' href='<?php echo BASE_URL; ?>assets/css/owl.carousel.css'>
+    <link rel='stylesheet' href='<?php echo BASE_URL; ?>assets/css/style.css'>
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/head.css" >
 <nav class="navbar sticky-top navbar-expand-lg bg-white">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/"><img src="<?php echo BASE_URL; ?>assets/images/TradersFind.webp" alt="TradersFind" width="110" height="70" />
+      <a class="navbar-brand" href="<?php echo BASE_URL; ?>"><img src="<?php echo BASE_URL; ?>assets/images/TradersFind.webp" alt="TradersFind" width="110" height="70" />
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

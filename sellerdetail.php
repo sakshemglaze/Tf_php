@@ -1,4 +1,4 @@
-<?php include 'config.php'; ?>
+<?php include_once 'config.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,14 +16,18 @@
     
     $index=0;
             class FilterDTO {}
-            $companyName= $_POST['searchText']? $_POST['searchText']:"globe-trading-agency-limited";
+
+            $currenturl= $_SERVER['REQUEST_URI'];
+            $urlpart=explode('/',$currenturl);
+            $companyName= end($urlpart);
+           
             require_once 'post.php';
         $data =  get(
-                'api/guest/search-sellers-company-name/clean well facilities management', true
+                'api/guest/search-sellers-company-name/'.$companyName
               );
               $data1 = json_decode($data);
              // $data = findActive($data1);
-              print_r($data1);
+            // print_r($data1);
               ?>
 
 <section class="container-fluid ">
@@ -33,7 +37,7 @@
   <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="/">TradersFind </a></li>
-      <li class="breadcrumb-item active" aria-current="page"> <?php echo $data1->industryName; ?> </li>
+      <li class="breadcrumb-item active" aria-current="page"> <?php echo $data1[0]->sellerCompanyName; ?> </li>
     </ol>
   </nav>
 </section>
@@ -48,34 +52,35 @@
               <div class="d-flex flex-wrap flex-md-nowrap h-100 align-items-center">
                 <div class="">
                   <div class="card-body card-body3">
-                    <span *ngIf="seller">
-                    <span *ngIf="seller.logo">
-                      <app-traders-img [id]="seller && seller.logo? seller.logo.id : null" width="100%" height="100%"
-                        [class]=""></app-traders-img> </span>
+                    <span>
+                    <?php if ($data1[0]->logo): ?>
+                    <span >
+                      <img src="https://doc.tradersfind.com/images/<?php echo $data1[0]->logo->id;?>.webp" alt="">  
                     <app-logo [name]="seller?seller.sellerCompanyName:'Traders Find'" *ngIf="!seller.logo"></app-logo>
-
+                  
                       </span>
+                      <?php endif;?>
                   </div>
                 </div>
 
                 <div class="text-white lh-sm ms-md-3">
-                  <h1 class="text-uppercase fwbold text-black fs-4">{{seller?seller.sellerCompanyName:"TF"}}</h1>
+                  <h1 class="text-uppercase fwbold text-black fs-4"><?php echo$data1[0]?$data1[0]->sellerCompanyName:"TF";?></h1>
                   <div class="d-flex align-items-start mt-3">
                     <img src="assets/images/location3.png" width="28" alt="" />
-                    <p class="mb-0 ms-2 text-black"><span *ngIf="seller">
-                      {{seller.address}}, {{seller.city}}<br />
-                      {{seller.sellerState}}, {{seller.country}} </span>
+                    <p class="mb-0 ms-2 text-black"><span>
+                      <?php echo $data1[0]->address.','.$data1[0]->city;?> <br />
+                      <?php echo $data1[0]->sellerState.','. $data1[0]->country;?> </span>
                     </p>
                   </div>
                   <div class="d-flex mt-3 gap-3" *ngIf="seller">
                     <div *ngIf="seller.isPreffered">
                       <div class="d-flex align-items-center">
-                        <img src="assets/images/crown.png" alt="Premium Seller" width="30" />
+                        <img src="<?php echo BASE_URL;?>assets/images/crown.png" alt="Premium Seller" width="30" />
                         <span class="ms-2 fwbold text-black">Premium Seller </span>
                       </div>
                     </div>
                     <div class="d-flex align-items-center" *ngIf="seller && seller.isVerifiedSeller">
-                      <img src="assets/images/verified2.png" alt="Verified Seller"
+                      <img src="<?php echo BASE_URL;?>assets/images/verified2.png" alt="Verified Seller"
                         width="70" /><app-ratings></app-ratings>
                     </div>
                   </div>
@@ -86,25 +91,16 @@
             <div class="col-lg-5">
               <div class="row gy-2">
                 <div class="col-lg-12 text-center" *ngIf="seller">
-
-                  <a *ngIf="
-                                      seller.sellerVirtualContactPhone &&
-                                      seller.sellerVirtualContactPhone != null &&
-                                      seller.sellerVirtualContactPhone != ''
-                                    " (click)="
-                                      this.maskingService.onClickPhoneNum(
-                                        seller,
-                                        'sellerVirtualContactPhone',
-                                        this.urlService.getSellerUrl(sellerCompanyName,seller.id)
-                                      , '')" class="btn btn-light">
-                    <img src="assets/images/phone.png" width="16" alt="" />
-                    {{
-                    this.maskingService.getMaskedNumber(
-                    seller,
-                    "sellerVirtualContactPhone"
-                    )
-                    }}
+                 <?php
+                 if($data1[0]->sellerVirtualContactPhone &&
+                 $data1[0]->sellerVirtualContactPhone != null &&
+                 $data1[0]->sellerVirtualContactPhone != ''):
+                 ?>
+                  <a class="btn btn-light">
+                    <img src="<?php echo BASE_URL;?>assets/images/phone.png" width="16" alt="" />
+                  
                   </a>
+                  <?php endif;?>
                 </div>
                 <div class="col-lg-6" *ngIf="seller">
                   <a target="_blank" [href]="this.urlService.getProductToWhatsapp('', seller.id, seller)"
@@ -188,7 +184,8 @@
           <h2 class="fwbold mt-5 fs-3 mb-5 border-center text-center">
             Seller Profile
           </h2>
-          <div [innerHTML]="seller.sellerTagline"></div>
+          <div><?php echo $data1[0]->sellerTagline; ?></div>
+
           <div class="fs-4 px-md-5">
 
             <!--
@@ -202,13 +199,13 @@
             <div class="col-lg-3">
               <!--*ngIf="seller.sellerCompanyType">-->
               <div class="d-flex align-items-center justify-content-md-center">
-                <img src="assets/images/icon__1.png" alt="" class="me-3" />
+                <img src="<?php echo BASE_URL;?>assets/images/icon__1.png" alt="" class="me-3" />
                 <div class="text-start lh-sm">
                   <h3 class="text-black-50 mb-0 fs-4 fwbold">Nature of Business</h3>
                   <span class="mb-0 fs-5">
-                    {{seller?
-                    seller.sellerCompanyType:''
-                    }}
+                  <?php  echo $data1[0]?$data1[0]->sellerCompanyType:'';
+                    
+                    ?>
                   </span>
                 </div>
               </div>
@@ -216,20 +213,20 @@
             <div class="col-lg-3">
               <!--*ngIf="seller.sellerInceptionYear">-->
               <div class="d-flex align-items-center justify-content-md-center">
-                <img src="assets/images/icon__2.png" alt="" class="me-3" />
+                <img src="<?php echo BASE_URL;?>assets/images/icon__2.png" alt="" class="me-3" />
                 <div class="text-start lh-sm">
                   <h3 class="text-black-50 mb-0 fs-4 fwbold">Year of Establishment</h3>
                   <!--<h3 class="mb-0 fs-5">-->
-                  {{seller?
-                  seller.sellerInceptionYear:''
-                  }}
+                  <?php  echo $data1[0]?$data1[0]->sellerInceptionYear:'';
+                    
+                    ?>
                 </div>
               </div>
             </div>
             <div class="col-lg-3" *ngIf="seller.sellerWebsite && seller.sellerWebsite != ''">
               <!--*ngIf="seller.sellerWebsite && seller.sellerWebsite != ''">-->
               <div class="d-flex align-items-center justify-content-md-center">
-                <img src="assets/images/icon__3.png" alt="" class="me-3" />
+                <img src="<?php echo BASE_URL;?>assets/images/icon__3.png" alt="" class="me-3" />
                 <div class="text-start lh-sm" *ngIf="seller">
                   <a [href]="seller.sellerWebsite" target="_blank">
                     <h3 class="text-black-50 mb-0 fs-4 fwbold" style="text-transform: capitalize;">{{sellerCompanyName}}
@@ -241,10 +238,11 @@
             </div>
             <div class="col-lg-3">
               <div class="d-flex align-items-center justify-content-md-center">
-                <img src="assets/images/icon__4.png" alt="" class="me-3" />
+                <img src="<?php echo BASE_URL;?>assets/images/icon__4.png" alt="" class="me-3" />
                 <div class="text-start lh-sm" *ngIf="seller">
                   <h3 class="text-black-50 mb-0 fs-4 fwbold">Working Days</h3>
-                  {{ seller.sellerBusinessHours.split("@@@").join(" ") }}
+                  <?php echo implode(" ", explode("@@@", $data1[0]->sellerBusinessHours)); ?>
+
                 </div>
               </div>
             </div>
@@ -253,17 +251,19 @@
 
             <div class="col-lg-3">
               <div class="d-flex align-items-center justify-content-md-center">
-                <img src="assets/images/icon__5.png" alt="" class="me-3" />
+                <img src="<?php echo BASE_URL;?>assets/images/icon__5.png" alt="" class="me-3" />
                 <div class="text-start lh-sm">
                   <h3 class="text-black-50 mb-0 fs-4 fwbold">Trade License</h3>
-                  {{seller.tradeLicenseNumber}}
+                  <?php  echo$data1[0]->tradeLicenseNumber;?>
+                    
+                 
                 </div>
               </div>
             </div>
 
             <div class="col-lg-3">
               <div class="d-flex align-items-center justify-content-md-center">
-                <img src="assets/images/icon__6.png" alt="" class="me-3" />
+                <img src="<?php echo BASE_URL;?>assets/images/icon__6.png" alt="" class="me-3" />
                 <div class="text-start lh-sm">
                   <h3 class="text-black-50 mb-0 fs-4 fwbold">Service Area</h3>
                   <span title="{{ seller.mainMarkets.join(', ') }}" *ngIf="
@@ -290,7 +290,7 @@
 
             <div class="col-lg-3">
               <div class="d-flex align-items-center justify-content-md-center">
-                <img src="assets/images/icon__7.png" alt="" class="me-3" />
+                <img src="<?php echo BASE_URL;?>assets/images/icon__7.png" alt="" class="me-3" />
                 <div class="text-start lh-sm">
                   <h3 class="text-black-50 mb-0 fs-4 fwbold">Map Location</h3>
                   <!--<app-map [longitude]="this.seller.coordinates[0]" [latitude]="this.seller.coordinates[1]"></app-map>-->
@@ -303,7 +303,7 @@
 
             <div class="col-lg-3">
               <div class="d-flex align-items-center justify-content-md-center">
-                <img src="assets/images/icon__8.png" alt="" class="me-3" />
+                <img src="<?php echo BASE_URL;?>assets/images/icon__8.png" alt="" class="me-3" />
                 <div class="text-start lh-sm">
                   <h3 class="text-black-50 mb-0 fs-4 fwbold"></h3>
                   <strong>Certified by TradersFind </strong>
@@ -314,7 +314,7 @@
             <div class="col-lg-3">
               <!--*ngIf="seller.youtubeLink">-->
               <div class="d-flex align-items-center justify-content-md-center">
-                <img src="assets/images/icon__9.png" alt="" class="me-3" />
+                <img src="<?php echo BASE_URL;?>assets/images/icon__9.png" alt="" class="me-3" />
                 <div class="text-start lh-sm">
                   <h3 class="text-black-50 mb-0 fs-4 "></h3>
                   <a [href]="seller.youtubeLink">Company Video</a>

@@ -1,4 +1,4 @@
-<?php include 'config.php'; 
+<?php include_once 'config.php'; 
     include_once 'services/url.php';
     $urlService = new UrlService();
 ?>
@@ -36,7 +36,7 @@
               );
               $data1 = json_decode($data);
               //$data = findActive($data1);
-              //print_r($data1->productsSubcategories);
+              // print_r($data1->image->id);
               ?>
 <section class="container-fluid ">
   <?php include "banner.php"; ?>
@@ -85,16 +85,17 @@
               <img data-src="<?php echo IMAGE_URL . $data1->image->id;?>.webp" class="lazy w-100" alt="Group-Category" />
 
             </div>
-            <h2 class="fs-4 fwbold mt-4"><?php echo $data1->subCategoryName; ?></h2>
+            <h2 class="fs-4 fwbold mt-4"><?php echo $data1->categoryName; ?></h2>
           </div>
         </div>
         <div class="col-lg-10 position-relative">
           <ul class="sub_category_list">
             <?php
+              
             foreach ($data1->productsSubcategories as $subCat) {
-              //print_r($subCat);
+            
             echo '<li>';
-              echo '<a href="/' . $urlService->getCategoryUrl($subCat->subCategoryName, $subCat->id) . '" class="product-box">';
+              echo '<a href="' . B_URL . '/' . $urlService->getCategoryUrl($subCat->subCategoryName, $subCat->id) . '" class="product-box">';
                 echo '<div class="pro_image">';
                   echo '<img data-src="' . IMAGE_URL . $subCat->image->id .'.webp" class="lazy w-100" alt="Category" />';
                 echo '</div>';
