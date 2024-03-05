@@ -89,33 +89,18 @@
 </div>
 <?php 
 
-if ($subcatById2->shortDescription != '' && $location === '') {
+if ($subcategory->shortDescription != '' && $location === '') {
  echo '<div>';
- echo '<span [innerHTML]="' . substr($subcatById2->shortDescription, 0, 400) . '"> </span>';
+ echo '<span [innerHTML]="' . substr($subcategory->shortDescription, 0, 400) . '"> </span>';
+ if(strlen($subcategory->shortDescription) >= 400) {
   echo '<span style="color:brown; position: absolute;">&nbsp;<b> <a (click)=""> View more : View less</a> </b></span>';
+ } else {
+  echo '<span style="color:brown; position: absolute;">&nbsp;<b> <a (click)=""> View more : View less</a> </b></span>';
+ }
   echo '</div>';
   } ?>
-
- //print_r($subcategory->shortDescription);
-  //$maxLength = 250;
-  //$showFull = false;
-  //$shortDescription = $subcategory->shortDescription;
-  //if (isset($_GET['showFull']) && $_GET['showFull'] == 'true') {
-  //  $showFull = true;
-  //}
-  //if (!$showFull && strlen($shortDescription) > $maxLength) {
-  //  $shortDescription = substr($shortDescription, 0, $maxLength) . '...';
-//}
-//echo '<div id="shortDesc">' . $shortDescription . '</div>';
-//if (strlen($subcategory->shortDescription) > $maxLength) {
- //   if ($showFull) {
- //       echo '<a href="?showFull=false">View less</a>';
- //   } else {
- //       echo '<a href="?showFull=true">View more</a>';
- //   }
-//}
-// ?>
 <br>
+
 
 </section>
 <div class="row gy-2">
@@ -139,7 +124,7 @@ if ($subcatById2->shortDescription != '' && $location === '') {
               <ul class="d-flex align-items-center flex-wrap rightnav" *ngIf="filters">
                 <?php 
                 //print_r($location);
-                if ($location === null || $location === 'UAE' ) { 
+                if ($location == null || $location == 'UAE' ) { 
                 echo '<li><a href="'. $name .'" class="active" >All UAE</a></li>';
                 } else {
                   echo '<li><a href="'. $name .'" >All UAE</a></li>';
