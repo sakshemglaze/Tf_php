@@ -1,4 +1,6 @@
-<?php include_once 'config.php'; ?>
+<?php include_once 'config.php';
+ ?>
+
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/tnc.css" />
 <?Php
 include_once "header-sub.php";

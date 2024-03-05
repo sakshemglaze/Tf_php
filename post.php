@@ -60,7 +60,7 @@ function getItem($item) {
         }
         
         // Construct URL with query parameters if provided
-        $urlWithQuery = 'https://api.tradersfind.com/'.$url;
+        $urlWithQuery = 'http://localhost:8080/'.$url;
         if ($query) {
             $urlWithQuery .= '?' . $query;
         }

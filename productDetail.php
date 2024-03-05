@@ -16,10 +16,19 @@
     
     $index=0;
             class FilterDTO {}
-            $productName= $_POST['searchText']? $_POST['searchText']:"globe-trading-agency-limited";
+            $currentUrl = $_SERVER['REQUEST_URI'];
+
+            // Split the URL by "/"
+            $parts = explode("/", $currentUrl);
+            
+            
+            $id = end($parts); 
+          
+            $name = prev($parts);
+           
             require_once 'post.php';
         $data =  get(
-                'api/guest/products/647dcf429d126d0588ea6e3a/carpet-dry-cleaning-services', 
+                'api/guest/products/'.$id.'/'.$name, 
                 true
               );
               $data1 = json_decode($data);
@@ -49,7 +58,7 @@
               <?php if ($data1 != null ) : ?>
               <div class="fotorama" data-nav="thumbs" data-thumbmargin="20" data-width="100%"
                 data-allowfullscreen="true" data-height="auto" data-ratio="800/600">
-                <img data-src="image.php?image=<?php echo $data1->images[0]->id?>" alt="<?php echo $data1->productName ?>" class="lazy" >
+                         <img src="https://doc.tradersfind.com/images/<?php echo $data1->images[0]->id; ?>.webp" alt="<?php echo $data1->productName ?>" >
              </div>
              <?php endif; ?>
             </div>
@@ -58,14 +67,14 @@
                <?php echo $data1->productName ?>
               </h1>
               <span class="fwbold fs-3 text-red">
-                <?php if ($data1->Price && ($data1->maxPrice == null || $data1->maxPrice == '')) : ?>
+                <?php if (isset($data1->Price) && (isset($data1->maxPrice) == null || isset($data1->maxPrice) == '')) : ?>
                   <strong>Price:</strong> <?php echo $prodDetails['price']; ?>
                 <?php endif; ?>
-                <?php if ($data1->maxPrice && ($data1->Price == null || $data1->Price == '')) : ?> 
+                <?php if (isset($data1->maxPrice) && (isset($data1->Price) == null || isset($data1->Price) == '')) : ?> 
                 <strong>Price:</strong><?php echo $data1.maxPrice; 
                 endif; ?> 
 
-                <?php if ($data1->price && $data1->price != '' && $data1->maxPrice && $data1->maxPrice != '') : ?>  
+                <?php if (isset($data1->price) && isset($data1->price) != '' && isset($data1->maxPrice) && isset($data1->maxPrice) != '') : ?>  
                   <strong>Price:</strong> <?php echo $data1->price . '-' . $data1->maxPrice; ?> <?php endif; ?>
                 <?php if ($data1->currency != '') : ?>  
                  <?php echo $data1->currency?> / Piece
@@ -100,16 +109,17 @@
                 <div class="card-body">
                   <div class="d-flex flex-column align-items-center">
                     <span class="bg-white px-3 rounded-10 py-5">
-                      <img data-src="image.php?image=<?php echo $data1->seller->logo->id ?>" alt="<?php echo $data1->seller->sellerCompanyName ?>" class="lazy" width="160"/> 
+                      <img src="https://doc.tradersfind.com/images/<?php echo $data1->seller->logo->id; ?>.webp" alt="<?php echo $data1->seller->sellerCompanyName; ?>"width="160" >
                     </span>
 
                     <h2 class="fwbold fs-4 mt-3">
                       <?php if($data1->seller && $data1->seller->sellerCompanyName ) : ?>
-                     <a [href]="url.php?getSellerUrl($data1->seller->sellerUrl,$data1->seller->id)" target="_blank" class="text-blue"> <?php echo $data1->seller->sellerCompanyName ?> </a></h2>
+                     <a hre]="url.php?getSellerUrl($data1->seller->sellerUrl,$data1->seller->id)" target="_blank" class="text-blue"> <?php echo $data1->seller->sellerCompanyName ?> </a></h2>
                      <?php endif; ?>
                     <div class="fs-5 mt-2">
-                      <img class="lazy me-2" data-src="assets/images/location-3.svg" width="15" alt="location" />
-                      <?php join($data1->seller->mainMarkets,',') .', ' . $data1->seller->state . $data1->seller->city . $data1->seller->country ?>
+                      <img class="me-2" src="<?php echo BASE_URL; ?>assets/images/location-3.svg" width="15" alt="location" />
+                     
+                      <?php  print_r(implode(", ", $data1->seller->mainMarkets)) .', ' . isset($data1->seller->state) . isset($data1->seller->city) . isset($data1->seller->country) ?>
                       <!--
                       <a *ngIf="prodDetails" [href]="
                       urlService.getSellerUrl(prodDetails.seller.sellerUrl,prodDetails.seller.id)" target="_blank">
@@ -138,17 +148,17 @@
                     </div>
                     <div class="d-flex align-items-center flex-wrap mt-3">
                       <div class="d-flex align-items-center me-3">
-                        <img src="assets/images/crown.png" class="me-1" alt="" />
+                        <img src="<?php echo BASE_URL; ?>assets/images/crown.png" class="me-1" alt="" />
                         <span>Premium Supplier</span>
                       </div>
                       <div class="d-flex align-items-center">
-                        <img src="assets/images/verifiedw2.png" alt="" class="me-1" />
+                        <img src="<?php echo BASE_URL; ?>assets/images/verifiedw2.png" alt="" class="me-1" />
 
                       </div>
                     </div>
                     <button class="btn btn-light mt-5 bg-white"
                       (click)="this.maskingService.onClickPhoneNum(prodDetails.seller, 'sellerVirtualContactPhone', this.urlService.getProductUrl(prodDetails.productName,prodDetails.id), prodDetails)">
-                      <img src="assets/images/phone.png" width="15" alt="phone" />  <?php echo $data1->seller->maskedNum ?> </button>
+                      <img src="<?php echo BASE_URL; ?>assets/images/phone.png" width="15" alt="phone" />  <?php echo isset($data1->seller->maskedNum) ?> </button>
                     <div class="d-flex align-items-center w-100 mt-3 gap-2">
                       <a *ngIf="prodDetails"
                         [href]="this.urlService.getProductToWhatsapp(prodDetails.productName, prodDetails.id, prodDetails.seller)"

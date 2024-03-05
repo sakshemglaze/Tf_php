@@ -40,6 +40,7 @@
                 'api/industries-na/' . $data1->title . '?size=10&sort=industryName',true
               ));
               //$data = findActive($data1);
+
               //print_r($industry[0]);
               ?>
 <section class="container-fluid ">
@@ -94,10 +95,11 @@
         <div class="col-lg-10 position-relative">
           <ul class="sub_category_list">
             <?php
+              
             foreach ($data1->productsSubcategories as $subCat) {
-              //print_r($subCat);
+            
             echo '<li>';
-              echo '<a href="/' . $urlService->getCategoryUrl($subCat->subCategoryName, $subCat->id) . '" class="product-box">';
+              echo '<a href="' . B_URL . '/' . $urlService->getCategoryUrl($subCat->subCategoryName, $subCat->id) . '" class="product-box">';
                 echo '<div class="pro_image">';
                  if (isset($subCat->image)) {
                   echo '<img data-src="' . IMAGE_URL . $subCat->image->id .'.webp" class="lazy w-100" alt="Category" />';

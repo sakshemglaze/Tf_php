@@ -1,7 +1,9 @@
 <?php include_once 'config.php'; 
      include_once 'services/url.php';
      $urlService = new UrlService(); 
-    $name = str_replace("-", " ", $matches[1]);
+     $name = str_replace("-", " ", $matches[1]);
+     $id = str_replace("-", " ", $matches[2]);
+   //print_r($name);
     $subCategoryId = $matches[2];
     $location = 'UAE';
     //print_r($name);
@@ -23,15 +25,8 @@
     include_once "header-sub.php";
     $indexr=0;
             class FilterDTO {}
-            if(isset($_POST['searchText'])){
-              $name= $_POST['searchText'];
-              print_r('post');
-            } /*
-            else{
-               $name= $_POST['search'];
-               print_r($name);
-            }*/
-         
+           
+         $location="";
             $filterDto = new FilterDTO();
             $payload = array(
                 'searchText' => $name ,
@@ -73,6 +68,7 @@
     </li>
     <li class="breadcrumb-item"><a
         href="/<?php echo $urlService->getGroupCategoryUrl($category[0]->categoryName,$category[0]->id) ?>"><?php echo $category[0]->categoryName ?></a>
+
     </li>
     <li class="breadcrumb-item active fwbold text-capitalize " aria-current="page" >
     <?php echo $subcategory->subCategoryName;
@@ -92,25 +88,33 @@
   <small class="fwbold">(<?php print_r($length)?> products available) </small>
 </div>
 <?php 
+
+if ($subcatById2->shortDescription != '' && $location === '') {
+ echo '<div>';
+ echo '<span [innerHTML]="' . substr($subcatById2->shortDescription, 0, 400) . '"> </span>';
+  echo '<span style="color:brown; position: absolute;">&nbsp;<b> <a (click)=""> View more : View less</a> </b></span>';
+  echo '</div>';
+  } ?>
+
  //print_r($subcategory->shortDescription);
-  $maxLength = 250;
-  $showFull = false;
-  $shortDescription = $subcategory->shortDescription;
-  if (isset($_GET['showFull']) && $_GET['showFull'] == 'true') {
-    $showFull = true;
-  }
-  if (!$showFull && strlen($shortDescription) > $maxLength) {
-    $shortDescription = substr($shortDescription, 0, $maxLength) . '...';
-}
-echo '<div id="shortDesc">' . $shortDescription . '</div>';
-if (strlen($subcategory->shortDescription) > $maxLength) {
-    if ($showFull) {
-        echo '<a href="?showFull=false">View less</a>';
-    } else {
-        echo '<a href="?showFull=true">View more</a>';
-    }
-}
- ?>
+  //$maxLength = 250;
+  //$showFull = false;
+  //$shortDescription = $subcategory->shortDescription;
+  //if (isset($_GET['showFull']) && $_GET['showFull'] == 'true') {
+  //  $showFull = true;
+  //}
+  //if (!$showFull && strlen($shortDescription) > $maxLength) {
+  //  $shortDescription = substr($shortDescription, 0, $maxLength) . '...';
+//}
+//echo '<div id="shortDesc">' . $shortDescription . '</div>';
+//if (strlen($subcategory->shortDescription) > $maxLength) {
+ //   if ($showFull) {
+ //       echo '<a href="?showFull=false">View less</a>';
+ //   } else {
+ //       echo '<a href="?showFull=true">View more</a>';
+ //   }
+//}
+// ?>
 <br>
 
 </section>
