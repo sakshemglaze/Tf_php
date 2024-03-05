@@ -1,14 +1,14 @@
-<?php include 'config.php'; ?>
+<?php include_once 'config.php'; ?>
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/blog.css" />
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
 <?php
-include "header-sub.php";
+include_once "header-sub.php";
 ?>
 <section class="hidden-content container-fluid mt-4">
     <div class="row">
         <div class="col-lg-12">
            <?php
-           include 'banner.php';
+           include_once 'banner.php';
            ?>  
         </div>
     </div>
@@ -178,5 +178,5 @@ include "header-sub.php";
 
 
 <?php
-include "footer.php";
+include_once "footer.php";
 ?>

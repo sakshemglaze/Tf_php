@@ -7,8 +7,8 @@
 <link rel='stylesheet' href='<?php echo BASE_URL; ?>assets/css/owl.carousel.css'>
     <link rel='stylesheet' href='<?php echo BASE_URL; ?>assets/css/style.css'>
 <?php
-include "header.php";
-include "home-search.php"
+include_once "header.php";
+include_once "home-search.php"
 ?>
 
 
@@ -16,7 +16,7 @@ include "home-search.php"
   <div class="row gy-2">
     <div class="col">
      <?php
-     include "home-industry.php";
+     include_once "home-industry.php";
      ?>
     </div>
 
@@ -325,7 +325,7 @@ include "home-search.php"
 
 <section>
  <?php
- include "home-blog.php";
+ include_once "home-blog.php";
  ?>
 </section>
 
@@ -432,5 +432,5 @@ include "home-search.php"
 </section>
 
 <?php
-include "footer.php";
+include_once "footer.php";
 ?>

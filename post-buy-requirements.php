@@ -1,8 +1,8 @@
-<?php include 'config.php'; ?>
+<?php include_once 'config.php'; ?>
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/postbuyreq.css" />
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>asses/vendors/bootstrap/bootstrap.min.css">
 <?php
-include "header-sub.php";
+include_once "header-sub.php";
 ?>
 <p-toast></p-toast>
 <section class="bg-gradiant1 login-title text-center text-white fwbold pb100">
@@ -173,5 +173,5 @@ include "header-sub.php";
   </div>
 </section>
 <?php
-include "footer.php";
+include_once "footer.php";
 ?>

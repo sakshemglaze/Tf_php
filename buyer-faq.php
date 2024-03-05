@@ -1,8 +1,8 @@
-<?php include 'config.php'; ?>
+<?php include_once 'config.php'; ?>
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/buyfaq.css" />
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
 <?php
-include 'header-sub.php';
+include_once 'header-sub.php';
 ?>
 
 
@@ -404,7 +404,7 @@ Note: Add a relevant name to get a relevant product in the search result.
                 </h2>
                 <div id="collapse3" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                   <div class="accordion-body">
-                    Product attributes are the details or specifications that you can include in your product to make it more descriptive and attract sellers who are interested in it.
+                    Product attributes are the details or specifications that you can include_once in your product to make it more descriptive and attract sellers who are interested in it.
                   </div> 
                 </div>
                </div> 
@@ -453,5 +453,5 @@ Note: Add a relevant name to get a relevant product in the search result.
 </section>
 <script src="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.bundle.min.js"></script>
 <?php
-include 'footer.php';
+include_once 'footer.php';
 ?>

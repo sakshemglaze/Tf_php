@@ -1,9 +1,9 @@
-<?php include 'config.php'; ?>
+<?php include_once 'config.php'; ?>
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/userRegis.css" />
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
 <script src="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.bundle.min.js"></script>
 <?php
-include "header-sub.php";
+include_once "header-sub.php";
 $pager=false;
 ?>
   
@@ -572,5 +572,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   </section>
 </div>
 <?php
-include "footer.php"
+include_once "footer.php"
 ?>

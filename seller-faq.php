@@ -1,8 +1,8 @@
-<?php include 'config.php'; ?>
+<?php include_once 'config.php'; ?>
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/sellfaq.css" />
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
 <?php
-include "header-sub.php";
+include_once "header-sub.php";
 ?>
 
 
@@ -571,7 +571,7 @@ include "header-sub.php";
                 </h2>
                 <div id="collapse52" class="accordion-collapse collapse show" data-bs-parent="#accordionExample4">
                   <div class="accordion-body"> 
-                    In your folder, you have to select the option 'Add New Product' , which is located within the 'Products & Services' tab. By clicking on it, you will be able to include a new product.
+                    In your folder, you have to select the option 'Add New Product' , which is located within the 'Products & Services' tab. By clicking on it, you will be able to include_once a new product.
                   </div>
                 </div>
               </div>
@@ -654,7 +654,7 @@ include "header-sub.php";
                 </h2>
                 <div id="collapse58" class="accordion-collapse collapse show" data-bs-parent="#accordionExample4">
                   <div class="accordion-body"> 
-                    Adding more pictures is easy. After you have uploaded the primary image, you can click on the plus symbol (+) next to it to include extra pictures.
+                    Adding more pictures is easy. After you have uploaded the primary image, you can click on the plus symbol (+) next to it to include_once extra pictures.
                   </div>
                 </div>
               </div>
@@ -752,7 +752,7 @@ include "header-sub.php";
                 </h2>
                 <div id="collapse595" class="accordion-collapse collapse show" data-bs-parent="#accordionExample4">
                   <div class="accordion-body"> 
-                    Yes,  FREE members have the option to include their products on TradersFind
+                    Yes,  FREE members have the option to include_once their products on TradersFind
                   </div>
                 </div>
               </div>
@@ -789,7 +789,7 @@ include "header-sub.php";
                 <h2 class="accordion-header">
                   <button class="accordion-button" type="button" data-bs-toggle="collapse"
                           data-bs-target="#collapse598">
-                          17. Is it possible for me to include products as a free member?
+                          17. Is it possible for me to include_once products as a free member?
                   </button>
                 </h2>
                 <div id="collapse598" class="accordion-collapse collapse show" data-bs-parent="#accordionExample4">
@@ -808,7 +808,7 @@ include "header-sub.php";
                 </h2>
                 <div id="collapse599" class="accordion-collapse collapse show" data-bs-parent="#accordionExample4">
                   <div class="accordion-body"> 
-                    In addition to product listings, TradersFind offers various promotional opportunities to enhance your visibility on the platform. These may include featured product placements, sponsored listings, or banner advertisements. Contact TradersFind's customer support or explore their advertising options for more details.
+                    In addition to product listings, TradersFind offers various promotional opportunities to enhance your visibility on the platform. These may include_once featured product placements, sponsored listings, or banner advertisements. Contact TradersFind's customer support or explore their advertising options for more details.
                   </div>
                 </div>
               </div>
@@ -1165,5 +1165,5 @@ include "header-sub.php";
 </section>
 <script src="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.bundle.min.js"></script>
 <?php
-include "footer.php";
+include_once "footer.php";
 ?>

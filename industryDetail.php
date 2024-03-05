@@ -23,7 +23,7 @@
 <body>
 <script src="<?php echo BASE_URL; ?>assets/js/lazy-load.js"></script>
 <?php
-    include "header-sub.php";
+    include_once "header-sub.php";
     
     $index=0;
             class FilterDTO {}
@@ -42,7 +42,7 @@
               //print_r($data);
               ?>
 <section class="container-fluid ">
-  <?php include "banner.php"; ?>
+  <?php include_once "banner.php"; ?>
 </section>
 <section class="p-3">
   <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
@@ -92,9 +92,9 @@
     </div>
 </section>
 <?php
-include "inquiry.php";
+include_once "inquiry.php";
 
-include "footer.php";
+include_once "footer.php";
 ?>
                                     </body>
                                     </html>

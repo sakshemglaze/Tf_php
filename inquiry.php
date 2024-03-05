@@ -21,7 +21,7 @@
                 <div class="col-lg-6">
                   <label for="" class="form-label fw-semibold fs-5">Describe in few words *</label>
                   <textarea name=""  formControlName="description" class="form-control" id="" cols="30" rows="6"
-                    placeholder="Please include product name, order quantity, usage, special request if any in your inquery."></textarea>
+                    placeholder="Please include_once product name, order quantity, usage, special request if any in your inquery."></textarea>
                   <button class="p-0 text-blue bg-transparent border-0 mt-3 fs-5">
                     + Add Attachment
                   </button>

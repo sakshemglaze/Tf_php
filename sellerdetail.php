@@ -12,7 +12,7 @@
 <body>
 <script src="<?php echo BASE_URL; ?>assets/js/lazy-load.js"></script>
 <?php
-    include "header-sub.php";
+    include_once "header-sub.php";
     
     $index=0;
             class FilterDTO {}
@@ -31,7 +31,7 @@
               ?>
 
 <section class="container-fluid ">
-  <?php include "banner.php"; ?>
+  <?php include_once "banner.php"; ?>
 </section>
 <section class="p-3">
   <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
@@ -190,7 +190,7 @@
 
             <!--
             <p class="">Established in 1947, Apex Trading Co.is a leading supplier and stockists of products related to the electro-mechanical, fire-fighting, HVAC, Plumbing and Sanitary industries.</p>
-            <p class="pt-2">Some of the products we carry include Pipes and Pipe Fittings in Steel, Copper and PVC; Brass, Cast lron, Bronze and Chrome Plated Valves; Related Accessories; Power and Hand Tools; and Safety Products. We cater to Electromechanical and Civil Contractors, Fire-fighting Contractors, Air-conditioning Contractors, Fabricators, Oilfield & Petro-chemical Industry, and Wooden Joinery Industry.</p>
+            <p class="pt-2">Some of the products we carry include_once Pipes and Pipe Fittings in Steel, Copper and PVC; Brass, Cast lron, Bronze and Chrome Plated Valves; Related Accessories; Power and Hand Tools; and Safety Products. We cater to Electromechanical and Civil Contractors, Fire-fighting Contractors, Air-conditioning Contractors, Fabricators, Oilfield & Petro-chemical Industry, and Wooden Joinery Industry.</p>
             <p class="pt-2">The company has showrooms in Dubai and Abu Dhabi as well as a  warehouse and head office based in Sharjah. The total storage facility currently measures more than 100,000 sq.ft. and is backed by a highly qualified technical sales team which can offer the latest products suitable to customer requirements. </p>
             -->
           </div>
@@ -410,7 +410,7 @@
                               <label for="" class="form-label fs-5">Describe in few words *</label>
                               <textarea name="" formControlName="description" class="form-control" id="" cols="30"
                                 rows="6"
-                                placeholder="Please include product name, order quantity, usage, special request if any in your inquiry."></textarea>
+                                placeholder="Please include_once product name, order quantity, usage, special request if any in your inquiry."></textarea>
                               <!--<button class="p-0 text-blue bg-transparent border-0 mt-3 fs-6">
                               + Add Attachment
                             </button>-->
@@ -518,4 +518,4 @@
 </section>
                                 </body></html>
                                 <script src="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.bundle.min.js"></script>
-<?php include "footer.php"; ?>
+<?php include_once "footer.php"; ?>

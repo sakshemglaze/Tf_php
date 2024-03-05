@@ -1,7 +1,7 @@
-<?php include 'config.php'; ?>
+<?php include_once 'config.php'; ?>
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/pp.css" />
 <?php
-include "header-sub.php";
+include_once "header-sub.php";
 ?>
 
 <section class="mt-4 mb-4">
@@ -110,5 +110,5 @@ include "header-sub.php";
   </div>
 </section>
 <?php
-include "footer.php";
+include_once "footer.php";
 ?>
