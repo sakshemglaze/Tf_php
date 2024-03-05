@@ -1,4 +1,5 @@
 <?php
+include_once 'config.php';
 function getItem($item) {
                
                $value = $_COOKIE[$item] ?? null;
@@ -20,7 +21,7 @@ function getItem($item) {
            if ($authRequired) {
                $headers[] = 'Authorization: Bearer ' . $token;
            }
-           $ch = curl_init('https://api.tradersfind.com/'. $url);
+           $ch = curl_init(API_URL. $url);
        
            $postData = json_encode($request);
        
@@ -61,6 +62,7 @@ function getItem($item) {
         
         // Construct URL with query parameters if provided
         $urlWithQuery = 'http://localhost:8080/'.$url;
+        $urlWithQuery = API_URL . $url;
         if ($query) {
             $urlWithQuery .= '?' . $query;
         }

@@ -41,7 +41,7 @@
                         </div>
                             <div class="col-md-7 position-relative p-3">
                                     <div class="single-line">
-                                    <a href="<?php echo $urlService->getProductUrl($prodData->productName, $prodData->id) ?>" target="_blank" title="Product Page">
+                                    <a href="/<?php echo $urlService->getProductUrl($prodData->productName, $prodData->id) ?>" target="_blank" title="Product Page">
                                             <h2 class="fs-5 about_text2" style="color:rgb(216, 71, 119);">
                                             <?php    
                                             print_r( $prodData->productName);
@@ -64,7 +64,7 @@
                                                   <?php } ?>
                                              <?php } ?>
                                          </ul>
-                                         <a href="<?php echo $urlService->getProductUrl($prodData->productName, $prodData->id)?>" title="Product Page" target="_blank" style="color: palevioletred;" > View more...</a>
+                                         <a href="/<?php echo $urlService->getProductUrl($prodData->productName, $prodData->id)?>" title="Product Page" target="_blank" style="color: palevioletred;" > View more...</a>
                                     </div>
 
 
