@@ -488,14 +488,14 @@ a:hover {
   display: block;
   display: -webkit-box;
   margin: 0;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .two-line-containers {
-  height: 3.1em;
+  height: 6.2em;
   overflow: hidden;
 }
 
@@ -505,7 +505,19 @@ a:hover {
   display: block;
 }
 
+li {
+        display: inline-block;
+        white-space: nowrap; /* Prevent text wrapping */
+        overflow: hidden; /* Hide overflowing text */
+        text-overflow: ellipsis; /* Show ellipsis for overflowing text */
+    }
+ @media screen and (max-width: 600px) {
+        .single-line {
+            max-width: 100px; /* Set a maximum width for small screens */
+        }
+
 .single-line {
+  
   display: block;
   display: -webkit-box;
   margin: 0;

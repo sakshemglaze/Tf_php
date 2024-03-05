@@ -1,10 +1,10 @@
-<?php include 'config.php'; 
+<?php include_once 'config.php'; 
     include_once 'services/url.php';
     $urlService = new UrlService();
 ?>
 <?php
     $currentUrl = $_SERVER['REQUEST_URI'];   
-    $industryName = $matches[1];
+    $grpCatName = $matches[1];
     $id = $matches[2];
 ?>
 <!DOCTYPE html>
@@ -20,7 +20,7 @@
 <body>
 <script src="<?php echo BASE_URL; ?>assets/js/lazy-load.js"></script>
 <?php
-    include "header-sub.php";
+    include_once "header-sub.php";
     
     $index=0;
             class FilterDTO {}
@@ -29,17 +29,21 @@
             $payload = array();
             $page = 0;
             $size = 6;
+            $queryParams= array('page'=>0, 'size'=> 6) ;
             require_once 'post.php';
         $data =  get(
                 'api/guest/products-categories/' . $matches[2] .'?size=' . $size . '&page=' . $page . '&sort=categoryName,asc',
                  true
               );
               $data1 = json_decode($data);
+              $industry =  json_decode(get(
+                'api/industries-na/' . $data1->title . '?size=10&sort=industryName',true
+              ));
               //$data = findActive($data1);
-              //print_r($data1->productsSubcategories);
+              //print_r($industry[0]);
               ?>
 <section class="container-fluid ">
-  <?php include "banner.php"; ?>
+  <?php include_once "banner.php"; ?>
 </section>
 
 <section class="container-fluid ">
@@ -56,9 +60,8 @@
   <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="/">TradersFind </a></li>
-
-      <li class="breadcrumb-item" *ngIf="industryDetails"><a
-          [href]="getIndustryUrl(industryDetails.industryName, industryDetails.id)"><?php echo $data1->industryName; ?>
+      <li class="breadcrumb-item" ><a
+          href="/<?php echo $urlService->getIndustryUrl($industry[0]->industryName, $industry[0]->id) ?>"><?php echo $industry[0]->industryName; ?>
         </a></li>
 
       <li class="breadcrumb-item active" aria-current="page" *ngIf="categoryDetails">
@@ -85,7 +88,7 @@
               <img data-src="<?php echo IMAGE_URL . $data1->image->id;?>.webp" class="lazy w-100" alt="Group-Category" />
 
             </div>
-            <h2 class="fs-4 fwbold mt-4"><?php echo $data1->subCategoryName; ?></h2>
+            <h2 class="fs-4 fwbold mt-4"><?php echo $data1->categoryName; ?></h2>
           </div>
         </div>
         <div class="col-lg-10 position-relative">
@@ -96,7 +99,11 @@
             echo '<li>';
               echo '<a href="/' . $urlService->getCategoryUrl($subCat->subCategoryName, $subCat->id) . '" class="product-box">';
                 echo '<div class="pro_image">';
+                 if (isset($subCat->image)) {
                   echo '<img data-src="' . IMAGE_URL . $subCat->image->id .'.webp" class="lazy w-100" alt="Category" />';
+                 } else {
+                   echo '<img data-src="' . BASE_URL . 'assets/images/TradersFind.webp" class="lazy" alt="Category" />';
+                 } 
                 echo '</div>';
                 echo '<h2 class="fs-18">'. $subCat->subCategoryName . '</h2>';
               echo '</a>';
@@ -110,7 +117,7 @@
   </div>
 </section>
 <?php
-include "inquiry.php" ?>
+include_once "inquiry.php" ?>
                 </body></html>
 <?php 
-include "footer.php"                 ?>
+include_once "footer.php"                 ?>

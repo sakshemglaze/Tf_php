@@ -1,7 +1,9 @@
-<?php include 'config.php'; 
+<?php 
+    include_once 'config.php'; 
     include_once 'services/url.php';
     $urlService = new UrlService(); 
 ?>
+<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/searchcard.css" > 
 <div class="cardproduct card-shadow rounded-10 bg-white" style="border: 0.5px solid #ddd;">
     <div class="swiper swiper4">
         <div class="swiper-wrapper">
@@ -11,6 +13,7 @@
                         <div class="col-md-5 position-relative star-listing2">
                         <div class="" style="margin-top: 10px;width: 100%; float: left;">
                            <?php
+                           //print_r($prodData);
                             if ($prodData->seller && $prodData->seller->isVerifiedSeller) {
                                 echo '<div style="margin: auto; display: table;">';
                                 echo '<img class="lazy" data-src="' . BASE_URL . 'assets/images/verified2.png" width="74" height="22" alt="Verified_Product" style="float: left; width: 60px;">';
@@ -21,9 +24,11 @@
                             }
                             ?>
                               <?php
+                              if(isset($prodData->images) && count($prodData->images) > 0) {
                                $newsto = IMAGE_URL . $prodData->images[0]->id . ".webp";
-
-                                
+                              } else {
+                                $newsto = BASE_URL . "assets/images/TradersFind.webp";
+                              }
                                  ?>
                                </div> 
                             <div class="border-end p-3 pt-5 border_img border_img2">
@@ -44,17 +49,17 @@
                                             ?>
                                             </h2> </a>
                                     </div>
-                                    <div class="two-lines small">
-                                        <ul class="two-line-containers" role="list">
+                                    <div >
+                                        <ul role="list">
                                             <?php if (!empty($prodData->productDescription)) { ?>
                                                   <?php foreach (array_slice(json_decode($prodData->specifications, true), 0, 4) as $spec) { ?>
-                                                      <li role="listitem" tabindex="0">
+                                                      <li role="listitem" tabindex="0" class="single-line">
                                                         <span><b><?php echo $spec['SpecificationName']; ?> :</b> <?php echo $spec['SpecValue']; ?></span>
                                                       </li>
                                                   <?php } ?>
                                             <?php } else { ?>
                                                   <?php foreach (array_slice(json_decode($prodData->specifications, true), 0, 4) as $spec) { ?>
-                                                     <li role="listitem" tabindex="0">
+                                                     <li role="listitem" tabindex="0" class="single-line">
                                                        <span><b><?php echo $spec['SpecificationName']; ?> :</b> <?php echo $spec['SpecValue']; ?></span>
                                                     </li>
                                                   <?php } ?>
@@ -68,16 +73,17 @@
                                     <br>
                                     
                                     <div class="d-flex mt-1 small about_text2">
+                                        <li>
                                         <img src="<?php echo BASE_URL ?>assets/images/house.png" alt="Location_seller" width="18" height="19" class="me-3 w-18" />
                                         <b>Company :</b>
                                             <a href="/<?php echo $urlService->getSellerUrl($prodData->seller->sellerCompanyName,$prodData->seller->id) ?>" style="color: palevioletred;" target="_blank"> 
                                             <span class="single-line">
                                                 <?php print_r($prodData->seller->sellerCompanyName); ?>
                                                 </span>
-                                            </a>
+                                            </a></li>
                                     </div>
                                     <div class="d-flex small mt-1 about_text2">
-                                        <img src="<?php echo BASE_URL ?>assets/images/location-3.svg" width="18" height="19" alt="Seller_Location" class="me-3 w-18" />
+                                        <li><img src="<?php echo BASE_URL ?>assets/images/location-3.svg" width="18" height="19" alt="Seller_Location" class="me-3 w-18" />
                                         <b>Office : </b>
                                         <a 
                                             target="_blank">
@@ -86,24 +92,24 @@
                                                 print_r($prodData->seller->state);
                                                  ?>
                                                  </span>
-                                        </a>
+                                        </a></li>
                                     </div>
 
-                                    <div class="d-flex small mt-1 about_text2">
+                                    <div class="d-flex small mt-1 about_text2"><li>
                                         <img src="<?php echo BASE_URL ?>assets/images/service_area.png" width="18" height="19" alt="Service_area" class="me-3 w-18" />
                                         <b>Service Area : </b>
                                         <a  target="_blank">
                                             <span 
-                                  class="service-area single-line">
+                                  class="service-area ">
                                   <?php $prodData->seller->mainMarkets
                                    ?>
                                             </span>
-                                            <span class="service-area single-line">
+                                            <span class="service-area ">
                                                 <?php
-                                                print_r(  $prodData->seller->state);       
+                                               print_r(  $prodData->seller->state);       
                                                ?>
                                                </span>
-                                        </a>
+                                        </a> </li>
                                     </div>
                                     <div class="d-flex small mt-1 single-line">
                                         <?php if( $prodData->brand){?>
@@ -159,7 +165,7 @@
         </div>
     </div>
  </div>
- <?php include 'enquery.php'; ?>
+ <?php include_once 'enquery.php'; ?>
 
 <!-- JavaScript code -->
 <script>

@@ -1,7 +1,7 @@
-<?php include 'config.php'; ?>
+<?php include_once 'config.php'; ?>
 <link rel="stylesheet" href="./<?php echo BASE_URL; ?>assets/css/about.css" />
 <?php
-include 'header-sub.php';
+include_once 'header-sub.php';
 ?>
 <section class="mt-4 mb-4">
   <div class="container">
@@ -109,5 +109,5 @@ Innovation: We encourage creative thinking and the exploration of new possibilit
   </div>
 </section>
 <?Php
-include "footer.php";
+include_once "footer.php";
 ?>

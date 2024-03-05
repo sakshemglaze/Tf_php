@@ -1,7 +1,7 @@
-<?php include 'config.php'; ?>
+<?php include_once 'config.php'; ?>
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/notfound.css" />
 <?php
-include "header.php"
+include_once "header.php"
 ?>
 <section class="mt-4 mb-4">
   <div class="container">
@@ -15,4 +15,4 @@ include "header.php"
 </div>
 </section>
 <?php
-include "footer.php"; ?>
+include_once "footer.php"; ?>

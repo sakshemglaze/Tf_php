@@ -1,4 +1,4 @@
-<?php include 'config.php'; ?>
+<?php include_once 'config.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +12,7 @@
 <body>
 <script src="<?php echo BASE_URL; ?>assets/js/lazy-load.js"></script>
 <?php
-    include "header-sub.php";
+    include_once "header-sub.php";
     
     $index=0;
             class FilterDTO {}
@@ -28,7 +28,7 @@
               ?>
 
 <section class="container-fluid ">
-  <?php include "banner.php"; ?>
+  <?php include_once "banner.php"; ?>
 </section>
 <section class="p-3">
   <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
@@ -179,7 +179,7 @@
           More products from this seller
         </h2>
       </div>
-      <?php include "moreproduct.php" ?>
+      <?php include_once "moreproduct.php" ?>
     </div>
   </div>
 </section>
@@ -301,7 +301,7 @@
             <div class="form-group mt-4">
               <label for="description" class="form-label">Describe in few words *</label>
               <textarea name="" class="form-control" id="" cols="30" rows="3" formControlName="description"
-                placeholder="Please include product name, order quantity, usage, special request if any in your inquery."></textarea>
+                placeholder="Please include_once product name, order quantity, usage, special request if any in your inquery."></textarea>
               <a href="" class="text-blue small">+Add Attachment</a>
             </div>
             <div class="form-group mt-4">
@@ -380,4 +380,4 @@
 </section> -->
 <script src="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.bundle.min.js"></script>
                 </body></html>
-<?php include "footer.php" ?>
+<?php include_once "footer.php" ?>

@@ -1,4 +1,8 @@
 <!--<section class="container-fluid mt-1">-->
+  <?php
+    $currentUrl = $_SERVER['REQUEST_URI'];
+    $name = '';
+  ?>
     <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
           <?php

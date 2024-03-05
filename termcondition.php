@@ -1,7 +1,7 @@
-<?php include 'config.php'; ?>
+<?php include_once 'config.php'; ?>
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/tnc.css" />
 <?Php
-include "header-sub.php";
+include_once "header-sub.php";
 ?>
 
 
@@ -49,7 +49,7 @@ include "header-sub.php";
             <span class="text-danger fs-1">-</span> If someone believes that their copyrights have been infringed upon by the content on the website, they can file a written notice through mail, fax, or email.
           </li>
           <li>
-            <span class="text-danger fs-1">-</span> The notice should include an electronic or physical signature of the authorized person acting on behalf of the copyright owner.
+            <span class="text-danger fs-1">-</span> The notice should include_once an electronic or physical signature of the authorized person acting on behalf of the copyright owner.
           </li>
           <li>
             <span class="text-danger fs-1">-</span> A description of the copyrighted work that has been infringed upon must also be provided in the notice.
@@ -112,5 +112,5 @@ include "header-sub.php";
   </div>
 </section>
 <?php
-include "footer.php";
+include_once "footer.php";
 ?>

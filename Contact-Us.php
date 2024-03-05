@@ -1,8 +1,8 @@
-<?php include 'config.php'; ?>
+<?php include_once 'config.php'; ?>
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/contact.css" />
 
 <?php
-include 'header-sub.php';
+include_once 'header-sub.php';
 ?>
 
 <!--<app-home-search></app-home-search>-->
@@ -67,5 +67,5 @@ include 'header-sub.php';
     
 </div>
 <?php 
-include 'footer.php';
+include_once 'footer.php';
 ?>
