@@ -43,8 +43,8 @@
           <img src="<?php echo BASE_URL; ?>assets/images/whatsapp-chat.webp" alt="Whatsapp_chat" style="height: 46px;"></a>
         <div class="login-button-top d-flex align-items-center mw-200" *ngIf="!this.storageService.getItem('login')">
           <img src="<?php echo BASE_URL; ?>assets/images/user.png" alt="" />
-          <a href="login" class="border-end-black px-3 me-3 lh-sm nowrap">Sign In </a>
-          <a href="register-your-business">Join Free</a>
+          <a href="<?php echo BASE_URL; ?>login" class="border-end-black px-3 me-3 lh-sm nowrap">Sign In </a>
+          <a href="<?php echo BASE_URL; ?>register-your-business">Join Free</a>
         </div>
 </div>
 </div>

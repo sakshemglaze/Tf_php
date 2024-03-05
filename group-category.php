@@ -99,7 +99,7 @@
             foreach ($data1->productsSubcategories as $subCat) {
             
             echo '<li>';
-              echo '<a href="' . B_URL . '/' . $urlService->getCategoryUrl($subCat->subCategoryName, $subCat->id) . '" class="product-box">';
+              echo '<a href="' . BASE_URL  . $urlService->getCategoryUrl($subCat->subCategoryName, $subCat->id) . '" class="product-box">';
                 echo '<div class="pro_image">';
                  if (isset($subCat->image)) {
                   echo '<img data-src="' . IMAGE_URL . $subCat->image->id .'.webp" class="lazy w-100" alt="Category" />';

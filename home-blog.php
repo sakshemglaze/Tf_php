@@ -7,6 +7,8 @@
       </div>
   <?php
  require_once 'post.php';
+ include_once 'services/url.php';
+$urlService = new UrlService(); 
   $blogs=get('api/guest/homeblogs' .'?page=' . '0' . '&size=' .'5', true);
   $jblog=json_decode($blogs);
  
@@ -15,7 +17,7 @@
     $blogimg='https://d1o1xqr29l8ebx.cloudfront.net/images/'.$blog->image->id.'.webp';
   ?>
       <div class="col-lg-4 border_img" >
-        <a href="/">
+        <a href="<?php echo BASE_URL.$urlService->getBlogUrl($blog->title);?>">
           <div class="blog text-center">
            
             <img src="<?php echo $blogimg; ?>" alt="blog Image">
