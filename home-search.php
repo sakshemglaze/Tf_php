@@ -49,7 +49,7 @@
                                 placeholder="What are you looking for.." /> -->
 
 
-                                <input type="text" id="search" name="search" autofocus class="form-control border-rounded-end" placeholder="What are you looking for..">
+                                <input type="text" id="search"  autofocus class="form-control border-rounded-end" placeholder="What are you looking for..">
                                
                                 <div class="submit-button">
                                         <!-- <img src="assets/images/Voice-icon.png" alt="" class="me-lg-3 me-1 img-fluid" width="15"> -->
@@ -166,7 +166,12 @@
                 $('#option_com').empty();
                 suggestions.forEach(function (suggestion) {
                     var suggestionItem = $('<li></li>').text(suggestion).click(function() {
-               
+                        $('#search').val(suggestion); 
+                var searchTermp = $('#search').val().replace(/\s+/g, '-');
+                var actionURL = "seller/" + encodeURIComponent(searchTermp);
+                $('#homepageSearch').attr('action', actionURL);
+                $('#homepageSearch').submit();
+
                 $('#search').val(suggestion); 
                 $('.search-result').hide(); 
             });
