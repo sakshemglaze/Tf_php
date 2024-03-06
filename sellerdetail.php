@@ -13,6 +13,8 @@
 <script src="<?php echo BASE_URL; ?>assets/js/lazy-load.js"></script>
 <?php
     include "header-sub.php";
+    include_once "whatsapp.php";
+    $whatsappUrl=new WhatsappUrl();
     
     $index=0;
             class FilterDTO {}
@@ -111,7 +113,7 @@ $aproodproduct1 = json_decode($aproodproduct);
                   <?php endif;?>
                 </div>
                 <div class="col-lg-6" *ngIf="seller">
-                  <a target="_blank" [href]="this.urlService.getProductToWhatsapp('', seller.id, seller)"
+                  <a target="_blank" href="<?php echo $whatsappUrl->getProductToWhatsapp('', $data1[0]->id, $data1)?>"
                     class="whatsappbtn btn py-2 btn-sm w-100">
                     <!--<a target="_blank" href="https://api.whatsapp.com/send?phone=971569773623&text=Browsed TradersFind" class="whatsappbtn btn py-2 btn-sm w-100">-->
                     Connect on whatsapp

@@ -13,6 +13,8 @@
 <script src="<?php echo BASE_URL; ?>assets/js/lazy-load.js"></script>
 <?php
     include_once "header-sub.php";
+    include_once "whatsapp.php";
+    $whatsappUrl=new WhatsappUrl();
     
     $index=0;
             class FilterDTO {}
@@ -161,7 +163,7 @@
                       <img src="<?php echo BASE_URL; ?>assets/images/phone.png" width="15" alt="phone" />  <?php echo isset($data1->seller->maskedNum) ?> </button>
                     <div class="d-flex align-items-center w-100 mt-3 gap-2">
                       <a *ngIf="prodDetails"
-                        [href]="this.urlService.getProductToWhatsapp(prodDetails.productName, prodDetails.id, prodDetails.seller)"
+                        href=" <?php echo $whatsappUrl->getProductToWhatsapp($data1->productName,$data1->id,get_object_vars($data1->seller))?>"
                         class="whatsappbtn btn btn-sm w-100" target="_blank">
                         Connect on whatsapp
                       </a>

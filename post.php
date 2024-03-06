@@ -61,7 +61,7 @@ function getItem($item) {
         }
         
         // Construct URL with query parameters if provided
-        $urlWithQuery = 'http://localhost:8080/'.$url;
+       // $urlWithQuery = 'http://localhost:8080/'.$url;
         $urlWithQuery = API_URL . $url;
         if ($query) {
             $urlWithQuery .= '?' . $query;

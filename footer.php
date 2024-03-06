@@ -88,7 +88,7 @@
                 <img src="assets/images/iphone.png" class="img-fluid" alt="" />
               </p> -->
             </div>
-            <div class="col-lg-4 text-center mt-0"> <a href="/" title="TradersFind" aria-label="TradersFind - Largest B2B online Portal">
+            <div class="col-lg-4 text-center mt-0"> <a href="<?php echo BASE_URL;?>" title="TradersFind" aria-label="TradersFind - Largest B2B online Portal">
               <img src="<?php echo BASE_URL; ?>assets/images/footer-logo.webp" title="TradersFind" class="img-fluid footer_img" width="180" height="108" alt="TradersFind" /> </a>
             </div>
           </div>
