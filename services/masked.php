@@ -3,10 +3,10 @@ class MaskingService
 {
     private $apiService;
 
-    public function __construct($apiService)
-    {
-        $this->apiService = $apiService;
-    }
+    //public function __construct($apiService)
+   // {
+   //     $this->apiService = $apiService;
+   // }
 
     public function onClickPhoneNum($seller, $toBeMasked, $url, $product)
     {
@@ -37,12 +37,29 @@ class MaskingService
         }
     }
 
-    public function getMaskedNumber($seller, $toBeMasked)
+    public function getMaskedNumber($toBeMasked)
     {
-        $first2 = substr($seller[$toBeMasked], 0, 4);
-        $last2 = substr($seller[$toBeMasked], -2);
-        $mask = str_repeat('*', strlen($seller[$toBeMasked]) - 6); // Assuming the mask should cover all but the first 2 and last 2 characters
-        $seller['maskedNum'] = $first2 . $mask . $last2;
-        return $seller['maskedClicked'] ? $seller[$toBeMasked] : '+971 Click To View';
+        //print_r($toBeMasked);
+        if (strlen($toBeMasked) > 9 ) {
+        $first2 = substr($toBeMasked, 0, 4);
+        //$last2 = substr($toBeMasked, -2);
+        //$mask = str_repeat('*', strlen($toBeMasked) - 6); // Assuming the mask should cover all but the first 2 and last 2 characters
+        //$seller = $first2 . $mask . $last2;
+        print '<a href="#" onclick="showPhoneNumber(this, \'' . $toBeMasked . '\'); return false;">' . $first2 . ' Click to View</a>';
+        } else {
+            return '+971 Click To View';
+        }        
     }
 }
+?>
+<script type="text/javascript">
+function showPhoneNumber(link, phoneNumber) {
+    //var first2 = phoneNumber.substr(0, 2);
+    //var mask = "*".repeat(phoneNumber.length - 4); // Mask all but the first 2 and last 2 characters
+    //var last2 = phoneNumber.substr(-2);
+    //var maskedNumber = first2 + mask + last2;
+
+    link.textContent = phoneNumber;
+    link.onclick = function() { return true; }; // Allow default behavior for subsequent clicks
+}
+</script>
