@@ -19,6 +19,9 @@ include_once "header-sub.php";
         <div class="col-lg-8 mt-4 card-shadow rounded-2 bg-white p-2">
             <!--<h2 class="my-4 text-uppercase fw-bold">Latest Blog</h2>-->
             <?php
+           include_once 'services/url.php';
+           $urlService = new UrlService(); 
+
             $blogList = '';
             function getFilterBlog($payload, $queryParams) {
                 if (isset($payload['productCategoryIds']) && count($payload['productCategoryIds']) > 0) {
@@ -111,19 +114,19 @@ include_once "header-sub.php";
                     <div class="col-lg-6 mb-4 align-items-center front_blog">
                         <div class="hello">
                             <?php if ($blog->image == null || $blog->image == 'null' || $blog->image == ''): ?>
-                                <a target="_blank" href="/">
+                                <a target="_blank" href="<?php echo BASE_URL.$urlService->getBlogUrl($blog->title); ?>">
                                     <img src="<?php echo BASE_URL; ?>assets/images/YP-logo@2x.png" alt="<?= $blog->altText ? $blog->altText : 'blog image' ?>">
                                 </a>
                             <?php endif; ?>
-                            <a target="_blank" href="/">
+                            <a target="_blank" href="<?php echo BASE_URL.$urlService->getBlogUrl($blog->title); ?>">
                                 <?php
-                                $blogimgurl = 'https://d1o1xqr29l8ebx.cloudfront.net/images/' . $blog->image->id . '.webp';
+                                $blogimgurl = IMAGE_URL . $blog->image->id . '.webp';
                                 ?>
                                 <img class="img-fluid" width="100%" src="<?php echo $blogimgurl; ?>" alt="blogimg">
                             </a>
                             <div class="front_blog2">
                                 <p><?php echo $blog->subTitle; ?></p>
-                                <h1 style="font-size: x-large;"><a href="/"><?php echo $blog->title; ?></a></h1>
+                                <h1 style="font-size: x-large;"><a href="<?php echo BASE_URL.$urlService->getBlogUrl($blog->title); ?>"><?php echo $blog->title; ?></a></h1>
                                 <!-- <p class='roohit'><?php echo $desc;?></p> -->
                                 <small class="mt-1 d-block"><?php echo $blog->createdBy; ?>, <?php echo date('d M y', strtotime($blog->createdDate)); ?></small>
                             </div>

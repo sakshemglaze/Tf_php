@@ -12,7 +12,7 @@
 <body>
 <script src="<?php echo BASE_URL; ?>assets/js/lazy-load.js"></script>
 <?php
-    include_once "header-sub.php";
+    include "header-sub.php";
     
     $index=0;
             class FilterDTO {}
@@ -28,10 +28,18 @@
               $data1 = json_decode($data);
              // $data = findActive($data1);
             // print_r($data1);
-              ?>
+              
+$aproodproduct=get(
+  'api/guest/products/by-seller/' . $data1[0]->id,
+  false,
+  ['isFeatured' => true]
+);
+$aproodproduct1 = json_decode($aproodproduct);
+//print_r($aproodproduct1->products);
+?>
 
 <section class="container-fluid ">
-  <?php include_once "banner.php"; ?>
+  <?php include "banner.php"; ?>
 </section>
 <section class="p-3">
   <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
@@ -156,7 +164,7 @@
     <!-- Navigation button for "Seller Profile" -->
     <button class="nav-link active" id="pills-seller-tab" data-bs-toggle="pill" data-bs-target="#pills-seller"
       type="button" role="tab" aria-controls="pills-seller" aria-selected="true">
-      <img src="assets/images/seller_icon1.png" alt="" aria-hidden="true">
+      <img src="<?php echo BASE_URL;?>assets/images/seller_icon1.png" alt="" aria-hidden="true">
       <span >Seller Profile</span>
     </button>
   </li>
@@ -164,7 +172,7 @@
     <!-- Navigation button for "Products & Services" -->
     <button class="nav-link" id="pills-products-tab" data-bs-toggle="pill" data-bs-target="#pills-products"
       type="button" role="tab" aria-controls="pills-products" aria-selected="false">
-      <img src="assets/images/seller_icon2.png" alt="" aria-hidden="true">
+      <img src="<?php echo BASE_URL;?>assets/images/seller_icon2.png" alt="" aria-hidden="true">
       <span >Products & Services</span>
     </button>
   </li>
@@ -172,7 +180,7 @@
     <!-- Navigation button for "Contact Details" -->
     <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact"
       type="button" role="tab" aria-controls="pills-contact" aria-selected="false">
-      <img src="assets/images/seller_icon3.png" height="48" alt="" aria-hidden="true">
+      <img src="<?php echo BASE_URL;?>assets/images/seller_icon3.png" height="48" alt="" aria-hidden="true">
       <span >Contact Details</span>
     </button>
   </li>
@@ -190,7 +198,7 @@
 
             <!--
             <p class="">Established in 1947, Apex Trading Co.is a leading supplier and stockists of products related to the electro-mechanical, fire-fighting, HVAC, Plumbing and Sanitary industries.</p>
-            <p class="pt-2">Some of the products we carry include_once Pipes and Pipe Fittings in Steel, Copper and PVC; Brass, Cast lron, Bronze and Chrome Plated Valves; Related Accessories; Power and Hand Tools; and Safety Products. We cater to Electromechanical and Civil Contractors, Fire-fighting Contractors, Air-conditioning Contractors, Fabricators, Oilfield & Petro-chemical Industry, and Wooden Joinery Industry.</p>
+            <p class="pt-2">Some of the products we carry include Pipes and Pipe Fittings in Steel, Copper and PVC; Brass, Cast lron, Bronze and Chrome Plated Valves; Related Accessories; Power and Hand Tools; and Safety Products. We cater to Electromechanical and Civil Contractors, Fire-fighting Contractors, Air-conditioning Contractors, Fabricators, Oilfield & Petro-chemical Industry, and Wooden Joinery Industry.</p>
             <p class="pt-2">The company has showrooms in Dubai and Abu Dhabi as well as a  warehouse and head office based in Sharjah. The total storage facility currently measures more than 100,000 sq.ft. and is backed by a highly qualified technical sales team which can offer the latest products suitable to customer requirements. </p>
             -->
           </div>
@@ -217,7 +225,7 @@
                 <div class="text-start lh-sm">
                   <h3 class="text-black-50 mb-0 fs-4 fwbold">Year of Establishment</h3>
                   <!--<h3 class="mb-0 fs-5">-->
-                  <?php  echo $data1[0]?$data1[0]->sellerInceptionYear:'';
+                  <?php if(isset($data1[0]->sellerInceptionYear)){ echo $data1[0]->sellerInceptionYear;}
                     
                     ?>
                 </div>
@@ -228,9 +236,9 @@
               <div class="d-flex align-items-center justify-content-md-center">
                 <img src="<?php echo BASE_URL;?>assets/images/icon__3.png" alt="" class="me-3" />
                 <div class="text-start lh-sm" *ngIf="seller">
-                  <a [href]="seller.sellerWebsite" target="_blank">
-                    <h3 class="text-black-50 mb-0 fs-4 fwbold" style="text-transform: capitalize;">{{sellerCompanyName}}
-                      Website </h3>
+                  <a href="<?php echo$data1[0]->sellerWebsite; ?>" target="_blank">
+                    <h3 class="text-black-50 mb-0 fs-4 fwbold" style="text-transform: capitalize;"><?php echo $data1[0]->sellerCompanyName.'Website';?>
+                       </h3>
                     <!--{{seller.sellerWebsite }}-->
                   </a>
                 </div>
@@ -272,7 +280,8 @@
                       0 &&
                       seller.mainMarkets[0] &&
                       seller.mainMarkets[0] != ''
-                      ">{{ seller.mainMarkets.join(", ") }}
+                      "><?php echo implode(", ", $data1[0]->mainMarkets); ?>
+
                   </span>
                   <span title="{{ seller?.sellerState }}, {{ seller?.sellerCountry }}" *ngIf="
                           !(
@@ -282,7 +291,7 @@
                       seller.mainMarkets[0] &&
                       seller.mainMarkets[0] != ''
                       )
-                      ">{{ seller?.sellerState }}, {{ seller?.sellerCountry }}
+                      "><?php echo $data1[0]->sellerState.',' .$data1[0]->sellerCountry ;?>
                   </span>
                 </div>
               </div>
@@ -317,7 +326,7 @@
                 <img src="<?php echo BASE_URL;?>assets/images/icon__9.png" alt="" class="me-3" />
                 <div class="text-start lh-sm">
                   <h3 class="text-black-50 mb-0 fs-4 "></h3>
-                  <a [href]="seller.youtubeLink">Company Video</a>
+                  <a href="<?php echo$data1[0]->youtubeLink; ?>">Company Video</a>
                 </div>
               </div>
             </div>
@@ -328,7 +337,6 @@
           <h2 class="fwbold fs-3 mb-5 border-center text-center pt-5">
             Product & Services
           </h2>
-
           <section class="gallery">
             <div class="container-fluid">
               <div class="row">
@@ -344,27 +352,22 @@
               <div class="row">
                 <div class="fw mix-container home-gallery">
 
-                  <div class="mix valves" *ngFor="let product of this.nonFeaturedProducts; let i = index">
-                    <a [href]="this.urlService.getProductUrl(product.productName, product.id)" class="thumb-a">
-                      <div class="item-hover">
-                        <div class="hover-text">
-                          <h3>{{product.productName}}</h3>
-                        </div>
-                      </div>
-                      <div class="item-img">
-                        <app-traders-img [id]="
-                                         product && product.images && product.images.length>
-                          0
-                          ? product.images[0].id
-                          : null" [prodName]="product.altText ? product.altText : product.productName" target="_blank"
-                          [class]="">
-                        </app-traders-img>
-                        <!-- <img src="assets/images/products/valves.png" alt="" /> -->
-                      </div>
-                    </a>
+                <?php foreach ( $aproodproduct1->products as $index => $product): ?>
+    <div class="mix valves">
+        <a href="" class="thumb-a">
+            <div class="item-hover">
+                <div class="hover-text">
+                    <h3><?= $product->productName ?></h3>
+                </div>
+            </div>
+            <div class="item-img">
+               <img src="https://doc.tradersfind.com/images/<?php echo $product->images[0]->id; ?>.webp" alt="<?php echo $product->productName;?>">
+                <!-- <img src="assets/images/products/valves.png" alt="" /> -->
+            </div>
+        </a>
+    </div>
+<?php endforeach; ?>
 
-
-                  </div>
 
 
                 </div>
@@ -397,7 +400,7 @@
                         </h5>
                       </div>
                       <div class="card-body px-md-5">
-                        <p class="fs-5 mb-2">{{seller.sellerCompanyName}} </p>
+                        <p class="fs-5 mb-2"><?php echo $data1[0]->sellerCompanyName;?> </p>
                         <h4 class="text-uppercase mb-4 fwbold fs-4">
                           Tell us about your requirement
                         </h4>
@@ -410,7 +413,7 @@
                               <label for="" class="form-label fs-5">Describe in few words *</label>
                               <textarea name="" formControlName="description" class="form-control" id="" cols="30"
                                 rows="6"
-                                placeholder="Please include_once product name, order quantity, usage, special request if any in your inquiry."></textarea>
+                                placeholder="Please include product name, order quantity, usage, special request if any in your inquiry."></textarea>
                               <!--<button class="p-0 text-blue bg-transparent border-0 mt-3 fs-6">
                               + Add Attachment
                             </button>-->
@@ -427,9 +430,17 @@
                                   <label for="" class="form-label  fs-4">Mobile Number*</label>
                                   <div class="input-group">
                                     <select formControlName="noCode" class="form-control mxw-50">
-                                      <option *ngFor="let opt of this.requirementService.countries"
-                                        value="{{opt.code}}">{{ opt.code }}- {{ opt.name }}
-                                      </option>
+                                    <?php
+                      $resUnit=file_get_contents('<?php echo BASE_URL; ?>assets/testingJson/Units.json');
+                      $allunit=json_decode($resUnit);
+                      foreach($allunit as $unit){
+                             ?>
+                             <option value="<?php echo $unit;?>">
+                            <?php echo $unit;?>
+                            </option>
+                             <?php
+                      }
+                      ?>
                                     </select>
                                     <!--</div>
                                <div class="col-lg-6">-->
@@ -466,10 +477,10 @@
                                 Contact Details
                               </h5>
                               <p class="mb-0 fs-14" *ngIf="seller.firstName">
-                                {{seller.firstName}}
-                                {{seller.lastName}}
+                              <?php echo $data1[0]->firstName.$data1[0]->lastName;?> 
+                          
                               </p>
-                              <p class="fs-14">{{seller.designation}}</p>
+                              <p class="fs-14"> <?php echo isset($data1[0]->designation);?> </p>
                               <div class="d-flex align-items-center gap-3 link_pp">
                                 <a *ngIf="
                               seller.sellerVirtualContactPhone &&
@@ -482,12 +493,7 @@
                                 this.urlService.getSellerUrl(this.sellerCompanyName,this.seller.id)
                               , '')" class="btn btn-sm btn-light  py-2 fw-semibold bg-grey w-100">
                                   <img src="assets/images/phone.png" width="16" alt="" />
-                                  {{
-                                  this.maskingService.getMaskedNumber(
-                                  seller,
-                                  "sellerVirtualContactPhone"
-                                  )
-                                  }}
+                                 phone number
                                 </a>
 
 
@@ -518,4 +524,4 @@
 </section>
                                 </body></html>
                                 <script src="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.bundle.min.js"></script>
-<?php include_once "footer.php"; ?>
+<?php include "footer.php"; ?>
