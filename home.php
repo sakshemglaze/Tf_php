@@ -2,13 +2,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/home.css" />
 <!-- <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css" > -->
-<link rel="stylesheet" href="<?php echo BASE_URL; ?>bssets/vendors/bootstrap/bootstrap.min.css">
+<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
 <link rel="preload" href="<?php echo BASE_URL; ?>assets/images/header-bg.webp" as="image" type="image/webp" fetchpriority="high" >
 <link rel='stylesheet' href='<?php echo BASE_URL; ?>assets/css/owl.carousel.css'>
     <link rel='stylesheet' href='<?php echo BASE_URL; ?>assets/css/style.css'>
 <?php
-include_once "header.php";
-include_once "home-search.php"
+include "header.php";
+include "home-search.php"
 ?>
 
 
@@ -16,7 +16,7 @@ include_once "home-search.php"
   <div class="row gy-2">
     <div class="col">
      <?php
-     include_once "home-industry.php";
+     include "home-industry.php";
      ?>
     </div>
 
@@ -325,7 +325,7 @@ include_once "home-search.php"
 
 <section>
  <?php
- include_once "home-blog.php";
+ include "home-blog.php";
  ?>
 </section>
 
@@ -362,12 +362,12 @@ include_once "home-search.php"
               <div class="card-body">
                 <div class="row">
                   <div class="col-3">
-                    <img ngSrc="<?php echo BASE_URL; ?>assets/images/client.png" class="img-fluid w-100" alt="" width="165" height="162">
+                    <img src="<?php echo BASE_URL; ?>assets/images/client.png" class="img-fluid w-100" alt="" width="165" height="162">
                   </div>
                   <div class="col-9">
                     <h4>Mr. Imtiaz</h4>
                     <div class="d-flex gap-4 align-items-center mb-3">
-                      <img ngSrc="<?php echo BASE_URL; ?>assets/images/location-2.png" alt="" width="25" height="28">
+                      <img src="<?php echo BASE_URL; ?>assets/images/location-2.png" alt="" width="25" height="28">
                       <address class="mb-0"> UAE, Dubai</address>
                       <div class="clientTime">8 Months</div>
 
@@ -388,12 +388,12 @@ include_once "home-search.php"
             <div class="card-body">
               <div class="row">
                 <div class="col-3">
-                  <img ngSrc="<?php echo BASE_URL; ?>assets/images/client.png" class="img-fluid w-100" alt="" width="165" height="162">
+                  <img src="<?php echo BASE_URL; ?>assets/images/client.png" class="img-fluid w-100" alt="" width="165" height="162">
                 </div>
                 <div class="col-9">
                   <h4>Mr. Ahmed Ali</h4>
                   <div class="d-flex gap-4 align-items-center mb-3">
-                    <img ngSrc="<?php echo BASE_URL; ?>assets/images/location-2.png" alt="" width="25" height="28">
+                    <img src="<?php echo BASE_URL; ?>assets/images/location-2.png" alt="" width="25" height="28">
                     <address class="mb-0"> UAE, Abu Dhabi</address>
                     <div class="clientTime">3 Months</div>
 
@@ -432,5 +432,5 @@ include_once "home-search.php"
 </section>
 
 <?php
-include_once "footer.php";
+include "footer.php";
 ?>

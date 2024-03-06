@@ -1,6 +1,9 @@
 <?php include_once 'config.php'; 
     include_once 'services/url.php';
     $urlService = new UrlService(); 
+
+    include_once "whatsapp.php";
+    $whatsappUrl=new WhatsappUrl();
 ?>
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/searchcard.css" > 
 <div class="cardproduct card-shadow rounded-10 bg-white" style="border: 0.5px solid #ddd;">
@@ -141,9 +144,10 @@
                                     </button>
                                 </div>
                                 <div class="col-md-4">
-                                    <a [href]="#" 
+                                    <a href="  <?php echo $whatsappUrl->getProductToWhatsapp($prodData->productName,$prodData->id,get_object_vars($prodData->seller))?>"                                
                           target="_blank" class="whatsappbtn btn btn-sm w-100">
                                         Connect on whatsapp
+                                        
                                     </a>
                                 </div>
                                 <div class="col-md-4">
@@ -164,7 +168,11 @@
         </div>
     </div>
  </div>
- <?php include_once 'enquery.php'; ?>
+ <?php
+ $productName=$prodData->productName;
+ $discribenote='I am interested in '.$prodData->productName;
+ include 'enquery.php';
+ ?>
 
 <!-- JavaScript code -->
 <script>
