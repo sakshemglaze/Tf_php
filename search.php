@@ -43,11 +43,13 @@
             );  
             $queryParams= array('page'=> $page, 'size'=> $size) ;
             require_once 'post.php';
-        $data =  post(
-                'api/new-search-products',
-                $payload,
-                $queryParams,
-              );
+            $data =  post(
+              'api/new-search-products',
+              $payload,
+              true,
+              $queryParams,
+              false
+            );
            
               $length = count(($data->products));
 
@@ -65,17 +67,17 @@
               $SeoParams = [
                 'title' => $subcategory->subCategoryName,
                 'metaTitle' => $subcategory->metaTitle !== null ? $subcategory->metaTitle : $subcategory->subCategoryName,
-                'metaDescription' => $subcategory->metaDescription !== null ? $subcategory->metaDescription : $subcategory->subCategoryDescription,
+                'metaDescription' => isset($subcategory->metaDescription) !== null ?isset($subcategory->metaDescription) : $subcategory->subCategoryDescription,
                 'metaKeywords' => $subcategory->keywords !== null ? $subcategory->keywords : 'tradersfind, b2b portal, list of companies in uae, b2b marketplace, business directory, manufacturers in uae, suppliers in uae, buyers in uae, yellowpages uae, importers in uae, uae companies directory, b2b website, business marketplace, local business listings, business directory in uae',
                 'fbTitle' => $subcategory->fbTitle !== null ? $subcategory->fbTitle : $subCategory->subCategoryName,
                 'fbDescription' => $subcategory->fbDescription !== null ? $subcategory->fbDescription : '',
-                'fbImage' => $subcategory->fbImage !== null ? $subCategory->fbImage : '',
-                'fbUrl' => $subcategory->fbUrl !== null ? $subCategory->fbUrl : '',
+                'fbImage' =>isset( $subcategory->fbImage) !== null ? isset( $subcategory->fbImage) : '',
+                'fbUrl' => isset($subcategory->fbUrl) !== null ? isset($subCategory->fbUrl) : '',
                 'twitterTitle' => $subcategory->twitterTitle !== null ? $subcategory->twitterTitle : $subCategory->subCategoryName,
                 'twitterDescription' => $subcategory->twitterDescription !== null ? $subcategory -> twitterDescription : '',
-                'twitterImage' => $subcategory->twitterImage !== null ? $subCategory->twitterImage : '',
-                'twitterSite' => $subcategory->twitterSite !== null ? $subCategory->twitterSite : '',
-                'twitterCard' => $subcategory->twitterCard !== null ? $subCategory->twitterCard : '',
+                'twitterImage' => isset($subcategory->twitterImage) !== null ? isset($subCategory->twitterImage) : '',
+                'twitterSite' => isset($subcategory->twitterSite) !== null ? isset($subCategory->twitterSite) : '',
+                'twitterCard' => isset($subcategory->twitterCard) !== null ? isset($subCategory->twitterCard) : '',
                 'schemaDescription' => $subcategory->schemaDescription != null ? $subCategory->schemaDescription : '',
                 ];
 ?>
