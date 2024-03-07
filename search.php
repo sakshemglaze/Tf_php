@@ -1,4 +1,5 @@
-<?php include_once 'config.php'; 
+<?php include_once 'config.php';
+       
      include_once 'services/url.php';
      $urlService = new UrlService(); 
      $name = str_replace("-", " ", $matches[1]);
@@ -7,6 +8,7 @@
     $subCategoryId = $matches[2];
     $location = 'UAE';
     //print_r($name);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,6 +26,9 @@
 <body>
     <?php
     include_once "header-sub.php";
+
+
+
     $indexr=0;
     $page=0;
     $size=10;
@@ -41,13 +46,11 @@
         $data =  post(
                 'api/new-search-products',
                 $payload,
-                true,
                 $queryParams,
-                false
               );
            
               $length = count(($data->products));
-              //print_r(gettype($data));
+
               //print_r($data->products);
               $subcategory = json_decode(get ( 'api/guest/products-subcategories/' . $subCategoryId));
               //print_r($subcategory);  
@@ -57,11 +60,51 @@
               //print_r($category[0]);
               $industry = json_decode(get(
                 'api/industries-na/' . $category[0]->title,$queryParams) );
-              //print_r($name);
-              ?>
-              <section class="container-fluid mt-1">
-              <?php include_once "banner.php";     ?>
-              </section>
+              //print_r($subcategory);
+
+              $SeoParams = [
+                'title' => $subcategory->subCategoryName,
+                'metaTitle' => $subcategory->metaTitle !== null ? $subcategory->metaTitle : $subcategory->subCategoryName,
+                'metaDescription' => $subcategory->metaDescription !== null ? $subcategory->metaDescription : $subcategory->subCategoryDescription,
+                'metaKeywords' => $subcategory->keywords !== null ? $subcategory->keywords : 'tradersfind, b2b portal, list of companies in uae, b2b marketplace, business directory, manufacturers in uae, suppliers in uae, buyers in uae, yellowpages uae, importers in uae, uae companies directory, b2b website, business marketplace, local business listings, business directory in uae',
+                'fbTitle' => $subcategory->fbTitle !== null ? $subcategory->fbTitle : $subCategory->subCategoryName,
+                'fbDescription' => $subcategory->fbDescription !== null ? $subcategory->fbDescription : '',
+                'fbImage' => $subcategory->fbImage !== null ? $subCategory->fbImage : '',
+                'fbUrl' => $subcategory->fbUrl !== null ? $subCategory->fbUrl : '',
+                'twitterTitle' => $subcategory->twitterTitle !== null ? $subcategory->twitterTitle : $subCategory->subCategoryName,
+                'twitterDescription' => $subcategory->twitterDescription !== null ? $subcategory -> twitterDescription : '',
+                'twitterImage' => $subcategory->twitterImage !== null ? $subCategory->twitterImage : '',
+                'twitterSite' => $subcategory->twitterSite !== null ? $subCategory->twitterSite : '',
+                'twitterCard' => $subcategory->twitterCard !== null ? $subCategory->twitterCard : '',
+                'schemaDescription' => $subcategory->schemaDescription != null ? $subCategory->schemaDescription : '',
+                ];
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex nofollow" >
+  <?php 
+  include_once 'services/seo.php';
+  $seo = new seoService();
+                $seo->setSeoTags($SeoParams);
+
+  ?>
+      
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css" >
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/enquery.css" > 
+    
+</head>
+
+<body>
+    <?php
+    include_once "header-sub.php";
+    ?>
+    <section class="container-fluid mt-1">
+       <?php include_once "banner.php";     ?>
+    </section>
             
 <section class="p-2">
 <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb" *ngIf="products">

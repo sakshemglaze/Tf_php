@@ -1,9 +1,11 @@
 <?php include_once 'config.php'; 
     include_once 'services/url.php';
+    include_once 'services/masked.php';
     $urlService = new UrlService(); 
 
     include_once "whatsapp.php";
     $whatsappUrl=new WhatsappUrl();
+    $maskedService = new MaskingService();
 ?>
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/searchcard.css" > 
 <div class="cardproduct card-shadow rounded-10 bg-white" style="border: 0.5px solid #ddd;">
@@ -139,7 +141,9 @@
                                 <div class="col-md-4">
                                     <button class="btn btn-sm btn-light w-100 d-center"  title="Seller_Phone" href="#">
                                         <img src="<?php echo BASE_URL ?>assets/images/phone.png" width="18" height="17" class="w-18 me-2"
-                                            alt="Phone" />
+                                            alt="Phone" /> <?php //print_r($prodData->seller->sellerVirtualContactPhone);
+                                            $maskedService->getMaskedNumber($prodData->seller->sellerVirtualContactPhone);
+                                            ?>
                                        
                                     </button>
                                 </div>
