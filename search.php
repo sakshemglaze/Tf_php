@@ -18,12 +18,15 @@
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css" >
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/enquery.css" > 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     
 </head>
 <body>
     <?php
     include_once "header-sub.php";
     $indexr=0;
+    $page=0;
+    $size=10;
             class FilterDTO {}
            
          $location="";
@@ -33,7 +36,7 @@
                 'searchTextType' => 'subcategory',
                 'filterDto' => $filterDto
             );  
-            $queryParams= array('page'=>0, 'size'=> 12) ;
+            $queryParams= array('page'=> $page, 'size'=> $size) ;
             require_once 'post.php';
         $data =  post(
                 'api/new-search-products',
@@ -42,8 +45,9 @@
                 $queryParams,
                 false
               );
+           
               $length = count(($data->products));
-              //print_r($data);
+              //print_r(gettype($data));
               //print_r($data->products);
               $subcategory = json_decode(get ( 'api/guest/products-subcategories/' . $subCategoryId));
               //print_r($subcategory);  
@@ -153,7 +157,7 @@ if ($subcategory->shortDescription != '' && $location === '') {
                 if (is_array($prod)) {
                   //print_r($prod);
                     ?>
-                    <div class="row gy-4">
+                    <div id="data-container" class="row gy-4">
                         <?php
                       foreach ($prod as $inde => $onep) {
                         $indexr=$inde;
@@ -170,13 +174,21 @@ if ($subcategory->shortDescription != '' && $location === '') {
                         }
                       }
                           ?>
-                    </div>                    
+                    </div>         
                     <?php
                 }
             }
-          
-          ?> 
+          ?>
+       
+                 
           <div class="post-request-text ">
+          <div class="text-center my-2" >
+          <?php if (!($length < 10)): ?>
+            <form action="loadmore.php">
+          <button id="loadm" class="btn-primary-gradiant rounded-2 btn-auto"> LOAD MORE RESULTS ... </button>
+          </form>
+        </div>
+        <?php endif; ?>
           <section class="easysource my-4 py-2">
             <?php
              include_once "post-request.php";
