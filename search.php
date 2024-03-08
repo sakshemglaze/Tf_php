@@ -1,4 +1,9 @@
-<?php include_once 'config.php';
+<?php 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+//print_r('Welcome search');
+include_once 'config.php';
        
      include_once 'services/url.php';
      $urlService = new UrlService(); 
@@ -18,14 +23,11 @@
                 'searchText' => $name ,
                 'searchTextType' => 'subcategory',
                 'filterDto' => $filterDto
-            );  
+            ); 
+ 
             $queryParams= array('page'=>0, 'size'=> 12) ;
             require_once 'post.php';
-        $data =  post(
-                'api/new-search-products',
-                $payload,
-                $queryParams,
-              );
+        $data =  post('api/new-search-products',$payload,$queryParams);
               $length = count(($data->products));
               //print_r($data->products);
               $subcategory = json_decode(get ( 'api/guest/products-subcategories/' . $subCategoryId));
@@ -40,20 +42,21 @@
 
               $SeoParams = [
                 'title' => $subcategory->subCategoryName,
-                'metaTitle' => $subcategory->metaTitle !== null ? $subcategory->metaTitle : $subcategory->subCategoryName,
-                'metaDescription' => $subcategory->metaDescription !== null ? $subcategory->metaDescription : $subcategory->subCategoryDescription,
-                'metaKeywords' => $subcategory->keywords !== null ? $subcategory->keywords : 'tradersfind, b2b portal, list of companies in uae, b2b marketplace, business directory, manufacturers in uae, suppliers in uae, buyers in uae, yellowpages uae, importers in uae, uae companies directory, b2b website, business marketplace, local business listings, business directory in uae',
-                'fbTitle' => $subcategory->fbTitle !== null ? $subcategory->fbTitle : $subCategory->subCategoryName,
-                'fbDescription' => $subcategory->fbDescription !== null ? $subcategory->fbDescription : '',
-                'fbImage' => $subcategory->fbImage !== null ? $subCategory->fbImage : '',
-                'fbUrl' => $subcategory->fbUrl !== null ? $subCategory->fbUrl : '',
-                'twitterTitle' => $subcategory->twitterTitle !== null ? $subcategory->twitterTitle : $subCategory->subCategoryName,
-                'twitterDescription' => $subcategory->twitterDescription !== null ? $subcategory -> twitterDescription : '',
-                'twitterImage' => $subcategory->twitterImage !== null ? $subCategory->twitterImage : '',
-                'twitterSite' => $subcategory->twitterSite !== null ? $subCategory->twitterSite : '',
-                'twitterCard' => $subcategory->twitterCard !== null ? $subCategory->twitterCard : '',
-                'schemaDescription' => $subcategory->schemaDescription != null ? $subCategory->schemaDescription : '',
+                'metaTitle' => isset($subcategory->metaTitle) ? $subcategory->metaTitle : $subcategory->subCategoryName,
+                'metaDescription' => isset($subcategory->metaDescription) ? $subcategory->metaDescription : $subcategory->subCategoryDescription,
+                'metaKeywords' => isset($subcategory->keywords) ? $subcategory->keywords : 'tradersfind, b2b portal, list of companies in uae, b2b marketplace, business directory, manufacturers in uae, suppliers in uae, buyers in uae, yellowpages uae, importers in uae, uae companies directory, b2b website, business marketplace, local business listings, business directory in uae',
+                'fbTitle' => isset($subcategory->fbTitle) ? $subcategory->fbTitle : $subCategory->subCategoryName,
+                'fbDescription' => isset($subcategory->fbDescription) ? $subcategory->fbDescription : '',
+                'fbImage' => isset($subcategory->fbImage) ? $subcategory->fbImage : '',
+                'fbUrl' => isset($subcategory->fbUrl) ? $subcategory->fbUrl : '',
+                'twitterTitle' => isset($subcategory->twitterTitle) ? $subcategory->twitterTitle : $subcategory->subCategoryName,
+                'twitterDescription' => isset($subcategory->twitterDescription) ? $subcategory -> twitterDescription : '',
+                'twitterImage' => isset($subcategory->twitterImage) ? $subcategory->twitterImage : '',
+                'twitterSite' => isset($subcategory->twitterSite) ? $subcategory->twitterSite : '',
+                'twitterCard' => isset($subcategory->twitterCard) ? $subcategory->twitterCard : '',
+                'schemaDescription' => isset($subcategory->schemaDescription) ? $subcategory->schemaDescription : '',
                 ];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

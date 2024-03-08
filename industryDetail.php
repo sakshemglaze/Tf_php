@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+#print_r('welcom1');
     include_once 'config.php';
 
     include_once 'services/url.php';
@@ -33,10 +36,7 @@
             $page = 0;
             $size = 6;
             require_once 'post.php';
-        $data =  get(
-                'api/industries/' . $matches[2] .'?size=' . $size . '&page=' . $page . '&sort=industryName,asc',
-                 true
-              );
+        $data =  get('api/industries/' . $matches[2] .'?size=' . $size . '&page=' . $page . '&sort=industryName,asc',true );
               $data1 = json_decode($data);
              // $data = findActive($data1);
               //print_r($data);
