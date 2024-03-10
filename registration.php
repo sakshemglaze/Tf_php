@@ -1,4 +1,8 @@
-<?php include_once 'config.php'; ?>
+<?php 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+include_once 'config.php'; ?>
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/userRegis.css" />
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
 <script src="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.bundle.min.js"></script>

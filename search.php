@@ -1,4 +1,9 @@
-<?php include_once 'config.php';
+<?php 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+//print_r('Welcome search');
+include_once 'config.php';
        
      include_once 'services/url.php';
      $urlService = new UrlService(); 
@@ -50,7 +55,6 @@
               $queryParams,
               false
             );
-           
               $length = count(($data->products));
 
               //print_r($data->products);
@@ -66,20 +70,21 @@
 
               $SeoParams = [
                 'title' => $subcategory->subCategoryName,
-                'metaTitle' => $subcategory->metaTitle !== null ? $subcategory->metaTitle : $subcategory->subCategoryName,
-                'metaDescription' => isset($subcategory->metaDescription) !== null ?isset($subcategory->metaDescription) : $subcategory->subCategoryDescription,
-                'metaKeywords' => $subcategory->keywords !== null ? $subcategory->keywords : 'tradersfind, b2b portal, list of companies in uae, b2b marketplace, business directory, manufacturers in uae, suppliers in uae, buyers in uae, yellowpages uae, importers in uae, uae companies directory, b2b website, business marketplace, local business listings, business directory in uae',
-                'fbTitle' => $subcategory->fbTitle !== null ? $subcategory->fbTitle : $subCategory->subCategoryName,
-                'fbDescription' => $subcategory->fbDescription !== null ? $subcategory->fbDescription : '',
-                'fbImage' =>isset( $subcategory->fbImage) !== null ? isset( $subcategory->fbImage) : '',
-                'fbUrl' => isset($subcategory->fbUrl) !== null ? isset($subCategory->fbUrl) : '',
-                'twitterTitle' => $subcategory->twitterTitle !== null ? $subcategory->twitterTitle : $subCategory->subCategoryName,
-                'twitterDescription' => $subcategory->twitterDescription !== null ? $subcategory -> twitterDescription : '',
-                'twitterImage' => isset($subcategory->twitterImage) !== null ? isset($subCategory->twitterImage) : '',
-                'twitterSite' => isset($subcategory->twitterSite) !== null ? isset($subCategory->twitterSite) : '',
-                'twitterCard' => isset($subcategory->twitterCard) !== null ? isset($subCategory->twitterCard) : '',
-                'schemaDescription' => $subcategory->schemaDescription != null ? $subCategory->schemaDescription : '',
+                'metaTitle' => isset($subcategory->metaTitle) ? $subcategory->metaTitle : $subcategory->subCategoryName,
+                'metaDescription' => isset($subcategory->metaDescription) ? $subcategory->metaDescription : $subcategory->subCategoryDescription,
+                'metaKeywords' => isset($subcategory->keywords) ? $subcategory->keywords : 'tradersfind, b2b portal, list of companies in uae, b2b marketplace, business directory, manufacturers in uae, suppliers in uae, buyers in uae, yellowpages uae, importers in uae, uae companies directory, b2b website, business marketplace, local business listings, business directory in uae',
+                'fbTitle' => isset($subcategory->fbTitle) ? $subcategory->fbTitle : $subCategory->subCategoryName,
+                'fbDescription' => isset($subcategory->fbDescription) ? $subcategory->fbDescription : '',
+                'fbImage' => isset($subcategory->fbImage) ? $subcategory->fbImage : '',
+                'fbUrl' => isset($subcategory->fbUrl) ? $subcategory->fbUrl : '',
+                'twitterTitle' => isset($subcategory->twitterTitle) ? $subcategory->twitterTitle : $subcategory->subCategoryName,
+                'twitterDescription' => isset($subcategory->twitterDescription) ? $subcategory -> twitterDescription : '',
+                'twitterImage' => isset($subcategory->twitterImage) ? $subcategory->twitterImage : '',
+                'twitterSite' => isset($subcategory->twitterSite) ? $subcategory->twitterSite : '',
+                'twitterCard' => isset($subcategory->twitterCard) ? $subcategory->twitterCard : '',
+                'schemaDescription' => isset($subcategory->schemaDescription) ? $subcategory->schemaDescription : '',
                 ];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

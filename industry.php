@@ -1,4 +1,8 @@
-<?php include_once 'config.php'; 
+<?php 
+//error_reporting(E_ALL);
+//ini_set('display_errors', 1);
+
+include_once 'config.php'; 
   include_once 'services/url.php';
   $urlService = new UrlService();
 ?>
@@ -7,7 +11,7 @@
     //$urlParts = explode('/', $currentUrl);
     //$industryName = $urlParts[2];
     //$id = $urlParts[3];
-    // print_r ($industryName);
+    // print_r ('welcom');
     // if ($industryName != '') {
     //   include_once "industryDetail.php/industry/" . $id;
     // }
@@ -26,22 +30,19 @@
 <script src="<?php echo BASE_URL; ?>assets/js/lazy-load.js"></script>
 <?php
     include_once "header-sub.php";
-    
-    $index=0;
-            class FilterDTO {}
+//    print_r('welcome1');
+    //$index=0;
+            //class FilterDTO {}
             //$name= $_POST['searchText']? $_POST['searchText']:"cleaning services";
-            $filterDto = new FilterDTO();
-            $payload = array();
-            $page = 0;
-            $size = 6;
+            //$filterDto = new FilterDTO();
+            //$payload = array();
+           $page = 0;
+           $size = 6;
             require_once 'post.php';
-        $data =  get(
-                'api/industries'.'?size=' . $size . '&page=' . $page . '&sort=industryName,asc',
-                 true
-              );
-              $data1 = json_decode($data);
+        $data =  get('api/industries'.'?size=' . $size . '&page=' . $page . '&sort=industryName,asc',true );
+             $data1 = json_decode($data);
              // $data = findActive($data1);
-              //print_r($data);
+             // print_r($data);
               ?>
 <section class="container-fluid ">
   <?php include_once "banner.php"; ?>

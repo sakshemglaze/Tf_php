@@ -1,4 +1,10 @@
-<?php include_once 'config.php'; ?>
+<?php 
+ include_once 'config.php'; 
+ include_once 'services/masked.php';
+ $maskedService = new MaskingService();
+ include_once 'services/url.php';
+ $url = new UrlService();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,7 +47,7 @@
 <section class="container-fluid ">
   <?php include_once "banner.php"; ?>
 </section>
-<section class="p-3">
+<section class="p-1">
   <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="/">TradersFind </a></li>
@@ -58,9 +64,9 @@
           <div class="row">
             <div class="col-lg-3 product_details_img">
               <?php if ($data1 != null ) : ?>
-              <div class="fotorama" data-nav="thumbs" data-thumbmargin="20" data-width="100%"
-                data-allowfullscreen="true" data-height="auto" data-ratio="800/600">
-                         <img src="https://doc.tradersfind.com/images/<?php echo $data1->images[0]->id; ?>.webp" alt="<?php echo $data1->productName ?>" >
+              <div class="fotorama" data-nav="thumbs" data-thumbmargin="20" data-width="100%" data-allowfullscreen="true"
+                 data-height="auto" data-ratio="800/600">
+                         <img class="rounded-10" src="https://doc.tradersfind.com/images/<?php echo $data1->images[0]->id; ?>.webp" alt="<?php echo $data1->productName ?>" width="240" height="240" >
              </div>
              <?php endif; ?>
             </div>
@@ -107,16 +113,16 @@
             </div>
 
             <div class="col-lg-4">
-              <div class="card bg-grey3 border-0">
-                <div class="card-body">
+              <div class="card border-0">
+                <div class="card-body bg-grey3">
                   <div class="d-flex flex-column align-items-center">
-                    <span class="bg-white px-3 rounded-10 py-5">
+                    <span class="bg-white px-3 rounded-10 py-2">
                       <img src="https://doc.tradersfind.com/images/<?php echo $data1->seller->logo->id; ?>.webp" alt="<?php echo $data1->seller->sellerCompanyName; ?>"width="160" >
                     </span>
 
                     <h2 class="fwbold fs-4 mt-3">
                       <?php if($data1->seller && $data1->seller->sellerCompanyName ) : ?>
-                     <a hre]="url.php?getSellerUrl($data1->seller->sellerUrl,$data1->seller->id)" target="_blank" class="text-blue"> <?php echo $data1->seller->sellerCompanyName ?> </a></h2>
+                     <a href="/<?php echo $url->getSellerUrl($data1->seller->sellerUrl,$data1->seller->id) ?>" target="_blank" class="text-blue"> <?php echo $data1->seller->sellerCompanyName ?> </a></h2>
                      <?php endif; ?>
                     <div class="fs-5 mt-2">
                       <img class="me-2" src="<?php echo BASE_URL; ?>assets/images/location-3.svg" width="15" alt="location" />
@@ -158,11 +164,11 @@
 
                       </div>
                     </div>
-                    <button class="btn btn-light mt-5 bg-white"
-                      (click)="this.maskingService.onClickPhoneNum(prodDetails.seller, 'sellerVirtualContactPhone', this.urlService.getProductUrl(prodDetails.productName,prodDetails.id), prodDetails)">
-                      <img src="<?php echo BASE_URL; ?>assets/images/phone.png" width="15" alt="phone" />  <?php echo isset($data1->seller->maskedNum) ?> </button>
+                    <button class="btn btn-light mt-5 bg-white">
+                      <img src="<?php echo BASE_URL; ?>assets/images/phone.png" width="15" alt="phone" />  
+                      <?php $maskedService->getMaskedNumber($data1->seller->sellerVirtualContactPhone); ?> </button>
                     <div class="d-flex align-items-center w-100 mt-3 gap-2">
-                      <a *ngIf="prodDetails"
+                      <a
                         href=" <?php echo $whatsappUrl->getProductToWhatsapp($data1->productName,$data1->id,get_object_vars($data1->seller))?>"
                         class="whatsappbtn btn btn-sm w-100" target="_blank">
                         Connect on whatsapp

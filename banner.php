@@ -1,14 +1,15 @@
-<!--<section class="container-fluid mt-1">-->
   <?php
     $currentUrl = $_SERVER['REQUEST_URI'];
     $name = '';
+//print_r('welcome3');
   ?>
     <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
-          <?php
-          $webPageName = 'Search Product Top';
+          <?php          
+	$webPageName = 'Search Product Top';
           require_once 'post.php';
            $responseBanner = post('api/keywords-banner', array($name, $webPageName));
+print_r('w4');
            foreach($responseBanner as $index => $ban){
             $banner = $ban;
               ?>
@@ -25,5 +26,4 @@
             ?>
         </div>   
     </div>    
-<!--</section>-->
 <hr  size="5" width="100%">  
