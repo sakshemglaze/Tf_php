@@ -7,6 +7,7 @@
 <link rel="preload" href="<?php echo BASE_URL; ?>assets/images/header-bg.webp" as="image" type="image/webp" fetchpriority="high" >
 <link rel='stylesheet' href='<?php echo BASE_URL; ?>assets/css/owl.carousel.css'>
     <link rel='stylesheet' href='<?php echo BASE_URL; ?>assets/css/style.css'>
+   
 <?php
 include "header.php";
 include "home-search.php"

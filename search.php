@@ -229,14 +229,17 @@ if ($subcategory->shortDescription != '' && $location === '') {
                 }
             }
           ?>
-       
+       <div id="productList">
+  
+</div>
+<div id="result"></div>
                  
           <div class="post-request-text ">
           <div class="text-center my-2" >
           <?php if (!($length < 10)): ?>
-            <form action="loadmore.php">
-          <button id="loadm" class="btn-primary-gradiant rounded-2 btn-auto"> LOAD MORE RESULTS ... </button>
-          </form>
+            
+          <button  id="loadMoreBtn" onclick="lod()"class="btn-primary-gradiant rounded-2 btn-auto"> LOAD MORE RESULTS ... </button>
+         
         </div>
         <?php endif; ?>
           <section class="easysource my-4 py-2">
@@ -255,11 +258,56 @@ if ($subcategory->shortDescription != '' && $location === '') {
         </p>
         <?php
         }
+        $currentUrl = $_SERVER['REQUEST_URI'];
+        $parts = explode('/', $currentUrl);
+        $category = basename($parts[3]); // Extract the category part
+        $searchtext = htmlspecialchars(str_replace('-',' ', $category)); // Sanitize the value
+
         ?>
         </div>
     </div>    
 </div>
 
+<script>
+  let page=1;
+  var searchtext = "<?php echo $searchtext; ?>";
+  
+  function lod(){
+    let payload= {
+    searchText: searchtext,
+    searchTextType: 'subcategory',
+    filterDto: {}
+     
+}
+console.log(searchtext);
+searchProductNew(payload, page).then(response => {
+     
+        console.log(response);
+        var jsonString = JSON.stringify(response);
+    
+    
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "tf_result/test.php", true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                document.getElementById("result").innerHTML =document.getElementById("result").innerHTML + xhr.responseText; 
+            } else {
+                console.error('Error:', xhr.status);
+            }
+        }
+    };
+    xhr.send(jsonString);
+    })
+    .catch(error => {
+       
+        console.error(error);
+    });
+    page++;
+  }
+</script>
+<script src='<?php echo BASE_URL; ?>services/moreproductjs.js'></script>
     <script src="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.bundle.min.js"></script>
   <script src="<?php echo BASE_URL; ?>assets/js/lazy-load.js"></script> 
 </body>
