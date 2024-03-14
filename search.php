@@ -415,7 +415,10 @@ if (isset($subcategory->shortDescription) != '' && $location === '') {
         <?php
         }
         // Sanitize the value
-
+        $currentUrl = $_SERVER['REQUEST_URI'];
+        $parts = explode('/', $currentUrl);
+        $category = basename($parts[2]); // Extract the category part
+        $searchtext = htmlspecialchars(str_replace('-',' ', $category)); // Sanitize the value
         ?>
         </div>
     </div>    
@@ -440,7 +443,7 @@ searchProductNew(payload, page).then(response => {
     
     
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "tf_result/test.php", true);
+    xhr.open("POST", "test.php", true);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onreadystatechange = function() {
         if (xhr.readyState === XMLHttpRequest.DONE) {

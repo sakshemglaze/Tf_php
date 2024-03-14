@@ -6,22 +6,8 @@
     $currentUrl = $_SERVER['REQUEST_URI'];   
     $grpCatName = $matches[1];
     $id = $matches[2];
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Industry</title>
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/cate.css" />
-</head>
-<body>
-<script src="<?php echo BASE_URL; ?>assets/js/lazy-load.js"></script>
-<?php
-    include_once "header-sub.php";
-    
+
+
     $index=0;
             class FilterDTO {}
             //$name= $_POST['searchText']? $_POST['searchText']:"cleaning services";
@@ -39,10 +25,39 @@
               $industry =  json_decode(get(
                 'api/industries-na/' . $data1->title . '?size=10&sort=industryName',true
               ));
-              //$data = findActive($data1);
-
-              //print_r($industry[0]);
-              ?>
+              $SeoParams = [
+                'title' => isset($data1->metaTitle) && $data1->metaTitle != '' ? $data1->metaTitle : $data1->productName . ' in ' . $data1->seller->state . ' - ' . $data1->sellerCompanyName,
+                'metaTitle' => isset($data1->metaTitle) && $data1->metaTitle != '' ? $data1->metaTitle : $data1->productName . ' in ' . $data1->seller->state . ' - ' . $data1->sellerCompanyName,
+                'metaDescription' => isset($data1->categoryDescription) && $data1->categoryDescription != '' ? $data1->categoryDescription : '',
+                'metaKeywords' => isset($data1->Keywords) && $data1->Keywords != '' ? implode(',', $data1->Keywords) : '',
+                'fbTitle' => isset($data1->fbTitle) && $data1->fbTitle != '' ? $data1->fbTitle : $data1->productName,
+                'fbDescription' => isset($data1->fbDescription) && $data1->fbDescription != '' ? $data1->fbDescription : $data1->productDescription,
+                'fbImage' => isset($data1->fbImage) ? API_URL . 'api/guest/imageContentDownload/' . $data1->fbImage.id : 'undefined',
+                'fbUrl' => isset($data1->fbUrl) && $data1->fbUrl != '' ? $data1->fbUrl : null,
+                'twitterTitle' => isset($data1->twitterTitle) && $data1->twitterTitle != '' ? $data1->twitterTitle : $data1->productName,
+                'twitterDescription' => isset($data1->twitterDescription) && $data1->twitterDescription != '' ? $data1->twitterDescription : $data1->productDescription,
+                'twitterImage' => isset($data1->twitterImage) ? API_URL . 'api/guest/imageContentDownload/' . $data1->twitterImage.id : 'undefined',
+                'twitterSite' => isset($data1->twitterSite) && $data1->twitterSite != '' ? $data1->twitterSite : null,
+                'twitterCard' => isset($data1->twitterCard) && $data1->twitterCard != '' ? $data1->twitterCard : null,
+             ];
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php 
+        include_once 'services/seo.php';
+        $seo = new seoService();
+        $seo->setSeoTags($SeoParams); ?>
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/cate.css" />
+</head>
+<body>
+<script src="<?php echo BASE_URL; ?>assets/js/lazy-load.js"></script>
+<?php
+    include_once "header-sub.php";              ?>
 <section class="container-fluid ">
   <?php include_once "banner.php"; ?>
 </section>

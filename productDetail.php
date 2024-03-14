@@ -1,26 +1,14 @@
-<?php 
- include_once 'config.php'; 
- include_once 'services/masked.php';
- $maskedService = new MaskingService();
- include_once 'services/url.php';
- $url = new UrlService();
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Details </title>
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/prod.css" />
-</head>
-<body>
-<script src="<?php echo BASE_URL; ?>assets/js/lazy-load.js"></script>
+<?php 
+ include_once 'config.php'; 
+ 
+ include_once 'services/url.php';
+ $url = new UrlService();
+?>
 <?php
-    include_once "header-sub.php";
-    include_once "whatsapp.php";
-    $whatsappUrl=new WhatsappUrl();
+   
     
     $index=0;
             class FilterDTO {}
@@ -42,7 +30,44 @@
               $data1 = json_decode($data);
               //$data = findActive($data1);
               //print_r($data1->seller->logo->id);
+//     SEO Attributes setting ..................
+        $SeoParams = [
+          'title' => isset($data1->metaTitle) && $data1->metaTitle != '' ? $data1->metaTitle : $data1->productName . ' in ' . $data1->seller->state . ' - ' . $data1->sellerCompanyName,
+          'metaTitle' => isset($data1->metaTitle) && $data1->metaTitle != '' ? $data1->metaTitle : $data1->productName . ' in ' . $data1->seller->state . ' - ' . $data1->sellerCompanyName,
+          'metaDescription' => isset($data1->metaDescription) && $data1->metaDescription != '' ? $data1->metaDescription : $data1->sellerCompanyName . ' - Offering ' . $data1->productName . ' in ' . $data1->seller->state . '. Get the best quality at the best price.',
+          'metaKeywords' => isset($data1->metaKeywords) && $data1->metaKeywords != '' ? implode(',', $data1->metaKeywords) : $data1->productName . ', ' . $data1->productName . ' in ' . $data1->seller->state . ', ' . $data1->productName . ' in UAE',
+          'fbTitle' => isset($data1->fbTitle) && $data1->fbTitle != '' ? $data1->fbTitle : $data1->productName,
+          'fbDescription' => isset($data1->fbDescription) && $data1->fbDescription != '' ? $data1->fbDescription : $data1->productDescription,
+          'fbImage' => isset($data1->fbImage) ? API_URL . 'api/guest/imageContentDownload/' . $data1->fbImage.id : 'undefined',
+          'fbUrl' => isset($data1->fbUrl) && $data1->fbUrl != '' ? $data1->fbUrl : null,
+          'twitterTitle' => isset($data1->twitterTitle) && $data1->twitterTitle != '' ? $data1->twitterTitle : $data1->productName,
+          'twitterDescription' => isset($data1->twitterDescription) && $data1->twitterDescription != '' ? $data1->twitterDescription : $data1->productDescription,
+          'twitterImage' => isset($data1->twitterImage) ? API_URL . 'api/guest/imageContentDownload/' . $data1->twitterImage.id : 'undefined',
+          'twitterSite' => isset($data1->twitterSite) && $data1->twitterSite != '' ? $data1->twitterSite : null,
+          'twitterCard' => isset($data1->twitterCard) && $data1->twitterCard != '' ? $data1->twitterCard : null,
+       ];
+
               ?>
+  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php 
+  include_once 'services/seo.php';
+  $seo = new seoService();
+                $seo->setSeoTags($SeoParams);
+                include_once "header-sub.php";
+                include_once "whatsapp.php";
+                $whatsappUrl=new WhatsappUrl();
+
+                include_once 'services/masked.php';
+                $maskedService = new MaskingService();
+
+  ?>
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/prod.css" />
+</head>
+<body>
+<script src="<?php echo BASE_URL; ?>assets/js/lazy-load.js"></script>
 
 <section class="container-fluid ">
   <?php include_once "banner.php"; ?>

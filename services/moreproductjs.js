@@ -1,7 +1,7 @@
 function searchProductNew(newSearchDTO, page, userId = null, isFeatured = null) {
     return new Promise((resolve, reject) => {
         // Construct the URL with query parameters
-        let url = `http://localhost:8080/api/new-search-products?page=${page}&size=10`;
+        let url = `https://api.tradersfind.com/api/new-search-products?page=${page}&size=10`;
         if (userId !== null) {
           url += `&userId=${userId}`;
         }
