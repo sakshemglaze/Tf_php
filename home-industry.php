@@ -15,13 +15,15 @@ array_push($industry, array("Industrial Supplies", "6450d5651381f473d7f9da51", "
 
       ?>
     <ul>
-      <li class="has-category" >
+    
         <?php
         include_once 'services/url.php';
         $urlService = new UrlService();
         
         foreach($industry as $indus){
+
             ?>
+              <li class="has-category" >
             <h5>
             <a href="<?php echo $urlService->getIndustryUrl($indus[0],$indus[1]); ?>" title="<?php echo $indus[0];?>">
               <span><img src="<?php echo $indus[2];?>" alt="I" width="30" height="30" /></span>&nbsp; 
@@ -31,15 +33,15 @@ array_push($industry, array("Industrial Supplies", "6450d5651381f473d7f9da51", "
                      } else {
                 echo $indus[0];
                      }?>
-              <span
-                *ngIf="category[0].length > 200">...</span>
+              
             </a>  </h5>
+            </li>
             <?php
         }
         ?>
        
        
-      </li>
+      
   
       <li class="has-category"> <h5>
         <a href="industry">

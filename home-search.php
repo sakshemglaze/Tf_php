@@ -87,7 +87,7 @@
        
     }
 </style>
-                              <ul class="form-control search-result"  style="display: none; max-height: 200px; overflow-y: auto;">
+                              <ul class="form-control search-result"  style="display: none; max-height: 400px; overflow-y: auto;">
     <div class="form-control" id="option_sub"></div>
 
     <li style="background-image: -moz-linear-gradient(-40deg, rgb(189, 56, 56) 0%, rgb(13, 88, 140) 100%);

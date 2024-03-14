@@ -81,7 +81,7 @@ include "home-search.php"
       <div class="owl-carousel carousel-main1">
              <div class="text-center">
                 <h4 class="text-red">UAE’s Largest Online B2B Portal & Business Directory in UAE</h4>
-                <p class="my-4">Welcome to TradersFind, the UAE’s Largest Online B2B portal & business directory in UAE. 
+                <p class="">Welcome to TradersFind, the UAE’s Largest Online B2B portal & business directory in UAE. 
                   As a comprehensive B2B marketplace for buyers and sellers in UAE, we are here to revolutionize the way businesses connect, 
                   collaborate, and succeed in the global marketplace. With a deep understanding of the challenges faced by traders and a passion 
                   for empowering businesses, TradersFind is your go-to destination for finding the right products, connecting with trusted suppliers, 
@@ -95,7 +95,7 @@ include "home-search.php"
     
                <div class="text-center">
                 <h4 class="text-red">Connecting Businesses Across UAE: A Powerful B2B Marketplace</h4>
-                <p class="my-4">
+                <p class="">
                   TradersFind is more than just a directory of UAE companies; it is a powerful online B2B marketplace in UAE  
                   where businesses can source products, connect with suppliers, and expand their networks. We provide an easy to 
                   use platform that connects buyers and sellers, importers and exporters, manufacturers and suppliers, retailers, 
@@ -107,7 +107,7 @@ include "home-search.php"
    
               <div class="text-center">
                 <h4 class="text-red">Your Comprehensive Business Directory in UAE</h4>
-                <p class="my-4">
+                <p class=">
                   With our extensive list of companies in UAE, including manufacturers, suppliers, and service providers, 
                   we enable businesses to find reliable and trustworthy partners to meet their specific needs. Whether you're a startup, 
                   a small or medium-sized enterprise, or a large corporation, our platform provides the resources and opportunities 
@@ -120,7 +120,7 @@ include "home-search.php"
           
               <div class="text-center">
                 <h4 class="text-red">Connect with Verified Suppliers and Buyers in UAE</h4>
-                <p class="my-4">
+                <p class="">
                   At TradersFind, we prioritize quality and trust. We understand that the success of your business depends on the reliability of your partners. 
                   That's why we have implemented a rigorous verification process to ensure that all the verified suppliers and 
                   buyers on our platform meet the highest standards of quality, authenticity, and ethical practices. 
@@ -131,7 +131,7 @@ include "home-search.php"
     
               <div class="text-center">
                 <h4 class="text-red">Expand Your Reach and Boost Visibility</h4>
-                <p class="my-4">
+                <p class="">
                   At TradersFind, we understand the importance of accessibility and convenience in the digital age. 
                   Our online marketplace provides a platform for businesses to display their products and services, 
                   allowing them to reach a wider audience. Our efficient interface allows free business listings that increase 
@@ -142,7 +142,7 @@ include "home-search.php"
    
              <div class="text-center">
                 <h4 class="text-red">Find Everything You Need at One Place:</h4>
-                <p class="my-4">
+                <p class="">
                   TradersFind offers a comprehensive platform where you can find everything you need in one place. 
                   Our extensive product categories cover a wide range of industries, ensuring that you can find the 
                   right products for your business requirements. Whether you are searching for electronics, machinery, 
@@ -154,7 +154,7 @@ include "home-search.php"
     
               <div class="text-center">
                 <h4 class="text-red">Get Started with TradersFind Today: Your Gateway to Success</h4>
-                <p class="my-4">
+                <p class="">
                   Get Started with TradersFind, UAE’s leading B2B website connecting buyers with sellers. 
                   Discover a vast network of trusted and verified suppliers, manufacturers, and service providers in UAE. 
                   Join now to expand your business reach, explore new opportunities, and take your business to new heights. 

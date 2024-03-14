@@ -42,7 +42,7 @@
             </button>
           </div>
           </div>
-          <ul class="form-control search-result"  style="display: none; max-height: 200px; overflow-y: auto;">
+          <ul class="form-control search-result"  style="display: none; max-height: 400px; overflow-y: auto;">
     <div class="form-control" id="option_sub"></div>
 
     <li style="background-image: -moz-linear-gradient(-40deg, rgb(189, 56, 56) 0%, rgb(13, 88, 140) 100%);
@@ -101,7 +101,7 @@
             if (suggestions) {
                 $('#option_sub').empty();
                 suggestions.forEach(function (suggestion) {
-                    var suggestionItem = $('<li></li><br>').text(suggestion.subCategoryName).click(function() {
+                    var suggestionItem = $('<li></li>').text(suggestion.subCategoryName).click(function() {
                        
                 $('#search').val(suggestion.subCategoryName); 
                 var searchTerm = $('#search').val().replace(/\s+/g, '-');
