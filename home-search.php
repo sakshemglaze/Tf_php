@@ -1,7 +1,25 @@
-<?php include_once 'config.php'; ?>
+<?php include_once 'config.php'; 
+
+?>
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/hs.css" />
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
+<script>
+    function submitform(){
+        var location=document.getElementById("locationSelect").value;
+        var searchtex=document.getElementById("search").value;
+        var baseurl='<?php echo BASE_URL?>';
+        var bsearchurl=baseurl;
+        if(location &&location=='UAE'){
+            bsearchurl=bsearchurl+'search'+ "/" + searchtex.replace(' ', '-');
+            
+        }else{
+            bsearchurl=bsearchurl+'search'+'/' + searchtex.replace(' ', '-')+ "/"+location;
+        }
+        document.getElementById("homepageSearch").action=bsearchurl;
+        document.getElementById("homepageSearch").submit();
 
+    }
+</script>
 <section class="search-bar">
     <div class="search-contents py-4">
         <h1 class="text-white text-center"><strong><b>LARGEST ONLINE B2B PORTAL </b></strong></h1>
@@ -9,7 +27,7 @@
             <div class="row">
                 <div class="col-md-8 offset-md-2">
                     <form  class="search-form"
-                        id="homepageSearch" inViewport  action="" method="post" >
+                        id="homepageSearch" inViewport  action="<?php echo BASE_URL; ?>search/<?php echo str_replace(' ','-',$searchtext12) ?>" method="post" >
 
                         <div class="input-group mb-3 w-100 position-relative">
                             <span class="input-group-text bg-white" id="basic-addon1"><img
@@ -27,7 +45,7 @@
                                     "Umm Al Quwain",
                                 );
                                ?>
-                                <select area-label="state" name="location" formControlName="location" #locationSelect  class="form-select no-border" >
+                                <select area-label="state" name="location" formControlName="location" id="locationSelect"   class="form-select no-border" >
                                     <!-- class="form-select no-border" (change)="onChangeLocation(locationSelect.value)"> -->
                                      <?php
                                      foreach($areas as $area){
@@ -49,11 +67,11 @@
                                 placeholder="What are you looking for.." /> -->
 
 
-                                <input type="text" id="search"  autofocus class="form-control border-rounded-end" placeholder="What are you looking for..">
+                                <input type="text"  id="search" autofocus class="form-control border-rounded-end" placeholder="What are you looking for.." autocomplete="off" >
                                
                                 <div class="submit-button">
                                         <!-- <img src="assets/images/Voice-icon.png" alt="" class="me-lg-3 me-1 img-fluid" width="15"> -->
-                                <button type="submit" class="btn-primary-gradiant w-100 h-100 px-2 px-lg-5">
+                                <button type="button" onclick="submitform()" class="btn-primary-gradiant w-100 h-100 px-2 px-lg-5">
                                         <!-- <img src="assets/images/search-icon.png" width="18" class="me-lg-2" alt=""> -->
                                       <span class="d-lg-inline">Search</span>
                                 </button>
@@ -69,7 +87,7 @@
        
     }
 </style>
-                              <ul class="form-control search-result"  style="display: none; max-height: 200px; overflow-y: auto;">
+                              <ul class="form-control search-result"  style="display: none; max-height: 400px; overflow-y: auto;">
     <div class="form-control" id="option_sub"></div>
 
     <li style="background-image: -moz-linear-gradient(-40deg, rgb(189, 56, 56) 0%, rgb(13, 88, 140) 100%);
@@ -182,6 +200,8 @@
         }
     });
 </script>
+
+
  
     
 

@@ -14,6 +14,9 @@
 <?php
     include "header-sub.php";
     include_once "whatsapp.php";
+    include_once 'services/url.php';
+    $urlService = new UrlService(); 
+
     $whatsappUrl=new WhatsappUrl();
     
     $index=0;
@@ -356,14 +359,14 @@ $aproodproduct1 = json_decode($aproodproduct);
 
                 <?php foreach ( $aproodproduct1->products as $index => $product): ?>
     <div class="mix valves">
-        <a href="" class="thumb-a">
+        <a href="<?php echo BASE_URL. $urlService->getProductUrl($product->productName,$product->id);?>" class="thumb-a">
             <div class="item-hover">
                 <div class="hover-text">
                     <h3><?= $product->productName ?></h3>
                 </div>
             </div>
             <div class="item-img">
-               <img src="https://doc.tradersfind.com/images/<?php echo $product->images[0]->id; ?>.webp" alt="<?php echo $product->productName;?>">
+               <img src="https://doc.tradersfind.com/images/<?php echo $product->images[0]->id; ?>.webp" alt="<?php echo $product->productName;?>" style="width: 140px;">
                 <!-- <img src="assets/images/products/valves.png" alt="" /> -->
             </div>
         </a>
