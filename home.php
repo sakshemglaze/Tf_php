@@ -55,7 +55,7 @@ include "home-search.php"
           <img src="<?php echo BASE_URL; ?>assets/images/brands/new1.webp" alt="" width="271" height="193" class="w-100 img-fluid" />
           <div class="hading2">
             <p>Looking for a <br> product ?</p>
-            <a href="post-buy-requirements.php">Post Buy Requirement</a>
+            <a href="post-buy-requirements">Post Buy Requirement</a>
           </div>
         </div>
 
@@ -63,7 +63,7 @@ include "home-search.php"
           <img src="<?php echo BASE_URL; ?>assets/images/brands/new2.webp" alt="" width="271" height="193" class="w-100 img-fluid" />
           <div class="hading2">
             <p>Want to grow your <br> business 10X Faster?</p>
-            <a href="registration.php">Sell on TradersFind</a>
+            <a href="registration">Sell on TradersFind</a>
           </div>
         </div>
       </div>
