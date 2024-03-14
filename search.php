@@ -107,7 +107,7 @@ $SeoParams = [
   'twitterCard' => isset($subcategory->twitterCard) ? $subcategory->twitterCard : '',
   'schemaDescription' => isset($subcategory->schemaDescription) ? $subcategory->schemaDescription : '',
   ];
-  print_r("first if");
+  //print_r("first if");
           }else if( $numParts==4){//will be change
   
             $payload = array(
@@ -140,7 +140,7 @@ $SeoParams = [
            //   'api/industries-na/' . $category[0]->title,$queryParams) );
             //print_r($subcategory);
            // $SeoParams = [];
-            print_r("second if");
+           // print_r("second if");
           }else if(basename($parts[2])=='search' && $numParts==5 ){//will change
 
             $payload = array(
@@ -162,7 +162,7 @@ $SeoParams = [
           );
           
             $length = count(($data->products));
-            print_r("third if");
+           // print_r("third if");
             //$SeoParams = [];
           }
          
@@ -213,7 +213,7 @@ $SeoParams = [
   'twitterCard' => isset($subcategory->twitterCard) ? $subcategory->twitterCard : '',
   'schemaDescription' => isset($subcategory->schemaDescription) ? $subcategory->schemaDescription : '',
   ];
-  print_r("else");
+  //print_r("else");
           }
 
               

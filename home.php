@@ -107,7 +107,7 @@ include "home-search.php"
    
               <div class="text-center">
                 <h4 class="text-red">Your Comprehensive Business Directory in UAE</h4>
-                <p class=">
+                <p class="">
                   With our extensive list of companies in UAE, including manufacturers, suppliers, and service providers, 
                   we enable businesses to find reliable and trustworthy partners to meet their specific needs. Whether you're a startup, 
                   a small or medium-sized enterprise, or a large corporation, our platform provides the resources and opportunities 
