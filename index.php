@@ -1,53 +1,53 @@
 <?php
 // for you sir 
 
-//  $routes = [
-//      '/' => 'home.php',
-//      '/about-us' => 'about-us.php',
-//      '/contact-us' => 'Contact-Us.php',
-//      '/blog' => 'blog-listing.php',
-//      '/buyer-faq' => 'buyer-faq.php',
-//      '/group-category' => 'group-category.php',
-//      '/industry' => 'industry.php',
+  $routes = [
+      '/' => 'home.php',
+      '/about-us' => 'about-us.php',
+      '/contact-us' => 'Contact-Us.php',
+      '/blog' => 'blog-listing.php',
+      '/buyer-faq' => 'buyer-faq.php',
+      '/group-category' => 'group-category.php',
+      '/industry' => 'industry.php',
     
-//      '/post-buy-requirements' => 'post-buy-requirements.php',
-//      '/privacy-policy' => 'privacy-policy.php',
-//      '/product' => 'productdetail.php',
-//      '/register-your-business' => 'registration.php',
-//      '/seller-faq' => 'seller-faq.php',
+      '/post-buy-requirements' => 'post-buy-requirements.php',
+      '/privacy-policy' => 'privacy-policy.php',
+      '/register-your-business' => 'registration.php',
+      '/seller-faq' => 'seller-faq.php',
    
-//      '/feedback' => 'send-feedback.php',
-//      '/complaint' => 'send-feedback.php',
-//      '/login' => 'signIn.php',
-//      '/term-and-conditions' => 'termcondition.php',
-//      '/browse-sellers' => 'industry.php',
-//  ];
+      '/feedback' => 'send-feedback.php',
+      '/complaint' => 'send-feedback.php',
+      '/login' => 'signIn.php',
+      '/term-and-conditions' => 'termcondition.php',
+      '/browse-sellers' => 'industry.php',
+  ];
 
-// $url = $_SERVER['REQUEST_URI'];
+ $url = $_SERVER['REQUEST_URI'];
 
-// $url = strtok($url, '?');
+ $url = strtok($url, '?');
 
-//  if (preg_match('~^/industry/([^/]+)/([^/]+)$~', $url, $matches)) {
-//    include 'industryDetail.php'; 
-//  }
-//  if (preg_match('~^/group-category/([^/]+)/([^/]+)$~', $url, $matches)) {
-//    include 'group-category.php';
-//  }
-//  if (preg_match('~^/category/([^/]+)/([^/]+)$~', $url, $matches)) {
-//    include 'search.php'; 
-//  }
-//  if (preg_match('~^/seller/([^/]+)/([^/]+)$~', $url, $matches)) {
-//    include 'sellerdetail.php'; 
-//  }
-//  if (preg_match('~^/product/([^/]+)/([^/]+)$~', $url, $matches)) {
-//    include 'productDetail.php';
-//  }
-//   if (preg_match('~^/blog/([^/]+)/([^/]+)$~', $url, $matches)) {
-//    include 'blog.php';
-//  }
+  if (preg_match('~^/industry/([^/]+)/([^/]+)$~', $url, $matches)) {
+    include 'industryDetail.php'; 
+  }
+  if (preg_match('~^/group-category/([^/]+)/([^/]+)$~', $url, $matches)) {
+    include 'group-category.php';
+  }
+  if (preg_match('~^/category/([^/]+)/([^/]+)$~', $url, $matches)) {
+    include 'search.php'; 
+  }
+  if (preg_match('~^/seller/([^/]+)/([^/]+)$~', $url, $matches)) {
+    include 'sellerdetail.php'; 
+  }
+  if (preg_match('~^/product/([^/]+)/([^/]+)$~', $url, $matches)) {
+    include 'productDetail.php';
+  }
+   if (preg_match('~^/blog/([^/]+)/([^/]+)$~', $url, $matches)) {
+    include 'blog.php';
+  }
 
 
-//for atul 
+//for atul
+/* 
 $routes = [
  
  '/tf_result/' => 'home.php',
@@ -96,7 +96,7 @@ $url = strtok($url, '?');
   if (preg_match('~^/tf_result/blog/([^/]+)/([^/]+)$~', $url, $matches)) {
    include 'blog.php';
  }
-
+*/
 
 
 if (isset($routes[$url])) {

@@ -5,10 +5,10 @@ class seoService {
     public function setSeoTags($seoParams){
         //print_r($seoParam)
         $curl = substr(BASE_URL,0,strlen(BASE_URL)-1) . $_SERVER['REQUEST_URI'];
-        $title = isset($seoParams['title']) ? $seoParams['title'] : '';
+        $title = isset($seoParams['title']) ? $seoParams['title'] : "UAE's Largest Online B2B Portal - TradersFind";
         $metaTitle = isset($seoParams['metaTitle']) ? $seoParams['metaTitle'] : '';
-        $metaDescription = isset($seoParams['metaDescription']) ? $seoParams['metaDescription'] : '';
-        $metaKeywords = isset($seoParams['metaKeywords']) ? $seoParams['metaKeywords'] : '';
+        $metaDescription = isset($seoParams['metaDescription']) ? $seoParams['metaDescription'] : 'TradersFind is UAE"s Largest Online B2B Portal connecting buyers with suppliers. List of companies in UAE with contact details. Register Now!';
+        $metaKeywords = isset($seoParams['metaKeywords']) ? $seoParams['metaKeywords'] : 'tradersfind, b2b portal, list of companies in uae, b2b marketplace, business directory, manufacturers in uae, suppliers in uae, buyers in uae, yellowpages uae, importers in uae, uae companies directory, b2b website, business marketplace, local business listings, business directory in uae';
         $fbTitle = isset($seoParams['fbTitle']) ? $seoParams['fbTitle'] : $seoParams['title'];
         $fbDescription = isset($seoParams['fbDescription']) ? $seoParams['fbDescription'] : $seoParams['metaDescription'];
         $fbImage = isset($seoParams['fbImage']) ? $seoParams['fbImage'] : '';

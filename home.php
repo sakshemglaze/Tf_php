@@ -1,5 +1,28 @@
-<?php include_once 'config.php'; ?>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<?php include_once 'config.php'; 
+  $SeoParams = [
+    'title' => 'UAE"s Largest Online B2B Portal - TradersFind',
+    'metaTitle' => 'UAE"s Largest Online B2B Portal - TradersFind',
+    'metaDescription' => null,
+                'metaKeywords' => null,
+                'fbTitle' => null,
+                'fbDescription' => null,
+                'fbImage' => null,
+                'fbUrl' => null,
+                'twitterTitle' => null,
+                'twitterDescription' => null,
+                'twitterImage' => null,
+                'twitterSite' => null,
+                'twitterCard' => null,
+  ];
+?>
+<html>
+  <head>
+  <meta name="robots" content="index, follow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<?php 
+        include_once 'services/seo.php';
+        $seo = new seoService();
+        $seo->setSeoTags($SeoParams); ?>
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/home.css" />
 
 <!-- <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css" > -->
@@ -7,7 +30,8 @@
 <link rel="preload" href="<?php echo BASE_URL; ?>assets/images/header-bg.webp" as="image" type="image/webp" fetchpriority="high" >
 <link rel='stylesheet' href='<?php echo BASE_URL; ?>assets/css/owl.carousel.css'>
     <link rel='stylesheet' href='<?php echo BASE_URL; ?>assets/css/style.css'>
-   
+</head>
+<body>   
 <?php
 include "header.php";
 include "home-search.php"
@@ -436,3 +460,5 @@ include "home-search.php"
 <?php
 include "footer.php";
 ?>
+</body>
+</html>

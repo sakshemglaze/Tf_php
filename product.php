@@ -36,7 +36,7 @@
                                  ?>
                                </div> 
                             <div class="border-end p-3 pt-5 border_img border_img2">
-                            <img data-src="<?php echo $newsto; ?>" alt="<?php echo $prodData->productName ?>" class="lazy" style="width: 160px;">
+                            <img src="<?php echo $newsto; ?>" alt="<?php echo $prodData->productName ?>" style="width: 160px;">
                                 <div class="d-flex mt-3 d-center">
                                
                                 <button onclick="openPopup()" class="btn-primary-gradiant btn btn-sm w-100 d-center">

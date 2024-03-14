@@ -8,34 +8,8 @@ include_once 'config.php';
 ?>
 <?php
     $currentUrl = $_SERVER['REQUEST_URI'];
-    //$urlParts = explode('/', $currentUrl);
-    //$industryName = $urlParts[2];
-    //$id = $urlParts[3];
-    // print_r ('welcom');
-    // if ($industryName != '') {
-    //   include_once "industryDetail.php/industry/" . $id;
-    // }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Industry</title>
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/indus.css" />
-</head>
-<body>
-<script src="<?php echo BASE_URL; ?>assets/js/lazy-load.js"></script>
 <?php
-    include_once "header-sub.php";
-//    print_r('welcome1');
-    //$index=0;
-            //class FilterDTO {}
-            //$name= $_POST['searchText']? $_POST['searchText']:"cleaning services";
-            //$filterDto = new FilterDTO();
-            //$payload = array();
            $page = 0;
            $size = 6;
             require_once 'post.php';
@@ -44,6 +18,29 @@ include_once 'config.php';
              // $data = findActive($data1);
              // print_r($data);
               ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php
+    $SeoParams = [
+          'title' => 'Browse Sellers from UAE"s Largest Online B2B Portal',
+          'metaTitle' => 'Browse Sellers from UAE"s Largest Online B2B Portal',
+          'metaDescription' => 'Browse Sellers products and services on the UAE"s Largest Online B2B Portal. Connect with leading sellers for successful business deals on TradersFind',
+       ];
+       include_once 'services/seo.php';
+        $seo = new seoService();
+                $seo->setSeoTags($SeoParams);
+?>
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/indus.css" />
+</head>
+<body>
+<?php include_once "header-sub.php"; ?>
+<script src="<?php echo BASE_URL; ?>assets/js/lazy-load.js"></script>
+
 <section class="container-fluid ">
   <?php include_once "banner.php"; ?>
 </section>
