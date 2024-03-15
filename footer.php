@@ -1,5 +1,5 @@
 
-<?php include_once 'config.php'; ?>
+<?php include_once 'services/config.php'; ?>
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/foot.css" >
 
 <footer class="footer pt-5 pb-1">

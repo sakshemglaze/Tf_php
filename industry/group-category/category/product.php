@@ -1,4 +1,4 @@
-<?php include_once 'config.php'; 
+<?php include_once 'services/config.php'; 
     include_once 'services/url.php';
     include_once 'services/masked.php';
     $urlService = new UrlService(); 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <?php 
- include_once 'config.php'; 
+ include_once 'services/config.php'; 
  
  include_once 'services/url.php';
  $url = new UrlService();

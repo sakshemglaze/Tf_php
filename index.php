@@ -7,8 +7,8 @@
       '/contact-us' => 'Contact-Us.php',
       '/blog' => 'blog-listing.php',
       '/buyer-faq' => 'buyer-faq.php',
-      '/group-category' => 'group-category.php',
-      '/industry' => 'industry.php',
+      '/group-category' => 'industry/group-category/group-category.php',
+      '/industry' => 'industry/industry.php',
     
       '/post-buy-requirements' => 'post-buy-requirements.php',
       '/privacy-policy' => 'privacy-policy.php',
@@ -19,7 +19,7 @@
       '/complaint' => 'send-feedback.php',
       '/login' => 'signIn.php',
       '/term-and-conditions' => 'termcondition.php',
-      '/browse-sellers' => 'industry.php',
+      '/browse-sellers' => 'industry/industry.php',
   ];
 
  $url = $_SERVER['REQUEST_URI'];
@@ -46,13 +46,13 @@
 //  }
 
   if (preg_match('~^/industry/([^/]+)/([^/]+)$~', $url, $matches)) {
-    include 'industryDetail.php'; 
+    include 'industry/industryDetail.php'; 
   }
   if (preg_match('~^/group-category/([^/]+)/([^/]+)$~', $url, $matches)) {
-    include 'group-category.php';
+    include 'industry/group-category/group-category.php';
   }
   if (preg_match('~^/category/([^/]+)/([^/]+)$~', $url, $matches)) {
-    include 'search.php'; 
+    include 'industry/group-category/category/search.php'; 
   }
   if (preg_match('~^/seller/([^/]+)/([^/]+)$~', $url, $matches)) {
     include 'sellerdetail.php'; 

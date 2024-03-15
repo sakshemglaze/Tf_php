@@ -1,4 +1,4 @@
-<?php include_once 'config.php'; ?>
+<?php include_once 'services/config.php'; ?>
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/userlogin.css" />
 
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/footer.css" >

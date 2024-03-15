@@ -1,4 +1,4 @@
-<?php include_once 'config.php'; 
+<?php include_once 'services/config.php'; 
   $SeoParams = [
     'title' => 'UAE"s Largest Online B2B Portal - TradersFind',
     'metaTitle' => 'UAE"s Largest Online B2B Portal - TradersFind',

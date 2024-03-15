@@ -1,5 +1,5 @@
 <?php
-include_once 'config.php';
+include_once 'services/config.php';
 class seoService {
 
     public function setSeoTags($seoParams){

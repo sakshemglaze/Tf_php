@@ -3,7 +3,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 //print_r('Welcome search');
-include_once 'config.php';
+include_once 'services/config.php';
        
      include_once 'services/url.php';
      $urlService = new UrlService(); 
