@@ -441,8 +441,9 @@ input:focus {
   }
 
   .inner_header1 .form-control {
-    height: 35px;
+    height: auto;
     font-size: 14px;
+    width: 100%;
   }
 
   .inner_header1 .w-100 {

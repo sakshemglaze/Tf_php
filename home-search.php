@@ -20,12 +20,12 @@
 
     }
 </script>
-<section class="search-bar">
+<section class="search-bar ">
     <div class="search-contents py-4">
         <h1 class="text-white text-center"><strong><b>LARGEST ONLINE B2B PORTAL </b></strong></h1>
         <div class="container mt-2">
             <div class="row">
-                <div class="col-md-8 offset-md-2">
+                <div class="col-md-8 offset-md-2 search-bar2">
                     <form  class="search-form"
                         id="homepageSearch" inViewport  action="<?php echo BASE_URL; ?>search/<?php echo str_replace(' ','-',$searchtext12) ?>" method="post" >
 
@@ -80,12 +80,13 @@
                               <style>
     .search-result {
         position: absolute;
-      
-        width: 50%;
+        width: 98%;
         z-index: 999; /* Set z-index to appear above other content */
-     
+     top: 52px;
        
     }
+    
+    .search-bar2{position: relative;}
 </style>
                               <ul class="form-control search-result"  style="display: none; max-height: 400px; overflow-y: auto;">
     <div class="form-control" id="option_sub"></div>
