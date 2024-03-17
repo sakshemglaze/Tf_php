@@ -1,6 +1,21 @@
+<html>
+    <head>
+
 <?php include_once 'config.php'; ?>
+<?php
+    $SeoParams = [
+          'title' => 'UAE B2B Marketing Blogs to Read in 2024',
+          'metaTitle' => 'UAE B2B Marketing Blogs to Read in 2024',
+          'metaDescription' => 'UAE B2B Marketing Blogs to Read in 2024. Best Business Blog on business topics including: management, marketing, education, technology, innovation and more.',
+       ];
+       include_once 'services/seo.php';
+        $seo = new seoService();
+                $seo->setSeoTags($SeoParams);
+?>
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/blog.css" />
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
+</head>
+<body>
 <?php
 include_once "header-sub.php";
 ?>
@@ -178,7 +193,7 @@ include_once "header-sub.php";
     </div>
   
 </section>
-
+                </body> </html>
 
 <?php
 include_once "footer.php";

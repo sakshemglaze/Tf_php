@@ -45,7 +45,7 @@
   
             <div class="col-md-3  ">
               <h4 class="text-white">BUYERS</h4>
-              <ul class="footermenu">
+              <ul class="footermenu footer_call">
                 <li><a href="post-buy-requirements">Post Your Requirement</a></li>
                 <li><a href="industry">Browse Sellers</a></li>
                 <li><a href="buyer-faq">Buyer FAQ</a></li>
@@ -54,7 +54,7 @@
   
             <div class="col-md-3 ">
               <h4 class="text-white">SELLERS</h4>
-              <ul class="footermenu">
+              <ul class="footermenu footer_call">
                 <li><a href="register-your-business">Sell Your Product</a></li>
               
                 <li><a href="seller-faq">Seller FAQ</a></li>
@@ -63,7 +63,7 @@
   
             <div class="col-md-3  ">
               <h4 class="text-white">QUICK LINKS</h4>
-              <ul class="footermenu">
+              <ul class="footermenu footer_call">
                 <li><a href="blog">Latest Blogs</a></li>
                 <li><a href="feedback">Feedback</a></li>
              <!--   <li><a href="">Testimonials</a></li>  -->
@@ -88,7 +88,7 @@
                 <img src="assets/images/iphone.png" class="img-fluid" alt="" />
               </p> -->
             </div>
-            <div class="col-lg-4 text-center mt-0"> <a href="/" title="TradersFind" aria-label="TradersFind - Largest B2B online Portal">
+            <div class="col-lg-4 text-center mt-0"> <a href="<?php echo BASE_URL;?>" title="TradersFind" aria-label="TradersFind - Largest B2B online Portal">
               <img src="<?php echo BASE_URL; ?>assets/images/footer-logo.webp" title="TradersFind" class="img-fluid footer_img" width="180" height="108" alt="TradersFind" /> </a>
             </div>
           </div>

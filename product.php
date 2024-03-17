@@ -2,11 +2,14 @@
     include_once 'services/url.php';
     include_once 'services/masked.php';
     $urlService = new UrlService(); 
+
+    include_once "whatsapp.php";
+    $whatsappUrl=new WhatsappUrl();
     $maskedService = new MaskingService();
 ?>
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/searchcard.css" > 
 <div class="cardproduct card-shadow rounded-10 bg-white" style="border: 0.5px solid #ddd;">
-    <div class="swiper swiper4">
+    <div class="swiper ">
         <div class="swiper-wrapper">
             <div class="swiper-slide">
                 <div class="container">
@@ -33,7 +36,7 @@
                                  ?>
                                </div> 
                             <div class="border-end p-3 pt-5 border_img border_img2">
-                            <img data-src="<?php echo $newsto; ?>" alt="<?php echo $prodData->productName ?>" class="lazy" style="width: 160px;">
+                            <img src="<?php echo $newsto; ?>" alt="<?php echo $prodData->productName ?>" style="width: 160px;">
                                 <div class="d-flex mt-3 d-center">
                                
                                 <button onclick="openPopup()" class="btn-primary-gradiant btn btn-sm w-100 d-center">
@@ -42,6 +45,29 @@
                             </div>
                         </div>
                             <div class="col-md-7 position-relative p-3">
+                            <?php 
+                            $rating = 0;
+                            $rating = $prodData->rating;
+                            //include 'services/rating.php';  ?>
+                                <span class="verified2">
+        <?php if ($rating === 1) : ?>
+            <ul class=" d-flex">
+            <li><img src="<?php echo BASE_URL; ?>assets/images/level/l1.png" alt="Rating1" width="15" height="20"/></ul>
+        <?php elseif ($rating === 2) : ?>
+            <ul class=" d-flex" >
+            <li><img src="<?php echo BASE_URL; ?>assets/images/level/l2.png" alt="Rating2" width="15" height="20"/></ul>
+        <?php elseif ($rating === 3) : ?>
+            <ul class=" d-flex">
+            <li><img src="<?php echo BASE_URL; ?>assets/images/level/l3.png" alt="Rating3" width="15" height="20"/></ul>
+        <?php elseif ($rating === 4) : ?>
+            <ul class=" d-flex">
+            <li><img src="<?php echo BASE_URL; ?>assets/images/level/l4.png" alt="Rating4" width="15" height="20"/></ul>
+        <?php elseif ($rating === 5) : ?>
+            <ul class=" d-flex">
+            <li><img src="<?php echo BASE_URL; ?>assets/images/level/l5.png" alt="Rating5" width="15" height="20"/></ul>
+        <?php endif; ?>
+    </span>
+    
                                     <div class="single-line">
                                     <a href="/<?php echo $urlService->getProductUrl($prodData->productName, $prodData->id) ?>" target="_blank" title="Product Page">
                                             <h2 class="fs-5 about_text2" style="color:rgb(216, 71, 119);">
@@ -51,7 +77,7 @@
                                             </h2> </a>
                                     </div>
                                     <div >
-                                        <ul role="list">
+                                        <ul role="list" class="list_box">
                                             <?php if (!empty($prodData->productDescription)) { ?>
                                                   <?php foreach (array_slice(json_decode($prodData->specifications, true), 0, 4) as $spec) { ?>
                                                       <li role="listitem" tabindex="0" class="single-line">
@@ -129,10 +155,8 @@
                           </span>
                              <?php } ?>
                             </div>
-
                                    
-                        </div>
-                        
+                        </div>                        
                     </div>
                     <div class="row gx-2 mb-5 mt-1 gy-3 gy-md-2">
                                 <div class="col-md-4">
@@ -145,9 +169,10 @@
                                     </button>
                                 </div>
                                 <div class="col-md-4">
-                                    <a [href]="#" 
+                                    <a href="  <?php echo $whatsappUrl->getProductToWhatsapp($prodData->productName,$prodData->id,get_object_vars($prodData->seller))?>"                                
                           target="_blank" class="whatsappbtn btn btn-sm w-100">
                                         Connect on whatsapp
+                                        
                                     </a>
                                 </div>
                                 <div class="col-md-4">
@@ -168,7 +193,11 @@
         </div>
     </div>
  </div>
- <?php include_once 'enquery.php'; ?>
+ <?php
+ $productName=$prodData->productName;
+ $discribenote='I am interested in '.$prodData->productName;
+ include 'enquery.php';
+ ?>
 
 <!-- JavaScript code -->
 <script>

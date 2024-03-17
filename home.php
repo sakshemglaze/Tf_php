@@ -1,14 +1,40 @@
-<?php include_once 'config.php'; ?>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<?php include_once 'config.php'; 
+  $SeoParams = [
+    'title' => 'UAE"s Largest Online B2B Portal - TradersFind',
+    'metaTitle' => 'UAE"s Largest Online B2B Portal - TradersFind',
+    'metaDescription' => null,
+                'metaKeywords' => null,
+                'fbTitle' => null,
+                'fbDescription' => null,
+                'fbImage' => null,
+                'fbUrl' => null,
+                'twitterTitle' => null,
+                'twitterDescription' => null,
+                'twitterImage' => null,
+                'twitterSite' => null,
+                'twitterCard' => null,
+  ];
+?>
+<html>
+  <head>
+  <meta name="robots" content="index, follow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<?php 
+        include_once 'services/seo.php';
+        $seo = new seoService();
+        $seo->setSeoTags($SeoParams); ?>
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/home.css" />
+
 <!-- <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css" > -->
-<link rel="stylesheet" href="<?php echo BASE_URL; ?>bssets/vendors/bootstrap/bootstrap.min.css">
+<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
 <link rel="preload" href="<?php echo BASE_URL; ?>assets/images/header-bg.webp" as="image" type="image/webp" fetchpriority="high" >
 <link rel='stylesheet' href='<?php echo BASE_URL; ?>assets/css/owl.carousel.css'>
     <link rel='stylesheet' href='<?php echo BASE_URL; ?>assets/css/style.css'>
+</head>
+<body>   
 <?php
-include_once "header.php";
-include_once "home-search.php"
+include "header.php";
+include "home-search.php"
 ?>
 
 
@@ -16,7 +42,7 @@ include_once "home-search.php"
   <div class="row gy-2">
     <div class="col">
      <?php
-     include_once "home-industry.php";
+     include "home-industry.php";
      ?>
     </div>
 
@@ -53,7 +79,7 @@ include_once "home-search.php"
           <img src="<?php echo BASE_URL; ?>assets/images/brands/new1.webp" alt="" width="271" height="193" class="w-100 img-fluid" />
           <div class="hading2">
             <p>Looking for a <br> product ?</p>
-            <a href="post-buy-requirements.php">Post Buy Requirement</a>
+            <a href="post-buy-requirements">Post Buy Requirement</a>
           </div>
         </div>
 
@@ -61,7 +87,7 @@ include_once "home-search.php"
           <img src="<?php echo BASE_URL; ?>assets/images/brands/new2.webp" alt="" width="271" height="193" class="w-100 img-fluid" />
           <div class="hading2">
             <p>Want to grow your <br> business 10X Faster?</p>
-            <a href="registration.php">Sell on TradersFind</a>
+            <a href="registration">Sell on TradersFind</a>
           </div>
         </div>
       </div>
@@ -79,7 +105,7 @@ include_once "home-search.php"
       <div class="owl-carousel carousel-main1">
              <div class="text-center">
                 <h4 class="text-red">UAE’s Largest Online B2B Portal & Business Directory in UAE</h4>
-                <p class="my-4">Welcome to TradersFind, the UAE’s Largest Online B2B portal & business directory in UAE. 
+                <p class="">Welcome to TradersFind, the UAE’s Largest Online B2B portal & business directory in UAE. 
                   As a comprehensive B2B marketplace for buyers and sellers in UAE, we are here to revolutionize the way businesses connect, 
                   collaborate, and succeed in the global marketplace. With a deep understanding of the challenges faced by traders and a passion 
                   for empowering businesses, TradersFind is your go-to destination for finding the right products, connecting with trusted suppliers, 
@@ -93,7 +119,7 @@ include_once "home-search.php"
     
                <div class="text-center">
                 <h4 class="text-red">Connecting Businesses Across UAE: A Powerful B2B Marketplace</h4>
-                <p class="my-4">
+                <p class="">
                   TradersFind is more than just a directory of UAE companies; it is a powerful online B2B marketplace in UAE  
                   where businesses can source products, connect with suppliers, and expand their networks. We provide an easy to 
                   use platform that connects buyers and sellers, importers and exporters, manufacturers and suppliers, retailers, 
@@ -105,7 +131,7 @@ include_once "home-search.php"
    
               <div class="text-center">
                 <h4 class="text-red">Your Comprehensive Business Directory in UAE</h4>
-                <p class="my-4">
+                <p class="">
                   With our extensive list of companies in UAE, including manufacturers, suppliers, and service providers, 
                   we enable businesses to find reliable and trustworthy partners to meet their specific needs. Whether you're a startup, 
                   a small or medium-sized enterprise, or a large corporation, our platform provides the resources and opportunities 
@@ -118,7 +144,7 @@ include_once "home-search.php"
           
               <div class="text-center">
                 <h4 class="text-red">Connect with Verified Suppliers and Buyers in UAE</h4>
-                <p class="my-4">
+                <p class="">
                   At TradersFind, we prioritize quality and trust. We understand that the success of your business depends on the reliability of your partners. 
                   That's why we have implemented a rigorous verification process to ensure that all the verified suppliers and 
                   buyers on our platform meet the highest standards of quality, authenticity, and ethical practices. 
@@ -129,7 +155,7 @@ include_once "home-search.php"
     
               <div class="text-center">
                 <h4 class="text-red">Expand Your Reach and Boost Visibility</h4>
-                <p class="my-4">
+                <p class="">
                   At TradersFind, we understand the importance of accessibility and convenience in the digital age. 
                   Our online marketplace provides a platform for businesses to display their products and services, 
                   allowing them to reach a wider audience. Our efficient interface allows free business listings that increase 
@@ -140,7 +166,7 @@ include_once "home-search.php"
    
              <div class="text-center">
                 <h4 class="text-red">Find Everything You Need at One Place:</h4>
-                <p class="my-4">
+                <p class="">
                   TradersFind offers a comprehensive platform where you can find everything you need in one place. 
                   Our extensive product categories cover a wide range of industries, ensuring that you can find the 
                   right products for your business requirements. Whether you are searching for electronics, machinery, 
@@ -152,7 +178,7 @@ include_once "home-search.php"
     
               <div class="text-center">
                 <h4 class="text-red">Get Started with TradersFind Today: Your Gateway to Success</h4>
-                <p class="my-4">
+                <p class="">
                   Get Started with TradersFind, UAE’s leading B2B website connecting buyers with sellers. 
                   Discover a vast network of trusted and verified suppliers, manufacturers, and service providers in UAE. 
                   Join now to expand your business reach, explore new opportunities, and take your business to new heights. 
@@ -325,7 +351,7 @@ include_once "home-search.php"
 
 <section>
  <?php
- include_once "home-blog.php";
+ include "home-blog.php";
  ?>
 </section>
 
@@ -362,12 +388,12 @@ include_once "home-search.php"
               <div class="card-body">
                 <div class="row">
                   <div class="col-3">
-                    <img ngSrc="<?php echo BASE_URL; ?>assets/images/client.png" class="img-fluid w-100" alt="" width="165" height="162">
+                    <img src="<?php echo BASE_URL; ?>assets/images/client.png" class="img-fluid w-100" alt="" width="165" height="162">
                   </div>
                   <div class="col-9">
                     <h4>Mr. Imtiaz</h4>
                     <div class="d-flex gap-4 align-items-center mb-3">
-                      <img ngSrc="<?php echo BASE_URL; ?>assets/images/location-2.png" alt="" width="25" height="28">
+                      <img src="<?php echo BASE_URL; ?>assets/images/location-2.png" alt="" width="25" height="28">
                       <address class="mb-0"> UAE, Dubai</address>
                       <div class="clientTime">8 Months</div>
 
@@ -388,12 +414,12 @@ include_once "home-search.php"
             <div class="card-body">
               <div class="row">
                 <div class="col-3">
-                  <img ngSrc="<?php echo BASE_URL; ?>assets/images/client.png" class="img-fluid w-100" alt="" width="165" height="162">
+                  <img src="<?php echo BASE_URL; ?>assets/images/client.png" class="img-fluid w-100" alt="" width="165" height="162">
                 </div>
                 <div class="col-9">
                   <h4>Mr. Ahmed Ali</h4>
                   <div class="d-flex gap-4 align-items-center mb-3">
-                    <img ngSrc="<?php echo BASE_URL; ?>assets/images/location-2.png" alt="" width="25" height="28">
+                    <img src="<?php echo BASE_URL; ?>assets/images/location-2.png" alt="" width="25" height="28">
                     <address class="mb-0"> UAE, Abu Dhabi</address>
                     <div class="clientTime">3 Months</div>
 
@@ -432,5 +458,7 @@ include_once "home-search.php"
 </section>
 
 <?php
-include_once "footer.php";
+include "footer.php";
 ?>
+</body>
+</html>

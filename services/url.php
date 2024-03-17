@@ -42,7 +42,7 @@ public function getSubcategoryAllLocUrl($category, $subcategory, $loc, $id) {
 }
 
 public function getSellerUrl($sellerUrl, $id) {
-  if ($sellerUrl === 'null' || $sellerUrl === '') { return '/'; }
+  if ($sellerUrl == 'null' || $sellerUrl == '') { return '/'; }
   $url = 'seller/' . preg_replace('/[&,\s]+/', '-', strtolower(trim($sellerUrl))) . '/' . $id;
   return $url;
 }

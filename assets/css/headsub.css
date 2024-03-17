@@ -1,21 +1,3 @@
-@font-face {
-  font-family: "Calibri";
-  src: url("http://localhost/tf_result/assets/fonts/Calibri.woff2") format('woff');
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Calibrib";
-  src: url("http://localhost/tf_result/assets/fonts/Calibri.woff2") format('woff');
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Calibril";
-  src: url("http://localhost/tf_result/assets/fonts/Calibri.woff2") format('woff');
-  font-display: swap;
-}
-
 body {
   font-size: 15px;
   background: #f8f8f8;
@@ -232,7 +214,7 @@ input:focus {
   -webkit-box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
   box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
-  z-index: 90;
+ 
 }
 
 .bg-gradiant1 {
@@ -459,8 +441,9 @@ input:focus {
   }
 
   .inner_header1 .form-control {
-    height: 35px;
+    height: auto;
     font-size: 14px;
+    width: 100%;
   }
 
   .inner_header1 .w-100 {
@@ -623,4 +606,14 @@ input:focus {
     font-size: 34px !important;
     padding: 42px 16px !important;
   }
+}
+.form-control li {padding: 10px 15px;
+  cursor: pointer;
+  transition: all .1s ease-in-out;
+  border-bottom: 1px solid #d0cece;
+  -webkit-transition: all .1s ease-in-out;
+  -moz-transition: all .1s ease-in-out;
+  -ms-transition: all .1s ease-in-out;
+  -o-transition: all .1s ease-in-out;
+  width: 100%;
 }

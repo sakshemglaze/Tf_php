@@ -1,48 +1,46 @@
-<?php include_once 'config.php'; 
+<?php 
+//error_reporting(E_ALL);
+//ini_set('display_errors', 1);
+
+include_once 'config.php'; 
   include_once 'services/url.php';
   $urlService = new UrlService();
 ?>
 <?php
     $currentUrl = $_SERVER['REQUEST_URI'];
-    //$urlParts = explode('/', $currentUrl);
-    //$industryName = $urlParts[2];
-    //$id = $urlParts[3];
-    // print_r ($industryName);
-    // if ($industryName != '') {
-    //   include_once "industryDetail.php/industry/" . $id;
-    // }
 ?>
+<?php
+           $page = 0;
+           $size = 6;
+            require_once 'post.php';
+        $data =  get('api/industries'.'?size=' . $size . '&page=' . $page . '&sort=industryName,asc',true );
+             $data1 = json_decode($data);
+             // $data = findActive($data1);
+             // print_r($data);
+              ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Industry</title>
+    <?php
+    $SeoParams = [
+          'title' => 'Browse Sellers from UAE"s Largest Online B2B Portal',
+          'metaTitle' => 'Browse Sellers from UAE"s Largest Online B2B Portal',
+          'metaDescription' => 'Browse Sellers products and services on the UAE"s Largest Online B2B Portal. Connect with leading sellers for successful business deals on TradersFind',
+       ];
+       include_once 'services/seo.php';
+        $seo = new seoService();
+                $seo->setSeoTags($SeoParams);
+?>
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/indus.css" />
 </head>
 <body>
+<?php include_once "header-sub.php"; ?>
 <script src="<?php echo BASE_URL; ?>assets/js/lazy-load.js"></script>
-<?php
-    include_once "header-sub.php";
-    
-    $index=0;
-            class FilterDTO {}
-            //$name= $_POST['searchText']? $_POST['searchText']:"cleaning services";
-            $filterDto = new FilterDTO();
-            $payload = array();
-            $page = 0;
-            $size = 6;
-            require_once 'post.php';
-        $data =  get(
-                'api/industries'.'?size=' . $size . '&page=' . $page . '&sort=industryName,asc',
-                 true
-              );
-              $data1 = json_decode($data);
-             // $data = findActive($data1);
-              //print_r($data);
-              ?>
+
 <section class="container-fluid ">
   <?php include_once "banner.php"; ?>
 </section>
@@ -120,10 +118,7 @@ foreach ($data1 as $category) {
     echo '<br />';
     echo '<br />';
 }
-?>
-
-  <pagination-controls id="industry_listing_pagination" (pageChange)="getNext($event)" [responsive]="true"
-    [maxSize]="20"></pagination-controls>
+  ?>
 </section>
 
 <section class="container-fluid mt-4" *ngIf="popular_categories">

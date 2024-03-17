@@ -13,6 +13,11 @@
 <script src="<?php echo BASE_URL; ?>assets/js/lazy-load.js"></script>
 <?php
     include "header-sub.php";
+    include_once "whatsapp.php";
+    include_once 'services/url.php';
+    $urlService = new UrlService(); 
+
+    $whatsappUrl=new WhatsappUrl();
     
     $index=0;
             class FilterDTO {}
@@ -111,7 +116,7 @@ $aproodproduct1 = json_decode($aproodproduct);
                   <?php endif;?>
                 </div>
                 <div class="col-lg-6" *ngIf="seller">
-                  <a target="_blank" [href]="this.urlService.getProductToWhatsapp('', seller.id, seller)"
+                  <a target="_blank" href="<?php echo $whatsappUrl->getProductToWhatsapp('', $data1[0]->id, $data1)?>"
                     class="whatsappbtn btn py-2 btn-sm w-100">
                     <!--<a target="_blank" href="https://api.whatsapp.com/send?phone=971569773623&text=Browsed TradersFind" class="whatsappbtn btn py-2 btn-sm w-100">-->
                     Connect on whatsapp
@@ -354,14 +359,14 @@ $aproodproduct1 = json_decode($aproodproduct);
 
                 <?php foreach ( $aproodproduct1->products as $index => $product): ?>
     <div class="mix valves">
-        <a href="" class="thumb-a">
+        <a href="<?php echo BASE_URL. $urlService->getProductUrl($product->productName,$product->id);?>" class="thumb-a">
             <div class="item-hover">
                 <div class="hover-text">
                     <h3><?= $product->productName ?></h3>
                 </div>
             </div>
             <div class="item-img">
-               <img src="https://doc.tradersfind.com/images/<?php echo $product->images[0]->id; ?>.webp" alt="<?php echo $product->productName;?>">
+               <img src="https://doc.tradersfind.com/images/<?php echo $product->images[0]->id; ?>.webp" alt="<?php echo $product->productName;?>" style="width: 140px;">
                 <!-- <img src="assets/images/products/valves.png" alt="" /> -->
             </div>
         </a>
