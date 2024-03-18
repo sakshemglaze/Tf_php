@@ -1,31 +1,18 @@
-<?php include_once 'config.php'; ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seller Details </title>
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/sellweb.css" />
-</head>
-<body>
-<script src="<?php echo BASE_URL; ?>assets/js/lazy-load.js"></script>
-<?php
-    include "header-sub.php";
-    include_once "whatsapp.php";
-    include_once 'services/url.php';
-    $urlService = new UrlService(); 
+<?php 
+  include_once 'config.php'; 
+  include_once 'services/masked.php';
+  $maskedService = new MaskingService();
+  include_once 'services/seo.php';
+  $seo = new seoService();
 
-    $whatsappUrl=new WhatsappUrl();
-    
-    $index=0;
+  $index=0;
             class FilterDTO {}
 
             $currenturl= $_SERVER['REQUEST_URI'];
             $urlpart=explode('/',$currenturl);
             $companyName= $matches[1]; //($urlpart);
-            //print_r($matches[1]);
+            
+            print_r($urlpart);
             require_once 'post.php';
         $data =  get(
                 'api/guest/search-sellers-company-name/'.$companyName
@@ -40,17 +27,54 @@ $aproodproduct=get(
   ['isFeatured' => true]
 );
 $aproodproduct1 = json_decode($aproodproduct);
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php
+      $SeoParams = [
+          'title' => isset($data1[0]->metaTitle) && $data1[0]->metaTitle != '' ? $data1[0]->metaTitle : $data1[0]->productName . ' in ' . $data1[0]->seller->state . ' - ' . $data1[0]->sellerCompanyName,
+          'metaTitle' => isset($data1[0]->metaTitle) && $data1[0]->metaTitle != '' ? $data1[0]->metaTitle : $data1[0]->productName . ' in ' . $data1[0]->seller->state . ' - ' . $data1[0]->sellerCompanyName,
+          'metaDescription' => isset($data1[0]->metaDescription) && $data1[0]->metaDescription != '' ? $data1[0]->metaDescription : $data1[0]->sellerCompanyName . ' - Offering ' . $data1[0]->productName . ' in ' . $data1[0]->seller->state . '. Get the best quality at the best price.',
+          'metaKeywords' => isset($data1[0]->metaKeywords) && $data1[0]->metaKeywords != '' & $data1[0]->metaKeywords[0] !='' ? implode(',', $data1[0]->metaKeywords) : $data1[0]->productName . ', ' . $data1[0]->productName . ' in ' . $data1[0]->seller->state . ', ' . $data1[0]->productName . ' in UAE',
+          'fbTitle' => isset($data1[0]->fbTitle) && $data1[0]->fbTitle != '' ? $data1[0]->fbTitle : $data1[0]->productName,
+          'fbDescription' => isset($data1[0]->fbDescription) && $data1[0]->fbDescription != '' ? $data1[0]->fbDescription : $data1[0]->productDescription,
+          'fbImage' => isset($data1[0]->fbImage) ? API_URL . 'api/guest/imageContentDownload/' . $data1[0]->fbImage.id : 'undefined',
+          'fbUrl' => isset($data1[0]->fbUrl) && $data1[0]->fbUrl != '' ? $data1[0]->fbUrl : null,
+          'twitterTitle' => isset($data1[0]->twitterTitle) && $data1[0]->twitterTitle != '' ? $data1[0]->twitterTitle : $data1[0]->productName,
+          'twitterDescription' => isset($data1[0]->twitterDescription) && $data1[0]->twitterDescription != '' ? $data1[0]->twitterDescription : $data1[0]->productDescription,
+          'twitterImage' => isset($data1[0]->twitterImage) ? API_URL . 'api/guest/imageContentDownload/' . $data1[0]->twitterImage.id : 'undefined',
+          'twitterSite' => isset($data1[0]->twitterSite) && $data1[0]->twitterSite != '' ? $data1[0]->twitterSite : null,
+          'twitterCard' => isset($data1[0]->twitterCard) && $data1[0]->twitterCard != '' ? $data1[0]->twitterCard : null,
+       ];
+      $seo->setSeoTags($SeoParams);
+        ?>
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/sellweb.css" />
+</head>
+<body>
+<script src="<?php echo BASE_URL; ?>assets/js/lazy-load.js"></script>
+<?php
+    include "header-sub.php";
+    include_once "whatsapp.php";
+    include_once 'services/url.php';
+    $urlService = new UrlService(); 
+    $whatsappUrl=new WhatsappUrl();
 //print_r($aproodproduct1->products);
 ?>
 
 <section class="container-fluid ">
-  <?php include "banner.php"; ?>
+  <?php //include "banner.php"; ?>
 </section>
 <section class="p-3">
   <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="/">TradersFind </a></li>
-      <li class="breadcrumb-item active" aria-current="page"> <?php echo $data1[0]->sellerCompanyName; ?> </li>
+      <li class="breadcrumb-item active fw-bold" aria-current="page"> <?php echo $data1[0]->sellerCompanyName; ?> </li>
     </ol>
   </nav>
 </section>
@@ -85,16 +109,21 @@ $aproodproduct1 = json_decode($aproodproduct);
                       <?php echo $data1[0]->sellerState.','. $data1[0]->country;?> </span>
                     </p>
                   </div>
-                  <div class="d-flex mt-3 gap-3" *ngIf="seller">
-                    <div *ngIf="seller.isPreffered">
+                  <div class="d-flex mt-3 gap-3">
+                    <div>
+                      <?php 
+                      //print_r($data1[0]);
+                      if (isset($data1[0]->isPreffered) && $data1[0]->isPreffered) : ?>
                       <div class="d-flex align-items-center">
                         <img src="<?php echo BASE_URL;?>assets/images/crown.png" alt="Premium Seller" width="30" />
                         <span class="ms-2 fwbold text-black">Premium Seller </span>
                       </div>
+                      <?php endif; ?>
                     </div>
-                    <div class="d-flex align-items-center" *ngIf="seller && seller.isVerifiedSeller">
-                      <img src="<?php echo BASE_URL;?>assets/images/verified2.png" alt="Verified Seller"
-                        width="70" /><app-ratings></app-ratings>
+                    <div class="d-flex align-items-center">
+                      <?php if (isset($data1[0]->isVerifiedSeller) && $data1[0]->isVerifiedSeller): ?>
+                      <img src="<?php echo BASE_URL;?>assets/images/verified2.png" alt="Verified Seller" width="70" />
+                      <?php endif; ?>
                     </div>
                   </div>
 
@@ -103,25 +132,28 @@ $aproodproduct1 = json_decode($aproodproduct);
             </div>
             <div class="col-lg-5">
               <div class="row gy-2">
-                <div class="col-lg-12 text-center" *ngIf="seller">
+                <div class="col-lg-12 text-center">
                  <?php
                  if($data1[0]->sellerVirtualContactPhone &&
                  $data1[0]->sellerVirtualContactPhone != null &&
                  $data1[0]->sellerVirtualContactPhone != ''):
                  ?>
-                  <a class="btn btn-light">
+                  <!--<a class="btn btn-light">-->
+                    <button class="btn btn-light w-100 d-center"  title="Seller_Phone" href="#">
                     <img src="<?php echo BASE_URL;?>assets/images/phone.png" width="16" alt="phone" />
-                  
-                  </a>
+                     <?php $maskedService->getMaskedNumber($data1[0]->sellerVirtualContactPhone); ?>
+   
+                      </button>
                   <?php endif;?>
                 </div>
-                <div class="col-lg-6" *ngIf="seller">
+                <div class="col-lg-6">
+                  
                   <a target="_blank" href="<?php echo $whatsappUrl->getProductToWhatsapp('', $data1[0]->id, $data1)?>"
                     class="whatsappbtn btn py-2 btn-sm w-100">
                     <!--<a target="_blank" href="https://api.whatsapp.com/send?phone=971569773623&text=Browsed TradersFind" class="whatsappbtn btn py-2 btn-sm w-100">-->
                     Connect on whatsapp
                   </a>
-
+                      
                 </div>
                 <div class="col-lg-6">
                   <button (click)="openPostRequirement()"
@@ -390,7 +422,7 @@ $aproodproduct1 = json_decode($aproodproduct);
 
 
             <div class="container-fluid">
-              <div class="row" *ngIf="seller.coordinates && seller.coordinates.length > 0">
+              <div class="row">
                 <app-map [latitude]="this.seller.coordinates[1]" [longitude]="this.seller.coordinates[0]"></app-map>
               </div>
 
@@ -481,25 +513,16 @@ $aproodproduct1 = json_decode($aproodproduct);
                               <h5 class="border-bottom pb-2 text-center">
                                 Contact Details
                               </h5>
-                              <p class="mb-0 fs-14" *ngIf="seller.firstName">
-                              <?php echo $data1[0]->firstName.$data1[0]->lastName;?> 
+                              <p class="mb-0 fs-14">
+                              <?php echo $data1[0]->firstName. ' ' .$data1[0]->lastName;?> 
                           
                               </p>
                               <p class="fs-14"> <?php echo isset($data1[0]->designation);?> </p>
                               <div class="d-flex align-items-center gap-3 link_pp">
-                                <a *ngIf="
-                              seller.sellerVirtualContactPhone &&
-                              seller.sellerVirtualContactPhone != null &&
-                              seller.sellerVirtualContactPhone != ''
-                            " (click)="
-                              this.maskingService.onClickPhoneNum(
-                                seller,
-                                'sellerVirtualContactPhone',
-                                this.urlService.getSellerUrl(this.sellerCompanyName,this.seller.id)
-                              , '')" class="btn btn-sm btn-light  py-2 fw-semibold bg-grey w-100">
+                                <button class="btn btn-sm btn-light  py-2 fw-semibold bg-grey w-100">
                                   <img src="assets/images/phone.png" width="16" alt="phone" />
-                                 phone number
-                                </a>
+                                 <?php $maskedService->getMaskedNumber($data1[0]->sellerVirtualContactPhone); ?>
+                    </button>
 
 
                                 <a target="_blank"

@@ -188,7 +188,7 @@
                     var suggestionItem = $('<li></li>').text(suggestion).click(function() {
                         $('#search').val(suggestion); 
                 var searchTermp = $('#search').val().replace(/\s+/g, '-');
-                var actionURL = "seller/" + encodeURIComponent(searchTermp);
+                var actionURL = "seller/" + encodeURIComponent(searchTermp.toLowerCase());
                 $('#homepageSearch').attr('action', actionURL);
                 $('#homepageSearch').submit();
 
