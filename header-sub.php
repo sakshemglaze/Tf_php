@@ -12,7 +12,13 @@
         <?php
       $currecntUrlHS=$_SERVER['REQUEST_URI'];
       $part=explode('/',$currecntUrlHS);
-      $suncat=basename($part[3]);//will change
+      //$suncat=basename($part[3]);//will change
+      $countparts=count($part);
+      if($countparts>=4){
+        $suncat=basename($part[3]);//will change
+      }else{
+        $suncat='';
+      }
 
       $searchtext12 = htmlspecialchars(str_replace('-',' ', $suncat));
       //$numParts = count($parts);

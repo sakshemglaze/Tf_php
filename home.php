@@ -79,7 +79,7 @@ include "home-search.php"
           <img src="<?php echo BASE_URL; ?>assets/images/brands/new1.webp" alt="" width="271" height="193" class="w-100 img-fluid" />
           <div class="hading2">
             <p>Looking for a <br> product ?</p>
-            <a href="post-buy-requirements">Post Buy Requirement</a>
+            <a href="<?php echo  BASE_URL ?>post-buy-requirements">Post Buy Requirement</a>
           </div>
         </div>
 
@@ -87,7 +87,7 @@ include "home-search.php"
           <img src="<?php echo BASE_URL; ?>assets/images/brands/new2.webp" alt="" width="271" height="193" class="w-100 img-fluid" />
           <div class="hading2">
             <p>Want to grow your <br> business 10X Faster?</p>
-            <a href="registration">Sell on TradersFind</a>
+            <a href="<?php echo  BASE_URL ?>registration">Sell on TradersFind</a>
           </div>
         </div>
       </div>
@@ -112,7 +112,7 @@ include "home-search.php"
                   and driving your business forward.
                 </p>
                 
-                <a class="btn-primary-gradiant rounded-2" href="about-us">LEARN MORE ABOUT US</a>
+                <a class="btn-primary-gradiant rounded-2" href="<?php echo  BASE_URL ?>about-us">LEARN MORE ABOUT US</a>
 
               </div>
     
@@ -126,7 +126,7 @@ include "home-search.php"
                   and service providers in UAE within a single marketplace. Whether you are a local business looking for suppliers 
                   in UAE or an international company seeking trade opportunities in UAE’s thriving market, TradersFind is your gateway to expand your business in UAE.
                 </p>
-                <a class="btn-primary-gradiant rounded-2" href="about-us">LEARN MORE ABOUT US</a>
+                <a class="btn-primary-gradiant rounded-2" href="<?php echo  BASE_URL ?>about-us">LEARN MORE ABOUT US</a>
               </div>
    
               <div class="text-center">
@@ -138,7 +138,7 @@ include "home-search.php"
                   you need to thrive in the competitive market. Our business directory of UAE companies is updated at regular intervals to ensure 
                   that you have access to the most relevant and up-to-date information.
                 </p>
-                <a class="btn-primary-gradiant rounded-2" href="about-us">LEARN MORE ABOUT US</a>
+                <a class="btn-primary-gradiant rounded-2" href="<?php echo  BASE_URL ?>about-us">LEARN MORE ABOUT US</a>
               </div>
     
           
@@ -150,7 +150,7 @@ include "home-search.php"
                   buyers on our platform meet the highest standards of quality, authenticity, and ethical practices. 
                   When you connect with a verified  supplier or buyer through TradersFind, you can have confidence in the credibility and reliability of your business partners.
                 </p>
-                <a class="btn-primary-gradiant rounded-2" href="about-us">LEARN MORE ABOUT US</a>
+                <a class="btn-primary-gradiant rounded-2" href="<?php echo  BASE_URL ?>about-us">LEARN MORE ABOUT US</a>
               </div>
     
               <div class="text-center">
@@ -161,7 +161,7 @@ include "home-search.php"
                   allowing them to reach a wider audience. Our efficient interface allows free business listings that increase 
                   their visibility among potential customers without hurting their pockets.
                 </p>
-                <a class="btn-primary-gradiant rounded-2" href="about-us">LEARN MORE ABOUT US</a>
+                <a class="btn-primary-gradiant rounded-2" href="<?php echo  BASE_URL ?>about-us">LEARN MORE ABOUT US</a>
               </div>
    
              <div class="text-center">
@@ -173,7 +173,7 @@ include "home-search.php"
                   textiles, or raw materials, our platform has a diverse selection to cater to your needs. TradersFind 
                   is a place where you can connect with suppliers at one click.
                 </p>
-                <a class="btn-primary-gradiant rounded-2" href="about-us">LEARN MORE ABOUT US</a>
+                <a class="btn-primary-gradiant rounded-2" href="<?php echo  BASE_URL ?>about-us">LEARN MORE ABOUT US</a>
               </div>
     
               <div class="text-center">
@@ -184,7 +184,7 @@ include "home-search.php"
                   Join now to expand your business reach, explore new opportunities, and take your business to new heights. 
                   One Click 3 options to fulfill all your requirements. Option 1: Click to Call, Option 2: Click to Connect on Whatsapp, Option 3: Click to Send your Requirement.
                 </p>
-                <a class="btn-primary-gradiant rounded-2" href="about-us">LEARN MORE ABOUT US</a>
+                <a class="btn-primary-gradiant rounded-2" href="<?php echo  BASE_URL ?>about-us">LEARN MORE ABOUT US</a>
               </div>
     </div>
   </div>
@@ -208,7 +208,7 @@ include "home-search.php"
           <li>Competitive Pricing</li>
         </ul>
         <br>
-        <a  href="about-us" title="Learn More" class="mt-5"><b>Learn More </b></a>
+        <a  href="<?php echo  BASE_URL ?>about-us" title="Learn More" class="mt-5"><b>Learn More </b></a>
       </div>
       <div class="col-lg-6">
         <div class="card-transparent">
@@ -297,10 +297,10 @@ include "home-search.php"
           </form>
 
 
-
+<!-- 
           <app-otp *ngIf="this.requirementService.isVerification"
             [countryCode]="this.requirementService.productSellerForm.value.countryCode"
-            [mobileNo]="this.requirementService.productSellerForm.value.contactNumber"></app-otp>
+            [mobileNo]="this.requirementService.productSellerForm.value.contactNumber"></app-otp> -->
 
 
         </div>
@@ -313,7 +313,7 @@ include "home-search.php"
   <h3 class="border-center text-center mb-4">FIND SELLERS FROM TOP EMIRATES </h3>
   <div class="owl-carousel carousel-main4">
     <?php
-   $items=array(BASE_URL . 'assets/images/c1.png','./assets/images/c2.png',
+   $items=array('assets/images/c1.png','./assets/images/c2.png',
    './assets/images/c3.png','./assets/images/c4.png',
    './assets/images/c5.png','./assets/images/c1.png','./assets/images/c3.png');
    $state=array('DUBAI','ABU DHABI','SHARJAH','AJMAN','FUJAIRAH','RAS AL KHAIMAH','UMM AL QUWAIN');
@@ -331,7 +331,7 @@ include "home-search.php"
            
             // Output item content here, you can access $items[$j] to get each item
             echo '<div class="position-relative bg-transparent swiper2 p-2">';
-            echo '<img src="' . $items[$j] . '" width="209" height="80" alt="" class="w-100 img-fluid" />';
+            echo '<img src="'.BASE_URL . $items[$j] . '" width="209" height="80" alt="" class="w-100 img-fluid" />';
            
             echo '<h4>' . $state[$j] . '</h4>';
        

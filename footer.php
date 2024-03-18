@@ -46,26 +46,26 @@
             <div class="col-md-3  ">
               <h4 class="text-white">BUYERS</h4>
               <ul class="footermenu">
-                <li><a href="post-buy-requirements">Post Your Requirement</a></li>
-                <li><a href="industry">Browse Sellers</a></li>
-                <li><a href="buyer-faq">Buyer FAQ</a></li>
+                <li><a href="<?php echo  BASE_URL ?>post-buy-requirements">Post Your Requirement</a></li>
+                <li><a href="<?php echo  BASE_URL ?>industry">Browse Sellers</a></li>
+                <li><a href="<?php echo  BASE_URL ?>buyer-faq">Buyer FAQ</a></li>
               </ul>
             </div>
   
             <div class="col-md-3 ">
               <h4 class="text-white">SELLERS</h4>
               <ul class="footermenu">
-                <li><a href="register-your-business">Sell Your Product</a></li>
+                <li><a href="<?php echo  BASE_URL ?>register-your-business">Sell Your Product</a></li>
               
-                <li><a href="seller-faq">Seller FAQ</a></li>
+                <li><a href="<?php echo  BASE_URL ?>seller-faq">Seller FAQ</a></li>
               </ul>
             </div>
   
             <div class="col-md-3  ">
               <h4 class="text-white">QUICK LINKS</h4>
               <ul class="footermenu">
-                <li><a href="blog">Latest Blogs</a></li>
-                <li><a href="feedback">Feedback</a></li>
+                <li><a href="<?php echo  BASE_URL ?>blog">Latest Blogs</a></li>
+                <li><a href="<?php echo  BASE_URL ?>feedback">Feedback</a></li>
              <!--   <li><a href="">Testimonials</a></li>  -->
               </ul>
             </div>
@@ -76,10 +76,10 @@
   
             <div class="col-lg-8">
               <ul class="footermenu2">
-                <li><a href="about-us">About us</a></li>
-                <li><a href="contact-us">Contact us</a></li>
-                <li><a href="privacy-policy">Privacy Policy</a></li>
-                <li><a href="term-and-conditions">Term of Use</a></li>
+                <li><a href="<?php echo  BASE_URL ?>about-us">About us</a></li>
+                <li><a href="<?php echo  BASE_URL ?>contact-us">Contact us</a></li>
+                <li><a href="<?php echo  BASE_URL ?>privacy-policy">Privacy Policy</a></li>
+                <li><a href="<?php echo  BASE_URL ?>term-and-conditions">Term of Use</a></li>
               </ul>
   
               <!-- <p class="d-flex align-items-center gap-3 text-grey mt-5">
