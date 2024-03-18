@@ -261,8 +261,10 @@ input:focus {
     border-bottom-right-radius: 7px !important;
   }
 
+  .search-result {top: 97px !important;}
+
   .search-bar .form-control {
-    width: 100%;
+    width: 93% !important;
     margin-top: 5px;
     border-top-left-radius: 7px !important;
     border-bottom-left-radius: 7px !important;

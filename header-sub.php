@@ -12,9 +12,20 @@
         <?php
       $currecntUrlHS=$_SERVER['REQUEST_URI'];
       $part=explode('/',$currecntUrlHS);
-      $suncat=basename($part[3]);//will change
-
+      $comtparts=count($part);
+      if($comtparts>=3){
+        $suncat=basename($part[2]);//will change 
+      }else{
+        $suncat='';//will change
+      }
+     // $suncat=basename($part[3]);//will change
+     //print_r(strpos($currecntUrlHS, 'category'));
+     if ( strpos($currecntUrlHS, 'search') >0 || strpos($currecntUrlHS, 'category') >0 ) {
       $searchtext12 = htmlspecialchars(str_replace('-',' ', $suncat));
+      //print_r($searchtext12);
+     } else {
+        $searchtext12 = '';
+     }
       //$numParts = count($parts);
      
        ?>
@@ -24,7 +35,6 @@
       
         width: 50%;
         z-index: 9999999; /* Set z-index to appear above other content */
-     
        
     }
 </style>

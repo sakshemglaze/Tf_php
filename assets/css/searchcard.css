@@ -42,6 +42,8 @@ a:hover {
   color: #873636;
 }
 
+.list_box li {width: 100% !important;}
+
 .border_img img {
   width: 100%;
   border-radius: 10px !important;
@@ -513,7 +515,7 @@ li {
     }
  @media screen and (max-width: 600px) {
         .single-line {
-            max-width: 100px; /* Set a maximum width for small screens */
+            max-width: 300px mpo !important; /* Set a maximum width for small screens */
         }
 
 .single-line {

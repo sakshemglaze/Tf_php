@@ -248,6 +248,9 @@ a:hover {
   text-align: left;
 }
 
+.footer_call li {width: 100% !important;}
+
+
 @media (max-width: 1199px) {
   .whatsappBg {
     display: none;
