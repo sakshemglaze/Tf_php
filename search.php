@@ -26,26 +26,32 @@ include_once 'config.php';
 
     $currentUrl = $_SERVER['REQUEST_URI'];
     $parts = explode('/', $currentUrl);
-    $category1 = basename($parts[3]); // Extract the category part
-    $searchtext = htmlspecialchars(str_replace('-',' ', $category1));
+  
+    
     $numParts = count($parts);
+    if($numParts>=4){
+    $category1 = basename($parts[3]); // Extract the category part
+    }else{
+      $category1='';
+    }
+    $searchtext = htmlspecialchars(str_replace('-',' ', $category1));
     class FilterDTO {
       public $stateFilter;
   }
   $filterDto = new FilterDTO();
-  if( $numParts==6){//will change
-    $location= basename($parts[4]);//will change
-    $subCategoryId=basename($parts[5]);//will change
+  if( $numParts==5){//will change
+    $location= basename($parts[3]);//will change
+    $subCategoryId=basename($parts[4]);//will change
     $filterDto->stateFilter=[ucwords(str_replace('-'," ",$location))];
     $name = str_replace("-", " ", $matches[1]);//neverchange
     $id = str_replace("-", " ", $matches[3]);//will change
-  }else if($numParts==4){//will change
-    $keyword=basename($parts[3]);//will change
+  }else if($numParts==3){//will change
+    $keyword=basename($parts[2]);//will change
    // print_r($keyword);
-  }else if(basename($parts[2])=='search' && $numParts==5 ){//will change
+  }else if(basename($parts[1])=='search' && $numParts==4 ){//will change
    // $location="";
    // print_r("locationkeywordstatehjedf");
-    $location= basename($parts[4]);//will change
+    $location= basename($parts[3]);//will change
     
     $filterDto->stateFilter=[ucwords(str_replace('-'," ",$location))];
 }
@@ -108,7 +114,7 @@ $SeoParams = [
   'schemaDescription' => isset($subcategory->schemaDescription) ? $subcategory->schemaDescription : '',
   ];
   //print_r("first if");
-          }else if( $numParts==4){//will be change
+          }else if( $numParts==3){//will be change
   
             $payload = array(
               'searchText' => $name ,
@@ -141,7 +147,7 @@ $SeoParams = [
             //print_r($subcategory);
            // $SeoParams = [];
            // print_r("second if");
-          }else if(basename($parts[2])=='search' && $numParts==5 ){//will change
+          }else if(basename($parts[1])=='search' && $numParts==4 ){//will change
 
             $payload = array(
               'searchText' => $name ,
@@ -268,7 +274,7 @@ $SeoParams = [
     </li>
     <?php endif;?>
     <li class="breadcrumb-item active fwbold text-capitalize " aria-current="page" >
-    <?php echo basename($parts[3]);//will chnage
+    <?php echo basename($parts[2]);//will chnage
   
     ?>
     </li>
@@ -276,25 +282,27 @@ $SeoParams = [
 </nav>
 <div style="text-align: center;">
 
-  <h1 class="me-2 fwbold  text-capitalize mb-0"><?php echo basename($parts[3]);?>  <!--will chnage -->
+  <h1 class="me-2 fwbold  text-capitalize mb-0"><?php echo basename($parts[2]);?>  <!--will chnage -->
   <?php if ($location == null) {
     echo '<span> in UAE</span>';
   } else {
-    echo '<span> in ' . $location;
+    echo '<span> in ' . str_replace("-"," " ,$location);
   } ?>
   </h1>
   <small class="fwbold">(<?php print_r($length)?> products available) </small>
 </div>
 <?php 
 
-if (isset($subcategory->shortDescription) != '' && $location === '') {
- echo '<div>';
- echo '<span [innerHTML]="' . substr($subcategory->shortDescription, 0, 400) . '"> </span>';
- if(strlen($subcategory->shortDescription) >= 400) {
-  echo '<span style="color:brown; position: absolute;">&nbsp;<b> <a (click)=""> View more : View less</a> </b></span>';
- } else {
-  echo '<span style="color:brown; position: absolute;">&nbsp;<b> <a (click)=""> View more : View less</a> </b></span>';
- }
+if (isset($subcategory->shortDescription) && $subcategory->shortDescription && $location === '') {
+  echo '<div>';
+  $shortDescription = $subcategory->shortDescription;
+  $shortenedDescription = substr($shortDescription, 0, 400);
+  echo '<span id="short-desc">' . $shortenedDescription . '</span>';
+  if (strlen($shortDescription) > 400) {
+      echo '<span style="color:brown;">&nbsp;<b><a href="javascript:void(0);" onclick="toggleDescription()"> View more</a></b></span>';
+  } //else {
+  //echo '<span id="full-desc" style="display:inline;">' . $shortDescription . '</span>';
+  //}
   echo '</div>';
   } ?>
 <br>
@@ -319,17 +327,17 @@ if (isset($subcategory->shortDescription) != '' && $location === '') {
         <div class="col-lg-12">
           <div class="shadow2 row align-items-center mx-1">
             <div class="col-lg-8">
-              <ul class="d-flex align-items-center flex-wrap rightnav" *ngIf="filters">
+              <ul class="d-flex align-items-center flex-wrap rightnav" >
                 <?php 
                 //print_r($location);
                 if (($location == null || $location == 'UAE' )&& isset($category[0])) { 
                   
-                  echo '<li><a href="'.BASE_URL.$urlService->getSubcategoryAllLocUrl($category[0]->categoryName,$subcategory->subCategoryName,'all',$id) .'" >All UAE</a></li>';
+                  echo '<li ><a class="active" href="'.BASE_URL.$urlService->getSubcategoryAllLocUrl($category[0]->categoryName,$subcategory->subCategoryName,'all',$id) .'" >All UAE</a></li>';
                 } else if(!isset($category[0])){
-                  echo '<li><a href="'.BASE_URL.basename($parts[2]).'/'.basename($parts[3]).'" >All UAE</a></li>';
+                  echo '<li><a href="'.BASE_URL.basename($parts[1]).'/'.basename($parts[2]).'" >All UAE</a></li>';
                   //will change
                 }else{
-                  echo '<li><a href="'.BASE_URL.$urlService->getSubcategoryAllLocUrl($category[0]->categoryName,$subcategory->subCategoryName,'all',$id) .'" >All UAE</a></li>';
+                  echo '<li ><a href="'.BASE_URL.$urlService->getSubcategoryAllLocUrl($category[0]->categoryName,$subcategory->subCategoryName,'all',$id) .'" >All UAE</a></li>';
                  
                 }
                 
@@ -339,8 +347,9 @@ if (isset($subcategory->shortDescription) != '' && $location === '') {
                     echo '<a href="' . BASE_URL . 'search/' . $keyword . '/' .str_replace(' ','-', $state) . '">' . $state . '</a>';
                     echo' </li>';
                     }else{
+                      $location1 = str_replace("-"," ",$location);
                       echo'<li >';
-                      echo '<a href="'.BASE_URL.$urlService->getSubCategoryLocUrl($category[0]->categoryName,$subcategory->subCategoryName,$state,$id) .'">'. $state .'</a>';
+                      echo '<a class="' . (strtolower($state) !== $location1 ? 'active' : '') . 'active" href="'.BASE_URL.$urlService->getSubCategoryLocUrl($category[0]->categoryName,$subcategory->subCategoryName,$state,$id) .'">'. $state .'</a>';
                       echo' </li>';
                     }
                   };
@@ -443,7 +452,7 @@ searchProductNew(payload, page).then(response => {
     
     
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "test.php", true);
+    xhr.open("POST", "/test.php", true);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onreadystatechange = function() {
         if (xhr.readyState === XMLHttpRequest.DONE) {
@@ -468,6 +477,23 @@ searchProductNew(payload, page).then(response => {
   <script src="<?php echo BASE_URL; ?>assets/js/lazy-load.js"></script> 
 </body>
 </html>
+<script>
+function toggleDescription() {
+                var shortDesc = document.getElementById("short-desc");
+                var fullDesc = document.getElementById("full-desc");
+                var moreText = document.querySelector("#short-desc + span a");
+
+                if (fullDesc.style.display === "none") {
+                    shortDesc.style.display = "none";
+                    fullDesc.style.display = "inline";
+                    moreText.innerHTML = " View less";
+                } else {
+                    shortDesc.style.display = "inline";
+                    fullDesc.style.display = "none";
+                    moreText.innerHTML = " View more";
+                }
+            }
+          </script>
 <?php
 include_once "footer.php"
 ?>

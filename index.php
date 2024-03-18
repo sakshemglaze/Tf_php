@@ -1,6 +1,7 @@
 <?php
 // for you sir 
 
+
 //   $routes = [
 //       '/' => 'home.php',
 //       '/about-us' => 'about-us.php',
@@ -14,7 +15,7 @@
 //       '/privacy-policy' => 'privacy-policy.php',
 //       '/register-your-business' => 'registration.php',
 //       '/seller-faq' => 'seller-faq.php',
-   
+
 //       '/feedback' => 'send-feedback.php',
 //       '/complaint' => 'send-feedback.php',
 //       '/login' => 'signIn.php',
@@ -25,6 +26,7 @@
 //  $url = $_SERVER['REQUEST_URI'];
 
 //  $url = strtok($url, '?');
+
 
 //  if (preg_match('~^/industry/([^/]+)/([^/]+)$~', $url, $matches)) {
 //    include 'industryDetail.php'; 
@@ -46,6 +48,7 @@
 //  }
 
   
+
 //for atul
 
 $routes = [

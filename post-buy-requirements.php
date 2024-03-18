@@ -205,7 +205,9 @@ fetch(url, {
           <div class="media mt-3">
             <div class="media-left media-middle">
               <a href="#">
+
                 <img class="media-object" src="<?php echo  BASE_URL ?>assets/images/login-icon1.jpg">
+
               </a>
             </div>
             <div class="media-body">
@@ -217,7 +219,9 @@ fetch(url, {
           <div class="media ">
             <div class="media-left media-middle">
               <a href="#">
+
                 <img class="media-object" src="<?php echo  BASE_URL ?>assets/images/login-icon2.jpg">
+
               </a>
             </div>
             <div class="media-body">
@@ -229,7 +233,9 @@ fetch(url, {
           <div class="media ">
             <div class="media-left media-middle">
               <a href="#">
+
                 <img class="media-object" src="<?php echo  BASE_URL ?>assets/images/login-icon3.jpg">
+
               </a>
             </div>
             <div class="media-body">

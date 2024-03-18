@@ -1,26 +1,49 @@
-<?php include_once "config.php";?>
-<link rel="stylesheet" href="<?php echo BASE_URL;?>/assets/css/blogls.css" />
+<html>
+    <head>
 
+
+<?php include_once "config.php";
+    include_once 'services/url.php';
+    $urlService = new UrlService();
+
+    $currentUrl=$_SERVER['REQUEST_URI'];
+    $urlparts=explode('/',$currentUrl);
+    $blogUrl=end($urlparts);
+
+    include_once "post.php";
+    $blogtitle=str_replace('-',' ',$blogUrl);
+    $blogp= get('api/guest/blogs-by-title', false,['blogTitle' => $blogtitle]);
+    $blog=json_decode($blogp);
+    $size=5;
+    $queryParams=['size'=> $size, 'sort'=> "createdDate,desc" ];
+    $letestBlog=get('api/guest/blogs', false, $queryParams);
+    $latestBlogs=json_decode($letestBlog);
+
+
+    $SeoParams = [
+        'title' => isset($blog->metaTitle) && $blog->metaTitle != '' ? $blog->metaTitle : $blog->productName . ' in ' . $blog->seller->state . ' - ' . $blog->sellerCompanyName,
+        'metaTitle' => isset($blog->metaTitle) && $blog->metaTitle != '' ? $blog->metaTitle : $blog->productName . ' in ' . $blog->seller->state . ' - ' . $blog->sellerCompanyName,
+        'metaDescription' => isset($blog->metaDescription) && $blog->metaDescription != '' ? $blog->metaDescription : null,
+        'metaKeywords' => isset($blog->metaKeywords) && $blog->metaKeywords != '' ? $blog->metaKeywords : null,
+        'fbTitle' => isset($blog->fbTitle) && $blog->fbTitle != '' ? $blog->fbTitle : null,
+        'fbDescription' => isset($blog->fbDescription) && $blog->fbDescription != '' ? $blog->fbDescription : null,
+        'fbImage' => isset($blog->fbImage) ? API_URL . 'api/guest/imageContentDownload/' . $blog->fbImage.id : 'undefined',
+        'fbUrl' => isset($blog->fbUrl) && $blog->fbUrl != '' ? $blog->fbUrl : null,
+        'twitterTitle' => isset($blog->twitterTitle) && $blog->twitterTitle != '' ? $blog->twitterTitle : null,
+        'twitterDescription' => isset($blog->twitterDescription) && $blog->twitterDescription != '' ? $blog->twitterDescription : null,
+        'twitterImage' => isset($blog->twitterImage) ? API_URL . 'api/guest/imageContentDownload/' . $blog->twitterImage.id : 'undefined',
+        'twitterSite' => isset($blog->twitterSite) && $blog->twitterSite != '' ? $blog->twitterSite : null,
+        'twitterCard' => isset($blog->twitterCard) && $blog->twitterCard != '' ? $blog->twitterCard : null,
+    ];
+ include_once 'services/seo.php';
+  $seo = new seoService();
+          $seo->setSeoTags($SeoParams);
+?>
+<link rel="stylesheet" href="<?php echo BASE_URL;?>/assets/css/blogls.css" />
+</head>
+<body>
 <?php 
 include_once "header-sub.php";
-
-include_once 'services/url.php';
-        $urlService = new UrlService();
-
-        $currentUrl=$_SERVER['REQUEST_URI'];
-        $urlparts=explode('/',$currentUrl);
-        $blogUrl=end($urlparts);
-
-   include_once "post.php";
-   $blogtitle=str_replace('-',' ',$blogUrl);
-   $blogp= get('api/guest/blogs-by-title', false,['blogTitle' => $blogtitle]);
-$blog=json_decode($blogp);
-$size=5;
-$queryParams=['size'=> $size, 'sort'=> "createdDate,desc" ];
-$letestBlog=get('api/guest/blogs', false, $queryParams);
-$latestBlogs=json_decode($letestBlog);
-
-
 ?>
 <div class="container blog-page-container">
     <section class="search-breadcrumb">
@@ -83,6 +106,7 @@ $latestBlogs=json_decode($letestBlog);
         </div>
     </div>
 </div>
+                                </body></html>
 <?php 
 include_once 'footer.php';
 ?>

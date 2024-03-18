@@ -118,10 +118,7 @@ foreach ($data1 as $category) {
     echo '<br />';
     echo '<br />';
 }
-?>
-
-  <pagination-controls id="industry_listing_pagination" (pageChange)="getNext($event)" [responsive]="true"
-    [maxSize]="20"></pagination-controls>
+  ?>
 </section>
 
 <section class="container-fluid mt-4" *ngIf="popular_categories">
