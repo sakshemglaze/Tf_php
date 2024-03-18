@@ -45,7 +45,7 @@ array_push($industry, array("Industrial Supplies", "6450d5651381f473d7f9da51", "
   
       <li class="has-category"> <h5>
         <a href="industry">
-          <span><img src="./assets/images/browse-icon.png" alt="" width="30" height="30" /></span>
+          <span><img src="./assets/images/browse-icon.png" alt="industry" width="30" height="30" /></span>
           &nbsp;All Categories
         </a> </h5>
   

@@ -29,7 +29,7 @@
                 'title' => isset($data1->metaTitle) && $data1->metaTitle != '' ? $data1->metaTitle : $data1->productName . ' in ' . $data1->seller->state . ' - ' . $data1->sellerCompanyName,
                 'metaTitle' => isset($data1->metaTitle) && $data1->metaTitle != '' ? $data1->metaTitle : $data1->productName . ' in ' . $data1->seller->state . ' - ' . $data1->sellerCompanyName,
                 'metaDescription' => isset($data1->categoryDescription) && $data1->categoryDescription != '' ? $data1->categoryDescription : '',
-                'metaKeywords' => isset($data1->Keywords) && $data1->Keywords != '' ? implode(',', $data1->Keywords) : '',
+                'metaKeywords' => isset($data1->Keywords) && $data1->Keywords != '' ? implode(',', $data1->Keywords) : $data1->categoryName,
                 'fbTitle' => isset($data1->fbTitle) && $data1->fbTitle != '' ? $data1->fbTitle : $data1->productName,
                 'fbDescription' => isset($data1->fbDescription) && $data1->fbDescription != '' ? $data1->fbDescription : $data1->productDescription,
                 'fbImage' => isset($data1->fbImage) ? API_URL . 'api/guest/imageContentDownload/' . $data1->fbImage.id : 'undefined',
@@ -104,7 +104,7 @@
               <img data-src="<?php echo IMAGE_URL . $data1->image->id;?>.webp" class="lazy w-100" alt="Group-Category" />
 
             </div>
-            <h2 class="fs-4 fwbold mt-4"><?php echo $data1->categoryName; ?></h2>
+            <span class="fs-4 fwbold mt-4"><?php echo $data1->categoryName; ?></span>
           </div>
         </div>
         <div class="col-lg-10 position-relative">

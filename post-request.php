@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row gy-1">
       <div class="col-lg-6">
-        <h2><b>EASY SOURCING</b></h2>
+        <span class="fw-bold fs-3"><b>EASY SOURCING</b></span>
         <p>An easy way to post your sourcing requests and get quotes.</p>
         <ul class="sellers_text">
           <li>One request, multiple quotes </li>
@@ -16,7 +16,7 @@
       </div>
       <div class="col-lg-6">
         <div class="card-transparent">
-          <h2 class="fs-4">Let us know what you need?</h2>
+          <span class="fs-4">Let us know what you need?</span>
   
           <form>
             <input type="text" class="form-control" formcontrolName="productName"

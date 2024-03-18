@@ -15,11 +15,6 @@ include_once 'config.php';
     $keyword = 'yes';
     //print_r($name);
     //print_r($subCategoryId);
-
-    include_once "header-sub.php";
-
-
-
     $indexr=0;
     $page=0;
     $size=20;
@@ -60,6 +55,7 @@ else{
  // print_r("locationkeyword");
 }
   //print_r($location);
+  $location1 = str_replace('-',' ',$location);
   require_once 'post.php';
          if($location==""){
           
@@ -95,12 +91,10 @@ $industry = json_decode(get(
 //print_r($subcategory);
 
 
-
-
 $SeoParams = [
   'title' => $subcategory->subCategoryName,
-  'metaTitle' => isset($subcategory->metaTitle) ? $subcategory->metaTitle : $subcategory->subCategoryName,
-  'metaDescription' => isset($subcategory->metaDescription) ? $subcategory->metaDescription : $subcategory->subCategoryDescription,
+  'metaTitle' => isset($subcategory->metaTitle) ? str_replace('UAE',$location1,$subcategory->metaTitle) : $subcategory->subCategoryName,
+  'metaDescription' => isset($subcategory->metaDescription) ? str_replace('UAE',$location1,$subcategory->metaDescription) : $subcategory->subCategoryDescription,
   'metaKeywords' => isset($subcategory->keywords) ? $subcategory->keywords : 'tradersfind, b2b portal, list of companies in uae, b2b marketplace, business directory, manufacturers in uae, suppliers in uae, buyers in uae, yellowpages uae, importers in uae, uae companies directory, b2b website, business marketplace, local business listings, business directory in uae',
   'fbTitle' => isset($subcategory->fbTitle) ? $subcategory->fbTitle : $subCategory->subCategoryName,
   'fbDescription' => isset($subcategory->fbDescription) ? $subcategory->fbDescription : '',
@@ -204,14 +198,14 @@ $industry = json_decode(get(
   'api/industries-na/' . $category[0]->title,$queryParams) );
 //print_r($subcategory);
 $SeoParams = [
-  'title' => $subcategory->subCategoryName,
-  'metaTitle' => isset($subcategory->metaTitle) ? $subcategory->metaTitle : $subcategory->subCategoryName,
-  'metaDescription' => isset($subcategory->metaDescription) ? $subcategory->metaDescription : $subcategory->subCategoryDescription,
-  'metaKeywords' => isset($subcategory->keywords) ? $subcategory->keywords : 'tradersfind, b2b portal, list of companies in uae, b2b marketplace, business directory, manufacturers in uae, suppliers in uae, buyers in uae, yellowpages uae, importers in uae, uae companies directory, b2b website, business marketplace, local business listings, business directory in uae',
-  'fbTitle' => isset($subcategory->fbTitle) ? $subcategory->fbTitle : $subCategory->subCategoryName,
+  'title' => isset($subcategory->metaTitle) ? $subcategory->metaTitle : $subcategory->subCategoryName,
+  'metaTitle' => isset($subcategory->metaTitle) ? str_replace('UAE',$location1,$subcategory->metaTitle) : $subcategory->subCategoryName,
+  'metaDescription' => isset($subcategory->metaDescription) ? str_replace('UAE',$location1, $subcategory->metaDescription) : str_replace('UAE',$location1,$subcategory->subCategoryDescription),
+  'metaKeywords' => isset($subcategory->keywords) ? str_replace('UAE',$location1,$subcategory->keywords) : 'tradersfind, b2b portal, list of companies in uae, b2b marketplace, business directory, manufacturers in uae, suppliers in uae, buyers in uae, yellowpages uae, importers in uae, uae companies directory, b2b website, business marketplace, local business listings, business directory in uae',
+  'fbTitle' => isset($subcategory->fbTitle) ? str_replace('UAE',$location1,$subcategory->fbTitle) : $subCategory->subCategoryName,
   'fbDescription' => isset($subcategory->fbDescription) ? $subcategory->fbDescription : '',
-  'fbImage' => isset($subcategory->fbImage) ? $subcategory->fbImage : '',
-  'fbUrl' => isset($subcategory->fbUrl) ? $subcategory->fbUrl : '',
+  'fbImage' => isset($subcategory->fbImage) ? $subcategory->fbImage : null,
+  'fbUrl' => isset($subcategory->fbUrl) ? $subcategory->fbUrl : null,
   'twitterTitle' => isset($subcategory->twitterTitle) ? $subcategory->twitterTitle : $subcategory->subCategoryName,
   'twitterDescription' => isset($subcategory->twitterDescription) ? $subcategory -> twitterDescription : '',
   'twitterImage' => isset($subcategory->twitterImage) ? $subcategory->twitterImage : '',
@@ -221,9 +215,6 @@ $SeoParams = [
   ];
   //print_r("else");
           }
-
-              
-              
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -232,36 +223,32 @@ $SeoParams = [
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex nofollow" >
   <?php 
-     
-
   include_once 'services/seo.php';
   $seo = new seoService();
   if(isset($SeoParams)){
     $seo->setSeoTags($SeoParams);
   }
-         
-
-  ?>
-      
+?>
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css" >
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/enquery.css" > 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+    <script src="<?php echo BASE_URL;?>assets/js/jquery-3.6.1.min.js"> </script>
     
 </head>
-
 <body>
 
     <section class="container-fluid mt-1">
-       <?php include_once "banner.php";   
-      
+       <?php 
+       include_once "header-sub.php";
+       include_once "banner.php";   
        ?>
        
     </section>
     
             
 <section class="p-2">
-<nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb" *ngIf="products">
+<nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb" >
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/">TradersFind</a></li> 
     <?php if(isset($subcategory)):?>
@@ -269,20 +256,25 @@ $SeoParams = [
         href="/<?php echo $urlService->getIndustryUrl($industry[0]->industryName,$industry[0]->id) ?>"><?php echo $industry[0]->industryName ?></a>
     </li>
     <li class="breadcrumb-item"><a
-        href="/<?php echo $urlService->getGroupCategoryUrl($category[0]->categoryName,$category[0]->id) ?>"><?php echo $category[0]->categoryName ?></a>
+        href="/<?php echo $urlService->getGroupCategoryUrl($category[0]->categoryName,$category[0]->id) ?>"><?php echo $category[0]->categoryName ?> </a>
 
     </li>
-    <?php endif;?>
+    <?php endif;
+      if($location == null || $location == 'All UAE' || $location == 'UAE') :?>
     <li class="breadcrumb-item active fwbold text-capitalize " aria-current="page" >
-    <?php echo basename($parts[2]);//will chnage
-  
-    ?>
+    <?php echo str_replace("-"," ",basename($parts[2])); ?>
     </li>
+    <?php else :?>
+      <li class="breadcrumb-item text-capitalize"> <a href="/<?php echo $urlService->getCategoryUrl($subcategory->subCategoryName,$subcategory->id)?>">
+      <?php echo str_replace("-"," ",basename($parts[2])); ?> </a></li>
+      <li class="breadcrumb-item active fwbold text-capitalize " aria-current="page" >
+        <?php echo str_replace("-"," ",$location); ?>
+    <?php endif; ?>
   </ol>
 </nav>
 <div style="text-align: center;">
 
-  <h1 class="me-2 fwbold  text-capitalize mb-0"><?php echo basename($parts[2]);?>  <!--will chnage -->
+  <h1 class="me-2 fwbold  text-capitalize mb-0"><?php echo str_replace("-"," ", basename($parts[2]));?>  <!--will chnage -->
   <?php if ($location == null) {
     echo '<span> in UAE</span>';
   } else {

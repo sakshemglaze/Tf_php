@@ -33,7 +33,7 @@ include_once "header-sub.php";
             <div class="input-group">
               <input type="text" class="form-control" placeholder="Search here...">
               <span class="input-group-btn">
-                <button class="btn btn-primary-gradiant  btn-lg" type="submit"><img src="assets/images/search-icon.png" width="18" alt=""></button>
+                <button class="btn btn-primary-gradiant  btn-lg" type="submit"><img src="assets/images/search-icon.png" width="18" alt="search"></button>
               </span>
             </div>
           </form>

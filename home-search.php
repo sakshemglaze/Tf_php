@@ -31,7 +31,7 @@
 
                         <div class="input-group mb-3 w-100 position-relative">
                             <span class="input-group-text bg-white" id="basic-addon1"><img
-                                    src="assets/images/location-3.png" width="16" height="17" alt="" class="me-lg-3 me-2 img-fluid" />
+                                    src="assets/images/location-3.png" width="16" height="17" alt="location" class="me-lg-3 me-2 img-fluid" />
                                <?php
                                 $areas = array(
                                     "UAE",
@@ -70,9 +70,9 @@
                                 <input type="text"  id="search" autofocus class="form-control border-rounded-end" placeholder="What are you looking for.." autocomplete="off" >
                                
                                 <div class="submit-button">
-                                        <!-- <img src="assets/images/Voice-icon.png" alt="" class="me-lg-3 me-1 img-fluid" width="15"> -->
+                                        <!-- <img src="assets/images/Voice-icon.png" alt="voice" class="me-lg-3 me-1 img-fluid" width="15"> -->
                                 <button type="button" onclick="submitform()" class="btn-primary-gradiant w-100 h-100 px-2 px-lg-5">
-                                        <!-- <img src="assets/images/search-icon.png" width="18" class="me-lg-2" alt=""> -->
+                                        <!-- <img src="assets/images/search-icon.png" width="18" class="me-lg-2" alt="search"> -->
                                       <span class="d-lg-inline">Search</span>
                                 </button>
                               </div>
@@ -108,7 +108,8 @@
     <div class="form-control " id="option_com"></div>
 </ul>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+<script src="<?php echo BASE_URL;?>assets/js/jquery-3.6.1.min.js"> </script>
 <script>
     $(document).ready(function () {
         $('#search').keyup(function () {

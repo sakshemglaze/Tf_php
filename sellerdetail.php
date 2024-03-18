@@ -24,15 +24,15 @@
 
             $currenturl= $_SERVER['REQUEST_URI'];
             $urlpart=explode('/',$currenturl);
-            $companyName= end($urlpart);
-           
+            $companyName= $matches[1]; //($urlpart);
+            //print_r($matches[1]);
             require_once 'post.php';
         $data =  get(
                 'api/guest/search-sellers-company-name/'.$companyName
               );
               $data1 = json_decode($data);
              // $data = findActive($data1);
-            // print_r($data1);
+             //print_r($data1);
               
 $aproodproduct=get(
   'api/guest/products/by-seller/' . $data1[0]->id,
@@ -68,7 +68,7 @@ $aproodproduct1 = json_decode($aproodproduct);
                     <span>
                     <?php if ($data1[0]->logo): ?>
                     <span >
-                      <img src="https://doc.tradersfind.com/images/<?php echo $data1[0]->logo->id;?>.webp" alt="">  
+                      <img src="https://doc.tradersfind.com/images/<?php echo $data1[0]->logo->id;?>.webp" alt="seller">  
                     <app-logo [name]="seller?seller.sellerCompanyName:'Traders Find'" *ngIf="!seller.logo"></app-logo>
                   
                       </span>
@@ -79,7 +79,7 @@ $aproodproduct1 = json_decode($aproodproduct);
                 <div class="text-white lh-sm ms-md-3">
                   <h1 class="text-uppercase fwbold text-black fs-4"><?php echo$data1[0]?$data1[0]->sellerCompanyName:"TF";?></h1>
                   <div class="d-flex align-items-start mt-3">
-                    <img src="assets/images/location3.png" width="28" alt="" />
+                    <img src="<?php echo BASE_URL?>assets/images/location3.png" width="28" alt="location" />
                     <p class="mb-0 ms-2 text-black"><span>
                       <?php echo $data1[0]->address.','.$data1[0]->city;?> <br />
                       <?php echo $data1[0]->sellerState.','. $data1[0]->country;?> </span>
@@ -110,7 +110,7 @@ $aproodproduct1 = json_decode($aproodproduct);
                  $data1[0]->sellerVirtualContactPhone != ''):
                  ?>
                   <a class="btn btn-light">
-                    <img src="<?php echo BASE_URL;?>assets/images/phone.png" width="16" alt="" />
+                    <img src="<?php echo BASE_URL;?>assets/images/phone.png" width="16" alt="phone" />
                   
                   </a>
                   <?php endif;?>
@@ -126,7 +126,7 @@ $aproodproduct1 = json_decode($aproodproduct);
                 <div class="col-lg-6">
                   <button (click)="openPostRequirement()"
                     class="btn-outline-gradiant btn py-2  btn-sm w-100 text-black">
-                    <img src="assets/images/mail-solid.png" alt="" /> Send Inquiry
+                    <img src="<?php echo BASE_URL?>assets/images/mail-solid.png" alt="mail" /> Send Inquiry
                   </button>
                 </div>
                 <div class="col-12">
@@ -139,18 +139,18 @@ $aproodproduct1 = json_decode($aproodproduct);
 
                     <li>
                       <a *ngIf="seller.twitterLink && seller.twitterLink != ''" [href]="seller.twitterLink" aria-label="Twitter">
-                        <img src="assets/images/twitter.webp" width="40" alt="" />
+                        <img src="<?php echo BASE_URL?>assets/images/twitter.webp" width="40" alt="X" />
                       </a>
                     </li>
                     <li>
                       <a *ngIf="seller.facebookLink && seller.facebookLink != ''" [href]="seller.facebookLink" aria-label="Facebook">
-                          <img src="assets/images/facebook.webp" width="40" alt="" />
+                          <img src="<?php echo BASE_URL?>assets/images/facebook.webp" width="40" alt="facebook" />
                       </a>
                   </li>
                   
                     <li>
                       <a *ngIf="seller.instagramLink && seller.instagramLink != ''" [href]="seller.instagramLink" aria-label="Instagram">
-                        <img src="assets/images/instagram.webp" width="40" alt="" />
+                        <img src="<?php echo BASE_URL?>assets/images/instagram.webp" width="40" alt="instagram" />
                       </a>
                     </li>
                   </ul>
@@ -169,7 +169,7 @@ $aproodproduct1 = json_decode($aproodproduct);
     <!-- Navigation button for "Seller Profile" -->
     <button class="nav-link active" id="pills-seller-tab" data-bs-toggle="pill" data-bs-target="#pills-seller"
       type="button" role="tab" aria-controls="pills-seller" aria-selected="true">
-      <img src="<?php echo BASE_URL;?>assets/images/seller_icon1.png" alt="" aria-hidden="true">
+      <img src="<?php echo BASE_URL;?>assets/images/seller_icon1.png" alt=seller" aria-hidden="true">
       <span >Seller Profile</span>
     </button>
   </li>
@@ -177,7 +177,7 @@ $aproodproduct1 = json_decode($aproodproduct);
     <!-- Navigation button for "Products & Services" -->
     <button class="nav-link" id="pills-products-tab" data-bs-toggle="pill" data-bs-target="#pills-products"
       type="button" role="tab" aria-controls="pills-products" aria-selected="false">
-      <img src="<?php echo BASE_URL;?>assets/images/seller_icon2.png" alt="" aria-hidden="true">
+      <img src="<?php echo BASE_URL;?>assets/images/seller_icon2.png" alt="seller" aria-hidden="true">
       <span >Products & Services</span>
     </button>
   </li>
@@ -185,7 +185,7 @@ $aproodproduct1 = json_decode($aproodproduct);
     <!-- Navigation button for "Contact Details" -->
     <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact"
       type="button" role="tab" aria-controls="pills-contact" aria-selected="false">
-      <img src="<?php echo BASE_URL;?>assets/images/seller_icon3.png" height="48" alt="" aria-hidden="true">
+      <img src="<?php echo BASE_URL;?>assets/images/seller_icon3.png" height="48" alt="seller" aria-hidden="true">
       <span >Contact Details</span>
     </button>
   </li>
@@ -212,7 +212,7 @@ $aproodproduct1 = json_decode($aproodproduct);
             <div class="col-lg-3">
               <!--*ngIf="seller.sellerCompanyType">-->
               <div class="d-flex align-items-center justify-content-md-center">
-                <img src="<?php echo BASE_URL;?>assets/images/icon__1.png" alt="" class="me-3" />
+                <img src="<?php echo BASE_URL;?>assets/images/icon__1.png" alt="seller" class="me-3" />
                 <div class="text-start lh-sm">
                   <h3 class="text-black-50 mb-0 fs-4 fwbold">Nature of Business</h3>
                   <span class="mb-0 fs-5">
@@ -226,7 +226,7 @@ $aproodproduct1 = json_decode($aproodproduct);
             <div class="col-lg-3">
               <!--*ngIf="seller.sellerInceptionYear">-->
               <div class="d-flex align-items-center justify-content-md-center">
-                <img src="<?php echo BASE_URL;?>assets/images/icon__2.png" alt="" class="me-3" />
+                <img src="<?php echo BASE_URL;?>assets/images/icon__2.png" alt="seller" class="me-3" />
                 <div class="text-start lh-sm">
                   <h3 class="text-black-50 mb-0 fs-4 fwbold">Year of Establishment</h3>
                   <!--<h3 class="mb-0 fs-5">-->
@@ -239,7 +239,7 @@ $aproodproduct1 = json_decode($aproodproduct);
             <div class="col-lg-3" *ngIf="seller.sellerWebsite && seller.sellerWebsite != ''">
               <!--*ngIf="seller.sellerWebsite && seller.sellerWebsite != ''">-->
               <div class="d-flex align-items-center justify-content-md-center">
-                <img src="<?php echo BASE_URL;?>assets/images/icon__3.png" alt="" class="me-3" />
+                <img src="<?php echo BASE_URL;?>assets/images/icon__3.png" alt="seller" class="me-3" />
                 <div class="text-start lh-sm" *ngIf="seller">
                   <a href="<?php echo$data1[0]->sellerWebsite; ?>" target="_blank">
                     <h3 class="text-black-50 mb-0 fs-4 fwbold" style="text-transform: capitalize;"><?php echo $data1[0]->sellerCompanyName.'Website';?>
@@ -251,7 +251,7 @@ $aproodproduct1 = json_decode($aproodproduct);
             </div>
             <div class="col-lg-3">
               <div class="d-flex align-items-center justify-content-md-center">
-                <img src="<?php echo BASE_URL;?>assets/images/icon__4.png" alt="" class="me-3" />
+                <img src="<?php echo BASE_URL;?>assets/images/icon__4.png" alt="seller" class="me-3" />
                 <div class="text-start lh-sm" *ngIf="seller">
                   <h3 class="text-black-50 mb-0 fs-4 fwbold">Working Days</h3>
                   <?php echo implode(" ", explode("@@@", $data1[0]->sellerBusinessHours)); ?>
@@ -264,7 +264,7 @@ $aproodproduct1 = json_decode($aproodproduct);
 
             <div class="col-lg-3">
               <div class="d-flex align-items-center justify-content-md-center">
-                <img src="<?php echo BASE_URL;?>assets/images/icon__5.png" alt="" class="me-3" />
+                <img src="<?php echo BASE_URL;?>assets/images/icon__5.png" alt="seller" class="me-3" />
                 <div class="text-start lh-sm">
                   <h3 class="text-black-50 mb-0 fs-4 fwbold">Trade License</h3>
                   <?php  echo$data1[0]->tradeLicenseNumber;?>
@@ -276,7 +276,7 @@ $aproodproduct1 = json_decode($aproodproduct);
 
             <div class="col-lg-3">
               <div class="d-flex align-items-center justify-content-md-center">
-                <img src="<?php echo BASE_URL;?>assets/images/icon__6.png" alt="" class="me-3" />
+                <img src="<?php echo BASE_URL;?>assets/images/icon__6.png" alt="seller" class="me-3" />
                 <div class="text-start lh-sm">
                   <h3 class="text-black-50 mb-0 fs-4 fwbold">Service Area</h3>
                   <span title="{{ seller.mainMarkets.join(', ') }}" *ngIf="
@@ -304,7 +304,7 @@ $aproodproduct1 = json_decode($aproodproduct);
 
             <div class="col-lg-3">
               <div class="d-flex align-items-center justify-content-md-center">
-                <img src="<?php echo BASE_URL;?>assets/images/icon__7.png" alt="" class="me-3" />
+                <img src="<?php echo BASE_URL;?>assets/images/icon__7.png" alt="seller" class="me-3" />
                 <div class="text-start lh-sm">
                   <h3 class="text-black-50 mb-0 fs-4 fwbold">Map Location</h3>
                   <!--<app-map [longitude]="this.seller.coordinates[0]" [latitude]="this.seller.coordinates[1]"></app-map>-->
@@ -317,7 +317,7 @@ $aproodproduct1 = json_decode($aproodproduct);
 
             <div class="col-lg-3">
               <div class="d-flex align-items-center justify-content-md-center">
-                <img src="<?php echo BASE_URL;?>assets/images/icon__8.png" alt="" class="me-3" />
+                <img src="<?php echo BASE_URL;?>assets/images/icon__8.png" alt="seller" class="me-3" />
                 <div class="text-start lh-sm">
                   <h3 class="text-black-50 mb-0 fs-4 fwbold"></h3>
                   <strong>Certified by TradersFind </strong>
@@ -328,7 +328,7 @@ $aproodproduct1 = json_decode($aproodproduct);
             <div class="col-lg-3">
               <!--*ngIf="seller.youtubeLink">-->
               <div class="d-flex align-items-center justify-content-md-center">
-                <img src="<?php echo BASE_URL;?>assets/images/icon__9.png" alt="" class="me-3" />
+                <img src="<?php echo BASE_URL;?>assets/images/icon__9.png" alt="seller" class="me-3" />
                 <div class="text-start lh-sm">
                   <h3 class="text-black-50 mb-0 fs-4 "></h3>
                   <a href="<?php echo$data1[0]->youtubeLink; ?>">Company Video</a>
@@ -367,7 +367,7 @@ $aproodproduct1 = json_decode($aproodproduct);
             </div>
             <div class="item-img">
                <img src="https://doc.tradersfind.com/images/<?php echo $product->images[0]->id; ?>.webp" alt="<?php echo $product->productName;?>" style="width: 140px;">
-                <!-- <img src="assets/images/products/valves.png" alt="" /> -->
+                <!-- <img src="assets/images/products/valves.png" alt="seller" /> -->
             </div>
         </a>
     </div>
@@ -497,7 +497,7 @@ $aproodproduct1 = json_decode($aproodproduct);
                                 'sellerVirtualContactPhone',
                                 this.urlService.getSellerUrl(this.sellerCompanyName,this.seller.id)
                               , '')" class="btn btn-sm btn-light  py-2 fw-semibold bg-grey w-100">
-                                  <img src="assets/images/phone.png" width="16" alt="" />
+                                  <img src="assets/images/phone.png" width="16" alt="phone" />
                                  phone number
                                 </a>
 
