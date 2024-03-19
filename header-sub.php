@@ -34,7 +34,25 @@
        
     }
 </style>
-<form method="post" action="<?php echo BASE_URL; ?>search/<?php echo str_replace(' ','-',$searchtext12) ?>" id="homepageSearch" class="w-100 position-relative ms-auto mw-600 order-3 order-md-2 mt-md-0 ddd">
+<script>
+function submitform(){
+       // var location=document.getElementById("locationSelect").value;
+        var searchtex=document.getElementById("search").value;
+        var baseurl='<?php echo BASE_URL?>';
+        var bsearchurl=baseurl;
+       
+        bsearchurl = bsearchurl + 'search/' + searchtex.replace(/ /g, '-');
+
+            
+        // else{
+        //     bsearchurl=bsearchurl+'search'+'/' + searchtex.replace(' ', '-')+ "/"+location;
+        // }
+        document.getElementById("homepageSearch").action=bsearchurl;
+        document.getElementById("homepageSearch").submit();
+
+    }
+</script>
+<form method="post" action="" id="homepageSearch" class="w-100 position-relative ms-auto mw-600 order-3 order-md-2 mt-md-0 ddd">
 
     <div class="input-group input-group-lg w-100 position-relative ms-auto mw-600 order-3 order-md-2 mt-md-0">
           <input  autofocus type="text" class="form-control " id="search" name="searchText"  placeholder="What are you looking for.."
@@ -42,7 +60,7 @@
 
           <div class="submit-button">
            
-            <button  type="submit" class="btn-primary-gradiant w-100 h-100 px-2 px-lg-5">
+            <button  type="submit" onclick="submitform()" class="btn-primary-gradiant w-100 h-100 px-2 px-lg-5">
               <img src="<?php echo BASE_URL; ?>assets/images/search-icon.png" width="18" class="me-lg-2" alt="search" />
               <div class="d-none d-lg-inline">Search</div>
             </button>

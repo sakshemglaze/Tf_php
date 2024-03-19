@@ -109,7 +109,7 @@ $SeoParams = [
   'schemaDescription' => isset($subcategory->schemaDescription) ? $subcategory->schemaDescription : '',
   ];
   //print_r("first if");
-          }else if( $numParts==3){//will be change
+          }else if( $numParts==4){//will be change
   
             $payload = array(
               'searchText' => $name ,
@@ -263,11 +263,18 @@ $SeoParams = [
     <?php endif;
       if($location == null || $location == 'All UAE' || $location == 'UAE') :?>
     <li class="breadcrumb-item active fwbold text-capitalize " aria-current="page" >
-    <?php echo str_replace("-"," ",basename($parts[2])); ?>
+    <?php echo str_replace("-"," ",basename($parts[3]));//will change ?>
     </li>
     <?php else :?>
+      <?php if(isset($subcategory)):?>
       <li class="breadcrumb-item text-capitalize"> <a href="/<?php echo $urlService->getCategoryUrl($subcategory->subCategoryName,$subcategory->id)?>">
-      <?php echo str_replace("-"," ",basename($parts[2])); ?> </a></li>
+      <?php echo str_replace("-"," ",basename($parts[3]));//will change ?> </a></li>
+      <?php endif;?>
+      <?php if(!isset($subcategory)):?>
+      <li class="breadcrumb-item text-capitalize"> <a href="<?php echo BASE_URL.basename($parts[2]).'/'.basename($parts[3]) //will change
+      ?>">
+      <?php echo str_replace("-"," ",basename($parts[3]));//will change ?> </a></li>
+      <?php endif;?>
       <li class="breadcrumb-item active fwbold text-capitalize " aria-current="page" >
         <?php echo str_replace("-"," ",$location); ?>
     <?php endif; ?>
@@ -275,7 +282,7 @@ $SeoParams = [
 </nav>
 <div style="text-align: center;">
 
-  <h1 class="me-2 fwbold  text-capitalize mb-0"><?php echo str_replace("-"," ", basename($parts[2]));?>  <!--will chnage -->
+  <h1 class="me-2 fwbold  text-capitalize mb-0"><?php echo str_replace("-"," ", basename($parts[3]));?>  <!--will chnage -->
   <?php if ($location == null) {
     echo '<span> in UAE</span>';
   } else {

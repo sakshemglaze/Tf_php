@@ -12,7 +12,7 @@
             $urlpart=explode('/',$currenturl);
             $companyName= $matches[1]; //($urlpart);
             
-            print_r($urlpart);
+           // print_r($urlpart);
             require_once 'post.php';
         $data =  get(
                 'api/guest/search-sellers-company-name/'.$companyName
@@ -423,7 +423,17 @@ $aproodproduct1 = json_decode($aproodproduct);
 
             <div class="container-fluid">
               <div class="row">
-                <app-map [latitude]="this.seller.coordinates[1]" [longitude]="this.seller.coordinates[0]"></app-map>
+               
+              <!-- <app-map [latitude]="this.seller.coordinates[1]" [longitude]="this.seller.coordinates[0]"></app-map> -->
+              <?php 
+              if($data1[0]->coordinates[1]<$data1[0]->coordinates[0]){
+              $latitude=$data1[0]->coordinates[1];
+              $longitude=$data1[0]->coordinates[0];
+              }else{
+                $latitude=$data1[0]->coordinates[0];
+              $longitude=$data1[0]->coordinates[1];
+              }
+              include_once "map.php";?>
               </div>
 
 
@@ -494,8 +504,8 @@ $aproodproduct1 = json_decode($aproodproduct);
                                         class="text-decoration-underline">terms and conditions</a>
                                     </label>
                                   </div>
-                                  <app-loadp *ngIf="this.requirementService.spannerval"
-                                    style="height: 50%; width: 100%; margin-left: -5px;"></app-loadp>
+                                  <!-- <app-loadp *ngIf="this.requirementService.spannerval"
+                                    style="height: 50%; width: 100%; margin-left: -5px;"></app-loadp> -->
                                     <button (click)="this.requirementService.onClickSubmitRequirement()"
                                     class="btn-primary-gradiant custom-button-style">
                                 Requirement
