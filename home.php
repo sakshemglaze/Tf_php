@@ -352,7 +352,7 @@ include "home-search.php"
             // Output item content here, you can access $items[$j] to get each item
             echo '<div class="position-relative bg-transparent swiper2 p-2">';
             echo '<img src="'.BASE_URL . $items[$j] . '" width="209" height="80" alt="" class="w-100 img-fluid" />';           
-            echo '<h4>' . $state[$j] . '</h4>'
+            echo '<h4>' . $state[$j] . '</h4>';
             echo '</div>';
           
         }
