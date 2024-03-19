@@ -18,20 +18,11 @@
 
 <html lang="en">
   <head>
-  <meta name="robots" content="index, follow">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <?php 
         include_once 'services/seo.php';
         $seo = new seoService();
         $seo->setSeoTags($SeoParams); ?>
-<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/home.css" />
-
-<!-- <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css" > -->
-<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
-<link rel="preload" href="<?php echo BASE_URL; ?>assets/images/header-bg.webp" as="image" type="image/webp" fetchpriority="high" >
-<link rel='stylesheet' href='<?php echo BASE_URL; ?>assets/css/owl.carousel.css'>
-    <link rel='stylesheet' href='<?php echo BASE_URL; ?>assets/css/style.css'>
-
   <!-- Google Tag Manager -->
   <script>
     (function (w, d, s, l, i) {
@@ -94,7 +85,7 @@ include "home-search.php"
         
     </div>
     <div class="col">
-      <div class="swiper2 new_img ">
+      <div class="swiper2">
         <div class="position-relative bg-transparent new_img_11">
           <img src="<?php echo BASE_URL; ?>assets/images/brands/new1.webp" alt="Post Buy Requirements" width="271" height="193" class="w-100 img-fluid" />
           <div class="hading2">
@@ -373,7 +364,7 @@ include "home-search.php"
  ?>
 </section>
 
-<section class="bg-grey bg-grey_22 new_img  p-4 my-5  ">
+<section class="bg-grey bg-grey_22 p-4 my-5  ">
 
   <h3 class="border-center text-center mb-4">
     EXPLORE PREMIUM SELLERS

@@ -126,6 +126,6 @@
       Copyright &copy; 2023 Interconnect Marketing Management L.L.C All rights reserved.
     </p>
   </footer>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+  
 <script src='<?php echo BASE_URL; ?>assets/js/owl.carousel.min.js'></script>
 <script  src="<?php echo BASE_URL; ?>assets/js/script.js"></script>

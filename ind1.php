@@ -37,8 +37,6 @@ include_once 'config.php';
         $seo = new seoService();
                 $seo->setSeoTags($SeoParams);
 ?>
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/indus.css" />
 </head>
 <body>
 <?php include_once "header-sub.php"; ?>

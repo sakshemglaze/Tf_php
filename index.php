@@ -9,7 +9,7 @@
       '/blog' => 'blog-listing.php',
       '/buyer-faq' => 'buyer-faq.php',
       '/group-category' => 'group-category.php',
-      '/industry' => 'industry.php',
+      '/industry' => 'ind1.php',
     
       '/post-buy-requirements' => 'post-buy-requirements.php',
       '/privacy-policy' => 'privacy-policy.php',

@@ -1,8 +1,6 @@
 <?php include_once 'config.php'; 
 
 ?>
-<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/hs.css" />
-<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
 <script>
     function submitform(){
         var location=document.getElementById("locationSelect").value;
