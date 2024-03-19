@@ -122,8 +122,10 @@
         Please wait, sending OTP ...
     </div>
                             <div class="mb-4 input-group">
+
                                 <!--<span><img src="assets/images/mail-black.png" alt=""></span>-->
                                 <span *ngIf="this.loginMethod != 'EMAIL'" class="contcode">
+
                                     <select formControlName="countryCode" id="ccId" name="countryCode" class="form-control mxw-50" style="width: auto;">
                                     <?php
                 $json_data = file_get_contents(  BASE_URL.'assets/testingJson/country_codes_v1.json');
@@ -150,8 +152,10 @@
                             <app-loadp *ngIf="requirementService1.spannerval" style="height: 50%; width: 60%; margin-left: -5px;"></app-loadp>
                             <!-- <button id="button1" formControlName="submit" -->
                             <button id="button1"
-                                class="btn btn-primary w-100 signbtn rounded-10 d-flex align-items-center justify-content-center" >
-                                <img src="assets/images/arrow-right.png" class="me-2" alt=""> Send OTP </button>
+
+                                class="btn btn-primary w-100 signbtn rounded-10 d-flex align-items-center justify-content-center">
+                                <img src="assets/images/arrow-right.png" class="me-2" alt="login"> Send OTP </button>
+
                         </form>
                         <app-otp *ngIf="this.requirementService.isVerification"
                         [mobileNo]="loginEmailFormGroup.get('email').value" 
