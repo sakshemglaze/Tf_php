@@ -27,7 +27,7 @@
                 </a></h3> </div>
                 <hr />
                 <button (click)="openPostRequirement(product.productName)"  class="btn-outline-gradiant btn btn-sm mt-1" >
-                    <img src="assets/images/mail-solid.png" alt="" /> Send Enquiry
+                    <img src="assets/images/mail-solid.png" alt="enquiry" /> Send Enquiry
                 </button>
             </div>
         </div>

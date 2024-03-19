@@ -26,9 +26,9 @@ include_once 'config.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php
     $SeoParams = [
-          'title' => 'Browse Sellers from UAE"s Largest Online B2B Portal',
-          'metaTitle' => 'Browse Sellers from UAE"s Largest Online B2B Portal',
-          'metaDescription' => 'Browse Sellers products and services on the UAE"s Largest Online B2B Portal. Connect with leading sellers for successful business deals on TradersFind',
+          'title' => 'Browse Sellers from UAE\'s Largest Online B2B Portal',
+          'metaTitle' => 'Browse Sellers from UAE\'s Largest Online B2B Portal',
+          'metaDescription' => 'Browse Sellers products and services on the UAE\'s Largest Online B2B Portal. Connect with leading sellers for successful business deals on TradersFind',
        ];
        include_once 'services/seo.php';
         $seo = new seoService();

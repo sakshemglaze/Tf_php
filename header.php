@@ -47,7 +47,7 @@
           </li>
         </ul>
         <a target="_blank" href="https://api.whatsapp.com/send?phone=971569773623&text=Browsed TradersFind" title="Whatsapp Chat" class="mx-4 whatsappBg">
-          <img src="<?php echo BASE_URL; ?>assets/images/whatsapp-chat.webp" alt="" width="186" height="44" /></a>
+          <img src="<?php echo BASE_URL; ?>assets/images/whatsapp-chat.webp" alt="login" width="186" height="44" /></a>
         <div class="login-button-top" *ngIf="this.userName==''">
           <img src="<?php echo BASE_URL; ?>assets/images/user.png" alt="" width="16" height="16" />
           <a href="<?php echo  BASE_URL ?>login" class="border-end-black px-3 me-3 lh-sm">Sign In</a>

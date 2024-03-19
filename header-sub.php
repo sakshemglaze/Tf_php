@@ -28,7 +28,7 @@
     .search-result {
         position: absolute;
       
-        width: 50%;
+        width:100%;
         z-index: 9999999; /* Set z-index to appear above other content */
      
        
@@ -43,7 +43,7 @@
           <div class="submit-button">
            
             <button  type="submit" class="btn-primary-gradiant w-100 h-100 px-2 px-lg-5">
-              <img src="<?php echo BASE_URL; ?>assets/images/search-icon.png" width="18" class="me-lg-2" alt="" />
+              <img src="<?php echo BASE_URL; ?>assets/images/search-icon.png" width="18" class="me-lg-2" alt="search" />
               <div class="d-none d-lg-inline">Search</div>
             </button>
           </div>
@@ -68,9 +68,7 @@
     <div class="form-control " id="option_com"></div>
 </ul>
                
-       
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="<?php echo BASE_URL;?>assets/js/jquery-3.6.1.min.js"> </script>
 <script>
     $(document).ready(function () {
         $('#search').keyup(function () {
@@ -169,7 +167,7 @@
         <a href="https://api.whatsapp.com/send?phone=971569773623&text=Browsed TradersFind" class="mx-4" title="Whatsapp_chat" aria-label="Chat with Tradersfind support team" target="_blank">
           <img src="<?php echo BASE_URL; ?>assets/images/whatsapp-chat.webp" alt="Whatsapp_chat" style="height: 46px;"></a>
         <div class="login-button-top d-flex align-items-center mw-200" *ngIf="!this.storageService.getItem('login')">
-          <img src="<?php echo BASE_URL; ?>assets/images/user.png" alt="" />
+          <img src="<?php echo BASE_URL; ?>assets/images/user.png" alt="user" />
           <a href="<?php echo BASE_URL; ?>login" class="border-end-black px-3 me-3 lh-sm nowrap">Sign In </a>
           <a href="<?php echo BASE_URL; ?>register-your-business">Join Free</a>
         </div>

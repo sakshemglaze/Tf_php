@@ -99,14 +99,14 @@
 
                                     <br>
                                     
-                                    <div class="d-flex mt-1 small about_text2">
+                                    <div class="d-flex mt-1 fs-6 about_text2">
                                         <li>
                                         <img src="<?php echo BASE_URL ?>assets/images/house.png" alt="Location_seller" width="18" height="19" class="me-3 w-18" />
                                         <b>Company :</b>
                                             <a href="/<?php echo $urlService->getSellerUrl($prodData->seller->sellerCompanyName,$prodData->seller->id) ?>" style="color: palevioletred;" target="_blank"> 
-                                            <span class="single-line">
+                                            <h3 class="single-line fs-6">
                                                 <?php print_r($prodData->seller->sellerCompanyName); ?>
-                                                </span>
+                                                  </h3>
                                             </a></li>
                                     </div>
                                     <div class="d-flex small mt-1 about_text2">

@@ -28,9 +28,10 @@ include_once 'config.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php
     $SeoParams = [
-          'title' => 'Browse Sellers from UAE"s Largest Online B2B Portal',
-          'metaTitle' => 'Browse Sellers from UAE"s Largest Online B2B Portal',
-          'metaDescription' => 'Browse Sellers products and services on the UAE"s Largest Online B2B Portal. Connect with leading sellers for successful business deals on TradersFind',
+          'title' => 'Browse Sellers from UAE\'s Largest Online B2B Portal',
+          'metaTitle' => 'Browse Sellers from UAE\'s Largest Online B2B Portal',
+          'metaDescription' => 'Browse Sellers products and services on the UAE\'s Largest Online B2B Portal. Connect with leading sellers for successful business deals on TradersFind',
+          'metaKeywords' => 'Tradersfind industry, industries',
        ];
        include_once 'services/seo.php';
         $seo = new seoService();
@@ -67,7 +68,7 @@ foreach ($data1 as $category) {
    $i= $i + 1;
     echo '<div class="row  gy-4 bg-white">';
     echo '<div class="col-lg-12">';
-    echo '<h3 class="text-center fwbold text-uppercase text-black-50"><a href="' . $urlService->getIndustryUrl($category->industryName, $category->id) .'">' . $category->industryName . '</a></h3>';
+    echo '<h1 class="text-center fwbold text-uppercase text-black-50"><a href="' . $urlService->getIndustryUrl($category->industryName, $category->id) .'">' . $category->industryName . '</a></h1>';
     echo '</div>';
     echo '<div class="col-lg-3 text-center">';
     if (!empty($category->image)) { 
@@ -87,7 +88,7 @@ foreach ($data1 as $category) {
         $catImage = IMAGE_URL . $cat->image->id . ".webp";
         echo '<a href="' . $urlService->getGroupCategoryUrl($cat->categoryName, $cat->id) . '"> <img data-src="' . $catImage . '" class="lazy" alt="Category" width="140px" /> </a>';
         echo '<div class="inddetails">';
-        echo '<h4 class="fs-6 fwbold"><a href="' . $urlService->getGroupCategoryUrl($cat->categoryName, $cat->id) . '" title="' . $cat->categoryName . '">' . $cat->categoryName . '</a></h4>';
+        echo '<h2 class="fs-6 fwbold"><a href="' . $urlService->getGroupCategoryUrl($cat->categoryName, $cat->id) . '" title="' . $cat->categoryName . '">' . $cat->categoryName . '</a></h2>';
         echo '<ul class="mt-4 text-black-50">';
         foreach (array_slice($cat->productsSubcategories, 0, 3) as $subcat) {
             echo '<li><a href="' . $urlService->getCategoryUrl($subcat->subCategoryName, $subcat->id) . '" title="' . $subcat->subCategoryName . '">' . $subcat->subCategoryName . '</a></li>';
@@ -112,7 +113,7 @@ foreach ($data1 as $category) {
                 echo '<div class="pro_image">';
                   echo'<img data-src="' . IMAGE_URL . $cat->image->id . '.webp" class="lazy"' . 'alt="Category" width="140px"/>';
                 echo'</div>';
-                echo'<h2 class="fs-6 fw-bold">' . $cat->categoryName .'</h2>';
+                echo'<h3 class="fs-6 fw-bold">' . $cat->categoryName .'</h3>';
               echo'</a>';
             echo '</li>';
           }
@@ -190,7 +191,7 @@ function renderIndustries(industries) {
     var industryTitleDiv = document.createElement('div');
     industryTitleDiv.classList.add('col-lg-12');
 
-    var industryTitle = document.createElement('h3');
+    var industryTitle = document.createElement('h1');
     industryTitle.classList.add('text-black-50','fwbold','text-center', 'text-uppercase');
     var industryTitleLink = document.createElement('a');
     industryTitleLink.href = urlService.getIndustryUrl(category.industryName, category.id);
@@ -249,7 +250,7 @@ function renderIndustries(industries) {
       var categoryDetailsDiv = document.createElement('div');
       categoryDetailsDiv.classList.add('inddetails');
 
-      var categoryTitle = document.createElement('h4');
+      var categoryTitle = document.createElement('h2');
       categoryTitle.classList.add('fs-6', 'fwbold');
       var categoryTitleLink = document.createElement('a');
       categoryTitleLink.href = urlService.getGroupCategoryUrl(cat.categoryName, cat.id);
@@ -343,18 +344,6 @@ function renderIndustries(industries) {
   });
 }
 
-  // Event listener to load more industries when scrolling to the bottom of the page
-  //window.addEventListener('scroll', function() {
-  //  if (isBottomOfPage()) {
-  //    loadMoreIndustries();
-  //  }
-  //});
-
-  // Load more industries initially if the page is already scrolled to the bottom
-  //if (isBottomOfPage()) {
-  //  loadMoreIndustries();
-  //}
-  
   var urlService = {
   getIndustryUrl: function(industryName, industryId) {
     return 'industry/' + industryName.toLowerCase().replace(/[^\w\s]/gi, '').replace(/\s+/g, '-') + '/' + industryId;

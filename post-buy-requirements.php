@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>asses/vendors/bootstrap/bootstrap.min.css">
 <?php
 include_once "header-sub.php";
+include_once "otp.php";
 ?>
 <p-toast></p-toast>
 <section class="bg-gradiant1 login-title text-center text-white fwbold pb100">
@@ -12,8 +13,11 @@ include_once "header-sub.php";
   </div>
 </section>
 <script>
-  
+       function closePopup() {
+    document.getElementById("popup-card-otp").style.display = "none";
+  }
   function submitRequirement(){
+  document.getElementById("popup-card-otp").style.display = "block";
   var productname=document.getElementById("productName").value;
   var quantity=document.getElementById("quantity").value;
   var Unit=document.getElementById("quantityUnit").value;

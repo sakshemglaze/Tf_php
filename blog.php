@@ -71,7 +71,7 @@ include_once "header-sub.php";
 
                 <div <?php if($blog->image != null && isset($blog->image->imageContent)): ?> <?php endif; ?>>
          
-                   <img src="<?php echo IMAGE_URL.$blog->image->id.'.webp';?>" alt="">
+                   <img src="<?php echo IMAGE_URL.$blog->image->id.'.webp';?>" alt="<?php echo $blog->title; ?>">
                 </div>
                 <div <?php if($blog->image == null || $blog->image == 'null' || $blog->image == ''): ?>      <?php endif; ?>>
                     <!-- <img class="img-fluid w-100" src="<?php echo BASE_URL;?>assets/images/YP-logo@2x.png"
