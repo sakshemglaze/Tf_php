@@ -31,11 +31,12 @@
               //$data = findActive($data1);
               //print_r($data1->seller->logo->id);
 //     SEO Attributes setting ..................
+              //print_r($data1->metaKeywords);
         $SeoParams = [
           'title' => isset($data1->metaTitle) && $data1->metaTitle != '' ? $data1->metaTitle : $data1->productName . ' in ' . $data1->seller->state . ' - ' . $data1->sellerCompanyName,
           'metaTitle' => isset($data1->metaTitle) && $data1->metaTitle != '' ? $data1->metaTitle : $data1->productName . ' in ' . $data1->seller->state . ' - ' . $data1->sellerCompanyName,
           'metaDescription' => isset($data1->metaDescription) && $data1->metaDescription != '' ? $data1->metaDescription : $data1->sellerCompanyName . ' - Offering ' . $data1->productName . ' in ' . $data1->seller->state . '. Get the best quality at the best price.',
-          'metaKeywords' => isset($data1->metaKeywords) && $data1->metaKeywords != '' ? implode(',', $data1->metaKeywords) : $data1->productName . ', ' . $data1->productName . ' in ' . $data1->seller->state . ', ' . $data1->productName . ' in UAE',
+          'metaKeywords' => isset($data1->metaKeywords) && $data1->metaKeywords != '' & $data1->metaKeywords[0] !='' ? implode(',', $data1->metaKeywords) : $data1->productName . ', ' . $data1->productName . ' in ' . $data1->seller->state . ', ' . $data1->productName . ' in UAE',
           'fbTitle' => isset($data1->fbTitle) && $data1->fbTitle != '' ? $data1->fbTitle : $data1->productName,
           'fbDescription' => isset($data1->fbDescription) && $data1->fbDescription != '' ? $data1->fbDescription : $data1->productDescription,
           'fbImage' => isset($data1->fbImage) ? API_URL . 'api/guest/imageContentDownload/' . $data1->fbImage.id : 'undefined',
@@ -181,11 +182,11 @@
                     </div>
                     <div class="d-flex align-items-center flex-wrap mt-3">
                       <div class="d-flex align-items-center me-3">
-                        <img src="<?php echo BASE_URL; ?>assets/images/crown.png" class="me-1" alt="" />
+                        <img src="<?php echo BASE_URL; ?>assets/images/crown.png" class="me-1" alt="premium" />
                         <span>Premium Supplier</span>
                       </div>
                       <div class="d-flex align-items-center">
-                        <img src="<?php echo BASE_URL; ?>assets/images/verifiedw2.png" alt="" class="me-1" />
+                        <img src="<?php echo BASE_URL; ?>assets/images/verifiedw2.png" alt="verified" class="me-1" />
 
                       </div>
                     </div>
@@ -200,7 +201,7 @@
                       </a>
                       <button (click)="openPostRequirement(prodDetails.productName)"
                         class="btn-outline-gradiant btn btn-sm w-100">
-                        <img src="assets/images/mail-solid.png" alt="" /> Send
+                        <img src="assets/images/mail-solid.png" alt="mail" /> Send
                         Inquiry
                       </button>
                     </div>

@@ -29,7 +29,7 @@ ini_set('display_errors', 1);
           'title' => isset($data1->metaTitle) && $data1->metaTitle != '' ? $data1->metaTitle : $data1->productName . ' in ' . $data1->seller->state . ' - ' . $data1->sellerCompanyName,
           'metaTitle' => isset($data1->metaTitle) && $data1->metaTitle != '' ? $data1->metaTitle : $data1->productName . ' in ' . $data1->seller->state . ' - ' . $data1->sellerCompanyName,
           'metaDescription' => isset($data1->industryDescription) && $data1->industryDescription != '' ? $data1->industryDescription : '',
-          'metaKeywords' => isset($data1->Keywords) && $data1->Keywords != '' ? implode(',', $data1->Keywords) : '',
+          'metaKeywords' => isset($data1->Keywords) && $data1->Keywords != '' ? implode(',', $data1->Keywords) : $data1->industryName,
           'fbTitle' => isset($data1->fbTitle) && $data1->fbTitle != '' ? $data1->fbTitle : $data1->productName,
           'fbDescription' => isset($data1->fbDescription) && $data1->fbDescription != '' ? $data1->fbDescription : $data1->productDescription,
           'fbImage' => isset($data1->fbImage) ? API_URL . 'api/guest/imageContentDownload/' . $data1->fbImage.id : 'undefined',
@@ -95,7 +95,7 @@ include_once "header-sub.php";
                                 echo '<ul class="list-style-disc ms-4">';
                                     foreach (array_slice($cat->productsSubcategories, 0, 5) as $subcat) {
                                         echo '<li>';
-                                            echo '<a href="' . BASE_URL  . $urlService->getCategoryUrl($subcat->subCategoryName, $subcat->id) . '">' . $subcat->subCategoryName . '</a>';
+                                            echo '<h3 class="fs-6"><a href="' . BASE_URL  . $urlService->getCategoryUrl($subcat->subCategoryName, $subcat->id) . '">' . $subcat->subCategoryName . '</a></h3>';
                                         echo '</li>';
                                                                         }
                                     echo '<li>';

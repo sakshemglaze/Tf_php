@@ -5,7 +5,7 @@
 <section class="bg-gradiant1 login-title text-center text-white fwbold pb100">
     <div class="container">
         <button type="button" class="btn-close float-end mt-1" aria-label="Close" onclick="closePopup();"></button>
-        <h2 class="fs-3 pt20">Let Us know What you Need</h2>
+        <span class="fs-3 pt20">Let Us know What you Need</span>
         <p class="mt-0 mb-0 ">Tell us your requirement. Get Instant quotes from Verified Sellers</p>
 
     </div>
@@ -130,7 +130,7 @@
                             </a>
                         </div>
                         <div class="media-body">
-                            <h4 class="media-heading fwbold  mb-0">Immediate Responses</h4>
+                            <span class="media-heading fwbold  mb-0">Immediate Responses</span>
                             <p class="mt-0 mb-0">Get instant response from sellers.</p>
                         </div>
                     </div>
@@ -142,7 +142,7 @@
                             </a>
                         </div>
                         <div class="media-body">
-                            <h4 class="media-heading fwbold  mb-0">Genuine Sellers</h4>
+                            <span class="media-heading fwbold  mb-0">Genuine Sellers</span>
                             <p class="mt-0 mb-0">Verified sellers that meet your needs.</p>
                         </div>
                     </div>
@@ -154,7 +154,7 @@
                             </a>
                         </div>
                         <div class="media-body">
-                            <h4 class="media-heading fwbold  mb-0">Multiple Choices</h4>
+                            <span class="media-heading fwbold  mb-0">Multiple Choices</span>
                             <p class="mt-0 mb-0">Get the power to choose the best!</p>
                         </div>
                     </div>

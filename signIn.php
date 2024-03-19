@@ -12,7 +12,7 @@
             <div class="row g-0">
                 <div class="col-lg-5 ">
                     <div class="position-relative d-none d-lg-block">
-                        <img src="assets/images/login-bg2.jpg" class="w-100" alt="">
+                        <img src="assets/images/login-bg2.jpg" class="w-100" alt="login">
                         <div class="middle-content">
                             <h4 class="border-bottom-red-left text-white fs-6">Welcome back to<br>
                                 <strong>TradersFind</strong>
@@ -20,7 +20,7 @@
                             <p class="mt-4 text-white">Sign in to continue to your account</p>
                         </div>
                         <div class="logo-login-fotter"> <a href="/">
-                                <img src="assets/images/footer-logo.webp" width="200" alt=""> </a>
+                                <img src="assets/images/footer-logo.webp" width="200" alt="login"> </a>
                         </div>
                     </div>
                 </div>
@@ -60,7 +60,7 @@
         Please wait, sending OTP ...
     </div>
                             <div class="mb-4 input-group">
-                                <!--<span><img src="assets/images/mail-black.png" alt=""></span>-->
+                                <!--<span><img src="assets/images/mail-black.png" alt="mail"></span>-->
                                 <span *ngIf="this.loginMethod != 'EMAIL'">
                                     <select formControlName="countryCode" id="ccId" name="countryCode" class="form-control mxw-50" style="width: auto;">
                                     <?php
@@ -82,14 +82,14 @@
                             </div>
                             
                             <!--<div class="signininput mb-2" >
-                                <span><img src="assets/images/otp.png" alt=""></span>
+                                <span><img src="assets/images/otp.png" alt="otp"></span>
                                 <input formControlName="password" type="password" placeholder="Password">
                             </div>-->
                             <app-loadp *ngIf="requirementService1.spannerval" style="height: 50%; width: 60%; margin-left: -5px;"></app-loadp>
                             <!-- <button id="button1" formControlName="submit" -->
                             <button id="button1"
                                 class="btn btn-primary w-100 signbtn rounded-10 d-flex align-items-center justify-content-center">
-                                <img src="assets/images/arrow-right.png" class="me-2" alt=""> Send OTP </button>
+                                <img src="assets/images/arrow-right.png" class="me-2" alt="login"> Send OTP </button>
                         </form>
                         <app-otp *ngIf="this.requirementService.isVerification"
                         [mobileNo]="loginEmailFormGroup.get('email').value" 
