@@ -4,7 +4,6 @@
     include_once 'services/masked.php';
     $maskedService = new MaskingService();
 ?>
-<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/searchPremium.css" />
 
 <div class="bg-gradiant rounded-20 position-relative shadow-sm mb-4">
         <div class="premium_listing">
@@ -135,13 +134,13 @@
                                             ?> </span>
         </div>
     </div>
-    <div class="col-sm-6">
-        <a href="#" target="_blank" class="whatsappbtn btn btn-sm w-100">
+    <div class="col-sm-6 whatsappbtn ">
+        <a href="#" target="_blank" class="btn btn-sm w-100">
             Connect on whatsapp
         </a>
     </div>
-    <div class="col-sm-6">
-        <button onclick="openPopup()" class="btn-outline-gradiant btn btn-sm w-100 d-center">
+    <div class="col-sm-6 btn-outline-gradiant">
+        <button onclick="openPopup()" class="btn btn-sm w-100 d-center text-white">
             <img src="<?php echo BASE_URL?>assets/images/mail-solid.png" alt="Mail" width="17" height="9" /> Send Inquiry
         </button>
     </div>

@@ -37,13 +37,13 @@
  if (preg_match('~^/category/([^/]+)/([^/]+)$~', $url, $matches)||preg_match('~^/category/([^/]+)/([^/]+)/([^/]+)$~', $url,$matches)|| preg_match('~^/search/([^/]+)?([^/]+)$~', $url,$matches)||preg_match('~^/search/([^/]+)/([^/]+)$~', $url, $matches)) {
    include 'search.php'; 
  }
- if (preg_match('~^/seller/([^/]+)/([^/]+)$~', $url, $matches)) {
+ if (preg_match('~^/seller/([^/]+)$~', $url, $matches)) {
    include 'sellerdetail.php'; 
  }
  if (preg_match('~^/product/([^/]+)/([^/]+)$~', $url, $matches)) {
    include 'productDetail.php';
  }
-  if (preg_match('~^/blog/([^/]+)$~', $url, $matches)) {
+ if (preg_match('~^/blog/([^/]+)$~', $url, $matches)) {
    include 'blog.php';
  }
 

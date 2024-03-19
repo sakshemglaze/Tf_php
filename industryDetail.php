@@ -80,7 +80,7 @@ include_once "header-sub.php";
         </div>
 
         <?php 
-        foreach ($data1->productsCategories as $cat) {
+       2foreach ($data1->productsCategories as $cat) {
                 echo '<div class="col-lg-4">';
                     echo '<div class="card border-0 category-hover">';
                         echo '<div class="card-body">';

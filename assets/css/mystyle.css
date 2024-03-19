@@ -927,7 +927,7 @@ textarea:focus {
 
 .btn-outline-gradiant:hover {
     border: 1px solid #319038;
-    color: #319038;
+    color: #319038 !important;
     background-color: #f8f8f8;
     background-image: none;
 }
@@ -2755,12 +2755,10 @@ h3.fwbold {
 
 .about_text2 {
     position: relative;
-    padding-left: 82px;
 }
-
 .about_text2 b {
-    position: absolute;
-    left: 0;
+  position: absolute;
+  left: 0;
 }
 
 .about_text3 {
@@ -3082,4 +3080,8 @@ h3.fwbold {
         .has-category {
             font-size: 18px;
         }
+}
+
+.footer_call li {
+    width: 100% !important;
 }

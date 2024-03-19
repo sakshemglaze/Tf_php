@@ -43,22 +43,6 @@
     background-color: #f8f8f8;
     background-image: none;
 }
-.whatsappbtn {
-  border: 1px solid #319038;
-  color: #fff;
-  background-color: #319038;
-  border-radius: 7px;
-  -webkit-border-radius: 7px;
-  -moz-border-radius: 7px;
-  -ms-border-radius: 7px;
-  -o-border-radius: 7px;
-}
-
-.whatsappbtn:hover {
-  border: 1px solid #319038;
-  color: #319038;
-  background-color: #f8f8f8;
-}
 .about_text2{
     display: block;
     display: -webkit-box;
