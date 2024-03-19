@@ -150,7 +150,7 @@
                        
                 $('#search').val(suggestion.subCategoryName); 
                 var searchTerm = $('#search').val().replace(/\s+/g, '-');
-                var actionURL = "category/" + encodeURIComponent(searchTerm)+'/'+suggestion.id;
+                var actionURL = "<?php echo  BASE_URL ?>category/" + encodeURIComponent(searchTerm)+'/'+suggestion.id;
                 $('#homepageSearch').attr('action', actionURL);
                 $('#homepageSearch').submit();
             });
@@ -169,7 +169,7 @@
             
                 $('#search').val(suggestion.productName); 
                 var searchTermp = $('#search').val().replace(/\s+/g, '-');
-                var actionURL = "product/" + encodeURIComponent(searchTermp)+'/'+suggestion.id;
+                var actionURL = "<?php echo  BASE_URL ?>product/" + encodeURIComponent(searchTermp)+'/'+suggestion.id;
                 $('#homepageSearch').attr('action', actionURL);
                 $('#homepageSearch').submit();
                 $('.search-result').hide(); 
@@ -188,7 +188,7 @@
                     var suggestionItem = $('<li></li>').text(suggestion).click(function() {
                         $('#search').val(suggestion); 
                 var searchTermp = $('#search').val().replace(/\s+/g, '-');
-                var actionURL = "seller/" + encodeURIComponent(searchTermp.toLowerCase());
+                var actionURL = "<?php echo  BASE_URL ?>seller/" + encodeURIComponent(searchTermp);
                 $('#homepageSearch').attr('action', actionURL);
                 $('#homepageSearch').submit();
 
