@@ -142,10 +142,10 @@ $aproodproduct1 = json_decode($aproodproduct);
                       </button>
                   <?php endif;?>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-6 whatsappbtn">
                   
                   <a target="_blank" href="<?php echo $whatsappUrl->getProductToWhatsapp('', $data1[0]->id, $data1)?>"
-                    class="whatsappbtn btn py-2 btn-sm w-100">
+                    class=" btn py-2 btn-sm w-100">
                     <!--<a target="_blank" href="https://api.whatsapp.com/send?phone=971569773623&text=Browsed TradersFind" class="whatsappbtn btn py-2 btn-sm w-100">-->
                     Connect on whatsapp
                   </a>
@@ -524,26 +524,28 @@ $aproodproduct1 = json_decode($aproodproduct);
                           
                               </p>
                               <p class="fs-14"> <?php echo isset($data1[0]->designation);?> </p>
-                              <div class="d-flex align-items-center gap-3 link_pp">
+                              <div class="d-flex align-items-center gap-3">
                                 <button class="btn btn-sm btn-light  py-2 fw-semibold bg-grey w-100">
                                   <img src="assets/images/phone.png" width="16" alt="phone" />
                                  <?php $maskedService->getMaskedNumber($data1[0]->sellerVirtualContactPhone); ?>
                     </button>
 
 
+                    
+                                <div class=" col-lg-6 whatsappbtn">
                                 <a target="_blank"
                                   href="https://api.whatsapp.com/send?phone=971569773623&text=Visited TradersFind Pages"
-                                  class="whatsappbtn btn btn-sm fs-6 py-2 fw-semibold w-100">
+                                  class=" btn btn-sm fs-6 py-2 fw-semibold w-100">
                                   Connect on whatsapp
                                 </a>
-
+</div>
                               </div>
                             </div>
                           </div>
                         </div>
-                        <app-otp *ngIf="this.requirementService.isVerification"
+                        <!-- <app-otp *ngIf="this.requirementService.isVerification"
                           [countryCode]="this.requirementService.prodDetailFrom.value.noCode"
-                          [mobileNo]="this.requirementService.prodDetailFrom.value.mobileNo"></app-otp>
+                          [mobileNo]="this.requirementService.prodDetailFrom.value.mobileNo"></app-otp> -->
                       </div>
                     </div>
                   </div>

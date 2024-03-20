@@ -80,13 +80,13 @@
                                         <ul role="list" class="list_box">
                                             <?php if (!empty($prodData->productDescription)) { ?>
                                                   <?php foreach (array_slice(json_decode($prodData->specifications, true), 0, 4) as $spec) { ?>
-                                                      <li role="listitem" tabindex="0" class="single-line">
+                                                      <li role="listitem" tabindex="0" class="single-line small">
                                                         <span><b><?php echo $spec['SpecificationName']; ?> :</b> <?php echo $spec['SpecValue']; ?></span>
                                                       </li>
                                                   <?php } ?>
                                             <?php } else { ?>
                                                   <?php foreach (array_slice(json_decode($prodData->specifications, true), 0, 4) as $spec) { ?>
-                                                     <li role="listitem" tabindex="0" class="single-line">
+                                                     <li role="listitem" tabindex="0" class="single-line small">
                                                        <span><b><?php echo $spec['SpecificationName']; ?> :</b> <?php echo $spec['SpecValue']; ?></span>
                                                     </li>
                                                   <?php } ?>
@@ -99,7 +99,7 @@
 
                                     <br>
                                     
-                                    <div class="d-flex mt-1 fs-8 about_text2">
+                                    <div class="d-flex mt-1 small about_text2">
                                         
                                         <img src="<?php echo BASE_URL ?>assets/images/house.png" alt="Location_seller" width="18" height="19" class="me-3 w-18" />
                                         <b>Company:</b>
@@ -107,7 +107,7 @@
                                             <h3 class="single-line fs-6">
                                                 <?php print_r($prodData->seller->sellerCompanyName); ?>
                                                   </h3>
-                                            </a>
+                                            </a> 
                                     </div>
                                     <div class="d-flex small mt-1 about_text2">
                                         <img src="<?php echo BASE_URL ?>assets/images/location-3.svg" width="18" height="19" alt="Seller_Location" class="me-3 w-18" />

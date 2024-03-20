@@ -1,5 +1,4 @@
 <?php include_once 'config.php'; ?>
-<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/notfound.css" />
 <?php
 include_once "header.php"
 ?>
