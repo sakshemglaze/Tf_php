@@ -2,8 +2,8 @@
 
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
 <link rel='stylesheet' href='<?php echo BASE_URL; ?>assets/css/owl.carousel.css'>
-    <!--<link rel='stylesheet' href='<?php echo BASE_URL; ?>assets/css/style.css'>-->
-<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/head.css" >
+<link rel='stylesheet' href='<?php echo BASE_URL; ?>assets/css/mystyle.css'>
+
 <nav class="navbar sticky-top navbar-expand-lg bg-white">
     <div class="container-fluid">
       <a class="navbar-brand" href="<?php echo BASE_URL; ?>"><img src="<?php echo BASE_URL; ?>assets/images/TradersFind.webp" alt="TradersFind" width="110" height="70" />

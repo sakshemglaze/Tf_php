@@ -12,8 +12,7 @@
         $seo = new seoService();
                 $seo->setSeoTags($SeoParams);
 ?>
-<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/blog.css" />
-<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
+
 </head>
 <body>
 <?php

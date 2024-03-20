@@ -11,8 +11,6 @@
             $currenturl= $_SERVER['REQUEST_URI'];
             $urlpart=explode('/',$currenturl);
             $companyName= $matches[1]; //($urlpart);
-            
-           // print_r($urlpart);
             require_once 'post.php';
         $data =  get(
                 'api/guest/search-sellers-company-name/'.$companyName
@@ -53,8 +51,6 @@ $aproodproduct1 = json_decode($aproodproduct);
        ];
       $seo->setSeoTags($SeoParams);
         ?>
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/sellweb.css" />
 </head>
 <body>
 <script src="<?php echo BASE_URL; ?>assets/js/lazy-load.js"></script>

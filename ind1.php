@@ -37,8 +37,6 @@ include_once 'config.php';
         $seo = new seoService();
                 $seo->setSeoTags($SeoParams);
 ?>
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/indus.css" />
 </head>
 <body>
 <?php include_once "header-sub.php"; ?>
@@ -84,7 +82,7 @@ foreach ($data1 as $category) {
     echo '<div class="row gy-4">';
     foreach (array_slice($category->productsCategories, 0, 6) as $cat) {
         echo '<div class="col-lg-4">';
-        echo '<div class="d-flex align-items-center gap-3">';
+        echo '<div class="d-flex align-items-center gap-2">';
         $catImage = IMAGE_URL . $cat->image->id . ".webp";
         echo '<a href="' . $urlService->getGroupCategoryUrl($cat->categoryName, $cat->id) . '"> <img data-src="' . $catImage . '" class="lazy" alt="Category" width="140px" /> </a>';
         echo '<div class="inddetails">';

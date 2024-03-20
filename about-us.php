@@ -1,8 +1,32 @@
-<?php include_once 'config.php'; ?>
-<link rel="stylesheet" href="./<?php echo BASE_URL; ?>assets/css/about.css" />
-<?php
-include_once 'header-sub.php';
+<?php include_once 'config.php'; 
+
+$SeoParams = [
+  'title' => 'Your Ultimate B2B and B2C Platform - TradersFind',
+  'metaTitle' => 'Your Ultimate B2B and B2C Platform - TradersFind',
+  'metaDescription' => null,
+              'metaKeywords' => null,
+              'fbTitle' => null,
+              'fbDescription' => null,
+              'fbImage' => null,
+              'fbUrl' => null,
+              'twitterTitle' => null,
+              'twitterDescription' => null,
+              'twitterImage' => null,
+              'twitterSite' => null,
+              'twitterCard' => null,
+];
 ?>
+<html lang="en">
+  <head>
+  <meta name="robots" content="index, follow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <?php 
+        include_once 'services/seo.php';
+        $seo = new seoService();
+        $seo->setSeoTags($SeoParams); ?>
+</head> 
+<body>
+  <?php include_once 'header-sub.php'; ?>
 <section class="mt-4 mb-4">
   <div class="container">
     <div class="row">
@@ -108,6 +132,7 @@ Innovation: We encourage creative thinking and the exploration of new possibilit
     </div>
   </div>
 </section>
+</body></html>
 <?Php
 include_once "footer.php";
 ?>

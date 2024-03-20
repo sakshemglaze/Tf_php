@@ -1,5 +1,5 @@
 <?php include_once 'config.php'; ?>
-<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/tradersimg.css" />
+
 <?php
 
 $width = '';

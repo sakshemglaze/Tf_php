@@ -1,4 +1,4 @@
-<html>
+<html lang="en">
     <head>
 
 
@@ -39,7 +39,6 @@
   $seo = new seoService();
           $seo->setSeoTags($SeoParams);
 ?>
-<link rel="stylesheet" href="<?php echo BASE_URL;?>/assets/css/blogls.css" />
 </head>
 <body>
 <?php 

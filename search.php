@@ -230,9 +230,7 @@ $SeoParams = [
     $seo->setSeoTags($SeoParams);
   }
 ?>
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css" >
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/enquery.css" > 
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
     <script src="<?php echo BASE_URL;?>assets/js/jquery-3.6.1.min.js"> </script>
     

@@ -1,5 +1,4 @@
 <?php include_once 'config.php'; ?>
-<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/hb.css" />
 <section class="container-fluid">
     <div class="row gy-4">
       <div class="col-lg-12">

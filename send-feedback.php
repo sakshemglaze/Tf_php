@@ -1,5 +1,30 @@
-<?php include_once 'config.php'; ?>
-<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/sendfeed.css" />
+<?php include_once 'config.php'; 
+$SeoParams = [
+  'title' => 'TradersFind Feedback Form: Improve Trading Journey',
+  'metaTitle' => 'TradersFind Feedback Form: Improve Trading Journey',
+  'metaDescription' => 'Share your valuable feedback through our TradersFind feedback form to enhance the trading experience. Your input makes a difference!',
+              'metaKeywords' => null,
+              'fbTitle' => null,
+              'fbDescription' => null,
+              'fbImage' => null,
+              'fbUrl' => null,
+              'twitterTitle' => null,
+              'twitterDescription' => null,
+              'twitterImage' => null,
+              'twitterSite' => null,
+              'twitterCard' => null,
+];
+?>
+<html lang="en">
+  <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<?php 
+        include_once 'services/seo.php';
+        $seo = new seoService();
+        $seo->setSeoTags($SeoParams); ?>
+
+</head>
+<body>
 <?php
 include_once 'header-sub.php';
 ?>
@@ -89,6 +114,7 @@ include_once 'header-sub.php';
     </div>
   </div>
 </section>
+</body></html>
 <?php
 include_once "footer.php";
 ?>
