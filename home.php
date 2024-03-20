@@ -107,7 +107,7 @@ include "home-search.php"
           <img src="<?php echo BASE_URL; ?>assets/images/brands/new2.webp" alt="Grow Business" width="271" height="193" class="w-100 img-fluid" />
           <div class="hading2">
             <p>Want to grow your <br> business 10X Faster?</p>
-            <a href="<?php echo  BASE_URL ?>registration">Sell on TradersFind</a>
+            <a href="<?php echo  BASE_URL ?>register-your-business">Sell on TradersFind</a>
           </div>
         </div>
       </div>
