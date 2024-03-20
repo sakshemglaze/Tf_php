@@ -5,7 +5,7 @@
  include_once 'config.php'; 
  
  include_once 'services/url.php';
- $url = new UrlService();
+ $urlpro = new UrlService();
 ?>
 <?php
    
@@ -147,7 +147,7 @@
 
                     <h2 class="fwbold fs-4 mt-3">
                       <?php if($data1->seller && $data1->seller->sellerCompanyName ) : ?>
-                     <a href="/<?php echo $url->getSellerUrl($data1->seller->sellerUrl,$data1->seller->id) ?>" target="_blank" class="text-blue"> <?php echo $data1->seller->sellerCompanyName ?> </a></h2>
+                     <a href="/<?php echo $urlpro->getSellerUrl($data1->seller->sellerUrl,$data1->seller->id) ?>" target="_blank" class="text-blue"> <?php echo $data1->seller->sellerCompanyName ?> </a></h2>
                      <?php endif; ?>
                     <div class="fs-5 mt-2">
                       <img class="me-2" src="<?php echo BASE_URL; ?>assets/images/location-3.svg" width="15" alt="location" />
@@ -377,9 +377,9 @@
         </div>
       </form>
       
-      <app-otp *ngIf="this.requirementService.isVerification"
+      <!-- <app-otp *ngIf="this.requirementService.isVerification"
       [countryCode]="this.requirementService.prodDetailFrom.value.noCode"
-      [mobileNo]="this.requirementService.prodDetailFrom.value.mobileNo"></app-otp>
+      [mobileNo]="this.requirementService.prodDetailFrom.value.mobileNo"></app-otp> -->
 
       
 

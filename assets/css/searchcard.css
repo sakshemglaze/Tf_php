@@ -491,7 +491,7 @@ a:hover {
 }
 
 li {
-        display: inline-block;
+        
         white-space: nowrap; /* Prevent text wrapping */
         overflow: hidden; /* Hide overflowing text */
         text-overflow: ellipsis; /* Show ellipsis for overflowing text */
@@ -557,3 +557,4 @@ li {
     padding: 42px 16px !important;
   }
 }
+ }

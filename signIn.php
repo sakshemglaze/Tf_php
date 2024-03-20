@@ -4,7 +4,83 @@
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/footer.css" >
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
     <script src="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.bundle.min.js"></script>
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        var loginMethod='';
+        var mobilno='';
+        function onClickEmailLogin()
+        {
+            $('.contcode').hide();
+           console.log("email");
+           loginMethod="EMAIL";
+        }
+        function onClickWhatsappLogin()
+        {
+            $('.contcode').show();
+            loginMethod="WHATSAPP";
+            console.log("whatsapp");
+        }
+        function onClickSmsLogin()
+        {
+            $('.contcode').show();
+            loginMethod="SMS";
+            console.log("Sms");
+        }
+  
+        function verifyOtp(event,lolnumber){
+           // var otm=document.getElementById('otp').value;
+           // console.log("success"+event+lol);
+           
+            $.ajax({
+                    url: "https://api.tradersfind.com/api/guest/users/"+lolnumber,
+                    dataType: "json",
+                    data: { },
+                    success: function (data) {
+                        console.log(data);
+                       
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            closePopup();
+
+        }
+
+        function closePopup() {
+    document.getElementById("popup-card-otp").style.display = "none";
+  }
+        </script>
+        <?php
+        include_once 'post.php';
+        function sendOtp($contenctNo){
+
+            $payload=array('phone'=> '+919639330901', 'loginmethod'=>'WHATSAPP');
+            $data123=post(
+            'api/otps',
+            $payload,
+            false,
+            //isWhatsapp ? { type: 'whatsapp' } : {type: 'email'},
+            array("type"=> 'WHATSAPP'),
+            false);
+            include_once 'otp.php';
+           // echo $contenctNo;
+            echo '<script>document.getElementById("popup-card-otp").style.display = "block";</script>';
+            //print_r($data123);
+        }
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $contenctNo=null;
+            if(isset($_POST['mobileNa'])){
+                $countryCode=isset($_POST['countryCode'])?$_POST['countryCode']:'';
+            $mobileno=isset($_POST['mobileNa'])?$_POST['mobileNa']:'';
+            $contenctNo=$countryCode.$mobileno;
+            echo $contenctNo;
+            $respons=sendOtp($contenctNo);
+            }
+            $contenctNo=null;
+
+        }
+        ?>
    
 <div class="Signin-body">
     <div class="signin-panel">
@@ -32,25 +108,11 @@
                             <?php
                                 $sendingSMS=false;
                              ?>
-                        <form class="p-4">
+                        <form class="p-4" method="post" >
     <div class="text-center mb-3" <?php echo $sendingSMS ? 'style="display: none;"' : ''; ?>>
-        <?php
-        function onClickEmailLogin()
-        {
-            // Function definition
-        }
-        function onClickWhatsappLogin()
-        {
-            // Function definition
-        }
-        function onClickSmsLogin()
-        {
-            // Function definition
-        }
-        ?>
-   <input type="radio" id="password" value="password" name="loginmode" formControlName="loginmode" onclick="onClickEmailLogin()">
+   <input type="radio" id="password" value="password" name="loginmode" formControlName="loginmode" onclick="onClickEmailLogin()" >
 &nbsp;<label for="password">Email OTP &nbsp;</label>
-<input type="radio" id="whatsapp" value="whatsapp" name="loginmode" formControlName="loginmode" onclick="onClickWhatsappLogin()">
+<input type="radio" id="whatsapp" value="whatsapp" name="loginmode" formControlName="loginmode" onclick="onClickWhatsappLogin()" checked>
 &nbsp;<label for="whatsapp">Whatsapp OTP &nbsp;</label>
 <input type="radio" id="sms" value="sms" name="loginmode" formControlName="loginmode" onclick="onClickSmsLogin()">
 &nbsp;<label for="sms">SMS OTP &nbsp;</label>
@@ -60,11 +122,13 @@
         Please wait, sending OTP ...
     </div>
                             <div class="mb-4 input-group">
-                                <!--<span><img src="assets/images/mail-black.png" alt="mail"></span>-->
-                                <span *ngIf="this.loginMethod != 'EMAIL'">
+
+                                <!--<span><img src="assets/images/mail-black.png" alt=""></span>-->
+                                <span *ngIf="this.loginMethod != 'EMAIL'" class="contcode">
+
                                     <select formControlName="countryCode" id="ccId" name="countryCode" class="form-control mxw-50" style="width: auto;">
                                     <?php
-                $json_data = file_get_contents('<?php echo BASE_URL; ?>assets/testingJson/country_codes_v1.json');
+                $json_data = file_get_contents(  BASE_URL.'assets/testingJson/country_codes_v1.json');
                 $countries = json_decode($json_data);
 
                 foreach ($countries as $code) {
@@ -77,7 +141,7 @@
                 ?>
                                     </select>
                                 </span>
-                                <input type="email" formControlName="email" placeholder="Mobile or Email ID" class="form-control">
+                                <input type="text" id="contentId"  name="mobileNa" placeholder="Mobile or Email ID" class="form-control" autocomplete="off">
                                 
                             </div>
                             
@@ -88,8 +152,10 @@
                             <app-loadp *ngIf="requirementService1.spannerval" style="height: 50%; width: 60%; margin-left: -5px;"></app-loadp>
                             <!-- <button id="button1" formControlName="submit" -->
                             <button id="button1"
+
                                 class="btn btn-primary w-100 signbtn rounded-10 d-flex align-items-center justify-content-center">
                                 <img src="assets/images/arrow-right.png" class="me-2" alt="login"> Send OTP </button>
+
                         </form>
                         <app-otp *ngIf="this.requirementService.isVerification"
                         [mobileNo]="loginEmailFormGroup.get('email').value" 

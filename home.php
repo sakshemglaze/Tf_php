@@ -244,7 +244,9 @@ include "home-search.php"
                   <select formControlName="quantityUnit" class="form-control"
                     placeholder="eg:  Dozen,  Piece(s),  Tonr">
                     <?php
-                      $resUnit=file_get_contents('<?php echo BASE_URL; ?>assets/testingJson/Units.json');
+                 
+                    $resUnit = file_get_contents(BASE_URL . 'assets/testingJson/Units.json');
+
                       $allunit=json_decode($resUnit);
                       foreach($allunit as $unit){
                              ?>
@@ -279,7 +281,7 @@ include "home-search.php"
                   <select area-label="countryCode" formControlName="countryCode" class="form-control mxw-50">
                 
                   <?php
-                      $rescuntrycode=file_get_contents('<?php echo BASE_URL; ?>assets/testingJson/country_codes_v1.json');
+                      $rescuntrycode=file_get_contents( BASE_URL.'assets/testingJson/country_codes_v1.json');
                       $allcuntrycode=json_decode($rescuntrycode);
                       foreach($allcuntrycode as $unit){
                              ?>
@@ -347,9 +349,6 @@ include "home-search.php"
             echo '</div>';
           
         }
-        
-       
-        
     }
     ?>
   

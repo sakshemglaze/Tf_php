@@ -8,10 +8,10 @@
         var baseurl='<?php echo BASE_URL?>';
         var bsearchurl=baseurl;
         if(location &&location=='UAE'){
-            bsearchurl=bsearchurl+'search'+ "/" + searchtex.replace(' ', '-');
+            bsearchurl = bsearchurl + 'search/' + searchtex.replace(/ /g, '-');
             
         }else{
-            bsearchurl=bsearchurl+'search'+'/' + searchtex.replace(' ', '-')+ "/"+location;
+            bsearchurl=bsearchurl+'search'+'/' + searchtex.replace(/ /g, '-')+ "/"+location;
         }
         document.getElementById("homepageSearch").action=bsearchurl;
         document.getElementById("homepageSearch").submit();
@@ -25,11 +25,11 @@
             <div class="row">
                 <div class="col-md-8 offset-md-2 search-bar2">
                     <form  class="search-form"
-                        id="homepageSearch" inViewport  action="<?php echo BASE_URL; ?>search/<?php echo str_replace(' ','-',$searchtext12) ?>" method="post" >
+                        id="homepageSearch" inViewport  action="" method="post" >
 
                         <div class="input-group mb-3 w-100 position-relative">
                             <span class="input-group-text bg-white" id="basic-addon1"><img
-                                    src="assets/images/location-3.png" width="16" height="17" alt="location" class="me-lg-3 me-2 img-fluid" />
+                                    src="<?php echo BASE_URL?>assets/images/location-3.png" width="16" height="17" alt="location" class="me-lg-3 me-2 img-fluid" />
                                <?php
                                 $areas = array(
                                     "UAE",
@@ -148,6 +148,7 @@
                        
                 $('#search').val(suggestion.subCategoryName); 
                 var searchTerm = $('#search').val().replace(/\s+/g, '-');
+                searchTerm =searchTerm.toLowerCase();
                 var actionURL = "<?php echo  BASE_URL ?>category/" + encodeURIComponent(searchTerm)+'/'+suggestion.id;
                 $('#homepageSearch').attr('action', actionURL);
                 $('#homepageSearch').submit();
@@ -167,6 +168,7 @@
             
                 $('#search').val(suggestion.productName); 
                 var searchTermp = $('#search').val().replace(/\s+/g, '-');
+                searchTermp=searchTermp.toLowerCase();
                 var actionURL = "<?php echo  BASE_URL ?>product/" + encodeURIComponent(searchTermp)+'/'+suggestion.id;
                 $('#homepageSearch').attr('action', actionURL);
                 $('#homepageSearch').submit();
@@ -186,6 +188,7 @@
                     var suggestionItem = $('<li></li>').text(suggestion).click(function() {
                         $('#search').val(suggestion); 
                 var searchTermp = $('#search').val().replace(/\s+/g, '-');
+                searchTermp=searchTermp.toLowerCase();
                 var actionURL = "<?php echo  BASE_URL ?>seller/" + encodeURIComponent(searchTermp);
                 $('#homepageSearch').attr('action', actionURL);
                 $('#homepageSearch').submit();
