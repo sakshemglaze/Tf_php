@@ -1,5 +1,4 @@
 <?php include_once 'config.php'; ?>
-<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/post-request.css" />
 
 <div class="container">
     <div class="row gy-1">

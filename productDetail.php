@@ -64,8 +64,7 @@
                 $maskedService = new MaskingService();
 
   ?>
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/prod.css" />
+  
 </head>
 <body>
 <script src="<?php echo BASE_URL; ?>assets/js/lazy-load.js"></script>
@@ -304,7 +303,7 @@
                 Trade License <br />  <?php echo $data1->seller->tradeLicenseNumber; ?>
               </td>
               <td>
-                Service Area <br /> <?php echo $data1->seller->sellerState . ', ' . $data1->seller->sellerCountry ?> 
+                Service Area <br /> <?php echo $data1->seller->state . ', ' . $data1->seller->sellerCountry ?> 
               </td>
             </tbody>
             <tbody>
@@ -323,8 +322,7 @@
           <?php echo $data1->seller->sellerCompanyName; ?>
           </div>
           <div> <?php echo $data1->seller->sellerTagline; ?>     </div><br>
-          <a *ngIf="prodDetails && prodDetails.seller" [href]="this.urlService.getSellerUrl(prodDetails.seller.sellerUrl,prodDetails.seller.id)
-          " target="_blank" title="{{ prodDetails.seller.sellerCompanyName }}" target="_blank"
+          <a href="/<?php echo $url->getSellerUrl($data1->seller->sellerCompanyName,$data1->seller->id) ?>" target="_blank" title="<?php echo $data1->seller->sellerCompanyName?>" target="_blank"
             class="btn-primary-gradiant rounded-10 mt-4 px-md-5">
             View more
           </a>

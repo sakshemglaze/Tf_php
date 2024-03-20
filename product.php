@@ -7,7 +7,7 @@
     $whatsappUrl=new WhatsappUrl();
     $maskedService = new MaskingService();
 ?>
-<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/searchcard.css" > 
+
 <div class="cardproduct card-shadow rounded-10 bg-white" style="border: 0.5px solid #ddd;">
     <div class="swiper ">
         <div class="swiper-wrapper">
@@ -99,18 +99,18 @@
 
                                     <br>
                                     
-                                    <div class="d-flex mt-1 fs-6 about_text2">
-                                        <li>
+                                    <div class="d-flex mt-1 fs-8 about_text2">
+                                        
                                         <img src="<?php echo BASE_URL ?>assets/images/house.png" alt="Location_seller" width="18" height="19" class="me-3 w-18" />
-                                        <b>Company :</b>
+                                        <b>Company:</b>
                                             <a href="/<?php echo $urlService->getSellerUrl($prodData->seller->sellerCompanyName,$prodData->seller->id) ?>" style="color: palevioletred;" target="_blank"> 
                                             <h3 class="single-line fs-6">
                                                 <?php print_r($prodData->seller->sellerCompanyName); ?>
                                                   </h3>
-                                            </a></li>
+                                            </a>
                                     </div>
                                     <div class="d-flex small mt-1 about_text2">
-                                        <li><img src="<?php echo BASE_URL ?>assets/images/location-3.svg" width="18" height="19" alt="Seller_Location" class="me-3 w-18" />
+                                        <img src="<?php echo BASE_URL ?>assets/images/location-3.svg" width="18" height="19" alt="Seller_Location" class="me-3 w-18" />
                                         <b>Office : </b>
                                         <a 
                                             target="_blank">
@@ -119,10 +119,10 @@
                                                 print_r($prodData->seller->state);
                                                  ?>
                                                  </span>
-                                        </a></li>
+                                        </a>
                                     </div>
 
-                                    <div class="d-flex small mt-1 about_text2"><li>
+                                    <div class="d-flex small mt-1 about_text2">
                                         <img src="<?php echo BASE_URL ?>assets/images/service_area.png" width="18" height="19" alt="Service_area" class="me-3 w-18" />
                                         <b>Service Area : </b>
                                         <a  target="_blank">
@@ -136,7 +136,7 @@
                                                print_r(  $prodData->seller->state);       
                                                ?>
                                                </span>
-                                        </a> </li>
+                                        </a>
                                     </div>
                                     <div class="d-flex small mt-1 single-line">
                                         <?php if( $prodData->brand){?>
@@ -168,20 +168,19 @@
                                        
                                     </button>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 whatsappbtn">
                                     <a href="  <?php echo $whatsappUrl->getProductToWhatsapp($prodData->productName,$prodData->id,get_object_vars($prodData->seller))?>"                                
-                          target="_blank" class="whatsappbtn btn btn-sm w-100">
+                          target="_blank" class="btn btn-sm w-100">
                                         Connect on whatsapp
                                         
                                     </a>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 btn-outline-gradiant">
                                  
                                     <button onclick="openPopup()"
-                                        class="btn-outline-gradiant btn btn-sm w-100 d-center">
+                                        class="btn btn-sm w-100 d-center">
                                         <img src="<?php echo BASE_URL ?>assets/images/mail-black.png" width="14" height="12"
                                             class="me-2 w-18" alt="Mail_" />
-                                         
                                         Send Inquiry
                                     </button>
                                     

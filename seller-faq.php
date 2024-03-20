@@ -1,11 +1,32 @@
-<?php include_once 'config.php'; ?>
-<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/sellfaq.css" />
-<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
-<?php
-include_once "header-sub.php";
+<?php include_once 'config.php'; 
+$SeoParams = [
+  'title' => 'TradersFind Seller FAQ: Registration &amp; Paid Memberships',
+  'metaTitle' => 'TradersFind Seller FAQ: Registration &amp; Paid Memberships',
+  'metaDescription' => 'Get answers to your questions about registration, paid membership, and more on TradersFind seller FAQ page. Start boosting your selling potential!',
+              'metaKeywords' => null,
+              'fbTitle' => null,
+              'fbDescription' => null,
+              'fbImage' => null,
+              'fbUrl' => null,
+              'twitterTitle' => null,
+              'twitterDescription' => null,
+              'twitterImage' => null,
+              'twitterSite' => null,
+              'twitterCard' => null,
+];
 ?>
-
-
+<html lang="en">
+  <head>
+  <meta name="robots" content="index, follow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<?php 
+        include_once 'services/seo.php';
+        $seo = new seoService();
+        $seo->setSeoTags($SeoParams); ?>
+</head>
+<body>
+<?php include_once "header-sub.php";
+?>
 <section class="p-3">
   <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -1163,6 +1184,7 @@ include_once "header-sub.php";
     </div>
   </div>
 </section>
+                          </body></html>
 <script src="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.bundle.min.js"></script>
 <?php
 include_once "footer.php";

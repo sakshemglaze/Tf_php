@@ -12,7 +12,6 @@
               //print_r($datap->products);
               ?>
 
-<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/moreprod.css" />
 <div class="row">
     <?php foreach ($datap->products as $product): ?>
     <div class="col-lg-3">

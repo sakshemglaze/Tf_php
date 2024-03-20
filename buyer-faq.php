@@ -1,10 +1,33 @@
-<?php include_once 'config.php'; ?>
-<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/buyfaq.css" />
-<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
+<?php include_once 'config.php';
+$SeoParams = [
+  'title' => 'Buyer FAQs | Frequently Asked Questions | TradersFind',
+  'metaTitle' => 'Buyer FAQs | Frequently Asked Questions | TradersFind',
+  'metaDescription' => 'Buyer FAQs - Frequently Asked Questions by buyers related to buying queries. Below are the questions frequently asked by our buyers.',
+              'metaKeywords' => null,
+              'fbTitle' => null,
+              'fbDescription' => null,
+              'fbImage' => null,
+              'fbUrl' => null,
+              'twitterTitle' => null,
+              'twitterDescription' => null,
+              'twitterImage' => null,
+              'twitterSite' => null,
+              'twitterCard' => null,
+];
+?>
+<html lang="en">
+  <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<?php 
+        include_once 'services/seo.php';
+        $seo = new seoService();
+        $seo->setSeoTags($SeoParams); ?>
+
+</head>
+<body>
 <?php
 include_once 'header-sub.php';
 ?>
-
 
 <section class="p-3">
   <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
@@ -451,6 +474,7 @@ Note: Add a relevant name to get a relevant product in the search result.
     </div>
   </div>
 </section>
+                    </body></html>
 <script src="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.bundle.min.js"></script>
 <?php
 include_once 'footer.php';

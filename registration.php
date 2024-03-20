@@ -2,10 +2,35 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-include_once 'config.php'; ?>
-<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/userRegis.css" />
-<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
+include_once 'config.php'; 
+$SeoParams = [
+  'title' => null,
+  'metaTitle' => null,
+  'metaDescription' => null,
+              'metaKeywords' => null,
+              'fbTitle' => null,
+              'fbDescription' => null,
+              'fbImage' => null,
+              'fbUrl' => null,
+              'twitterTitle' => null,
+              'twitterDescription' => null,
+              'twitterImage' => null,
+              'twitterSite' => null,
+              'twitterCard' => null,
+];
+?>
+<html lang="en">
+  <head>
+  <meta name="robots" content="index, follow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<?php 
+        include_once 'services/seo.php';
+        $seo = new seoService();
+        $seo->setSeoTags($SeoParams); ?>
+
 <script src="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.bundle.min.js"></script>
+</head>
+<body>
 <?php
 include_once "header-sub.php";
 $pager=false;
@@ -19,7 +44,7 @@ $pager=false;
       <div class="row align-items-center gy-5">
         <div class="col-lg-6  mb-4">
           <div class="card border-0 rounded-top-20 rounded-bottom-20">
-            <div class="card-header bg-gradiant py-3 px-md-3 rounded-top-20 border-0">
+            <div class="card-header bg-gradiant py-3 px-md-3 rounded-top-20 border-0 text-white">
               <h5 class="fs-3 fwbold text-uppercase">Register your Company Free</h5>
               <p class="mb-0">Create Company Profile with very Simple Steps & Manage your Business.</p>
             </div>
@@ -575,6 +600,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
   </section>
 </div>
+</body></html>
 <?php
 include_once "footer.php"
 ?>

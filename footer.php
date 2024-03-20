@@ -1,7 +1,6 @@
 
 <?php include_once 'config.php'; ?>
-<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/foot.css" >
-
+<link rel='stylesheet' href='<?php echo BASE_URL; ?>assets/css/foot.css'>
 <footer class="footer pt-5 pb-1">
 
     <div class="container-fluid">
@@ -46,7 +45,7 @@
             <div class="col-md-3  ">
               <h4 class="text-white">BUYERS</h4>
 
-              <ul class="footermenu">
+              <ul class="footermenu footer_call">
                 <li><a href="<?php echo  BASE_URL ?>post-buy-requirements">Post Your Requirement</a></li>
                 <li><a href="<?php echo  BASE_URL ?>industry">Browse Sellers</a></li>
                 <li><a href="<?php echo  BASE_URL ?>buyer-faq">Buyer FAQ</a></li>
@@ -57,7 +56,7 @@
             <div class="col-md-3 ">
               <h4 class="text-white">SELLERS</h4>
 
-              <ul class="footermenu">
+              <ul class="footermenu footer_call">
                 <li><a href="<?php echo  BASE_URL ?>register-your-business">Sell Your Product</a></li>
 
               
@@ -69,7 +68,7 @@
             <div class="col-md-3  ">
               <h4 class="text-white">QUICK LINKS</h4>
 
-              <ul class="footermenu">
+              <ul class="footermenu footer_call">
                 <li><a href="<?php echo  BASE_URL ?>blog">Latest Blogs</a></li>
                 <li><a href="<?php echo  BASE_URL ?>feedback">Feedback</a></li>
 
@@ -126,6 +125,6 @@
       Copyright &copy; 2023 Interconnect Marketing Management L.L.C All rights reserved.
     </p>
   </footer>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+  
 <script src='<?php echo BASE_URL; ?>assets/js/owl.carousel.min.js'></script>
 <script  src="<?php echo BASE_URL; ?>assets/js/script.js"></script>

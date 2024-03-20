@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="<?php echo BASE_URL?>assets/css/hi.css" />
 <div class="categories card-shadow rounded-10">
     <div class="d-flex align-items-center ps-2 mb-3">
       <img src="<?php echo BASE_URL?>assets/images/Category-icon2.png" alt="Industry" width="19" height="12"  />

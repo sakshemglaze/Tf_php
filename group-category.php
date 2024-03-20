@@ -51,8 +51,6 @@
         include_once 'services/seo.php';
         $seo = new seoService();
         $seo->setSeoTags($SeoParams); ?>
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/cate.css" />
 </head>
 <body>
 <script src="<?php echo BASE_URL; ?>assets/js/lazy-load.js"></script>
