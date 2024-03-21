@@ -17,38 +17,37 @@
 }
 
 body {
-    font-size: 15px;
+    font-size: 15px !important;
     background: #f8f8f8;
     font-family: "Calibri";
 }
-
-.fwbold {
-    font-family: "Calibri";
-    font-weight: bold;
-}
-
 ul {
     list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-a {
-    color: black;
-    text-decoration: none;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  
+  a {
+    color: black !important;
+    text-decoration: none !important;
     transition: all 0.2s;
     -webkit-transition: all 0.2s;
     -moz-transition: all 0.2s;
     -ms-transition: all 0.2s;
     -o-transition: all 0.2s;
+  }
+.fwbold {
+    font-family: "Calibri";
+    font-weight: bold;
 }
+
 
 a:hover {
     color: #873636;
 }
 
 .btn-primary-gradiant {
-    color: white;
+    color: white !important;
     padding: 6.5px 24px;
     border: 0;
     line-height: 25px;
@@ -348,7 +347,7 @@ ul.socialmedia li {
 }
 
 .footermenu li a {
-    color: #cccccc;
+    color: #cccccc !important;
     font-size: 20px;
 }
 
@@ -372,7 +371,7 @@ ul.socialmedia li {
 }
 
 .footermenu2 li a {
-    color: #cccccc;
+    color: #cccccc !important;
     font-size: 20px;
     display: block;
     border-right: 1px solid #cccccc;
@@ -730,7 +729,7 @@ textarea:focus {
 
 .card-header {
     background-color: #8f8f8f;
-    color: white;
+    color: white !important;
 }
 
 .add-products {

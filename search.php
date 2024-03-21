@@ -269,7 +269,7 @@ $SeoParams = [
       <?php echo str_replace("-"," ",basename($parts[2]));//will change ?> </a></li>
       <?php endif;?>
       <?php if(!isset($subcategory)):?>
-      <li class="breadcrumb-item text-capitalize"> <a href="<?php echo BASE_URL.basename($parts[2]).'/'.basename($parts[3]) //will change
+      <li class="breadcrumb-item text-capitalize"> <a href="<?php echo BASE_URL.basename($parts[1]).'/'.basename($parts[2]) //will change
       ?>">
       <?php echo str_replace("-"," ",basename($parts[2]));//will change ?> </a></li>
       <?php endif;?>

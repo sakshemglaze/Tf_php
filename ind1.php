@@ -66,7 +66,7 @@ foreach ($data1 as $category) {
    $i= $i + 1;
     echo '<div class="row  gy-4 bg-white">';
     echo '<div class="col-lg-12">';
-    echo '<h1 class="text-center fwbold text-uppercase text-black-50"><a href="' . $urlService->getIndustryUrl($category->industryName, $category->id) .'">' . $category->industryName . '</a></h1>';
+    echo '<h1 class="text-center fwbold text-uppercase text-black"><a href="' . $urlService->getIndustryUrl($category->industryName, $category->id) .'">' . $category->industryName . '</a></h1>';
     echo '</div>';
     echo '<div class="col-lg-3 text-center">';
     if (!empty($category->image)) { 
@@ -87,7 +87,7 @@ foreach ($data1 as $category) {
         echo '<a href="' . $urlService->getGroupCategoryUrl($cat->categoryName, $cat->id) . '"> <img data-src="' . $catImage . '" class="lazy" alt="Category" width="140px" /> </a>';
         echo '<div class="inddetails">';
         echo '<h2 class="fs-6 fwbold"><a href="' . $urlService->getGroupCategoryUrl($cat->categoryName, $cat->id) . '" title="' . $cat->categoryName . '">' . $cat->categoryName . '</a></h2>';
-        echo '<ul class="mt-4 text-black-50">';
+        echo '<ul class="mt-4 text-black">';
         foreach (array_slice($cat->productsSubcategories, 0, 3) as $subcat) {
             echo '<li><a href="' . $urlService->getCategoryUrl($subcat->subCategoryName, $subcat->id) . '" title="' . $subcat->subCategoryName . '">' . $subcat->subCategoryName . '</a></li>';
         }
@@ -190,11 +190,11 @@ function renderIndustries(industries) {
     industryTitleDiv.classList.add('col-lg-12');
 
     var industryTitle = document.createElement('h1');
-    industryTitle.classList.add('text-black-50','fwbold','text-center', 'text-uppercase');
+    industryTitle.classList.add('text-black','fwbold','text-center', 'text-uppercase');
     var industryTitleLink = document.createElement('a');
     industryTitleLink.href = urlService.getIndustryUrl(category.industryName, category.id);
     industryTitleLink.textContent = category.industryName;
-    industryTitleLink.classList.add('text-center', 'fwbold', 'text-uppercase', 'text-black-50');
+    industryTitleLink.classList.add('text-center', 'fwbold', 'text-uppercase', 'text-black');
 
     industryTitle.appendChild(industryTitleLink);
     industryTitleDiv.appendChild(industryTitle);
@@ -257,7 +257,7 @@ function renderIndustries(industries) {
       categoryTitle.appendChild(categoryTitleLink);
 
       var subcategoriesUl = document.createElement('ul');
-      subcategoriesUl.classList.add('mt-4', 'text-black-50');
+      subcategoriesUl.classList.add('mt-4', 'text-black');
 
       cat.productsSubcategories.slice(0, 3).forEach(function(subcat) {
         var subcategoryLi = document.createElement('li');
