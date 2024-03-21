@@ -76,7 +76,7 @@
                                             ?>
                                             </h2> </a>
                                     </div>
-                                    <div >
+                                    <div class="fs-8 small">
                                         <ul role="list" class="list_box">
                                             <?php if (!empty($prodData->productDescription)) { ?>
                                                   <?php foreach (array_slice(json_decode($prodData->specifications, true), 0, 4) as $spec) { ?>
@@ -99,7 +99,7 @@
 
                                     <br>
                                     
-                                    <div class="d-flex mt-1 fs-8 about_text2">
+                                    <div class="d-flex mt-1 about_text2 small">
                                         
                                         <img src="<?php echo BASE_URL ?>assets/images/house.png" alt="Location_seller" width="18" height="19" class="me-3 w-18" />
                                         <b>Company:</b>
