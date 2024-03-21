@@ -6,14 +6,14 @@
         <div class="p-md-4 my-3">
           <div class="card border-0 shadow-lg">
             <div class="card-header text-center bg-gradiant">
-              <h5 class="mb-0 py-1 fs-3">
+              <h4 class="mb-0 py-1 fs-3">
                 INQUIRE FOR YOUR BUYING REQUIREMENT
-              </h5>
+              </h4>
             </div>
             <div class="card-body p-md-5">
-              <h4 class="text-uppercase mb-5 fw-semibold">
+              <h5 class="text-uppercase mb-5 fw-semibold">
                 Tell us about your requirement
-              </h4>
+              </h5>
               <form *ngIf="this.requirementService.prodDetailFrom"
               [ngClass]="!this.requirementService.isFormvalid?'was-validated':''"
               [formGroup]="this.requirementService.prodDetailFrom">

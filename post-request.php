@@ -1,10 +1,9 @@
 <?php include_once 'config.php'; ?>
-<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/post-request.css" />
 
 <div class="container">
     <div class="row gy-1">
       <div class="col-lg-6">
-        <h2><b>EASY SOURCING</b></h2>
+        <span class="fw-bold fs-3"><b>EASY SOURCING</b></span>
         <p>An easy way to post your sourcing requests and get quotes.</p>
         <ul class="sellers_text">
           <li>One request, multiple quotes </li>
@@ -16,7 +15,7 @@
       </div>
       <div class="col-lg-6">
         <div class="card-transparent">
-          <h2 class="fs-4">Let us know what you need?</h2>
+          <span class="fs-4">Let us know what you need?</span>
   
           <form>
             <input type="text" class="form-control" formcontrolName="productName"
@@ -37,7 +36,7 @@
                   <select id="quantityUnit" formControlName="quantityUnit" class="form-control" placeholder="eg: Dozen, Piece(s), Tonr">
                       <!-- <option *ngFor="let unit of this.requirementService.units" [value]="unit">{{unit}}</option> -->
                       <?php
-                      $resUnit=file_get_contents('<?php echo BASE_URL; ?>assets/testingJson/Units.json');
+                      $resUnit=file_get_contents(BASE_URL.'assets/testingJson/Units.json');
                       $allunit=json_decode($resUnit);
                       foreach($allunit as $unit){
                              ?>

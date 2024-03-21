@@ -1,8 +1,13 @@
-<?php include_once 'config.php'; ?>
+<?php
+//ob_start();
+include_once 'config.php'; ?>
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/postbuyreq.css" />
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>asses/vendors/bootstrap/bootstrap.min.css">
+<script src="services/storegeService.js"></script>
+
 <?php
 include_once "header-sub.php";
+
 ?>
 <p-toast></p-toast>
 <section class="bg-gradiant1 login-title text-center text-white fwbold pb100">
@@ -12,6 +17,58 @@ include_once "header-sub.php";
   </div>
 </section>
 
+<script>
+       function closePopup() {
+    document.getElementById("popup-card-otp").style.display = "none";
+  }
+  function submitRequirement(){
+  var productname=document.getElementById("productName").value;
+  
+  var quantity=document.getElementById("quantity").value;
+  var Unit=document.getElementById("quantityUnit").value;
+  var requirement=document.getElementById("requirement").value;
+ 
+  var countryCode=document.getElementById("countryCode").value;
+  var contactNumber=document.getElementById("contactNumber").value;
+  
+//console.log(productname);
+        let payload = {
+          enquirerName: 'Atulyadav',
+          enquirerContactNumber: countryCode+contactNumber,
+          enquirerEmail:'atul@sakshemit.com',
+          enquiryMessage: requirement,
+          productName:productname,
+          quantity: quantity,
+          unit: Unit,
+          buyer: { id: '651266a6be013b38a26b35bf' },
+          status: 'New',
+          frequencytype: lol
+        }
+       var url="<?php echo API_URL?>api/enquiries";
+       console.log(url);
+       const myObject1 = new StorageService();
+      var token=myObject1.getItem('userAccessToken');
+fetch(url, {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+        Authorization: 'Bearer ' + token,
+    },
+    body: JSON.stringify(payload),
+})
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        console.log(data);
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+  console.log(payload);
+  }
+</script>
+
 <section class="">
   <div class="container">
     <div class="login-detailsBg shadow2">
@@ -20,12 +77,10 @@ include_once "header-sub.php";
         <div class="col-md-8 line">
           <div class="fs-3 fwbold Details">Requirement Details</div>
 
-          <form *ngIf="this.requirementService.productSellerForm"
-            [ngClass]="!this.requirementService.isFormvalid?'was-validated':''"
-            [formGroup]="this.requirementService.productSellerForm">
+          <form method="post">
             <div class="mb-3 mt-3">
               <label>Product / Service</label>
-              <input type="text" class="form-control" formControlName="productName"
+              <input type="text" id="productName" class="form-control" name="productName"
                 placeholder="Products / Services you are looking for" required>
               <div class="is-invalid" *ngIf="
               !this.requirementService.productSellerForm.controls['productName']
@@ -40,7 +95,7 @@ include_once "header-sub.php";
               <div class="col-md-6">
                 <div class="mb-3">
                   <label>Quantity</label>
-                  <input type="text" class="form-control" formControlName="quantity"
+                  <input type="text" id="quantity" class="form-control" name="quantity"
                     placeholder="Estimated Order Quantity">
 
                 </div>
@@ -48,7 +103,7 @@ include_once "header-sub.php";
               <div class="col-md-6">
                 <div class="mb-3">
                   <label>Unit</label>
-                  <select formControlName="quantityUnit" class="form-control"
+                  <select id="quantityUnit" name="quantityUnit" class="form-control"
                     placeholder="eg:  Dozen,  Piece(s),  Tonr">
                     <?php
                       $resUnit=file_get_contents('./assets/testingJson/Units.json');
@@ -68,7 +123,7 @@ include_once "header-sub.php";
               <div class="col-md-12">
                 <div class="mb-3">
                   <label>Describe your buying requirement</label>
-                  <textarea formControlName="requirement" class="form-control"
+                  <textarea id="requirement" name="requirement" class="form-control"
                     placeholder="Describe your buying requirement">
                   </textarea>
 
@@ -78,12 +133,12 @@ include_once "header-sub.php";
               <div class="row mt-1">
                 <div class="col-md-6">
                   <div class="mb-1"> &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="radio" id="onetime" formControlName="frequencytype" name="frequencytype" value="onetime" checked>&nbsp;&nbsp;<label for="onetime">One Time</label>
+                    <input type="radio" id="onetime" name="frequencytype"  value="onetime" checked>&nbsp;&nbsp;<label for="onetime">One Time</label>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="mb-1"> &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="radio" id="recuring" formControlName="frequencytype" name="frequencytype" value="recuring">&nbsp;&nbsp;<label for="recuring">Recurring</label>
+                    <input type="radio" id="recuring" name="frequencytype" value="recuring">&nbsp;&nbsp;<label for="recuring">Recurring</label>
                   </div>
                 </div>
               </div>
@@ -92,12 +147,12 @@ include_once "header-sub.php";
                 <div class="mb-3">
                   <label>Mobile No.</label>
                   <div class="input-group">
-                    <select formControlName="countryCode" class="form-control mxw-50">
+                    <select id="countryCode" name="countryCode" class="form-control mxw-50">
                       <!--<option *ngFor="let opt of this.requirementService.countries" value="{{opt.code}}">{{ opt.code }} - {{ opt.name }}     </option>-->
                       <option value="+971">+971 - United Arab Emirates.</option>
                        <option value="+91">+91 - India</option>
                     </select>
-                    <input type="number" formControlName="contactNumber" class="form-control" placeholder="Mobile"
+                    <input  id="contactNumber"  type="number" name="contactNumber" class="form-control" placeholder="Mobile"
                       required="number" />
 
                   </div>
@@ -114,15 +169,166 @@ include_once "header-sub.php";
                   </div>
               </div>
             </div>
-            <app-loadp *ngIf="requirementService.spannerval" style="height: 50%; width: 60%; margin-left: -5px;"></app-loadp>
-            <button (click)="this.requirementService.onClickSubmitRequirement()"
+            <button onclick="startfomsubmition()"
               class="btn-primary-gradiant px-md-5 py-2 rounded-10 fs-5 fwbold mt-3 mb-3">Submit Requirement</button>
             
           </form>
-          
-          <app-otp *ngIf="this.requirementService.isVerification"
+
+          <script>
+              var lol='';
+    var frequencytype=document.getElementsByName('frequencytype');
+  frequencytype.forEach(function(radioButton) {
+        radioButton.addEventListener('change', function() {
+            var selectedValue = this.value;
+            lol=selectedValue;
+            console.log(selectedValue); // Log the selected value
+        });
+    });
+
+   function otpLogin(otpAuthData, mobileNumber) {
+    console.log(mobileNumber);
+      const myObject = new StorageService();
+      $.ajax({
+        url: "https://api.tradersfind.com/api/authenticate-otp",
+  method: "POST",
+  dataType: "json",
+  contentType: "application/json",
+  data: JSON.stringify(otpAuthData),
+  success: function (data) {
+                       console.log(data);
+                       myObject.setItem('userAccessToken', data['id_token']);
+                       myObject.setItem('isLoggedIn', '1');
+                       myObject.setItem('loggedVia', 'mobile');
+                       myObject.setItem('userData', mobileNumber);
+                       myObject.setItem('userMobile', mobileNumber);
+                       myObject.setItem('login', mobileNumber);
+                       myObject.setItem('userFname', "User");
+                       submitRequirement();
+    
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+      //this.verifyRequestProcessing = false;
+    
+      //var that = this;
+      // setTimeout(function () { that.authService.authenticateUser(); }, 3000);
+      // this.messageService.add({
+      //   severity: "success",
+      //   summary:
+      //     'Otp verified successfully.',
+      // });
+      // this.dialogRef.close();
+      // this.modalService.dismissAll();
+      // this._router.navigate(['/']);
+    }
+    
+
+    function verifyOtp(event,lolnumber){
+           // var otm=document.getElementById('otp').value;
+           // console.log(lolnumber);
+           var newmobnum='+'+lolnumber;
+           let otpAuthData = {
+              phone: newmobnum,
+              otpValue: event,
+              login: newmobnum,
+              isMobileLogin: true,
+              langKey: "en"
+    };
+           var otpres='';
+            $.ajax({
+                    url: "https://api.tradersfind.com/api/guest/users/"+'+'+lolnumber,
+                    dataType: "json",
+                    data: { },
+                    success: function (data) {
+                       
+                        if (data != "NotFound") {
+          //console.log(otpAuthData,mobileNumber)
+          otpLogin(otpAuthData, newmobnum);
+          console.log("1");
+        }
+        else {
+          this.otpRegister(otpRegisterData, newmobnum);
+          console.log("2");
+        }
+                    },
+                    error: function (xhr, status, error) {
+                        if(xhr.responseText!='NotFound'){
+                          otpLogin(otpAuthData, newmobnum);
+                        }
+                    }
+                });
+            closePopup();
+
+        }
+
+       function startfomsubmition(){
+
+        }
+          </script>
+          <?php
+
+function sendOtp($contenctNo){
+ 
+
+  $payload=array('phone'=> '+919639330901', 'loginmethod'=>'WHATSAPP');
+  $data123=post(
+  'api/otps',
+  $payload,
+  false,
+  //isWhatsapp ? { type: 'whatsapp' } : {type: 'email'},
+  array("type"=> 'WHATSAPP'),
+  false);
+  include_once 'otp.php';
+ // echo $contenctNo;
+  echo '<script>document.getElementById("popup-card-otp").style.display = "block";</script>';
+ // print_r($data123);
+}
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Retrieve form data
+    $productName = $_POST['productName'];
+    $quantity = $_POST['quantity'];
+    $quantityUnit = $_POST['quantityUnit'];
+    $requirement = $_POST['requirement'];
+    $frequencytype = $_POST['frequencytype'];
+    $countryCode = $_POST['countryCode'];
+    $contactNumber = $_POST['contactNumber'];
+
+  echo "Form submitted successfully!";
+  echo $productName;
+ // header("Location: post-buy-requirements");
+ $contenctNo=$countryCode.$contactNumber;
+ include_once 'post.php';
+ print_r($contenctNo);
+ $respons=sendOtp($contenctNo);
+
+//  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+//      $contenctNo=null;
+//      if(isset($_POST['mobileNa'])){
+//          $countryCode=isset($_POST['countryCode'])?$_POST['countryCode']:'';
+//      $mobileno=isset($_POST['mobileNa'])?$_POST['mobileNa']:'';
+//      $contenctNo=$countryCode.$mobileno;
+//      echo $contenctNo;
+//      $respons=sendOtp($contenctNo);
+//      }
+//      $contenctNo=null;
+
+//  }
+ 
+   
+
+} else {
+ 
+    echo "Error: Form not submitted!";
+}
+//ob_end_flush();
+?>
+            
+  
+          <!-- <app-otp *ngIf="this.requirementService.isVerification"
             [countryCode]="this.requirementService.productSellerForm.value.countryCode"
-            [mobileNo]="this.requirementService.productSellerForm.value.contactNumber"></app-otp>
+            [mobileNo]="this.requirementService.productSellerForm.value.contactNumber"></app-otp> -->
 
         </div>
         <!---Left End---->
@@ -133,7 +339,9 @@ include_once "header-sub.php";
           <div class="media mt-3">
             <div class="media-left media-middle">
               <a href="#">
-                <img class="media-object" src="assets/images/login-icon1.jpg">
+
+                <img class="media-object" src="<?php echo  BASE_URL ?>assets/images/login-icon1.jpg">
+
               </a>
             </div>
             <div class="media-body">
@@ -145,7 +353,9 @@ include_once "header-sub.php";
           <div class="media ">
             <div class="media-left media-middle">
               <a href="#">
-                <img class="media-object" src="assets/images/login-icon2.jpg">
+
+                <img class="media-object" src="<?php echo  BASE_URL ?>assets/images/login-icon2.jpg">
+
               </a>
             </div>
             <div class="media-body">
@@ -157,7 +367,9 @@ include_once "header-sub.php";
           <div class="media ">
             <div class="media-left media-middle">
               <a href="#">
-                <img class="media-object" src="assets/images/login-icon3.jpg">
+
+                <img class="media-object" src="<?php echo  BASE_URL ?>assets/images/login-icon3.jpg">
+
               </a>
             </div>
             <div class="media-body">

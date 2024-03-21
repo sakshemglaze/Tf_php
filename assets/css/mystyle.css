@@ -17,38 +17,37 @@
 }
 
 body {
-    font-size: 15px;
+    font-size: 15px !important;
     background: #f8f8f8;
     font-family: "Calibri";
 }
-
-.fwbold {
-    font-family: "Calibri";
-    font-weight: bold;
-}
-
 ul {
     list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-a {
-    color: black;
-    text-decoration: none;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  
+  a {
+    color: black !important;
+    text-decoration: none !important;
     transition: all 0.2s;
     -webkit-transition: all 0.2s;
     -moz-transition: all 0.2s;
     -ms-transition: all 0.2s;
     -o-transition: all 0.2s;
+  }
+.fwbold {
+    font-family: "Calibri";
+    font-weight: bold;
 }
+
 
 a:hover {
     color: #873636;
 }
 
 .btn-primary-gradiant {
-    color: white;
+    color: white !important;
     padding: 6.5px 24px;
     border: 0;
     line-height: 25px;
@@ -348,7 +347,7 @@ ul.socialmedia li {
 }
 
 .footermenu li a {
-    color: #cccccc;
+    color: #cccccc !important;
     font-size: 20px;
 }
 
@@ -372,7 +371,7 @@ ul.socialmedia li {
 }
 
 .footermenu2 li a {
-    color: #cccccc;
+    color: #cccccc !important;
     font-size: 20px;
     display: block;
     border-right: 1px solid #cccccc;
@@ -730,7 +729,7 @@ textarea:focus {
 
 .card-header {
     background-color: #8f8f8f;
-    color: white;
+    color: white !important;
 }
 
 .add-products {
@@ -896,9 +895,9 @@ textarea:focus {
 }
 
 .whatsappbtn {
-    border: 1px solid #319038;
-    color: #fff;
-    background-color: #319038;
+    border: 1px solid #319038 !important;
+    color: #fff !important;
+    background-color: #319038 !important;
     border-radius: 7px;
     -webkit-border-radius: 7px;
     -moz-border-radius: 7px;
@@ -927,7 +926,7 @@ textarea:focus {
 
 .btn-outline-gradiant:hover {
     border: 1px solid #319038;
-    color: #319038;
+    color: #319038 !important;
     background-color: #f8f8f8;
     background-image: none;
 }
@@ -2742,7 +2741,8 @@ h3.fwbold {
 .inner_menu_icon {
     display: none;
 }
-
+a {text-decoration: none !important; 
+color :#000 !important} 
 .single-line {
     display: block;
     display: -webkit-box;
@@ -2755,13 +2755,14 @@ h3.fwbold {
 
 .about_text2 {
     position: relative;
-    padding-left: 82px;
 }
-
 .about_text2 b {
-    position: absolute;
-    left: 0;
+  position: relative;
+  left: 0;
 }
+.list_box {padding: 0px; margin: 0px;}
+
+
 
 .about_text3 {
     position: relative;
@@ -3083,3 +3084,17 @@ h3.fwbold {
             font-size: 18px;
         }
 }
+
+.footer_call li {
+    width: 100% !important;
+}
+.form-control li {padding: 10px 15px;
+    cursor: pointer;
+    transition: all .1s ease-in-out;
+    border-bottom: 1px solid #d0cece;
+    -webkit-transition: all .1s ease-in-out;
+    -moz-transition: all .1s ease-in-out;
+    -ms-transition: all .1s ease-in-out;
+    -o-transition: all .1s ease-in-out;
+    width: 100%;
+  }

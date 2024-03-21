@@ -27,23 +27,23 @@ public function getGroupCategoryUrl($name, $id) {
 }
 
 public function getCategoryUrl($subcategory, $id) {
-  $url =  'category/' . preg_replace('/[&,\s]+/', '-', strtolower(trim($subcategory))) . '/' . $id;
+  $url =  'category/' . preg_replace('/[&,\s]+/', '-', strtolower(trim($subcategory)));
   return $url;
 }
 
 public function getSubcategoryLocUrl($category, $subcategory, $loc, $id) {
-  $url = 'category/' . preg_replace('/[&,\s]+/', '-', strtolower(trim($subcategory))) . '/' . preg_replace('/[&,\s]+/', '-', strtolower(trim($loc))) . '/' . $id;
+  $url = 'category/' . preg_replace('/[&,\s]+/', '-', strtolower(trim($subcategory))) . '/' . preg_replace('/[&,\s]+/', '-', strtolower(trim($loc)));
   return $url;
 }
 
 public function getSubcategoryAllLocUrl($category, $subcategory, $loc, $id) {
-  $url = 'category/' . preg_replace('/[&,\s]+/', '-', strtolower(trim($subcategory))) . '/' . $id;
+  $url = 'category/' . preg_replace('/[&,\s]+/', '-', strtolower(trim($subcategory)));
   return $url;
 }
 
 public function getSellerUrl($sellerUrl, $id) {
-  if ($sellerUrl === 'null' || $sellerUrl === '') { return '/'; }
-  $url = 'seller/' . preg_replace('/[&,\s]+/', '-', strtolower(trim($sellerUrl))) . '/' . $id;
+  if ($sellerUrl == 'null' || $sellerUrl == '') { return '/'; }
+  $url = 'seller/' . preg_replace('/[&,\s]+/', '-', strtolower(trim($sellerUrl)));
   return $url;
 }
 

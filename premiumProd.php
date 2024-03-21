@@ -1,8 +1,9 @@
 <?php include_once 'config.php'; 
     include_once 'services/url.php';
     $urlService = new UrlService(); 
+    include_once 'services/masked.php';
+    $maskedService = new MaskingService();
 ?>
-<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/searchPremium.css" />
 
 <div class="bg-gradiant rounded-20 position-relative shadow-sm mb-4">
         <div class="premium_listing">
@@ -48,10 +49,10 @@
                                     <?php if (strlen($premiumprod->productName) > 100) : ?>...<?php endif; ?>
                                 </h2>
                                 <div class="">
-                                    <ul class="mt-2 small">
+                                    <ul class="mt-2 small list_box" role="list">
                                         <?php foreach (array_slice(json_decode($premiumprod->specifications, true), 0, 3) as $spec) : ?>
-                                            <li>
-                                                <span><b><?php echo $spec['SpecificationName']; ?> :</b> <?php echo $spec['SpecValue']; ?></span>
+                                            <li role="listitem">
+                                                <span><b><?php echo $spec['SpecificationName']; ?> :</b> <?php echo $spec['SpecValue']; ?> </span>
                                             </li>
                                         <?php endforeach; ?>
                                     </ul>
@@ -127,18 +128,19 @@
             <img src="<?php echo BASE_URL?>assets/images/crown-white.png" width="18" height="12" alt="Premium Seller" />
             Premium Seller
             <img src="<?php echo BASE_URL?>assets/images/phone-white.png" alt="Premium_Phone" width="16" height="16" />
-            <a class="btn-sm text-white" style="text-align: left;" >
-                &nbsp;
-            </a>
+            <span class="btn-sm text-white" style="text-align: left;" >
+                                        <?php 
+                                            $maskedService->getMaskedNumber($premiumprod->seller->sellerVirtualContactPhone);
+                                            ?> </span>
         </div>
     </div>
-    <div class="col-sm-6">
-        <a href="#" target="_blank" class="whatsappbtn btn btn-sm w-100">
+    <div class="col-sm-6 whatsappbtn ">
+        <a href="#" target="_blank" class="btn btn-sm w-100">
             Connect on whatsapp
         </a>
     </div>
-    <div class="col-sm-6">
-        <button onclick="openPopup()" class="btn-outline-gradiant btn btn-sm w-100 d-center">
+    <div class="col-sm-6 btn-outline-gradiant">
+        <button onclick="openPopup()" class="btn btn-sm w-100 d-center text-white">
             <img src="<?php echo BASE_URL?>assets/images/mail-solid.png" alt="Mail" width="17" height="9" /> Send Inquiry
         </button>
     </div>
