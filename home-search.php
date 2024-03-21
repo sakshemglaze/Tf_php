@@ -3,15 +3,14 @@
 ?>
 <script>
     function submitform(){
-        var location=document.getElementById("locationSelect").value;
+        var location=document.getElementById("locationSelect").value.toLowerCase().replace(/\s+/g, '-');
         var searchtex=document.getElementById("search").value;
         var baseurl='<?php echo BASE_URL?>';
         var bsearchurl=baseurl;
-        if(location &&location=='UAE'){
-            bsearchurl = bsearchurl + 'search/' + searchtex.replace(/ /g, '-');
-            
+        if(location && location=='uae'){
+            bsearchurl = bsearchurl + 'search/' + searchtex.toLowerCase().replace(/\s+/g, '-'); 
         }else{
-            bsearchurl=bsearchurl+'search'+'/' + searchtex.replace(/ /g, '-')+ "/"+location;
+            bsearchurl=bsearchurl+'search'+'/' + searchtex.toLowerCase().replace(/\s+/g, '-')+ "/"+location;
         }
         document.getElementById("homepageSearch").action=bsearchurl;
         document.getElementById("homepageSearch").submit();
@@ -149,7 +148,12 @@
                 $('#search').val(suggestion.subCategoryName); 
                 var searchTerm = $('#search').val().replace(/\s+/g, '-');
                 searchTerm =searchTerm.toLowerCase();
-                var actionURL = "<?php echo  BASE_URL ?>category/" + encodeURIComponent(searchTerm);
+                var statelocation = document.getElementById('locationSelect').value.toLowerCase().replace(/\s+/g,'-');
+                if (document.getElementById('locationSelect').value.toLowerCase() != 'uae') {
+                    var actionURL = "<?php echo  BASE_URL ?>category/" + encodeURIComponent(searchTerm) + '/' + statelocation;
+                } else {
+                    var actionURL = "<?php echo  BASE_URL ?>category/" + encodeURIComponent(searchTerm);
+                }
                 $('#homepageSearch').attr('action', actionURL);
                 $('#homepageSearch').submit();
             });

@@ -1,6 +1,17 @@
 <?php
 // for you sir 
+$url = $_SERVER['REQUEST_URI'];
+$currentUrl = rtrim($url, '/');
+// Split the URL by '/'
+$urlParts = explode('/', $currentUrl);
+$lastPart = end($urlParts);
 
+if ((in_array('category', $urlParts) || in_array('search', $urlParts)) && ctype_xdigit($lastPart) && strlen($lastPart) > 16) {
+    // Redirect to the desired URL
+    $redirectUrl = implode('/', array_slice($urlParts, 0, -1)); // Reconstruct the URL without the last part
+    header('Location: ' . $redirectUrl);
+    exit;
+}
 
   $routes = [
       '/' => 'home.php',
@@ -22,8 +33,6 @@
       '/term-and-conditions' => 'termcondition.php',
       '/browse-sellers' => 'industry.php',
   ];
-
- $url = $_SERVER['REQUEST_URI'];
 
  $url = strtok($url, '?');
 

@@ -95,7 +95,7 @@ $SeoParams = [
   'metaTitle' => isset($subcategory->metaTitle) ? str_replace('UAE',$location1,$subcategory->metaTitle) : $subcategory->subCategoryName,
   'metaDescription' => isset($subcategory->metaDescription) ? str_replace('UAE',$location1,$subcategory->metaDescription) : $subcategory->subCategoryDescription,
   'metaKeywords' => isset($subcategory->keywords) ? $subcategory->keywords : 'tradersfind, b2b portal, list of companies in uae, b2b marketplace, business directory, manufacturers in uae, suppliers in uae, buyers in uae, yellowpages uae, importers in uae, uae companies directory, b2b website, business marketplace, local business listings, business directory in uae',
-  'fbTitle' => isset($subcategory->fbTitle) ? $subcategory->fbTitle : $subCategory->subCategoryName,
+  'fbTitle' => isset($subcategory->fbTitle) ? $subcategory->fbTitle : $subcategory->subCategoryName,
   'fbDescription' => isset($subcategory->fbDescription) ? $subcategory->fbDescription : '',
   'fbImage' => isset($subcategory->fbImage) ? $subcategory->fbImage : '',
   'fbUrl' => isset($subcategory->fbUrl) ? $subcategory->fbUrl : '',
@@ -188,7 +188,7 @@ $SeoParams = [
   'metaTitle' => isset($subcategory->metaTitle) ? str_replace('UAE',$location1,$subcategory->metaTitle) : $subcategory->subCategoryName,
   'metaDescription' => isset($subcategory->metaDescription) ? str_replace('UAE',$location1, $subcategory->metaDescription) : str_replace('UAE',$location1,$subcategory->subCategoryDescription),
   'metaKeywords' => isset($subcategory->keywords) ? str_replace('UAE',$location1,$subcategory->keywords) : 'tradersfind, b2b portal, list of companies in uae, b2b marketplace, business directory, manufacturers in uae, suppliers in uae, buyers in uae, yellowpages uae, importers in uae, uae companies directory, b2b website, business marketplace, local business listings, business directory in uae',
-  'fbTitle' => isset($subcategory->fbTitle) ? str_replace('UAE',$location1,$subcategory->fbTitle) : $subCategory->subCategoryName,
+  'fbTitle' => isset($subcategory->fbTitle) ? str_replace('UAE',$location1,$subcategory->fbTitle) : $subcategory->subCategoryName,
   'fbDescription' => isset($subcategory->fbDescription) ? $subcategory->fbDescription : '',
   'fbImage' => isset($subcategory->fbImage) ? $subcategory->fbImage : null,
   'fbUrl' => isset($subcategory->fbUrl) ? $subcategory->fbUrl : null,
@@ -315,12 +315,12 @@ if (isset($subcategory->shortDescription) && $subcategory->shortDescription && $
                 //print_r($location);
                 if (($location == null || $location == 'UAE' )&& isset($category[0])) { 
                   
-                  echo '<li ><a class="active" href="'.BASE_URL.$urlService->getSubcategoryAllLocUrl($category[0]->categoryName,$subcategory->subCategoryName,'all') .'" >All UAE</a></li>';
+                  echo '<li ><a class="active" href="'.BASE_URL.$urlService->getSubcategoryAllLocUrl($category[0]->categoryName,$subcategory->subCategoryName,'all',1) .'" >All UAE</a></li>';
                 } else if(!isset($category[0])){
                   echo '<li><a href="'.BASE_URL.basename($parts[1]).'/'.basename($parts[2]).'" >All UAE</a></li>';
                   //will change
                 }else{
-                  echo '<li ><a href="'.BASE_URL.$urlService->getSubcategoryAllLocUrl($category[0]->categoryName,$subcategory->subCategoryName,'all') .'" >All UAE</a></li>';
+                  echo '<li ><a href="'.BASE_URL.$urlService->getSubcategoryAllLocUrl($category[0]->categoryName,$subcategory->subCategoryName,'all',1) .'" >All UAE</a></li>';
                  
                 }
                 
@@ -332,7 +332,7 @@ if (isset($subcategory->shortDescription) && $subcategory->shortDescription && $
                     }else{
                       $location1 = str_replace("-"," ",$location);
                       echo'<li >';
-                      echo '<a class="' . (strtolower($state) !== $location1 ? 'active' : '') . 'active" href="'.BASE_URL.$urlService->getSubCategoryLocUrl($category[0]->categoryName,$subcategory->subCategoryName,$state) .'">'. $state .'</a>';
+                      echo '<a class="' . (strtolower($state) !== $location1 ? 'active' : '') . 'active" href="'.BASE_URL.$urlService->getSubCategoryLocUrl($category[0]->categoryName,$subcategory->subCategoryName,$state,1) .'">'. $state .'</a>';
                       echo' </li>';
                     }
                   };

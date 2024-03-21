@@ -14,7 +14,7 @@
       $part=explode('/',$currecntUrlHS);
       //$suncat=basename($part[3]);//will change
       $countparts=count($part);
-      if($countparts>=4){
+      if($countparts>=3){
         $suncat=basename($part[2]);//will change
       }else{
         $suncat='';
@@ -127,7 +127,7 @@ function submitform(){
                        
                 $('#search').val(suggestion.subCategoryName); 
                 var searchTerm = $('#search').val().replace(/\s+/g, '-');
-                var actionURL = '<?php echo BASE_URL; ?>'+"category/" + encodeURIComponent(searchTerm);
+                var actionURL = '<?php echo BASE_URL; ?>'+"category/" + encodeURIComponent(searchTerm.toLowerCase());
                 $('#homepageSearch').attr('action', actionURL);
                 $('#homepageSearch').submit();
             });
@@ -146,6 +146,7 @@ function submitform(){
             
                 $('#search').val(suggestion.productName); 
                 var searchTermp = $('#search').val().replace(/\s+/g, '-');
+                searchTermp =searchTermp.toLowerCase();
                 var actionURL ='<?php echo BASE_URL; ?>'+ "product/" + encodeURIComponent(searchTermp)+'/'+suggestion.id;
                 $('#homepageSearch').attr('action', actionURL);
                 $('#homepageSearch').submit();
@@ -165,7 +166,7 @@ function submitform(){
                     var suggestionItem = $('<li></li><br>').text(suggestion).click(function() {
                         $('#search').val(suggestion); 
                 var searchTermp = $('#search').val().replace(/\s+/g, '-');
-                var actionURL = '<?php echo BASE_URL; ?>'+"seller/" + encodeURIComponent(searchTermp);
+                var actionURL = '<?php echo BASE_URL; ?>'+"seller/" + encodeURIComponent(searchTermp.toLowerCase());
                 $('#homepageSearch').attr('action', actionURL);
                 $('#homepageSearch').submit();
 
