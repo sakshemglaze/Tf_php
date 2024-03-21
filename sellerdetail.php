@@ -35,22 +35,23 @@ $aproodproduct1 = json_decode($aproodproduct);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php
       $SeoParams = [
-          'title' => isset($data1[0]->metaTitle) && $data1[0]->metaTitle != '' ? $data1[0]->metaTitle : $data1[0]->productName . ' in ' . $data1[0]->seller->state . ' - ' . $data1[0]->sellerCompanyName,
-          'metaTitle' => isset($data1[0]->metaTitle) && $data1[0]->metaTitle != '' ? $data1[0]->metaTitle : $data1[0]->productName . ' in ' . $data1[0]->seller->state . ' - ' . $data1[0]->sellerCompanyName,
-          'metaDescription' => isset($data1[0]->metaDescription) && $data1[0]->metaDescription != '' ? $data1[0]->metaDescription : $data1[0]->sellerCompanyName . ' - Offering ' . $data1[0]->productName . ' in ' . $data1[0]->seller->state . '. Get the best quality at the best price.',
-          'metaKeywords' => isset($data1[0]->metaKeywords) && $data1[0]->metaKeywords != '' & $data1[0]->metaKeywords[0] !='' ? implode(',', $data1[0]->metaKeywords) : $data1[0]->productName . ', ' . $data1[0]->productName . ' in ' . $data1[0]->seller->state . ', ' . $data1[0]->productName . ' in UAE',
-          'fbTitle' => isset($data1[0]->fbTitle) && $data1[0]->fbTitle != '' ? $data1[0]->fbTitle : $data1[0]->productName,
-          'fbDescription' => isset($data1[0]->fbDescription) && $data1[0]->fbDescription != '' ? $data1[0]->fbDescription : $data1[0]->productDescription,
+          'title' => isset($data1[0]->metaTitle) && $data1[0]->metaTitle != '' ? $data1[0]->metaTitle : isset($data1[0]->productName) . ' in ' . isset($data1[0]->seller->state) . ' - ' . $data1[0]->sellerCompanyName,
+          'metaTitle' => isset($data1[0]->metaTitle) && $data1[0]->metaTitle != '' ? $data1[0]->metaTitle : isset($data1[0]->productName) . ' in ' . isset($data1[0]->seller->state) . ' - ' . $data1[0]->sellerCompanyName,
+          'metaDescription' => isset($data1[0]->metaDescription) && $data1[0]->metaDescription != '' ? $data1[0]->metaDescription : $data1[0]->sellerCompanyName . ' - Offering ' . isset($data1[0]->productName) . ' in ' . isset($data1[0]->seller->state) . '. Get the best quality at the best price.',
+          'metaKeywords' => isset($data1[0]->metaKeywords) && $data1[0]->metaKeywords != '' & $data1[0]->metaKeywords[0] !='' ? implode(',', $data1[0]->metaKeywords) : isset($data1[0]->productName) . ', ' . isset($data1[0]->productName) . ' in ' . isset($data1[0]->seller->state) . ', ' . isset($data1[0]->productName) . ' in UAE',
+          'fbTitle' => isset($data1[0]->fbTitle) && $data1[0]->fbTitle != '' ? $data1[0]->fbTitle : isset($data1[0]->productName),
+          'fbDescription' => isset($data1[0]->fbDescription) && $data1[0]->fbDescription != '' ? $data1[0]->fbDescription : isset($data1[0]->productDescription),
           'fbImage' => isset($data1[0]->fbImage) ? API_URL . 'api/guest/imageContentDownload/' . $data1[0]->fbImage.id : 'undefined',
           'fbUrl' => isset($data1[0]->fbUrl) && $data1[0]->fbUrl != '' ? $data1[0]->fbUrl : null,
-          'twitterTitle' => isset($data1[0]->twitterTitle) && $data1[0]->twitterTitle != '' ? $data1[0]->twitterTitle : $data1[0]->productName,
-          'twitterDescription' => isset($data1[0]->twitterDescription) && $data1[0]->twitterDescription != '' ? $data1[0]->twitterDescription : $data1[0]->productDescription,
+          'twitterTitle' => isset($data1[0]->twitterTitle) && $data1[0]->twitterTitle != '' ? $data1[0]->twitterTitle : isset($data1[0]->productName),
+          'twitterDescription' => isset($data1[0]->twitterDescription) && $data1[0]->twitterDescription != '' ? $data1[0]->twitterDescription : isset($data1[0]->productDescription),
           'twitterImage' => isset($data1[0]->twitterImage) ? API_URL . 'api/guest/imageContentDownload/' . $data1[0]->twitterImage.id : 'undefined',
           'twitterSite' => isset($data1[0]->twitterSite) && $data1[0]->twitterSite != '' ? $data1[0]->twitterSite : null,
           'twitterCard' => isset($data1[0]->twitterCard) && $data1[0]->twitterCard != '' ? $data1[0]->twitterCard : null,
        ];
       $seo->setSeoTags($SeoParams);
         ?>
+         <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css" >
 </head>
 <body>
 <script src="<?php echo BASE_URL; ?>assets/js/lazy-load.js"></script>
@@ -152,7 +153,7 @@ $aproodproduct1 = json_decode($aproodproduct);
                       
                 </div>
                 <div class="col-lg-6">
-                  <button (click)="openPostRequirement()"
+                  <button onclick="openPopup()"
                     class="btn-outline-gradiant btn py-2  btn-sm w-100 text-black">
                     <img src="<?php echo BASE_URL?>assets/images/mail-solid.png" alt="mail" /> Send Inquiry
                   </button>
@@ -524,7 +525,7 @@ $aproodproduct1 = json_decode($aproodproduct);
                           
                               </p>
                               <p class="fs-14"> <?php echo isset($data1[0]->designation);?> </p>
-                              <div class="d-flex align-items-center gap-3">
+                              <div class="d-flex align-items-center gap-3 ">
                                 <button class="btn btn-sm btn-light  py-2 fw-semibold bg-grey w-100">
                                   <img src="assets/images/phone.png" width="16" alt="phone" />
                                  <?php $maskedService->getMaskedNumber($data1[0]->sellerVirtualContactPhone); ?>
@@ -557,7 +558,19 @@ $aproodproduct1 = json_decode($aproodproduct);
       </div>
     </div>
   </div>
+ 
+<?php
+ include_once 'enquery.php';
+ ?>
 </section>
+
+<script>
+  // Function to open the popup card
+  function openPopup() {
+
+    document.getElementById("popup-card").style.display = "block";
+  }
+</script>
                                 </body></html>
                                 <script src="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.bundle.min.js"></script>
 <?php include "footer.php"; ?>

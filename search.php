@@ -17,7 +17,7 @@ include_once 'config.php';
     //print_r($subCategoryId);
     $indexr=0;
     $page=0;
-    $size=20;
+    $size=10;
 
     $currentUrl = $_SERVER['REQUEST_URI'];
     $parts = explode('/', $currentUrl);
@@ -26,7 +26,7 @@ include_once 'config.php';
     $numParts = count($parts);
        print_r($numParts);
     if($numParts>=4){
-    $category1 = basename($parts[3]); // Extract the category part
+    $category1 = basename($parts[2]); // Extract the category part
     }else{
       $category1='';
     }
@@ -280,14 +280,14 @@ $SeoParams = [
 </nav>
 <div style="text-align: center;">
 
-  <h1 class="me-2 fwbold  text-capitalize mb-0"><?php echo str_replace("-"," ", basename($parts[3]));?>  <!--will chnage -->
+  <h1 class="me-2 fwbold  text-capitalize mb-0"><?php echo str_replace("-"," ", basename($parts[2]));?>  <!--will chnage -->
   <?php if ($location == null) {
     echo '<span> in UAE</span>';
   } else {
     echo '<span> in ' . str_replace("-"," " ,$location);
   } ?>
   </h1>
-  <small class="fwbold">(<?php print_r($length)?> products available) </small>
+  <small class="fwbold">(<?php print_r($length)?>+ products available) </small>
 </div>
 <?php 
 

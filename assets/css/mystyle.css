@@ -895,9 +895,9 @@ textarea:focus {
 }
 
 .whatsappbtn {
-    border: 1px solid #319038;
-    color: #fff;
-    background-color: #319038;
+    border: 1px solid #319038 !important;
+    color: #fff !important;
+    background-color: #319038 !important;
     border-radius: 7px;
     -webkit-border-radius: 7px;
     -moz-border-radius: 7px;
@@ -2741,7 +2741,8 @@ h3.fwbold {
 .inner_menu_icon {
     display: none;
 }
-
+a {text-decoration: none !important; 
+color :#000 !important} 
 .single-line {
     display: block;
     display: -webkit-box;
@@ -2756,9 +2757,12 @@ h3.fwbold {
     position: relative;
 }
 .about_text2 b {
-  position: absolute;
+  position: relative;
   left: 0;
 }
+.list_box {padding: 0px; margin: 0px;}
+
+
 
 .about_text3 {
     position: relative;
