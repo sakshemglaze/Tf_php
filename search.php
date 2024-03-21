@@ -2,29 +2,26 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-//print_r('Welcome search');
+
 include_once 'config.php';
        
      include_once 'services/url.php';
      $urlService = new UrlService(); 
      $name = str_replace("-", " ", $matches[1]);
-     $id = str_replace("-", " ", $matches[2]);
+    // $id = str_replace("-", " ", $matches[2]);
    
-    $subCategoryId = $matches[2];
+  
     $location = 'UAE';
     $keyword = 'yes';
-    //print_r($name);
-    //print_r($subCategoryId);
+    
     $indexr=0;
     $page=0;
     $size=10;
 
     $currentUrl = $_SERVER['REQUEST_URI'];
     $parts = explode('/', $currentUrl);
-  
-    
     $numParts = count($parts);
-       print_r($numParts);
+   //print_r($numParts);
     if($numParts>=4){
     $category1 = basename($parts[2]); // Extract the category part
     }else{
@@ -35,30 +32,29 @@ include_once 'config.php';
       public $stateFilter;
   }
   $filterDto = new FilterDTO();
-  if( $numParts==5){//will change
+  if( $numParts==4){//will change
     $location= basename($parts[3]);//will change
-    $subCategoryId=basename($parts[4]);//will change
+  //  $subCategoryId=basename($parts[3]);//will change
     $filterDto->stateFilter=[ucwords(str_replace('-'," ",$location))];
     $name = str_replace("-", " ", $matches[1]);//neverchange
-    $id = str_replace("-", " ", $matches[3]);//will change
-  }else if($numParts==3){//will change
+    //$id = str_replace("-", " ", $matches[3]);//will change
+  }else if($numParts==3 && $parts[1]=='search'){//will change
     $keyword=basename($parts[2]);//will change
-   // print_r($keyword);
+  
   }else if(basename($parts[1])=='search' && $numParts==4 ){//will change
-   // $location="";
-   // print_r("locationkeywordstatehjedf");
+ 
     $location= basename($parts[3]);//will change
     
     $filterDto->stateFilter=[ucwords(str_replace('-'," ",$location))];
 }
 else{
   $location="";
- // print_r("locationkeyword");
+
 }
   //print_r($location);
   $location1 = str_replace('-',' ',$location);
   require_once 'post.php';
-         if($location==""){
+         if($location=="" && $numParts==3){
           
             $payload = array(
                 'searchText' => $name ,
@@ -80,16 +76,18 @@ if($data->sponsoredProduct!=null){
 }else{
               $length = count(($data->products));
 }
-//print_r($data->products);
-$subcategory = json_decode(get ( 'api/guest/products-subcategories/' . $subCategoryId));
-//print_r($subcategory);  
+//print_r($data->sponsoredProduct->productsSubcategory->id);
+$subcatName=basename($parts[2]);
+$subcategory = json_decode(get ( 'api/guest/products-subcategorie/' . $subcatName));
+
+  //print_r($subcategory);
 $category = json_decode(get(
   'api/guest/products-categories-na/' . $subcategory->title, $queryParams
 ));
-//print_r($category[0]);
+
 $industry = json_decode(get(
   'api/industries-na/' . $category[0]->title,$queryParams) );
-//print_r($subcategory);
+
 
 
 $SeoParams = [
@@ -109,7 +107,7 @@ $SeoParams = [
   'schemaDescription' => isset($subcategory->schemaDescription) ? $subcategory->schemaDescription : '',
   ];
   //print_r("first if");
-          }else if( $numParts==3){//will be change
+          }else if( $numParts==3 && basename($parts[1])=='search'){//will be change
   
             $payload = array(
               'searchText' => $name ,
@@ -117,41 +115,6 @@ $SeoParams = [
               'filterDto' => $filterDto
           );  
         
-          //print_r($payload);
-         
-          $queryParams= array('page'=> $page, 'size'=> $size) ;
-        
-          $data =  post(
-            'api/new-search-products',
-            $payload,
-            true,
-            $queryParams,
-            false
-          );
-          //print_r("++++++");
-            $length = count(($data->products));
-            //print_r($data->products);
-          //  $subcategory = json_decode(get ( 'api/guest/products-subcategories/644fb84b294b4e53e904728f'));
-            //print_r($subcategory);  
-          //  $category = json_decode(get(
-          //    'api/guest/products-categories-na/' . $subcategory->title, $queryParams
-           // ));
-           // //print_r($category[0]);
-          //  $industry = json_decode(get(
-           //   'api/industries-na/' . $category[0]->title,$queryParams) );
-            //print_r($subcategory);
-           // $SeoParams = [];
-           // print_r("second if");
-          }else if(basename($parts[1])=='search' && $numParts==4 ){//will change
-
-            $payload = array(
-              'searchText' => $name ,
-              'searchTextType' => null,
-              'filterDto' => $filterDto
-          );  
-        
-          //print_r($payload);
-         
           $queryParams= array('page'=> $page, 'size'=> $size) ;
         
           $data =  post(
@@ -163,8 +126,27 @@ $SeoParams = [
           );
           
             $length = count(($data->products));
-           // print_r("third if");
-            //$SeoParams = [];
+           //print_r('Welcome search 3');
+          }else if(basename($parts[1])=='search' && $numParts==4 ){//will change
+
+            $payload = array(
+              'searchText' => $name ,
+              'searchTextType' => null,
+              'filterDto' => $filterDto
+          );  
+        
+          $queryParams= array('page'=> $page, 'size'=> $size) ;
+        
+          $data =  post(
+            'api/new-search-products',
+            $payload,
+            true,
+            $queryParams,
+            false
+          );
+          
+            $length = count(($data->products));
+            //print_r('Welcome search 1 4');
           }
          
           else{
@@ -176,7 +158,6 @@ $SeoParams = [
             );  
           
             //print_r($payload);
-           
             $queryParams= array('page'=> $page, 'size'=> $size) ;
           
             $data =  post(
@@ -188,15 +169,19 @@ $SeoParams = [
             );
             
               $length = count(($data->products));
-//print_r($data->products);
-$subcategory = json_decode(get ( 'api/guest/products-subcategories/' . $subCategoryId));
-//print_r($subcategory);  
-$category = json_decode(get(
-  'api/guest/products-categories-na/' . $subcategory->title, $queryParams
-));
-//print_r($category[0]);
-$industry = json_decode(get(
-  'api/industries-na/' . $category[0]->title,$queryParams) );
+
+              $subcatName=basename($parts[2]);
+              $subcategory = json_decode(get ( 'api/guest/products-subcategorie/' . $subcatName));
+              
+                //print_r($subcategory);
+              $category = json_decode(get(
+                'api/guest/products-categories-na/' . $subcategory->title, $queryParams
+              ));
+             // print($subcategory->subCategoryName);
+              
+              $industry = json_decode(get(
+                'api/industries-na/' . $category[0]->title,$queryParams) );
+              
 //print_r($subcategory);
 $SeoParams = [
   'title' => isset($subcategory->metaTitle) ? $subcategory->metaTitle : $subcategory->subCategoryName,
@@ -287,7 +272,7 @@ $SeoParams = [
     echo '<span> in ' . str_replace("-"," " ,$location);
   } ?>
   </h1>
-  <small class="fwbold">(<?php print_r($length)?>+ products available) </small>
+  <small class="fwbold">(<?php echo ($length)?>+ products available) </small>
 </div>
 <?php 
 
@@ -330,12 +315,12 @@ if (isset($subcategory->shortDescription) && $subcategory->shortDescription && $
                 //print_r($location);
                 if (($location == null || $location == 'UAE' )&& isset($category[0])) { 
                   
-                  echo '<li ><a class="active" href="'.BASE_URL.$urlService->getSubcategoryAllLocUrl($category[0]->categoryName,$subcategory->subCategoryName,'all',$id) .'" >All UAE</a></li>';
+                  echo '<li ><a class="active" href="'.BASE_URL.$urlService->getSubcategoryAllLocUrl($category[0]->categoryName,$subcategory->subCategoryName,'all') .'" >All UAE</a></li>';
                 } else if(!isset($category[0])){
                   echo '<li><a href="'.BASE_URL.basename($parts[1]).'/'.basename($parts[2]).'" >All UAE</a></li>';
                   //will change
                 }else{
-                  echo '<li ><a href="'.BASE_URL.$urlService->getSubcategoryAllLocUrl($category[0]->categoryName,$subcategory->subCategoryName,'all',$id) .'" >All UAE</a></li>';
+                  echo '<li ><a href="'.BASE_URL.$urlService->getSubcategoryAllLocUrl($category[0]->categoryName,$subcategory->subCategoryName,'all') .'" >All UAE</a></li>';
                  
                 }
                 
@@ -347,7 +332,7 @@ if (isset($subcategory->shortDescription) && $subcategory->shortDescription && $
                     }else{
                       $location1 = str_replace("-"," ",$location);
                       echo'<li >';
-                      echo '<a class="' . (strtolower($state) !== $location1 ? 'active' : '') . 'active" href="'.BASE_URL.$urlService->getSubCategoryLocUrl($category[0]->categoryName,$subcategory->subCategoryName,$state,$id) .'">'. $state .'</a>';
+                      echo '<a class="' . (strtolower($state) !== $location1 ? 'active' : '') . 'active" href="'.BASE_URL.$urlService->getSubCategoryLocUrl($category[0]->categoryName,$subcategory->subCategoryName,$state) .'">'. $state .'</a>';
                       echo' </li>';
                     }
                   };
@@ -405,7 +390,7 @@ if (isset($subcategory->shortDescription) && $subcategory->shortDescription && $
          
         </div>
         <?php endif; ?>
-          <section class="easysource my-4 py-2">
+          <section class="easysource my-4 py-2" >
             <?php
              include_once "post-request.php";
               ?>
@@ -413,11 +398,12 @@ if (isset($subcategory->shortDescription) && $subcategory->shortDescription && $
           </div>
           <div class="row">
           <p class="search-product-text">
-        
+        <div class="cat-desc" id="cat-desc" style="display:none;">
         <?php
         if(isset($data->sponsoredProduct->productsSubcategory->categoryDescriptionPage)){
-                      print_r( $data->sponsoredProduct->productsSubcategory->categoryDescriptionPage);
+                      echo ( $data->sponsoredProduct->productsSubcategory->categoryDescriptionPage);
                          ?>
+                         </div>
         </p>
         <?php
         }
@@ -491,6 +477,32 @@ function toggleDescription() {
                     moreText.innerHTML = " View more";
                 }
             }
+
+     // Create an IntersectionObserver
+const observer = new IntersectionObserver(handleIntersection, {
+  root: null,
+  rootMargin: '0px',
+  threshold: 0.1 // You can adjust this threshold as needed
+});
+
+// Find the element near the bottom of the page
+const bottomElement = document.getElementById('loadMoreBtn'); // Change 'bottom-element' to the ID of your actual element
+
+// Start observing the bottom element
+observer.observe(bottomElement);
+
+// Function to handle intersection
+function handleIntersection(entries, observer) {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      // If the bottom element is intersecting with the viewport, it means user has scrolled to the bottom
+      // Add your code here to execute when user scrolls to the bottom
+      document.getElementById("cat-desc").style.display="block";
+      console.log("working...")
+    }
+  });
+}
+
           </script>
 <?php
 include_once "footer.php"
