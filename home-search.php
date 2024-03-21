@@ -149,7 +149,7 @@
                 $('#search').val(suggestion.subCategoryName); 
                 var searchTerm = $('#search').val().replace(/\s+/g, '-');
                 searchTerm =searchTerm.toLowerCase();
-                var actionURL = "<?php echo  BASE_URL ?>category/" + encodeURIComponent(searchTerm)+'/'+suggestion.id;
+                var actionURL = "<?php echo  BASE_URL ?>category/" + encodeURIComponent(searchTerm);
                 $('#homepageSearch').attr('action', actionURL);
                 $('#homepageSearch').submit();
             });
