@@ -5,7 +5,8 @@
 <?php
     $currentUrl = $_SERVER['REQUEST_URI'];   
     $grpCatName = $matches[1];
-    $id = $matches[2];
+    //$id = $matches[2];
+ // print_r($id);
 
 
     $index=0;
@@ -18,7 +19,7 @@
             $queryParams= array('page'=>0, 'size'=> 6) ;
             require_once 'post.php';
         $data =  get(
-                'api/guest/products-categories/' . $matches[2] .'?size=' . $size . '&page=' . $page . '&sort=categoryName,asc',
+                'api/guest/products-categorie-name/' . $matches[1] .'?size=' . $size . '&page=' . $page . '&sort=categoryName,asc',
                  true
               );
               $data1 = json_decode($data);

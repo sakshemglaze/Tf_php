@@ -40,7 +40,7 @@ if ((in_array('category', $urlParts) || in_array('search', $urlParts)) && ctype_
  if (preg_match('~^/industry/([^/]+)/([^/]+)$~', $url, $matches)) {
    include 'industryDetail.php'; 
  }
- if (preg_match('~^/group-category/([^/]+)/([^/]+)$~', $url, $matches)) {
+ if (preg_match('~^/group-category/([^/]+)$~', $url, $matches)) {
    include 'group-category.php';
  }
  if (preg_match('~^/category/([^/]+)/([^/]+)$~', $url, $matches)||preg_match('~^/category/([^/]+)$~', $url,$matches)|| preg_match('~^/search/([^/]+)?([^/]+)$~', $url,$matches)||preg_match('~^/search/([^/]+)/([^/]+)$~', $url, $matches)) {
@@ -49,7 +49,7 @@ if ((in_array('category', $urlParts) || in_array('search', $urlParts)) && ctype_
  if (preg_match('~^/seller/([^/]+)$~', $url, $matches)) {
    include 'sellerdetail.php'; 
  }
- if (preg_match('~^/product/([^/]+)/([^/]+)$~', $url, $matches)) {
+ if (preg_match('~^/product/([^/]+)$~', $url, $matches)) {
    include 'productDetail.php';
  }
  if (preg_match('~^/blog/([^/]+)$~', $url, $matches)) {

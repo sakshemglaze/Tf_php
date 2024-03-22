@@ -113,7 +113,7 @@
             var searchText = $(this).val();
             if (searchText.length >= 3) {
                 $.ajax({
-                    url: "https://api.tradersfind.com/api/search-suggestions",
+                    url: "http://localhost:8080/api/search-suggestions",
                     dataType: "json",
                     data: { searchText: searchText },
                     success: function (data) {
@@ -150,9 +150,9 @@
                 searchTerm =searchTerm.toLowerCase();
                 var statelocation = document.getElementById('locationSelect').value.toLowerCase().replace(/\s+/g,'-');
                 if (document.getElementById('locationSelect').value.toLowerCase() != 'uae') {
-                    var actionURL = "<?php echo  BASE_URL ?>category/" + encodeURIComponent(searchTerm) + '/' + statelocation;
+                    var actionURL = "<?php echo  BASE_URL ?>category/" + encodeURIComponent((suggestion.subcategoryUrl?suggestion.subcategoryUrl:suggestion.subCategoryName).replace(/\s/g, '-')) + '/' + statelocation;
                 } else {
-                    var actionURL = "<?php echo  BASE_URL ?>category/" + encodeURIComponent(searchTerm);
+                    var actionURL = "<?php echo  BASE_URL ?>category/" + encodeURIComponent((suggestion.subcategoryUrl?suggestion.subcategoryUrl:suggestion.subCategoryName).replace(/\s/g, '-'));
                 }
                 $('#homepageSearch').attr('action', actionURL);
                 $('#homepageSearch').submit();
@@ -173,7 +173,7 @@
                 $('#search').val(suggestion.productName); 
                 var searchTermp = $('#search').val().replace(/\s+/g, '-');
                 searchTermp=searchTermp.toLowerCase();
-                var actionURL = "<?php echo  BASE_URL ?>product/" + encodeURIComponent(searchTermp)+'/'+suggestion.id;
+                var actionURL = "<?php echo  BASE_URL ?>product/" + encodeURIComponent((suggestion.productUrl?suggestion.productUrl:suggestion.productName).replace(/\s/g,'-'));
                 $('#homepageSearch').attr('action', actionURL);
                 $('#homepageSearch').submit();
                 $('.search-result').hide(); 
@@ -189,11 +189,11 @@
             if (suggestions) {
                 $('#option_com').empty();
                 suggestions.forEach(function (suggestion) {
-                    var suggestionItem = $('<li></li>').text(suggestion).click(function() {
+                    var suggestionItem = $('<li></li>').text(suggestion.sellerCompanyName).click(function() {
                         $('#search').val(suggestion); 
                 var searchTermp = $('#search').val().replace(/\s+/g, '-');
                 searchTermp=searchTermp.toLowerCase();
-                var actionURL = "<?php echo  BASE_URL ?>seller/" + encodeURIComponent(searchTermp);
+                var actionURL = "<?php echo  BASE_URL ?>seller/" + encodeURIComponent((suggestion.sellerUrl?suggestion.sellerUrl:suggestion.sellerCompanyName).replace(/\s/g,'-'));
                 $('#homepageSearch').attr('action', actionURL);
                 $('#homepageSearch').submit();
 

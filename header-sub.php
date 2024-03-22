@@ -1,8 +1,9 @@
 <?php include_once 'config.php'; ?>
+<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
 <link rel='stylesheet' href='<?php echo BASE_URL; ?>assets/css/mystyle.css'>
 <link rel='stylesheet' href='<?php echo BASE_URL; ?>assets/css/owl.carousel.css'>
  
-<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
+
 <header class="container-fluid shadow-sm border-bottom bg-white sticky-top inner_header1 ">
     <div class="d-flex align-items-center position-relative flex-wrap">
 
@@ -127,7 +128,7 @@ function submitform(){
                        
                 $('#search').val(suggestion.subCategoryName); 
                 var searchTerm = $('#search').val().replace(/\s+/g, '-');
-                var actionURL = '<?php echo BASE_URL; ?>'+"category/" + encodeURIComponent(searchTerm.toLowerCase());
+                var actionURL = '<?php echo BASE_URL; ?>'+"category/" + encodeURIComponent((suggestion.subcategoryUrl?suggestion.subcategoryUrl:suggestion.subCategoryName).replace(/\s/g, '-'));
                 $('#homepageSearch').attr('action', actionURL);
                 $('#homepageSearch').submit();
             });
