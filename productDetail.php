@@ -16,15 +16,12 @@
 
             // Split the URL by "/"
             $parts = explode("/", $currentUrl);
-            
-            
-            $id = end($parts); 
-          
-            $name = prev($parts);
+
+            $name = end($parts);
            
             require_once 'post.php';
         $data =  get(
-                'api/guest/products/'.$id.'/'.$name, 
+                'api/guest/products/'.$name, 
                 true
               );
               $data1 = json_decode($data);
