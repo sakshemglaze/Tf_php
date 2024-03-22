@@ -188,7 +188,7 @@ $SeoParams = [
   'metaTitle' => isset($subcategory->metaTitle) ? str_replace('UAE',$location1,$subcategory->metaTitle) : $subcategory->subCategoryName,
   'metaDescription' => isset($subcategory->metaDescription) ? str_replace('UAE',$location1, $subcategory->metaDescription) : str_replace('UAE',$location1,$subcategory->subCategoryDescription),
   'metaKeywords' => isset($subcategory->keywords) ? str_replace('UAE',$location1,$subcategory->keywords) : 'tradersfind, b2b portal, list of companies in uae, b2b marketplace, business directory, manufacturers in uae, suppliers in uae, buyers in uae, yellowpages uae, importers in uae, uae companies directory, b2b website, business marketplace, local business listings, business directory in uae',
-  'fbTitle' => isset($subcategory->fbTitle) ? str_replace('UAE',$location1,$subcategory->fbTitle) : $subcategory->subCategoryName,
+  'fbTitle' => isset($subcategory->fbTitle) ? str_replace('UAE',$location1,$subcategory->fbTitle) : $subCategory->subCategoryName,
   'fbDescription' => isset($subcategory->fbDescription) ? $subcategory->fbDescription : '',
   'fbImage' => isset($subcategory->fbImage) ? $subcategory->fbImage : null,
   'fbUrl' => isset($subcategory->fbUrl) ? $subcategory->fbUrl : null,
@@ -207,7 +207,6 @@ $SeoParams = [
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex nofollow" >
   <?php 
   include_once 'services/seo.php';
   $seo = new seoService();
