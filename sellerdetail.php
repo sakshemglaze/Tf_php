@@ -87,7 +87,7 @@ $aproodproduct1 = json_decode($aproodproduct);
                 <div class="">
                   <div class="card-body card-body3">
                     <span>
-                    <?php if ($data1[0]->logo): ?>
+                    <?php if (isset($data1[0]->logo)): ?>
                     <span >
                       <img src="https://doc.tradersfind.com/images/<?php echo $data1[0]->logo->id;?>.webp" alt="seller">  
                     <app-logo [name]="seller?seller.sellerCompanyName:'Traders Find'" *ngIf="!seller.logo"></app-logo>
@@ -473,19 +473,11 @@ $aproodproduct1 = json_decode($aproodproduct);
                                 <div class="col-lg-6">
                                   <label for="" class="form-label  fs-4">Mobile Number*</label>
                                   <div class="input-group">
-                                    <select formControlName="noCode" class="form-control mxw-50">
-                                    <?php
-                      $resUnit=file_get_contents('<?php echo BASE_URL; ?>assets/testingJson/Units.json');
-                      $allunit=json_decode($resUnit);
-                      foreach($allunit as $unit){
-                             ?>
-                             <option value="<?php echo $unit;?>">
-                            <?php echo $unit;?>
-                            </option>
-                             <?php
-                      }
-                      ?>
-                                    </select>
+                                  <select formControlName="countryCode" class="form-control mxw-50">
+                                          
+                                          <option value="+971">+971 - United Arab Emirates.</option>
+                 <option value="+91">+91 - India</option>
+                                  </select>
                                     <!--</div>
                                <div class="col-lg-6">-->
                                     <input type="text" formControlName="mobileNo" class="form-control"

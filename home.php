@@ -245,7 +245,13 @@ include "home-search.php"
                     placeholder="eg:  Dozen,  Piece(s),  Tonr">
                     <?php
                  
-                    $resUnit = file_get_contents(BASE_URL . 'assets/testingJson/Units.json');
+                 $context = stream_context_create([
+                  'ssl' => [
+                      'verify_peer' => false,
+                      'verify_peer_name' => false,
+                  ],
+              ]);
+              $resUnit = file_get_contents(BASE_URL . 'assets/testingJson/Units.json', false, $context);
 
                       $allunit=json_decode($resUnit);
                       foreach($allunit as $unit){
@@ -281,7 +287,7 @@ include "home-search.php"
                   <select area-label="countryCode" formControlName="countryCode" class="form-control mxw-50">
                 
                   <?php
-                      $rescuntrycode=file_get_contents( BASE_URL.'assets/testingJson/country_codes_v1.json');
+                      $rescuntrycode=file_get_contents( BASE_URL.'assets/testingJson/country_codes_v1.json',false, $context);
                       $allcuntrycode=json_decode($rescuntrycode);
                       foreach($allcuntrycode as $unit){
                              ?>

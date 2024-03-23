@@ -85,10 +85,10 @@ if($data->sponsoredProduct!=null){
 $category = json_decode(get(
   'api/guest/products-categories-na/' . $subcategory->title, $queryParams
 ));
-
+if( isset($category[0]->title)){
 $industry = json_decode(get(
   'api/industries-na/' . $category[0]->title,$queryParams) );
-
+}
 
 
 $SeoParams = [
@@ -210,7 +210,7 @@ $SeoParams = [
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex nofollow" >
+
   <?php 
   include_once 'services/seo.php';
   $seo = new seoService();
@@ -238,10 +238,12 @@ $SeoParams = [
 <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb" >
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/">TradersFind</a></li> 
-    <?php if(isset($category )):?>
+    <?php if(isset($category ) ):?>
+      <?php if( isset($industry)):?>
     <li class="breadcrumb-item" ><a
         href="/<?php echo $urlService->getIndustryUrl($industry[0]->industryName,$industry[0]->id) ?>"><?php echo $industry[0]->industryName ?></a>
     </li>
+    <?php endif;?>
     <li class="breadcrumb-item"><a
         href="/<?php echo $urlService->getGroupCategoryUrl($category[0]->categoryName,$category[0]->id) ?>"><?php echo $category[0]->categoryName ?> </a>
 

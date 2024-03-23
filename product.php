@@ -69,14 +69,14 @@
     </span>
     
                                     <div class="single-line">
-                                    <a href="/<?php echo $urlService->getProductUrl($prodData->productName, $prodData->id) ?>" target="_blank" title="Product Page">
+                                    <a href="/<?php echo $urlService->getProductUrl(isset($prodData->productUrl)?$prodData->productUrl:$prodData->productName) ?>" target="_blank" title="Product Page">
                                             <h2 class="fs-5 about_text2" style="color:rgb(216, 71, 119);">
                                             <?php    
                                             print_r( $prodData->productName);
                                             ?>
                                             </h2> </a>
                                     </div>
-                                    <div class="fs-8 small">
+                                    <div class="fs-8 ">
                                         <ul role="list" class="list_box">
                                             <?php if (!empty($prodData->productDescription)) { ?>
                                                   <?php foreach (array_slice(json_decode($prodData->specifications, true), 0, 4) as $spec) { ?>
@@ -167,17 +167,17 @@
                                        
                                     </button>
                                 </div>
-                                <div class="col-md-4 whatsappbtn">
+                                <div class="col-md-4 ">
                                     <a href="  <?php echo $whatsappUrl->getProductToWhatsapp($prodData->productName,$prodData->id,get_object_vars($prodData->seller))?>"                                
-                          target="_blank" class="btn btn-sm w-100">
+                          target="_blank" class="whatsappbtn btn btn-sm w-100">
                                         Connect on whatsapp
                                         
                                     </a>
                                 </div>
-                                <div class="col-md-4 btn-outline-gradiant">
+                                <div class="col-md-4 ">
                                  
                                     <button onclick="openPopup()"
-                                        class="btn btn-sm w-100 d-center">
+                                        class="btn-outline-gradiant btn btn-sm w-100 d-center">
                                         <img src="<?php echo BASE_URL ?>assets/images/mail-black.png" width="14" height="12"
                                             class="me-2 w-18" alt="Mail_" />
                                         Send Inquiry
