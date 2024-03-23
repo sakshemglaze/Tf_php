@@ -45,7 +45,7 @@ class seoService {
         }';
 
         $metaTags = "<title>$metaTitle</title>\n";
-        $metaTags .= "<meya name='robots' content='index follow'>\n";
+        $metaTags .= "<meta name='robots' content='index follow'>\n";
         $metaTags .= "<meta name='title' content='$metaTitle'>\n";
         $metaTags .= "<meta name='description' content='$metaDescription'>\n";
         $metaTags .= "<meta name='keywords' content='$metaKeywords'>\n";

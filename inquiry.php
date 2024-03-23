@@ -33,11 +33,11 @@
                       <input type="text" formControlName="enquirerEmail" class="form-control" placeholder="Email ID" />
                     </div>
                     <div class="input-group">
-                      <select formControlName="noCode" class="form-control mxw-50">
-                        <option *ngFor="let opt of this.requirementService.countries"
-                          value="{{opt.code}}">{{ opt.code }}- {{ opt.name }}
-                        </option>
-                      </select>
+                    <select formControlName="countryCode" class="form-control mxw-50">
+                                          
+                                          <option value="+971">+971 - United Arab Emirates.</option>
+                 <option value="+91">+91 - India</option>
+                                  </select>
                       <!--</div>
                 <div class="col-lg-6">-->
                       <input type="text" formControlName="mobileNo" class="form-control"

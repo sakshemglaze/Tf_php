@@ -148,7 +148,7 @@ function submitform(){
                 $('#search').val(suggestion.productName); 
                 var searchTermp = $('#search').val().replace(/\s+/g, '-');
                 searchTermp =searchTermp.toLowerCase();
-                var actionURL ='<?php echo BASE_URL; ?>'+ "product/" + encodeURIComponent(searchTermp)+'/'+suggestion.id;
+                var actionURL = "<?php echo  BASE_URL ?>product/" + encodeURIComponent((suggestion.productUrl?suggestion.productUrl:suggestion.productName).toLowerCase().replace(/\s/g,'-'));
                 $('#homepageSearch').attr('action', actionURL);
                 $('#homepageSearch').submit();
                 $('.search-result').hide(); 
@@ -164,10 +164,10 @@ function submitform(){
             if (suggestions) {
                 $('#option_com').empty();
                 suggestions.forEach(function (suggestion) {
-                    var suggestionItem = $('<li></li><br>').text(suggestion).click(function() {
+                    var suggestionItem = $('<li></li><br>').text(suggestion.sellerCompanyName).click(function() {
                         $('#search').val(suggestion); 
                 var searchTermp = $('#search').val().replace(/\s+/g, '-');
-                var actionURL = '<?php echo BASE_URL; ?>'+"seller/" + encodeURIComponent(searchTermp.toLowerCase());
+                var actionURL = "<?php echo  BASE_URL ?>seller/" + encodeURIComponent((suggestion.sellerUrl?suggestion.sellerUrl:suggestion.sellerCompanyName).toLowerCase().replace(/\s/g,'-'));
                 $('#homepageSearch').attr('action', actionURL);
                 $('#homepageSearch').submit();
 
@@ -187,9 +187,8 @@ function submitform(){
         <a href="https://api.whatsapp.com/send?phone=971569773623&text=Browsed TradersFind" class="mx-4" title="Whatsapp_chat" aria-label="Chat with Tradersfind support team" target="_blank">
           <img src="<?php echo BASE_URL; ?>assets/images/whatsapp-chat.webp" alt="Whatsapp_chat" style="height: 46px;"></a>
         <div class="login-button-top d-flex align-items-center mw-200" *ngIf="!this.storageService.getItem('login')">
-          <img src="<?php echo BASE_URL; ?>assets/images/user.png" alt="user" />
-          <a href="<?php echo BASE_URL; ?>login" class="border-end-black px-3 me-3 lh-sm nowrap">Sign In </a>
-          <a href="<?php echo BASE_URL; ?>register-your-business">Join Free</a>
+        <a href="<?php echo BASE_URL ?>register-your-business">Add Your Business</a>&nbsp;
+        <img src="<?php echo BASE_URL; ?>assets/images/business.png" alt="" width="16" height="16" />
         </div>
 </div>
 </div>

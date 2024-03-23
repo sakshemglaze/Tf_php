@@ -16,28 +16,28 @@ public function getIndustryUrl($indName,$iid) {
   $url = 'industry/' . preg_replace('/[&,\s]+/', '-', strtolower($indName)) . '/' . $iid;
   return $url;
 }
-public function getProductUrl($pname, $pid) {
-  $url = 'product/' . preg_replace('/[&,\s]+/', '-', strtolower(trim($pname))) . '/'. $pid;
+public function getProductUrl($pname) {
+  $url = 'product/' . preg_replace('/[&,\s]+/', '-', strtolower(trim($pname)));
   return $url;
 }
 
-public function getGroupCategoryUrl($name, $id) {
-  $url = 'group-category/' . preg_replace('/[&,\s]+/', '-', strtolower(trim($name))) . '/' . $id;
+public function getGroupCategoryUrl($name) {
+  $url = 'group-category/' . preg_replace('/[&,\s]+/', '-', strtolower(trim($name)));
   return $url;
 }
 
-public function getCategoryUrl($subcategory, $id) {
+public function getCategoryUrl($subcategory) {
   $url =  'category/' . preg_replace('/[&,\s]+/', '-', strtolower(trim($subcategory)));
   return $url;
 }
 
-public function getSubcategoryLocUrl($category, $subcategory, $loc, $id) {
-  $url = 'category/' . preg_replace('/[&,\s]+/', '-', strtolower(trim($subcategory))) . '/' . preg_replace('/[&,\s]+/', '-', strtolower(trim($loc)));
+public function getSubcategoryLocUrl($category, $subcategory, $loc) {
+  $url = 'category/' . preg_replace('/[&,\s]+/', '-', strtolower(trim($subcategory))) . '/' . preg_replace('/[&,\s]+/', '-', strtolower(trim($loc))) ;
   return $url;
 }
 
-public function getSubcategoryAllLocUrl($category, $subcategory, $loc, $id) {
-  $url = 'category/' . preg_replace('/[&,\s]+/', '-', strtolower(trim($subcategory)));
+public function getSubcategoryAllLocUrl($category, $subcategory, $loc) {
+  $url = 'category/' . preg_replace('/[&,\s]+/', '-', strtolower(trim($subcategory))) ;
   return $url;
 }
 

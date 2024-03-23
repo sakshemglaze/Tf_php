@@ -50,7 +50,13 @@
                                     <select formControlName="quantityUnit" class="form-control"
                                         placeholder="eg:  Dozen,  Piece(s),  Tonr">
                                         <?php
-                      $resUnit=file_get_contents(BASE_URL.'assets/testingJson/Units.json');
+                      $context = stream_context_create([
+                        'ssl' => [
+                            'verify_peer' => false,
+                            'verify_peer_name' => false,
+                        ],
+                    ]);
+                    $resUnit = file_get_contents(BASE_URL . 'assets/testingJson/Units.json', false, $context);
                       $allunit=json_decode($resUnit);
                       foreach($allunit as $unit){
                              ?>

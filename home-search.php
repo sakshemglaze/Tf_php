@@ -113,7 +113,7 @@
             var searchText = $(this).val();
             if (searchText.length >= 3) {
                 $.ajax({
-                    url: "http://localhost:8080/api/search-suggestions",
+                    url: "https://api.tradersfind.com/api/search-suggestions",
                     dataType: "json",
                     data: { searchText: searchText },
                     success: function (data) {
@@ -150,12 +150,13 @@
                 searchTerm =searchTerm.toLowerCase();
                 var statelocation = document.getElementById('locationSelect').value.toLowerCase().replace(/\s+/g,'-');
                 if (document.getElementById('locationSelect').value.toLowerCase() != 'uae') {
-                    var actionURL = "<?php echo  BASE_URL ?>category/" + encodeURIComponent((suggestion.subcategoryUrl?suggestion.subcategoryUrl:suggestion.subCategoryName).replace(/\s/g, '-')) + '/' + statelocation;
+                    var actionURL = "<?php echo  BASE_URL ?>category/" + encodeURIComponent((suggestion.subcategoryUrl?suggestion.subcategoryUrl:suggestion.subCategoryName).toLowerCase().replace(/\s/g, '-')) + '/' + statelocation;
                 } else {
-                    var actionURL = "<?php echo  BASE_URL ?>category/" + encodeURIComponent((suggestion.subcategoryUrl?suggestion.subcategoryUrl:suggestion.subCategoryName).replace(/\s/g, '-'));
+                    var actionURL = "<?php echo  BASE_URL ?>category/" + encodeURIComponent((suggestion.subcategoryUrl?suggestion.subcategoryUrl:suggestion.subCategoryName).toLowerCase().replace(/\s/g, '-'));
                 }
                 $('#homepageSearch').attr('action', actionURL);
                 $('#homepageSearch').submit();
+                $('.search-result').hide();
             });
             $('#option_sub').append(suggestionItem);
                 });
@@ -173,7 +174,7 @@
                 $('#search').val(suggestion.productName); 
                 var searchTermp = $('#search').val().replace(/\s+/g, '-');
                 searchTermp=searchTermp.toLowerCase();
-                var actionURL = "<?php echo  BASE_URL ?>product/" + encodeURIComponent((suggestion.productUrl?suggestion.productUrl:suggestion.productName).replace(/\s/g,'-'));
+                var actionURL = "<?php echo  BASE_URL ?>product/" + encodeURIComponent((suggestion.productUrl?suggestion.productUrl:suggestion.productName).toLowerCase().replace(/\s/g,'-'));
                 $('#homepageSearch').attr('action', actionURL);
                 $('#homepageSearch').submit();
                 $('.search-result').hide(); 
@@ -190,14 +191,13 @@
                 $('#option_com').empty();
                 suggestions.forEach(function (suggestion) {
                     var suggestionItem = $('<li></li>').text(suggestion.sellerCompanyName).click(function() {
-                        $('#search').val(suggestion); 
+                        $('#search').val(suggestion.sellerCompanyName); 
                 var searchTermp = $('#search').val().replace(/\s+/g, '-');
                 searchTermp=searchTermp.toLowerCase();
-                var actionURL = "<?php echo  BASE_URL ?>seller/" + encodeURIComponent((suggestion.sellerUrl?suggestion.sellerUrl:suggestion.sellerCompanyName).replace(/\s/g,'-'));
+                var actionURL = "<?php echo  BASE_URL ?>seller/" + encodeURIComponent((suggestion.sellerUrl?suggestion.sellerUrl:suggestion.sellerCompanyName).toLowerCase().replace(/\s/g,'-'));
                 $('#homepageSearch').attr('action', actionURL);
                 $('#homepageSearch').submit();
 
-                $('#search').val(suggestion); 
                 $('.search-result').hide(); 
             });
             $('#option_com').append(suggestionItem);
