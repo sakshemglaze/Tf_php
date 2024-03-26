@@ -1,5 +1,4 @@
 <?php include_once 'config.php'; ?>
-<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/hb.css" />
 <section class="container-fluid">
     <div class="row gy-4">
       <div class="col-lg-12">
@@ -36,7 +35,7 @@ $urlService = new UrlService();
   }
   ?>
     </div>
-    <div class="text-center"> <a href="blog-listing.php">
+    <div class="text-center"> <a href="blog">
         <button class="btn-primary-gradiant rounded-2 btn-auto">VIEW ALL</button> </a>
     </div>
   </section>

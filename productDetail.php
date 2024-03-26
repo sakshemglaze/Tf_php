@@ -1,18 +1,14 @@
-<?php include_once 'config.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Details </title>
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/prod.css" />
-</head>
-<body>
-<script src="<?php echo BASE_URL; ?>assets/js/lazy-load.js"></script>
+<?php 
+ include_once 'config.php'; 
+ 
+ include_once 'services/url.php';
+ $urlpro = new UrlService();
+?>
 <?php
-    include_once "header-sub.php";
+   
     
     $index=0;
             class FilterDTO {}
@@ -20,26 +16,60 @@
 
             // Split the URL by "/"
             $parts = explode("/", $currentUrl);
-            
-            
-            $id = end($parts); 
-          
-            $name = prev($parts);
+
+            $name = end($parts);
            
             require_once 'post.php';
         $data =  get(
-                'api/guest/products/'.$id.'/'.$name, 
+                'api/guest/products/'.$name, 
                 true
               );
               $data1 = json_decode($data);
               //$data = findActive($data1);
               //print_r($data1->seller->logo->id);
+//     SEO Attributes setting ..................
+              //print_r($data1->metaKeywords);
+        $SeoParams = [
+          'title' => isset($data1->metaTitle) && $data1->metaTitle != '' ? $data1->metaTitle : $data1->productName . ' in ' . $data1->seller->state . ' - ' . $data1->sellerCompanyName,
+          'metaTitle' => isset($data1->metaTitle) && $data1->metaTitle != '' ? $data1->metaTitle : $data1->productName . ' in ' . $data1->seller->state . ' - ' . $data1->sellerCompanyName,
+          'metaDescription' => isset($data1->metaDescription) && $data1->metaDescription != '' ? $data1->metaDescription : $data1->sellerCompanyName . ' - Offering ' . $data1->productName . ' in ' . $data1->seller->state . '. Get the best quality at the best price.',
+          'metaKeywords' => isset($data1->metaKeywords) && $data1->metaKeywords != '' & $data1->metaKeywords[0] !='' ? implode(',', $data1->metaKeywords) : $data1->productName . ', ' . $data1->productName . ' in ' . $data1->seller->state . ', ' . $data1->productName . ' in UAE',
+          'fbTitle' => isset($data1->fbTitle) && $data1->fbTitle != '' ? $data1->fbTitle : $data1->productName,
+          'fbDescription' => isset($data1->fbDescription) && $data1->fbDescription != '' ? $data1->fbDescription : $data1->productDescription,
+          'fbImage' => isset($data1->fbImage) ? API_URL . 'api/guest/imageContentDownload/' . $data1->fbImage.id : 'undefined',
+          'fbUrl' => isset($data1->fbUrl) && $data1->fbUrl != '' ? $data1->fbUrl : null,
+          'twitterTitle' => isset($data1->twitterTitle) && $data1->twitterTitle != '' ? $data1->twitterTitle : $data1->productName,
+          'twitterDescription' => isset($data1->twitterDescription) && $data1->twitterDescription != '' ? $data1->twitterDescription : $data1->productDescription,
+          'twitterImage' => isset($data1->twitterImage) ? API_URL . 'api/guest/imageContentDownload/' . $data1->twitterImage.id : 'undefined',
+          'twitterSite' => isset($data1->twitterSite) && $data1->twitterSite != '' ? $data1->twitterSite : null,
+          'twitterCard' => isset($data1->twitterCard) && $data1->twitterCard != '' ? $data1->twitterCard : null,
+       ];
+
               ?>
+  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php 
+  include_once 'services/seo.php';
+  $seo = new seoService();
+                $seo->setSeoTags($SeoParams);
+                include_once "header-sub.php";
+                include_once "whatsapp.php";
+                $whatsappUrl=new WhatsappUrl();
+
+                include_once 'services/masked.php';
+                $maskedService = new MaskingService();
+
+  ?>
+  
+</head>
+<body>
+<script src="<?php echo BASE_URL; ?>assets/js/lazy-load.js"></script>
 
 <section class="container-fluid ">
   <?php include_once "banner.php"; ?>
 </section>
-<section class="p-3">
+<section class="p-1">
   <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="/">TradersFind </a></li>
@@ -56,9 +86,9 @@
           <div class="row">
             <div class="col-lg-3 product_details_img">
               <?php if ($data1 != null ) : ?>
-              <div class="fotorama" data-nav="thumbs" data-thumbmargin="20" data-width="100%"
-                data-allowfullscreen="true" data-height="auto" data-ratio="800/600">
-                         <img src="https://doc.tradersfind.com/images/<?php echo $data1->images[0]->id; ?>.webp" alt="<?php echo $data1->productName ?>" >
+              <div class="fotorama" data-nav="thumbs" data-thumbmargin="20" data-width="100%" data-allowfullscreen="true"
+                 data-height="auto" data-ratio="800/600">
+                         <img class="rounded-10" src="https://doc.tradersfind.com/images/<?php echo $data1->images[0]->id; ?>.webp" alt="<?php echo $data1->productName ?>" width="240" height="240" >
              </div>
              <?php endif; ?>
             </div>
@@ -105,16 +135,16 @@
             </div>
 
             <div class="col-lg-4">
-              <div class="card bg-grey3 border-0">
-                <div class="card-body">
+              <div class="card border-0">
+                <div class="card-body bg-grey3">
                   <div class="d-flex flex-column align-items-center">
-                    <span class="bg-white px-3 rounded-10 py-5">
+                    <span class="bg-white px-3 rounded-10 py-2">
                       <img src="https://doc.tradersfind.com/images/<?php echo $data1->seller->logo->id; ?>.webp" alt="<?php echo $data1->seller->sellerCompanyName; ?>"width="160" >
                     </span>
 
                     <h2 class="fwbold fs-4 mt-3">
                       <?php if($data1->seller && $data1->seller->sellerCompanyName ) : ?>
-                     <a hre]="url.php?getSellerUrl($data1->seller->sellerUrl,$data1->seller->id)" target="_blank" class="text-blue"> <?php echo $data1->seller->sellerCompanyName ?> </a></h2>
+                     <a href="/<?php echo $urlpro->getSellerUrl($data1->seller->sellerUrl,$data1->seller->id) ?>" target="_blank" class="text-blue"> <?php echo $data1->seller->sellerCompanyName ?> </a></h2>
                      <?php endif; ?>
                     <div class="fs-5 mt-2">
                       <img class="me-2" src="<?php echo BASE_URL; ?>assets/images/location-3.svg" width="15" alt="location" />
@@ -148,26 +178,26 @@
                     </div>
                     <div class="d-flex align-items-center flex-wrap mt-3">
                       <div class="d-flex align-items-center me-3">
-                        <img src="<?php echo BASE_URL; ?>assets/images/crown.png" class="me-1" alt="" />
+                        <img src="<?php echo BASE_URL; ?>assets/images/crown.png" class="me-1" alt="premium" />
                         <span>Premium Supplier</span>
                       </div>
                       <div class="d-flex align-items-center">
-                        <img src="<?php echo BASE_URL; ?>assets/images/verifiedw2.png" alt="" class="me-1" />
+                        <img src="<?php echo BASE_URL; ?>assets/images/verifiedw2.png" alt="verified" class="me-1" />
 
                       </div>
                     </div>
-                    <button class="btn btn-light mt-5 bg-white"
-                      (click)="this.maskingService.onClickPhoneNum(prodDetails.seller, 'sellerVirtualContactPhone', this.urlService.getProductUrl(prodDetails.productName,prodDetails.id), prodDetails)">
-                      <img src="<?php echo BASE_URL; ?>assets/images/phone.png" width="15" alt="phone" />  <?php echo isset($data1->seller->maskedNum) ?> </button>
+                    <button class="btn btn-light mt-5 bg-white">
+                      <img src="<?php echo BASE_URL; ?>assets/images/phone.png" width="15" alt="phone" />  
+                      <?php $maskedService->getMaskedNumber($data1->seller->sellerVirtualContactPhone); ?> </button>
                     <div class="d-flex align-items-center w-100 mt-3 gap-2">
-                      <a *ngIf="prodDetails"
-                        [href]="this.urlService.getProductToWhatsapp(prodDetails.productName, prodDetails.id, prodDetails.seller)"
+                      <a
+                        href=" <?php echo $whatsappUrl->getProductToWhatsapp($data1->productName,$data1->id,get_object_vars($data1->seller))?>"
                         class="whatsappbtn btn btn-sm w-100" target="_blank">
                         Connect on whatsapp
                       </a>
                       <button (click)="openPostRequirement(prodDetails.productName)"
                         class="btn-outline-gradiant btn btn-sm w-100">
-                        <img src="assets/images/mail-solid.png" alt="" /> Send
+                        <img src="assets/images/mail-solid.png" alt="mail" /> Send
                         Inquiry
                       </button>
                     </div>
@@ -270,7 +300,7 @@
                 Trade License <br />  <?php echo $data1->seller->tradeLicenseNumber; ?>
               </td>
               <td>
-                Service Area <br /> <?php echo $data1->seller->sellerState . ', ' . $data1->seller->sellerCountry ?> 
+                Service Area <br /> <?php echo $data1->seller->state . ', ' . $data1->seller->sellerCountry ?> 
               </td>
             </tbody>
             <tbody>
@@ -289,8 +319,7 @@
           <?php echo $data1->seller->sellerCompanyName; ?>
           </div>
           <div> <?php echo $data1->seller->sellerTagline; ?>     </div><br>
-          <a *ngIf="prodDetails && prodDetails.seller" [href]="this.urlService.getSellerUrl(prodDetails.seller.sellerUrl,prodDetails.seller.id)
-          " target="_blank" title="{{ prodDetails.seller.sellerCompanyName }}" target="_blank"
+          <a href="/<?php echo $url->getSellerUrl($data1->seller->sellerCompanyName,$data1->seller->id) ?>" target="_blank" title="<?php echo $data1->seller->sellerCompanyName?>" target="_blank"
             class="btn-primary-gradiant rounded-10 mt-4 px-md-5">
             View more
           </a>
@@ -345,9 +374,9 @@
         </div>
       </form>
       
-      <app-otp *ngIf="this.requirementService.isVerification"
+      <!-- <app-otp *ngIf="this.requirementService.isVerification"
       [countryCode]="this.requirementService.prodDetailFrom.value.noCode"
-      [mobileNo]="this.requirementService.prodDetailFrom.value.mobileNo"></app-otp>
+      [mobileNo]="this.requirementService.prodDetailFrom.value.mobileNo"></app-otp> -->
 
       
 

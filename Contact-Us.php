@@ -1,6 +1,30 @@
-<?php include_once 'config.php'; ?>
-<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/contact.css" />
-
+<?php include_once 'config.php'; 
+$SeoParams = [
+    'title' => 'Reach TradersFind - UAEs Largest Online B2B Portal',
+    'metaTitle' => 'Reach TradersFind - UAEs Largest Online B2B Portal',
+    'metaDescription' => 'Have queries or suggestions? Contact us at TradersFind, UAEs Largest Online B2B Portal. Your gateway to seamless business interactions and solutions',
+                'metaKeywords' => null,
+                'fbTitle' => null,
+                'fbDescription' => null,
+                'fbImage' => null,
+                'fbUrl' => null,
+                'twitterTitle' => null,
+                'twitterDescription' => null,
+                'twitterImage' => null,
+                'twitterSite' => null,
+                'twitterCard' => null,
+  ];
+  ?>
+  <html lang="en">
+    <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <?php 
+          include_once 'services/seo.php';
+          $seo = new seoService();
+          $seo->setSeoTags($SeoParams); ?>
+  
+  </head>
+  <body>
 <?php
 include_once 'header-sub.php';
 ?>
@@ -20,17 +44,17 @@ include_once 'header-sub.php';
                 <div class="col-sm-8">
                     <ul>
                         <li>
-                            <img src="<?php echo BASE_URL; ?>assets/img/map1.png" width="40" height="40" alt="" /> 
+                            <img src="<?php echo BASE_URL; ?>assets/img/map1.png" width="40" height="40" alt="location" /> 
                             <div class="text_11" style="color: #333;">606 Binary Tower by Omniyat Business Bay, Dubai</div>
                             <div class="text_11">&nbsp;</div>
                         </li>
                         <li>
-                            <img src="<?php echo BASE_URL; ?>assets/img/phone11.png" width="40" height="40" alt="" />
+                            <img src="<?php echo BASE_URL; ?>assets/img/phone11.png" width="40" height="40" alt="phone" />
                             <div class="text_11" style="color: #333;">Sales : +971 502943313</div>
                             <div class="text_11" style="color: #333;">Support : +971 502943313</div>
                         </li>
                         <li>
-                            <img src="<?php echo BASE_URL; ?>assets/img/email1.png" width="40" height="40" alt="" />
+                            <img src="<?php echo BASE_URL; ?>assets/img/email1.png" width="40" height="40" alt="post buy requirements" />
                             <a href="/post-buy-requirements" title="post-buy-requirements" style="color: #333;">Click here to share your queries.</a>
                         </li>
                     </ul>
@@ -42,7 +66,7 @@ include_once 'header-sub.php';
                 </div>
                 <div class="col-sm-3">
                     <div class="right_box_img">
-                        <img src="<?php echo BASE_URL; ?>assets/img/email2.webp" style="max-width: 100%; height: auto; display: block; margin: 0 auto;" alt="" />
+                        <img src="<?php echo BASE_URL; ?>assets/img/email2.webp" style="max-width: 100%; height: auto; display: block; margin: 0 auto;" alt="email" />
                     </div>
                 </div>
             </div>
@@ -66,6 +90,7 @@ include_once 'header-sub.php';
     </div>
     
 </div>
+        </body></html>
 <?php 
 include_once 'footer.php';
 ?>

@@ -6,14 +6,14 @@
         <div class="p-md-4 my-3">
           <div class="card border-0 shadow-lg">
             <div class="card-header text-center bg-gradiant">
-              <h5 class="mb-0 py-1 fs-3">
+              <h4 class="mb-0 py-1 fs-3">
                 INQUIRE FOR YOUR BUYING REQUIREMENT
-              </h5>
+              </h4>
             </div>
             <div class="card-body p-md-5">
-              <h4 class="text-uppercase mb-5 fw-semibold">
+              <h5 class="text-uppercase mb-5 fw-semibold">
                 Tell us about your requirement
-              </h4>
+              </h5>
               <form *ngIf="this.requirementService.prodDetailFrom"
               [ngClass]="!this.requirementService.isFormvalid?'was-validated':''"
               [formGroup]="this.requirementService.prodDetailFrom">
@@ -33,11 +33,11 @@
                       <input type="text" formControlName="enquirerEmail" class="form-control" placeholder="Email ID" />
                     </div>
                     <div class="input-group">
-                      <select formControlName="noCode" class="form-control mxw-50">
-                        <option *ngFor="let opt of this.requirementService.countries"
-                          value="{{opt.code}}">{{ opt.code }}- {{ opt.name }}
-                        </option>
-                      </select>
+                    <select formControlName="countryCode" class="form-control mxw-50">
+                                          
+                                          <option value="+971">+971 - United Arab Emirates.</option>
+                 <option value="+91">+91 - India</option>
+                                  </select>
                       <!--</div>
                 <div class="col-lg-6">-->
                       <input type="text" formControlName="mobileNo" class="form-control"

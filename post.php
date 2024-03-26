@@ -13,33 +13,40 @@ function getItem($item) {
        }
         
        function post($url, $request, $observeResponseFlag = false, $queryParams = null, $authRequired = false, $responseType = null) {
-           $token = getItem("userAccessToken");
-       
-           $headers = array(
-               'Content-Type: application/json'
-           );
-           if ($authRequired) {
-               $headers[] = 'Authorization: Bearer ' . $token;
-           }
-           $ch = curl_init(API_URL. $url);
-       
-           $postData = json_encode($request);
-       
-           if ($queryParams) {
-               $url .= '?' . http_build_query($queryParams);
-           }
-       
-           curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-           curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
-           curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-           curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-           $response = curl_exec($ch);
-          
-          $rereasponse= json_decode($response);
-        return $rereasponse;   
-       }
-
+        $token = getItem("userAccessToken");
+    
+        $headers = array(
+            'Content-Type: application/json'
+        );
+        if ($authRequired) {
+            $headers[] = 'Authorization: Bearer ' . $token;
+        }
+    
+        // Append query parameters to URL if provided
+        if ($queryParams) {
+            $url .= '?' . http_build_query($queryParams);
+        }
+    
+        $ch = curl_init(API_URL . $url);
+    
+        $postData = json_encode($request);
+    
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        //curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        $response = curl_exec($ch);
+        $data=json_decode($response);
+        if ($responseType === 'json') {
+            // Decode JSON response
+            $decodedResponse = json_decode($response, true);
+            return $decodedResponse;
+        }
+    
+        return $data;
+    }
+    
 
        function get($url, $observeResponseFlag = false, $queryParams = null, $authRequired = false, $responseType = null) {
        
@@ -61,7 +68,7 @@ function getItem($item) {
         }
         
         // Construct URL with query parameters if provided
-        $urlWithQuery = 'http://localhost:8080/'.$url;
+       // $urlWithQuery = 'http://localhost:8080/'.$url;
         $urlWithQuery = API_URL . $url;
         if ($query) {
             $urlWithQuery .= '?' . $query;

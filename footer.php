@@ -1,24 +1,23 @@
 
 <?php include_once 'config.php'; ?>
-<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/foot.css" >
 
 <footer class="footer pt-5 pb-1">
 
     <div class="container-fluid">
       <div class="row gy-5">
         <div class="col-lg-3  text-center">
-          <img src="<?php echo BASE_URL; ?>assets/images/help-icon.webp" class="img-fluid" width="60" height="30" alt="" />
+          <img src="<?php echo BASE_URL; ?>assets/images/help-icon.webp" class="img-fluid" width="60" height="30" alt="help" />
           <h4 class="my-4">Happy to help you!</h4>
           <ul class="mt-4 mb-5 footer_call gap-3">
             <li>
-              <a href="tel:+971502943313" class="text-white"><img src="<?php echo BASE_URL; ?>assets/images/call-footer-icon.webp" width="20" height="20" alt="" /> +971 502943313 </a>
+              <a href="tel:+971502943313" class="text-white"><img src="<?php echo BASE_URL; ?>assets/images/call-footer-icon.webp" width="20" height="20" alt="contact no" /> +971 502943313 </a>
             </li>
             <li class="my-1">
-              <a href="tel:+971569773623" class="text-white"><img src="<?php echo BASE_URL; ?>assets/images/whatsapp-footer-icon.webp" width="20" height="20" alt="" />
+              <a href="tel:+971569773623" class="text-white"><img src="<?php echo BASE_URL; ?>assets/images/whatsapp-footer-icon.webp" width="20" height="20" alt="whatsapp" />
                 +971 569773623</a>
             </li>
             <li>
-              <a href="tel:+97143465220" class="text-white"><img src="<?php echo BASE_URL; ?>assets/images/mail-footer-icon.webp" width="20" height="15" alt="" />
+              <a href="tel:+97143465220" class="text-white"><img src="<?php echo BASE_URL; ?>assets/images/mail-footer-icon.webp" width="20" height="15" alt="support no" />
                 support&#64;tradersfind.com</a>
             </li>
           </ul>
@@ -45,27 +44,34 @@
   
             <div class="col-md-3  ">
               <h4 class="text-white">BUYERS</h4>
-              <ul class="footermenu">
-                <li><a href="post-buy-requirements">Post Your Requirement</a></li>
-                <li><a href="industry">Browse Sellers</a></li>
-                <li><a href="buyer-faq">Buyer FAQ</a></li>
+
+              <ul class="footermenu footer_call">
+                <li><a href="<?php echo  BASE_URL ?>post-buy-requirements">Post Your Requirement</a></li>
+                <li><a href="<?php echo  BASE_URL ?>industry">Browse Sellers</a></li>
+                <li><a href="<?php echo  BASE_URL ?>buyer-faq">Buyer FAQ</a></li>
+
               </ul>
             </div>
   
             <div class="col-md-3 ">
               <h4 class="text-white">SELLERS</h4>
-              <ul class="footermenu">
-                <li><a href="register-your-business">Sell Your Product</a></li>
+
+              <ul class="footermenu footer_call">
+                <li><a href="<?php echo  BASE_URL ?>register-your-business">Sell Your Product</a></li>
+
               
-                <li><a href="seller-faq">Seller FAQ</a></li>
+              
+                <li><a href="<?php echo  BASE_URL ?>seller-faq">Seller FAQ</a></li>
               </ul>
             </div>
   
             <div class="col-md-3  ">
               <h4 class="text-white">QUICK LINKS</h4>
-              <ul class="footermenu">
-                <li><a href="blog">Latest Blogs</a></li>
-                <li><a href="feedback">Feedback</a></li>
+
+              <ul class="footermenu footer_call">
+                <li><a href="<?php echo  BASE_URL ?>blog">Latest Blogs</a></li>
+                <li><a href="<?php echo  BASE_URL ?>feedback">Feedback</a></li>
+
              <!--   <li><a href="">Testimonials</a></li>  -->
               </ul>
             </div>
@@ -76,19 +82,13 @@
   
             <div class="col-lg-8">
               <ul class="footermenu2">
-                <li><a href="about-us">About us</a></li>
-                <li><a href="contact-us">Contact us</a></li>
-                <li><a href="privacy-policy">Privacy Policy</a></li>
-                <li><a href="term-and-conditions">Term of Use</a></li>
+                <li><a href="<?php echo  BASE_URL ?>about-us">About us</a></li>
+                <li><a href="<?php echo  BASE_URL ?>contact-us">Contact us</a></li>
+                <li><a href="<?php echo  BASE_URL ?>privacy-policy">Privacy Policy</a></li>
+                <li><a href="<?php echo  BASE_URL ?>term-and-conditions">Term of Use</a></li>
               </ul>
-  
-              <!-- <p class="d-flex align-items-center gap-3 text-grey mt-5">
-                Go Mobile:
-                <img src="assets/images/googleplay.png" class="img-fluid" alt="" />
-                <img src="assets/images/iphone.png" class="img-fluid" alt="" />
-              </p> -->
             </div>
-            <div class="col-lg-4 text-center mt-0"> <a href="/" title="TradersFind" aria-label="TradersFind - Largest B2B online Portal">
+            <div class="col-lg-4 text-center mt-0"> <a href="<?php echo BASE_URL;?>" title="TradersFind" aria-label="TradersFind - Largest B2B online Portal">
               <img src="<?php echo BASE_URL; ?>assets/images/footer-logo.webp" title="TradersFind" class="img-fluid footer_img" width="180" height="108" alt="TradersFind" /> </a>
             </div>
           </div>
@@ -103,16 +103,16 @@
   
   <div class="owl-carousel carousel-main4">
        
-          <img src="<?php echo BASE_URL; ?>assets/images/brands/footer-brands/1.webp"  alt="" />
+          <img src="<?php echo BASE_URL; ?>assets/images/brands/footer-brands/1.webp"  alt="branc" />
        
         
-          <img src="<?php echo BASE_URL; ?>assets/images/brands/footer-brands/2.webp" alt="" />
+          <img src="<?php echo BASE_URL; ?>assets/images/brands/footer-brands/2.webp" alt="brand" />
         
        
-          <img src="<?php echo BASE_URL; ?>assets/images/brands/footer-brands/3.webp"  alt="" />
+          <img src="<?php echo BASE_URL; ?>assets/images/brands/footer-brands/3.webp"  alt="brand" />
         
         
-          <img src="<?php echo BASE_URL; ?>assets/images/brands/footer-brands/4.webp"  alt="" />
+          <img src="<?php echo BASE_URL; ?>assets/images/brands/footer-brands/4.webp"  alt="brand" />
        
       </div>
     
@@ -125,6 +125,6 @@
       Copyright &copy; 2023 Interconnect Marketing Management L.L.C All rights reserved.
     </p>
   </footer>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+  
 <script src='<?php echo BASE_URL; ?>assets/js/owl.carousel.min.js'></script>
 <script  src="<?php echo BASE_URL; ?>assets/js/script.js"></script>

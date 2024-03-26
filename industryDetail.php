@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
     include_once 'config.php';
 
     include_once 'services/url.php';
@@ -8,23 +11,7 @@
     $urlParts = explode('/', $currentUrl);
     $industryName = $matches[1];
     $id = $matches[2];
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Industry </title>
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
-   
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/indusdetail.css" />
-</head>
-<body>
-<script src="<?php echo BASE_URL; ?>assets/js/lazy-load.js"></script>
-<?php
-    include_once "header-sub.php";
-    
+
     $index=0;
             class FilterDTO {}
             //$name= $_POST['searchText']? $_POST['searchText']:"cleaning services";
@@ -33,13 +20,42 @@
             $page = 0;
             $size = 6;
             require_once 'post.php';
-        $data =  get(
-                'api/industries/' . $matches[2] .'?size=' . $size . '&page=' . $page . '&sort=industryName,asc',
-                 true
-              );
+        $data =  get('api/industries/' . $matches[2] .'?size=' . $size . '&page=' . $page . '&sort=industryName,asc',true );
               $data1 = json_decode($data);
              // $data = findActive($data1);
               //print_r($data);
+
+        $SeoParams = [
+          'title' => isset($data1->metaTitle) && $data1->metaTitle != '' ? $data1->metaTitle : $data1->productName . ' in ' . $data1->seller->state . ' - ' . $data1->sellerCompanyName,
+          'metaTitle' => isset($data1->metaTitle) && $data1->metaTitle != '' ? $data1->metaTitle : $data1->productName . ' in ' . $data1->seller->state . ' - ' . $data1->sellerCompanyName,
+          'metaDescription' => isset($data1->industryDescription) && $data1->industryDescription != '' ? $data1->industryDescription : '',
+          'metaKeywords' => isset($data1->Keywords) && $data1->Keywords != '' ? implode(',', $data1->Keywords) : $data1->industryName,
+          'fbTitle' => isset($data1->fbTitle) && $data1->fbTitle != '' ? $data1->fbTitle : $data1->productName,
+          'fbDescription' => isset($data1->fbDescription) && $data1->fbDescription != '' ? $data1->fbDescription : $data1->productDescription,
+          'fbImage' => isset($data1->fbImage) ? API_URL . 'api/guest/imageContentDownload/' . $data1->fbImage.id : 'undefined',
+          'fbUrl' => isset($data1->fbUrl) && $data1->fbUrl != '' ? $data1->fbUrl : null,
+          'twitterTitle' => isset($data1->twitterTitle) && $data1->twitterTitle != '' ? $data1->twitterTitle : $data1->productName,
+          'twitterDescription' => isset($data1->twitterDescription) && $data1->twitterDescription != '' ? $data1->twitterDescription : $data1->productDescription,
+          'twitterImage' => isset($data1->twitterImage) ? API_URL . 'api/guest/imageContentDownload/' . $data1->twitterImage.id : 'undefined',
+          'twitterSite' => isset($data1->twitterSite) && $data1->twitterSite != '' ? $data1->twitterSite : null,
+          'twitterCard' => isset($data1->twitterCard) && $data1->twitterCard != '' ? $data1->twitterCard : null,
+       ];
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php 
+        include_once 'services/seo.php';
+        $seo = new seoService();
+        $seo->setSeoTags($SeoParams); ?>
+</head>
+<body>
+<script src="<?php echo BASE_URL; ?>assets/js/lazy-load.js"></script>
+<?php
+include_once "header-sub.php";    
               ?>
 <section class="container-fluid ">
   <?php include_once "banner.php"; ?>
@@ -64,7 +80,9 @@
         </div>
 
         <?php 
-        foreach ($data1->productsCategories as $cat) {
+        $filteredCategories = array_filter($data1->productsCategories, function($record) {
+                return $record->status == 'true'; });
+       foreach ($filteredCategories as $cat) {
                 echo '<div class="col-lg-4">';
                     echo '<div class="card border-0 category-hover">';
                         echo '<div class="card-body">';
@@ -74,9 +92,11 @@
                             echo '<div class="d-flex align-items-start">';
                                echo '<img data-src="' . IMAGE_URL . $cat->image->id .'.webp" class="lazy me-3 rounded-10 img-fluid" height="70" width="70" alt="Category">' ;
                                 echo '<ul class="list-style-disc ms-4">';
-                                    foreach (array_slice($cat->productsSubcategories, 0, 5) as $subcat) {
+                                $filteredSubCategories = array_filter($cat->productsSubcategories, function($record) {
+                                return $record->status == 'true'; });
+                                    foreach (array_slice($filteredSubCategories, 0, 5) as $subcat) {
                                         echo '<li>';
-                                            echo '<a href="' . BASE_URL  . $urlService->getCategoryUrl($subcat->subCategoryName, $subcat->id) . '">' . $subcat->subCategoryName . '</a>';
+                                            echo '<h3 class="fs-6"><a href="' . BASE_URL  . $urlService->getCategoryUrl($subcat->subCategoryName, $subcat->id) . '">' . $subcat->subCategoryName . '</a></h3>';
                                         echo '</li>';
                                                                         }
                                     echo '<li>';

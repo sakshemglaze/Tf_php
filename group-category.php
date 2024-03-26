@@ -3,9 +3,44 @@
     $urlService = new UrlService();
 ?>
 <?php
+    //print_r('welcome1');
     $currentUrl = $_SERVER['REQUEST_URI'];   
     $grpCatName = $matches[1];
     $id = $matches[2];
+    //print_r($id);
+    $index=0;
+            class FilterDTO {}
+            //$name= $_POST['searchText']? $_POST['searchText']:"cleaning services";
+            $filterDto = new FilterDTO();
+            $payload = array();
+            $page = 0;
+            $size = 20;
+            $queryParams= array('page'=>0, 'size'=> 6) ;
+            require_once 'post.php';
+        $data =  get(
+                'api/guest/products-categories/' . $id .'?size=' . $size . '&sort=categoryName,asc',
+                 true
+              );
+              $data1 = json_decode($data);
+              //print_r('welcome');
+              $industry =  json_decode(get(
+                'api/industries-na/' . $data1->title . '?size=10&sort=industryName',true
+              ));
+              $SeoParams = [
+                'title' => isset($data1->metaTitle) && $data1->metaTitle != '' ? $data1->metaTitle : $data1->productName . ' in ' . $data1->seller->state . ' - ' . $data1->sellerCompanyName,
+                'metaTitle' => isset($data1->metaTitle) && $data1->metaTitle != '' ? $data1->metaTitle : $data1->productName . ' in ' . $data1->seller->state . ' - ' . $data1->sellerCompanyName,
+                'metaDescription' => isset($data1->categoryDescription) && $data1->categoryDescription != '' ? $data1->categoryDescription : '',
+                'metaKeywords' => isset($data1->Keywords) && $data1->Keywords != '' ? implode(',', $data1->Keywords) : $data1->categoryName,
+                'fbTitle' => isset($data1->fbTitle) && $data1->fbTitle != '' ? $data1->fbTitle : $data1->productName,
+                'fbDescription' => isset($data1->fbDescription) && $data1->fbDescription != '' ? $data1->fbDescription : $data1->productDescription,
+                'fbImage' => isset($data1->fbImage) ? API_URL . 'api/guest/imageContentDownload/' . $data1->fbImage.id : 'undefined',
+                'fbUrl' => isset($data1->fbUrl) && $data1->fbUrl != '' ? $data1->fbUrl : null,
+                'twitterTitle' => isset($data1->twitterTitle) && $data1->twitterTitle != '' ? $data1->twitterTitle : $data1->productName,
+                'twitterDescription' => isset($data1->twitterDescription) && $data1->twitterDescription != '' ? $data1->twitterDescription : $data1->productDescription,
+                'twitterImage' => isset($data1->twitterImage) ? API_URL . 'api/guest/imageContentDownload/' . $data1->twitterImage.id : 'undefined',
+                'twitterSite' => isset($data1->twitterSite) && $data1->twitterSite != '' ? $data1->twitterSite : null,
+                'twitterCard' => isset($data1->twitterCard) && $data1->twitterCard != '' ? $data1->twitterCard : null,
+             ];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,49 +48,18 @@
   
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Industry</title>
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/cate.css" />
+    <?php 
+        include_once 'services/seo.php';
+        $seo = new seoService();
+        $seo->setSeoTags($SeoParams); ?>
 </head>
 <body>
 <script src="<?php echo BASE_URL; ?>assets/js/lazy-load.js"></script>
 <?php
-    include_once "header-sub.php";
-    
-    $index=0;
-            class FilterDTO {}
-            //$name= $_POST['searchText']? $_POST['searchText']:"cleaning services";
-            $filterDto = new FilterDTO();
-            $payload = array();
-            $page = 0;
-            $size = 6;
-            $queryParams= array('page'=>0, 'size'=> 6) ;
-            require_once 'post.php';
-        $data =  get(
-                'api/guest/products-categories/' . $matches[2] .'?size=' . $size . '&page=' . $page . '&sort=categoryName,asc',
-                 true
-              );
-              $data1 = json_decode($data);
-              $industry =  json_decode(get(
-                'api/industries-na/' . $data1->title . '?size=10&sort=industryName',true
-              ));
-              //$data = findActive($data1);
-
-              //print_r($industry[0]);
-              ?>
+    include_once "header-sub.php";              ?>
 <section class="container-fluid ">
   <?php include_once "banner.php"; ?>
 </section>
-
-<section class="container-fluid ">
-  <div class="hidden-content row">
-    <div class="col-lg-12">
-       <app-banner-adv [bannerPosition]="'Category'" [renderServerSide]="false" [image]="'na'"> 
-      </app-banner-adv> 
-    </div>
-  </div>
-
-</section> 
 
 <section class="p-3">
   <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
@@ -89,7 +93,7 @@
               <img data-src="<?php echo IMAGE_URL . $data1->image->id;?>.webp" class="lazy w-100" alt="Group-Category" />
 
             </div>
-            <h2 class="fs-4 fwbold mt-4"><?php echo $data1->categoryName; ?></h2>
+            <span class="fs-4 fwbold mt-4"><?php echo $data1->categoryName; ?></span>
           </div>
         </div>
         <div class="col-lg-10 position-relative">

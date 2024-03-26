@@ -1,7 +1,30 @@
 <?php include_once 'config.php';
- ?>
+$SeoParams = [
+  'title' => 'TradersFinds Terms & Conditions - Largest Online B2B Portal',
+  'metaTitle' => 'TradersFinds Terms & Conditions - Largest Online B2B Portal',
+  'metaDescription' => 'TradersFinds Terms & Conditions - UAEs Largest Online B2B Portal connecting buyers with suppliers. Register Now!',
+              'metaKeywords' => null,
+              'fbTitle' => null,
+              'fbDescription' => null,
+              'fbImage' => null,
+              'fbUrl' => null,
+              'twitterTitle' => null,
+              'twitterDescription' => null,
+              'twitterImage' => null,
+              'twitterSite' => null,
+              'twitterCard' => null,
+];
+?>
+<html lang="en">
+  <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<?php 
+        include_once 'services/seo.php';
+        $seo = new seoService();
+        $seo->setSeoTags($SeoParams); ?>
 
-<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/tnc.css" />
+</head>
+<body>
 <?Php
 include_once "header-sub.php";
 ?>
@@ -116,3 +139,4 @@ include_once "header-sub.php";
 <?php
 include_once "footer.php";
 ?>
+</body></html>

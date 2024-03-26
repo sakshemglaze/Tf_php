@@ -1,0 +1,7 @@
+#Robots.txt for www.tradersfind.com
+
+User-agent: *
+Disallow: /
+User-agent: Googlebot
+Disallow: /search/*
+Sitemap: https://www.tradersfind.com/xmlfile/sitemap.xml

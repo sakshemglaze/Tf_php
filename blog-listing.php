@@ -1,6 +1,20 @@
+<html>
+    <head>
+
 <?php include_once 'config.php'; ?>
-<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/blog.css" />
-<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
+<?php
+    $SeoParams = [
+          'title' => 'UAE B2B Marketing Blogs to Read in 2024',
+          'metaTitle' => 'UAE B2B Marketing Blogs to Read in 2024',
+          'metaDescription' => 'UAE B2B Marketing Blogs to Read in 2024. Best Business Blog on business topics including: management, marketing, education, technology, innovation and more.',
+       ];
+       include_once 'services/seo.php';
+        $seo = new seoService();
+                $seo->setSeoTags($SeoParams);
+?>
+
+</head>
+<body>
 <?php
 include_once "header-sub.php";
 ?>
@@ -101,6 +115,33 @@ include_once "header-sub.php";
                 $blogList = json_decode($apiResponse);
                 return $blogList;
             }
+            // function custom_mb_strimwidth($str, $start, $width, $trimmarker = '') {
+            //     // Get the length of the string in characters
+            //     $strLen = mb_strlen($str);
+            
+            //     // If the string length is less than the width, return the whole string
+            //     if ($strLen <= $width) {
+            //         return $str;
+            //     }
+            
+            //     // Trim the string using substr() based on byte length
+            //     $trimmed = substr($str, $start, $width);
+            
+            //     // Find the last whitespace within the width
+            //     $lastSpace = mb_strrpos($trimmed, ' ');
+            
+            //     // If the last space is found within the width, trim the string to that position
+            //     if ($lastSpace !== false && $lastSpace < $width) {
+            //         $trimmed = mb_substr($trimmed, 0, $lastSpace);
+            //     }
+            
+            //     // Append the trim marker if provided
+            //     if (!empty($trimmarker)) {
+            //         $trimmed .= $trimmarker;
+            //     }
+            
+            //     return $trimmed;
+            // }
 
             $blogList = onChangeFilter();
             
@@ -108,7 +149,7 @@ include_once "header-sub.php";
             <div class="row">
                 
                 <?php foreach ($blogList as $blog){
-                     $desc=mb_strimwidth($blog->description, 0, 250, '...')
+                     // $desc = custom_mb_strimwidth($blog->description, 0, 250, '...');
                     ?>
                    
                     <div class="col-lg-6 mb-4 align-items-center front_blog">
@@ -127,7 +168,8 @@ include_once "header-sub.php";
                             <div class="front_blog2">
                                 <p><?php echo $blog->subTitle; ?></p>
                                 <h1 style="font-size: x-large;"><a href="<?php echo BASE_URL.$urlService->getBlogUrl($blog->title); ?>"><?php echo $blog->title; ?></a></h1>
-                                <!-- <p class='roohit'><?php echo $desc;?></p> -->
+                                <!-- <p class='roohit'></p> -->
+                                    <?php//echo $desc;?>
                                 <small class="mt-1 d-block"><?php echo $blog->createdBy; ?>, <?php echo date('d M y', strtotime($blog->createdDate)); ?></small>
                             </div>
                         </div>
@@ -178,7 +220,7 @@ include_once "header-sub.php";
     </div>
   
 </section>
-
+                </body> </html>
 
 <?php
 include_once "footer.php";

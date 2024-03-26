@@ -1,7 +1,36 @@
-<?php include_once 'config.php'; ?>
-<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/userRegis.css" />
-<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
+<?php 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+include_once 'config.php'; 
+$SeoParams = [
+  'title' => null,
+  'metaTitle' => null,
+  'metaDescription' => null,
+              'metaKeywords' => null,
+              'fbTitle' => null,
+              'fbDescription' => null,
+              'fbImage' => null,
+              'fbUrl' => null,
+              'twitterTitle' => null,
+              'twitterDescription' => null,
+              'twitterImage' => null,
+              'twitterSite' => null,
+              'twitterCard' => null,
+];
+?>
+<html lang="en">
+  <head>
+  <meta name="robots" content="index, follow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<?php 
+        include_once 'services/seo.php';
+        $seo = new seoService();
+        $seo->setSeoTags($SeoParams); ?>
+
 <script src="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.bundle.min.js"></script>
+</head>
+<body>
 <?php
 include_once "header-sub.php";
 $pager=false;
@@ -15,7 +44,7 @@ $pager=false;
       <div class="row align-items-center gy-5">
         <div class="col-lg-6  mb-4">
           <div class="card border-0 rounded-top-20 rounded-bottom-20">
-            <div class="card-header bg-gradiant py-3 px-md-3 rounded-top-20 border-0">
+            <div class="card-header bg-gradiant py-3 px-md-3 rounded-top-20 border-0 text-white">
               <h5 class="fs-3 fwbold text-uppercase">Register your Company Free</h5>
               <p class="mb-0">Create Company Profile with very Simple Steps & Manage your Business.</p>
             </div>
@@ -167,19 +196,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             TradersFind </div>
           <div class="row justify-content-center align-items-center sell_product mt-5">
             <div class="col text-center">
-              <img src="assets/images/join-icon_7.jpg" class="img-fluid rounded-10" alt="">
+              <img src="assets/images/join-icon_7.jpg" class="img-fluid rounded-10" alt="register now">
               <!--<h5 class="mt-2 mb-0">9237056+</h5>-->
               <p class="fs-18 pt-2">Product/Services</p>
             </div>
 
             <div class="col text-center ">
-              <img src="assets/images/join-icon_8.jpg" class="img-fluid rounded-10" alt="">
+              <img src="assets/images/join-icon_8.jpg" class="img-fluid rounded-10" alt="register now">
               <!--<h5 class="mt-2 mb-0">9237056+</h5>-->
               <p class="fs-18 pt-2">Sellers</p>
             </div>
 
             <div class="col text-center">
-              <img src="assets/images/join-icon_9.jpg" class="img-fluid rounded-10" alt="">
+              <img src="assets/images/join-icon_9.jpg" class="img-fluid rounded-10" alt="register now">
               <!--<h5 class="mt-2 mb-0">9237056+</h5>-->
               <p class="fs-18 pt-2">Verified Buyers</p>
             </div>
@@ -199,38 +228,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <ul class="howtobuy">
             <li>
               <div class="d-flex align-items-center gap-4">
-                <img src="assets/images/join-icon_1.jpg" alt="" />
+                <img src="assets/images/join-icon_1.jpg" alt="register now" />
                 <h5 class="fwbold">Register on TradersFind </h5>
               </div>
             </li>
             <li>
               <div class="d-flex align-items-center gap-4">
-                <img src="assets/images/join-icon_2.jpg" alt="" />
+                <img src="assets/images/join-icon_2.jpg" alt="register now" />
                 <h5 class="fwbold">Add Your Product & Services</h5>
               </div>
             </li>
             <li>
               <div class="d-flex align-items-center gap-4">
-                <img src="assets/images/join-icon_3.jpg" alt="" />
+                <img src="assets/images/join-icon_3.jpg" alt="register now" />
                 <h5 class="fwbold">Your products/services will display online</h5>
               </div>
             </li>
             <li>
               <div class="d-flex align-items-center gap-4">
-                <img src="assets/images/join-icon_4.jpg" alt="" />
+                <img src="assets/images/join-icon_4.jpg" alt="register now" />
                 <h5 class="fwbold">Receive Buyer Inquiries in your Folder</h5>
               </div>
             </li>
             <li>
               <div class="d-flex align-items-center gap-4">
-                <img src="assets/images/join-icon_5.jpg" alt="" />
+                <img src="assets/images/join-icon_5.jpg" alt="register now" />
                 <h5 class="fwbold">Connect with buyer Instantly for further Deals</h5>
               </div>
             </li>
           </ul>
         </div>
         <div class="col-lg-6">
-          <img src="assets/images/join-icon_6.jpg" alt="" class="img-fluid">
+          <img src="assets/images/join-icon_6.jpg" alt="register now" class="img-fluid">
         </div>
       </div>
     </div>
@@ -241,22 +270,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <h3 class="border-center text-center mb-5">TRADERSFIND IS TRUSTED BY</h3>
     <div class="row gy-4">
       <div class="col-lg-2 col-sm-6 col-6">
-        <span class="brand-box"><img src="assets/images/brands/1.png" class="img-fluid" alt="" /></span>
+        <span class="brand-box"><img src="assets/images/brands/1.png" class="img-fluid" alt="brand" /></span>
       </div>
       <div class="col-lg-2 col-sm-6 col-6">
-        <span class="brand-box"><img src="assets/images/brands/2.png" class="img-fluid" alt="" /></span>
+        <span class="brand-box"><img src="assets/images/brands/2.png" class="img-fluid" alt="brand" /></span>
       </div>
       <div class="col-lg-2 col-sm-6 col-6">
-        <span class="brand-box"><img src="assets/images/brands/3.png" class="img-fluid" alt="" /></span>
+        <span class="brand-box"><img src="assets/images/brands/3.png" class="img-fluid" alt="brand" /></span>
       </div>
       <div class="col-lg-2 col-sm-6 col-6">
-        <span class="brand-box"><img src="assets/images/brands/4.png" class="img-fluid" alt="" /></span>
+        <span class="brand-box"><img src="assets/images/brands/4.png" class="img-fluid" alt="brand" /></span>
       </div>
       <div class="col-lg-2 col-sm-6 col-6">
-        <span class="brand-box"><img src="assets/images/brands/5.png" class="img-fluid" alt="" /></span>
+        <span class="brand-box"><img src="assets/images/brands/5.png" class="img-fluid" alt="brand" /></span>
       </div>
       <div class="col-lg-2 col-sm-6 col-6">
-        <span class="brand-box"><img src="assets/images/brands/6.png" class="img-fluid" alt="" /></span>
+        <span class="brand-box"><img src="assets/images/brands/6.png" class="img-fluid" alt="brand" /></span>
       </div>
     </div>
   </section>
@@ -271,7 +300,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       </div>
       <div class="col-lg-3 col-md-6 col-sm-6">
         <div class="px-4 text-center">
-          <img src="assets/images/join-icon1.jpg" alt="" />
+          <img src="assets/images/join-icon1.jpg" alt="register" />
           <h4 class="fs-5 fwbold mt-4 mb-3">
             Custom Domain Name
           </h4>
@@ -283,7 +312,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
       <div class="col-lg-3 col-md-6 col-sm-6">
         <div class="px-4 text-center">
-          <img src="assets/images/join-icon2.jpg" alt="" />
+          <img src="assets/images/join-icon2.jpg" alt="register" />
           <h4 class="fs-5 fwbold mt-4 mb-3">
             Online Company Profile Page
           </h4>
@@ -295,7 +324,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
       <div class="col-lg-3 col-md-6 col-sm-6">
         <div class="px-4 text-center">
-          <img src="assets/images/join-icon3.jpg" alt="" />
+          <img src="assets/images/join-icon3.jpg" alt="register" />
           <h4 class="fs-5 fwbold mt-4 mb-3">
             Website Link at Relevant Places
           </h4>
@@ -307,7 +336,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
       <div class="col-lg-3 col-md-6 col-sm-6">
         <div class="px-4 text-center">
-          <img src="assets/images/join-icon4.jpg" alt="" />
+          <img src="assets/images/join-icon4.jpg" alt="register" />
           <h4 class="fs-5 fwbold mt-4 mb-3">
             Product / Service Management
           </h4>
@@ -319,7 +348,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
       <div class="col-lg-3 col-md-6 col-sm-6">
         <div class="px-4 text-center">
-          <img src="assets/images/join-icon5.jpg" alt="" />
+          <img src="assets/images/join-icon5.jpg" alt="register" />
           <h4 class="fs-5 fwbold mt-4 mb-3">
             Product / Service Grouping
           </h4>
@@ -331,7 +360,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
       <div class="col-lg-3 col-md-6 col-sm-6">
         <div class="px-4 text-center">
-          <img src="assets/images/join-icon6.jpg" alt="" />
+          <img src="assets/images/join-icon6.jpg" alt="register" />
           <h4 class="fs-5 fwbold mt-4 mb-3">
             Excellent Dashboard
           </h4>
@@ -343,7 +372,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
       <div class="col-lg-3 col-md-6 col-sm-6">
         <div class="px-4 text-center">
-          <img src="assets/images/join-icon7.jpg" alt="" />
+          <img src="assets/images/join-icon7.jpg" alt="register" />
           <h4 class="fs-5 fwbold mt-4 mb-3">
             Buyer Inquiry Section
           </h4>
@@ -355,7 +384,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
       <div class="col-lg-3 col-md-6 col-sm-6">
         <div class="px-4 text-center">
-          <img src="assets/images/join-icon8.jpg" alt="" />
+          <img src="assets/images/join-icon8.jpg" alt="register" />
           <h4 class="fs-5 fwbold mt-4 mb-3">
             Buy Lead Database Access
           </h4>
@@ -367,7 +396,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
       <div class="col-lg-3 col-md-6 col-sm-6">
         <div class="px-4 text-center">
-          <img src="assets/images/join-icon9.jpg" alt="" />
+          <img src="assets/images/join-icon9.jpg" alt="register" />
           <h4 class="fs-5 fwbold mt-4 mb-3">
             Inquiry Alert Setting
           </h4>
@@ -379,7 +408,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
       <div class="col-lg-3 col-md-6 col-sm-6">
         <div class="px-4 text-center">
-          <img src="assets/images/join-icon10.jpg" alt="" />
+          <img src="assets/images/join-icon10.jpg" alt="register" />
           <h4 class="fs-5 fwbold mt-4 mb-3">
             Trusted Certificate
           </h4>
@@ -571,6 +600,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
   </section>
 </div>
+</body></html>
 <?php
 include_once "footer.php"
 ?>

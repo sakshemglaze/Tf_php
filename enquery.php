@@ -5,7 +5,7 @@
 <section class="bg-gradiant1 login-title text-center text-white fwbold pb100">
     <div class="container">
         <button type="button" class="btn-close float-end mt-1" aria-label="Close" onclick="closePopup();"></button>
-        <h2 class="fs-3 pt20">Let Us know What you Need</h2>
+        <span class="fs-3 pt20">Let Us know What you Need</span>
         <p class="mt-0 mb-0 ">Tell us your requirement. Get Instant quotes from Verified Sellers</p>
 
     </div>
@@ -50,7 +50,13 @@
                                     <select formControlName="quantityUnit" class="form-control"
                                         placeholder="eg:  Dozen,  Piece(s),  Tonr">
                                         <?php
-                      $resUnit=file_get_contents('<?php echo BASE_URL; ?>assets/testingJson/Units.json');
+                      $context = stream_context_create([
+                        'ssl' => [
+                            'verify_peer' => false,
+                            'verify_peer_name' => false,
+                        ],
+                    ]);
+                    $resUnit = file_get_contents(BASE_URL . 'assets/testingJson/Units.json', false, $context);
                       $allunit=json_decode($resUnit);
                       foreach($allunit as $unit){
                              ?>
@@ -126,11 +132,11 @@
                     <div class="media mt-3">
                         <div class="media-left media-middle">
                             <a href="#">
-                                <img class="media-object" src="assets/images/login-icon1.jpg">
+                                <img class="media-object" src="<?php echo BASE_URL ?>assets/images/login-icon1.jpg">
                             </a>
                         </div>
                         <div class="media-body">
-                            <h4 class="media-heading fwbold  mb-0">Immediate Responses</h4>
+                            <span class="media-heading fwbold  mb-0">Immediate Responses</span>
                             <p class="mt-0 mb-0">Get instant response from sellers.</p>
                         </div>
                     </div>
@@ -138,11 +144,11 @@
                     <div class="media ">
                         <div class="media-left media-middle">
                             <a href="#">
-                                <img class="media-object" src="assets/images/login-icon2.jpg">
+                                <img class="media-object" src="<?php echo BASE_URL ?>assets/images/login-icon2.jpg">
                             </a>
                         </div>
                         <div class="media-body">
-                            <h4 class="media-heading fwbold  mb-0">Genuine Sellers</h4>
+                            <span class="media-heading fwbold  mb-0">Genuine Sellers</span>
                             <p class="mt-0 mb-0">Verified sellers that meet your needs.</p>
                         </div>
                     </div>
@@ -150,11 +156,11 @@
                     <div class="media ">
                         <div class="media-left media-middle">
                             <a href="#">
-                                <img class="media-object" src="assets/images/login-icon3.jpg">
+                                <img class="media-object" src="<?php echo BASE_URL ?>assets/images/login-icon3.jpg">
                             </a>
                         </div>
                         <div class="media-body">
-                            <h4 class="media-heading fwbold  mb-0">Multiple Choices</h4>
+                            <span class="media-heading fwbold  mb-0">Multiple Choices</span>
                             <p class="mt-0 mb-0">Get the power to choose the best!</p>
                         </div>
                     </div>

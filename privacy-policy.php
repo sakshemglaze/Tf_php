@@ -1,5 +1,30 @@
-<?php include_once 'config.php'; ?>
-<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/pp.css" />
+<?php include_once 'config.php'; 
+$SeoParams = [
+  'title' => 'TradersFind Privacy Policy - Largest Online B2B Portal',
+  'metaTitle' => 'TradersFind Privacy Policy - Largest Online B2B Portal',
+  'metaDescription' => 'Navigate online trust with TradersFind Privacy Policy. Explore UAEs Largest Online B2B Portal - TradersFind',
+              'metaKeywords' => null,
+              'fbTitle' => null,
+              'fbDescription' => null,
+              'fbImage' => null,
+              'fbUrl' => null,
+              'twitterTitle' => null,
+              'twitterDescription' => null,
+              'twitterImage' => null,
+              'twitterSite' => null,
+              'twitterCard' => null,
+];
+?>
+<html lang="en">
+  <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<?php 
+        include_once 'services/seo.php';
+        $seo = new seoService();
+        $seo->setSeoTags($SeoParams); ?>
+
+</head>
+<body>
 <?php
 include_once "header-sub.php";
 ?>
@@ -108,7 +133,7 @@ include_once "header-sub.php";
 
     </div>
   </div>
-</section>
+</section> </body></html>
 <?php
 include_once "footer.php";
 ?>

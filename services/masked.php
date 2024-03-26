@@ -54,12 +54,7 @@ class MaskingService
 ?>
 <script type="text/javascript">
 function showPhoneNumber(link, phoneNumber) {
-    //var first2 = phoneNumber.substr(0, 2);
-    //var mask = "*".repeat(phoneNumber.length - 4); // Mask all but the first 2 and last 2 characters
-    //var last2 = phoneNumber.substr(-2);
-    //var maskedNumber = first2 + mask + last2;
-
     link.textContent = phoneNumber;
-    link.onclick = function() { return true; }; // Allow default behavior for subsequent clicks
+    link.onclick = function() { return false; }; // Allow default behavior for subsequent clicks
 }
 </script>
