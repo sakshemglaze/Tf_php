@@ -15,7 +15,6 @@ include_once 'config.php';
            $size = 6;
             require_once 'post.php';
         $data =  get('api/industries'.'?size=' . $size . '&page=' . $page . '&sort=industryName,asc',true );
-
              //$data1 = json_decode($data);
              $data1 = array_filter(json_decode($data), function($record) {
                 return $record->status == 'true'; });
@@ -31,9 +30,9 @@ include_once 'config.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php
     $SeoParams = [
-          'title' => 'Browse Sellers from UAE\'s Largest Online B2B Portal',
-          'metaTitle' => 'Browse Sellers from UAE\'s Largest Online B2B Portal',
-          'metaDescription' => 'Browse Sellers products and services on the UAE\'s Largest Online B2B Portal. Connect with leading sellers for successful business deals on TradersFind',
+          'title' => 'Browse Sellers from UAEs Largest Online B2B Portal',
+          'metaTitle' => 'Browse Sellers from UAEs Largest Online B2B Portal',
+          'metaDescription' => 'Browse Sellers products and services on the UAEs Largest Online B2B Portal. Connect with leading sellers for successful business deals on TradersFind',
           'metaKeywords' => 'Tradersfind industry, industries',
        ];
        include_once 'services/seo.php';
@@ -83,7 +82,6 @@ foreach ($data1 as $category) {
       echo '<div class="col-lg-9">';
     //}
     echo '<div class="row gy-4">';
-
     $filteredCategories = array_filter($category->productsCategories, function($record) {
     return ($record->status == 'true' && count($record->productsSubcategories) > 0 ); });
     foreach (array_slice($filteredCategories, 0, 6) as $cat) {
@@ -94,7 +92,6 @@ foreach ($data1 as $category) {
         echo '<div class="inddetails">';
         echo '<h2 class="fs-6 fwbold"><a href="' . $urlService->getGroupCategoryUrl($cat->categoryName, $cat->id) . '" title="' . $cat->categoryName . '">' . $cat->categoryName . '</a></h2>';
         echo '<ul class="mt-4 text-black">';
-
        // print_r($cat);
         $filteredSubCategories = array_filter($cat->productsSubcategories, function($record) {
           return $record->status == 'true'; });
@@ -115,7 +112,8 @@ foreach ($data1 as $category) {
     echo '<div class="col-lg-12">';
       echo '<div class="row bg-grey">';
         echo '<div class="col-lg-12 position-relative sub_category_list2 ">';
-         echo '<ul class="sub_category_list">';         
+         echo '<ul class="sub_category_list">';
+         
           shuffle($filteredCategories);
           if (count($filteredCategories) > 6) {
           foreach (array_slice($filteredCategories, 0, 4) as $cat) {
@@ -124,12 +122,10 @@ foreach ($data1 as $category) {
                 echo '<div class="pro_image">';
                   echo'<img data-src="' . IMAGE_URL . $cat->image->id . '.webp" class="lazy"' . 'alt="Category" width="140px"/>';
                 echo'</div>';
-
                 echo'<h2 class="fs-6 fw-bold">' . $cat->categoryName .'</h2>';
               echo'</a>';
             echo '</li>';
           }}
-
           echo '</ul>';
           echo '<a href="' . $urlService->getIndustryUrl($category->industryName, $category->id) .'" class="btn-primary-gradiant subcatbtn">View More</a>';
       echo '</div>';
@@ -152,12 +148,12 @@ foreach ($data1 as $category) {
     </div>
   </div>
 </section>
-
 <div id="popup" class="popup">
     <div class="popup-content">
         <div class="loader"></div>
     </div>
 </div>
+
 <?php 
 include_once "inquiry.php" ?>
         </body></html>
@@ -167,7 +163,6 @@ include_once "footer.php";
 
 <script>
     var data1 = [];
-  // Function to check if user has scrolled to the bottom of the page
   // Function to load more industries
   function loadMoreIndustries() {
     var currentPage = parseInt(document.getElementById('currentPage').value);
@@ -180,7 +175,6 @@ include_once "footer.php";
       if (xhr.readyState == 4 && xhr.status == 200) {
         //console.log(xhr.responseText);
         var newIndustries = JSON.parse(xhr.responseText);
-
         if (newIndustries.length === 0 ) { 
         /*var industryDiv = document.createElement('div');
         industryDiv.classList.add('row', 'gy-4', 'bg-white');
@@ -241,7 +235,6 @@ function renderIndustries(industries) {
     var industryImageDiv = document.createElement('div');
     industryImageDiv.classList.add('col-lg-3', 'text-center');
 
-
     if (!!category.image) {
       var indImage = 'https://doc.tradersfind.com/images/' + category.image.id + '.webp';
       var industryImageLink = document.createElement('a');
@@ -249,7 +242,6 @@ function renderIndustries(industries) {
 
       var industryImage = document.createElement('img');
       industryImage.setAttribute('src', indImage);
-
       industryImage.classList.add('img-fluid', 'img-size');
       industryImage.alt = 'Industry';
       //industryImage.width = '100%';
@@ -264,7 +256,6 @@ function renderIndustries(industries) {
     industryDetailsDiv.classList.add('col-lg-9');
     var categoriesRowDiv = document.createElement('div');
     categoriesRowDiv.classList.add('row', 'gy-4');
-
     //console.log(category.productsCategories);
     var filteredCategories = category.productsCategories.filter(function(industry) {
     return industry.status === 'true'; });
@@ -283,7 +274,6 @@ function renderIndustries(industries) {
 
       var categoryImage = document.createElement('img');
       categoryImage.setAttribute('src', catImage);
-
       categoryImage.classList.add('lazy','img-cat');
       categoryImage.alt = 'Category';
       //categoryImage.width = '140px';
@@ -304,7 +294,6 @@ function renderIndustries(industries) {
 
       var subcategoriesUl = document.createElement('ul');
       subcategoriesUl.classList.add('mt-4', 'text-black');
-
       var filteredSubcategories = cat.productsSubcategories.filter(function(industry) {
         return industry.status === 'true';});
         filteredSubcategories.slice(0, 3).forEach(function(subcat) {
@@ -426,7 +415,6 @@ const lastIndustryElement = document.querySelector('.industry:last-of-type');
 if (lastIndustryElement) {
   observer.observe(lastIndustryElement);
 }
-
 function shuffleArray(array) {
   return array.sort(() => Math.random() - 0.5);
 }

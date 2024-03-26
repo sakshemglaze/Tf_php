@@ -57,7 +57,7 @@ else{
     if($location=="" && $numParts==3){
         $location1 = 'UAE';
           $subcatName=basename($parts[2]);
-          $subcategory = json_decode(get ( 'api/guest/products-subcategories/' . $subcatName));
+          $subcategory = json_decode(get ( 'api/guest/products-subcategorie/' . $subcatName));
 
     //print_r($subcategory->subCategoryName);
             $payload = array(
@@ -79,7 +79,7 @@ else{
         }else{
               $length = count(($data->products));
           }
-    //print_r($data->sponsoredProduct->productsSubcategory->id);
+    //print_r($data);
 
     $category = json_decode(get(
       'api/guest/products-categories-na/' . $subcategory->title, $queryParams
@@ -89,11 +89,11 @@ else{
         'api/industries-na/' . $category[0]->title,$queryParams) );
       }
 
-       // print_r('Print ' . isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('UAE',$location1,$subcategory->metaTitle) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com');
+        //print_r(isset($subcategory) && $subcategory->metaDescription !='' ? str_replace('UAE',$location1,$subcategory->metaDescription) : 'Searching for ' . $subcategory->subCategoryName . ' at best price in ' . $location1 . '? Choose from a wide range of companies provide' . $subcategory->subCategoryName . ' online on Tradersfind.com');
         $SeoParams = [
           'title' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('UAE',$location1,$subcategory->metaTitle) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com',
           'metaTitle' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('UAE',$location1,$subcategory->metaTitle) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com',
-          'metaDescription' => isset($subcategory->metaDescription) && $subCategory->metaDescription !='' ? str_replace('UAE',$location1,$subcategory->metaDescription) : 'Searching for ' . $subcategory->subCategoryName . ' at best price in ' . $location1 . '? Choose from a wide range of companies provide' . $subcategory->subCategoryName . ' online on Tradersfind.com',
+          'metaDescription' => isset($subcategory->subCategoryDescription) && $subcategory->subCategoryDescription !='' ? str_replace('UAE',$location1,$subcategory->subCategoryDescription) : 'Searching for ' . $subcategory->subCategoryName . ' at best price in ' . $location1 . '? Choose from a wide range of companies provide' . $subcategory->subCategoryName . ' online on Tradersfind.com',
           'metaKeywords' => isset($subcategory->keywords) && $subcategory->keywords != '' ? $subcategory->keywords : $subcategory->subCategoryName . ', ' . $subcategory->subCategoryName . ' in '. $location1,
           'fbTitle' => isset($subcategory->fbTitle) && $subcategory->fbTitle !='' ? $subcategory->fbTitle : null,
           'fbDescription' => isset($subcategory->fbDescription) ? $subcategory->fbDescription : '',
@@ -110,7 +110,7 @@ else{
   }
   else if( $numParts==3 && basename($parts[1])=='search'){//will be change
             $subcatName=basename($parts[2]);
-            $subcategory = json_decode(get ( 'api/guest/products-subcategories/' . $subcatName));
+            $subcategory = json_decode(get ( 'api/guest/products-subcategorie/' . $subcatName));
             $payload = array(
               'searchText' => $subcategory->subCategoryName ,
               'searchTextType' => null,
@@ -131,7 +131,7 @@ else{
            //print_r('Welcome search 3');
           }else if(basename($parts[1])=='search' && $numParts==4 ){//will change
             $subcatName=basename($parts[2]);
-            $subcategory = json_decode(get ( 'api/guest/products-subcategories/' . $subcatName));
+            $subcategory = json_decode(get ( 'api/guest/products-subcategorie/' . $subcatName));
 
             $payload = array(
               'searchText' => $subcategory->subCategoryName,
@@ -155,7 +155,7 @@ else{
          
           else{
             $subcatName=basename($parts[2]);
-            $subcategory = json_decode(get ( 'api/guest/products-subcategories/' . $subcatName));
+            $subcategory = json_decode(get ( 'api/guest/products-subcategorie/' . $subcatName));
             $payload = array(
                 'searchText' => $subcategory->subCategoryName ,
                 'searchTextType' => 'subcategory',
@@ -189,7 +189,7 @@ else{
 $SeoParams = [
           'title' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('UAE',$location1,$subcategory->metaTitle) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com',
           'metaTitle' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('UAE',$location1,$subcategory->metaTitle) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com',
-          'metaDescription' => isset($subcategory->metaDescription) && $subCategory->metaDescription !='' ? str_replace('UAE',$location1,$subcategory->metaDescription) : 'Searching for ' . $subcategory->subCategoryName . ' at best price in ' . $location1 . '? Choose from a wide range of companies provide' . $subcategory->subCategoryName . ' online on Tradersfind.com',
+          'metaDescription' => isset($subcategory->metaDescription) && $subcategory->metaDescription !='' ? str_replace('UAE',$location1,$subcategory->metaDescription) : 'Searching for ' . $subcategory->subCategoryName . ' at best price in ' . $location1 . '? Choose from a wide range of companies provide' . $subcategory->subCategoryName . ' online on Tradersfind.com',
           'metaKeywords' => isset($subcategory->keywords) && $subcategory->keywords != '' ? $subcategory->keywords : $subcategory->subCategoryName . ', ' . $subcategory->subCategoryName . ' in '. $location1,
           'fbTitle' => isset($subcategory->fbTitle) && $subcategory->fbTitle !='' ? $subcategory->fbTitle : null,
           'fbDescription' => isset($subcategory->fbDescription) ? $subcategory->fbDescription : '',
@@ -210,6 +210,7 @@ $SeoParams = [
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <?php 
   include_once 'services/seo.php';
   $seo = new seoService();
@@ -280,7 +281,7 @@ $SeoParams = [
     echo '<span> in ' . str_replace("-"," " ,$location);
   } ?>
   </h1>
-  <small class="fwbold">(<?php echo ($length)?>+ products available) </small>
+  <small class="fwbold">(<?php if ($length >= 10) { echo ($length . '+'); } else {echo ($length); } ?> products available) </small>
 </div>
 <?php 
 
@@ -288,12 +289,14 @@ if (isset($category )&&isset($subcategory->shortDescription) && $subcategory->sh
   echo '<div>';
   $shortDescription = $subcategory->shortDescription;
   $shortenedDescription = substr($shortDescription, 0, 400);
-  echo '<span id="short-desc">' . $shortenedDescription . '</span>';
-  if (strlen($shortDescription) > 400) {
-      echo '<span style="color:brown;">&nbsp;<b><a href="javascript:void(0);" onclick="toggleDescription()"> View more</a></b></span>';
-  } //else {
-  //echo '<span id="full-desc" style="display:inline;">' . $shortDescription . '</span>';
-  //}
+  
+  if (strlen($shortDescription) >= 400) {
+      $sd = '1';
+      echo '<div id="short-desc" style="display: inline;">' . $shortenedDescription . '<span style="color:brown;">&nbsp;<b><a href="javascript:void(0);" onclick="toggleDescription()"> View more</a></b></span></div>';
+      echo '<div id="full-desc" style="display: none;">' . $shortDescription . '<span style="color:brown;">&nbsp;<b><a href="javascript:void(0);" onclick="toggleDescription()"> View less</a></b></span></div>';
+  } else {
+    echo '<div id="full-desc" style="display: inline;">' . $shortDescription . '</div>';
+  }
   echo '</div>';
   } ?>
 <br>
@@ -408,8 +411,8 @@ if (isset($category )&&isset($subcategory->shortDescription) && $subcategory->sh
           <p class="search-product-text">
         <div class="cat-desc" id="cat-desc" style="display:none;">
         <?php
-        if(isset($data->sponsoredProduct->productsSubcategory->categoryDescriptionPage)){
-                      echo ( $data->sponsoredProduct->productsSubcategory->categoryDescriptionPage);
+        if(isset($subcategory->categoryDescriptionPage)){
+                      echo ( $subcategory->categoryDescriptionPage);
                          ?>
                          </div>
         </p>
@@ -471,18 +474,19 @@ searchProductNew(payload, page).then(response => {
 </html>
 <script>
 function toggleDescription() {
+  //alert(document.getElementById("full-desc"));
                 var shortDesc = document.getElementById("short-desc");
                 var fullDesc = document.getElementById("full-desc");
                 var moreText = document.querySelector("#short-desc + span a");
-
-                if (fullDesc.style.display === "none") {
-                    shortDesc.style.display = "none";
-                    fullDesc.style.display = "inline";
-                    moreText.innerHTML = " View less";
-                } else {
+                //alert(moreText);
+                if (shortDesc.style.display === "none") {
                     shortDesc.style.display = "inline";
                     fullDesc.style.display = "none";
                     moreText.innerHTML = " View more";
+                } else {
+                    shortDesc.style.display = "none";
+                    fullDesc.style.display = "inline";
+                    moreText.innerHTML = " View less";
                 }
             }
 

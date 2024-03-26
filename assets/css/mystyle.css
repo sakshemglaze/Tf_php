@@ -895,9 +895,9 @@ textarea:focus {
 }
 
 .whatsappbtn {
-    border: 1px solid #319038 !important;
-    color: #fff !important;
-    background-color: #319038 !important;
+    border: 1px solid #319038 ;
+    color: #fff ;
+    background-color: #319038 ;
     border-radius: 7px;
     -webkit-border-radius: 7px;
     -moz-border-radius: 7px;

@@ -6,7 +6,6 @@ $currentUrl = rtrim($url, '/');
 $urlParts = explode('/', $currentUrl);
 $lastPart = end($urlParts);
 
-
 if ((in_array('product', $urlParts) || in_array('category', $urlParts) || in_array('search', $urlParts)) && ctype_xdigit($lastPart) && strlen($lastPart) > 16) {
     // Redirect to the desired URL
     $redirectUrl = implode('/', array_slice($urlParts, 0, -1)); // Reconstruct the URL without the last part
@@ -41,7 +40,6 @@ if ((in_array('product', $urlParts) || in_array('category', $urlParts) || in_arr
  if (preg_match('~^/industry/([^/]+)/([^/]+)$~', $url, $matches)) {
    include 'industryDetail.php'; 
  }
-
  if (preg_match('~^/group-category/([^/]+)/([^/]+)$~', $url, $matches) || preg_match('~^/group-category/([^/]+)$~', $url, $matches)) {
    include 'group-category.php';
  }

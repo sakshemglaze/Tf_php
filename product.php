@@ -104,9 +104,9 @@
                                         <b>Company:</b>
                                             <a href="/<?php if(isset($prodData->seller)) {
                                             echo $urlService->getSellerUrl($prodData->seller->sellerCompanyName,$prodData->seller->id); } ?>" style="color: palevioletred;" target="_blank"> 
-                                            <h3 class="single-line fs-6">
+                                            <h3 class="single-line"><font size="2" style="color: palevioletred;">
                                                 <?php if(isset($prodData->seller)) { print_r($prodData->seller->sellerCompanyName); } ?>
-                                                  </h3>
+                                            </font></h3>
                                             </a> 
                                     </div>
                                     <div class="d-flex small mt-1 about_text2">
