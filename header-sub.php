@@ -41,7 +41,6 @@ function submitform(){
         var searchtex=document.getElementById("search").value;
         var baseurl='<?php echo BASE_URL?>';
         var bsearchurl=baseurl;
-       
         bsearchurl = bsearchurl + 'search/' + searchtex.replace(/ /g, '-').toLowerCase();
 
             
@@ -120,13 +119,13 @@ function submitform(){
 
 
         function displaySuggestionssubcat(suggestions) {
-          //  console.log(suggestions);
             if (suggestions) {
                 $('#option_sub').empty();
                 suggestions.forEach(function (suggestion) {
                     var suggestionItem = $('<li></li>').text(suggestion.subCategoryName).click(function() {
                        
                 $('#search').val(suggestion.subCategoryName); 
+
                 var searchTerm = $('#search').val().replace(/\s+/g, '-').toLowerCase();
                 var actionURL = '<?php echo BASE_URL; ?>'+"category/" + encodeURIComponent((suggestion.subcategoryUrl?suggestion.subcategoryUrl:suggestion.subCategoryName).replace(/\s/g, '-').toLowerCase());
                 $('#homepageSearch').attr('action', actionURL);

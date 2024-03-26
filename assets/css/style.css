@@ -24,7 +24,26 @@
     -webkit-transition: all 0.4s ease-in-out;
     transition: all 0.4s ease-in-out;
   }
-  
+  .btn-outline-gradiant {
+    border: 1px solid transparent;
+    color: #fff;
+    border-radius: 7px;
+    background-image: -webkit-linear-gradient(-40deg, rgb(189, 56, 56) 0%, rgb(13, 88, 140) 100%);
+    background-clip: padding-box, border-box;
+    background-origin: padding-box, border-box;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    -ms-border-radius: 7px;
+    -o-border-radius: 7px;
+}
+
+.btn-outline-gradiant:hover {
+    border: 1px solid #319038;
+    color: #319038;
+    background-color: #f8f8f8;
+    background-image: none;
+}
+
 .about_text2{
     display: block;
     display: -webkit-box;

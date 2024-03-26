@@ -80,6 +80,7 @@ include_once "header-sub.php";
         </div>
 
         <?php 
+
         $filteredCategories = array_filter($data1->productsCategories, function($record) {
                 return $record->status == 'true'; });
        foreach ($filteredCategories as $cat) {
