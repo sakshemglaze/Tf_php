@@ -1,7 +1,6 @@
 <?php 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
+//error_reporting(E_ALL);
+//ini_set('display_errors', 1);
 
 include_once 'config.php';
        
@@ -112,7 +111,7 @@ else{
             $subcatName=basename($parts[2]);
             $subcategory = json_decode(get ( 'api/guest/products-subcategorie/' . $subcatName));
             $payload = array(
-              'searchText' => $subcategory->subCategoryName ,
+              'searchText' => isset($subcategory) ? $subcategory->subCategoryName : $subcatName ,
               'searchTextType' => null,
               'filterDto' => $filterDto
           );  
@@ -134,7 +133,7 @@ else{
             $subcategory = json_decode(get ( 'api/guest/products-subcategorie/' . $subcatName));
 
             $payload = array(
-              'searchText' => $subcategory->subCategoryName,
+              'searchText' => isset($subcategory) ? $subcategory->subCategoryName : $subcatName ,
               'searchTextType' => null,
               'filterDto' => $filterDto
           );  
@@ -157,7 +156,7 @@ else{
             $subcatName=basename($parts[2]);
             $subcategory = json_decode(get ( 'api/guest/products-subcategorie/' . $subcatName));
             $payload = array(
-                'searchText' => $subcategory->subCategoryName ,
+                'searchText' => isset($subcategory) ? $subcategory->subCategoryName : $subcatName  ,
                 'searchTextType' => 'subcategory',
                 'filterDto' => $filterDto
             );  
@@ -251,17 +250,17 @@ $SeoParams = [
     <?php endif;
       if($location == null || $location == 'All UAE' || $location == 'UAE') :?>
     <li class="breadcrumb-item active fwbold text-capitalize " aria-current="page" >
-    <?php echo str_replace("-"," ",$subcategory->subCategoryName);//will change ?>
+    <?php if(isset($subcategory)) {echo str_replace("-"," ",$subcategory->subCategoryName); } else {echo str_replace("-"," ",$subcatName); } ?>
     </li>
     <?php else :?>
-      <?php if(isset($category )):?>
+      <?php if(isset($subcategory )):?>
       <li class="breadcrumb-item text-capitalize"> <a href="/<?php echo $urlService->getCategoryUrl($subcatName)?>">
       <?php echo str_replace("-"," ",$subcategory->subCategoryName);//will change ?> </a></li>
       <?php endif;?>
       <?php if(!isset($category )):?>
       <li class="breadcrumb-item text-capitalize"> <a href="<?php echo BASE_URL.basename($parts[1]).'/'.basename($parts[2]) //will change
       ?>">
-      <?php echo str_replace("-"," ",($subcategory->subCategoryName));//will change ?> </a></li>
+      <?php if(isset($subcategory)) {echo str_replace("-"," ",($subcategory->subCategoryName)); } else { echo str_replace("-"," ",$subcatName); } ?> </a></li>
       <?php endif;?>
       <li class="breadcrumb-item active fwbold text-capitalize " aria-current="page" >
         <?php echo str_replace("-"," ",$location); ?></li>
@@ -286,13 +285,12 @@ $SeoParams = [
 <?php 
 
 if (isset($category )&&isset($subcategory->shortDescription) && $subcategory->shortDescription && $location === '') {
-  echo '<div>';
+  echo '<div class="two-line-containers">';
   $shortDescription = $subcategory->shortDescription;
-  $shortenedDescription = substr($shortDescription, 0, 400);
+  //$shortenedDescription = substr($shortDescription, 0, 400);
   
   if (strlen($shortDescription) >= 400) {
-      $sd = '1';
-      echo '<div id="short-desc" style="display: inline;">' . $shortenedDescription . '<span style="color:brown;">&nbsp;<b><a href="javascript:void(0);" onclick="toggleDescription()"> View more</a></b></span></div>';
+      echo '<a href="javascript:void(0);" onclick="toggleDescription()"><div id="short-desc" style="display: inline;">' . $shortDescription . '</div></a>';
       echo '<div id="full-desc" style="display: none;">' . $shortDescription . '<span style="color:brown;">&nbsp;<b><a href="javascript:void(0);" onclick="toggleDescription()"> View less</a></b></span></div>';
   } else {
     echo '<div id="full-desc" style="display: inline;">' . $shortDescription . '</div>';
