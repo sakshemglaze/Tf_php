@@ -381,13 +381,13 @@ function renderIndustries(industries) {
 
   var urlService = {
   getIndustryUrl: function(industryName, industryId) {
-    return 'industry/' + industryName.toLowerCase().replace(/[^\w\s]/gi, '').replace(/\s+/g, '-') + '/' + industryId;
+    return 'industry/' + industryName.toLowerCase().replace(/[^\w\s]/gi, '').replace(/\s+/g, '-') ;
   },
   getGroupCategoryUrl: function(categoryName, categoryId) {
-    return 'group-category/' + categoryName.toLowerCase().replace(/[^\w\s]/gi, '').replace(/\s+/g, '-') + '/' + categoryId;
+    return 'group-category/' + categoryName.toLowerCase().replace(/[^\w\s]/gi, '').replace(/\s+/g, '-') ;
   },
   getCategoryUrl: function(subCategoryName, subCategoryId) {
-    return 'category/' + subCategoryName.toLowerCase().replace(/[^\w\s]/gi, '').replace(/\s+/g, '-') + '/' + subCategoryId ;
+    return 'category/' + subCategoryName.toLowerCase().replace(/[^\w\s]/gi, '').replace(/\s+/g, '-')  ;
   }
 };
 
