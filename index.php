@@ -37,10 +37,10 @@ if ((in_array('product', $urlParts) || in_array('category', $urlParts) || in_arr
  $url = strtok($url, '?');
 
 
- if (preg_match('~^/industry/([^/]+)/([^/]+)$~', $url, $matches)) {
+ if (preg_match('~^/industry/([^/]+)$~', $url, $matches)) {
    include 'industryDetail.php'; 
  }
- if (preg_match('~^/group-category/([^/]+)/([^/]+)$~', $url, $matches) || preg_match('~^/group-category/([^/]+)$~', $url, $matches)) {
+ if (preg_match('~^/group-category/([^/]+)$~', $url, $matches) || preg_match('~^/group-category/([^/]+)$~', $url, $matches)) {
    include 'group-category.php';
  }
  if (preg_match('~^/category/([^/]+)/([^/]+)$~', $url, $matches)||preg_match('~^/category/([^/]+)$~', $url,$matches)|| preg_match('~^/search/([^/]+)?([^/]+)$~', $url,$matches)||preg_match('~^/search/([^/]+)/([^/]+)$~', $url, $matches)) {

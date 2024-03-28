@@ -10,7 +10,7 @@ ini_set('display_errors', 1);
     $currentUrl = $_SERVER['REQUEST_URI'];
     $urlParts = explode('/', $currentUrl);
     $industryName = $matches[1];
-    $id = $matches[2];
+    //$id = $matches[2];
 
     $index=0;
             class FilterDTO {}
@@ -20,25 +20,25 @@ ini_set('display_errors', 1);
             $page = 0;
             $size = 6;
             require_once 'post.php';
-        $data =  get('api/industries/' . $matches[2] .'?size=' . $size . '&page=' . $page . '&sort=industryName,asc',true );
+        $data =  get('api/industries-by-name/' . $matches[1] .'?size=' . $size . '&page=' . $page . '&sort=industryName,asc',true );
               $data1 = json_decode($data);
              // $data = findActive($data1);
-              //print_r($data);
+              //print_r($data1[0]);
 
         $SeoParams = [
-          'title' => isset($data1->metaTitle) && $data1->metaTitle != '' ? $data1->metaTitle : $data1->productName . ' in ' . $data1->seller->state . ' - ' . $data1->sellerCompanyName,
-          'metaTitle' => isset($data1->metaTitle) && $data1->metaTitle != '' ? $data1->metaTitle : $data1->productName . ' in ' . $data1->seller->state . ' - ' . $data1->sellerCompanyName,
-          'metaDescription' => isset($data1->industryDescription) && $data1->industryDescription != '' ? $data1->industryDescription : '',
-          'metaKeywords' => isset($data1->Keywords) && $data1->Keywords != '' ? implode(',', $data1->Keywords) : $data1->industryName,
-          'fbTitle' => isset($data1->fbTitle) && $data1->fbTitle != '' ? $data1->fbTitle : $data1->productName,
-          'fbDescription' => isset($data1->fbDescription) && $data1->fbDescription != '' ? $data1->fbDescription : $data1->productDescription,
-          'fbImage' => isset($data1->fbImage) ? API_URL . 'api/guest/imageContentDownload/' . $data1->fbImage.id : 'undefined',
-          'fbUrl' => isset($data1->fbUrl) && $data1->fbUrl != '' ? $data1->fbUrl : null,
-          'twitterTitle' => isset($data1->twitterTitle) && $data1->twitterTitle != '' ? $data1->twitterTitle : $data1->productName,
-          'twitterDescription' => isset($data1->twitterDescription) && $data1->twitterDescription != '' ? $data1->twitterDescription : $data1->productDescription,
-          'twitterImage' => isset($data1->twitterImage) ? API_URL . 'api/guest/imageContentDownload/' . $data1->twitterImage.id : 'undefined',
-          'twitterSite' => isset($data1->twitterSite) && $data1->twitterSite != '' ? $data1->twitterSite : null,
-          'twitterCard' => isset($data1->twitterCard) && $data1->twitterCard != '' ? $data1->twitterCard : null,
+          'title' => isset($data1[0]->metaTitle) && $data1[0]->metaTitle != '' ? $data1[0]->metaTitle : $data1[0]->productName . ' in ' . $data1[0]->seller->state . ' - ' . $data1[0]->sellerCompanyName,
+          'metaTitle' => isset($data1[0]->metaTitle) && $data1[0]->metaTitle != '' ? $data1[0]->metaTitle : $data1[0]->productName . ' in ' . $data1[0]->seller->state . ' - ' . $data1[0]->sellerCompanyName,
+          'metaDescription' => isset($data1[0]->industryDescription) && $data1[0]->industryDescription != '' ? $data1[0]->industryDescription : '',
+          'metaKeywords' => isset($data1[0]->Keywords) && $data1[0]->Keywords != '' ? implode(',', $data1[0]->Keywords) : $data1[0]->industryName,
+          'fbTitle' => isset($data1[0]->fbTitle) && $data1[0]->fbTitle != '' ? $data1[0]->fbTitle : $data1[0]->productName,
+          'fbDescription' => isset($data1[0]->fbDescription) && $data1[0]->fbDescription != '' ? $data1[0]->fbDescription : $data1[0]->productDescription,
+          'fbImage' => isset($data1[0]->fbImage) ? API_URL . 'api/guest/imageContentDownload/' . $data1[0]->fbImage.id : 'undefined',
+          'fbUrl' => isset($data1[0]->fbUrl) && $data1[0]->fbUrl != '' ? $data1[0]->fbUrl : null,
+          'twitterTitle' => isset($data1[0]->twitterTitle) && $data1[0]->twitterTitle != '' ? $data1[0]->twitterTitle : $data1[0]->productName,
+          'twitterDescription' => isset($data1[0]->twitterDescription) && $data1[0]->twitterDescription != '' ? $data1[0]->twitterDescription : $data1[0]->productDescription,
+          'twitterImage' => isset($data1[0]->twitterImage) ? API_URL . 'api/guest/imageContentDownload/' . $data1[0]->twitterImage.id : 'undefined',
+          'twitterSite' => isset($data1[0]->twitterSite) && $data1[0]->twitterSite != '' ? $data1[0]->twitterSite : null,
+          'twitterCard' => isset($data1[0]->twitterCard) && $data1[0]->twitterCard != '' ? $data1[0]->twitterCard : null,
        ];
 ?>
 <!DOCTYPE html>
@@ -65,7 +65,7 @@ include_once "header-sub.php";
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="/">TradersFind </a></li>
       <li class="breadcrumb-item" aria-current="page"><a href="<?php echo BASE_URL;?>industry"> Industry </a> </li>
-      <li class="breadcrumb-item active" aria-current="page"> <?php echo $data1->industryName; ?> </li>
+      <li class="breadcrumb-item active" aria-current="page"> <?php echo $data1[0]->industryName; ?> </li>
     </ol>
   </nav>
 </section>
@@ -73,16 +73,14 @@ include_once "header-sub.php";
 <section class="container-fluid ">
     <div class="row gy-4">
         <div class="col-ld-12 text-center">
-            <h1 class="border-center fs-1"><?php echo $data1->industryName; ?></h1>
+            <h1 class="border-center fs-1"><?php echo $data1[0]->industryName; ?></h1>
         </div>
         <div class="col-lg-12">
             <br>
         </div>
 
         <?php 
-        $filteredCategories = array_filter($data1->productsCategories, function($record) {
-                return $record->status == 'true'; });
-       foreach ($filteredCategories as $cat) {
+       foreach ($data1[0]->productsCategories as $cat) {
                 echo '<div class="col-lg-4">';
                     echo '<div class="card border-0 category-hover">';
                         echo '<div class="card-body">';
@@ -92,9 +90,7 @@ include_once "header-sub.php";
                             echo '<div class="d-flex align-items-start">';
                                echo '<img data-src="' . IMAGE_URL . $cat->image->id .'.webp" class="lazy me-3 rounded-10 img-fluid" height="70" width="70" alt="Category">' ;
                                 echo '<ul class="list-style-disc ms-4">';
-                                $filteredSubCategories = array_filter($cat->productsSubcategories, function($record) {
-                                return $record->status == 'true'; });
-                                    foreach (array_slice($filteredSubCategories, 0, 5) as $subcat) {
+                                    foreach (array_slice($cat->productsSubcategories, 0, 5) as $subcat) {
                                         echo '<li>';
                                             echo '<h3 class="fs-6"><a href="' . BASE_URL  . $urlService->getCategoryUrl($subcat->subCategoryName, $subcat->id) . '">' . $subcat->subCategoryName . '</a></h3>';
                                         echo '</li>';

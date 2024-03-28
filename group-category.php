@@ -6,7 +6,7 @@
     //print_r('welcome1');
     $currentUrl = $_SERVER['REQUEST_URI'];   
     $grpCatName = $matches[1];
-    $id = $matches[2];
+   // $id = $matches[2];
     //print_r($id);
     $index=0;
             class FilterDTO {}
@@ -18,7 +18,7 @@
             $queryParams= array('page'=>0, 'size'=> 6) ;
             require_once 'post.php';
         $data =  get(
-                'api/guest/products-categories/' . $id .'?size=' . $size . '&sort=categoryName,asc',
+          'api/guest/products-categorie-name/' . $matches[1] .'?size=' . $size . '&sort=categoryName,asc',
                  true
               );
               $data1 = json_decode($data);

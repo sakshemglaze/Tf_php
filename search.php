@@ -9,7 +9,7 @@ include_once 'config.php';
      $name = str_replace("-", " ", $matches[1]);
     // $id = str_replace("-", " ", $matches[2]);
    
-  
+    $textType=$matches[0];
     $location = 'UAE';
     $keyword = 'yes';
     
@@ -421,6 +421,7 @@ if (isset($category )&&isset($subcategory->shortDescription) && $subcategory->sh
         $parts = explode('/', $currentUrl);
         $category = basename($parts[2]); // Extract the category part
         $searchtext = htmlspecialchars(str_replace('-',' ', $category)); // Sanitize the value
+      
         ?>
         </div>
     </div>    
@@ -429,7 +430,8 @@ if (isset($category )&&isset($subcategory->shortDescription) && $subcategory->sh
 <script>
   let page=1;
   var searchtext = "<?php echo $subcategory->subCategoryName; ?>";
-  
+  var textType="<?php echo $textType;?>";
+
   function lod(){
     let payload= {
     searchText: searchtext,
@@ -437,6 +439,7 @@ if (isset($category )&&isset($subcategory->shortDescription) && $subcategory->sh
     filterDto: {}
      
 }
+console.log(textType);
 console.log(searchtext);
 searchProductNew(payload, page).then(response => {
      

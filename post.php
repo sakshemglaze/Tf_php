@@ -94,7 +94,7 @@ function getItem($item) {
         $context = stream_context_create($contextOptions);
         
       
-        $response = file_get_contents($urlWithQuery, false, $context);
+        $response = @file_get_contents($urlWithQuery, false, $context);
         
         
         if ($response === false) {
