@@ -3,7 +3,7 @@ include_once 'config.php';
 class seoService {
 
     public function setSeoTags($seoParams){
-        //print_r($seoParam)
+        //print_r($seoParams);
         $curl = substr(BASE_URL,0,strlen(BASE_URL)-1) . $_SERVER['REQUEST_URI'];
      
         if(substr($curl,-1) === '/') {

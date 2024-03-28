@@ -63,9 +63,6 @@
               </div>
             </form>
           
-            <app-otp *ngIf="this.requirementService.isVerification"
-            [countryCode]="this.requirementService.prodDetailFrom.value.noCode"
-            [mobileNo]="this.requirementService.prodDetailFrom.value.mobileNo"></app-otp>
             </div>
           </div>
         </div>

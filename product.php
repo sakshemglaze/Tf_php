@@ -18,7 +18,7 @@
                         <div class="" style="margin-top: 10px;width: 100%; float: left;">
                            <?php
                            //print_r($prodData);
-                            if ($prodData->seller && $prodData->seller->isVerifiedSeller) {
+                            if (isset($prodData->seller) && $prodData->seller->isVerifiedSeller) {
                                 echo '<div style="margin: auto; display: table;">';
                                 echo '<img class="lazy" data-src="' . BASE_URL . 'assets/images/verified2.png" width="74" height="22" alt="Verified_Product" style="float: left; width: 60px;">';
                                 if ($prodData->isFeatured) {
@@ -102,10 +102,11 @@
                                         
                                         <img src="<?php echo BASE_URL ?>assets/images/house.png" alt="Location_seller" width="18" height="19" class="me-3 w-18" />
                                         <b>Company:</b>
-                                            <a href="/<?php echo $urlService->getSellerUrl($prodData->seller->sellerCompanyName,$prodData->seller->id) ?>" style="color: palevioletred;" target="_blank"> 
-                                            <h3 class="single-line fs-6">
-                                                <?php print_r($prodData->seller->sellerCompanyName); ?>
-                                                  </h3>
+                                            <a href="/<?php if(isset($prodData->seller)) {
+                                            echo $urlService->getSellerUrl($prodData->seller->sellerCompanyName,$prodData->seller->id); } ?>" style="color: palevioletred;" target="_blank"> 
+                                            <h3 class="single-line"><font size="2" style="color: palevioletred;">
+                                                <?php if(isset($prodData->seller)) { print_r($prodData->seller->sellerCompanyName); } ?>
+                                            </font></h3>
                                             </a> 
                                     </div>
                                     <div class="d-flex small mt-1 about_text2">
@@ -114,8 +115,8 @@
                                         <a 
                                             target="_blank">
                                             <span>
-                                              <?php
-                                                print_r($prodData->seller->state);
+                                              <?php if(isset($prodData->seller)) {
+                                                print_r($prodData->seller->state); }
                                                  ?>
                                                  </span>
                                         </a>
@@ -127,12 +128,12 @@
                                         <a  target="_blank">
                                             <span 
                                   class="service-area ">
-                                  <?php $prodData->seller->mainMarkets
+                                  <?php if(isset($prodData->seller)) { $prodData->seller->mainMarkets; }
                                    ?>
                                             </span>
                                             <span class="service-area ">
-                                                <?php
-                                               print_r(  $prodData->seller->state);       
+                                                <?php if(isset($prodData->seller)) {
+                                               print_r(  $prodData->seller->state);       }
                                                ?>
                                                </span>
                                         </a>
@@ -161,14 +162,14 @@
                                 <div class="col-md-4">
                                     <button class="btn btn-sm btn-light w-100 d-center"  title="Seller_Phone" href="#">
                                         <img src="<?php echo BASE_URL ?>assets/images/phone.png" width="18" height="17" class="w-18 me-2"
-                                            alt="Phone" /> <?php //print_r($prodData->seller->sellerVirtualContactPhone);
-                                            $maskedService->getMaskedNumber($prodData->seller->sellerVirtualContactPhone);
+                                            alt="Phone" /> <?php if(isset($prodData->seller)) {
+                                            $maskedService->getMaskedNumber($prodData->seller->sellerVirtualContactPhone); }
                                             ?>
                                        
                                     </button>
                                 </div>
                                 <div class="col-md-4 ">
-                                    <a href="  <?php echo $whatsappUrl->getProductToWhatsapp($prodData->productName,$prodData->id,get_object_vars($prodData->seller))?>"                                
+                                    <a href="  <?php if(isset($prodData->seller)) { echo $whatsappUrl->getProductToWhatsapp($prodData->productName,$prodData->id,get_object_vars($prodData->seller)) ; }?>"                                
                           target="_blank" class="whatsappbtn btn btn-sm w-100">
                                         Connect on whatsapp
                                         

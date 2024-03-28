@@ -6,7 +6,7 @@ $currentUrl = rtrim($url, '/');
 $urlParts = explode('/', $currentUrl);
 $lastPart = end($urlParts);
 
-if ((in_array('category', $urlParts) || in_array('search', $urlParts)) && ctype_xdigit($lastPart) && strlen($lastPart) > 16) {
+if ((in_array('product', $urlParts) || in_array('category', $urlParts) || in_array('search', $urlParts)) && ctype_xdigit($lastPart) && strlen($lastPart) > 16) {
     // Redirect to the desired URL
     $redirectUrl = implode('/', array_slice($urlParts, 0, -1)); // Reconstruct the URL without the last part
     header('Location: ' . $redirectUrl);
@@ -40,7 +40,7 @@ if ((in_array('category', $urlParts) || in_array('search', $urlParts)) && ctype_
  if (preg_match('~^/industry/([^/]+)/([^/]+)$~', $url, $matches)) {
    include 'industryDetail.php'; 
  }
- if (preg_match('~^/group-category/([^/]+)$~', $url, $matches)) {
+ if (preg_match('~^/group-category/([^/]+)/([^/]+)$~', $url, $matches) || preg_match('~^/group-category/([^/]+)$~', $url, $matches)) {
    include 'group-category.php';
  }
  if (preg_match('~^/category/([^/]+)/([^/]+)$~', $url, $matches)||preg_match('~^/category/([^/]+)$~', $url,$matches)|| preg_match('~^/search/([^/]+)?([^/]+)$~', $url,$matches)||preg_match('~^/search/([^/]+)/([^/]+)$~', $url, $matches)) {

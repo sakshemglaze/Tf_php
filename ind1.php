@@ -15,7 +15,9 @@ include_once 'config.php';
            $size = 6;
             require_once 'post.php';
         $data =  get('api/industries'.'?size=' . $size . '&page=' . $page . '&sort=industryName,asc',true );
-             $data1 = json_decode($data);
+             //$data1 = json_decode($data);
+             $data1 = array_filter(json_decode($data), function($record) {
+                return $record->status == 'true'; });
              // $data = findActive($data1);
              // print_r($data);
 
@@ -28,9 +30,9 @@ include_once 'config.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php
     $SeoParams = [
-          'title' => 'Browse Sellers from UAE\'s Largest Online B2B Portal',
-          'metaTitle' => 'Browse Sellers from UAE\'s Largest Online B2B Portal',
-          'metaDescription' => 'Browse Sellers products and services on the UAE\'s Largest Online B2B Portal. Connect with leading sellers for successful business deals on TradersFind',
+          'title' => 'Browse Sellers from UAEs Largest Online B2B Portal',
+          'metaTitle' => 'Browse Sellers from UAEs Largest Online B2B Portal',
+          'metaDescription' => 'Browse Sellers products and services on the UAEs Largest Online B2B Portal. Connect with leading sellers for successful business deals on TradersFind',
           'metaKeywords' => 'Tradersfind industry, industries',
        ];
        include_once 'services/seo.php';
@@ -80,7 +82,9 @@ foreach ($data1 as $category) {
       echo '<div class="col-lg-9">';
     //}
     echo '<div class="row gy-4">';
-    foreach (array_slice($category->productsCategories, 0, 6) as $cat) {
+    $filteredCategories = array_filter($category->productsCategories, function($record) {
+    return ($record->status == 'true' && count($record->productsSubcategories) > 0 ); });
+    foreach (array_slice($filteredCategories, 0, 6) as $cat) {
         echo '<div class="col-lg-4">';
         echo '<div class="d-flex align-items-center gap-2">';
         $catImage = IMAGE_URL . $cat->image->id . ".webp";
@@ -88,7 +92,11 @@ foreach ($data1 as $category) {
         echo '<div class="inddetails">';
         echo '<h2 class="fs-6 fwbold"><a href="' . $urlService->getGroupCategoryUrl($cat->categoryName, $cat->id) . '" title="' . $cat->categoryName . '">' . $cat->categoryName . '</a></h2>';
         echo '<ul class="mt-4 text-black">';
-        foreach (array_slice($cat->productsSubcategories, 0, 3) as $subcat) {
+       // print_r($cat);
+        $filteredSubCategories = array_filter($cat->productsSubcategories, function($record) {
+          return $record->status == 'true'; });
+       // print_r($filteredSubCategories);
+        foreach (array_slice($filteredSubCategories, 0, 3) as $subcat) {
             echo '<li><a href="' . $urlService->getCategoryUrl($subcat->subCategoryName, $subcat->id) . '" title="' . $subcat->subCategoryName . '">' . $subcat->subCategoryName . '</a></li>';
         }
         echo '<li><a href="' . $urlService->getGroupCategoryUrl($cat->categoryName, $cat->id) . '"> + View All</a></li>';
@@ -105,16 +113,19 @@ foreach ($data1 as $category) {
       echo '<div class="row bg-grey">';
         echo '<div class="col-lg-12 position-relative sub_category_list2 ">';
          echo '<ul class="sub_category_list">';
-          foreach (array_slice($category->productsCategories, 0, 4) as $cat) {
+         
+          shuffle($filteredCategories);
+          if (count($filteredCategories) > 6) {
+          foreach (array_slice($filteredCategories, 0, 4) as $cat) {
             echo '<li>';
               echo '<a href="' . $urlService->getGroupCategoryUrl($cat->categoryName, $cat->id) . '" class="align-items-center flex-row d-flex gap-3 flex-wrap flex-md-nowrap  justify-content-md-start">';
                 echo '<div class="pro_image">';
                   echo'<img data-src="' . IMAGE_URL . $cat->image->id . '.webp" class="lazy"' . 'alt="Category" width="140px"/>';
                 echo'</div>';
-                echo'<h3 class="fs-6 fw-bold">' . $cat->categoryName .'</h3>';
+                echo'<h2 class="fs-6 fw-bold">' . $cat->categoryName .'</h2>';
               echo'</a>';
             echo '</li>';
-          }
+          }}
           echo '</ul>';
           echo '<a href="' . $urlService->getIndustryUrl($category->industryName, $category->id) .'" class="btn-primary-gradiant subcatbtn">View More</a>';
       echo '</div>';
@@ -137,6 +148,12 @@ foreach ($data1 as $category) {
     </div>
   </div>
 </section>
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <div class="loader"></div>
+    </div>
+</div>
+
 <?php 
 include_once "inquiry.php" ?>
         </body></html>
@@ -146,11 +163,6 @@ include_once "footer.php";
 
 <script>
     var data1 = [];
-  // Function to check if user has scrolled to the bottom of the page
-  function isBottomOfPage() {
-    return window.innerHeight + window.scrollY >= document.body.offsetHeight;
-  }
-
   // Function to load more industries
   function loadMoreIndustries() {
     var currentPage = parseInt(document.getElementById('currentPage').value);
@@ -163,18 +175,38 @@ include_once "footer.php";
       if (xhr.readyState == 4 && xhr.status == 200) {
         //console.log(xhr.responseText);
         var newIndustries = JSON.parse(xhr.responseText);
-        //if (newIndustries == [] ) { return; }
+        if (newIndustries.length === 0 ) { 
+        /*var industryDiv = document.createElement('div');
+        industryDiv.classList.add('row', 'gy-4', 'bg-white');
+        var industryTitleDiv = document.createElement('div');
+          industryTitleDiv.classList.add('col-lg-12');
+          var industryTitle = document.createElement('h1');
+          industryTitle.classList.add('text-black','fwbold','text-center', 'text-uppercase');
+          var industryTitleLink = document.createElement('a');
+          industryTitleLink.href = '';
+          industryTitleLink.textContent = 'End of last record !!!';
+          industryTitleLink.classList.add('text-center', 'fwbold', 'text-uppercase', 'text-black');
+          industryTitle.appendChild(industryTitleLink);
+          industryTitleDiv.appendChild(industryTitle);
+          industryDiv.appendChild(industryTitleDiv);
+          document.getElementById('industriesContainer').appendChild(industryDiv);
+          */
+          return; 
+        }
         // Append new industries to the existing list
         // Assuming data1 is the array containing industries
-        data1 = data1.concat(newIndustries);
+        var filteredIndustries = newIndustries.filter(function(industry) {
+        return industry.status !== 'false'; });
+        data1 = data1.concat(filteredIndustries);
         // Update the current page
         document.getElementById('currentPage').value = nextPage;
         // Render the new industries on the page
-        //console.log(newIndustries);
-        renderIndustries(newIndustries);
+        //console.log(filteredIndustries);
+        renderIndustries(filteredIndustries);
       }
     };
     xhr.send();
+    //hidePopup();
   }
 
   // Function to render industries on the page
@@ -203,14 +235,14 @@ function renderIndustries(industries) {
     var industryImageDiv = document.createElement('div');
     industryImageDiv.classList.add('col-lg-3', 'text-center');
 
-    if (category.image !== null && category.image !== undefined && category.image !== '') {
+    if (!!category.image) {
       var indImage = 'https://doc.tradersfind.com/images/' + category.image.id + '.webp';
       var industryImageLink = document.createElement('a');
       industryImageLink.href = urlService.getIndustryUrl(category.industryName, category.id);
 
       var industryImage = document.createElement('img');
       industryImage.setAttribute('src', indImage);
-      industryImage.classList.add('img-fluid');
+      industryImage.classList.add('img-fluid', 'img-size');
       industryImage.alt = 'Industry';
       //industryImage.width = '100%';
 
@@ -224,8 +256,12 @@ function renderIndustries(industries) {
     industryDetailsDiv.classList.add('col-lg-9');
     var categoriesRowDiv = document.createElement('div');
     categoriesRowDiv.classList.add('row', 'gy-4');
-
-    category.productsCategories.slice(0, 6).forEach(function(cat) {
+    //console.log(category.productsCategories);
+    var filteredCategories = category.productsCategories.filter(function(industry) {
+    return industry.status === 'true'; });
+    //console.log(filteredCategories);
+    filteredCategories = shuffleArray(filteredCategories);
+    filteredCategories.slice(0, 6).forEach(function(cat) {
       var categoryDiv = document.createElement('div');
       categoryDiv.classList.add('col-lg-4');
 
@@ -238,7 +274,7 @@ function renderIndustries(industries) {
 
       var categoryImage = document.createElement('img');
       categoryImage.setAttribute('src', catImage);
-      categoryImage.classList.add('lazy');
+      categoryImage.classList.add('lazy','img-cat');
       categoryImage.alt = 'Category';
       //categoryImage.width = '140px';
 
@@ -258,8 +294,9 @@ function renderIndustries(industries) {
 
       var subcategoriesUl = document.createElement('ul');
       subcategoriesUl.classList.add('mt-4', 'text-black');
-
-      cat.productsSubcategories.slice(0, 3).forEach(function(subcat) {
+      var filteredSubcategories = cat.productsSubcategories.filter(function(industry) {
+        return industry.status === 'true';});
+        filteredSubcategories.slice(0, 3).forEach(function(subcat) {
         var subcategoryLi = document.createElement('li');
         var subcategoryLink = document.createElement('a');
         subcategoryLink.href = urlService.getCategoryUrl(subcat.subCategoryName, subcat.id);
@@ -378,5 +415,7 @@ const lastIndustryElement = document.querySelector('.industry:last-of-type');
 if (lastIndustryElement) {
   observer.observe(lastIndustryElement);
 }
-
+function shuffleArray(array) {
+  return array.sort(() => Math.random() - 0.5);
+}
 </script>

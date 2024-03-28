@@ -459,16 +459,29 @@ include "home-search.php"
 
 
     <div class="owl-carousel carousel-main">
-        <div><img src="<?php echo BASE_URL; ?>assets/images/brands/1.png" width="185" height="124" alt="brands"></div>
-        <div><img src="<?php echo BASE_URL; ?>assets/images/brands/2.png" width="185" height="124" alt="brands"></div>
-        <div><img src="<?php echo BASE_URL; ?>assets/images/brands/3.png" width="185" height="124" alt="brands"></div>
-        <div><img src="<?php echo BASE_URL; ?>assets/images/brands/4.png" width="185" height="124" alt="brands"></div>
-        <div><img src="<?php echo BASE_URL; ?>assets/images/brands/5.png" width="185" height="124" alt="brands"></div>
-        <div><img src="<?php echo BASE_URL; ?>assets/images/brands/6.png" width="185" height="124" alt="brands"></div>
-       
-    </div>
-
-    
+        <span class="brand-box brand-box2">
+          <img src="<?php echo BASE_URL; ?>assets/images/brands/1.png" width="180" height="48" class="" alt="brand" />
+        </span>
+        <span class="brand-box brand-box2">
+          <img src="<?php echo BASE_URL; ?>assets/images/brands/2.png" width="185" height="124" class="" alt="" />
+        </span>
+        <span class="brand-box brand-box2">
+          <img src="<?php echo BASE_URL; ?>assets/images/brands/3.png" width="185" height="124" class=""
+               alt="brand" />
+        </span>
+        <span class="brand-box brand-box2">
+          <img src="<?php echo BASE_URL; ?>assets/images/brands/4.png" width="185" height="124" class=""
+               alt="brand" />
+        </span>
+        <span class="brand-box brand-box2">
+          <img src="<?php echo BASE_URL; ?>assets/images/brands/5.png" width="185" height="124" class=""
+               alt="brand" />
+        </span>
+        <span class="brand-box brand-box2">
+          <img src="<?php echo BASE_URL; ?>assets/images/brands/6.png" width="185" height="124" class=""
+               alt="brand" />
+        </span>
+</div>    
 </section>
 
 <?php

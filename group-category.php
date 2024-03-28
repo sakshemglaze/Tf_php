@@ -3,26 +3,26 @@
     $urlService = new UrlService();
 ?>
 <?php
+    //print_r('welcome1');
     $currentUrl = $_SERVER['REQUEST_URI'];   
     $grpCatName = $matches[1];
-    //$id = $matches[2];
- // print_r($id);
-
-
+    $id = $matches[2];
+    //print_r($id);
     $index=0;
             class FilterDTO {}
             //$name= $_POST['searchText']? $_POST['searchText']:"cleaning services";
             $filterDto = new FilterDTO();
             $payload = array();
             $page = 0;
-            $size = 6;
+            $size = 20;
             $queryParams= array('page'=>0, 'size'=> 6) ;
             require_once 'post.php';
         $data =  get(
-                'api/guest/products-categorie-name/' . $matches[1] .'?size=' . $size . '&page=' . $page . '&sort=categoryName,asc',
+                'api/guest/products-categories/' . $id .'?size=' . $size . '&sort=categoryName,asc',
                  true
               );
               $data1 = json_decode($data);
+              //print_r('welcome');
               $industry =  json_decode(get(
                 'api/industries-na/' . $data1->title . '?size=10&sort=industryName',true
               ));
@@ -60,16 +60,6 @@
 <section class="container-fluid ">
   <?php include_once "banner.php"; ?>
 </section>
-
-<section class="container-fluid ">
-  <div class="hidden-content row">
-    <div class="col-lg-12">
-       <app-banner-adv [bannerPosition]="'Category'" [renderServerSide]="false" [image]="'na'"> 
-      </app-banner-adv> 
-    </div>
-  </div>
-
-</section> 
 
 <section class="p-3">
   <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">

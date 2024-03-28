@@ -1,7 +1,5 @@
 <?php 
   include_once 'config.php'; 
-  include_once 'services/masked.php';
-  $maskedService = new MaskingService();
   include_once 'services/seo.php';
   $seo = new seoService();
 
@@ -35,21 +33,25 @@ $aproodproduct1 = json_decode($aproodproduct);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php
       $SeoParams = [
-          'title' => isset($data1[0]->metaTitle) && $data1[0]->metaTitle != '' ? $data1[0]->metaTitle : isset($data1[0]->productName) . ' in ' . isset($data1[0]->seller->state) . ' - ' . $data1[0]->sellerCompanyName,
-          'metaTitle' => isset($data1[0]->metaTitle) && $data1[0]->metaTitle != '' ? $data1[0]->metaTitle : isset($data1[0]->productName) . ' in ' . isset($data1[0]->seller->state) . ' - ' . $data1[0]->sellerCompanyName,
-          'metaDescription' => isset($data1[0]->metaDescription) && $data1[0]->metaDescription != '' ? $data1[0]->metaDescription : $data1[0]->sellerCompanyName . ' - Offering ' . isset($data1[0]->productName) . ' in ' . isset($data1[0]->seller->state) . '. Get the best quality at the best price.',
-          'metaKeywords' => isset($data1[0]->metaKeywords) && $data1[0]->metaKeywords != '' & $data1[0]->metaKeywords[0] !='' ? implode(',', $data1[0]->metaKeywords) : isset($data1[0]->productName) . ', ' . isset($data1[0]->productName) . ' in ' . isset($data1[0]->seller->state) . ', ' . isset($data1[0]->productName) . ' in UAE',
-          'fbTitle' => isset($data1[0]->fbTitle) && $data1[0]->fbTitle != '' ? $data1[0]->fbTitle : isset($data1[0]->productName),
-          'fbDescription' => isset($data1[0]->fbDescription) && $data1[0]->fbDescription != '' ? $data1[0]->fbDescription : isset($data1[0]->productDescription),
+          'title' => isset($data1[0]->metaTitle) && $data1[0]->metaTitle != '' ? $data1[0]->metaTitle : $data1[0]->sellerCompanyName,
+          'metaTitle' => isset($data1[0]->metaTitle) && $data1[0]->metaTitle != '' ? $data1[0]->metaTitle : $data1[0]->sellerCompanyName,
+          'metaDescription' => isset($data1[0]->metaDescription) && $data1[0]->metaDescription != '' ? $data1[0]->metaDescription : $data1[0]->sellerCompanyName,
+          'metaKeywords' => isset($data1[0]->metaKeywords) && $data1[0]->metaKeywords != '' & $data1[0]->metaKeywords[0] !='' ? implode(',', $data1[0]->metaKeywords) : $data1[0]->sellerCompanyName,
+          'fbTitle' => isset($data1[0]->fbTitle) && $data1[0]->fbTitle != '' ? $data1[0]->fbTitle : $data1[0]->sellerCompanyName,
+          'fbDescription' => isset($data1[0]->fbDescription) && $data1[0]->fbDescription != '' ? $data1[0]->fbDescription : $data1[0]->sellerCompanyName,
           'fbImage' => isset($data1[0]->fbImage) ? API_URL . 'api/guest/imageContentDownload/' . $data1[0]->fbImage.id : 'undefined',
           'fbUrl' => isset($data1[0]->fbUrl) && $data1[0]->fbUrl != '' ? $data1[0]->fbUrl : null,
-          'twitterTitle' => isset($data1[0]->twitterTitle) && $data1[0]->twitterTitle != '' ? $data1[0]->twitterTitle : isset($data1[0]->productName),
-          'twitterDescription' => isset($data1[0]->twitterDescription) && $data1[0]->twitterDescription != '' ? $data1[0]->twitterDescription : isset($data1[0]->productDescription),
+          'twitterTitle' => isset($data1[0]->twitterTitle) && $data1[0]->twitterTitle != '' ? $data1[0]->twitterTitle : $data1[0]->sellerCompanyName,
+          'twitterDescription' => isset($data1[0]->twitterDescription) && $data1[0]->twitterDescription != '' ? $data1[0]->twitterDescription : $data1[0]->sellerCompanyName,
           'twitterImage' => isset($data1[0]->twitterImage) ? API_URL . 'api/guest/imageContentDownload/' . $data1[0]->twitterImage.id : 'undefined',
           'twitterSite' => isset($data1[0]->twitterSite) && $data1[0]->twitterSite != '' ? $data1[0]->twitterSite : null,
           'twitterCard' => isset($data1[0]->twitterCard) && $data1[0]->twitterCard != '' ? $data1[0]->twitterCard : null,
        ];
       $seo->setSeoTags($SeoParams);
+
+      include_once 'services/masked.php';
+      $maskedService = new MaskingService();
+
         ?>
          <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css" >
 </head>
@@ -165,23 +167,27 @@ $aproodproduct1 = json_decode($aproodproduct);
               </div>
                 <div class="col-12" *ngIf="seller">
                   <ul class="d-flex gap-2 justify-content-center mt-0">
-
+                <?php if (isset($data1[0]->twitterLink) && $data1[0]->twitterLink != '') :?>
                     <li>
-                      <a *ngIf="seller.twitterLink && seller.twitterLink != ''" [href]="seller.twitterLink" aria-label="Twitter">
+                      <a href="/<?php echo $data1[0]->twitterLink ?>" aria-label="Twitter">
                         <img src="<?php echo BASE_URL?>assets/images/twitter.webp" width="40" alt="X" />
                       </a>
                     </li>
+                    <?php endif;
+                    if (isset($data1[0]->facebookLink) && $data1[0]->facebookLink != ''): ?>
                     <li>
-                      <a *ngIf="seller.facebookLink && seller.facebookLink != ''" [href]="seller.facebookLink" aria-label="Facebook">
+                      <a href="/<?php echo $data1[0]->facebookLink ?>" aria-label="Facebook">
                           <img src="<?php echo BASE_URL?>assets/images/facebook.webp" width="40" alt="facebook" />
                       </a>
                   </li>
-                  
+                  <?php endif; 
+                  if (isset($data1[0]->instagramLink) && $data1[0]->instagramLink != '') :?>
                     <li>
-                      <a *ngIf="seller.instagramLink && seller.instagramLink != ''" [href]="seller.instagramLink" aria-label="Instagram">
+                      <a href="/<?php echo $data1[0]->instagramLink ?>" aria-label="Instagram">
                         <img src="<?php echo BASE_URL?>assets/images/instagram.webp" width="40" alt="instagram" />
                       </a>
                     </li>
+                   <?php endif; ?> 
                   </ul>
                 </div>
               </div>
@@ -271,7 +277,7 @@ $aproodproduct1 = json_decode($aproodproduct);
                 <img src="<?php echo BASE_URL;?>assets/images/icon__3.png" alt="seller" class="me-3" />
                 <div class="text-start lh-sm" *ngIf="seller">
                   <a href="<?php echo$data1[0]->sellerWebsite; ?>" target="_blank">
-                    <h3 class="text-black-50 mb-0 fs-4 fwbold" style="text-transform: capitalize;"><?php echo $data1[0]->sellerCompanyName.'Website';?>
+                    <h3 class="text-black-50 mb-0 fs-4 fwbold" style="text-transform: capitalize;"><?php echo $data1[0]->sellerCompanyName.' Website';?>
                        </h3>
                     <!--{{seller.sellerWebsite }}-->
                   </a>
@@ -412,9 +418,9 @@ $aproodproduct1 = json_decode($aproodproduct);
         <div class="tab-pane fade fs-5" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab"
           tabindex="0">
           <section class="">
-            <h3 class="fwbold fs-3 mb-5 border-center text-center pt-5">
+            <h2 class="fwbold fs-3 mb-5 border-center text-center pt-5">
               Contact Details
-            </h3>
+            </h2>
 
 
 

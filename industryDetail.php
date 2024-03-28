@@ -80,7 +80,9 @@ include_once "header-sub.php";
         </div>
 
         <?php 
-       foreach ($data1->productsCategories as $cat) {
+        $filteredCategories = array_filter($data1->productsCategories, function($record) {
+                return $record->status == 'true'; });
+       foreach ($filteredCategories as $cat) {
                 echo '<div class="col-lg-4">';
                     echo '<div class="card border-0 category-hover">';
                         echo '<div class="card-body">';
@@ -90,7 +92,9 @@ include_once "header-sub.php";
                             echo '<div class="d-flex align-items-start">';
                                echo '<img data-src="' . IMAGE_URL . $cat->image->id .'.webp" class="lazy me-3 rounded-10 img-fluid" height="70" width="70" alt="Category">' ;
                                 echo '<ul class="list-style-disc ms-4">';
-                                    foreach (array_slice($cat->productsSubcategories, 0, 5) as $subcat) {
+                                $filteredSubCategories = array_filter($cat->productsSubcategories, function($record) {
+                                return $record->status == 'true'; });
+                                    foreach (array_slice($filteredSubCategories, 0, 5) as $subcat) {
                                         echo '<li>';
                                             echo '<h3 class="fs-6"><a href="' . BASE_URL  . $urlService->getCategoryUrl($subcat->subCategoryName, $subcat->id) . '">' . $subcat->subCategoryName . '</a></h3>';
                                         echo '</li>';

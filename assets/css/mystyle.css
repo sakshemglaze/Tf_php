@@ -895,9 +895,9 @@ textarea:focus {
 }
 
 .whatsappbtn {
-    border: 1px solid #319038 !important;
-    color: #fff !important;
-    background-color: #319038 !important;
+    border: 1px solid #319038 ;
+    color: #fff ;
+    background-color: #319038 ;
     border-radius: 7px;
     -webkit-border-radius: 7px;
     -moz-border-radius: 7px;
@@ -913,7 +913,7 @@ textarea:focus {
 
 .btn-outline-gradiant {
     border: 1px solid transparent;
-    color: #fff;
+    color: #fff ;
     border-radius: 7px;
     background-image: -webkit-linear-gradient(-40deg, rgb(189, 56, 56) 0%, rgb(13, 88, 140) 100%);
     background-clip: padding-box, border-box;
@@ -3097,4 +3097,10 @@ color :#000 !important}
     -ms-transition: all .1s ease-in-out;
     -o-transition: all .1s ease-in-out;
     width: 100%;
+  }
+  .img-size {
+    width: 70% !important;
+  }
+  .img-cat {
+    width: 140px !important;
   }

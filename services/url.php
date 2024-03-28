@@ -21,8 +21,8 @@ public function getProductUrl($pname) {
   return $url;
 }
 
-public function getGroupCategoryUrl($name) {
-  $url = 'group-category/' . preg_replace('/[&,\s]+/', '-', strtolower(trim($name)));
+public function getGroupCategoryUrl($name,$id) {
+  $url = 'group-category/' . preg_replace('/[&,\s]+/', '-', strtolower(trim($name))) . '/' . $id;
   return $url;
 }
 
