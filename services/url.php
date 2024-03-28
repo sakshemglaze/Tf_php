@@ -13,7 +13,7 @@ public function __construct() {
 }
 
 public function getIndustryUrl($indName,$iid) {
-  $url = 'industry/' . preg_replace('/[&,\s]+/', '-', strtolower($indName)) . '/' . $iid;
+  $url = 'industry/' . preg_replace('/[&,\s]+/', '-', strtolower($indName)); // . '/' . $iid;
   return $url;
 }
 public function getProductUrl($pname) {
@@ -22,7 +22,7 @@ public function getProductUrl($pname) {
 }
 
 public function getGroupCategoryUrl($name,$id) {
-  $url = 'group-category/' . preg_replace('/[&,\s]+/', '-', strtolower(trim($name))) . '/' . $id;
+  $url = 'group-category/' . preg_replace('/[&,\s]+/', '-', strtolower(trim($name))); // . '/' . $id;
   return $url;
 }
 

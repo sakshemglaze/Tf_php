@@ -99,8 +99,9 @@
         <div class="col-lg-10 position-relative">
           <ul class="sub_category_list">
             <?php
-              
-            foreach ($data1->productsSubcategories as $subCat) {
+            $filteredSubCategories = array_filter($data1->productsSubcategories, function($record) {
+            return $record->status == 'true'; });  
+            foreach ($filteredSubCategories as $subCat) {
             
             echo '<li>';
               echo '<a href="' . BASE_URL  . $urlService->getCategoryUrl($subCat->subCategoryName, $subCat->id) . '" class="product-box">';

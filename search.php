@@ -8,14 +8,20 @@ include_once 'config.php';
      $urlService = new UrlService(); 
      $name = str_replace("-", " ", $matches[1]);
     // $id = str_replace("-", " ", $matches[2]);
-   
+    $userAgent = $_SERVER['HTTP_USER_AGENT'];
+    $isMobile = preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i', $userAgent);
+
     $textType=$matches[0];
     $location = 'UAE';
     $keyword = 'yes';
     
     $indexr=0;
     $page=0;
-    $size=10;
+    if ($isMobile) {
+      $size = 5;
+    } else {
+      $size=10;
+    }
 
     $currentUrl = $_SERVER['REQUEST_URI'];
     $parts = explode('/', $currentUrl);
@@ -64,7 +70,7 @@ else{
                 'searchTextType' => 'subcategory',
                 'filterDto' => $filterDto
             );  
-           
+            
             $queryParams= array('page'=> $page, 'size'=> $size) ;          
             $data =  post(
               'api/new-search-products',
@@ -90,15 +96,15 @@ else{
 
         //print_r(isset($subcategory) && $subcategory->metaDescription !='' ? str_replace('UAE',$location1,$subcategory->metaDescription) : 'Searching for ' . $subcategory->subCategoryName . ' at best price in ' . $location1 . '? Choose from a wide range of companies provide' . $subcategory->subCategoryName . ' online on Tradersfind.com');
         $SeoParams = [
-          'title' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('UAE',$location1,$subcategory->metaTitle) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com',
-          'metaTitle' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('UAE',$location1,$subcategory->metaTitle) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com',
-          'metaDescription' => isset($subcategory->subCategoryDescription) && $subcategory->subCategoryDescription !='' ? str_replace('UAE',$location1,$subcategory->subCategoryDescription) : 'Searching for ' . $subcategory->subCategoryName . ' at best price in ' . $location1 . '? Choose from a wide range of companies provide' . $subcategory->subCategoryName . ' online on Tradersfind.com',
-          'metaKeywords' => isset($subcategory->keywords) && $subcategory->keywords != '' ? $subcategory->keywords : $subcategory->subCategoryName . ', ' . $subcategory->subCategoryName . ' in '. $location1,
-          'fbTitle' => isset($subcategory->fbTitle) && $subcategory->fbTitle !='' ? $subcategory->fbTitle : null,
-          'fbDescription' => isset($subcategory->fbDescription) ? $subcategory->fbDescription : '',
+          'title' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('uae',$location1,strtolower($subcategory->metaTitle)) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com',
+          'metaTitle' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('uae',$location1,strtolower($subcategory->metaTitle)) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com',
+          'metaDescription' => isset($subcategory->subCategoryDescription) && $subcategory->subCategoryDescription !='' ? str_replace('uae',$location1,strtolower($subcategory->subCategoryDescription)) : 'Searching for ' . $subcategory->subCategoryName . ' at best price in ' . $location1 . '? Choose from a wide range of companies provide' . $subcategory->subCategoryName . ' online on Tradersfind.com',
+          'metaKeywords' => isset($subcategory->keywords) && $subcategory->keywords != '' ? str_replace('uae',$location1,strtolower($subcategory->keywords)) : $subcategory->subCategoryName . ', ' . $subcategory->subCategoryName . ' in '. $location1,
+          'fbTitle' => isset($subcategory->fbTitle) && $subcategory->fbTitle !='' ? str_replace('uae',$location1,strtolower($subcategory->fbTitle)) : null,
+          'fbDescription' => isset($subcategory->fbDescription) ? str_replace('uae',$location,strtolower($subcategory->fbDescription)) : null,
           'fbImage' => isset($subcategory->fbImage) ? $subcategory->fbImage : '',
           'fbUrl' => isset($subcategory->fbUrl) ? $subcategory->fbUrl : '',
-          'twitterTitle' => isset($subcategory->twitterTitle) && $subcategory->twitterTitle !='' ? $subcategory->twitterTitle : null,
+          'twitterTitle' => isset($subcategory->twitterTitle) && $subcategory->twitterTitle !='' ? str_replace('uae',$location1,strtolower($subcategory->twitterTitle)) : null,
           'twitterDescription' => isset($subcategory->twitterDescription) ? $subcategory -> twitterDescription : null,
           'twitterImage' => isset($subcategory->twitterImage) ? $subcategory->twitterImage : null,
           'twitterSite' => isset($subcategory->twitterSite) ? $subcategory->twitterSite : '',
@@ -172,9 +178,7 @@ else{
               false
             );
             
-              $length = count(($data->products));
-
-              
+              $length = count(($data->products));              
                 //print_r($subcategory);
               $category = json_decode(get(
                 'api/guest/products-categories-na/' . $subcategory->title, $queryParams
@@ -186,15 +190,15 @@ else{
               
 //print_r($subcategory->metaTitle);
 $SeoParams = [
-          'title' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('UAE',$location1,$subcategory->metaTitle) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com',
-          'metaTitle' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('UAE',$location1,$subcategory->metaTitle) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com',
-          'metaDescription' => isset($subcategory->metaDescription) && $subcategory->metaDescription !='' ? str_replace('UAE',$location1,$subcategory->metaDescription) : 'Searching for ' . $subcategory->subCategoryName . ' at best price in ' . $location1 . '? Choose from a wide range of companies provide' . $subcategory->subCategoryName . ' online on Tradersfind.com',
-          'metaKeywords' => isset($subcategory->keywords) && $subcategory->keywords != '' ? $subcategory->keywords : $subcategory->subCategoryName . ', ' . $subcategory->subCategoryName . ' in '. $location1,
-          'fbTitle' => isset($subcategory->fbTitle) && $subcategory->fbTitle !='' ? $subcategory->fbTitle : null,
-          'fbDescription' => isset($subcategory->fbDescription) ? $subcategory->fbDescription : '',
+          'title' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('uae',$location1,strtolower($subcategory->metaTitle)) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com',
+          'metaTitle' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('uae',$location1,strtolower($subcategory->metaTitle)) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com',
+          'metaDescription' => isset($subcategory->subCategoryDescription) && $subcategory->subCategoryDescription !='' ? str_replace('uae',$location1,strtolower($subcategory->subCategoryDescription)) : 'Searching for ' . $subcategory->subCategoryName . ' at best price in ' . $location1 . '? Choose from a wide range of companies provide' . $subcategory->subCategoryName . ' online on Tradersfind.com',
+          'metaKeywords' => isset($subcategory->keywords) && $subcategory->keywords != '' ? str_replace('uae',$location1,strtolower($subcategory->keywords)) : $subcategory->subCategoryName . ', ' . $subcategory->subCategoryName . ' in '. $location1,
+          'fbTitle' => isset($subcategory->fbTitle) && $subcategory->fbTitle !='' ? str_replace('uae',$location1,strtolower($subcategory->fbTitle)) : null,
+          'fbDescription' => isset($subcategory->fbDescription) ? str_replace('uae',$location,strtolower($subcategory->fbDescription)) : null,
           'fbImage' => isset($subcategory->fbImage) ? $subcategory->fbImage : '',
           'fbUrl' => isset($subcategory->fbUrl) ? $subcategory->fbUrl : '',
-          'twitterTitle' => isset($subcategory->twitterTitle) && $subcategory->twitterTitle !='' ? $subcategory->twitterTitle : null,
+          'twitterTitle' => isset($subcategory->twitterTitle) && $subcategory->twitterTitle !='' ? str_replace('uae',$location1,strtolower($subcategory->twitterTitle)) : null,
           'twitterDescription' => isset($subcategory->twitterDescription) ? $subcategory -> twitterDescription : null,
           'twitterImage' => isset($subcategory->twitterImage) ? $subcategory->twitterImage : null,
           'twitterSite' => isset($subcategory->twitterSite) ? $subcategory->twitterSite : '',
@@ -203,6 +207,10 @@ $SeoParams = [
           ];
   //print_r("else");
           }
+         if ($length == 0) {
+                header("Location: /not-found.php");
+                exit();
+              }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -304,8 +312,6 @@ if (isset($category )&&isset($subcategory->shortDescription) && $subcategory->sh
 <div class="row gy-2">
     <div class="col-lg-3 col-xxl-2">
        <?php
-        $userAgent = $_SERVER['HTTP_USER_AGENT'];
-        $isMobile = preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i', $userAgent);
         //$imagePath = $isMobile ? 'assets/images/poster1.webp' : 'assets/images/poster1.gif';
         if(!$isMobile ) {
       ?>
@@ -386,9 +392,7 @@ if (isset($category )&&isset($subcategory->shortDescription) && $subcategory->sh
                 }
             }
           ?>
-       <div id="productList">
-  
-</div>
+       <div id="productList"> </div>
 <div id="result"></div>
                  
           <div class="post-request-text ">
@@ -499,7 +503,7 @@ const observer = new IntersectionObserver(handleIntersection, {
 });
 
 // Find the element near the bottom of the page
-const bottomElement = document.getElementById('loadMoreBtn'); // Change 'bottom-element' to the ID of your actual element
+const bottomElement = document.getElementById('productList'); // Change 'bottom-element' to the ID of your actual element
 
 // Start observing the bottom element
 observer.observe(bottomElement);
