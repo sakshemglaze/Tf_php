@@ -9,7 +9,7 @@ include_once 'config.php';
      $name = str_replace("-", " ", $matches[1]);
     // $id = str_replace("-", " ", $matches[2]);
    
-    $textType=$matches[0];
+  
     $location = 'UAE';
     $keyword = 'yes';
     
@@ -393,12 +393,12 @@ if (isset($category )&&isset($subcategory->shortDescription) && $subcategory->sh
                  
           <div class="post-request-text ">
           <div class="text-center my-2" >
-          <?php if (!($length < 10)): ?>
+         
             
           <button  id="loadMoreBtn" onclick="lod()"class="btn-primary-gradiant rounded-2 btn-auto"> LOAD MORE RESULTS ... </button>
          
         </div>
-        <?php endif; ?>
+       
           <section class="easysource my-4 py-2" >
             <?php
              include_once "post-request.php";
@@ -421,7 +421,6 @@ if (isset($category )&&isset($subcategory->shortDescription) && $subcategory->sh
         $parts = explode('/', $currentUrl);
         $category = basename($parts[2]); // Extract the category part
         $searchtext = htmlspecialchars(str_replace('-',' ', $category)); // Sanitize the value
-      
         ?>
         </div>
     </div>    
@@ -430,17 +429,33 @@ if (isset($category )&&isset($subcategory->shortDescription) && $subcategory->sh
 <script>
   let page=1;
   var searchtext = "<?php echo $subcategory->subCategoryName; ?>";
-  var textType="<?php echo $textType;?>";
+  var currentURL = window.location.href;
 
-  function lod(){
+
+var urlParts = currentURL.split('/');
+var category = urlParts[urlParts.length - 2];
+
+console.log(searchtext);
+function lod(){
+if(category=='category'){
+  console.log(category);
+ 
     let payload= {
     searchText: searchtext,
     searchTextType: 'subcategory',
     filterDto: {}
      
 }
-console.log(textType);
-console.log(searchtext);
+
+}else{
+  payload={
+    searchText: searchtext,
+    searchTextType: null,
+    filterDto: {}
+  }
+
+ 
+}
 searchProductNew(payload, page).then(response => {
      
         console.log(response);
