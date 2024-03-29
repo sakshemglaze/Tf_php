@@ -8,9 +8,9 @@ include_once 'config.php';
      $urlService = new UrlService(); 
      $name = str_replace("-", " ", $matches[1]);
     // $id = str_replace("-", " ", $matches[2]);
+    
     $userAgent = $_SERVER['HTTP_USER_AGENT'];
     $isMobile = preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i', $userAgent);
-
     $textType=$matches[0];
     $location = 'UAE';
     $keyword = 'yes';
@@ -396,13 +396,11 @@ if (isset($category )&&isset($subcategory->shortDescription) && $subcategory->sh
 <div id="result"></div>
                  
           <div class="post-request-text ">
-          <div class="text-center my-2" >
-          <?php if (!($length < 10)): ?>
-            
+          <div class="text-center my-2" >     
           <button  id="loadMoreBtn" onclick="lod()"class="btn-primary-gradiant rounded-2 btn-auto"> LOAD MORE RESULTS ... </button>
          
         </div>
-        <?php endif; ?>
+       
           <section class="easysource my-4 py-2" >
             <?php
              include_once "post-request.php";
@@ -425,7 +423,6 @@ if (isset($category )&&isset($subcategory->shortDescription) && $subcategory->sh
         $parts = explode('/', $currentUrl);
         $category = basename($parts[2]); // Extract the category part
         $searchtext = htmlspecialchars(str_replace('-',' ', $category)); // Sanitize the value
-      
         ?>
         </div>
     </div>    
@@ -434,17 +431,33 @@ if (isset($category )&&isset($subcategory->shortDescription) && $subcategory->sh
 <script>
   let page=1;
   var searchtext = "<?php echo $subcategory->subCategoryName; ?>";
-  var textType="<?php echo $textType;?>";
+  var currentURL = window.location.href;
 
-  function lod(){
+
+var urlParts = currentURL.split('/');
+var category = urlParts[urlParts.length - 2];
+
+console.log(searchtext);
+function lod(){
+if(category=='category'){
+  //console.log(category);
+ 
     let payload= {
     searchText: searchtext,
     searchTextType: 'subcategory',
     filterDto: {}
      
 }
-console.log(textType);
-console.log(searchtext);
+
+}else{
+  payload={
+    searchText: searchtext,
+    searchTextType: null,
+    filterDto: {}
+  }
+
+ 
+}
 searchProductNew(payload, page).then(response => {
      
         console.log(response);
