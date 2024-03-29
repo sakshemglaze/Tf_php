@@ -64,7 +64,7 @@ $pager=false;
         <div class="input-group">
             <select name="countryCode" class="form-control mxw-50">
                 <?php
-                $json_data = file_get_contents('<?php echo BASE_URL; ?>assets/testingJson/country_codes_v1.json');
+                $json_data = file_get_contents( BASE_URL.'assets/testingJson/country_codes_v1.json');
                 $countries = json_decode($json_data);
 
                 foreach ($countries as $code) {

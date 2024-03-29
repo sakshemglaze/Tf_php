@@ -21,7 +21,7 @@ include_once "header-sub.php";
        function closePopup() {
     document.getElementById("popup-card-otp").style.display = "none";
   }
-  function submitRequirement(){
+  function submitRequirement(formdata){
   var productname=document.getElementById("productName").value;
   
   var quantity=document.getElementById("quantity").value;
@@ -44,6 +44,9 @@ include_once "header-sub.php";
           status: 'New',
           frequencytype: lol
         }
+        document.getElementById("postBuyreq").reset();
+
+       // formdata.frequencytype=lol;
        var url="<?php echo API_URL?>api/enquiries";
        console.log(url);
        const myObject1 = new StorageService();
@@ -54,16 +57,22 @@ fetch(url, {
         "Content-Type": "application/json",
         Authorization: 'Bearer ' + token,
     },
-    body: JSON.stringify(payload),
+    body: JSON.stringify(formdata),
 })
     .then(function (response) {
         return response.json();
     })
     .then(function (data) {
         console.log(data);
+        if(confirm('Your Request is submitted successfully!! Please click OK.')) {
+        window.open('/post-buy-requirements');
+    }
     })
     .catch(function (error) {
         console.log(error);
+        if(confirm('Your Request is not submitted !!! Due To some issue Please click OK.')) {
+       
+        }
     });
   console.log(payload);
   }
@@ -77,7 +86,7 @@ fetch(url, {
         <div class="col-md-8 line">
           <div class="fs-3 fwbold Details">Requirement Details</div>
 
-          <form method="post">
+          <form method="post" id="postBuyreq">
             <div class="mb-3 mt-3">
               <label>Product / Service</label>
               <input type="text" id="productName" class="form-control" name="productName"
@@ -120,14 +129,9 @@ fetch(url, {
                 </div>
               </div>
 
-              <div class="col-md-12">
-                <div class="mb-3">
+              <div class="col-md-12  mb-3">
                   <label>Describe your buying requirement</label>
-                  <textarea id="requirement" name="requirement" class="form-control"
-                    placeholder="Describe your buying requirement">
-                  </textarea>
-
-                </div>
+                  <textarea class="form-control" id="requirement" name="requirement" rows="2" placeholder="Describe your buying requirement"></textarea>
               </div>
               
               <div class="row mt-1">
@@ -152,7 +156,7 @@ fetch(url, {
                       <option value="+971">+971 - United Arab Emirates.</option>
                        <option value="+91">+91 - India</option>
                     </select>
-                    <input  id="contactNumber"  type="number" name="contactNumber" class="form-control" placeholder="Mobile"
+                    <input  id="contactNumber"  type="phone" name="contactNumber" class="form-control" placeholder="Mobile"
                       required="number" />
 
                   </div>
@@ -185,7 +189,7 @@ fetch(url, {
         });
     });
 
-   function otpLogin(otpAuthData, mobileNumber) {
+   function otpLogin(otpAuthData, mobileNumber,formdata) {
     console.log(mobileNumber);
       const myObject = new StorageService();
       $.ajax({
@@ -203,7 +207,7 @@ fetch(url, {
                        myObject.setItem('userMobile', mobileNumber);
                        myObject.setItem('login', mobileNumber);
                        myObject.setItem('userFname', "User");
-                       submitRequirement();
+                       submitRequirement(formdata);
     
                     },
                     error: function (xhr, status, error) {
@@ -223,12 +227,15 @@ fetch(url, {
       // this.modalService.dismissAll();
       // this._router.navigate(['/']);
     }
+    function otpRegister(otpAuthData, newmobnum,formdata){
+console.log("you are in register otp");
+    }
     
 
-    function verifyOtp(event,lolnumber){
+    function verifyOtp(event,mobnumber,formdata){
            // var otm=document.getElementById('otp').value;
-           // console.log(lolnumber);
-           var newmobnum='+'+lolnumber;
+           // console.log(mobnumber);
+           var newmobnum='+'+mobnumber;
            let otpAuthData = {
               phone: newmobnum,
               otpValue: event,
@@ -238,24 +245,24 @@ fetch(url, {
     };
            var otpres='';
             $.ajax({
-                    url: "https://api.tradersfind.com/api/guest/users/"+'+'+lolnumber,
+                    url: "https://api.tradersfind.com/api/guest/users/"+'+'+mobnumber,
                     dataType: "json",
                     data: { },
                     success: function (data) {
                        
                         if (data != "NotFound") {
           //console.log(otpAuthData,mobileNumber)
-          otpLogin(otpAuthData, newmobnum);
+          otpLogin(otpAuthData, newmobnum,formdata);
           console.log("1");
         }
         else {
-          this.otpRegister(otpRegisterData, newmobnum);
+          otpRegister(otpAuthData, newmobnum,formdata);
           console.log("2");
         }
                     },
                     error: function (xhr, status, error) {
                         if(xhr.responseText!='NotFound'){
-                          otpLogin(otpAuthData, newmobnum);
+                          otpLogin(otpAuthData, newmobnum,formdata);
                         }
                     }
                 });
@@ -269,10 +276,10 @@ fetch(url, {
           </script>
           <?php
 
-function sendOtp($contenctNo){
+function sendOtp($contenctNo,$formdata){
  
 
-  $payload=array('phone'=> '+919639330901', 'loginmethod'=>'WHATSAPP');
+  $payload=array('phone'=> $contenctNo, 'loginmethod'=>'WHATSAPP');
   $data123=post(
   'api/otps',
   $payload,
@@ -280,10 +287,19 @@ function sendOtp($contenctNo){
   //isWhatsapp ? { type: 'whatsapp' } : {type: 'email'},
   array("type"=> 'WHATSAPP'),
   false);
+  //print_r($data123->title);
+  if($data123->title=='ContactNo not Valid.'){
+   
+    echo "<script>
+    if(confirm('Please click on OK and send a message (Register Me) on our whatsapp number (+971569773623) to register.')) {
+        window.open('https://api.whatsapp.com/send?phone=971569773623&text=Register%20Me', '_blank');
+    }
+  </script>";
+  }else{
   include_once 'otp.php';
  // echo $contenctNo;
   echo '<script>document.getElementById("popup-card-otp").style.display = "block";</script>';
- // print_r($data123);
+  }
 }
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data
@@ -294,29 +310,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $frequencytype = $_POST['frequencytype'];
     $countryCode = $_POST['countryCode'];
     $contactNumber = $_POST['contactNumber'];
+    
+    $formdata = array(
+      'enquirerContactNumber' => $countryCode . $contactNumber,
+      'enquiryMessage' => $requirement,
+      'productName' => $productName,
+      'quantity' => $quantity,
+      'unit' => $quantityUnit,
+      'status' => 'New',
+      'frequencytype' => $frequencytype
+    );
 
-  echo "Form submitted successfully!";
-  echo $productName;
+  //echo "Form submitted successfully!";
+ // echo $productName;
  // header("Location: post-buy-requirements");
  $contenctNo=$countryCode.$contactNumber;
  include_once 'post.php';
- print_r($contenctNo);
- $respons=sendOtp($contenctNo);
+ //print_r($contenctNo);
+ $respons=sendOtp($contenctNo,$formdata);
 
-//  if ($_SERVER["REQUEST_METHOD"] == "POST") {
-//      $contenctNo=null;
-//      if(isset($_POST['mobileNa'])){
-//          $countryCode=isset($_POST['countryCode'])?$_POST['countryCode']:'';
-//      $mobileno=isset($_POST['mobileNa'])?$_POST['mobileNa']:'';
-//      $contenctNo=$countryCode.$mobileno;
-//      echo $contenctNo;
-//      $respons=sendOtp($contenctNo);
-//      }
-//      $contenctNo=null;
 
-//  }
- 
-   
 
 } else {
  
