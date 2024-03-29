@@ -14,7 +14,8 @@ include_once 'config.php';
     $textType=$matches[0];
     $location = 'UAE';
     $keyword = 'yes';
-    
+    $keywordDescription="";
+
     $indexr=0;
     $page=0;
     if ($isMobile) {
@@ -411,8 +412,22 @@ if (isset($category )&&isset($subcategory->shortDescription) && $subcategory->sh
           <p class="search-product-text">
         <div class="cat-desc" id="cat-desc" style="display:none;">
         <?php
-        if(isset($subcategory->categoryDescriptionPage)){
+        if($location=="" && isset($subcategory->categoryDescriptionPage)){
                       echo ( $subcategory->categoryDescriptionPage);
+        }else if($location=="dubai" && isset($subcategory->keywordDubaiDescription)){
+                      echo ( $subcategory->keywordDubaiDescription);
+        }else if($location=="abu dhabi" && isset($subcategory->keywordAbuDhabiDescription)){
+                      echo ( $subcategory->keywordAbuDhabiDescription);
+        }else if($location=="ajman" && isset($subcategory->keywordAjmanDescription)){
+                      echo ( $subcategory->keywordAjmanDescription);
+        }else if($location=="fujairah" && isset($subcategory->keywordFujairahDescription)){
+                      echo ( $subcategory->keywordFujairahDescription);
+        }else if($location=="ras al khaimah" && isset($subcategory->keywordRasAlKhaimahDescription)){
+                      echo ( $subcategory->keywordRasAlKhaimahDescription);
+        }else if($location=="umm al quwain" && isset($subcategory->keywordUmmAlQuwainDescription)){
+                      echo ( $subcategory->keywordUmmAlQuwainDescription);
+        }else if($location=="sharjah" && isset($subcategory->keywordSarjahDescription)){              
+                      echo ( $subcategory->keywordSarjahDescription);
                          ?>
                          </div>
         </p>
@@ -439,10 +454,11 @@ var category = urlParts[urlParts.length - 2];
 
 console.log(searchtext);
 function lod(){
+ let payload= {};
 if(category=='category'){
   //console.log(category);
  
-    let payload= {
+    payload= {
     searchText: searchtext,
     searchTextType: 'subcategory',
     filterDto: {}

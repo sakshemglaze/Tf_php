@@ -19,6 +19,7 @@
 }
 </style>
 <?php
+$formdata_json = json_encode($formdata);
 // Define a variable $modal to simulate the modal functionality
 $modal = true; // You can set it to false if modal is not needed
 ?>
@@ -42,7 +43,7 @@ $modal = true; // You can set it to false if modal is not needed
                 </div>
                 <button type="button"
                         class="btn-primary-gradiant px-md-5 py-2 rounded-10 fs-5 fwbold mb-3 mt-2 text-center"
-                        onclick="verifyOtp(document.querySelector('.setotp').value,<?php echo $contenctNo;?>)">
+                        onclick='verifyOtp(document.querySelector(".setotp").value, <?php echo $contenctNo; ?>,<?php echo $formdata_json; ?>)'>
                     Verify OTP
                 </button>
                 <!--<div class="mt-2 fs-5 text-dark fwbold">Kindly enter the verification code in the given space on the
