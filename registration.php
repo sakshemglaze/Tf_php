@@ -174,8 +174,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           $url='api/register';
          $response= post($url, $payload, false, null, true, 'text');
        
-         print_r($response);
-         echo '<script>alert("Form submitted successfully!");</script>';
+     
+         echo '<script>alert("Form submitted. You are registred successfully!");</script>';
     } 
     if($res=="NotFound"){
         submit();

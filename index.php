@@ -6,7 +6,7 @@ $currentUrl = rtrim($url, '/');
 $urlParts = explode('/', $currentUrl);
 $lastPart = end($urlParts);
 
-if ((in_array('industry', $urlParts) || in_array('group-category', $urlParts) || in_array('product', $urlParts) || in_array('category', $urlParts) || in_array('search', $urlParts)) && ctype_xdigit($lastPart) && strlen($lastPart) > 16) {
+if ((in_array('industry', $urlParts) || in_array('group-category', $urlParts) ||  in_array('category', $urlParts) || in_array('search', $urlParts)) && ctype_xdigit($lastPart) && strlen($lastPart) > 16) {
     // Redirect to the desired URL
     $redirectUrl = implode('/', array_slice($urlParts, 0, -1)); // Reconstruct the URL without the last part
     header('Location: ' . $redirectUrl);
@@ -49,7 +49,7 @@ if ((in_array('industry', $urlParts) || in_array('group-category', $urlParts) ||
  if (preg_match('~^/seller/([^/]+)$~', $url, $matches)) {
    include 'sellerdetail.php'; 
  }
- if (preg_match('~^/product/([^/]+)$~', $url, $matches)) {
+ if (preg_match('~^/product/([^/]+)/([^/]+)$~', $url, $matches)) {
    include 'productDetail.php';
  }
  if (preg_match('~^/blog/([^/]+)$~', $url, $matches)) {

@@ -3,6 +3,8 @@
     $urlService = new UrlService(); 
     include_once 'services/masked.php';
     $maskedService = new MaskingService();
+    include_once "whatsapp.php";
+    $whatsappUrl=new WhatsappUrl();
 ?>
 
 <div class="bg-gradiant rounded-20 position-relative shadow-sm mb-4">
@@ -19,6 +21,7 @@
                                 <?php
                               if($premiumprod && $premiumprod->images) {
                                 $id=$premiumprod->images[0]->id;
+                                //print_r($id);
                               }
                                 $prodName=$premiumprod->altText ?$premiumprod->altText:$premiumprod->productName;
                                 if ($premiumprod && $premiumprod->images && isset($premiumprod->images[0]->imageContent) && $premiumprod->images[0]->imageContent === null) {
@@ -135,7 +138,7 @@
         </div>
     </div>
     <div class="col-sm-6 whatsappbtn ">
-        <a href="#" target="_blank" class="btn btn-sm w-100">
+        <a href=" <?php echo $whatsappUrl->getProductToWhatsapp($premiumprod->productName,$premiumprod->id,get_object_vars($premiumprod->seller))?>" target="_blank" class="btn btn-sm w-100">
             Connect on whatsapp
         </a>
     </div>

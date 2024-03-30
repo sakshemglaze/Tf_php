@@ -16,9 +16,9 @@ if ($id) {
   
       $tradImage=json_decode($tradImg);
         if ($tradImage->imageContent && $tradImage->imageContentContentType) {
-          $imageContenth = "data:image/webp;base64" + "," + res.imageContent;
+          $imageContenth = "data:image/webp;base64" . "," . $tradImage->imageContent;
         } else if ($tradImage->imageContent && !$tradImage->imageContentContentType) {
-          $imageContenth = "data:image/webp;base64" + "," + res.imageContent;
+          $imageContenth = "data:image/webp;base64" . "," . $tradImage->imageContent;
         } else {
           $imageContenth ='https://d1o1xqr29l8ebx.cloudfront.net/images/'.$id .".webp";
         }

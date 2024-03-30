@@ -147,8 +147,7 @@ function submitform(){
                 $('#search').val(suggestion.productName); 
                 var searchTermp = $('#search').val().replace(/\s+/g, '-');
                 searchTermp =searchTermp.toLowerCase();
-                var actionURL = "<?php echo  BASE_URL ?>product/" + encodeURIComponent((suggestion.productUrl?suggestion.productUrl:suggestion.productName).toLowerCase().replace(/\s/g,'-'));
-                $('#homepageSearch').attr('action', actionURL);
+                var actionURL = "product/" + encodeURIComponent(searchTermp)+'/'+suggestion.id;                $('#homepageSearch').attr('action', actionURL);
                 $('#homepageSearch').submit();
                 $('.search-result').hide(); 
             });

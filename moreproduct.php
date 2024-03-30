@@ -5,7 +5,7 @@
    $prodId = "647dcf429d126d0588ea6e3a"; //$_GET['id'];
     require_once 'post.php';
         $datap1 =  get(
-                'api/guest/products/by-seller-related/' . $prodId, 
+                'api/guest/products/by-seller-related/' . $id, 
                 true
               );
               $datap = json_decode($datap1);

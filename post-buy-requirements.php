@@ -227,9 +227,34 @@ fetch(url, {
       // this.modalService.dismissAll();
       // this._router.navigate(['/']);
     }
-    function otpRegister(otpAuthData, newmobnum,formdata){
-console.log("you are in register otp");
-    }
+    function otpRegister(otpAuthData, mobileNumber,formdata){
+     
+      const myObject1 = new StorageService();
+      $.ajax({
+        url: "https://api.tradersfind.com/api/register-otp",
+  method: "POST",
+  dataType: "json",
+  contentType: "application/json",
+  data: JSON.stringify(otpAuthData),
+  success: function (data) {
+                       console.log(data);
+                       myObject1.setItem('userAccessToken', data['id_token']);
+                       myObject1.setItem('isLoggedIn', '1');
+                       myObject1.setItem('loggedVia', 'mobile');
+                       myObject1.setItem('userData', mobileNumber);
+                       myObject1.setItem('userMobile', mobileNumber);
+                       myObject1.setItem('login', mobileNumber);
+                       myObject1.setItem('userFname', "User");
+                       submitRequirement(formdata);
+    
+                    },
+                    error: function (xhr, status, error) {
+                      console.log("test reg")
+                        console.error(xhr.responseText);
+                    }
+                });
+  }
+    
     
 
     function verifyOtp(event,mobnumber,formdata){
@@ -263,6 +288,9 @@ console.log("you are in register otp");
                     error: function (xhr, status, error) {
                         if(xhr.responseText!='NotFound'){
                           otpLogin(otpAuthData, newmobnum,formdata);
+                        }else{
+                          console.log("tttttttttt");
+                          otpRegister(otpAuthData, newmobnum,formdata);
                         }
                     }
                 });
@@ -288,7 +316,7 @@ function sendOtp($contenctNo,$formdata){
   array("type"=> 'WHATSAPP'),
   false);
   //print_r($data123->title);
-  if($data123->title=='ContactNo not Valid.'){
+  if(isset($data123->title)&& $data123->title=='ContactNo not Valid.'){
    
     echo "<script>
     if(confirm('Please click on OK and send a message (Register Me) on our whatsapp number (+971569773623) to register.')) {

@@ -7,10 +7,13 @@
         var searchtex=document.getElementById("search").value;
         var baseurl='<?php echo BASE_URL?>';
         var bsearchurl=baseurl;
-        if(location && location=='uae'){
+       console.log(searchtex);
+        if(location && location=='uae' && searchtex!=''){
             bsearchurl = bsearchurl + 'search/' + searchtex.toLowerCase().replace(/\s+/g, '-'); 
-        }else{
+        }else if(searchtex!=''){
             bsearchurl=bsearchurl+'search'+'/' + searchtex.toLowerCase().replace(/\s+/g, '-')+ "/"+location;
+        }else{
+            bsearchurl ='/';
         }
         document.getElementById("homepageSearch").action=bsearchurl;
         document.getElementById("homepageSearch").submit();
@@ -169,12 +172,17 @@
             if (suggestions) {
                 $('#option_prod').empty();
                 suggestions.forEach(function (suggestion) {
+                    console.log();
+                 var idprod=suggestion.id;
                     var suggestionItem = $('<li></li>').text(suggestion.productName).click(function() {
             
                 $('#search').val(suggestion.productName); 
                 var searchTermp = $('#search').val().replace(/\s+/g, '-');
                 searchTermp=searchTermp.toLowerCase();
-                var actionURL = "<?php echo  BASE_URL ?>product/" + encodeURIComponent((suggestion.productUrl?suggestion.productUrl:suggestion.productName).toLowerCase().replace(/\s/g,'-'));
+                
+                var subcatnurl=(suggestion.productUrl?suggestion.productUrl:suggestion.productName).toLowerCase().replace(/\s/g,'-');
+                console.log(idprod);
+                var actionURL = "product/" + encodeURIComponent(searchTermp)+'/'+suggestion.id;
                 $('#homepageSearch').attr('action', actionURL);
                 $('#homepageSearch').submit();
                 $('.search-result').hide(); 

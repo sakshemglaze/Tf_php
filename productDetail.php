@@ -17,8 +17,8 @@
             // Split the URL by "/"
             $parts = explode("/", $currentUrl);
 
-            $name = end($parts);
-           
+            $id = end($parts);
+            $name = prev($parts);
             require_once 'post.php';
         $data =  get(
                 'api/guest/products/'.$name, 

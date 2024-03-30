@@ -67,7 +67,7 @@ else{
 
     //print_r($subcategory->subCategoryName);
             $payload = array(
-                'searchText' => $subcategory->subCategoryName ,
+                'searchText' => strtolower($subcategory->subCategoryName) ,
                 'searchTextType' => 'subcategory',
                 'filterDto' => $filterDto
             );  
@@ -297,13 +297,22 @@ if (isset($category )&&isset($subcategory->shortDescription) && $subcategory->sh
   echo '<div class="two-line-containers">';
   $shortDescription = $subcategory->shortDescription;
   //$shortenedDescription = substr($shortDescription, 0, 400);
-  
-  if (strlen($shortDescription) >= 400) {
-      echo '<a href="javascript:void(0);" onclick="toggleDescription()"><div id="short-desc" style="display: inline;">' . $shortDescription . '</div></a>';
-      echo '<div id="full-desc" style="display: none;">' . $shortDescription . '<span style="color:brown;">&nbsp;<b><a href="javascript:void(0);" onclick="toggleDescription()"> View less</a></b></span></div>';
-  } else {
-    echo '<div id="full-desc" style="display: inline;">' . $shortDescription . '</div>';
-  }
+    $shortDesc = 400;
+ 
+    if(strlen($shortDescription) > $shortDesc) {
+        $shortDescription = substr($shortDescription, 0, $shortDesc);
+        $showMore = true; 
+    } else {
+        $showMore = false; 
+    }
+
+    echo '<div>';
+    echo '<span>' . $shortDescription . '</span>';
+    if($showMore) {
+      echo '<span class="view-more" style="color: brown; position: absolute;">&nbsp;<b><a href="javascript:void(0)" >... View more</a></b></span>';
+    }
+    echo '</div>';
+
   echo '</div>';
   } ?>
 <br>
@@ -363,6 +372,7 @@ if (isset($category )&&isset($subcategory->shortDescription) && $subcategory->sh
                            <?php
                            if($data->sponsoredProduct!=null){
                           $premiumprod=$data->sponsoredProduct;
+                          //print_r($premiumprod);
                         include_once "premiumProd.php";
                            }
                            //print_r($data);
