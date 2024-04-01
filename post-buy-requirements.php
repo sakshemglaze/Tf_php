@@ -65,13 +65,13 @@ fetch(url, {
     .then(function (data) {
         console.log(data);
         if(confirm('Your Request is submitted successfully!! Please click OK.')) {
-        window.open('/post-buy-requirements');
+        window.location.href = '/post-buy-requirements';
     }
     })
     .catch(function (error) {
         console.log(error);
         if(confirm('Your Request is not submitted !!! Due To some issue Please click OK.')) {
-       
+          window.location.href = '/';
         }
     });
   console.log(payload);

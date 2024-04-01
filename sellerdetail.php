@@ -454,14 +454,12 @@ $aproodproduct1 = json_decode($aproodproduct);
                         <h4 class="text-uppercase mb-4 fwbold fs-4">
                           Tell us about your requirement
                         </h4>
-                        <form *ngIf="this.requirementService.prodDetailFrom"
-                          [ngClass]="!this.requirementService.isFormvalid?'was-validated':''"
-                          [formGroup]="this.requirementService.prodDetailFrom">
+                        <form method="post" id="postBuyreq">
                           <div class="row">
 
                             <div class="col-lg-6">
                               <label for="" class="form-label fs-5">Describe in few words *</label>
-                              <textarea name="" formControlName="description" class="form-control" id="" cols="30"
+                              <textarea name="" name="description" class="form-control" id="" cols="30"
                                 rows="6"
                                 placeholder="Please include product name, order quantity, usage, special request if any in your inquiry."></textarea>
                               <!--<button class="p-0 text-blue bg-transparent border-0 mt-3 fs-6">
@@ -473,20 +471,20 @@ $aproodproduct1 = json_decode($aproodproduct);
                               <div class="row gy-4">
                                 <div class="col-lg-6">
                                   <label for="" class="form-label  fs-4">Email ID *</label>
-                                  <input type="text" formControlName="enquirerEmail" class="form-control"
+                                  <input type="text" name="enquirerEmail" class="form-control"
                                     placeholder="Email ID" />
                                 </div>
                                 <div class="col-lg-6">
                                   <label for="" class="form-label  fs-4">Mobile Number*</label>
                                   <div class="input-group">
-                                  <select formControlName="countryCode" class="form-control mxw-50">
+                                  <select name="countryCode" class="form-control mxw-50">
                                           
                                           <option value="+971">+971 - United Arab Emirates.</option>
                  <option value="+91">+91 - India</option>
                                   </select>
                                     <!--</div>
                                <div class="col-lg-6">-->
-                                    <input type="text" formControlName="mobileNo" class="form-control"
+                                    <input type="text" name="mobileNo" class="form-control"
                                       placeholder="Mobile number" width="" />
                                   </div>
                                 </div>
@@ -499,9 +497,8 @@ $aproodproduct1 = json_decode($aproodproduct);
                                         class="text-decoration-underline">terms and conditions</a>
                                     </label>
                                   </div>
-                                  <!-- <app-loadp *ngIf="this.requirementService.spannerval"
-                                    style="height: 50%; width: 100%; margin-left: -5px;"></app-loadp> -->
-                                    <button (click)="this.requirementService.onClickSubmitRequirement()"
+                                  
+                                    <button 
                                     class="btn-primary-gradiant custom-button-style">
                                 Requirement
                             </button>
@@ -512,6 +509,9 @@ $aproodproduct1 = json_decode($aproodproduct);
                             </div>
                           </div>
                         </form>
+
+
+                        
                         <div class="col-lg-12">
                           <div class="card shadow-sm mt-5 br_right bg-light">
                             <div class="card-body text-center">
