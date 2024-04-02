@@ -15,7 +15,7 @@
               );
               $data1 = json_decode($data);
              // $data = findActive($data1);
-             //print_r($data1);
+            //print_r($data->linkedinUrl);
               
 $aproodproduct=get(
   'api/guest/products/by-seller/' . $data1[0]->id,
@@ -155,7 +155,7 @@ $aproodproduct1 = json_decode($aproodproduct);
                       
                 </div>
                 <div class="col-lg-6">
-                  <button onclick="openPopup()"
+                  <button onclick="openPopup1()"
                     class="btn-outline-gradiant btn py-2  btn-sm w-100 text-black">
                     <img src="<?php echo BASE_URL?>assets/images/mail-solid.png" alt="mail" /> Send Inquiry
                   </button>
@@ -169,25 +169,26 @@ $aproodproduct1 = json_decode($aproodproduct);
                   <ul class="d-flex gap-2 justify-content-center mt-0">
                 <?php if (isset($data1[0]->twitterLink) && $data1[0]->twitterLink != '') :?>
                     <li>
-                      <a href="/<?php echo $data1[0]->twitterLink ?>" aria-label="Twitter">
+                      <a href="<?php echo $data1[0]->twitterLink ?>" aria-label="Twitter">
                         <img src="<?php echo BASE_URL?>assets/images/twitter.webp" width="40" alt="X" />
                       </a>
                     </li>
                     <?php endif;
                     if (isset($data1[0]->facebookLink) && $data1[0]->facebookLink != ''): ?>
                     <li>
-                      <a href="/<?php echo $data1[0]->facebookLink ?>" aria-label="Facebook">
+                      <a href="<?php echo $data1[0]->facebookLink ?>" aria-label="Facebook">
                           <img src="<?php echo BASE_URL?>assets/images/facebook.webp" width="40" alt="facebook" />
                       </a>
                   </li>
                   <?php endif; 
                   if (isset($data1[0]->instagramLink) && $data1[0]->instagramLink != '') :?>
                     <li>
-                      <a href="/<?php echo $data1[0]->instagramLink ?>" aria-label="Instagram">
+                      <a href="<?php echo $data1[0]->instagramLink ?>" aria-label="Instagram">
                         <img src="<?php echo BASE_URL?>assets/images/instagram.webp" width="40" alt="instagram" />
                       </a>
                     </li>
                    <?php endif; ?> 
+                   
                   </ul>
                 </div>
               </div>
@@ -564,7 +565,7 @@ $aproodproduct1 = json_decode($aproodproduct);
 
 <script>
   // Function to open the popup card
-  function openPopup() {
+  function openPopup1() {
 
     document.getElementById("popup-card").style.display = "block";
   }

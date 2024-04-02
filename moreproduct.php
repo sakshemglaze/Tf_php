@@ -25,7 +25,7 @@
                     class="border-bottom-1 text-blue"> <?php echo $product->productName ?>
                 </a></h3> </div>
                 <hr />
-                <button (click)="openPostRequirement(product.productName)"  class="btn-outline-gradiant btn btn-sm mt-1" >
+                <button onclick="openPopup1()"  class="btn-outline-gradiant btn btn-sm mt-1" >
                     <img src="assets/images/mail-solid.png" alt="enquiry" /> Send Enquiry
                 </button>
             </div>

@@ -201,7 +201,7 @@
 <!-- JavaScript code -->
 <script>
   // Function to open the popup card
-  function openPopup() {
+  function openPopup1() {
     document.getElementById("popup-card").style.display = "block";
   }
 </script>

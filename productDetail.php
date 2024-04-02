@@ -61,7 +61,7 @@
                 $maskedService = new MaskingService();
 
   ?>
-  
+      <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css" >
 </head>
 <body>
 <script src="<?php echo BASE_URL; ?>assets/js/lazy-load.js"></script>
@@ -195,11 +195,12 @@
                         class="whatsappbtn btn btn-sm w-100" target="_blank">
                         Connect on whatsapp
                       </a>
-                      <button (click)="openPostRequirement(prodDetails.productName)"
+                      <button onclick="openPopup1()"
                         class="btn-outline-gradiant btn btn-sm w-100">
                         <img src="assets/images/mail-solid.png" alt="mail" /> Send
                         Inquiry
                       </button>
+
                     </div>
                   </div>
                 </div>
@@ -211,6 +212,18 @@
     </div>
   </div>
 </section>
+<?php
+ include_once 'enquery.php';
+ ?>
+</section>
+
+<script>
+  // Function to open the popup card
+  function openPopup1() {
+
+    document.getElementById("popup-card").style.display = "block";
+  }
+</script>
 <section class="bg-grey4 mt-5 py-4">
   <div class="container-fluid">
     <div class="row gy-4">
@@ -582,7 +595,7 @@ function sendOtp($contenctNo,$formdata){
   //isWhatsapp ? { type: 'whatsapp' } : {type: 'email'},
   array("type"=> 'WHATSAPP'),
   false);
-  //print_r($data123->title);
+  print_r($contenctNo);
   if(isset($data123->title)&& $data123->title=='ContactNo not Valid.'){
    
     echo "<script>
@@ -619,6 +632,33 @@ function sendOtp($contenctNo,$formdata){
  print_r($contenctNo);
  $respons=sendOtp($contenctNo,$formdata);
 
+  }else if(isset($_POST['productName'])){
+    $productName = $_POST['productName'];
+    $quantity = $_POST['quantity'];
+    $quantityUnit = $_POST['quantityUnit'];
+    $requirement = $_POST['requirement'];
+    $frequencytype = $_POST['frequencytype'];
+    $countryCode = $_POST['countryCode'];
+    $contactNumber = $_POST['contactNumber'];
+    
+    $formdata = array(
+      'enquirerContactNumber' => $countryCode . $contactNumber,
+      'enquiryMessage' => $requirement,
+      'productName' => $productName,
+      'quantity' => $quantity,
+      'unit' => $quantityUnit,
+      'status' => 'New',
+      'frequencytype' => $frequencytype
+    );
+  
+  //echo "Form submitted successfully!";
+  // echo $productName;
+  // header("Location: post-buy-requirements");
+  $contenctNo=$countryCode.$contactNumber;
+  include_once 'post.php';
+  //print_r($contenctNo);
+  $respons=sendOtp($contenctNo,$formdata);
+  
   }
 
 } else {

@@ -556,7 +556,7 @@ $respons=sendOtp($contenctNo,$formdata);
 
 } else {
 
-  echo "Error: Form not submitted!";
+ 
 }
 ?>
 

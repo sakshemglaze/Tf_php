@@ -1,10 +1,10 @@
 <?php include_once 'config.php'; ?>
-<div id="popup-card" class="popup-card">
+<div id="popup-card" class="popup-card" style="display: none;">
 
 
 <section class="bg-gradiant1 login-title text-center text-white fwbold pb100">
     <div class="container">
-        <button type="button" class="btn-close float-end mt-1" aria-label="Close" onclick="closePopup();"></button>
+        <button type="button" class="btn-close float-end mt-1" aria-label="Close" onclick="closePopup1();"></button>
         <span class="fs-3 pt20">Let Us know What you Need</span>
         <p class="mt-0 mb-0 ">Tell us your requirement. Get Instant quotes from Verified Sellers</p>
 
@@ -163,7 +163,8 @@
 </div>
 <script>
  
-  function closePopup() {
+  function closePopup1() {
     document.getElementById("popup-card").style.display = "none";
   }
 </script>
+

@@ -56,7 +56,7 @@ function submitform(){
 
     <div class="input-group input-group-lg w-100 position-relative ms-auto mw-600 order-3 order-md-2 mt-md-0">
           <input  autofocus type="text" class="form-control " id="search" name="searchText"  placeholder="What are you looking for.."
-                  style="height: 45px; border-top-right-radius: 10px; border-bottom-right-radius: 10px;" autocomplete="off" value="<?php echo $searchtext12;?>">
+                  style="height: 45px; border-top-right-radius: 10px; border-bottom-right-radius: 10px;" autocomplete="off" >
 
           <div class="submit-button">
            

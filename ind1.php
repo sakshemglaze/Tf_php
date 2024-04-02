@@ -17,7 +17,8 @@ include_once 'config.php';
         $data =  get('api/industries'.'?size=' . $size . '&page=' . $page . '&sort=industryName,asc',true );
              //$data1 = json_decode($data);
              $data1 = array_filter(json_decode($data), function($record) {
-                return $record->status == 'true'; });
+                return $record->status != 'false' && isset($record->categoryName) && $record->categoryName != '' && $record->id !=''; });
+                
              // $data = findActive($data1);
              // print_r($data);
 
