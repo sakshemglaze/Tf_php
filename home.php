@@ -409,18 +409,7 @@ fetch(url, {
                         console.error(xhr.responseText);
                     }
                 });
-      //this.verifyRequestProcessing = false;
-    
-      //var that = this;
-      // setTimeout(function () { that.authService.authenticateUser(); }, 3000);
-      // this.messageService.add({
-      //   severity: "success",
-      //   summary:
-      //     'Otp verified successfully.',
-      // });
-      // this.dialogRef.close();
-      // this.modalService.dismissAll();
-      // this._router.navigate(['/']);
+      
     }
     function otpRegister(otpAuthData, mobileNumber,formdata){
      

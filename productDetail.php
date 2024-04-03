@@ -126,7 +126,7 @@
 
          <!--     <app-ratings *ngIf="prodDetails" [rate]="prodDetails.rating"></app-ratings>-->
               <div class="text-center mt-4">
-                <button (click)="openPostRequirement(prodDetails.productName)"
+                <button onclick="openPopup1()"
                   class="btn-primary-gradiant rounded-2 py-2 lh-1 px-4">
                   <span class="fwbold fs-4"> Get Latest Price</span>
                   <small class="d-block">Request a quote</small>
@@ -177,6 +177,7 @@
                       </a> -->
                     </div>
                     <div class="d-flex align-items-center flex-wrap mt-3">
+                      
                       <div class="d-flex align-items-center me-3">
                         <img src="<?php echo BASE_URL; ?>assets/images/crown.png" class="me-1" alt="premium" />
                         <span>Premium Supplier</span>

@@ -45,7 +45,7 @@
                                     "Umm Al Quwain",
                                 );
                                ?>
-                                <select area-label="state" name="location" formControlName="location" id="locationSelect"   class="form-select no-border" >
+                                <select area-label="state" name="location" formControlName="location" id="locationSelect"   class="form-select no-border" style="border: hidden;">
                                     <!-- class="form-select no-border" (change)="onChangeLocation(locationSelect.value)"> -->
                                      <?php
                                      foreach($areas as $area){

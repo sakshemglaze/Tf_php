@@ -157,15 +157,13 @@ Note: Add a relevant name to get a relevant product in the search result.
                     1. How to search for Sellers on TradersFind.Com?
                   </button>
                 </h2>
-                <div id="collapse21" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                <div id="collapse21" class="accordion-collapse collapse show" data-bs-parent="#accordionExample1">
                   <div class="accordion-body">
                     TradersFind has a vast database of thousands of suppliers. To connect with a genuine supplier, You can check the verification status or Trust stamp of the supplier.
                   </div> 
                 </div>
                </div> 
-              </div>
-
-              <div class="accordion faqaccor" id="accordionExample">
+            
                <div class="accordion-item">
                 <h2 class="accordion-header">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -173,15 +171,13 @@ Note: Add a relevant name to get a relevant product in the search result.
                     2. What do you mean by Trust Stamp?
                   </button>
                 </h2>
-                <div id="collapse22" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div id="collapse22" class="accordion-collapse collapse" data-bs-parent="#accordionExample1">
                   <div class="accordion-body">
                     A trust stamp issued by TradersFind to its members whose business details and documents have been verified by our team. It is based upon the verified record of certified documents pertaining to the proof of existence, legal status, statutory approvals, affiliations and quality certifications. This stamp helps to find the right supplier or seller.
                   </div> 
                 </div>
                </div> 
-              </div>
-
-              <div class="accordion faqaccor" id="accordionExample">
+          
                <div class="accordion-item">
                 <h2 class="accordion-header">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -189,15 +185,13 @@ Note: Add a relevant name to get a relevant product in the search result.
                     3. Why should I trust the sellers with Trust Stamp?
                   </button>
                 </h2>
-                <div id="collapse23" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div id="collapse23" class="accordion-collapse collapse" data-bs-parent="#accordionExample1">
                   <div class="accordion-body">
                     Those sellers who have taken the paid membership package get the Trust Stamp. Moreover, all the details of the sellers with the Trust stamp have been verified by the team of TradersFind.
                   </div> 
                 </div>
                </div> 
-              </div>
-
-              <div class="accordion faqaccor" id="accordionExample">
+        
                <div class="accordion-item">
                 <h2 class="accordion-header">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -205,7 +199,7 @@ Note: Add a relevant name to get a relevant product in the search result.
                     4. How to search suppliers by location?
                   </button>
                 </h2>
-                <div id="collapse24" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div id="collapse24" class="accordion-collapse collapse" data-bs-parent="#accordionExample1">
                   <div class="accordion-body">
                     <ul style="list-style-type: disc;">
                       <li>To search for a supplier based on location, you need to use the search bar and enter the product/services name you are looking for. </li>
@@ -215,9 +209,7 @@ Note: Add a relevant name to get a relevant product in the search result.
                   </div> 
                 </div>
                </div> 
-              </div>
-
-              <div class="accordion faqaccor" id="accordionExample">
+          
                <div class="accordion-item">
                 <h2 class="accordion-header">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -225,7 +217,7 @@ Note: Add a relevant name to get a relevant product in the search result.
                     5. How to search by company name?
                   </button>
                 </h2>
-                <div id="collapse25" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div id="collapse25" class="accordion-collapse collapse" data-bs-parent="#accordionExample1">
                   <div class="accordion-body">
                     <ul style="list-style-type: disc;">
                     <li>Enter the name of the company in the search box and click 'Search'. </li>
@@ -238,22 +230,21 @@ Note: Add a relevant name to get a relevant product in the search result.
           </div>
           <div class="tab-pane fade" id="v-pills-buying-methods">
             <div class="fs-3 text-dark  fwbold fw-bold px-md-3">Buying Method</div>
-              <div class="accordion faqaccor" id="accordionExample">
+              <div class="accordion faqaccor" id="accordionExample2">
                <div class="accordion-item">
                 <h2 class="accordion-header">
                   <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse31">
                     1. How do I find sellers for my buying requirement? 
                   </button>
                 </h2>
-                <div id="collapse31" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                <div id="collapse31" class="accordion-collapse collapse show" data-bs-parent="#accordionExample2">
                   <div class="accordion-body">
                     TradersFind.Com makes things easy for all the buyers to find the right sellers for their buying requirements. All you need to do is post your buying requirement and you will be contacted by the top sellers of those products.
                   </div> 
                 </div>
                </div> 
-              </div>
+           
 
-              <div class="accordion faqaccor" id="accordionExample">
                <div class="accordion-item">
                 <h2 class="accordion-header">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -261,15 +252,13 @@ Note: Add a relevant name to get a relevant product in the search result.
                     2. What is a Buying Lead?
                   </button>
                 </h2>
-                <div id="collapse32" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div id="collapse32" class="accordion-collapse collapse" data-bs-parent="#accordionExample2">
                   <div class="accordion-body">
                   The buying requirement that you post on TradersFind.Com is called your buying lead.
                   </div> 
                 </div>
                </div> 
-              </div>
-
-              <div class="accordion faqaccor" id="accordionExample">
+        
                <div class="accordion-item">
                 <h2 class="accordion-header">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -277,7 +266,7 @@ Note: Add a relevant name to get a relevant product in the search result.
                     3. How do I post a Buying Lead?
                   </button>
                 </h2>
-                <div id="collapse33" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div id="collapse33" class="accordion-collapse collapse" data-bs-parent="#accordionExample2">
                   <div class="accordion-body">
                     <ul style="list-style-type:square">
                       <li>On the homepage of ‘TradersFind’, go to the ‘Post Your Requirement’ section. Here, add the product name, estimated quantity, unit, and description to post your buy requirement.</li>
@@ -286,9 +275,7 @@ Note: Add a relevant name to get a relevant product in the search result.
                   </div> 
                 </div>
                </div> 
-              </div>
-
-              <div class="accordion faqaccor" id="accordionExample">
+           
                <div class="accordion-item">
                 <h2 class="accordion-header">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -296,15 +283,13 @@ Note: Add a relevant name to get a relevant product in the search result.
                     4. Do I need to register on TradersFind.com to post my requirement?
                   </button>
                 </h2>
-                <div id="collapse34" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div id="collapse34" class="accordion-collapse collapse" data-bs-parent="#accordionExample2">
                   <div class="accordion-body">
                     No, registration is not mandatory for buyers to post their buying requirement on TradersFind.com.
                   </div> 
                 </div>
                </div> 
-              </div>
-
-              <div class="accordion faqaccor" id="accordionExample">
+          
                <div class="accordion-item">
                 <h2 class="accordion-header">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -312,15 +297,14 @@ Note: Add a relevant name to get a relevant product in the search result.
                     5. Is it compulsory to register on TradersFind.Com to contact sellers?
                   </button>
                 </h2>
-                <div id="collapse35" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div id="collapse35" class="accordion-collapse collapse" data-bs-parent="#accordionExample2">
                   <div class="accordion-body">
                     No, Registration is not mandatory to contact any seller. You just have to enter your contact information each time you send an enquiry to a seller. 
                     However, registering on the website can expedite the entire process. Once you have   completed registration, you can view contact information and send enquiries without  having to enter your contact information each time you try to view contact or send enquiry.
                   </div> 
                 </div>
                </div> 
-              </div>
-              <div class="accordion faqaccor" id="accordionExample">
+           
                <div class="accordion-item">
                 <h2 class="accordion-header">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -328,7 +312,7 @@ Note: Add a relevant name to get a relevant product in the search result.
                     6. Benefits of posting a Buying Lead.
                   </button>
                 </h2>
-                <div id="collapse36" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div id="collapse36" class="accordion-collapse collapse" data-bs-parent="#accordionExample2">
                   <div class="accordion-body"> <ul style="list-style-type: disc;">
                     <li>Time and Effort Saving</li>
                     <li>Connect with Verified Sellers</li>
@@ -338,9 +322,7 @@ Note: Add a relevant name to get a relevant product in the search result.
                   </div> 
                 </div>
                </div> 
-              </div>
-
-              <div class="accordion faqaccor" id="accordionExample">
+            
                <div class="accordion-item">
                 <h2 class="accordion-header">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -348,7 +330,7 @@ Note: Add a relevant name to get a relevant product in the search result.
                     7. What are the benefits of registering as a buyer on ‘TradersFind’?
                   </button>
                 </h2>
-                <div id="collapse75" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div id="collapse75" class="accordion-collapse collapse" data-bs-parent="#accordionExample2">
                   <div class="accordion-body">
                     TradersFind is a platform that connects buyers and sellers. By registering as a buyer on TradersFind, you can enjoy various benefits, including:
                     <ul><li>
@@ -357,9 +339,7 @@ Note: Add a relevant name to get a relevant product in the search result.
                   </div> 
                 </div>
                </div> 
-              </div>
-
-              <div class="accordion faqaccor" id="accordionExample">
+            
                <div class="accordion-item">
                 <h2 class="accordion-header">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -367,7 +347,7 @@ Note: Add a relevant name to get a relevant product in the search result.
                     8. How many Buying Leads can I post?
                   </button>
                 </h2>
-                <div id="collapse85" class="accordion-collapse" data-bs-parent="#accordionExample">
+                <div id="collapse85" class="accordion-collapse" data-bs-parent="#accordionExample2">
                   <div class="accordion-body">
                     There is no limit to the number of buying leads you can post. Feel free to post as many buying leads as you need to fulfill your requirements.
                   </div> 
@@ -379,7 +359,7 @@ Note: Add a relevant name to get a relevant product in the search result.
 
           <div class="tab-pane fade" id="v-pills-requirement-steps">
              <div class="fs-3 text-dark  fwbold fw-bold px-md-3">Post Requirement Steps</div>
-              <div class="accordion faqaccor" id="accordionExample">
+              <div class="accordion faqaccor" id="accordionExample3">
                <div class="accordion-item">
                 <h2 class="accordion-header">
                   <button class="accordion-button" type="button" data-bs-toggle="collapse"
@@ -387,7 +367,7 @@ Note: Add a relevant name to get a relevant product in the search result.
                     1. What are the steps of posting a Requirement?
                   </button>
                 </h2>
-                <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample3">
                   <div class="accordion-body">
                     <ul  style="list-style-type:square">
                      <li>On the homepage of ‘TradersFind’, go to the ‘Post Your Requirement’ section. Here, add the product name, estimated quantity, unit, and description to post your buy requirement. </li>
@@ -396,9 +376,7 @@ Note: Add a relevant name to get a relevant product in the search result.
                   </div> 
                 </div>
                </div> 
-              </div>
-
-              <div class="accordion faqaccor" id="accordionExample">
+              
                <div class="accordion-item">
                 <h2 class="accordion-header">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -406,7 +384,7 @@ Note: Add a relevant name to get a relevant product in the search result.
                     2. What is the use of adding a product description?
                   </button>
                 </h2>
-                <div id="collapse2" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div id="collapse2" class="accordion-collapse collapse" data-bs-parent="#accordionExample3">
                   <div class="accordion-body">
                     The product name plays an important role in generating valuable business leads because it 
                     is displayed to buyers in search results on TradersFind. When the product name is accurate 
@@ -415,9 +393,7 @@ Note: Add a relevant name to get a relevant product in the search result.
                   </div> 
                 </div>
                </div> 
-              </div>
-
-              <div class="accordion faqaccor" id="accordionExample">
+            
                <div class="accordion-item">
                 <h2 class="accordion-header">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -425,15 +401,13 @@ Note: Add a relevant name to get a relevant product in the search result.
                     3. What are product attributes? When can I add them?
                   </button>
                 </h2>
-                <div id="collapse3" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div id="collapse3" class="accordion-collapse collapse" data-bs-parent="#accordionExample3">
                   <div class="accordion-body">
                     Product attributes are the details or specifications that you can include_once in your product to make it more descriptive and attract sellers who are interested in it.
                   </div> 
                 </div>
                </div> 
-              </div>
-
-              <div class="accordion faqaccor" id="accordionExample">
+          
                <div class="accordion-item">
                 <h2 class="accordion-header">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -441,15 +415,13 @@ Note: Add a relevant name to get a relevant product in the search result.
                     4. How can I receive responses or proposals from suppliers?
                   </button>
                 </h2>
-                <div id="collapse4" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div id="collapse4" class="accordion-collapse collapse" data-bs-parent="#accordionExample3">
                   <div class="accordion-body">
                     Once you post a requirement on TradersFind, suppliers who match your criteria will be notified. They can then submit their proposals or quotes directly through the portal. You will receive these responses via email, depending on your notification settings.
                   </div> 
                 </div>
                </div> 
-              </div>
-
-              <div class="accordion faqaccor" id="accordionExample">
+            
                <div class="accordion-item">
                 <h2 class="accordion-header">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -457,7 +429,7 @@ Note: Add a relevant name to get a relevant product in the search result.
                     5. How long does it take to receive responses from suppliers after posting a requirement?
                   </button>
                 </h2>
-                <div id="collapse5" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div id="collapse5" class="accordion-collapse collapse" data-bs-parent="#accordionExample3">
                   <div class="accordion-body">
                     The time it takes to receive responses from suppliers may vary depending on various factors, including the nature of your requirement, the industry, and the urgency of your request. Typically, you can expect to receive responses within a few hours.
                   </div> 
