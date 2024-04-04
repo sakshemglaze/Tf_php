@@ -122,7 +122,7 @@
       </div>
     </div>
     <p class="text-white mt-2 ms-xl-5 mb-1 text-center">
-      Copyright &copy; 2023 Interconnect Marketing Management L.L.C All rights reserved.
+      Copyright &copy; 2024 Interconnect Marketing Management L.L.C All rights reserved.
     </p>
   </footer>
   

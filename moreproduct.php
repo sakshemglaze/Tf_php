@@ -13,7 +13,9 @@
               ?>
 
 <div class="row">
-    <?php foreach ($datap->products as $product): ?>
+    <?php
+    if(isset($datap->products)){
+     foreach ($datap->products as $product): ?>
     <div class="col-lg-3">
         <div class="card border-0 shadow-sm">
             <div class="card-body text-center">
@@ -31,5 +33,6 @@
             </div>
         </div>
     </div>
-    <?php endforeach; ?>
+    <?php endforeach; 
+    }?>
 </div>

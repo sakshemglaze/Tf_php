@@ -88,7 +88,7 @@
               <?php if ($data1 != null ) : ?>
               <div class="fotorama" data-nav="thumbs" data-thumbmargin="20" data-width="100%" data-allowfullscreen="true"
                  data-height="auto" data-ratio="800/600">
-                         <img class="rounded-10" src="https://doc.tradersfind.com/images/<?php echo $data1->images[0]->id; ?>.webp" alt="<?php echo $data1->productName ?>" width="240" height="240" >
+                         <img class="rounded-10" src="https://doc.tradersfind.com/images/<?php echo isset($data1->images[0]->id)?$data1->images[0]->id:''; ?>.webp" alt="<?php echo $data1->productName ?>" width="240" height="240" >
              </div>
              <?php endif; ?>
             </div>
@@ -101,7 +101,7 @@
                   <strong>Price:</strong> <?php echo $prodDetails['price']; ?>
                 <?php endif; ?>
                 <?php if (isset($data1->maxPrice) && (isset($data1->Price) == null || isset($data1->Price) == '')) : ?> 
-                <strong>Price:</strong><?php echo $data1.maxPrice; 
+                <strong>Price:</strong><?php echo $data1->maxPrice; 
                 endif; ?> 
 
                 <?php if (isset($data1->price) && isset($data1->price) != '' && isset($data1->maxPrice) && isset($data1->maxPrice) != '') : ?>  

@@ -45,28 +45,7 @@
                             </div>
                         </div>
                             <div class="col-md-7 position-relative p-3">
-                            <?php 
-                            $rating = 0;
-                            $rating = $prodData->rating;
-                            //include 'services/rating.php';  ?>
-                                <span class="verified2">
-        <?php if ($rating === 1) : ?>
-            <ul class=" d-flex">
-            <li><img src="<?php echo BASE_URL; ?>assets/images/level/l1.png" alt="Rating1" width="15" height="20"/></ul>
-        <?php elseif ($rating === 2) : ?>
-            <ul class=" d-flex" >
-            <li><img src="<?php echo BASE_URL; ?>assets/images/level/l2.png" alt="Rating2" width="15" height="20"/></ul>
-        <?php elseif ($rating === 3) : ?>
-            <ul class=" d-flex">
-            <li><img src="<?php echo BASE_URL; ?>assets/images/level/l3.png" alt="Rating3" width="15" height="20"/></ul>
-        <?php elseif ($rating === 4) : ?>
-            <ul class=" d-flex">
-            <li><img src="<?php echo BASE_URL; ?>assets/images/level/l4.png" alt="Rating4" width="15" height="20"/></ul>
-        <?php elseif ($rating === 5) : ?>
-            <ul class=" d-flex">
-            <li><img src="<?php echo BASE_URL; ?>assets/images/level/l5.png" alt="Rating5" width="15" height="20"/></ul>
-        <?php endif; ?>
-    </span>
+                         
     
                                     <div class="single-line">
                                     <a href="/<?php echo $urlService->getProductUrl(isset($prodData->productUrl)?$prodData->productUrl:$prodData->productName,$prodData->id) ?>" target="_blank" title="Product Page">
@@ -154,8 +133,29 @@
                            <?php echo $prodData->seller->Category; ?>
                           </span>
                              <?php } ?>
-                            </div>
-                                   
+                             <?php 
+                            $rating = 0;
+                            $rating = $prodData->rating;
+                            //include 'services/rating.php';  ?>
+                                <span class="verified2">
+        <?php if ($rating === 1) : ?>
+            <ul class=" d-flex">
+            <li><img src="<?php echo BASE_URL; ?>assets/images/level/l1.png" alt="Rating1" width="15" height="20"/></ul>
+        <?php elseif ($rating === 2) : ?>
+            <ul class=" d-flex" >
+            <li><img src="<?php echo BASE_URL; ?>assets/images/level/l2.png" alt="Rating2" width="15" height="20"/></ul>
+        <?php elseif ($rating === 3) : ?>
+            <ul class=" d-flex">
+            <li><img src="<?php echo BASE_URL; ?>assets/images/level/l3.png" alt="Rating3" width="15" height="20"/></ul>
+        <?php elseif ($rating === 4) : ?>
+            <ul class=" d-flex">
+            <li><img src="<?php echo BASE_URL; ?>assets/images/level/l4.png" alt="Rating4" width="15" height="20"/></ul>
+        <?php elseif ($rating === 5) : ?>
+            <ul class=" d-flex">
+            <li><img src="<?php echo BASE_URL; ?>assets/images/level/l5.png" alt="Rating5" width="15" height="20"/></ul>
+        <?php endif; ?>
+    </span>
+                            </div>    
                         </div>                        
                     </div>
                     <div class="row gx-2 mb-5 mt-1 gy-3 gy-md-2">
