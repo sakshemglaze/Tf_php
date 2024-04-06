@@ -1067,7 +1067,7 @@ textarea:focus {
 .verified2 {
     position: absolute;
     right: 8px;
-    top: 8px;
+    bottom: 0px;
 }
 
 .footer_img {
@@ -3098,6 +3098,7 @@ color :#000 !important}
     -o-transition: all .1s ease-in-out;
     width: 100%;
   }
+
   .img-size {
     width: 70% !important;
   }
