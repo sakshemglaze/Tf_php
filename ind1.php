@@ -17,10 +17,24 @@ include_once 'config.php';
         $data =  get('api/industries'.'?size=' . $size . '&page=' . $page . '&sort=industryName,asc',true );
              //$data1 = json_decode($data);
              $data1 = array_filter(json_decode($data), function($record) {
-                return $record->status != 'false' && isset($record->categoryName) && $record->categoryName != '' && $record->id !=''; });
-                
+              if($record->status != 'false' && count($record->productsCategories)>0){
+              //  print_r(count($record->productsCategories).'<br>');
+              foreach ($record->productsCategories as $category) {
+               
+                if ($category->status != 'false') {
+                  foreach ($category->productsSubcategories as $subcategory) {
+                    if($subcategory->status!='false'){
+                      return true; 
+                    }
+                  //print_r($category);
+                  }
+                }
+            }
+          }
+                return false; });
+          
              // $data = findActive($data1);
-             // print_r($data);
+             // print_r($data1);
 
               ?>
 <!DOCTYPE html>
@@ -66,6 +80,8 @@ include_once 'config.php';
   <?php
   $i = 0;
 foreach ($data1 as $category) {
+ if(count($category->productsCategories)>0){
+ // print_r($category->productsCategories);
    $i= $i + 1;
     echo '<div class="row  gy-4 bg-white">';
     echo '<div class="col-lg-12">';
@@ -83,9 +99,19 @@ foreach ($data1 as $category) {
       echo '<div class="col-lg-9">';
     //}
     echo '<div class="row gy-4">';
-    $filteredCategories = array_filter($category->productsCategories, function($record) {
-    return ($record->status == 'true' && count($record->productsSubcategories) > 0 ); });
+  $filteredCategories = array_filter($category->productsCategories, function($record) {
+    if ($record->status == 'true') {
+        foreach ($record->productsSubcategories as $subcategory) {
+            if ($subcategory->status != 'false') {
+                return true; // If any subcategory has status true, include the category
+            }
+        }
+    }
+    return false; // If category status is not true or no subcategory has status true, exclude the category
+});
+
     foreach (array_slice($filteredCategories, 0, 6) as $cat) {
+     // print_r($cat->productsSubcategories);
         echo '<div class="col-lg-4">';
         echo '<div class="d-flex align-items-center gap-2">';
         $catImage = IMAGE_URL . $cat->image->id . ".webp";
@@ -96,8 +122,9 @@ foreach ($data1 as $category) {
        // print_r($cat);
         $filteredSubCategories = array_filter($cat->productsSubcategories, function($record) {
           return $record->status == 'true'; });
-       // print_r($filteredSubCategories);
+       
         foreach (array_slice($filteredSubCategories, 0, 3) as $subcat) {
+         // print_r($filteredCategories);
             echo '<li><a href="' . $urlService->getCategoryUrl($subcat->subCategoryName, $subcat->id) . '" title="' . $subcat->subCategoryName . '">' . $subcat->subCategoryName . '</a></li>';
         }
         echo '<li><a href="' . $urlService->getGroupCategoryUrl($cat->categoryName, $cat->id) . '"> + View All</a></li>';
@@ -106,6 +133,7 @@ foreach ($data1 as $category) {
         echo '</div>';
         echo '</div>';
     }
+  
     echo '</div>';
     echo '</div>';
     echo '</div>';
@@ -136,6 +164,7 @@ foreach ($data1 as $category) {
     echo '</div>';
     echo '<br />';
     echo '<br />';
+        }
 }
 ?>
 <div class="row  gy-4 bg-white" id="industriesContainer"> </div>
@@ -197,9 +226,24 @@ include_once "footer.php";
         // Append new industries to the existing list
         // Assuming data1 is the array containing industries
         var filteredIndustries = newIndustries.filter(function(industry) {
-        return industry.status !== 'false'; });
+    if (industry.status !== 'false') {
+        for (var i = 0; i < industry.productsCategories.length; i++) {
+            var category = industry.productsCategories[i];
+            if (category.status !== 'false') {
+                for (var j = 0; j < category.productsSubcategories.length; j++) {
+                    var subcat = category.productsSubcategories[j];
+                    if (subcat.status !== 'false') {
+                      console.log("hello");
+                        return true;
+                    }
+                }
+            }
+        }
+    }
+    return false;
+});
         data1 = data1.concat(filteredIndustries);
-        // Update the current page
+       console.log(data1);
         document.getElementById('currentPage').value = nextPage;
         // Render the new industries on the page
         //console.log(filteredIndustries);
@@ -258,70 +302,89 @@ function renderIndustries(industries) {
     var categoriesRowDiv = document.createElement('div');
     categoriesRowDiv.classList.add('row', 'gy-4');
     //console.log(category.productsCategories);
+    var count = 0;
     var filteredCategories = category.productsCategories.filter(function(industry) {
     return industry.status === 'true'; });
     //console.log(filteredCategories);
     filteredCategories = shuffleArray(filteredCategories);
-    filteredCategories.slice(0, 6).forEach(function(cat) {
-      var categoryDiv = document.createElement('div');
-      categoryDiv.classList.add('col-lg-4');
-
-      var categoryImageDiv = document.createElement('div');
-      categoryImageDiv.classList.add('d-flex', 'align-items-center', 'gap-3');
-
-      var catImage = IMAGE_URL + cat.image.id + '.webp';
-      var categoryImageLink = document.createElement('a');
-      categoryImageLink.href = urlService.getGroupCategoryUrl(cat.categoryName, cat.id);
-
-      var categoryImage = document.createElement('img');
-      categoryImage.setAttribute('src', catImage);
-      categoryImage.classList.add('lazy','img-cat');
-      categoryImage.alt = 'Category';
-      //categoryImage.width = '140px';
-
-      categoryImageLink.appendChild(categoryImage);
-      categoryImageDiv.appendChild(categoryImageLink);
-
-      var categoryDetailsDiv = document.createElement('div');
-      categoryDetailsDiv.classList.add('inddetails');
-
-      var categoryTitle = document.createElement('h2');
-      categoryTitle.classList.add('fs-6', 'fwbold');
-      var categoryTitleLink = document.createElement('a');
-      categoryTitleLink.href = urlService.getGroupCategoryUrl(cat.categoryName, cat.id);
-      categoryTitleLink.title = cat.categoryName;
-      categoryTitleLink.textContent = cat.categoryName;
-      categoryTitle.appendChild(categoryTitleLink);
-
-      var subcategoriesUl = document.createElement('ul');
-      subcategoriesUl.classList.add('mt-4', 'text-black');
-      var filteredSubcategories = cat.productsSubcategories.filter(function(industry) {
-        return industry.status === 'true';});
-        filteredSubcategories.slice(0, 3).forEach(function(subcat) {
-        var subcategoryLi = document.createElement('li');
-        var subcategoryLink = document.createElement('a');
-        subcategoryLink.href = urlService.getCategoryUrl(subcat.subCategoryName, subcat.id);
-        subcategoryLink.title = subcat.subCategoryName;
-        subcategoryLink.textContent = subcat.subCategoryName;
-        subcategoryLi.appendChild(subcategoryLink);
-        subcategoriesUl.appendChild(subcategoryLi);
-      });
-
-      var viewAllLink = document.createElement('li');
-      var viewAllLinkAnchor = document.createElement('a');
-      viewAllLinkAnchor.href = urlService.getGroupCategoryUrl(cat.categoryName, cat.id);
-      viewAllLinkAnchor.textContent = '+ View All';
-      viewAllLink.appendChild(viewAllLinkAnchor);
-      subcategoriesUl.appendChild(viewAllLink);
-
-      categoryDetailsDiv.appendChild(categoryTitle);
-      categoryDetailsDiv.appendChild(subcategoriesUl);
-      categoryImageDiv.appendChild(categoryDetailsDiv);
-      categoryDiv.appendChild(categoryImageDiv);
-      //categoryDiv.appendChild(categoryDetailsDiv);
-
-      categoriesRowDiv.appendChild(categoryDiv);
+    filteredCategories.forEach(function(cat) {
+    var storecat = cat.productsSubcategories;
+    var hasTrueSubcat = storecat.some(function(subcat1) {
+        if (subcat1.status !== 'false') {
+            console.log("hyy from if");
+            count++; // Increment the counter
+            if (count <= 6){ return true
+            }
+            else{
+              return false;
+            }; 
+        } else {
+            console.log("hyy from else");
+            return false;
+        }
     });
+
+    if (hasTrueSubcat) {
+        var categoryDiv = document.createElement('div');
+        categoryDiv.classList.add('col-lg-4');
+
+        var categoryImageDiv = document.createElement('div');
+        categoryImageDiv.classList.add('d-flex', 'align-items-center', 'gap-3');
+
+        var catImage = IMAGE_URL + cat.image.id + '.webp';
+        var categoryImageLink = document.createElement('a');
+        categoryImageLink.href = urlService.getGroupCategoryUrl(cat.categoryName, cat.id);
+
+        var categoryImage = document.createElement('img');
+        categoryImage.setAttribute('src', catImage);
+        categoryImage.classList.add('lazy', 'img-cat');
+        categoryImage.alt = 'Category';
+
+        categoryImageLink.appendChild(categoryImage);
+        categoryImageDiv.appendChild(categoryImageLink);
+
+        var categoryDetailsDiv = document.createElement('div');
+        categoryDetailsDiv.classList.add('inddetails');
+
+        var categoryTitle = document.createElement('h2');
+        categoryTitle.classList.add('fs-6', 'fwbold');
+        var categoryTitleLink = document.createElement('a');
+        categoryTitleLink.href = urlService.getGroupCategoryUrl(cat.categoryName, cat.id);
+        categoryTitleLink.title = cat.categoryName;
+        categoryTitleLink.textContent = cat.categoryName;
+        categoryTitle.appendChild(categoryTitleLink);
+
+        var subcategoriesUl = document.createElement('ul');
+        subcategoriesUl.classList.add('mt-4', 'text-black');
+        var filteredSubcategories = cat.productsSubcategories.filter(function(subcat) {
+            return subcat.status === 'true';
+        });
+        filteredSubcategories.slice(0, 3).forEach(function(subcat) {
+            var subcategoryLi = document.createElement('li');
+            var subcategoryLink = document.createElement('a');
+            subcategoryLink.href = urlService.getCategoryUrl(subcat.subCategoryName, subcat.id);
+            subcategoryLink.title = subcat.subCategoryName;
+            subcategoryLink.textContent = subcat.subCategoryName;
+            subcategoryLi.appendChild(subcategoryLink);
+            subcategoriesUl.appendChild(subcategoryLi);
+        });
+
+        var viewAllLink = document.createElement('li');
+        var viewAllLinkAnchor = document.createElement('a');
+        viewAllLinkAnchor.href = urlService.getGroupCategoryUrl(cat.categoryName, cat.id);
+        viewAllLinkAnchor.textContent = '+ View All';
+        viewAllLink.appendChild(viewAllLinkAnchor);
+        subcategoriesUl.appendChild(viewAllLink);
+
+        categoryDetailsDiv.appendChild(categoryTitle);
+        categoryDetailsDiv.appendChild(subcategoriesUl);
+        categoryImageDiv.appendChild(categoryDetailsDiv);
+        categoryDiv.appendChild(categoryImageDiv);
+
+        categoriesRowDiv.appendChild(categoryDiv);
+    }
+});
+
 
     industryDetailsDiv.appendChild(categoriesRowDiv);
     industryDiv.appendChild(industryDetailsDiv);

@@ -17,7 +17,7 @@
     if(isset($datap->products)){
      foreach ($datap->products as $product): ?>
     <div class="col-lg-3">
-        <div class="card border-0 shadow-sm">
+        <div class="card border-0 shadow-sm" style="margin:10px">
             <div class="card-body text-center">
                 <span class="border1 p-3 text-center w-100 d-block rounded-10">
                  <img src="/image.php?image=<?php echo $product->images[0]->id?>" alt="<?php echo $product->productName ?>" width="140" />

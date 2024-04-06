@@ -177,15 +177,18 @@
                       </a> -->
                     </div>
                     <div class="d-flex align-items-center flex-wrap mt-3">
-                      
+                    <?php if($data1->seller->sellerTrustStamp==1):?>
                       <div class="d-flex align-items-center me-3">
                         <img src="<?php echo BASE_URL; ?>assets/images/crown.png" class="me-1" alt="premium" />
                         <span>Premium Supplier</span>
                       </div>
+                      <?php endif;?>
+                      <?php if($data1->seller->isVerifiedSeller==1):?>
                       <div class="d-flex align-items-center">
                         <img src="<?php echo BASE_URL; ?>assets/images/verifiedw2.png" alt="verified" class="me-1" />
 
                       </div>
+                      <?php endif;?>
                     </div>
                     <button class="btn btn-light mt-5 bg-white">
                       <img src="<?php echo BASE_URL; ?>assets/images/phone.png" width="15" alt="phone" />  
@@ -280,7 +283,7 @@
 
           <h3 class="fwbold mt-4 fs-3">Product Description</h3>
           <p >
-           <?php echo $data1->productDescription; ?> </p>
+           <?php print_r( $data1->productDescription); ?> </p>
         </div>
         <div class="tab-pane fade fs-5" id="pills-company" role="tabpanel" aria-labelledby="pills-company-tab"
           tabindex="0">

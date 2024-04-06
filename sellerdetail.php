@@ -375,24 +375,12 @@ fetch(url, {
                 <img src="<?php echo BASE_URL;?>assets/images/icon__6.png" alt="seller" class="me-3" />
                 <div class="text-start lh-sm">
                   <h3 class="text-black-50 mb-0 fs-4 fwbold">Service Area</h3>
-                  <span title="{{ seller.mainMarkets.join(', ') }}" *ngIf="
-                          seller.mainMarkets &&
-                          seller.mainMarkets.length>
-                      0 &&
-                      seller.mainMarkets[0] &&
-                      seller.mainMarkets[0] != ''
-                      "><?php echo implode(", ", $data1[0]->mainMarkets); ?>
-
+                  <span><?php if(isset($data1[0]->mainMarkets)):?><?php echo implode(", ", $data1[0]->mainMarkets); ?>
+                    <?php endif;?>
                   </span>
-                  <span title="{{ seller?.sellerState }}, {{ seller?.sellerCountry }}" *ngIf="
-                          !(
-                          seller.mainMarkets &&
-                          seller.mainMarkets.length>
-                      0 &&
-                      seller.mainMarkets[0] &&
-                      seller.mainMarkets[0] != ''
-                      )
-                      "><?php echo $data1[0]->sellerState.',' .$data1[0]->sellerCountry ;?>
+                  
+                  <span ><?php if(!isset($data1[0]->mainMarkets)):?><?php echo $data1[0]->sellerState.',' .$data1[0]->sellerCountry ; ?>
+                    <?php endif;?>
                   </span>
                 </div>
               </div>
@@ -404,7 +392,7 @@ fetch(url, {
                 <div class="text-start lh-sm">
                   <h3 class="text-black-50 mb-0 fs-4 fwbold">Map Location</h3>
                   <!--<app-map [longitude]="this.seller.coordinates[0]" [latitude]="this.seller.coordinates[1]"></app-map>-->
-                  <button (click)="openMap(this.seller.coordinates[1],this.seller.coordinates[0])"
+                  <button onclick="toggleMap()"
                     class="btn-outline-gradiant btn btn-sm w-100 d-center"> Click Here
                   </button>
                 </div>
@@ -454,20 +442,26 @@ fetch(url, {
                 <div class="fw mix-container home-gallery">
 
                 <?php foreach ( $aproodproduct1->products as $index => $product): ?>
+                  
     <div class="mix valves">
+       <?php if($product->isFeatured ):?>
+                    <img src="<?php echo BASE_URL; ?>assets/images/verifiedw2.png" alt="verified_image" width="80" height="30" />       
+                    <?php endif;?>
         <a href="<?php echo BASE_URL. $urlService->getProductUrl($product->productName,$product->id);?>" class="thumb-a">
             <div class="item-hover">
+      
                 <div class="hover-text">
                     <h3><?= $product->productName ?></h3>
                 </div>
             </div>
+            
             <div class="item-img">
                <img src="https://doc.tradersfind.com/images/<?php echo $product->images[0]->id; ?>.webp" alt="<?php echo $product->productName;?>" style="width: 140px;">
-                <!-- <img src="assets/images/products/valves.png" alt="seller" /> -->
-            </div>
+              </div>
         </a>
     </div>
-<?php endforeach; ?>
+<?php endforeach; 
+?>
 
 
 
@@ -498,6 +492,7 @@ fetch(url, {
               $longitude=$data1[0]->coordinates[1];
               }
               include_once "map.php";?>
+
               </div>
 
 
@@ -617,6 +612,14 @@ fetch(url, {
       </div>
     </div>
   </div>
+  <?php include_once 'map.php';?>
+  <script>
+        function toggleMap() {
+          console.log('bghjdbdfg');
+          document.getElementById("map-container").style.display = "block";
+        }
+    </script>
+  </script>
   <script>
               var lol='';
     var frequencytype=document.getElementsByName('frequencytype');

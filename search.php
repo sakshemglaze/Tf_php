@@ -115,7 +115,7 @@ else{
         //print_r("first if");
   }
   else if( $numParts==3 && basename($parts[1])=='search'){//will be change
-            $subcatName=basename($parts[2]);
+            $subcatName=str_replace('-',' ',basename($parts[2]));
             $subcategory = json_decode(get ( 'api/guest/products-subcategorie/' . $subcatName));
             $payload = array(
               'searchText' => isset($subcategory) ? $subcategory->subCategoryName : $subcatName ,
@@ -346,9 +346,11 @@ if (isset($category )&&isset($subcategory->shortDescription) && $subcategory->sh
                     echo' </li>';
                     }else{
                       $location1 = str_replace("-"," ",$location);
+                      if($state!='Other'){
                       echo'<li >';
                       echo '<a class="' . (strtolower($state) !== $location1 ? 'active' : '') . 'active" href="'.BASE_URL.$urlService->getSubCategoryLocUrl($category[0]->categoryName,$subcatName,$state,1) .'">'. $state .'</a>';
                       echo' </li>';
+                      }
                     }
                   };
                   ?>
@@ -374,18 +376,18 @@ if (isset($category )&&isset($subcategory->shortDescription) && $subcategory->sh
   var contactNumber=document.getElementById("contactNumber").value;
   
 //console.log(productname);
-        let payload = {
-          enquirerName: 'Atulyadav',
-          enquirerContactNumber: countryCode+contactNumber,
-          enquirerEmail:'atul@sakshemit.com',
-          enquiryMessage: requirement,
-          productName:productname,
-          quantity: quantity,
-          unit: Unit,
-          buyer: { id: '651266a6be013b38a26b35bf' },
-          status: 'New',
-          frequencytype: lol
-        }
+        // let payload = {
+        //   enquirerName: 'Atulyadav',
+        //   enquirerContactNumber: countryCode+contactNumber,
+        //   enquirerEmail:'atul@sakshemit.com',
+        //   enquiryMessage: requirement,
+        //   productName:productname,
+        //   quantity: quantity,
+        //   unit: Unit,
+        //   buyer: { id: '651266a6be013b38a26b35bf' },
+        //   status: 'New',
+        //   frequencytype: lol
+        // }
         document.getElementById("postBuyreq").reset();
 
        // formdata.frequencytype=lol;
@@ -416,7 +418,7 @@ fetch(url, {
           window.location.href =  window.location.href;
         }
     });
-  console.log(payload);
+  //console.log(payload);
   }
 </script>
 

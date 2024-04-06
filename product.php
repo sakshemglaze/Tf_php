@@ -71,7 +71,7 @@
                                                   <?php } ?>
                                              <?php } ?>
                                          </ul>
-                                         <a href="/<?php echo $urlService->getProductUrl($prodData->productName, $prodData->id)?>" title="Product Page" target="_blank" style="color: palevioletred;" > View more...</a>
+                                         <a href="/<?php echo $urlService->getProductUrl($prodData->productName, $prodData->id)?>" title="Product Page" target="_blank"  ><p style="color: palevioletred;">View more...</p> </a>
                                     </div>
 
 
@@ -135,6 +135,7 @@
                              <?php } ?>
                              <?php 
                             $rating = 0;
+                            if(isset( $prodData->rating)){
                             $rating = $prodData->rating;
                             //include 'services/rating.php';  ?>
                                 <span class="verified2">
@@ -153,7 +154,9 @@
         <?php elseif ($rating === 5) : ?>
             <ul class=" d-flex">
             <li><img src="<?php echo BASE_URL; ?>assets/images/level/l5.png" alt="Rating5" width="15" height="20"/></ul>
-        <?php endif; ?>
+        <?php endif;
+                            }
+         ?>
     </span>
                             </div>    
                         </div>                        
