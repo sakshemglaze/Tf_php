@@ -21,9 +21,10 @@
             $name = prev($parts);
             require_once 'post.php';
         $data =  get(
-                'api/guest/products/'.$name, 
+                'api/guest/products/'.$name.'/'.$id, 
                 true
               );
+              //print_r($data);
               $data1 = json_decode($data);
               //$data = findActive($data1);
               //print_r($data1->seller->logo->id);

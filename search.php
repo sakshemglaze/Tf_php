@@ -73,17 +73,23 @@ else{
             );  
             
             $queryParams= array('page'=> $page, 'size'=> $size) ;          
-            $data =  post(
+            $data1 =  postforprod(
               'api/new-search-products',
               $payload,
               true,
               $queryParams,
               false
             );
-        if($data->sponsoredProduct!=null){
-            $length=count(($data->products))+1;
+           
+           $data=$data1['data'];
+           $totallength=$data1['xTotalCount'];
+          // print_r(gettype($data));
+           //print_r($data);
+
+        if($data['sponsoredProduct']!=null){
+            $length=count(($data['products']))+1;
         }else{
-              $length = count(($data->products));
+              $length = count(($data['products']));
           }
     //print_r($data);
 
@@ -125,15 +131,16 @@ else{
         
           $queryParams= array('page'=> $page, 'size'=> $size) ;
         
-          $data =  post(
+          $data1 =  postforprod(
             'api/new-search-products',
             $payload,
             true,
             $queryParams,
             false
           );
-          
-            $length = count(($data->products));
+          $data=$data1['data'];
+          $totallength=$data1['xTotalCount'];
+           // $length = count(($data->products));
            //print_r('Welcome search 3');
           }else if(basename($parts[1])=='search' && $numParts==4 ){//will change
             $subcatName=basename($parts[2]);
@@ -147,15 +154,16 @@ else{
         
           $queryParams= array('page'=> $page, 'size'=> $size) ;
         
-          $data =  post(
+          $data1 =  postforprod(
             'api/new-search-products',
             $payload,
             true,
             $queryParams,
             false
           );
-          
-            $length = count(($data->products));
+          $data=$data1['data'];
+          $totallength=$data1['xTotalCount'];
+           // $length = count(($data->products));
             //print_r('Welcome search 1 4');
           }
          
@@ -171,15 +179,16 @@ else{
             //print_r($payload);
             $queryParams= array('page'=> $page, 'size'=> $size) ;
           
-            $data =  post(
+            $data1 =  postforprod(
               'api/new-search-products',
               $payload,
               true,
               $queryParams,
               false
             );
-            
-              $length = count(($data->products));              
+            $data=$data1['data'];
+            $totallength=$data1['xTotalCount'];
+              //$length = count(($data->products));              
                 //print_r($subcategory);
               $category = json_decode(get(
                 'api/guest/products-categories-na/' . $subcategory->title, $queryParams
@@ -208,10 +217,10 @@ $SeoParams = [
           ];
   //print_r("else");
           }
-         if ($length == 0) {
-                header("Location: /not-found.php");
-                exit();
-              }
+        //  if ($length == 0) {
+        //         header("Location: /not-found.php");
+        //         exit();
+        //       }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -289,7 +298,7 @@ $SeoParams = [
     echo '<span> in ' . str_replace("-"," " ,$location);
   } ?>
   </h1>
-  <small class="fwbold">(<?php if ($length >= 10) { echo ($length . '+'); } else {echo ($length); } ?> products available) </small>
+  <small class="fwbold">(<?php echo $totallength ; ?> products available) </small>
 </div>
 <?php 
 
@@ -311,6 +320,7 @@ if (isset($category )&&isset($subcategory->shortDescription) && $subcategory->sh
 </section>
 <div class="row gy-2">
     <div class="col-lg-3 col-xxl-2">
+   
        <?php
         //$imagePath = $isMobile ? 'assets/images/poster1.webp' : 'assets/images/poster1.gif';
         if(!$isMobile ) {
@@ -339,7 +349,7 @@ if (isset($category )&&isset($subcategory->shortDescription) && $subcategory->sh
                  
                 }
                 
-                  foreach(($data->states) as $state){
+                  foreach(($data['states']) as $state){
                     if(!isset($category[0])){
                     echo'<li >';
                     echo '<a href="' . BASE_URL . 'search/' . $keyword . '/' .str_replace(' ','-', $state) . '">' . $state . '</a>';
@@ -423,8 +433,8 @@ fetch(url, {
 </script>
 
                            <?php
-                           if($data->sponsoredProduct!=null){
-                          $premiumprod=$data->sponsoredProduct;
+                           if($data['sponsoredProduct']!=null){
+                          $premiumprod=$data['sponsoredProduct'];
                           //print_r($premiumprod);
                         include_once "premiumProd.php";
                            }
@@ -438,7 +448,9 @@ fetch(url, {
                         <?php
                       foreach ($prod as $inde => $onep) {
                         $indexr=$inde;
-                        if (is_object($onep) && isset($onep->id)) {
+                        
+                        if (is_array($onep) && isset($onep['productName'])) {
+                          //print_r($onep['id']);
                            $prodData=$onep;
                            //print_r($prodData);
                            ?>
@@ -457,7 +469,7 @@ fetch(url, {
             }
           ?>
        <div id="productList"> </div>
-<div id="result"></div>
+<div id="result" ></div>
 <script>
               var lol='';
     var frequencytype=document.getElementsByName('frequencytype');
@@ -647,11 +659,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 //ob_end_flush();
 ?>
           <div class="post-request-text ">
+
           <div class="text-center my-2" >     
-          <button  id="loadMoreBtn" onclick="lod()"class="btn-primary-gradiant rounded-2 btn-auto"> LOAD MORE RESULTS ... </button>
+          <button  id="loadMoreBtn"  onclick="lod()"class="btn-primary-gradiant rounded-2 btn-auto" style="display: inline-block;"> LOAD MORE RESULTS ... </button>
          
         </div>
        
+
           <section class="easysource my-4 py-2" >
             <?php
              include_once "post-request.php";
@@ -695,6 +709,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <script>
   let page=1;
+  let size=1;
   var searchtext = "<?php echo $subcategory->subCategoryName; ?>";
   var currentURL = window.location.href;
 
@@ -749,6 +764,11 @@ searchProductNew(payload, page).then(response => {
         console.error(error);
     });
     page++;
+    size++;
+    var tot="<?php echo $totallength;?>"
+    if(tot<=size*10){
+      document.getElementById("loadMoreBtn").style.display='none';
+    }
   }
 </script>
 <script src='<?php echo BASE_URL; ?>services/moreproductjs.js'></script>
