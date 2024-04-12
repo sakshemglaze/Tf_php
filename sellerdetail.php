@@ -23,7 +23,15 @@ $aproodproduct=get(
   ['isFeatured' => true]
 );
 $aproodproduct1 = json_decode($aproodproduct);
+$productNames='';
+foreach ($aproodproduct1->products as $index => $product) {
+    
+  $productNames .= $product->productName;
 
+  if ($index < count($aproodproduct1->products) - 1) {
+      $productNames .= ", ";
+  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,9 +42,9 @@ $aproodproduct1 = json_decode($aproodproduct);
     <?php
       $SeoParams = [
           'title' => isset($data1[0]->metaTitle) && $data1[0]->metaTitle != '' ? $data1[0]->metaTitle : $data1[0]->sellerCompanyName,
-          'metaTitle' => isset($data1[0]->metaTitle) && $data1[0]->metaTitle != '' ? $data1[0]->metaTitle : $data1[0]->sellerCompanyName,
-          'metaDescription' => isset($data1[0]->metaDescription) && $data1[0]->metaDescription != '' ? $data1[0]->metaDescription : $data1[0]->sellerCompanyName,
-          'metaKeywords' => isset($data1[0]->metaKeywords) && $data1[0]->metaKeywords != '' & $data1[0]->metaKeywords[0] !='' ? implode(',', $data1[0]->metaKeywords) : $data1[0]->sellerCompanyName,
+          'metaTitle' => isset($data1[0]->metaTitle) && $data1[0]->metaTitle != '' ? $data1[0]->metaTitle : $data1[0]->sellerCompanyName.' in '.$data1[0]->city.','.$data1[0]->sellerState.','.$data1[0]->country,
+          'metaDescription' => isset($data1[0]->metaDescription) && $data1[0]->metaDescription != '' ? $data1[0]->metaDescription : $data1[0]->sellerCompanyName.' is a leading company of '.$productnames.' located in '.$data1[0]->city.','.$data1[0]->sellerState.','.$data1[0]->country,
+          'metaKeywords' => isset($data1[0]->metaKeywords) && $data1[0]->metaKeywords != '' & $data1[0]->metaKeywords[0] !='' ? implode(',', $data1[0]->metaKeywords) : $data1[0]->sellerCompanyName.','.' in '.$data1[0]->city.','.$data1[0]->sellerCompanyName.' in '. $data1[0]->sellerState.','. $data1[0]->sellerCompanyName.' in '. $data1[0]->country.','. $productnames,
           'fbTitle' => isset($data1[0]->fbTitle) && $data1[0]->fbTitle != '' ? $data1[0]->fbTitle : $data1[0]->sellerCompanyName,
           'fbDescription' => isset($data1[0]->fbDescription) && $data1[0]->fbDescription != '' ? $data1[0]->fbDescription : $data1[0]->sellerCompanyName,
           'fbImage' => isset($data1[0]->fbImage) ? API_URL . 'api/guest/imageContentDownload/' . $data1[0]->fbImage.id : 'undefined',

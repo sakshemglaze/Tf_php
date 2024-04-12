@@ -31,9 +31,9 @@
 //     SEO Attributes setting ..................
               //print_r($data1->metaKeywords);
         $SeoParams = [
-          'title' => isset($data1->metaTitle) && $data1->metaTitle != '' ? $data1->metaTitle : $data1->productName . ' in ' . $data1->seller->state . ' - ' . $data1->sellerCompanyName,
-          'metaTitle' => isset($data1->metaTitle) && $data1->metaTitle != '' ? $data1->metaTitle : $data1->productName . ' in ' . $data1->seller->state . ' - ' . $data1->sellerCompanyName,
-          'metaDescription' => isset($data1->metaDescription) && $data1->metaDescription != '' ? $data1->metaDescription : $data1->sellerCompanyName . ' - Offering ' . $data1->productName . ' in ' . $data1->seller->state . '. Get the best quality at the best price.',
+          'title' => isset($data1->metaTitle) && $data1->metaTitle != '' ? $data1->metaTitle : $data1->productName . ' in ' .( isset($data1->seller->state)?$data1->seller->state:"" ). ' - ' . $data1->sellerCompanyName,
+          'metaTitle' => isset($data1->metaTitle) && $data1->metaTitle != '' ? $data1->metaTitle : $data1->productName . ' in ' .(isset($data1->seller->state)?$data1->seller->state:'') . ' - ' . $data1->sellerCompanyName,
+          'metaDescription' => isset($data1->metaDescription) && $data1->metaDescription != '' ? $data1->metaDescription : $data1->sellerCompanyName . ' - Offering ' . $data1->productName . ' in ' . (isset($data1->seller->state)?$data1->seller->state:'') . '. Get the best quality at the best price.',
           'metaKeywords' => isset($data1->metaKeywords) && $data1->metaKeywords != '' & $data1->metaKeywords[0] !='' ? implode(',', $data1->metaKeywords) : $data1->productName . ', ' . $data1->productName . ' in ' . $data1->seller->state . ', ' . $data1->productName . ' in UAE',
           'fbTitle' => isset($data1->fbTitle) && $data1->fbTitle != '' ? $data1->fbTitle : $data1->productName,
           'fbDescription' => isset($data1->fbDescription) && $data1->fbDescription != '' ? $data1->fbDescription : $data1->productDescription,
@@ -74,7 +74,7 @@
   <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="/">TradersFind </a></li>
-      <li class="breadcrumb-item active" aria-current="page"> <?php echo $data1->productName; ?> </li>
+      <li class="breadcrumb-item active" aria-current="page"> <?php echo isset( $data1->productName)?$data1->productName:''; ?> </li>
     </ol>
   </nav>
 </section>
@@ -135,7 +135,7 @@
               </div>
             </div>
 
-            <div class="col-lg-4">
+            <div class="col-lg-4" <?php if(isset($data1->seller)):?>>
               <div class="card border-0">
                 <div class="card-body bg-grey3">
                   <div class="d-flex flex-column align-items-center">
@@ -211,6 +211,7 @@
                 </div>
               </div>
             </div>
+            <?php endif;?>
           </div>
         </div>
       </div>
@@ -295,23 +296,23 @@
             <tbody>
               <td>
                 Nature of Business <br />
-                <?php echo $data1->seller->sellerCompanyType; ?>
+                <?php echo isset($data1->seller->sellerCompanyType)?$data1->seller->sellerCompanyType:''; ?>
               </td>
               <td>
                 Year of Establishment <br /> 
-                <?php echo $data1->seller->sellerInceptionYear; ?>
+                <?php echo isset($data1->seller->sellerInceptionYear)?$data1->seller->sellerInceptionYear:''; ?>
               </td>
               <td>
                 Website <br />
-                <a [href]="<?php echo $data1->seller->sellerWebsite; ?>" title="Seller Website" target="_blank" class="text-blue">
-                <?php echo $data1->seller->sellerWebsite; ?> </a>
+                <a [href]="<?php echo isset($data1->seller->sellerWebsite)?$data1->seller->sellerWebsite:''; ?>" title="Seller Website" target="_blank" class="text-blue">
+                <?php echo isset($data1->seller->sellerWebsite)?$data1->seller->sellerWebsite:''; ?> </a>
               </td>
             </tbody>
             <tbody>
               <td>
                 Working Days <br />
                 <?php 
-                 echo $data1->seller->sellerBusinessHours //. $data1->seller->sellerBusinessDay
+                 echo isset($data1->seller->sellerBusinessHours)?$data1->seller->sellerBusinessHours:'' //. $data1->seller->sellerBusinessDay
                   ?>
               </td>
               <td>
@@ -332,15 +333,18 @@
               </td> -->
             </tbody>
           </table>
+          <?php if(isset($data1->seller)):?>
           <div >
-          <?php echo $data1->seller->sellerCompanyName; ?>
+          <?php echo isset($data1->seller->sellerCompanyName)?$data1->seller->sellerCompanyName:''; ?>
           </div>
-          <div> <?php echo $data1->seller->sellerTagline; ?>     </div><br>
+          <div> <?php echo isset($data1->seller->sellerTagline)?$data1->seller->sellerTagline:''; ?>     </div><br>
           <a href="/<?php echo $url->getSellerUrl($data1->seller->sellerCompanyName,$data1->seller->id) ?>" target="_blank" title="<?php echo $data1->seller->sellerCompanyName?>" target="_blank"
             class="btn-primary-gradiant rounded-10 mt-4 px-md-5">
             View more
           </a>
+          <?php endif;?>
         </div>
+       
       </div>
     </div>
     <script src="services/storegeService.js"></script>
@@ -411,7 +415,7 @@ fetch(url, {
             <span class="mb-0 fwbold">Send Enquiry to Supplier</span>
           </div>
           <div class="card-body px-md-5 pt-4 pb-5">
-            <h3 class="fs-4">TO: <?php echo $data1->seller->sellerCompanyName; ?></h3>
+            <h3 class="fs-4">TO: <?php echo isset($data1->seller->sellerCompanyName)?$data1->seller->sellerCompanyName:''; ?></h3>
             <hr class="mt-4" />
             <div class="form-group mt-4">
               <label for="description" class="form-label">Describe in few words *</label>

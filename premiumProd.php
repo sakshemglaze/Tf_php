@@ -65,7 +65,7 @@
                                         <p class="about_text about_text2"><b>Description: </b><?php echo $premiumprod['productDescription'] ?></p>
                                     </div>
                                 <?php endif; ?>
-                                <a href="<?php echo $urlService->getProductUrl($premiumprod['productName'],$premiumprod['id']) ?>" target="_blank" title="<?php echo $premiumprod['seller']['sellerCompanyName'] ?>" class="fwbold d-block" style="padding-left: 82px; color: yellow;">
+                                <a href="<?php echo $urlService->getProductUrl($premiumprod['productName'],$premiumprod['id']) ?>" target="_blank" title="<?php echo isset($premiumprod['seller'])?$premiumprod['seller']['sellerCompanyName']:'' ?>" class="fwbold d-block" style="padding-left: 82px; color: yellow;">
                                     ...View more
                                 </a>
                                 <div class="text-white mt-3">
@@ -97,15 +97,16 @@
                                 <img src="<?php echo BASE_URL; ?>assets/images/level/lw5.png" alt="Rating5" width="15" height="20"/>
                             <?php endif; ?>
                         </span>
-                        <h3 class="text-uppercase fwbold fs-6 mt-0">
+                        <h3 class="text-uppercase fwbold fs-6 mt-0" <?php if(isset($premiumprod['seller'])):?>>
                             <u>
                                 <a href="/<?php echo $urlService->getSellerUrl($premiumprod['seller']['sellerCompanyName'], $premiumprod['seller']['id']) ?>" target="_blank" class="text-white fs-5" title="<?php echo $premiumprod['seller']['sellerCompanyName'] ?>">
                                     <?php echo strlen($premiumprod['seller']['sellerCompanyName']) > 40 ? substr($premiumprod['seller']['sellerCompanyName'], 0, $SAWidth) : $premiumprod['seller']['sellerCompanyName'] ?>
                                     <?php if (strlen($premiumprod['seller']['sellerCompanyName']) > 40) : ?>...<?php endif; ?>
                                 </a>
                             </u>
-                        </h3>
+                        </h3 <?php endif;?>>
                         <div class="row gx-3 mt-1 gy-4">
+                            <?php if(isset($premiumprod['seller'])):?>
     <div class="col-6">
         <div class="">
             <div class="card-body pt-0 text-center">
@@ -137,11 +138,13 @@
                                             ?> </span>
         </div>
     </div>
+
     <div class="col-sm-6 whatsappbtn ">
         <a href=" <?php echo $whatsappUrl->getProductToWhatsapp($premiumprod['productName'],$premiumprod['id'],$premiumprod['seller'])?>" target="_blank" class="btn btn-sm w-100">
             Connect on whatsapp
         </a>
     </div>
+    <?php endif;?>
     <div class="col-sm-6 btn-outline-gradiant">
         <button onclick="openPopup()" class="btn btn-sm w-100 d-center text-white">
             <img src="<?php echo BASE_URL?>assets/images/mail-solid.png" alt="Mail" width="17" height="9" /> Send Inquiry

@@ -102,22 +102,23 @@ else{
       }
 
         //print_r(isset($subcategory) && $subcategory->metaDescription !='' ? str_replace('UAE',$location1,$subcategory->metaDescription) : 'Searching for ' . $subcategory->subCategoryName . ' at best price in ' . $location1 . '? Choose from a wide range of companies provide' . $subcategory->subCategoryName . ' online on Tradersfind.com');
-        $SeoParams = [
-          'title' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('uae',$location1,strtolower($subcategory->metaTitle)) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com',
-          'metaTitle' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('uae',$location1,strtolower($subcategory->metaTitle)) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com',
-          'metaDescription' => isset($subcategory->subCategoryDescription) && $subcategory->subCategoryDescription !='' ? str_replace('uae',$location1,strtolower($subcategory->subCategoryDescription)) : 'Searching for ' . $subcategory->subCategoryName . ' at best price in ' . $location1 . '? Choose from a wide range of companies provide' . $subcategory->subCategoryName . ' online on Tradersfind.com',
-          'metaKeywords' => isset($subcategory->keywords) && $subcategory->keywords != '' ? str_replace('uae',$location1,strtolower($subcategory->keywords)) : $subcategory->subCategoryName . ', ' . $subcategory->subCategoryName . ' in '. $location1,
-          'fbTitle' => isset($subcategory->fbTitle) && $subcategory->fbTitle !='' ? str_replace('uae',$location1,strtolower($subcategory->fbTitle)) : null,
-          'fbDescription' => isset($subcategory->fbDescription) ? str_replace('uae',$location,strtolower($subcategory->fbDescription)) : null,
-          'fbImage' => isset($subcategory->fbImage) ? $subcategory->fbImage : '',
-          'fbUrl' => isset($subcategory->fbUrl) ? $subcategory->fbUrl : '',
-          'twitterTitle' => isset($subcategory->twitterTitle) && $subcategory->twitterTitle !='' ? str_replace('uae',$location1,strtolower($subcategory->twitterTitle)) : null,
-          'twitterDescription' => isset($subcategory->twitterDescription) ? $subcategory -> twitterDescription : null,
-          'twitterImage' => isset($subcategory->twitterImage) ? $subcategory->twitterImage : null,
-          'twitterSite' => isset($subcategory->twitterSite) ? $subcategory->twitterSite : '',
-          'twitterCard' => isset($subcategory->twitterCard) ? $subcategory->twitterCard : null,
-          'schemaDescription' => isset($subcategory->schemaDescription) ? $subcategory->schemaDescription : '',
-          ];
+        // $SeoParams = [
+        //   'title' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('uae',$location1,strtolower($subcategory->metaTitle)) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com',
+        //   'metaTitle' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('uae',$location1,strtolower($subcategory->metaTitle)) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com',
+        //   'metaDescription' => isset($subcategory->subCategoryDescription) && $subcategory->subCategoryDescription !='' ? str_replace('uae',$location1,strtolower($subcategory->subCategoryDescription)) : 'Searching for ' . $subcategory->subCategoryName . ' at best price in ' . $location1 . '? Choose from a wide range of companies provide' . $subcategory->subCategoryName . ' online on Tradersfind.com',
+        //   'metaKeywords' => isset($subcategory->keywords) && $subcategory->keywords != '' ? str_replace('uae',$location1,strtolower($subcategory->keywords)) : $subcategory->subCategoryName . ', ' . $subcategory->subCategoryName . ' in '. $location1,
+        //   'fbTitle' => isset($subcategory->fbTitle) && $subcategory->fbTitle !='' ? str_replace('uae',$location1,strtolower($subcategory->fbTitle)) : null,
+        //   'fbDescription' => isset($subcategory->fbDescription) ? str_replace('uae',$location,strtolower($subcategory->fbDescription)) : null,
+        //   'fbImage' => isset($subcategory->fbImage) ? $subcategory->fbImage : '',
+        //   'fbUrl' => isset($subcategory->fbUrl) ? $subcategory->fbUrl : '',
+        //   'twitterTitle' => isset($subcategory->twitterTitle) && $subcategory->twitterTitle !='' ? str_replace('uae',$location1,strtolower($subcategory->twitterTitle)) : null,
+        //   'twitterDescription' => isset($subcategory->twitterDescription) ? $subcategory -> twitterDescription : null,
+        //   'twitterImage' => isset($subcategory->twitterImage) ? $subcategory->twitterImage : null,
+        //   'twitterSite' => isset($subcategory->twitterSite) ? $subcategory->twitterSite : '',
+        //   'twitterCard' => isset($subcategory->twitterCard) ? $subcategory->twitterCard : null,
+        //   'schemaDescription' => isset($subcategory->schemaDescription) ? $subcategory->schemaDescription : '',
+        //   ];
+        include_once 'catmetas.php';
         //print_r("first if");
   }
   else if( $numParts==3 && basename($parts[1])=='search'){//will be change
@@ -197,30 +198,33 @@ else{
               
               $industry = json_decode(get(
                 'api/industries-na/' . $category[0]->title,$queryParams) );
+                
               
 //print_r($subcategory->metaTitle);
-$SeoParams = [
-          'title' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('uae',$location1,strtolower($subcategory->metaTitle)) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com',
-          'metaTitle' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('uae',$location1,strtolower($subcategory->metaTitle)) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com',
-          'metaDescription' => isset($subcategory->subCategoryDescription) && $subcategory->subCategoryDescription !='' ? str_replace('uae',$location1,strtolower($subcategory->subCategoryDescription)) : 'Searching for ' . $subcategory->subCategoryName . ' at best price in ' . $location1 . '? Choose from a wide range of companies provide' . $subcategory->subCategoryName . ' online on Tradersfind.com',
-          'metaKeywords' => isset($subcategory->keywords) && $subcategory->keywords != '' ? str_replace('uae',$location1,strtolower($subcategory->keywords)) : $subcategory->subCategoryName . ', ' . $subcategory->subCategoryName . ' in '. $location1,
-          'fbTitle' => isset($subcategory->fbTitle) && $subcategory->fbTitle !='' ? str_replace('uae',$location1,strtolower($subcategory->fbTitle)) : null,
-          'fbDescription' => isset($subcategory->fbDescription) ? str_replace('uae',$location,strtolower($subcategory->fbDescription)) : null,
-          'fbImage' => isset($subcategory->fbImage) ? $subcategory->fbImage : '',
-          'fbUrl' => isset($subcategory->fbUrl) ? $subcategory->fbUrl : '',
-          'twitterTitle' => isset($subcategory->twitterTitle) && $subcategory->twitterTitle !='' ? str_replace('uae',$location1,strtolower($subcategory->twitterTitle)) : null,
-          'twitterDescription' => isset($subcategory->twitterDescription) ? $subcategory -> twitterDescription : null,
-          'twitterImage' => isset($subcategory->twitterImage) ? $subcategory->twitterImage : null,
-          'twitterSite' => isset($subcategory->twitterSite) ? $subcategory->twitterSite : '',
-          'twitterCard' => isset($subcategory->twitterCard) ? $subcategory->twitterCard : null,
-          'schemaDescription' => isset($subcategory->schemaDescription) ? $subcategory->schemaDescription : '',
-          ];
+// $SeoParams = [
+//           'title' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('uae',$location1,strtolower($subcategory->metaTitle)) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com',
+//           'metaTitle' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('uae',$location1,strtolower($subcategory->metaTitle)) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com',
+//           'metaDescription' => isset($subcategory->subCategoryDescription) && $subcategory->subCategoryDescription !='' ? str_replace('uae',$location1,strtolower($subcategory->subCategoryDescription)) : 'Searching for ' . $subcategory->subCategoryName . ' at best price in ' . $location1 . '? Choose from a wide range of companies provide' . $subcategory->subCategoryName . ' online on Tradersfind.com',
+//           'metaKeywords' => isset($subcategory->keywords) && $subcategory->keywords != '' ? str_replace('uae',$location1,strtolower($subcategory->keywords)) : $subcategory->subCategoryName . ', ' . $subcategory->subCategoryName . ' in '. $location1,
+//           'fbTitle' => isset($subcategory->fbTitle) && $subcategory->fbTitle !='' ? str_replace('uae',$location1,strtolower($subcategory->fbTitle)) : null,
+//           'fbDescription' => isset($subcategory->fbDescription) ? str_replace('uae',$location,strtolower($subcategory->fbDescription)) : null,
+//           'fbImage' => isset($subcategory->fbImage) ? $subcategory->fbImage : '',
+//           'fbUrl' => isset($subcategory->fbUrl) ? $subcategory->fbUrl : '',
+//           'twitterTitle' => isset($subcategory->twitterTitle) && $subcategory->twitterTitle !='' ? str_replace('uae',$location1,strtolower($subcategory->twitterTitle)) : null,
+//           'twitterDescription' => isset($subcategory->twitterDescription) ? $subcategory -> twitterDescription : null,
+//           'twitterImage' => isset($subcategory->twitterImage) ? $subcategory->twitterImage : null,
+//           'twitterSite' => isset($subcategory->twitterSite) ? $subcategory->twitterSite : '',
+//           'twitterCard' => isset($subcategory->twitterCard) ? $subcategory->twitterCard : null,
+//           'schemaDescription' => isset($subcategory->schemaDescription) ? $subcategory->schemaDescription : '',
+//           ];
+include_once 'catmetas.php';
   //print_r("else");
           }
         //  if ($length == 0) {
         //         header("Location: /not-found.php");
         //         exit();
         //       }
+       // print_r($location);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -300,20 +304,55 @@ $SeoParams = [
   </h1>
   <small class="fwbold">(<?php echo $totallength ; ?> products available) </small>
 </div>
+<div class="sortdescription-card" id="sortdescription-card" style="display:none"> 
+  <p><?php $shortDescription = $subcategory->shortDescription; 
+  echo $shortDescription?></p>
+  <button type="button" style='color:brown; border: none;' onclick="closePopsdesc()">view less</button>
+
+</div>
+<script>
+  function readmoreSdesc(){
+    document.getElementById("sortdescription-card").style.display='block'
+    document.getElementById("viewmorebutten").style.display='none'
+  }
+  function closePopsdesc(){
+    document.getElementById("sortdescription-card").style.display='none'
+    document.getElementById("viewmorebutten").style.display='block'
+  }
+</script>
+<span id='viewmorebutten'>
 <?php 
 
 if (isset($category )&&isset($subcategory->shortDescription) && $subcategory->shortDescription && $location === '') {
   echo '<div class="two-line-containers">';
-  $shortDescription = $subcategory->shortDescription;
+  
   //$shortenedDescription = substr($shortDescription, 0, 400);
   if (strlen($shortDescription) >= 400) {
     echo '<a href="javascript:void(0);" onclick="toggleDescription()"><div id="short-desc" style="display: inline;">' . $shortDescription . '</div></a>';
     echo '<div id="full-desc" style="display: none;">' . $shortDescription . '<span style="color:brown;">&nbsp;<b><a href="javascript:void(0);" onclick="toggleDescription()"> View less</a></b></span></div>';
+
 } else {
   echo '<div id="full-desc" style="display: inline;">' . $shortDescription . '</div>';
 }
   echo '</div>';
+  }else{
+    echo "<p>
+    Find the best $subcategory->subCategoryName in $location1 at competitive prices. Discover a wide range of
+    $subcategory->subCategoryName from top companies, manufacturers, dealers, and distributors across $location1.
+     Take advantage of exclusive bulk ordering discounts and connect with sellers directly to secure the best
+     deals. Whether you're looking for any other  $subcategory->subCategoryName 
+      product in $location1, TradersFind makes it easy to find the perfect match for your business needs. 
+ 
+ Contact us today, and we'll connect you with the leading  $subcategory->subCategoryName provider in $location1. Simplify your
+ sourcing and get the best prices on high-quality  $subcategory->subCategoryName products in $location1. TradersFind offers 
+ you a variety of  $subcategory->subCategoryName options from verified companies that will fulfill your requirements at most 
+ competitive prices.
+    </p>";
   } ?>
+  <button style="color:brown; border: none;" onclick="readmoreSdesc()">
+view more
+</button>
+</span>
 <br>
 
 
@@ -680,15 +719,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                       echo ( $subcategory->categoryDescriptionPage);
         }else if($location=="dubai" && isset($subcategory->keywordDubaiDescription)){
                       echo ( $subcategory->keywordDubaiDescription);
-        }else if($location=="abu dhabi" && isset($subcategory->keywordAbuDhabiDescription)){
+        }else if($location=="abu-dhabi" && isset($subcategory->keywordAbuDhabiDescription)){
                       echo ( $subcategory->keywordAbuDhabiDescription);
         }else if($location=="ajman" && isset($subcategory->keywordAjmanDescription)){
                       echo ( $subcategory->keywordAjmanDescription);
         }else if($location=="fujairah" && isset($subcategory->keywordFujairahDescription)){
                       echo ( $subcategory->keywordFujairahDescription);
-        }else if($location=="ras al khaimah" && isset($subcategory->keywordRasAlKhaimahDescription)){
+        }else if($location=="ras-al-khaimah" && isset($subcategory->keywordRasAlKhaimahDescription)){
                       echo ( $subcategory->keywordRasAlKhaimahDescription);
-        }else if($location=="umm al quwain" && isset($subcategory->keywordUmmAlQuwainDescription)){
+        }else if($location=="umm-al-quwain" && isset($subcategory->keywordUmmAlQuwainDescription)){
                       echo ( $subcategory->keywordUmmAlQuwainDescription);
         }else if($location=="sharjah" && isset($subcategory->keywordSarjahDescription)){              
                       echo ( $subcategory->keywordSarjahDescription);

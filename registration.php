@@ -62,20 +62,13 @@ $pager=false;
 
     <div class="my-4">
         <div class="input-group">
-            <select name="countryCode" class="form-control mxw-50">
-                <?php
-                $json_data = file_get_contents( BASE_URL.'assets/testingJson/country_codes_v1.json');
-                $countries = json_decode($json_data);
-
-                foreach ($countries as $code) {
-                ?>
-                    <option value="<?php echo $code->code; ?>">
-                        <?php echo $code->code . ' - ' . $code->name; ?>
-                    </option>
-                <?php
-                }
-                ?>
-            </select>
+      
+            <select id="countryCode" name="countryCode" class="form-control mxw-50">
+                      <!--<option *ngFor="let opt of this.requirementService.countries" value="{{opt.code}}">{{ opt.code }} - {{ opt.name }}     </option>-->
+                      <option value="+971">+971 - United Arab Emirates.</option>
+                       <option value="+91">+91 - India</option>
+                    </select>
+           
             <div class="floating-label">
                 <input id="mobile" name="mobileno" class="form-control form-control-lg border-start-0" placeholder=" " required />
                 <label for="mobile">Enter your Mobile Number</label>
@@ -135,7 +128,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         null,
         false,
         'text' ); 
-       
+       print_r($res);
          function submit(){
             $firstname = $_POST['firstname'];
             $companyname = $_POST['companyname'];
@@ -161,7 +154,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $payload->sellerCity = null;
             $payload->sellerCompanyName = $companyname;
           } else {
-            $payload->address =null;
+            $payload->address =$city;
             $payload->country = null;
             $payload->state = null;
             $payload->city = null;
@@ -175,7 +168,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          $response= post($url, $payload, false, null, true, 'text');
        
      
-         echo '<script>alert("Form submitted. You are registred successfully!");</script>';
+         echo '<script>alert("Form submitted. You are registred successfully!"); window.location.href = "/register-your-business";</script>';
     } 
     if($res=="NotFound"){
         submit();
