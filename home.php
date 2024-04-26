@@ -515,6 +515,7 @@ function sendOtp($contenctNo,$formdata){
 }
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // Retrieve form data
+  if(isset($_POST['productName'])&isset($_POST['contactNumber'])){
   $productName = $_POST['productName'];
   $quantity = $_POST['quantity'];
   $quantityUnit = $_POST['quantityUnit'];
@@ -539,10 +540,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $contenctNo=$countryCode.$contactNumber;
 include_once 'post.php';
 //print_r($contenctNo);
-$respons=sendOtp($contenctNo,$formdata);
 
+  $respons=sendOtp($contenctNo,$formdata);
+}else{
+  if(isset($_POST['search']) && $_POST['search']!=''){
+    if(isset($_POST['location']) && $_POST['location']!='' && $_POST['location']!='UAE'){
+      $redirect_url = str_replace(' ','-',(BASE_URL.'search/'.$_POST['search'].'/'.$_POST['location']));
+      echo '<script>window.location.href = "'.$redirect_url.'";</script>';
+    }else{
+    $redirect_url = str_replace(' ','-',(BASE_URL.'search/'.$_POST['search']));
+   echo '<script>window.location.href = "'.$redirect_url.'";</script>';
+    }
+  }
 
-
+}
 } else {
 
  

@@ -67,7 +67,7 @@
                                 placeholder="What are you looking for.." /> -->
 
 
-                                <input type="text"  id="search" autofocus class="form-control border-rounded-end" placeholder="What are you looking for.." autocomplete="off" >
+                                <input type="text" name="search"  id="search" autofocus class="form-control border-rounded-end" placeholder="What are you looking for.." autocomplete="off" >
                                
                                 <div class="submit-button">
                                         <!-- <img src="assets/images/Voice-icon.png" alt="voice" class="me-lg-3 me-1 img-fluid" width="15"> -->

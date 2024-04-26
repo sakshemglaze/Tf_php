@@ -163,13 +163,13 @@ function submitform(){
                 $('#option_com').empty();
                 suggestions.forEach(function (suggestion) {
                     var suggestionItem = $('<li></li><br>').text(suggestion.sellerCompanyName).click(function() {
-                        $('#search').val(suggestion); 
+                        $('#search').val(suggestion.sellerCompanyName); 
                 var searchTermp = $('#search').val().replace(/\s+/g, '-');
                 var actionURL = "<?php echo  BASE_URL ?>seller/" + encodeURIComponent((suggestion.sellerUrl?suggestion.sellerUrl:suggestion.sellerCompanyName).toLowerCase().replace(/\s/g,'-'));
                 $('#homepageSearch').attr('action', actionURL);
                 $('#homepageSearch').submit();
 
-                $('#search').val(suggestion); 
+                $('#search').val(suggestion.sellerCompanyName); 
                 $('.search-result').hide(); 
             });
             $('#option_com').append(suggestionItem);

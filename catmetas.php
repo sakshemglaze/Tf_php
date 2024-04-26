@@ -1,5 +1,5 @@
 <?php
-if($location1==null || $location1=='UAE'){
+if($location1==null || $location1=='UAE' || !isset($subcategory->locations)){
   $SeoParams = [
     'title' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('uae',$location1,strtolower($subcategory->metaTitle)) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com',
     'metaTitle' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('uae',$location1,strtolower($subcategory->metaTitle)) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com',
@@ -18,6 +18,7 @@ if($location1==null || $location1=='UAE'){
     ];
 
     }else{
+     
       foreach($subcategory->locations as $Mlocation){
  
         if($Mlocation->location==$location1){

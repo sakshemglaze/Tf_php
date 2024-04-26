@@ -1,6 +1,4 @@
 <?php 
-//error_reporting(E_ALL);
-//ini_set('display_errors', 1);
 
 include_once 'config.php';
        
@@ -36,6 +34,7 @@ include_once 'config.php';
     $searchtext = htmlspecialchars(str_replace('-',' ', $category1));
     class FilterDTO {
       public $stateFilter;
+      public $productSubCategoryFilter;
   }
   $filterDto = new FilterDTO();
   if( $numParts==4){//will change
@@ -64,14 +63,21 @@ else{
         $location1 = 'UAE';
           $subcatName=basename($parts[2]);
           $subcategory = json_decode(get ( 'api/guest/products-subcategorie/' . $subcatName));
-
-    //print_r($subcategory->subCategoryName);
+         
+   
             $payload = array(
                 'searchText' => strtolower($subcategory->subCategoryName) ,
                 'searchTextType' => 'subcategory',
                 'filterDto' => $filterDto
             );  
-            
+            if(!isset($subcategory->subCategoryName)){
+              $new_url = str_replace('/category/', '/search/', $currentUrl);
+    
+              header('Location: ' . $new_url, true, 301);
+              exit;
+            }else{
+
+           
             $queryParams= array('page'=> $page, 'size'=> $size) ;          
             $data1 =  postforprod(
               'api/new-search-products',
@@ -120,10 +126,15 @@ else{
         //   ];
         include_once 'catmetas.php';
         //print_r("first if");
+      }
   }
   else if( $numParts==3 && basename($parts[1])=='search'){//will be change
             $subcatName=str_replace('-',' ',basename($parts[2]));
             $subcategory = json_decode(get ( 'api/guest/products-subcategorie/' . $subcatName));
+
+  $filterDto->productSubCategoryFilter = isset($_POST['productSubCategoryFilter'])?$_POST['productSubCategoryFilter']:null;
+
+
             $payload = array(
               'searchText' => isset($subcategory) ? $subcategory->subCategoryName : $subcatName ,
               'searchTextType' => null,
@@ -254,7 +265,8 @@ include_once 'catmetas.php';
        
     </section>
     
-            
+    <input type="hidden" id="productSubCategoryFilter" name="productSubCategoryFilter" value="">
+   
 <section class="p-2">
 <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb" >
   <ol class="breadcrumb">
@@ -299,14 +311,55 @@ include_once 'catmetas.php';
   <?php if ($location == null) {
     echo '<span> in UAE</span>';
   } else {
-    echo '<span> in ' . str_replace("-"," " ,$location);
+    echo '<span> in ' . str_replace("-"," " ,$location).'</span>';
   } ?>
   </h1>
   <small class="fwbold">(<?php echo $totallength ; ?> products available) </small>
 </div>
 <div class="sortdescription-card" id="sortdescription-card" style="display:none"> 
-  <p><?php $shortDescription = $subcategory->shortDescription; 
-  echo $shortDescription?></p>
+  <p><?php if(isset($subcategory->locations)){
+      foreach($subcategory->locations as $Sdlocation){
+   
+        if($Sdlocation->location==$location1 && isset($Sdlocation->shortDescription) && $Sdlocation->shortDescription !=''){
+          $shortDescription=$Sdlocation->shortDescription;
+        }elseif(isset($subcategory->shortDescription) && $location==''){
+          $shortDescription = $subcategory->shortDescription; 
+     
+        }else{
+          $shortDescription = "<p>
+          Find the best {$subcategory->subCategoryName} in $location1 at competitive prices. Discover a wide range of
+          {$subcategory->subCategoryName} from top companies, manufacturers, dealers, and distributors across $location1.
+          Take advantage of exclusive bulk ordering discounts and connect with sellers directly to secure the best
+          deals. Whether you're looking for any other {$subcategory->subCategoryName} 
+          product in $location1, TradersFind makes it easy to find the perfect match for your business needs. 
+      
+          Contact us today, and we'll connect you with the leading {$subcategory->subCategoryName} provider in $location1. Simplify your
+          sourcing and get the best prices on high-quality {$subcategory->subCategoryName} products in $location1. TradersFind offers 
+          you a variety of {$subcategory->subCategoryName} options from verified companies that will fulfill your requirements at most 
+          competitive prices.
+      </p>";
+        }
+      }}elseif(isset($subcategory->shortDescription) && $location==''){
+        $shortDescription = $subcategory->shortDescription; 
+      
+      }else{
+     
+        $shortDescription = "<p>
+            Find the best {$subcategory->subCategoryName} in $location1 at competitive prices. Discover a wide range of
+            {$subcategory->subCategoryName} from top companies, manufacturers, dealers, and distributors across $location1.
+            Take advantage of exclusive bulk ordering discounts and connect with sellers directly to secure the best
+            deals. Whether you're looking for any other {$subcategory->subCategoryName} 
+            product in $location1, TradersFind makes it easy to find the perfect match for your business needs. 
+        
+            Contact us today, and we'll connect you with the leading {$subcategory->subCategoryName} provider in $location1. Simplify your
+            sourcing and get the best prices on high-quality {$subcategory->subCategoryName} products in $location1. TradersFind offers 
+            you a variety of {$subcategory->subCategoryName} options from verified companies that will fulfill your requirements at most 
+            competitive prices.
+        </p>";
+        
+      } 
+  echo $shortDescription;
+  ?></p>
   <button type="button" style='color:brown; border: none;' onclick="closePopsdesc()">view less</button>
 
 </div>
@@ -335,31 +388,116 @@ if (isset($category )&&isset($subcategory->shortDescription) && $subcategory->sh
   echo '<div id="full-desc" style="display: inline;">' . $shortDescription . '</div>';
 }
   echo '</div>';
+  
+  echo '<button style="color:brown; border: none;" onclick="readmoreSdesc()">
+    view more
+  </button>';
+  
+  
+  }else if(isset($subcategory->locations)){
+      foreach($subcategory->locations as $Sdlocation){
+   
+        if($Sdlocation->location==$location1 && isset($Sdlocation->shortDescription) && $Sdlocation->shortDescription!='' ){
+          echo $Sdlocation->shortDescription;
+          echo '<button style="color:brown; border: none;" onclick="readmoreSdesc()">
+          view more
+        </button>';
+        }else if(isset($subcategory->subCategoryName)){
+          echo "<p>
+          Find the best $subcategory->subCategoryName in $location1 at competitive prices. Discover a wide range of
+          $subcategory->subCategoryName from top companies, manufacturers, dealers, and distributors across $location1.
+           Take advantage of exclusive bulk ordering discounts and connect with sellers directly to secure the best
+           deals. Whether you're looking for any other  $subcategory->subCategoryName 
+            product in $location1, TradersFind makes it easy to find the perfect match for...
+          </p>";
+          echo '<button style="color:brown; border: none;" onclick="readmoreSdesc()">
+          view more
+        </button>';
+        }
+      }
+   
   }else{
-    echo "<p>
-    Find the best $subcategory->subCategoryName in $location1 at competitive prices. Discover a wide range of
-    $subcategory->subCategoryName from top companies, manufacturers, dealers, and distributors across $location1.
-     Take advantage of exclusive bulk ordering discounts and connect with sellers directly to secure the best
-     deals. Whether you're looking for any other  $subcategory->subCategoryName 
-      product in $location1, TradersFind makes it easy to find the perfect match for your business needs. 
- 
- Contact us today, and we'll connect you with the leading  $subcategory->subCategoryName provider in $location1. Simplify your
- sourcing and get the best prices on high-quality  $subcategory->subCategoryName products in $location1. TradersFind offers 
- you a variety of  $subcategory->subCategoryName options from verified companies that will fulfill your requirements at most 
- competitive prices.
-    </p>";
+    if(isset($subcategory->subCategoryName)){
+      echo "<p>
+      Find the best $subcategory->subCategoryName in $location1 at competitive prices. Discover a wide range of
+      $subcategory->subCategoryName from top companies, manufacturers, dealers, and distributors across $location1.
+       Take advantage of exclusive bulk ordering discounts and connect with sellers directly to secure the best
+       deals. Whether you're looking for any other  $subcategory->subCategoryName 
+        product in $location1, TradersFind makes it easy to find the perfect match for...
+      </p>";
+      echo '<button style="color:brown; border: none;" onclick="readmoreSdesc()">
+      view more
+    </button>';
+    }
   } ?>
-  <button style="color:brown; border: none;" onclick="readmoreSdesc()">
-view more
-</button>
+ 
 </span>
 <br>
 
+<?php $subcategorys=$data['subCategories'];
 
+?>
 </section>
 <div class="row gy-2">
     <div class="col-lg-3 col-xxl-2">
-   
+    <div class="card card-shadow myUL border-0">
+  <?php if(count($subcategorys) > 1) { ?>
+  <div class="card-body">
+    <div class="row">
+      <div class="col">
+        <button class="btn btn-success btn-sm" onclick="applyFilter()">Apply Filter</button>
+      </div>
+      <div class="col">
+        <button class="btn btn-danger btn-sm" onclick="clearFilter()">Clear Filter</button>
+      </div>
+    </div>
+    <label for="subCategories"><u>Categories</u></label>  
+    <div class="left_slide_card_body">
+    <?php foreach($subcategorys as $subcate) { ?>
+      <div class="form-check">
+       
+        <input class="form-check-input" onclick="filterSubcat('<?php echo $subcate;?>')" type="checkbox" value="<?php echo $subcate; ?>"/>
+        <label class="form-check-label"><?php echo $subcate; ?></label>
+  
+      </div>
+      <?php } ?>
+    </div>
+  </div>
+  <?php } ?>
+</div>
+
+<script>
+  var selectedSubcategories = [];
+
+  function filterSubcat(subcategory) {
+    var index = selectedSubcategories.indexOf(subcategory);
+    if (index === -1) {
+      selectedSubcategories.push(subcategory);
+    } else {
+      selectedSubcategories.splice(index, 1);
+    }
+  }
+
+  function applyFilter() {
+
+    console.log(selectedSubcategories);
+    window.location.href =  window.location.href;
+    document.getElementById('productSubCategoryFilter').value = selectedSubcategories;
+    
+  }
+
+  function clearFilter() {
+    selectedSubcategories = [];
+    // Uncheck all checkboxes
+    var checkboxes = document.querySelectorAll('.form-check-input');
+    checkboxes.forEach(function(checkbox) {
+      checkbox.checked = false;
+    });
+  }
+</script>
+
+
+    
        <?php
         //$imagePath = $isMobile ? 'assets/images/poster1.webp' : 'assets/images/poster1.gif';
         if(!$isMobile ) {
@@ -698,10 +836,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 //ob_end_flush();
 ?>
           <div class="post-request-text ">
-
+<?php if($totallength>10){
+  ?>
           <div class="text-center my-2" >     
           <button  id="loadMoreBtn"  onclick="lod()"class="btn-primary-gradiant rounded-2 btn-auto" style="display: inline-block;"> LOAD MORE RESULTS ... </button>
-         
+         <?php } ?>
         </div>
        
 
@@ -749,23 +888,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <script>
   let page=1;
   let size=1;
-  var searchtext = "<?php echo $subcategory->subCategoryName; ?>";
+  var searchtext = "<?php echo isset($subcategory->subCategoryName)?$subcategory->subCategoryName:$subcatName; ?>";
+
+let filterdto1 = <?php echo json_encode($filterDto); ?>;
+
   var currentURL = window.location.href;
 
 
 var urlParts = currentURL.split('/');
-var category = urlParts[urlParts.length - 2];
+var category=category = urlParts[3];
 
 console.log(searchtext);
+console.log(filterdto1);
 function lod(){
  let payload= {};
+// console.log(category);
 if(category=='category'){
   //console.log(category);
  
     payload= {
     searchText: searchtext,
     searchTextType: 'subcategory',
-    filterDto: {}
+    filterDto: filterdto1
      
 }
 
@@ -773,11 +917,12 @@ if(category=='category'){
   payload={
     searchText: searchtext,
     searchTextType: null,
-    filterDto: {}
+    filterDto: filterdto1
   }
 
  
 }
+console.log(payload);
 searchProductNew(payload, page).then(response => {
      
         console.log(response);
@@ -810,6 +955,7 @@ searchProductNew(payload, page).then(response => {
     }
   }
 </script>
+
 <script src='<?php echo BASE_URL; ?>services/moreproductjs.js'></script>
     <script src="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.bundle.min.js"></script>
   <script src="<?php echo BASE_URL; ?>assets/js/lazy-load.js"></script> 

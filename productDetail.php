@@ -24,8 +24,15 @@
                 'api/guest/products/'.$name.'/'.$id, 
                 true
               );
-              //print_r($data);
+             // print_r($data);
               $data1 = json_decode($data);
+              if(!isset($data1->productName)){
+                $new_url = '/not-found';
+    
+                // Redirect to the new URL
+                header('Location: ' . $new_url, true, 301);
+                exit;
+              }
               //$data = findActive($data1);
               //print_r($data1->seller->logo->id);
 //     SEO Attributes setting ..................

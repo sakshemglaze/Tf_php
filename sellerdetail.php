@@ -219,6 +219,7 @@ fetch(url, {
                     class=" btn py-2 btn-sm w-100">
                     <!--<a target="_blank" href="https://api.whatsapp.com/send?phone=971569773623&text=Browsed TradersFind" class="whatsappbtn btn py-2 btn-sm w-100">-->
                     Connect on whatsapp
+                    
                   </a>
                       
                 </div>
@@ -453,7 +454,10 @@ fetch(url, {
                   
     <div class="mix valves">
        <?php if($product->isFeatured ):?>
-                    <img src="<?php echo BASE_URL; ?>assets/images/verifiedw2.png" alt="verified_image" width="80" height="30" />       
+                    <img class="inside" src="<?php echo BASE_URL; ?>assets/images/Star_listing.png" alt="verified_image" width="80" height="30" />       
+                    <?php endif;?>
+                    <?php if($product->sponsoredKeywords[0]!=''):?>
+                      <img class="inside" src="<?php echo BASE_URL; ?>assets/images/Premium_listing.png" alt="Premium_listing" width="80" height="30" style="margin-left: 90px;" />
                     <?php endif;?>
         <a href="<?php echo BASE_URL. $urlService->getProductUrl($product->productName,$product->id);?>" class="thumb-a">
             <div class="item-hover">
@@ -464,7 +468,7 @@ fetch(url, {
             </div>
             
             <div class="item-img">
-               <img src="https://doc.tradersfind.com/images/<?php echo $product->images[0]->id; ?>.webp" alt="<?php echo $product->productName;?>" style="width: 140px;">
+               <img  src="https://doc.tradersfind.com/images/<?php echo $product->images[0]->id; ?>.webp" alt="<?php echo $product->productName;?>" style="width: 140px;">
               </div>
         </a>
     </div>

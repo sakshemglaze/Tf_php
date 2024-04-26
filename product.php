@@ -172,7 +172,7 @@
                                     </button>
                                 </div>
                                 <div class="col-md-4 ">
-                                    <a href="  <?php if(isset($prodData['seller'])) { echo $whatsappUrl->getProductToWhatsapp($prodData['productName'],$prodData['id'],$prodData['seller']) ; }?>"                                
+                                    <a href="  <?php if(isset($prodData['seller'])) { echo $whatsappUrl->getProductToWhatsapp1($prodData['productName'],$prodData['id'],$prodData['seller']) ; }?>"                                
                           target="_blank" class="whatsappbtn btn btn-sm w-100">
                                         Connect on whatsapp
                                         
