@@ -13,7 +13,13 @@
         $data =  get(
                 'api/guest/search-sellers-company-name/'.$companyName
               );
+              
               $data1 = json_decode($data);
+              $new_url = '/not-found';
+              if(!isset($data1[0]->id)){
+              header('Location: ' . $new_url, true, 301);
+              exit;
+              }
              // $data = findActive($data1);
             //print_r($data->linkedinUrl);
               

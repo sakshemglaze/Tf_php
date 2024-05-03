@@ -849,7 +849,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
              include_once "post-request.php";
               ?>
                </section>
-          </div>
+         
           <div class="row">
           <p class="search-product-text">
         <div class="cat-desc" id="cat-desc" style="display:none;">
@@ -870,11 +870,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                       echo ( $subcategory->keywordUmmAlQuwainDescription);
         }else if($location=="sharjah" && isset($subcategory->keywordSarjahDescription)){              
                       echo ( $subcategory->keywordSarjahDescription);
-                         ?>
+                    }?>
                          </div>
         </p>
         <?php
-        }
+       
         // Sanitize the value
         $currentUrl = $_SERVER['REQUEST_URI'];
         $parts = explode('/', $currentUrl);

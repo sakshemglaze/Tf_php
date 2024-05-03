@@ -39,7 +39,7 @@
                             <img src="<?php echo $newsto; ?>" alt="<?php echo $prodData['productName']?>" style="width: 160px;">
                                 <div class="d-flex mt-3 d-center">
                                
-                                <button onclick="openPopup()" class="btn-primary-gradiant btn btn-sm w-100 d-center">
+                                <button onclick="openPopup1()" class="btn-primary-gradiant btn btn-sm w-100 d-center">
                                             Ask price</button>
                                 </div>
                             </div>
@@ -180,7 +180,7 @@
                                 </div>
                                 <div class="col-md-4 ">
                                  
-                                    <button onclick="openPopup()"
+                                    <button onclick="openPopup1()"
                                         class="btn-outline-gradiant btn btn-sm w-100 d-center">
                                         <img src="<?php echo BASE_URL ?>assets/images/mail-black.png" width="14" height="12"
                                             class="me-2 w-18" alt="Mail_" />
