@@ -2,7 +2,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 //define('BASE_URL', 'http://localhost/Tf_php/');
-define('API_URL','http://localhost:8080/');
+//define('API_URL','http://localhost:8080/');
 //define('IMAGE_URL', 'https://doc.tradersfind.com/images/');
 //define('B_URL', '/Tf_php');
 
@@ -12,8 +12,8 @@ define('IMAGE_URL', 'https://doc.tradersfind.com/images/');
 define('B_URL', '/tf_result');
 */
 
-  define('BASE_URL', 'http://localhost/');
+  define('BASE_URL', 'http://localhost:8000/');
   define('IMAGE_URL', 'https://doc.tradersfind.com/images/');
- // define('API_URL','https://api.tradersfind.com/');
+  define('API_URL','https://api.tradersfind.com/');
   define('B_URL', '');
 ?>
