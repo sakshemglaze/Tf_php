@@ -397,7 +397,7 @@ if (isset($category )&&isset($subcategory->shortDescription) && $subcategory->sh
   }else if(isset($subcategory->locations)){
       foreach($subcategory->locations as $Sdlocation){
    
-        if($Sdlocation->location==$location1 && isset($Sdlocation->shortDescription) && $Sdlocation->shortDescription!='' ){
+        if(strtolower(isset($Sdlocation->location)?$Sdlocation->location:'')==strtolower($location1) && isset($Sdlocation->shortDescription) && $Sdlocation->shortDescription!='' ){
           echo $Sdlocation->shortDescription;
           echo '<button style="color:brown; border: none;" onclick="readmoreSdesc()">
           view more

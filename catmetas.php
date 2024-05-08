@@ -20,8 +20,7 @@ if($location1==null || $location1=='UAE' || !isset($subcategory->locations)){
     }else{
      
       foreach($subcategory->locations as $Mlocation){
- 
-        if($Mlocation->location==$location1){
+        if(strtolower(isset($Sdlocation->location)?$Sdlocation->location:'')==strtolower($location1)){
           $SeoParams=seoSeter($Mlocation,$location1,$subcategory);
           
         }
