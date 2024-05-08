@@ -107,7 +107,7 @@ $SeoParams = [
                   </button>
                 </h2>
                 <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                  <div class="accordion-body fs-18">
+                  <div class="accordion-body ">
                     <ul style="list-style-type: disc;">
                       <li>Email Address</li>
                       <li>Phone number</li>

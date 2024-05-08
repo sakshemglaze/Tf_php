@@ -56,7 +56,7 @@ function submitform(){
 
     <div class="input-group input-group-lg w-100 position-relative ms-auto mw-600 order-3 order-md-2 mt-md-0">
           <input  autofocus type="text" class="form-control " id="search" name="searchText"  placeholder="What are you looking for.."
-                  style="height: 45px; border-top-right-radius: 10px; border-bottom-right-radius: 10px;" autocomplete="off" value="<?php echo $searchtext12;?>">
+                  style="height: 45px; border-top-right-radius: 10px; border-bottom-right-radius: 10px;" autocomplete="off" >
 
           <div class="submit-button">
            
@@ -147,8 +147,7 @@ function submitform(){
                 $('#search').val(suggestion.productName); 
                 var searchTermp = $('#search').val().replace(/\s+/g, '-');
                 searchTermp =searchTermp.toLowerCase();
-                var actionURL = "<?php echo  BASE_URL ?>product/" + encodeURIComponent((suggestion.productUrl?suggestion.productUrl:suggestion.productName).toLowerCase().replace(/\s/g,'-'));
-                $('#homepageSearch').attr('action', actionURL);
+                var actionURL = "product/" + encodeURIComponent(searchTermp)+'/'+suggestion.id;                $('#homepageSearch').attr('action', actionURL);
                 $('#homepageSearch').submit();
                 $('.search-result').hide(); 
             });
@@ -164,13 +163,13 @@ function submitform(){
                 $('#option_com').empty();
                 suggestions.forEach(function (suggestion) {
                     var suggestionItem = $('<li></li><br>').text(suggestion.sellerCompanyName).click(function() {
-                        $('#search').val(suggestion); 
+                        $('#search').val(suggestion.sellerCompanyName); 
                 var searchTermp = $('#search').val().replace(/\s+/g, '-');
                 var actionURL = "<?php echo  BASE_URL ?>seller/" + encodeURIComponent((suggestion.sellerUrl?suggestion.sellerUrl:suggestion.sellerCompanyName).toLowerCase().replace(/\s/g,'-'));
                 $('#homepageSearch').attr('action', actionURL);
                 $('#homepageSearch').submit();
 
-                $('#search').val(suggestion); 
+                $('#search').val(suggestion.sellerCompanyName); 
                 $('.search-result').hide(); 
             });
             $('#option_com').append(suggestionItem);

@@ -13,9 +13,15 @@
         $data =  get(
                 'api/guest/search-sellers-company-name/'.$companyName
               );
+              
               $data1 = json_decode($data);
+              $new_url = '/not-found';
+              if(!isset($data1[0]->id)){
+              header('Location: ' . $new_url, true, 301);
+              exit;
+              }
              // $data = findActive($data1);
-             //print_r($data1);
+            //print_r($data->linkedinUrl);
               
 $aproodproduct=get(
   'api/guest/products/by-seller/' . $data1[0]->id,
@@ -23,7 +29,15 @@ $aproodproduct=get(
   ['isFeatured' => true]
 );
 $aproodproduct1 = json_decode($aproodproduct);
+$productNames='';
+foreach ($aproodproduct1->products as $index => $product) {
+    
+  $productNames .= $product->productName;
 
+  if ($index < count($aproodproduct1->products) - 1) {
+      $productNames .= ", ";
+  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,9 +48,9 @@ $aproodproduct1 = json_decode($aproodproduct);
     <?php
       $SeoParams = [
           'title' => isset($data1[0]->metaTitle) && $data1[0]->metaTitle != '' ? $data1[0]->metaTitle : $data1[0]->sellerCompanyName,
-          'metaTitle' => isset($data1[0]->metaTitle) && $data1[0]->metaTitle != '' ? $data1[0]->metaTitle : $data1[0]->sellerCompanyName,
-          'metaDescription' => isset($data1[0]->metaDescription) && $data1[0]->metaDescription != '' ? $data1[0]->metaDescription : $data1[0]->sellerCompanyName,
-          'metaKeywords' => isset($data1[0]->metaKeywords) && $data1[0]->metaKeywords != '' & $data1[0]->metaKeywords[0] !='' ? implode(',', $data1[0]->metaKeywords) : $data1[0]->sellerCompanyName,
+          'metaTitle' => isset($data1[0]->metaTitle) && $data1[0]->metaTitle != '' ? $data1[0]->metaTitle : $data1[0]->sellerCompanyName.' in '.$data1[0]->city.','.$data1[0]->sellerState.','.$data1[0]->country,
+          'metaDescription' => isset($data1[0]->metaDescription) && $data1[0]->metaDescription != '' ? $data1[0]->metaDescription : $data1[0]->sellerCompanyName.' is a leading company of '.$productnames.' located in '.$data1[0]->city.','.$data1[0]->sellerState.','.$data1[0]->country,
+          'metaKeywords' => isset($data1[0]->metaKeywords) && $data1[0]->metaKeywords != '' & $data1[0]->metaKeywords[0] !='' ? implode(',', $data1[0]->metaKeywords) : $data1[0]->sellerCompanyName.','.' in '.$data1[0]->city.','.$data1[0]->sellerCompanyName.' in '. $data1[0]->sellerState.','. $data1[0]->sellerCompanyName.' in '. $data1[0]->country.','. $productnames,
           'fbTitle' => isset($data1[0]->fbTitle) && $data1[0]->fbTitle != '' ? $data1[0]->fbTitle : $data1[0]->sellerCompanyName,
           'fbDescription' => isset($data1[0]->fbDescription) && $data1[0]->fbDescription != '' ? $data1[0]->fbDescription : $data1[0]->sellerCompanyName,
           'fbImage' => isset($data1[0]->fbImage) ? API_URL . 'api/guest/imageContentDownload/' . $data1[0]->fbImage.id : 'undefined',
@@ -77,7 +91,67 @@ $aproodproduct1 = json_decode($aproodproduct);
     </ol>
   </nav>
 </section>
+<script src="services/storegeService.js"></script>
+<script>
+       function closePopup() {
+    document.getElementById("popup-card-otp").style.display = "none";
+  }
+  function submitRequirement(formdata){
+  // var productname=document.getElementById("productName").value;
+  
+  // var quantity=document.getElementById("quantity").value;
+  // var Unit=document.getElementById("quantityUnit").value;
+  // var requirement=document.getElementById("requirement").value;
+ 
+  // var countryCode=document.getElementById("countryCode").value;
+  // var contactNumber=document.getElementById("contactNumber").value;
+  
+//console.log(productname);
+        // let payload = {
+        //   enquirerName: 'Atulyadav',
+        //   enquirerContactNumber: countryCode+contactNumber,
+        //   enquirerEmail:'atul@sakshemit.com',
+        //   enquiryMessage: requirement,
+        //   productName:productname,
+        //   quantity: quantity,
+        //   unit: Unit,
+        //   buyer: { id: '651266a6be013b38a26b35bf' },
+        //   status: 'New',
+        //   frequencytype: lol
+        // }
+        document.getElementById("postBuyreq").reset();
 
+       // formdata.frequencytype=lol;
+       var url="<?php echo API_URL?>api/enquiries";
+       console.log(url);
+       const myObject1 = new StorageService();
+      var token=myObject1.getItem('userAccessToken');
+fetch(url, {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+        Authorization: 'Bearer ' + token,
+    },
+    body: JSON.stringify(formdata),
+})
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        console.log(data);
+        if(confirm('Your Request is submitted successfully!! Please click OK.')) {
+          window.location.href = '/';
+    }
+    })
+    .catch(function (error) {
+        console.log(error);
+        if(confirm('Your Request is not submitted !!! Due To some issue Please click OK.')) {
+          window.location.href = '/';
+        }
+    });
+  //console.log(payload);
+  }
+</script>
 <section class="container-fluid bg-gradiant2">
   <div class="row gy-4">
     <div class="bg9 position-relative mt-0 shadow-sm">
@@ -151,11 +225,12 @@ $aproodproduct1 = json_decode($aproodproduct);
                     class=" btn py-2 btn-sm w-100">
                     <!--<a target="_blank" href="https://api.whatsapp.com/send?phone=971569773623&text=Browsed TradersFind" class="whatsappbtn btn py-2 btn-sm w-100">-->
                     Connect on whatsapp
+                    
                   </a>
                       
                 </div>
                 <div class="col-lg-6">
-                  <button onclick="openPopup()"
+                  <button onclick="openPopup1()"
                     class="btn-outline-gradiant btn py-2  btn-sm w-100 text-black">
                     <img src="<?php echo BASE_URL?>assets/images/mail-solid.png" alt="mail" /> Send Inquiry
                   </button>
@@ -169,25 +244,26 @@ $aproodproduct1 = json_decode($aproodproduct);
                   <ul class="d-flex gap-2 justify-content-center mt-0">
                 <?php if (isset($data1[0]->twitterLink) && $data1[0]->twitterLink != '') :?>
                     <li>
-                      <a href="/<?php echo $data1[0]->twitterLink ?>" aria-label="Twitter">
+                      <a href="<?php echo $data1[0]->twitterLink ?>" aria-label="Twitter">
                         <img src="<?php echo BASE_URL?>assets/images/twitter.webp" width="40" alt="X" />
                       </a>
                     </li>
                     <?php endif;
                     if (isset($data1[0]->facebookLink) && $data1[0]->facebookLink != ''): ?>
                     <li>
-                      <a href="/<?php echo $data1[0]->facebookLink ?>" aria-label="Facebook">
+                      <a href="<?php echo $data1[0]->facebookLink ?>" aria-label="Facebook">
                           <img src="<?php echo BASE_URL?>assets/images/facebook.webp" width="40" alt="facebook" />
                       </a>
                   </li>
                   <?php endif; 
                   if (isset($data1[0]->instagramLink) && $data1[0]->instagramLink != '') :?>
                     <li>
-                      <a href="/<?php echo $data1[0]->instagramLink ?>" aria-label="Instagram">
+                      <a href="<?php echo $data1[0]->instagramLink ?>" aria-label="Instagram">
                         <img src="<?php echo BASE_URL?>assets/images/instagram.webp" width="40" alt="instagram" />
                       </a>
                     </li>
                    <?php endif; ?> 
+                   
                   </ul>
                 </div>
               </div>
@@ -314,24 +390,12 @@ $aproodproduct1 = json_decode($aproodproduct);
                 <img src="<?php echo BASE_URL;?>assets/images/icon__6.png" alt="seller" class="me-3" />
                 <div class="text-start lh-sm">
                   <h3 class="text-black-50 mb-0 fs-4 fwbold">Service Area</h3>
-                  <span title="{{ seller.mainMarkets.join(', ') }}" *ngIf="
-                          seller.mainMarkets &&
-                          seller.mainMarkets.length>
-                      0 &&
-                      seller.mainMarkets[0] &&
-                      seller.mainMarkets[0] != ''
-                      "><?php echo implode(", ", $data1[0]->mainMarkets); ?>
-
+                  <span><?php if(isset($data1[0]->mainMarkets)):?><?php echo implode(", ", $data1[0]->mainMarkets); ?>
+                    <?php endif;?>
                   </span>
-                  <span title="{{ seller?.sellerState }}, {{ seller?.sellerCountry }}" *ngIf="
-                          !(
-                          seller.mainMarkets &&
-                          seller.mainMarkets.length>
-                      0 &&
-                      seller.mainMarkets[0] &&
-                      seller.mainMarkets[0] != ''
-                      )
-                      "><?php echo $data1[0]->sellerState.',' .$data1[0]->sellerCountry ;?>
+                  
+                  <span ><?php if(!isset($data1[0]->mainMarkets)):?><?php echo $data1[0]->sellerState.',' .$data1[0]->sellerCountry ; ?>
+                    <?php endif;?>
                   </span>
                 </div>
               </div>
@@ -343,7 +407,7 @@ $aproodproduct1 = json_decode($aproodproduct);
                 <div class="text-start lh-sm">
                   <h3 class="text-black-50 mb-0 fs-4 fwbold">Map Location</h3>
                   <!--<app-map [longitude]="this.seller.coordinates[0]" [latitude]="this.seller.coordinates[1]"></app-map>-->
-                  <button (click)="openMap(this.seller.coordinates[1],this.seller.coordinates[0])"
+                  <button onclick="toggleMap()"
                     class="btn-outline-gradiant btn btn-sm w-100 d-center"> Click Here
                   </button>
                 </div>
@@ -393,20 +457,29 @@ $aproodproduct1 = json_decode($aproodproduct);
                 <div class="fw mix-container home-gallery">
 
                 <?php foreach ( $aproodproduct1->products as $index => $product): ?>
+                  
     <div class="mix valves">
+       <?php if($product->isFeatured ):?>
+                    <img class="inside" src="<?php echo BASE_URL; ?>assets/images/Star_listing.png" alt="verified_image" width="80" height="30" />       
+                    <?php endif;?>
+                    <?php if($product->sponsoredKeywords[0]!=''):?>
+                      <img class="inside" src="<?php echo BASE_URL; ?>assets/images/Premium_listing.png" alt="Premium_listing" width="80" height="30" style="margin-left: 90px;" />
+                    <?php endif;?>
         <a href="<?php echo BASE_URL. $urlService->getProductUrl($product->productName,$product->id);?>" class="thumb-a">
             <div class="item-hover">
+      
                 <div class="hover-text">
                     <h3><?= $product->productName ?></h3>
                 </div>
             </div>
+            
             <div class="item-img">
-               <img src="https://doc.tradersfind.com/images/<?php echo $product->images[0]->id; ?>.webp" alt="<?php echo $product->productName;?>" style="width: 140px;">
-                <!-- <img src="assets/images/products/valves.png" alt="seller" /> -->
-            </div>
+               <img  src="https://doc.tradersfind.com/images/<?php echo $product->images[0]->id; ?>.webp" alt="<?php echo $product->productName;?>" style="width: 140px;">
+              </div>
         </a>
     </div>
-<?php endforeach; ?>
+<?php endforeach; 
+?>
 
 
 
@@ -437,6 +510,7 @@ $aproodproduct1 = json_decode($aproodproduct);
               $longitude=$data1[0]->coordinates[1];
               }
               include_once "map.php";?>
+
               </div>
 
 
@@ -454,14 +528,12 @@ $aproodproduct1 = json_decode($aproodproduct);
                         <h4 class="text-uppercase mb-4 fwbold fs-4">
                           Tell us about your requirement
                         </h4>
-                        <form *ngIf="this.requirementService.prodDetailFrom"
-                          [ngClass]="!this.requirementService.isFormvalid?'was-validated':''"
-                          [formGroup]="this.requirementService.prodDetailFrom">
+                        <form method="post" id="postBuyreq">
                           <div class="row">
 
                             <div class="col-lg-6">
                               <label for="" class="form-label fs-5">Describe in few words *</label>
-                              <textarea name="" formControlName="description" class="form-control" id="" cols="30"
+                              <textarea name="" name="description" class="form-control" id="" cols="30"
                                 rows="6"
                                 placeholder="Please include product name, order quantity, usage, special request if any in your inquiry."></textarea>
                               <!--<button class="p-0 text-blue bg-transparent border-0 mt-3 fs-6">
@@ -473,20 +545,20 @@ $aproodproduct1 = json_decode($aproodproduct);
                               <div class="row gy-4">
                                 <div class="col-lg-6">
                                   <label for="" class="form-label  fs-4">Email ID *</label>
-                                  <input type="text" formControlName="enquirerEmail" class="form-control"
+                                  <input type="text" name="enquirerEmail" class="form-control"
                                     placeholder="Email ID" />
                                 </div>
                                 <div class="col-lg-6">
                                   <label for="" class="form-label  fs-4">Mobile Number*</label>
                                   <div class="input-group">
-                                  <select formControlName="countryCode" class="form-control mxw-50">
+                                  <select name="countryCode" class="form-control mxw-50">
                                           
                                           <option value="+971">+971 - United Arab Emirates.</option>
                  <option value="+91">+91 - India</option>
                                   </select>
                                     <!--</div>
                                <div class="col-lg-6">-->
-                                    <input type="text" formControlName="mobileNo" class="form-control"
+                                    <input type="text" name="mobileNo" class="form-control"
                                       placeholder="Mobile number" width="" />
                                   </div>
                                 </div>
@@ -499,9 +571,8 @@ $aproodproduct1 = json_decode($aproodproduct);
                                         class="text-decoration-underline">terms and conditions</a>
                                     </label>
                                   </div>
-                                  <!-- <app-loadp *ngIf="this.requirementService.spannerval"
-                                    style="height: 50%; width: 100%; margin-left: -5px;"></app-loadp> -->
-                                    <button (click)="this.requirementService.onClickSubmitRequirement()"
+                                  
+                                    <button 
                                     class="btn-primary-gradiant custom-button-style">
                                 Requirement
                             </button>
@@ -512,6 +583,9 @@ $aproodproduct1 = json_decode($aproodproduct);
                             </div>
                           </div>
                         </form>
+
+
+                        
                         <div class="col-lg-12">
                           <div class="card shadow-sm mt-5 br_right bg-light">
                             <div class="card-body text-center">
@@ -556,7 +630,201 @@ $aproodproduct1 = json_decode($aproodproduct);
       </div>
     </div>
   </div>
+  <?php include_once 'map.php';?>
+  <script>
+        function toggleMap() {
+          console.log('bghjdbdfg');
+          document.getElementById("map-container").style.display = "block";
+        }
+    </script>
+  </script>
+  <script>
+              var lol='';
+    var frequencytype=document.getElementsByName('frequencytype');
+  frequencytype.forEach(function(radioButton) {
+        radioButton.addEventListener('change', function() {
+            var selectedValue = this.value;
+            lol=selectedValue;
+            console.log(selectedValue); // Log the selected value
+        });
+    });
+
+   function otpLogin(otpAuthData, mobileNumber,formdata) {
+    console.log(mobileNumber);
+      const myObject = new StorageService();
+      $.ajax({
+        url: "https://api.tradersfind.com/api/authenticate-otp",
+  method: "POST",
+  dataType: "json",
+  contentType: "application/json",
+  data: JSON.stringify(otpAuthData),
+  success: function (data) {
+                       console.log(data);
+                       myObject.setItem('userAccessToken', data['id_token']);
+                       myObject.setItem('isLoggedIn', '1');
+                       myObject.setItem('loggedVia', 'mobile');
+                       myObject.setItem('userData', mobileNumber);
+                       myObject.setItem('userMobile', mobileNumber);
+                       myObject.setItem('login', mobileNumber);
+                       myObject.setItem('userFname', "User");
+                       submitRequirement(formdata);
+    
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+      //this.verifyRequestProcessing = false;
+    
+      //var that = this;
+      // setTimeout(function () { that.authService.authenticateUser(); }, 3000);
+      // this.messageService.add({
+      //   severity: "success",
+      //   summary:
+      //     'Otp verified successfully.',
+      // });
+      // this.dialogRef.close();
+      // this.modalService.dismissAll();
+      // this._router.navigate(['/']);
+    }
+    function otpRegister(otpAuthData, mobileNumber,formdata){
+     
+      const myObject1 = new StorageService();
+      $.ajax({
+        url: "https://api.tradersfind.com/api/register-otp",
+  method: "POST",
+  dataType: "json",
+  contentType: "application/json",
+  data: JSON.stringify(otpAuthData),
+  success: function (data) {
+                       console.log(data);
+                       myObject1.setItem('userAccessToken', data['id_token']);
+                       myObject1.setItem('isLoggedIn', '1');
+                       myObject1.setItem('loggedVia', 'mobile');
+                       myObject1.setItem('userData', mobileNumber);
+                       myObject1.setItem('userMobile', mobileNumber);
+                       myObject1.setItem('login', mobileNumber);
+                       myObject1.setItem('userFname', "User");
+                       submitRequirement(formdata);
+    
+                    },
+                    error: function (xhr, status, error) {
+                      console.log("test reg")
+                        console.error(xhr.responseText);
+                    }
+                });
+  }
+    
+    
+
+    function verifyOtp(event,mobnumber,formdata){
+           // var otm=document.getElementById('otp').value;
+           // console.log(mobnumber);
+           var newmobnum='+'+mobnumber;
+           let otpAuthData = {
+              phone: newmobnum,
+              otpValue: event,
+              login: newmobnum,
+              isMobileLogin: true,
+              langKey: "en"
+    };
+           var otpres='';
+            $.ajax({
+                    url: "https://api.tradersfind.com/api/guest/users/"+'+'+mobnumber,
+                    dataType: "json",
+                    data: { },
+                    success: function (data) {
+                       
+                        if (data != "NotFound") {
+          //console.log(otpAuthData,mobileNumber)
+          otpLogin(otpAuthData, newmobnum,formdata);
+          console.log("1");
+        }
+        else {
+          otpRegister(otpAuthData, newmobnum,formdata);
+          console.log("2");
+        }
+                    },
+                    error: function (xhr, status, error) {
+                        if(xhr.responseText!='NotFound'){
+                          otpLogin(otpAuthData, newmobnum,formdata);
+                        }else{
+                          console.log("tttttttttt");
+                          otpRegister(otpAuthData, newmobnum,formdata);
+                        }
+                    }
+                });
+            closePopup();
+
+        }
+
+       function startfomsubmition(){
+
+        }
+          </script>
+
+<?php
+function sendOtp($contenctNo,$formdata){
  
+
+  $payload=array('phone'=> $contenctNo, 'loginmethod'=>'WHATSAPP');
+  $data123=post(
+  'api/otps',
+  $payload,
+  false,
+  //isWhatsapp ? { type: 'whatsapp' } : {type: 'email'},
+  array("type"=> 'WHATSAPP'),
+  false);
+  //print_r($data123->title);
+  if(isset($data123->title)&& $data123->title=='ContactNo not Valid.'){
+   
+    echo "<script>
+    if(confirm('Please click on OK and send a message (Register Me) on our whatsapp number (+971569773623) to register.')) {
+        window.open('https://api.whatsapp.com/send?phone=971569773623&text=Register%20Me', '_blank');
+    }
+  </script>";
+  }else{
+  include_once 'otp.php';
+ // echo $contenctNo;
+  echo '<script>document.getElementById("popup-card-otp").style.display = "block";</script>';
+  }
+}
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  // Retrieve form data
+  if(isset($_POST['productName'])){
+  $productName = $_POST['productName'];
+  $quantity = $_POST['quantity'];
+  $quantityUnit = $_POST['quantityUnit'];
+  $requirement = $_POST['requirement'];
+  $frequencytype = $_POST['frequencytype'];
+  $countryCode = $_POST['countryCode'];
+  $contactNumber = $_POST['contactNumber'];
+  
+  $formdata = array(
+    'enquirerContactNumber' => $countryCode . $contactNumber,
+    'enquiryMessage' => $requirement,
+    'productName' => $productName,
+    'quantity' => $quantity,
+    'unit' => $quantityUnit,
+    'status' => 'New',
+    'frequencytype' => $frequencytype
+  );
+
+//echo "Form submitted successfully!";
+// echo $productName;
+// header("Location: post-buy-requirements");
+$contenctNo=$countryCode.$contactNumber;
+include_once 'post.php';
+//print_r($contenctNo);
+$respons=sendOtp($contenctNo,$formdata);
+
+
+  }
+} else {
+
+ 
+}
+?>
 <?php
  include_once 'enquery.php';
  ?>
@@ -564,7 +832,7 @@ $aproodproduct1 = json_decode($aproodproduct);
 
 <script>
   // Function to open the popup card
-  function openPopup() {
+  function openPopup1() {
 
     document.getElementById("popup-card").style.display = "block";
   }

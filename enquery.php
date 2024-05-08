@@ -1,10 +1,10 @@
 <?php include_once 'config.php'; ?>
-<div id="popup-card" class="popup-card">
-  
+<div id="popup-card" class="popup-card" style="display: none;">
+
 
 <section class="bg-gradiant1 login-title text-center text-white fwbold pb100">
     <div class="container">
-        <button type="button" class="btn-close float-end mt-1" aria-label="Close" onclick="closePopup();"></button>
+        <button type="button" class="btn-close float-end mt-1" aria-label="Close" onclick="closePopup1();"></button>
         <span class="fs-3 pt20">Let Us know What you Need</span>
         <p class="mt-0 mb-0 ">Tell us your requirement. Get Instant quotes from Verified Sellers</p>
 
@@ -19,19 +19,12 @@
                 <div class="col-md-8 line">
                     <div class="fs-3 fwbold Details">Requirement Details</div>
 
-                    <form *ngIf="this.requirementService.productSellerForm"
-                        [ngClass]="!this.requirementService.isFormvalid?'was-validated':''"
-                        [formGroup]="this.requirementService.productSellerForm">
+                    <form method="post" id="postBuyreq">
                         <div class="mb-3 mt-3">
                             <label>Product / Service</label>
-                            <input type="text" class="form-control" formControlName="productName"
+                            <input type="text" class="form-control" name="productName"
                                 placeholder="Products / Services you are looking for" required>
-                            <div class="is-invalid" *ngIf="
-              !this.requirementService.productSellerForm.controls['productName']
-                .valid &&
-              this.requirementService.productSellerForm.controls['productName']
-                .touched
-            ">
+                            <div class="is-invalid" >
                                 *Product/Service is required
                             </div>
                         </div>
@@ -39,7 +32,7 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label>Quantity</label>
-                                    <input type="text" class="form-control" formControlName="quantity"
+                                    <input type="text" class="form-control" name="quantity"
                                         placeholder="Estimated Order Quantity">
 
                                 </div>
@@ -47,7 +40,7 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label>Unit</label>
-                                    <select formControlName="quantityUnit" class="form-control"
+                                    <select name="quantityUnit" class="form-control"
                                         placeholder="eg:  Dozen,  Piece(s),  Tonr">
                                         <?php
                       $context = stream_context_create([
@@ -74,9 +67,8 @@
                             <div class="col-md-12">
                                 <div class="mb-3">
                                     <label>Describe your buying requirement</label>
-                                    <textarea formControlName="requirement" class="form-control"
-                                        placeholder="Describe your buying requirement">
-                  </textarea>
+                                    <textarea class="form-control" id="requirement" name="requirement" rows="2" placeholder="Describe your buying requirement"></textarea>
+
 
                                 </div>
                             </div>
@@ -98,12 +90,12 @@
                                     <div class="input-group">
 
 
-                                        <select formControlName="countryCode" class="form-control mxw-50">
+                                        <select name="countryCode" class="form-control mxw-50">
                                           
                                                 <option value="+971">+971 - United Arab Emirates.</option>
                        <option value="+91">+91 - India</option>
                                         </select>
-                                        <input type="number" formControlName="contactNumber" class="form-control"
+                                        <input type="number" name="contactNumber" class="form-control"
                                             placeholder="Mobile" required="number" />
 
                                     </div>
@@ -115,15 +107,12 @@
                         <p>
                                 I agree to all the <a href="https://www.tradersfind.com/term-and-conditions" target="_blank" class="text-danger"> Terms of Use </a> stated by TradersFind.com</p>
                                 <app-loadp *ngIf="requirementService.spannerval" style="height: 50%; width: 60%; margin-left: -5px;"></app-loadp>
-                        <button (click)="this.requirementService.onClickSubmitRequirement()"
+                        <button 
                             class="btn-primary-gradiant px-md-5 py-2 rounded-10 fs-5 fwbold mb-3">Submit
                             Requirement</button>
 
                     </form>
-
-                    <app-otp *ngIf="this.requirementService.isVerification"
-                        [countryCode]="this.requirementService.productSellerForm.value.countryCode"
-                        [mobileNo]="this.requirementService.productSellerForm.value.contactNumber"></app-otp>
+                   
                 </div>
                
                 <div class="col-md-4">
@@ -174,7 +163,8 @@
 </div>
 <script>
  
-  function closePopup() {
+  function closePopup1() {
     document.getElementById("popup-card").style.display = "none";
   }
 </script>
+

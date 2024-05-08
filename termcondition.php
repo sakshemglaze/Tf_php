@@ -43,21 +43,21 @@ include_once "header-sub.php";
       <div class="fs-18 px-sm-4 pt-2 pb-4 mt-3 rounded-10 shadow2">
         <h3 class="fwbold fs-4"> Acceptance </h3>
         <p>
-          This agreement is between the user and ‘Traders Find’. By using, accessing, or browsing our website, you agree to be bound by the terms and conditions set forth in this agreement. If you do not agree to these terms and conditions, please leave the website immediately and do not use it further. This agreement is the only agreement between you and ‘Traders Find’, and it supersedes all other agreements, representations, warranties, and understandings regarding our website and services. However, additional terms and conditions may apply to your use of our website and services. We may change this agreement at any time without specific notice to you, and the latest agreement will be posted on our website. By continuing to use our website, you agree to be bound by any changes to this agreement. It is important to periodically review this agreement, and if you do not accept it, you should discontinue use of our website and services immediately.
+          This agreement is between the user and ‘TradersFind’. By using, accessing, or browsing our website, you agree to be bound by the terms and conditions set forth in this agreement. If you do not agree to these terms and conditions, please leave the website immediately and do not use it further. This agreement is the only agreement between you and ‘TradersFind’, and it supersedes all other agreements, representations, warranties, and understandings regarding our website and services. However, additional terms and conditions may apply to your use of our website and services. We may change this agreement at any time without specific notice to you, and the latest agreement will be posted on our website. By continuing to use our website, you agree to be bound by any changes to this agreement. It is important to periodically review this agreement, and if you do not accept it, you should discontinue use of our website and services immediately.
         </p>
       </div>
 
       <div class="fs-18 px-sm-4 pt-2 pb-4 mt-3">
         <h3 class="fwbold fs-4"> Conditions And Restrictions </h3>
         <p>
-          The use of “Traders Find’s” Products and Services is subject to following the Terms and Conditions. It also states that if you fail to comply with these rules, “Traders Find” may terminate your access to their website or any of their Products and Services. Such termination may happen without notice and is at the discretion of “Traders Find”. Furthermore, “Traders Find” has the right to terminate any user's access to their website or Products and Services for conduct that they believe is or may be harmful to other users,“Traders Find”, any third party, or for any conduct that violates local or foreign laws or regulations.
+          The use of “TradersFind’s” Products and Services is subject to following the Terms and Conditions. It also states that if you fail to comply with these rules, “TradersFind” may terminate your access to their website or any of their Products and Services. Such termination may happen without notice and is at the discretion of “TradersFind”. Furthermore, “TradersFind” has the right to terminate any user's access to their website or Products and Services for conduct that they believe is or may be harmful to other users,“TradersFind”, any third party, or for any conduct that violates local or foreign laws or regulations.
         </p>
       </div>
 
       <div class="fs-18 px-sm-4 pt-2 pb-4 mt-3 rounded-10 shadow2">
         <h3 class="fwbold fs-4"> Defined permission </h3>
         <p>
-          When you submit a web page to “Traders Find” or any other web page hosting service on “Traders Find”, you give them permission to use and share your content with others. This includes the ability to copy, display, perform, and distribute your web page and any associated content, such as text or images. They can use your web page to promote it within “Traders Find” and on other websites. This permission applies to any form, media, or technology now or in the future. However, this permission is only valid while you are a member of “Traders Find”. You should also know that “Traders Find” may place ads on your web page, such as banner ads or pop-ups. The way these ads are displayed may change over time.
+          When you submit a web page to “TradersFind” or any other web page hosting service on “TradersFind”, you give them permission to use and share your content with others. This includes the ability to copy, display, perform, and distribute your web page and any associated content, such as text or images. They can use your web page to promote it within “TradersFind” and on other websites. This permission applies to any form, media, or technology now or in the future. However, this permission is only valid while you are a member of “TradersFind”. You should also know that “TradersFind” may place ads on your web page, such as banner ads or pop-ups. The way these ads are displayed may change over time.
         </p>
       </div>
 
@@ -123,7 +123,7 @@ include_once "header-sub.php";
       <div class="fs-18 px-sm-4 pt-2 pb-4 mt-3 rounded-10 shadow2">
         <h3 class="fwbold fs-4"> Disclaimer </h3>
         <p>
-          We,“Traders Find”, are not responsible for any content posted by our website users, whether it is offensive, inappropriate, or unlawful. We provide guidelines for conduct and postings, but we do not control what users post, share or transmit on our website or services.
+          We,“TradersFind”, are not responsible for any content posted by our website users, whether it is offensive, inappropriate, or unlawful. We provide guidelines for conduct and postings, but we do not control what users post, share or transmit on our website or services.
         </p>
         <p>We may have temporary downtime due to maintenance or other reasons, and we are not responsible for any errors, interruptions, or delays that occur. We are also not responsible for any technical problems, such as malfunctioning computer systems, servers or providers, email failures, or traffic congestion on the internet, that may cause damage or injury to your hardware or software.</p>
         <p>

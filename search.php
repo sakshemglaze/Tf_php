@@ -1,6 +1,4 @@
 <?php 
-//error_reporting(E_ALL);
-//ini_set('display_errors', 1);
 
 include_once 'config.php';
        
@@ -36,6 +34,7 @@ include_once 'config.php';
     $searchtext = htmlspecialchars(str_replace('-',' ', $category1));
     class FilterDTO {
       public $stateFilter;
+      public $productSubCategoryFilter;
   }
   $filterDto = new FilterDTO();
   if( $numParts==4){//will change
@@ -64,26 +63,39 @@ else{
         $location1 = 'UAE';
           $subcatName=basename($parts[2]);
           $subcategory = json_decode(get ( 'api/guest/products-subcategorie/' . $subcatName));
-
-    //print_r($subcategory->subCategoryName);
+         
+   
             $payload = array(
-                'searchText' => $subcategory->subCategoryName ,
+                'searchText' => strtolower($subcategory->subCategoryName) ,
                 'searchTextType' => 'subcategory',
                 'filterDto' => $filterDto
             );  
-            
+            if(!isset($subcategory->subCategoryName)){
+              $new_url = str_replace('/category/', '/search/', $currentUrl);
+    
+              header('Location: ' . $new_url, true, 301);
+              exit;
+            }else{
+
+           
             $queryParams= array('page'=> $page, 'size'=> $size) ;          
-            $data =  post(
+            $data1 =  postforprod(
               'api/new-search-products',
               $payload,
               true,
               $queryParams,
               false
             );
-        if($data->sponsoredProduct!=null){
-            $length=count(($data->products))+1;
+           
+           $data=$data1['data'];
+           $totallength=$data1['xTotalCount'];
+          // print_r(gettype($data));
+           //print_r($data);
+
+        if($data['sponsoredProduct']!=null){
+            $length=count(($data['products']))+1;
         }else{
-              $length = count(($data->products));
+              $length = count(($data['products']));
           }
     //print_r($data);
 
@@ -96,27 +108,33 @@ else{
       }
 
         //print_r(isset($subcategory) && $subcategory->metaDescription !='' ? str_replace('UAE',$location1,$subcategory->metaDescription) : 'Searching for ' . $subcategory->subCategoryName . ' at best price in ' . $location1 . '? Choose from a wide range of companies provide' . $subcategory->subCategoryName . ' online on Tradersfind.com');
-        $SeoParams = [
-          'title' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('uae',$location1,strtolower($subcategory->metaTitle)) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com',
-          'metaTitle' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('uae',$location1,strtolower($subcategory->metaTitle)) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com',
-          'metaDescription' => isset($subcategory->subCategoryDescription) && $subcategory->subCategoryDescription !='' ? str_replace('uae',$location1,strtolower($subcategory->subCategoryDescription)) : 'Searching for ' . $subcategory->subCategoryName . ' at best price in ' . $location1 . '? Choose from a wide range of companies provide' . $subcategory->subCategoryName . ' online on Tradersfind.com',
-          'metaKeywords' => isset($subcategory->keywords) && $subcategory->keywords != '' ? str_replace('uae',$location1,strtolower($subcategory->keywords)) : $subcategory->subCategoryName . ', ' . $subcategory->subCategoryName . ' in '. $location1,
-          'fbTitle' => isset($subcategory->fbTitle) && $subcategory->fbTitle !='' ? str_replace('uae',$location1,strtolower($subcategory->fbTitle)) : null,
-          'fbDescription' => isset($subcategory->fbDescription) ? str_replace('uae',$location,strtolower($subcategory->fbDescription)) : null,
-          'fbImage' => isset($subcategory->fbImage) ? $subcategory->fbImage : '',
-          'fbUrl' => isset($subcategory->fbUrl) ? $subcategory->fbUrl : '',
-          'twitterTitle' => isset($subcategory->twitterTitle) && $subcategory->twitterTitle !='' ? str_replace('uae',$location1,strtolower($subcategory->twitterTitle)) : null,
-          'twitterDescription' => isset($subcategory->twitterDescription) ? $subcategory -> twitterDescription : null,
-          'twitterImage' => isset($subcategory->twitterImage) ? $subcategory->twitterImage : null,
-          'twitterSite' => isset($subcategory->twitterSite) ? $subcategory->twitterSite : '',
-          'twitterCard' => isset($subcategory->twitterCard) ? $subcategory->twitterCard : null,
-          'schemaDescription' => isset($subcategory->schemaDescription) ? $subcategory->schemaDescription : '',
-          ];
+        // $SeoParams = [
+        //   'title' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('uae',$location1,strtolower($subcategory->metaTitle)) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com',
+        //   'metaTitle' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('uae',$location1,strtolower($subcategory->metaTitle)) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com',
+        //   'metaDescription' => isset($subcategory->subCategoryDescription) && $subcategory->subCategoryDescription !='' ? str_replace('uae',$location1,strtolower($subcategory->subCategoryDescription)) : 'Searching for ' . $subcategory->subCategoryName . ' at best price in ' . $location1 . '? Choose from a wide range of companies provide' . $subcategory->subCategoryName . ' online on Tradersfind.com',
+        //   'metaKeywords' => isset($subcategory->keywords) && $subcategory->keywords != '' ? str_replace('uae',$location1,strtolower($subcategory->keywords)) : $subcategory->subCategoryName . ', ' . $subcategory->subCategoryName . ' in '. $location1,
+        //   'fbTitle' => isset($subcategory->fbTitle) && $subcategory->fbTitle !='' ? str_replace('uae',$location1,strtolower($subcategory->fbTitle)) : null,
+        //   'fbDescription' => isset($subcategory->fbDescription) ? str_replace('uae',$location,strtolower($subcategory->fbDescription)) : null,
+        //   'fbImage' => isset($subcategory->fbImage) ? $subcategory->fbImage : '',
+        //   'fbUrl' => isset($subcategory->fbUrl) ? $subcategory->fbUrl : '',
+        //   'twitterTitle' => isset($subcategory->twitterTitle) && $subcategory->twitterTitle !='' ? str_replace('uae',$location1,strtolower($subcategory->twitterTitle)) : null,
+        //   'twitterDescription' => isset($subcategory->twitterDescription) ? $subcategory -> twitterDescription : null,
+        //   'twitterImage' => isset($subcategory->twitterImage) ? $subcategory->twitterImage : null,
+        //   'twitterSite' => isset($subcategory->twitterSite) ? $subcategory->twitterSite : '',
+        //   'twitterCard' => isset($subcategory->twitterCard) ? $subcategory->twitterCard : null,
+        //   'schemaDescription' => isset($subcategory->schemaDescription) ? $subcategory->schemaDescription : '',
+        //   ];
+        include_once 'catmetas.php';
         //print_r("first if");
+      }
   }
   else if( $numParts==3 && basename($parts[1])=='search'){//will be change
-            $subcatName=basename($parts[2]);
+            $subcatName=str_replace('-',' ',basename($parts[2]));
             $subcategory = json_decode(get ( 'api/guest/products-subcategorie/' . $subcatName));
+
+  $filterDto->productSubCategoryFilter = isset($_POST['productSubCategoryFilter'])?$_POST['productSubCategoryFilter']:null;
+
+
             $payload = array(
               'searchText' => isset($subcategory) ? $subcategory->subCategoryName : $subcatName ,
               'searchTextType' => null,
@@ -125,15 +143,16 @@ else{
         
           $queryParams= array('page'=> $page, 'size'=> $size) ;
         
-          $data =  post(
+          $data1 =  postforprod(
             'api/new-search-products',
             $payload,
             true,
             $queryParams,
             false
           );
-          
-            $length = count(($data->products));
+          $data=$data1['data'];
+          $totallength=$data1['xTotalCount'];
+           // $length = count(($data->products));
            //print_r('Welcome search 3');
           }else if(basename($parts[1])=='search' && $numParts==4 ){//will change
             $subcatName=basename($parts[2]);
@@ -147,15 +166,16 @@ else{
         
           $queryParams= array('page'=> $page, 'size'=> $size) ;
         
-          $data =  post(
+          $data1 =  postforprod(
             'api/new-search-products',
             $payload,
             true,
             $queryParams,
             false
           );
-          
-            $length = count(($data->products));
+          $data=$data1['data'];
+          $totallength=$data1['xTotalCount'];
+           // $length = count(($data->products));
             //print_r('Welcome search 1 4');
           }
          
@@ -171,15 +191,16 @@ else{
             //print_r($payload);
             $queryParams= array('page'=> $page, 'size'=> $size) ;
           
-            $data =  post(
+            $data1 =  postforprod(
               'api/new-search-products',
               $payload,
               true,
               $queryParams,
               false
             );
-            
-              $length = count(($data->products));              
+            $data=$data1['data'];
+            $totallength=$data1['xTotalCount'];
+              //$length = count(($data->products));              
                 //print_r($subcategory);
               $category = json_decode(get(
                 'api/guest/products-categories-na/' . $subcategory->title, $queryParams
@@ -188,30 +209,33 @@ else{
               
               $industry = json_decode(get(
                 'api/industries-na/' . $category[0]->title,$queryParams) );
+                
               
 //print_r($subcategory->metaTitle);
-$SeoParams = [
-          'title' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('uae',$location1,strtolower($subcategory->metaTitle)) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com',
-          'metaTitle' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('uae',$location1,strtolower($subcategory->metaTitle)) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com',
-          'metaDescription' => isset($subcategory->subCategoryDescription) && $subcategory->subCategoryDescription !='' ? str_replace('uae',$location1,strtolower($subcategory->subCategoryDescription)) : 'Searching for ' . $subcategory->subCategoryName . ' at best price in ' . $location1 . '? Choose from a wide range of companies provide' . $subcategory->subCategoryName . ' online on Tradersfind.com',
-          'metaKeywords' => isset($subcategory->keywords) && $subcategory->keywords != '' ? str_replace('uae',$location1,strtolower($subcategory->keywords)) : $subcategory->subCategoryName . ', ' . $subcategory->subCategoryName . ' in '. $location1,
-          'fbTitle' => isset($subcategory->fbTitle) && $subcategory->fbTitle !='' ? str_replace('uae',$location1,strtolower($subcategory->fbTitle)) : null,
-          'fbDescription' => isset($subcategory->fbDescription) ? str_replace('uae',$location,strtolower($subcategory->fbDescription)) : null,
-          'fbImage' => isset($subcategory->fbImage) ? $subcategory->fbImage : '',
-          'fbUrl' => isset($subcategory->fbUrl) ? $subcategory->fbUrl : '',
-          'twitterTitle' => isset($subcategory->twitterTitle) && $subcategory->twitterTitle !='' ? str_replace('uae',$location1,strtolower($subcategory->twitterTitle)) : null,
-          'twitterDescription' => isset($subcategory->twitterDescription) ? $subcategory -> twitterDescription : null,
-          'twitterImage' => isset($subcategory->twitterImage) ? $subcategory->twitterImage : null,
-          'twitterSite' => isset($subcategory->twitterSite) ? $subcategory->twitterSite : '',
-          'twitterCard' => isset($subcategory->twitterCard) ? $subcategory->twitterCard : null,
-          'schemaDescription' => isset($subcategory->schemaDescription) ? $subcategory->schemaDescription : '',
-          ];
+// $SeoParams = [
+//           'title' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('uae',$location1,strtolower($subcategory->metaTitle)) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com',
+//           'metaTitle' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('uae',$location1,strtolower($subcategory->metaTitle)) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com',
+//           'metaDescription' => isset($subcategory->subCategoryDescription) && $subcategory->subCategoryDescription !='' ? str_replace('uae',$location1,strtolower($subcategory->subCategoryDescription)) : 'Searching for ' . $subcategory->subCategoryName . ' at best price in ' . $location1 . '? Choose from a wide range of companies provide' . $subcategory->subCategoryName . ' online on Tradersfind.com',
+//           'metaKeywords' => isset($subcategory->keywords) && $subcategory->keywords != '' ? str_replace('uae',$location1,strtolower($subcategory->keywords)) : $subcategory->subCategoryName . ', ' . $subcategory->subCategoryName . ' in '. $location1,
+//           'fbTitle' => isset($subcategory->fbTitle) && $subcategory->fbTitle !='' ? str_replace('uae',$location1,strtolower($subcategory->fbTitle)) : null,
+//           'fbDescription' => isset($subcategory->fbDescription) ? str_replace('uae',$location,strtolower($subcategory->fbDescription)) : null,
+//           'fbImage' => isset($subcategory->fbImage) ? $subcategory->fbImage : '',
+//           'fbUrl' => isset($subcategory->fbUrl) ? $subcategory->fbUrl : '',
+//           'twitterTitle' => isset($subcategory->twitterTitle) && $subcategory->twitterTitle !='' ? str_replace('uae',$location1,strtolower($subcategory->twitterTitle)) : null,
+//           'twitterDescription' => isset($subcategory->twitterDescription) ? $subcategory -> twitterDescription : null,
+//           'twitterImage' => isset($subcategory->twitterImage) ? $subcategory->twitterImage : null,
+//           'twitterSite' => isset($subcategory->twitterSite) ? $subcategory->twitterSite : '',
+//           'twitterCard' => isset($subcategory->twitterCard) ? $subcategory->twitterCard : null,
+//           'schemaDescription' => isset($subcategory->schemaDescription) ? $subcategory->schemaDescription : '',
+//           ];
+include_once 'catmetas.php';
   //print_r("else");
           }
-         if ($length == 0) {
-                header("Location: /not-found.php");
-                exit();
-              }
+        //  if ($length == 0) {
+        //         header("Location: /not-found.php");
+        //         exit();
+        //       }
+       // print_r($location);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -241,7 +265,8 @@ $SeoParams = [
        
     </section>
     
-            
+    <input type="hidden" id="productSubCategoryFilter" name="productSubCategoryFilter" value="">
+   
 <section class="p-2">
 <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb" >
   <ol class="breadcrumb">
@@ -286,32 +311,193 @@ $SeoParams = [
   <?php if ($location == null) {
     echo '<span> in UAE</span>';
   } else {
-    echo '<span> in ' . str_replace("-"," " ,$location);
+    echo '<span> in ' . str_replace("-"," " ,$location).'</span>';
   } ?>
   </h1>
-  <small class="fwbold">(<?php if ($length >= 10) { echo ($length . '+'); } else {echo ($length); } ?> products available) </small>
+  <small class="fwbold">(<?php echo $totallength ; ?> products available) </small>
 </div>
+<div class="sortdescription-card" id="sortdescription-card" style="display:none"> 
+  <p><?php if(isset($subcategory->locations)){
+      foreach($subcategory->locations as $Sdlocation){
+   
+        if($Sdlocation->location==$location1 && isset($Sdlocation->shortDescription) && $Sdlocation->shortDescription !=''){
+          $shortDescription=$Sdlocation->shortDescription;
+        }elseif(isset($subcategory->shortDescription) && $location==''){
+          $shortDescription = $subcategory->shortDescription; 
+     
+        }else{
+          $shortDescription = "<p>
+          Find the best {$subcategory->subCategoryName} in $location1 at competitive prices. Discover a wide range of
+          {$subcategory->subCategoryName} from top companies, manufacturers, dealers, and distributors across $location1.
+          Take advantage of exclusive bulk ordering discounts and connect with sellers directly to secure the best
+          deals. Whether you're looking for any other {$subcategory->subCategoryName} 
+          product in $location1, TradersFind makes it easy to find the perfect match for your business needs. 
+      
+          Contact us today, and we'll connect you with the leading {$subcategory->subCategoryName} provider in $location1. Simplify your
+          sourcing and get the best prices on high-quality {$subcategory->subCategoryName} products in $location1. TradersFind offers 
+          you a variety of {$subcategory->subCategoryName} options from verified companies that will fulfill your requirements at most 
+          competitive prices.
+      </p>";
+        }
+      }}elseif(isset($subcategory->shortDescription) && $location==''){
+        $shortDescription = $subcategory->shortDescription; 
+      
+      }else{
+     
+        $shortDescription = "<p>
+            Find the best {$subcategory->subCategoryName} in $location1 at competitive prices. Discover a wide range of
+            {$subcategory->subCategoryName} from top companies, manufacturers, dealers, and distributors across $location1.
+            Take advantage of exclusive bulk ordering discounts and connect with sellers directly to secure the best
+            deals. Whether you're looking for any other {$subcategory->subCategoryName} 
+            product in $location1, TradersFind makes it easy to find the perfect match for your business needs. 
+        
+            Contact us today, and we'll connect you with the leading {$subcategory->subCategoryName} provider in $location1. Simplify your
+            sourcing and get the best prices on high-quality {$subcategory->subCategoryName} products in $location1. TradersFind offers 
+            you a variety of {$subcategory->subCategoryName} options from verified companies that will fulfill your requirements at most 
+            competitive prices.
+        </p>";
+        
+      } 
+  echo $shortDescription;
+  ?></p>
+  <button type="button" style='color:brown; border: none;' onclick="closePopsdesc()">view less</button>
+
+</div>
+<script>
+  function readmoreSdesc(){
+    document.getElementById("sortdescription-card").style.display='block'
+    document.getElementById("viewmorebutten").style.display='none'
+  }
+  function closePopsdesc(){
+    document.getElementById("sortdescription-card").style.display='none'
+    document.getElementById("viewmorebutten").style.display='block'
+  }
+</script>
+<span id='viewmorebutten'>
 <?php 
 
 if (isset($category )&&isset($subcategory->shortDescription) && $subcategory->shortDescription && $location === '') {
   echo '<div class="two-line-containers">';
-  $shortDescription = $subcategory->shortDescription;
-  //$shortenedDescription = substr($shortDescription, 0, 400);
   
+  //$shortenedDescription = substr($shortDescription, 0, 400);
   if (strlen($shortDescription) >= 400) {
-      echo '<a href="javascript:void(0);" onclick="toggleDescription()"><div id="short-desc" style="display: inline;">' . $shortDescription . '</div></a>';
-      echo '<div id="full-desc" style="display: none;">' . $shortDescription . '<span style="color:brown;">&nbsp;<b><a href="javascript:void(0);" onclick="toggleDescription()"> View less</a></b></span></div>';
-  } else {
-    echo '<div id="full-desc" style="display: inline;">' . $shortDescription . '</div>';
-  }
+    echo '<a href="javascript:void(0);" onclick="toggleDescription()"><div id="short-desc" style="display: inline;">' . $shortDescription . '</div></a>';
+    echo '<div id="full-desc" style="display: none;">' . $shortDescription . '<span style="color:brown;">&nbsp;<b><a href="javascript:void(0);" onclick="toggleDescription()"> View less</a></b></span></div>';
+
+} else {
+  echo '<div id="full-desc" style="display: inline;">' . $shortDescription . '</div>';
+}
   echo '</div>';
+  
+  echo '<button style="color:brown; border: none;" onclick="readmoreSdesc()">
+    view more
+  </button>';
+  
+  
+  }else if(isset($subcategory->locations)){
+      foreach($subcategory->locations as $Sdlocation){
+   
+        if($Sdlocation->location==$location1 && isset($Sdlocation->shortDescription) && $Sdlocation->shortDescription!='' ){
+          echo $Sdlocation->shortDescription;
+          echo '<button style="color:brown; border: none;" onclick="readmoreSdesc()">
+          view more
+        </button>';
+        }else if(isset($subcategory->subCategoryName)){
+          echo "<p>
+          Find the best $subcategory->subCategoryName in $location1 at competitive prices. Discover a wide range of
+          $subcategory->subCategoryName from top companies, manufacturers, dealers, and distributors across $location1.
+           Take advantage of exclusive bulk ordering discounts and connect with sellers directly to secure the best
+           deals. Whether you're looking for any other  $subcategory->subCategoryName 
+            product in $location1, TradersFind makes it easy to find the perfect match for...
+          </p>";
+          echo '<button style="color:brown; border: none;" onclick="readmoreSdesc()">
+          view more
+        </button>';
+        }
+      }
+   
+  }else{
+    if(isset($subcategory->subCategoryName)){
+      echo "<p>
+      Find the best $subcategory->subCategoryName in $location1 at competitive prices. Discover a wide range of
+      $subcategory->subCategoryName from top companies, manufacturers, dealers, and distributors across $location1.
+       Take advantage of exclusive bulk ordering discounts and connect with sellers directly to secure the best
+       deals. Whether you're looking for any other  $subcategory->subCategoryName 
+        product in $location1, TradersFind makes it easy to find the perfect match for...
+      </p>";
+      echo '<button style="color:brown; border: none;" onclick="readmoreSdesc()">
+      view more
+    </button>';
+    }
   } ?>
+ 
+</span>
 <br>
 
+<?php $subcategorys=$data['subCategories'];
 
+?>
 </section>
 <div class="row gy-2">
     <div class="col-lg-3 col-xxl-2">
+    <div class="card card-shadow myUL border-0">
+  <?php if(count($subcategorys) > 1) { ?>
+  <div class="card-body">
+    <div class="row">
+      <div class="col">
+        <button class="btn btn-success btn-sm" onclick="applyFilter()">Apply Filter</button>
+      </div>
+      <div class="col">
+        <button class="btn btn-danger btn-sm" onclick="clearFilter()">Clear Filter</button>
+      </div>
+    </div>
+    <label for="subCategories"><u>Categories</u></label>  
+    <div class="left_slide_card_body">
+    <?php foreach($subcategorys as $subcate) { ?>
+      <div class="form-check">
+       
+        <input class="form-check-input" onclick="filterSubcat('<?php echo $subcate;?>')" type="checkbox" value="<?php echo $subcate; ?>"/>
+        <label class="form-check-label"><?php echo $subcate; ?></label>
+  
+      </div>
+      <?php } ?>
+    </div>
+  </div>
+  <?php } ?>
+</div>
+
+<script>
+  var selectedSubcategories = [];
+
+  function filterSubcat(subcategory) {
+    var index = selectedSubcategories.indexOf(subcategory);
+    if (index === -1) {
+      selectedSubcategories.push(subcategory);
+    } else {
+      selectedSubcategories.splice(index, 1);
+    }
+  }
+
+  function applyFilter() {
+
+    console.log(selectedSubcategories);
+    window.location.href =  window.location.href;
+    document.getElementById('productSubCategoryFilter').value = selectedSubcategories;
+    
+  }
+
+  function clearFilter() {
+    selectedSubcategories = [];
+    // Uncheck all checkboxes
+    var checkboxes = document.querySelectorAll('.form-check-input');
+    checkboxes.forEach(function(checkbox) {
+      checkbox.checked = false;
+    });
+  }
+</script>
+
+
+    
        <?php
         //$imagePath = $isMobile ? 'assets/images/poster1.webp' : 'assets/images/poster1.gif';
         if(!$isMobile ) {
@@ -340,16 +526,18 @@ if (isset($category )&&isset($subcategory->shortDescription) && $subcategory->sh
                  
                 }
                 
-                  foreach(($data->states) as $state){
+                  foreach(($data['states']) as $state){
                     if(!isset($category[0])){
                     echo'<li >';
                     echo '<a href="' . BASE_URL . 'search/' . $keyword . '/' .str_replace(' ','-', $state) . '">' . $state . '</a>';
                     echo' </li>';
                     }else{
                       $location1 = str_replace("-"," ",$location);
+                      if($state!='Other'){
                       echo'<li >';
                       echo '<a class="' . (strtolower($state) !== $location1 ? 'active' : '') . 'active" href="'.BASE_URL.$urlService->getSubCategoryLocUrl($category[0]->categoryName,$subcatName,$state,1) .'">'. $state .'</a>';
                       echo' </li>';
+                      }
                     }
                   };
                   ?>
@@ -359,10 +547,72 @@ if (isset($category )&&isset($subcategory->shortDescription) && $subcategory->sh
           </div>
         </div>
       </div>
-      
+    
+      <script>
+       function closePopup() {
+    document.getElementById("popup-card-otp").style.display = "none";
+  }
+  function submitRequirement(formdata){
+  var productname=document.getElementById("productName").value;
+  
+  var quantity=document.getElementById("quantity").value;
+  var Unit=document.getElementById("quantityUnit").value;
+  var requirement=document.getElementById("requirement").value;
+ 
+  var countryCode=document.getElementById("countryCode").value;
+  var contactNumber=document.getElementById("contactNumber").value;
+  
+//console.log(productname);
+        // let payload = {
+        //   enquirerName: 'Atulyadav',
+        //   enquirerContactNumber: countryCode+contactNumber,
+        //   enquirerEmail:'atul@sakshemit.com',
+        //   enquiryMessage: requirement,
+        //   productName:productname,
+        //   quantity: quantity,
+        //   unit: Unit,
+        //   buyer: { id: '651266a6be013b38a26b35bf' },
+        //   status: 'New',
+        //   frequencytype: lol
+        // }
+        document.getElementById("postBuyreq").reset();
+
+       // formdata.frequencytype=lol;
+       var url="<?php echo API_URL?>api/enquiries";
+       console.log(url);
+       const myObject1 = new StorageService();
+      var token=myObject1.getItem('userAccessToken');
+fetch(url, {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+        Authorization: 'Bearer ' + token,
+    },
+    body: JSON.stringify(formdata),
+})
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        console.log(data);
+        if(confirm('Your Request is submitted successfully!! Please click OK.')) {
+        window.location.href =  window.location.href;
+    }
+    })
+    .catch(function (error) {
+        console.log(error);
+        if(confirm('Your Request is not submitted !!! Due To some issue Please click OK.')) {
+          window.location.href =  window.location.href;
+        }
+    });
+  //console.log(payload);
+  }
+</script>
+
                            <?php
-                           if($data->sponsoredProduct!=null){
-                          $premiumprod=$data->sponsoredProduct;
+                           if($data['sponsoredProduct']!=null){
+                          $premiumprod=$data['sponsoredProduct'];
+                          //print_r($premiumprod);
                         include_once "premiumProd.php";
                            }
                            //print_r($data);
@@ -375,7 +625,9 @@ if (isset($category )&&isset($subcategory->shortDescription) && $subcategory->sh
                         <?php
                       foreach ($prod as $inde => $onep) {
                         $indexr=$inde;
-                        if (is_object($onep) && isset($onep->id)) {
+                        
+                        if (is_array($onep) && isset($onep['productName'])) {
+                          //print_r($onep['id']);
                            $prodData=$onep;
                            //print_r($prodData);
                            ?>
@@ -394,20 +646,210 @@ if (isset($category )&&isset($subcategory->shortDescription) && $subcategory->sh
             }
           ?>
        <div id="productList"> </div>
-<div id="result"></div>
-                 
+<div id="result" ></div>
+<script>
+              var lol='';
+    var frequencytype=document.getElementsByName('frequencytype');
+  frequencytype.forEach(function(radioButton) {
+        radioButton.addEventListener('change', function() {
+            var selectedValue = this.value;
+            lol=selectedValue;
+            console.log(selectedValue); // Log the selected value
+        });
+    });
+
+   function otpLogin(otpAuthData, mobileNumber,formdata) {
+    console.log(mobileNumber);
+      const myObject = new StorageService();
+      $.ajax({
+        url: "https://api.tradersfind.com/api/authenticate-otp",
+  method: "POST",
+  dataType: "json",
+  contentType: "application/json",
+  data: JSON.stringify(otpAuthData),
+  success: function (data) {
+                       console.log(data);
+                       myObject.setItem('userAccessToken', data['id_token']);
+                       myObject.setItem('isLoggedIn', '1');
+                       myObject.setItem('loggedVia', 'mobile');
+                       myObject.setItem('userData', mobileNumber);
+                       myObject.setItem('userMobile', mobileNumber);
+                       myObject.setItem('login', mobileNumber);
+                       myObject.setItem('userFname', "User");
+                       submitRequirement(formdata);
+    
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+      //this.verifyRequestProcessing = false;
+    
+      //var that = this;
+      // setTimeout(function () { that.authService.authenticateUser(); }, 3000);
+      // this.messageService.add({
+      //   severity: "success",
+      //   summary:
+      //     'Otp verified successfully.',
+      // });
+      // this.dialogRef.close();
+      // this.modalService.dismissAll();
+      // this._router.navigate(['/']);
+    }
+    function otpRegister(otpAuthData, mobileNumber,formdata){
+     
+      const myObject1 = new StorageService();
+      $.ajax({
+        url: "https://api.tradersfind.com/api/register-otp",
+  method: "POST",
+  dataType: "json",
+  contentType: "application/json",
+  data: JSON.stringify(otpAuthData),
+  success: function (data) {
+                       console.log(data);
+                       myObject1.setItem('userAccessToken', data['id_token']);
+                       myObject1.setItem('isLoggedIn', '1');
+                       myObject1.setItem('loggedVia', 'mobile');
+                       myObject1.setItem('userData', mobileNumber);
+                       myObject1.setItem('userMobile', mobileNumber);
+                       myObject1.setItem('login', mobileNumber);
+                       myObject1.setItem('userFname', "User");
+                       submitRequirement(formdata);
+    
+                    },
+                    error: function (xhr, status, error) {
+                      console.log("test reg")
+                        console.error(xhr.responseText);
+                    }
+                });
+  }
+    
+    
+
+    function verifyOtp(event,mobnumber,formdata){
+           // var otm=document.getElementById('otp').value;
+           // console.log(mobnumber);
+           var newmobnum='+'+mobnumber;
+           let otpAuthData = {
+              phone: newmobnum,
+              otpValue: event,
+              login: newmobnum,
+              isMobileLogin: true,
+              langKey: "en"
+    };
+           var otpres='';
+            $.ajax({
+                    url: "https://api.tradersfind.com/api/guest/users/"+'+'+mobnumber,
+                    dataType: "json",
+                    data: { },
+                    success: function (data) {
+                       
+                        if (data != "NotFound") {
+          //console.log(otpAuthData,mobileNumber)
+          otpLogin(otpAuthData, newmobnum,formdata);
+          console.log("1");
+        }
+        else {
+          otpRegister(otpAuthData, newmobnum,formdata);
+          console.log("2");
+        }
+                    },
+                    error: function (xhr, status, error) {
+                        if(xhr.responseText!='NotFound'){
+                          otpLogin(otpAuthData, newmobnum,formdata);
+                        }else{
+                          console.log("tttttttttt");
+                          otpRegister(otpAuthData, newmobnum,formdata);
+                        }
+                    }
+                });
+            closePopup();
+
+        }
+
+       function startfomsubmition(){
+
+        }
+          </script>
+          <?php
+
+function sendOtp1($contenctNo,$formdata){
+ 
+
+  $payload=array('phone'=> $contenctNo, 'loginmethod'=>'WHATSAPP');
+  $data123=post(
+  'api/otps',
+  $payload,
+  false,
+  //isWhatsapp ? { type: 'whatsapp' } : {type: 'email'},
+  array("type"=> 'WHATSAPP'),
+  false);
+  //print_r($data123->title);
+  if(isset($data123->title)&& $data123->title=='ContactNo not Valid.'){
+   
+    echo "<script>
+    if(confirm('Please click on OK and send a message (Register Me) on our whatsapp number (+971569773623) to register.')) {
+        window.open('https://api.whatsapp.com/send?phone=971569773623&text=Register%20Me', '_blank');
+    }
+  </script>";
+  }else{
+  include_once 'otp.php';
+ // echo $contenctNo;
+  echo '<script>document.getElementById("popup-card-otp").style.display = "block";</script>';
+  }
+}
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Retrieve form data
+    if(isset($_POST['productName'])){
+    $productName = $_POST['productName'];
+    $quantity = $_POST['quantity'];
+    $quantityUnit = $_POST['quantityUnit'];
+    $requirement = $_POST['requirement'];
+    $frequencytype = $_POST['frequencytype'];
+    $countryCode = $_POST['countryCode'];
+    $contactNumber = $_POST['contactNumber'];
+    
+    $formdata = array(
+      'enquirerContactNumber' => $countryCode . $contactNumber,
+      'enquiryMessage' => $requirement,
+      'productName' => $productName,
+      'quantity' => $quantity,
+      'unit' => $quantityUnit,
+      'status' => 'New',
+      'frequencytype' => $frequencytype
+    );
+
+  //echo "Form submitted successfully!";
+ // echo $productName;
+ // header("Location: post-buy-requirements");
+ $contenctNo=$countryCode.$contactNumber;
+ include_once 'post.php';
+ //print_r($contenctNo);
+ $respons=sendOtp1($contenctNo,$formdata);
+
+  }
+
+} else {
+ 
+    //echo "Error: Form not submitted!";
+}
+//ob_end_flush();
+?>
           <div class="post-request-text ">
+<?php if($totallength>10){
+  ?>
           <div class="text-center my-2" >     
-          <button  id="loadMoreBtn" onclick="lod()"class="btn-primary-gradiant rounded-2 btn-auto"> LOAD MORE RESULTS ... </button>
-         
+          <button  id="loadMoreBtn"  onclick="lod()"class="btn-primary-gradiant rounded-2 btn-auto" style="display: inline-block;"> LOAD MORE RESULTS ... </button>
+         <?php } ?>
         </div>
        
+
           <section class="easysource my-4 py-2" >
             <?php
              include_once "post-request.php";
               ?>
                </section>
-          </div>
+         
           <div class="row">
           <p class="search-product-text">
         <div class="cat-desc" id="cat-desc" style="display:none;">
@@ -416,23 +858,23 @@ if (isset($category )&&isset($subcategory->shortDescription) && $subcategory->sh
                       echo ( $subcategory->categoryDescriptionPage);
         }else if($location=="dubai" && isset($subcategory->keywordDubaiDescription)){
                       echo ( $subcategory->keywordDubaiDescription);
-        }else if($location=="abu dhabi" && isset($subcategory->keywordAbuDhabiDescription)){
+        }else if($location=="abu-dhabi" && isset($subcategory->keywordAbuDhabiDescription)){
                       echo ( $subcategory->keywordAbuDhabiDescription);
         }else if($location=="ajman" && isset($subcategory->keywordAjmanDescription)){
                       echo ( $subcategory->keywordAjmanDescription);
         }else if($location=="fujairah" && isset($subcategory->keywordFujairahDescription)){
                       echo ( $subcategory->keywordFujairahDescription);
-        }else if($location=="ras al khaimah" && isset($subcategory->keywordRasAlKhaimahDescription)){
+        }else if($location=="ras-al-khaimah" && isset($subcategory->keywordRasAlKhaimahDescription)){
                       echo ( $subcategory->keywordRasAlKhaimahDescription);
-        }else if($location=="umm al quwain" && isset($subcategory->keywordUmmAlQuwainDescription)){
+        }else if($location=="umm-al-quwain" && isset($subcategory->keywordUmmAlQuwainDescription)){
                       echo ( $subcategory->keywordUmmAlQuwainDescription);
         }else if($location=="sharjah" && isset($subcategory->keywordSarjahDescription)){              
                       echo ( $subcategory->keywordSarjahDescription);
-                         ?>
+                    }?>
                          </div>
         </p>
         <?php
-        }
+       
         // Sanitize the value
         $currentUrl = $_SERVER['REQUEST_URI'];
         $parts = explode('/', $currentUrl);
@@ -445,23 +887,29 @@ if (isset($category )&&isset($subcategory->shortDescription) && $subcategory->sh
 
 <script>
   let page=1;
-  var searchtext = "<?php echo $subcategory->subCategoryName; ?>";
+  let size=1;
+  var searchtext = "<?php echo isset($subcategory->subCategoryName)?$subcategory->subCategoryName:$subcatName; ?>";
+
+let filterdto1 = <?php echo json_encode($filterDto); ?>;
+
   var currentURL = window.location.href;
 
 
 var urlParts = currentURL.split('/');
-var category = urlParts[urlParts.length - 2];
+var category=category = urlParts[3];
 
 console.log(searchtext);
+console.log(filterdto1);
 function lod(){
  let payload= {};
+// console.log(category);
 if(category=='category'){
   //console.log(category);
  
     payload= {
     searchText: searchtext,
     searchTextType: 'subcategory',
-    filterDto: {}
+    filterDto: filterdto1
      
 }
 
@@ -469,11 +917,12 @@ if(category=='category'){
   payload={
     searchText: searchtext,
     searchTextType: null,
-    filterDto: {}
+    filterDto: filterdto1
   }
 
  
 }
+console.log(payload);
 searchProductNew(payload, page).then(response => {
      
         console.log(response);
@@ -499,8 +948,14 @@ searchProductNew(payload, page).then(response => {
         console.error(error);
     });
     page++;
+    size++;
+    var tot="<?php echo $totallength;?>"
+    if(tot<=size*10){
+      document.getElementById("loadMoreBtn").style.display='none';
+    }
   }
 </script>
+
 <script src='<?php echo BASE_URL; ?>services/moreproductjs.js'></script>
     <script src="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.bundle.min.js"></script>
   <script src="<?php echo BASE_URL; ?>assets/js/lazy-load.js"></script> 
