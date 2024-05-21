@@ -55,7 +55,7 @@
         include_once 'post.php';
         function sendOtp($contenctNo){
 
-            $payload=array('phone'=> '+919639330901', 'loginmethod'=>'WHATSAPP');
+            $payload=array('phone'=> $contenctNo, 'loginmethod'=>'WHATSAPP');
             $data123=post(
             'api/otps',
             $payload,
