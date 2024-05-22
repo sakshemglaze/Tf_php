@@ -317,7 +317,7 @@ include_once 'catmetas.php';
   <small class="fwbold">(<?php echo $totallength ; ?> products available) </small>
 </div>
 <div class="sortdescription-card" id="sortdescription-card" style="display:none"> 
-  <p><?php if(isset($subcategory->locations)){
+  <?php if(isset($subcategory->locations)){
       foreach($subcategory->locations as $Sdlocation){
    
         if($Sdlocation->location==$location1 && isset($Sdlocation->shortDescription) && $Sdlocation->shortDescription !=''){
@@ -359,7 +359,7 @@ include_once 'catmetas.php';
         
       } 
   echo $shortDescription;
-  ?></p>
+  ?>
   <button type="button" style='color:brown; border: none;' onclick="closePopsdesc()">view less</button>
 
 </div>
@@ -381,8 +381,8 @@ if (isset($category )&&isset($subcategory->shortDescription) && $subcategory->sh
   
   //$shortenedDescription = substr($shortDescription, 0, 400);
   if (strlen($shortDescription) >= 400) {
-    echo '<a href="javascript:void(0);" onclick="toggleDescription()"><div id="short-desc" style="display: inline;">' . $shortDescription . '</div></a>';
-    echo '<div id="full-desc" style="display: none;">' . $shortDescription . '<span style="color:brown;">&nbsp;<b><a href="javascript:void(0);" onclick="toggleDescription()"> View less</a></b></span></div>';
+    echo '<a href="javascript:void(0);"><div id="short-desc" style="display: inline;">' . $shortDescription . '</div></a>';
+   // echo '<div id="full-desc" style="display: none;">' . $shortDescription . '<span style="color:brown;">&nbsp;<b><a href="javascript:void(0);" onclick="toggleDescription()"> View less</a></b></span></div>';
 
 } else {
   echo '<div id="full-desc" style="display: inline;">' . $shortDescription . '</div>';
@@ -395,14 +395,18 @@ if (isset($category )&&isset($subcategory->shortDescription) && $subcategory->sh
   
   
   }else if(isset($subcategory->locations)){
+	$loc1 = '1';
       foreach($subcategory->locations as $Sdlocation){
-   
-        if(strtolower(isset($Sdlocation->location)?$Sdlocation->location:'')==strtolower($location1) && isset($Sdlocation->shortDescription) && $Sdlocation->shortDescription!='' ){
+   //echo $location1;
+        if(strtolower($Sdlocation->location)== strtolower($location1) && isset($Sdlocation->shortDescription) && $Sdlocation->shortDescription!='' ){
           echo $Sdlocation->shortDescription;
-          echo '<button style="color:brown; border: none;" onclick="readmoreSdesc()">
-          view more
-        </button>';
-        }else if(isset($subcategory->subCategoryName)){
+//          echo '<button style="color:brown; border: none;" onclick="readmoreSdesc()"> view more      </button>';
+$loc1 = '0';
+break;
+        }
+      } 
+//  	if(isset($subcategory->subCategoryName) && $loc1 == 0){
+  	if($loc1 == '1'){
           echo "<p>
           Find the best $subcategory->subCategoryName in $location1 at competitive prices. Discover a wide range of
           $subcategory->subCategoryName from top companies, manufacturers, dealers, and distributors across $location1.
@@ -414,8 +418,8 @@ if (isset($category )&&isset($subcategory->shortDescription) && $subcategory->sh
           view more
         </button>';
         }
-      }
-   
+
+
   }else{
     if(isset($subcategory->subCategoryName)){
       echo "<p>
