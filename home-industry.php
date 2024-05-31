@@ -9,6 +9,11 @@
       <h4 class="mb-0 ms-3 fw-semibold">Categories</h4>
     </div>
       <?php
+      include_once "post.php";
+
+      $industrys=get('api/featured-industry',true);
+      //print_r($industrys);
+      
       $industry = array();
       array_push($industry, array("House Keeping Services", "6450d5651381f473d7f9da4d", "./assets/images/industry/House-Keeping-Services.jpg"));
 array_push($industry, array("Travel, Tourism & Hotels", "6450d5651381f473d7f9da64", "./assets/images/industry/Travel,-Tourism-&-Hotels.jpg"));

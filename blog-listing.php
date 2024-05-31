@@ -110,7 +110,7 @@ include_once "header-sub.php";
                     ];
                 }
 
-                $apiResponse = getFilterBlog($payload, ["page" => 0, "size" => 6, "createdDate" => 'desc']);
+                $apiResponse = getFilterBlog($payload, ["page" => 0, "size" => 8, "createdDate" => 'desc']);
                 $isShowShimmer = false;
                 $blogList = json_decode($apiResponse);
                 return $blogList;
@@ -176,24 +176,8 @@ include_once "header-sub.php";
                     </div>
                 <?php } ?>
             </div>
-            <div class="row mt-4">
-                <div class="col-lg-6">
-                  <nav aria-label="...">
-                    <ul class="pagination">
-                      <li class="page-item disabled">
-                        <a class="page-link">Previous</a>
-                      </li>
-                      <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                      <li class="page-item " aria-current="page">
-                        <a class="page-link" href="#">2</a>
-                      </li>
-                      <li class="page-item"><a class="page-link" href="#">3</a></li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                      </li>
-                    </ul>
-                  </nav>
-                </div>
+            <div id="loadmoreblog">
+              
             </div>
         </div>
          <div class="col-lg-4 mt-4">
@@ -220,7 +204,186 @@ include_once "header-sub.php";
     </div>
   
 </section>
-                </body> </html>
+<script src="services/storegeService.js"></script>
+
+
+<script>
+
+let urlService ="<?php new UrlService() ?>"
+//let loadedData=[];
+
+let page = 1;
+let isLoading = false;
+// Function to fetch blogs
+function fetchBlogs() {
+    // Check if already loading, return if true
+    if (isLoading) {
+        return;
+    }
+
+    isLoading = true;
+    const myObject1 = new StorageService();
+
+    let pagination = {
+        "page": page,
+        "size": 10,
+        "createdDate": 'desc'
+    };
+
+    const queryString = new URLSearchParams(pagination).toString();
+    var url = "<?php echo API_URL?>api/guest/filter-blogs" + '?' + queryString;
+    var token = myObject1.getItem('userAccessToken');
+    console.log(token);
+
+    fetch(url, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: 'Bearer ' + token,
+        }
+    })
+        .then(function (response) {
+            console.log("working...", response.status);
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+            //console.log(page);
+           // loadedData = loadedData.concat(data);
+            createBlogElements(data)
+            //console.log(loadedData);
+            console.log(page);
+           
+            page++; // Increment page after successful fetch
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+        .finally(() => {
+        isLoading = false; // Reset loading flag
+    });
+        
+}
+
+
+// Function to create blog elements
+function createBlogElements(loadedData) {
+    const BASE_URL = "https://www.tradersfind.com/";
+    const IMAGE_URL = "https://doc.tradersfind.com/images/";
+
+    // Get the parent container
+    const parentElement = document.getElementById("loadmoreblog");
+
+    // Iterate over the loadedData array in pairs of two
+    for (let i = 0; i < loadedData.length; i += 2) {
+        // Create a row container for every two blogs
+        const rowContainer = document.createElement("div");
+        rowContainer.className = "row mb-4";
+
+        // Create blog elements for the current pair
+        for (let j = i; j < i + 2 && j < loadedData.length; j++) {
+            const blogData = loadedData[j];
+
+            // Create column container for the blog
+            const colContainer = document.createElement("div");
+            colContainer.className = "col-lg-6";
+
+            // Create inner div for the blog
+            const innerDiv = document.createElement("div");
+            innerDiv.className = "hello";
+
+            // Check if blog image exists and add default image if not
+            if (!blogData.image || blogData.image.image === 'null' || blogData.image.image === '') {
+                const imageLink = document.createElement("a");
+                imageLink.setAttribute("target", "_blank");
+                imageLink.setAttribute("href", BASE_URL + 'blog/' + blogData.title.trim().toLowerCase().replace(/[&,\s]+/g, '-'));
+
+                const image = document.createElement("img");
+                image.setAttribute("src", IMAGE_URL + "YP-logo@2x.png");
+                image.setAttribute("alt", blogData.altText ? blogData.altText : 'blog image');
+
+                imageLink.appendChild(image);
+                innerDiv.appendChild(imageLink);
+            }
+
+            // Create link for blog
+            const blogLink = document.createElement("a");
+            blogLink.setAttribute("target", "_blank");
+            blogLink.setAttribute("href", BASE_URL + 'blog/' + blogData.title.trim().toLowerCase().replace(/[&,\s]+/g, '-'));
+
+            // Create blog image if it exists
+            if (blogData.image && blogData.image.id) {
+                const blogImg = document.createElement("img");
+                blogImg.className = "img-fluid";
+                blogImg.setAttribute("width", "100%");
+                blogImg.setAttribute("src", IMAGE_URL + blogData.image.id + '.webp');
+                blogImg.setAttribute("alt", "blogimg");
+
+                blogLink.appendChild(blogImg);
+                innerDiv.appendChild(blogLink);
+            }
+
+            // Create front_blog2 div
+            const frontBlog2Div = document.createElement("div");
+            frontBlog2Div.className = "front_blog2";
+
+            // Create paragraph for subtitle
+            const subtitleParagraph = document.createElement("p");
+            subtitleParagraph.textContent = blogData.subTitle;
+            frontBlog2Div.appendChild(subtitleParagraph);
+
+            // Create heading for blog title
+            const titleHeading = document.createElement("h1");
+            const titleLink = document.createElement("a");
+            titleLink.setAttribute("href", BASE_URL + 'blog/' + blogData.title.trim().toLowerCase().replace(/[&,\s]+/g, '-'));
+            titleLink.textContent = blogData.title;
+            titleHeading.appendChild(titleLink);
+            frontBlog2Div.appendChild(titleHeading);
+
+            // Create small tag for author and date
+            const smallTag = document.createElement("small");
+            smallTag.className = "mt-1 d-block";
+            smallTag.textContent = blogData.createdBy + ", " + new Date(blogData.createdDate).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
+            frontBlog2Div.appendChild(smallTag);
+
+            // Append front_blog2 div to inner div
+            innerDiv.appendChild(frontBlog2Div);
+
+            // Append inner div to column container
+            colContainer.appendChild(innerDiv);
+
+            // Append column container to row container
+            rowContainer.appendChild(colContainer);
+        }
+
+        // Append row container to the parent element
+        parentElement.appendChild(rowContainer);
+    }
+}
+
+function handleIntersection(entries, observer) {
+    entries.forEach(entry => {
+        if (entry.isIntersecting && entry.intersectionRatio > 0) {
+            fetchBlogs();
+        }
+    });
+}
+
+const observer = new IntersectionObserver(handleIntersection, {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.1
+});
+
+const bottomElement = document.getElementById('loadmoreblog');
+
+observer.observe(bottomElement);
+
+</script>
+
+
+</body> 
+</html>
 
 <?php
 include_once "footer.php";

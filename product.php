@@ -7,6 +7,27 @@
     $whatsappUrl=new WhatsappUrl();
     $maskedService = new MaskingService();
 ?>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="path/to/bootstrap-icons.css">
+
+<style>
+ .popuppluscard {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 60%;
+  transform: translate(-50%, -50%);
+  width: auto;
+  max-height: 80vh; 
+  overflow-y: auto;
+  background-color: lightgray;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 99999999;
+  
+}
+</style>
 
 <div class="cardproduct card-shadow rounded-10 bg-white" style="border: 0.5px solid #ddd;">
     <div class="swiper ">
@@ -58,13 +79,13 @@
                                     <div class="fs-8 ">
                                         <ul role="list" class="list_box">
                                             <?php if (!empty($prodData['productDescription'])) { ?>
-                                                  <?php foreach (array_slice(json_decode($prodData['specifications'], true), 0, 4) as $spec) { ?>
+                                                  <?php foreach (array_slice(json_decode($prodData['specifications'], true), 0, 2) as $spec) { ?>
                                                       <li role="listitem" tabindex="0" class="single-line small">
                                                         <span><b><?php echo $spec['SpecificationName']; ?> :</b> <?php echo $spec['SpecValue']; ?></span>
                                                       </li>
                                                   <?php } ?>
                                             <?php } else { ?>
-                                                  <?php foreach (array_slice(json_decode($prodData['specifications'], true), 0, 4) as $spec) { ?>
+                                                  <?php foreach (array_slice(json_decode($prodData['specifications'], true), 0, 2) as $spec) { ?>
                                                      <li role="listitem" tabindex="0" class="single-line small">
                                                        <span><b><?php echo $spec['SpecificationName']; ?> :</b> <?php echo $spec['SpecValue']; ?></span>
                                                     </li>
@@ -126,6 +147,39 @@
                                             </span>
                                             <?php } ?>
                                     </div>
+                                    <div class="d-flex small mt-1 single-line">
+                                        <?php if( isset($prodData['reletedSubcategorys'])){?>
+                                            <span  class="single-line"> <b>categorys : </b> 
+                                            <?php
+                                          echo $prodData['reletedSubcategorys'][0];
+                                            ?>
+                                           <div class="popuppluscard" id="popuppluscard" style="display:none">
+                                                   <button class="but" onclick="closepluscard()" style="border: none; position: absolute; right: 20px; top:20px;"><i class="bi bi-dash"></i></button>
+                                                    <?php 
+                                                   $formattedString = '';
+                                                   foreach ($prodData['reletedSubcategorys'] as $index => $subcategory) {
+                                                    $url = $urlService->getCategoryUrl($subcategory);
+                                                     if ($index == 0) {
+                                                              $formattedString .= '<a href="' . $url . '">' . $subcategory . '</a>';
+                                                                            } else {
+                                                               $formattedString .= ' | <a href="' . $url . '">' . $subcategory . '</a>';
+                                                                     }
+                                                            }
+                                                   echo "<h5 style='margin-top: 20px;'>".$formattedString."</h5>";
+
+                                                    ?>
+                                           </div>
+                                            </span>
+                                        <button type="button" class="btn " style="position: absolute;  right: 11px;" onclick="onclickplus()">
+    <span aria-hidden="true"><i class="bi bi-plus" style=" font-size: 18px;"></i></span>
+  </button>
+
+                                            <?php } ?>
+                                    </div>
+  
+
+
+
                                     <div class="d-flex small mt-1">
                              <?php if (isset($prodData['seller']['Category'] ) ){ ?>
                               <b>Other Category: </b>
@@ -201,9 +255,30 @@
  include 'enquery.php';
  ?>
 
-<!-- JavaScript code -->
+<div class="modal fade modal-center" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Title</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+           <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
 <script>
-  // Function to open the popup card
+  
+  function onclickplus(){
+    document.getElementById("popuppluscard").style.display = "block";
+  }
+  function closepluscard(){
+    document.getElementById("popuppluscard").style.display = "none";
+  }
   function openPopup1() {
     document.getElementById("popup-card").style.display = "block";
   }
