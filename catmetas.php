@@ -18,14 +18,19 @@ if($location1==null || $location1=='UAE' || !isset($subcategory->locations)){
     ];
 
     }else{
-     
+    	$loc1 = '0';
       foreach($subcategory->locations as $Mlocation){
-        if(strtolower(isset($Sdlocation->location)?$Sdlocation->location:'')==strtolower($location1)){
+        if(strtolower($Mlocation->location)==strtolower($location1)){
           $SeoParams=seoSeter($Mlocation,$location1,$subcategory);
-          
+	$loc1 = '1';
+          break;
         }
-      }  
+      } 
+	if ($loc1 == '0') {
+	 $SeoParams=seoSeter($location1,$location1,$subcategory);
+	}
         }
+
         function seoSeter($Flocation,$location1,$subcategory){
         return  $SeoParams = [
             'title' => isset($Flocation->metatitle) && $Flocation->metatitle != '' ?$Flocation->metatitle : $subcategory->subCategoryName . ' at best price in ' . $location1. ' on Tradersfind.com',

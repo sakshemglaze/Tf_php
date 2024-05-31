@@ -1,3 +1,8 @@
+<?php
+  require_once 'post.php';
+  $blogs=get('api/guest/homeblogs' .'?page=' . '0' . '&size=' .'5', true);
+  $jblog=json_decode($blogs);
+?> 
 <div class="categories card-shadow rounded-10">
     <div class="d-flex align-items-center ps-2 mb-3">
       <img src="<?php echo BASE_URL?>assets/images/Category-icon2.png" alt="Industry" width="19" height="12"  />
@@ -43,10 +48,6 @@ array_push($industry, array("Industrial Supplies", "6450d5651381f473d7f9da51", "
             <?php
         }
         ?>
-       
-       
-      
-  
       <li class="has-category"> <h5>
         <a href="industry">
           <span><img src="<?php echo BASE_URL?>assets/images/browse-icon.png" alt="" width="30" height="30" /></span>
