@@ -208,27 +208,9 @@ else{
              // print($subcategory->subCategoryName);
               
               $industry = json_decode(get(
-                'api/industries-na/' . $category[0]->title,$queryParams) );
-                
-              
-//print_r($subcategory->metaTitle);
-// $SeoParams = [
-//           'title' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('uae',$location1,strtolower($subcategory->metaTitle)) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com',
-//           'metaTitle' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('uae',$location1,strtolower($subcategory->metaTitle)) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com',
-//           'metaDescription' => isset($subcategory->subCategoryDescription) && $subcategory->subCategoryDescription !='' ? str_replace('uae',$location1,strtolower($subcategory->subCategoryDescription)) : 'Searching for ' . $subcategory->subCategoryName . ' at best price in ' . $location1 . '? Choose from a wide range of companies provide' . $subcategory->subCategoryName . ' online on Tradersfind.com',
-//           'metaKeywords' => isset($subcategory->keywords) && $subcategory->keywords != '' ? str_replace('uae',$location1,strtolower($subcategory->keywords)) : $subcategory->subCategoryName . ', ' . $subcategory->subCategoryName . ' in '. $location1,
-//           'fbTitle' => isset($subcategory->fbTitle) && $subcategory->fbTitle !='' ? str_replace('uae',$location1,strtolower($subcategory->fbTitle)) : null,
-//           'fbDescription' => isset($subcategory->fbDescription) ? str_replace('uae',$location,strtolower($subcategory->fbDescription)) : null,
-//           'fbImage' => isset($subcategory->fbImage) ? $subcategory->fbImage : '',
-//           'fbUrl' => isset($subcategory->fbUrl) ? $subcategory->fbUrl : '',
-//           'twitterTitle' => isset($subcategory->twitterTitle) && $subcategory->twitterTitle !='' ? str_replace('uae',$location1,strtolower($subcategory->twitterTitle)) : null,
-//           'twitterDescription' => isset($subcategory->twitterDescription) ? $subcategory -> twitterDescription : null,
-//           'twitterImage' => isset($subcategory->twitterImage) ? $subcategory->twitterImage : null,
-//           'twitterSite' => isset($subcategory->twitterSite) ? $subcategory->twitterSite : '',
-//           'twitterCard' => isset($subcategory->twitterCard) ? $subcategory->twitterCard : null,
-//           'schemaDescription' => isset($subcategory->schemaDescription) ? $subcategory->schemaDescription : '',
-//           ];
-include_once 'catmetas.php';
+                'api/industries-na/' . $category[0]->title,$queryParams) );   
+
+              include_once 'catmetas.php';
   //print_r("else");
           }
         //  if ($length == 0) {
@@ -256,10 +238,9 @@ include_once 'catmetas.php';
     
 </head>
 <body>
-
+ <?php    include_once "header-sub.php";              ?>
     <section class="container-fluid mt-1">
        <?php 
-       include_once "header-sub.php";
        include_once "banner.php";   
        ?>
        
