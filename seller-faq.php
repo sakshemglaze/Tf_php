@@ -168,7 +168,7 @@ $SeoParams = [
                   <div class="accordion-body">
                     <ul style="list-style-type: disc;">
                     <li> Contact customer support team on support&#64;tradersfind.com </li>
-                    <li>You can 'Live Chat' with our executive on our Whatsapp number : +971 50 315 9259 </li>
+                    <li>You can 'Live Chat' with our executive on our Whatsapp number : +971 569773623</li>
                   </ul>
                   </div>
                 </div>
@@ -1041,7 +1041,7 @@ $SeoParams = [
                 </h2>
                 <div id="collapse82" class="accordion-collapse collapse" data-bs-parent="#accordionExample7">
                   <div class="accordion-body"> 
-                    In order to get yourself listed as the "Premium Seller"  you need to buy one of our paid packages. If you're interested in purchasing a package, you can contact us on our Whatsapp number: +971 50 315 9259 or visit our website.
+                    In order to get yourself listed as the "Premium Seller"  you need to buy one of our paid packages. If you're interested in purchasing a package, you can contact us on our Whatsapp number: +971 569773623 or visit our website.
                   </div>
                 </div>
               </div>

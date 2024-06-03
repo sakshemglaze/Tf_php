@@ -16,12 +16,13 @@
               
               $data1 = json_decode($data);
               $new_url = '/not-found';
+
               if(!isset($data1[0]->id)){
               header('Location: ' . $new_url, true, 301);
               exit;
               }
              // $data = findActive($data1);
-            //print_r($data->linkedinUrl);
+           // print_r($data1[0]->linkedinUrl);
               
 $aproodproduct=get(
   'api/guest/products/by-seller/' . $data1[0]->id,
@@ -29,15 +30,7 @@ $aproodproduct=get(
   ['isFeatured' => true]
 );
 $aproodproduct1 = json_decode($aproodproduct);
-$productNames='';
-foreach ($aproodproduct1->products as $index => $product) {
-    
-  $productNames .= $product->productName;
 
-  if ($index < count($aproodproduct1->products) - 1) {
-      $productNames .= ", ";
-  }
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,11 +39,20 @@ foreach ($aproodproduct1->products as $index => $product) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php
+    $productNames='';
+    foreach ($aproodproduct1->products as $index => $product) {
+        
+      $productNames .= $product->productName;
+    
+      if ($index < count($aproodproduct1->products) - 1) {
+          $productNames .= ", ";
+      }
+    }
       $SeoParams = [
           'title' => isset($data1[0]->metaTitle) && $data1[0]->metaTitle != '' ? $data1[0]->metaTitle : $data1[0]->sellerCompanyName,
           'metaTitle' => isset($data1[0]->metaTitle) && $data1[0]->metaTitle != '' ? $data1[0]->metaTitle : $data1[0]->sellerCompanyName.' in '.$data1[0]->city.','.$data1[0]->sellerState.','.$data1[0]->country,
-          'metaDescription' => isset($data1[0]->metaDescription) && $data1[0]->metaDescription != '' ? $data1[0]->metaDescription : $data1[0]->sellerCompanyName.' is a leading company of '.$productnames.' located in '.$data1[0]->city.','.$data1[0]->sellerState.','.$data1[0]->country,
-          'metaKeywords' => isset($data1[0]->metaKeywords) && $data1[0]->metaKeywords != '' & $data1[0]->metaKeywords[0] !='' ? implode(',', $data1[0]->metaKeywords) : $data1[0]->sellerCompanyName.','.' in '.$data1[0]->city.','.$data1[0]->sellerCompanyName.' in '. $data1[0]->sellerState.','. $data1[0]->sellerCompanyName.' in '. $data1[0]->country.','. $productnames,
+          'metaDescription' => isset($data1[0]->metaDescription) && $data1[0]->metaDescription != '' ? $data1[0]->metaDescription : $data1[0]->sellerCompanyName.' is a leading company of '.$productNames.' located in '.$data1[0]->city.','.$data1[0]->sellerState.','.$data1[0]->country,
+          'metaKeywords' => isset($data1[0]->metaKeywords) && $data1[0]->metaKeywords != '' & $data1[0]->metaKeywords[0] !='' ? implode(',', $data1[0]->metaKeywords) : $data1[0]->sellerCompanyName.','.' in '.$data1[0]->city.','.$data1[0]->sellerCompanyName.' in '. $data1[0]->sellerState.','. $data1[0]->sellerCompanyName.' in '. $data1[0]->country.','. $productNames,
           'fbTitle' => isset($data1[0]->fbTitle) && $data1[0]->fbTitle != '' ? $data1[0]->fbTitle : $data1[0]->sellerCompanyName,
           'fbDescription' => isset($data1[0]->fbDescription) && $data1[0]->fbDescription != '' ? $data1[0]->fbDescription : $data1[0]->sellerCompanyName,
           'fbImage' => isset($data1[0]->fbImage) ? API_URL . 'api/guest/imageContentDownload/' . $data1[0]->fbImage.id : 'undefined',
@@ -69,6 +71,24 @@ foreach ($aproodproduct1->products as $index => $product) {
         ?>
          <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css" >
 </head>
+<style>
+ .container-card {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 60%;
+  transform: translate(-50%, -50%);
+  width: auto;
+  max-height: 80vh; 
+  overflow-y: auto;
+  background-color: lightgray;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 99999999;
+  
+}
+</style>
 <body>
 <script src="<?php echo BASE_URL; ?>assets/js/lazy-load.js"></script>
 <?php
@@ -97,31 +117,9 @@ foreach ($aproodproduct1->products as $index => $product) {
     document.getElementById("popup-card-otp").style.display = "none";
   }
   function submitRequirement(formdata){
-  // var productname=document.getElementById("productName").value;
-  
-  // var quantity=document.getElementById("quantity").value;
-  // var Unit=document.getElementById("quantityUnit").value;
-  // var requirement=document.getElementById("requirement").value;
- 
-  // var countryCode=document.getElementById("countryCode").value;
-  // var contactNumber=document.getElementById("contactNumber").value;
-  
-//console.log(productname);
-        // let payload = {
-        //   enquirerName: 'Atulyadav',
-        //   enquirerContactNumber: countryCode+contactNumber,
-        //   enquirerEmail:'atul@sakshemit.com',
-        //   enquiryMessage: requirement,
-        //   productName:productname,
-        //   quantity: quantity,
-        //   unit: Unit,
-        //   buyer: { id: '651266a6be013b38a26b35bf' },
-        //   status: 'New',
-        //   frequencytype: lol
-        // }
+
         document.getElementById("postBuyreq").reset();
 
-       // formdata.frequencytype=lol;
        var url="<?php echo API_URL?>api/enquiries";
        console.log(url);
        const myObject1 = new StorageService();
@@ -149,7 +147,7 @@ fetch(url, {
           window.location.href = '/';
         }
     });
-  //console.log(payload);
+
   }
 </script>
 <section class="container-fluid bg-gradiant2">
@@ -223,7 +221,6 @@ fetch(url, {
                   
                   <a target="_blank" href="<?php echo $whatsappUrl->getProductToWhatsapp('', $data1[0]->id, $data1)?>"
                     class=" btn py-2 btn-sm w-100">
-                    <!--<a target="_blank" href="https://api.whatsapp.com/send?phone=971569773623&text=Browsed TradersFind" class="whatsappbtn btn py-2 btn-sm w-100">-->
                     Connect on whatsapp
                     
                   </a>
@@ -244,25 +241,33 @@ fetch(url, {
                   <ul class="d-flex gap-2 justify-content-center mt-0">
                 <?php if (isset($data1[0]->twitterLink) && $data1[0]->twitterLink != '') :?>
                     <li>
-                      <a href="<?php echo $data1[0]->twitterLink ?>" aria-label="Twitter">
-                        <img src="<?php echo BASE_URL?>assets/images/twitter.webp" width="40" alt="X" />
+                      <a target="_blank" href="<?php echo $data1[0]->twitterLink ?>" aria-label="Twitter">
+                        <img src="<?php echo BASE_URL?>assets/images/twitter_icon.webp" width="40" alt="X" />
                       </a>
                     </li>
                     <?php endif;
                     if (isset($data1[0]->facebookLink) && $data1[0]->facebookLink != ''): ?>
                     <li>
-                      <a href="<?php echo $data1[0]->facebookLink ?>" aria-label="Facebook">
+                      <a target="_blank" href="<?php echo $data1[0]->facebookLink ?>" aria-label="Facebook">
                           <img src="<?php echo BASE_URL?>assets/images/facebook.webp" width="40" alt="facebook" />
                       </a>
                   </li>
                   <?php endif; 
                   if (isset($data1[0]->instagramLink) && $data1[0]->instagramLink != '') :?>
                     <li>
-                      <a href="<?php echo $data1[0]->instagramLink ?>" aria-label="Instagram">
+                      <a target="_blank" href="<?php echo $data1[0]->instagramLink ?>" aria-label="Instagram">
                         <img src="<?php echo BASE_URL?>assets/images/instagram.webp" width="40" alt="instagram" />
                       </a>
                     </li>
+                   <?php endif;
+                   if (isset($data1[0]->linkedinUrl) && $data1[0]->linkedinUrl != '') :?>
+                    <li>
+                      <a target="_blank" href="<?php echo $data1[0]->linkedinUrl?>" aria-label="linkedIn">
+                        <img src="<?php echo BASE_URL?>assets/images/LinkedIn_icon.webp" width="40" alt="linkedIn" />
+                      </a>
+                    </li>
                    <?php endif; ?> 
+                    
                    
                   </ul>
                 </div>
@@ -407,9 +412,12 @@ fetch(url, {
                 <div class="text-start lh-sm">
                   <h3 class="text-black-50 mb-0 fs-4 fwbold">Map Location</h3>
                   <!--<app-map [longitude]="this.seller.coordinates[0]" [latitude]="this.seller.coordinates[1]"></app-map>-->
-                  <button onclick="toggleMap()"
-                    class="btn-outline-gradiant btn btn-sm w-100 d-center"> Click Here
+                  <button onclick="toggleMap(<?php echo $data1[0]->coordinates[0]; ?>, <?php echo $data1[0]->coordinates[1]; ?>)"
+                     class="btn-outline-gradiant btn btn-sm w-100 d-center"> Click Here
                   </button>
+                <div id="map-container" class="container-card">
+                <button id="close-btn" onclick="closeMap()" class="close-btn">X</button>
+              </div>
                 </div>
               </div>
             </div>
@@ -566,6 +574,7 @@ fetch(url, {
                                   <div class="form-check mt-4">
                                     <!-- <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked />-->
                                     <label class="form-check-label" for="flexCheckChecked">
+                                    <input type="checkbox" id="option1" name="options" value="option1">
                                       I agree to
                                       <a href="https://www.tradersfind.com/term-and-conditions" target="_blank"
                                         class="text-decoration-underline">terms and conditions</a>
@@ -574,7 +583,7 @@ fetch(url, {
                                   
                                     <button 
                                     class="btn-primary-gradiant custom-button-style">
-                                Requirement
+                                    SUBMIT REQUIREMENT
                             </button>
 
                                 </div>
@@ -631,12 +640,92 @@ fetch(url, {
     </div>
   </div>
   <?php include_once 'map.php';?>
-  <script>
-        function toggleMap() {
-          console.log('bghjdbdfg');
-          document.getElementById("map-container").style.display = "block";
+  <style>
+     .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: red;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .close-btn:hover {
+        background-color: darkred;
+    }
+
+    .container-card {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 70%;
+        max-height: 90vh; 
+        overflow-y: auto;
+        background-color: lightgray;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        z-index: 99999999;
+    }
+</style>
+
+  <script type="text/javascript">
+     function closeMap() {
+        var mapContainer = document.getElementById("map-container");
+        mapContainer.style.display = "none";
+    }
+
+    function generateMapUrl(latitude, longitude) {
+        if (latitude && longitude) {
+            // If latitude and longitude are provided, generate the map URL with them
+            return "https://maps.google.com/maps?q=" + latitude + "," + longitude + "&z=15&output=embed";
+        } else {
+            // If latitude and longitude are not provided, use default coordinates
+            return "https://maps.google.com/maps?q=23.4241,53.8478&z=15&output=embed";
         }
-    </script>
+    }
+
+    function generateMapIframe(latitude, longitude) {
+        var mapUrl = generateMapUrl(latitude, longitude);
+
+        // Create iframe element
+        var iframe = document.createElement("iframe");
+        iframe.width = "100%";
+        iframe.height = "450";
+        iframe.frameBorder = "1";
+        iframe.style.border = "0";
+        iframe.loading = "lazy";
+        iframe.src = mapUrl;
+        iframe.allowFullscreen = true;
+
+        return iframe;
+    }
+
+    function toggleMap(latitude, longitude) {
+        var mapContainer = document.getElementById("map-container");
+
+        // Clear previous iframe if exists
+        var existingIframe = mapContainer.querySelector('iframe');
+        if (existingIframe) {
+            mapContainer.removeChild(existingIframe);
+        }
+
+        // Append new iframe
+        var iframe = generateMapIframe(latitude, longitude);
+        mapContainer.appendChild(iframe);
+
+        // Toggle display
+        mapContainer.style.display = "block";
+    }
+</script>
+
   </script>
   <script>
               var lol='';

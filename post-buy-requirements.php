@@ -65,7 +65,7 @@ fetch(url, {
     .then(function (data) {
         console.log(data);
         if(confirm('Your Request is submitted successfully!! Please click OK.')) {
-        window.location.href = '/post-buy-requirements';
+        window.location.href = '/';
     }
     })
     .catch(function (error) {
@@ -73,7 +73,8 @@ fetch(url, {
         if(confirm('Your Request is not submitted !!! Due To some issue Please click OK.')) {
           window.location.href = '/';
         }
-    });
+    })
+    ;
   console.log(payload);
   }
 </script>
@@ -361,7 +362,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 } else {
  
-    echo "Error: Form not submitted!";
+   
 }
 //ob_end_flush();
 ?>

@@ -188,7 +188,7 @@ include_once "header-sub.php";
              
             ?>
             <div class="card-shadow p-2 rounded-2 bg-white">
-                <h5 class="border-bottom pb-2 fw-bold">Categories</h5>
+                <h5 class="border-bottom pb-2 fw-bold">Group Categories</h5>
                 <ul class="category-filter flex-wrap mb-2"> 
                     <?php
                     foreach($blogcat as $bcat){
