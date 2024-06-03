@@ -302,36 +302,38 @@
             
             <tbody>
               <td>
-                Nature of Business <br />
+                <b>Nature of Business </b><br />
                 <?php echo isset($data1->seller->sellerCompanyType)?$data1->seller->sellerCompanyType:''; ?>
               </td>
               <td>
-                Year of Establishment <br /> 
+                <b>Year of Establishment </b><br /> 
                 <?php echo isset($data1->seller->sellerInceptionYear)?$data1->seller->sellerInceptionYear:''; ?>
               </td>
               <td>
-                Website <br />
+               <b> Website </b><br />
                 <a [href]="<?php echo isset($data1->seller->sellerWebsite)?$data1->seller->sellerWebsite:''; ?>" title="Seller Website" target="_blank" class="text-blue">
                 <?php echo isset($data1->seller->sellerWebsite)?$data1->seller->sellerWebsite:''; ?> </a>
               </td>
             </tbody>
             <tbody>
               <td>
-                Working Days <br />
+                <b>Working Days </b><br />
                 <?php 
-                 echo isset($data1->seller->sellerBusinessHours)?$data1->seller->sellerBusinessHours:'' //. $data1->seller->sellerBusinessDay
+              echo isset($data1->seller->sellerBusinessHours)
+              ? str_replace('@', ' ', $data1->seller->sellerBusinessHours)
+              : '';//. $data1->seller->sellerBusinessDay
                   ?>
               </td>
               <td>
-                Trade License <br />  <?php echo  isset($data1->seller->tradeLicenseNumber)?$data1->seller->tradeLicenseNumber:""; ?>
+               <b> Trade License </b><br />  <?php echo  isset($data1->seller->tradeLicenseNumber)?$data1->seller->tradeLicenseNumber:""; ?>
               </td>
               <td>
-              Service Area <br /> <?php echo (isset($data1->seller->state) ? $data1->seller->state : "") . ', ' . (isset($data1->seller->sellerCountry) ? $data1->seller->sellerCountry : "") ?>               </td>
+              <b> Service Area </b><br /> <?php echo (isset($data1->seller->state) ? $data1->seller->state : "") . ', ' . (isset($data1->seller->sellerCountry) ? $data1->seller->sellerCountry : "") ?>               </td>
             </tbody>
             <tbody>
               <td>
-                Certified <br />
-                Certified by TradersFind
+              <b>Certified</b> <br />
+              <b>Certified by TradersFind</b>
               </td>
               <!-- <td>
                 Map Location <br />

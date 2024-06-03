@@ -216,7 +216,7 @@ include_once 'config.php';
        include_once "banner.php";   
        ?>
        
-    </section>
+    
     
     <input type="hidden" id="productSubCategoryFilter" name="productSubCategoryFilter" value="">
    
@@ -270,7 +270,7 @@ include_once 'config.php';
   <small class="fwbold">(<?php echo $totallength ; ?> products available) </small>
 </div>
 <div class="sortdescription-card" id="sortdescription-card" style="display:none"> 
-  <?php if(isset($subcategory->locations)){
+  <p><?php if(isset($subcategory->locations)){
       foreach($subcategory->locations as $Sdlocation){
    
         if($Sdlocation->location==$location1 && isset($Sdlocation->shortDescription) && $Sdlocation->shortDescription !=''){
@@ -312,7 +312,7 @@ include_once 'config.php';
         
       } 
   echo $shortDescription;
-  ?>
+  ?></p>
   <button type="button" style='color:brown; border: none;' onclick="closePopsdesc()">view less</button>
 
 </div>
@@ -334,8 +334,8 @@ if (isset($category )&&isset($subcategory->shortDescription) && $subcategory->sh
   
   //$shortenedDescription = substr($shortDescription, 0, 400);
   if (strlen($shortDescription) >= 400) {
-    echo '<a href="javascript:void(0);"><div id="short-desc" style="display: inline;">' . $shortDescription . '</div></a>';
-   // echo '<div id="full-desc" style="display: none;">' . $shortDescription . '<span style="color:brown;">&nbsp;<b><a href="javascript:void(0);" onclick="toggleDescription()"> View less</a></b></span></div>';
+    echo '<a href="javascript:void(0);" onclick="toggleDescription()"><div id="short-desc" style="display: inline;">' . $shortDescription . '</div></a>';
+    echo '<div id="full-desc" style="display: none;">' . $shortDescription . '<span style="color:brown;">&nbsp;<b><a href="javascript:void(0);" onclick="toggleDescription()"> View less</a></b></span></div>';
 
 } else {
   echo '<div id="full-desc" style="display: inline;">' . $shortDescription . '</div>';
@@ -348,18 +348,14 @@ if (isset($category )&&isset($subcategory->shortDescription) && $subcategory->sh
   
   
   }else if(isset($subcategory->locations)){
-	$loc1 = '1';
       foreach($subcategory->locations as $Sdlocation){
-   //echo $location1;
-        if(strtolower($Sdlocation->location)== strtolower($location1) && isset($Sdlocation->shortDescription) && $Sdlocation->shortDescription!='' ){
+   
+        if(strtolower(isset($Sdlocation->location)?$Sdlocation->location:'')==strtolower($location1) && isset($Sdlocation->shortDescription) && $Sdlocation->shortDescription!='' ){
           echo $Sdlocation->shortDescription;
-//          echo '<button style="color:brown; border: none;" onclick="readmoreSdesc()"> view more      </button>';
-$loc1 = '0';
-break;
-        }
-      } 
-//  	if(isset($subcategory->subCategoryName) && $loc1 == 0){
-  	if($loc1 == '1'){
+          echo '<button style="color:brown; border: none;" onclick="readmoreSdesc()">
+          view more
+        </button>';
+        }else if(isset($subcategory->subCategoryName)){
           echo "<p>
           Find the best $subcategory->subCategoryName in $location1 at competitive prices. Discover a wide range of
           $subcategory->subCategoryName from top companies, manufacturers, dealers, and distributors across $location1.
@@ -371,8 +367,8 @@ break;
           view more
         </button>';
         }
-
-
+      }
+   
   }else{
     if(isset($subcategory->subCategoryName)){
       echo "<p>
@@ -776,21 +772,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       'frequencytype' => $frequencytype
     );
 
-  //echo "Form submitted successfully!";
- // echo $productName;
- // header("Location: post-buy-requirements");
+  
  $contenctNo=$countryCode.$contactNumber;
  include_once 'post.php';
- //print_r($contenctNo);
+ 
  $respons=sendOtp1($contenctNo,$formdata);
 
   }
 
 } else {
  
-    //echo "Error: Form not submitted!";
+    
 }
-//ob_end_flush();
+
 ?>
           <div class="post-request-text ">
 <?php if($totallength>10){
@@ -832,16 +826,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </p>
         <?php
        
-        // Sanitize the value
+   
         $currentUrl = $_SERVER['REQUEST_URI'];
         $parts = explode('/', $currentUrl);
-        $category = basename($parts[2]); // Extract the category part
-        $searchtext = htmlspecialchars(str_replace('-',' ', $category)); // Sanitize the value
+        $category = basename($parts[2]); 
+        $searchtext = htmlspecialchars(str_replace('-',' ', $category));
         ?>
         </div>
     </div>    
 </div>
-
+ </section>
 <script>
   let page=1;
   let size=1;
@@ -859,9 +853,9 @@ console.log(searchtext);
 console.log(filterdto1);
 function lod(){
  let payload= {};
-// console.log(category);
+
 if(category=='category'){
-  //console.log(category);
+  
  
     payload= {
     searchText: searchtext,
@@ -920,11 +914,11 @@ searchProductNew(payload, page).then(response => {
 </html>
 <script>
 function toggleDescription() {
-  //alert(document.getElementById("full-desc"));
+
                 var shortDesc = document.getElementById("short-desc");
                 var fullDesc = document.getElementById("full-desc");
                 var moreText = document.querySelector("#short-desc + span a");
-                //alert(moreText);
+               
                 if (shortDesc.style.display === "none") {
                     shortDesc.style.display = "inline";
                     fullDesc.style.display = "none";
@@ -936,25 +930,24 @@ function toggleDescription() {
                 }
             }
 
-     // Create an IntersectionObserver
+     
 const observer = new IntersectionObserver(handleIntersection, {
   root: null,
   rootMargin: '0px',
-  threshold: 0.1 // You can adjust this threshold as needed
+  threshold: 0.1 
 });
 
-// Find the element near the bottom of the page
-const bottomElement = document.getElementById('productList'); // Change 'bottom-element' to the ID of your actual element
 
-// Start observing the bottom element
+const bottomElement = document.getElementById('productList'); 
+
+
 observer.observe(bottomElement);
 
-// Function to handle intersection
+
 function handleIntersection(entries, observer) {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
-      // If the bottom element is intersecting with the viewport, it means user has scrolled to the bottom
-      // Add your code here to execute when user scrolls to the bottom
+      
       document.getElementById("cat-desc").style.display="block";
       console.log("working...")
     }
@@ -966,3 +959,4 @@ function handleIntersection(entries, observer) {
 <?php
 include_once "footer.php"
 ?>
+</section>

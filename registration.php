@@ -1,4 +1,5 @@
 <?php 
+
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
@@ -128,7 +129,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         null,
         false,
         'text' ); 
-       print_r($res);
+      // print_r($res);
          function submit(){
             $firstname = $_POST['firstname'];
             $companyname = $_POST['companyname'];
@@ -168,11 +169,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          $response= post($url, $payload, false, null, true, 'text');
        
      
-         echo '<script>alert("Form submitted. You are registred successfully!"); window.location.href = "/register-your-business";</script>';
+         echo '<script>alert("Form submitted. You are registred successfully!"); window.location.href = "/";</script>';
     } 
     if($res=="NotFound"){
         submit();
-        
+       
+    }else if($res==="Found"){
+
+      echo '<script type="text/javascript">
+      alert("User is Already registered!");
+      window.history.back();
+  </script>';
+  exit();
+     
+
     }
 }
 } 
@@ -298,7 +308,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             Custom Domain Name
           </h4>
           <p class="fs-18">
-            Get your own Responsive website & domain name with company registration on TradersFind .com
+            Get your own Responsive website & domain name with company registration on TradersFind.com
           </p>
         </div>
       </div>
@@ -310,7 +320,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             Online Company Profile Page
           </h4>
           <p class="fs-18">
-            Get your own Responsive website & domain name with company registration on TradersFind .com
+            Get your own Responsive website & domain name with company registration on TradersFind.com
           </p>
         </div>
       </div>
@@ -322,7 +332,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             Website Link at Relevant Places
           </h4>
           <p class="fs-18">
-            Get your own Responsive website & domain name with company registration on TradersFind .com
+            Get your own Responsive website & domain name with company registration on TradersFind.com
           </p>
         </div>
       </div>
@@ -334,7 +344,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             Product / Service Management
           </h4>
           <p class="fs-18">
-            Get your own Responsive website & domain name with company registration on TradersFind .com
+            Get your own Responsive website & domain name with company registration on TradersFind.com
           </p>
         </div>
       </div>
@@ -346,7 +356,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             Product / Service Grouping
           </h4>
           <p class="fs-18">
-            Get your own Responsive website & domain name with company registration on TradersFind .com
+            Get your own Responsive website & domain name with company registration on TradersFind.com
           </p>
         </div>
       </div>
@@ -358,7 +368,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             Excellent Dashboard
           </h4>
           <p class="fs-18">
-            Get your own Responsive website & domain name with company registration on TradersFind .com
+            Get your own Responsive website & domain name with company registration on TradersFind.com
           </p>
         </div>
       </div>
@@ -370,7 +380,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             Buyer Inquiry Section
           </h4>
           <p class="fs-18">
-            Get your own Responsive website & domain name with company registration on TradersFind .com
+            Get your own Responsive website & domain name with company registration on TradersFind.com
           </p>
         </div>
       </div>
@@ -382,7 +392,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             Buy Lead Database Access
           </h4>
           <p class="fs-18">
-            Get your own Responsive website & domain name with company registration on TradersFind .com
+            Get your own Responsive website & domain name with company registration on TradersFind.com
           </p>
         </div>
       </div>
@@ -394,7 +404,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             Inquiry Alert Setting
           </h4>
           <p class="fs-18">
-            Get your own Responsive website & domain name with company registration on TradersFind .com
+            Get your own Responsive website & domain name with company registration on TradersFind.com
           </p>
         </div>
       </div>
@@ -406,7 +416,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             Trusted Certificate
           </h4>
           <p class="fs-18">
-            Get your own Responsive website & domain name with company registration on TradersFind .com
+            Get your own Responsive website & domain name with company registration on TradersFind.com
           </p>
         </div>
       </div>
@@ -420,7 +430,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <div class="col-lg-12 fs-18 text-center mt-4">
         <p>
           Global Exposure, 24X7 live showroom, instant inquiries, potential buyers! All this is what B2B
-          entrepreneurs dream to growing business online. TradersFind .com is the answer to all, which
+          entrepreneurs dream to growing business online. TradersFind.com is the answer to all, which
           continues to serve you with such a common B2B online Marketplace with in numerous manufacturers,
           wholesalers suppliers, importers, exporters, service providers,of various companies have registered
           their business in it.
@@ -460,7 +470,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <h2 class="accordion-header">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse"
                   data-bs-target="#collapseOne" aria-expanded="true">
-                  Q1. Who all can sell their products or services on TradersFind .Com?
+                  Q1. Who all can sell their products or services on TradersFind.Com?
                 </button>
               </h2>
               <div id="collapseOne" class="accordion-collapse" data-bs-parent="#accordionExample">
@@ -478,12 +488,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <h2 class="accordion-header">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
                 aria-controls="collapseThree" >
-                  Q2. What details are required for registration on TradersFind .Com?
+                  Q2. What details are required for registration on TradersFind.Com?
                 </button>
               </h2>
               <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                 <div class="accordion-body fs-18">
-                  <p class="mb-2 ">To successfully register on TradersFind .Com, you need:</p>
+                  <p class="mb-2 ">To successfully register on TradersFind.Com, you need:</p>
                   <ul>
                     <li>• Email id</li>
                     <li>• Mobile number</li>
@@ -499,7 +509,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <h2 class="accordion-header">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                   data-bs-target="#collapseThree" aria-controls="collapseThree">
-                  Q3. How do I register on TradersFind .Com?
+                  Q3. How do I register on TradersFind.com?
                 </button>
               </h2>
               <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
@@ -517,7 +527,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <h2 class="accordion-header">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                   data-bs-target="#collapsefour" aria-controls="collapsefour">
-                  Q4. How can TradersFind .Com help me in generating more business?
+                  Q4. How can TradersFind.com help me in generating more business?
                 </button>
               </h2>
               <div id="collapsefour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
