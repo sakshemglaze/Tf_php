@@ -54,7 +54,7 @@ include_once "header-sub.php";
             <div class="mt-4 col-md-12 col-sm-12 col-xs-12 search-banner">
                 <a href="/">Home</a> >
                 <a href="/blog">Blogs</a> >
-                <a href="<?php echo $urlService->getBlogUrl($blog->title); ?>"><?php echo $blogtitle; ?></a>
+                <a href="<?php echo $urlService->getBlogUrl($blog->title); ?>"><?php echo $blog->title; ?></a>
             </div>
         </div>
     </section>
