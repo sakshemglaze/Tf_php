@@ -6,6 +6,7 @@
     include_once "whatsapp.php";
     $whatsappUrl=new WhatsappUrl();
     $maskedService = new MaskingService();
+
 ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="path/to/bootstrap-icons.css">
@@ -38,7 +39,6 @@
                         <div class="col-md-5 position-relative star-listing2">
                         <div class="" style="margin-top: 10px;width: 100%; float: left;">
                            <?php
-                           //print_r($prodData);
                             if (isset($prodData['seller']) && $prodData['seller']['isVerifiedSeller']) {
                                 echo '<div style="margin: auto; display: table;">';
                                 echo '<img class="lazy" data-src="' . BASE_URL . 'assets/images/verified2.png" width="74" height="22" alt="Verified_Product" style="float: left; width: 60px;">';
@@ -143,39 +143,53 @@
                                             <span  class="single-line"> <b>Brands : </b> 
                                             <?php
                                            print_r( $prodData['brand']);
+                                           
                                             ?>
                                             </span>
                                             <?php } ?>
                                     </div>
+                                    
                                     <div class="d-flex small mt-1 single-line">
-                                        <?php if( isset($prodData['reletedSubcategorys'])){?>
-                                            <span  class="single-line"> <b>categorys : </b> 
-                                            <?php
-                                          echo $prodData['reletedSubcategorys'][0];
-                                            ?>
-                                           <div class="popuppluscard" id="popuppluscard" style="display:none">
-                                                   <button class="but" onclick="closepluscard()" style="border: none; position: absolute; right: 20px; top:20px;"><i class="bi bi-dash"></i></button>
-                                                    <?php 
-                                                   $formattedString = '';
-                                                   foreach ($prodData['reletedSubcategorys'] as $index => $subcategory) {
-                                                    $url = $urlService->getCategoryUrl($subcategory);
-                                                     if ($index == 0) {
-                                                              $formattedString .= '<a href="' . $url . '">' . $subcategory . '</a>';
-                                                                            } else {
-                                                               $formattedString .= ' | <a href="' . $url . '">' . $subcategory . '</a>';
-                                                                     }
-                                                            }
-                                                   echo "<h5 style='margin-top: 20px;'>".$formattedString."</h5>";
+                                    <?php if(count($reletedSubCategory)>0){?>
+    <span class="single-line">
+        <b>Related categories: </b>
+        <?php
+             print_r( $reletedSubCategory[0]);                          
+        ?>
 
-                                                    ?>
-                                           </div>
-                                            </span>
-                                        <button type="button" class="btn " style="position: absolute;  right: 11px;" onclick="onclickplus()">
-    <span aria-hidden="true"><i class="bi bi-plus" style=" font-size: 18px;"></i></span>
-  </button>
+        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#<?php echo $modalId; ?>">
+            <span aria-hidden="true"><i class="bi bi-plus" style="font-size: 18px;"></i></span>
+        </button>
+    </span>
 
-                                            <?php } ?>
-                                    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="<?php echo $modalId; ?>" tabindex="-1" aria-labelledby="<?php echo $modalId; ?>Label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="<?php echo $modalId; ?>Label">Related Subcategories</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <?php
+                    $formattedString = '';
+                    foreach ($reletedSubCategory as $index => $subcategory) {
+                        $url = $urlService->getCategoryUrl($subcategory);
+                        if ($index == 0) {
+                            $formattedString .= '<a href="' . $url . '">' . $subcategory . '</a>';
+                        } else {
+                            $formattedString .= ' | <a href="' . $url . '">' . $subcategory . '</a>';
+                        }
+                    }
+                    echo "<h5 style='margin-top: 20px;'>" . $formattedString . "</h5>";
+                    ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php }?>
+</div>
+
   
 
 
@@ -283,6 +297,8 @@
     document.getElementById("popup-card").style.display = "block";
   }
 </script>
+
+
 <script src="<?php echo BASE_URL; ?>assets/js/lazy-load.js"></script>
  
 

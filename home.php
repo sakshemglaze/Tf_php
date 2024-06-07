@@ -68,10 +68,9 @@
   ];
 ?>
 
-<!DOCTYPE html lang="en">
+<html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <?php 
         include_once 'services/seo.php';
         $seo = new seoService();
@@ -584,7 +583,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     'quantity' => $quantity,
     'unit' => $quantityUnit,
     'status' => 'New',
-    'frequencytype' => $frequencytype
+    'frequencytype' => $frequencytype,
+    'enquirerName'=>''
   );
 
 //echo "Form submitted successfully!";

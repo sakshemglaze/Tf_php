@@ -302,7 +302,8 @@ fetch(url, {
       'quantity' => $quantity,
       'unit' => $quantityUnit,
       'status' => 'New',
-      'frequencytype' => $frequencytype
+      'frequencytype' => $frequencytype,
+      'enquirerName'=>''
     );
 
   //echo "Form submitted successfully!";
