@@ -580,9 +580,29 @@ fetch(url, {
                         $indexr=$inde;
                         
                         if (is_array($onep) && isset($onep['productName'])) {
-                          //print_r($onep['id']);
+                         
                            $prodData=$onep;
-                           //print_r($prodData);
+                           
+                           $reletedselId=$prodData["id"] ;
+                           
+                           $getreltedprod = get('api/guest/products/by-seller-related/' . $reletedselId, true);
+                           $reletedSubCategory = [];
+                           $arrayOfRelsubcat = [];
+                           $arrayRprod = json_decode($getreltedprod);
+                           
+                           foreach ($arrayRprod as $index => $relProd) {
+                               //print_r(gettype($relProd));
+                               if (is_array($relProd) && count($relProd) != 0) {
+                                   foreach ($relProd as $Sprod) {
+                                       $arrayOfRelsubcat[] = $Sprod->productSubcategoryName;
+                                    
+                                   }
+                               }
+                           }
+                           
+                           
+                           $reletedSubCategory = array_unique($arrayOfRelsubcat);
+                           $modalId = 'popuppluscardModal' . $indexr;
                            ?>
                            <div class= "col-lg-6 ">
                             <?php
@@ -769,7 +789,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       'quantity' => $quantity,
       'unit' => $quantityUnit,
       'status' => 'New',
-      'frequencytype' => $frequencytype
+      'frequencytype' => $frequencytype,
+      'enquirerName'=>''
     );
 
   

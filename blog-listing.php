@@ -123,6 +123,7 @@ include_once "header-sub.php";
                 
                 <?php foreach ($blogList as $blog){
                      // $desc = custom_mb_strimwidth($blog->description, 0, 250, '...');
+                     //print_r($blog->blogUrl);
                     ?>
                    
                     <div class="col-lg-6 mb-4 align-items-center front_blog">
@@ -141,7 +142,7 @@ include_once "header-sub.php";
                             <?php endif; ?>
                             <div class="front_blog2">
                                 <p><?php echo $blog->subTitle; ?></p>
-                                <h1 style="font-size: x-large;"><a href="<?php echo BASE_URL.$urlService->getBlogUrl($blog->title); ?>"><?php echo $blog->title; ?></a></h1>
+                                <h1 style="font-size: x-large;"><a href="<?php echo BASE_URL.$urlService->getBlogUrl(isset($blog->blogUrl)?$blog->blogUrl:$blog->title); ?>"><?php echo $blog->title; ?></a></h1>
                                 <!-- <p class='roohit'></p> -->
                                     <?php //echo $desc; ?>
                                 <small class="mt-1 d-block"><?php echo $blog->createdBy; ?>, <?php echo date('d M y', strtotime($blog->createdDate)); ?></small>
