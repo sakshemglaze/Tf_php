@@ -1,4 +1,55 @@
 <?php include_once 'config.php'; 
+ $schema = '{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.tradersfind.com/#organization",
+      "name": "Interconnect Marketing Management L.L.C",
+      "url": "https://www.tradersfind.com/seller/interconnect-marketing-management-llc",
+      "sameAs": [
+        "https://www.facebook.com/tradersfindb2bportal/",
+        "https://www.linkedin.com/company/tradersfind/",
+        "https://x.com/tradersfind/"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "@id": "https://www.tradersfind.com/#logo",
+        "url": "https://www.tradersfind.com/assets/images/TradersFind.webp",
+        "caption": "Tradersfind.com by Interconnect Marketing Management L.L.C"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.tradersfind.com/#website",
+      "url": "https://www.tradersfind.com/",
+      "name": "Tradersfind.com",
+      "publisher": {
+        "@id": "https://www.tradersfind.com/#organization"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://www.tradersfind.com/search/{search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://www.tradersfind.com/#webpage",
+      "url": "https://www.tradersfind.com",
+      "inLanguage": "en-US",
+      "name": "Tradersfind.com by Interconnect Marketing Management L.L.C",
+      "isPartOf": {
+        "@id": "https://www.tradersfind.com/#website"
+      },
+      "about": {
+        "@id": "https://www.tradersfind.com/#organization"
+      },
+      "description": "Interconnect Marketing Management L.L.C handles Tradersfind.com, which is the UAE largest B2B Portal for businesses, products and services. A smart and efficient way to Search, Find and Connect with Businesses in UAE."
+    }
+  ]
+}';
+
   $SeoParams = [
     'title' => null,
     'metaTitle' => 'UAEs Largest Online B2B Portal - TradersFind',
@@ -13,13 +64,13 @@
                 'twitterImage' => null,
                 'twitterSite' => null,
                 'twitterCard' => null,
+                'schemaDescription' => $schema,
   ];
 ?>
 
-<!DOCTYPE html lang="en">
+<html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <?php 
         include_once 'services/seo.php';
         $seo = new seoService();
@@ -532,7 +583,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     'quantity' => $quantity,
     'unit' => $quantityUnit,
     'status' => 'New',
-    'frequencytype' => $frequencytype
+    'frequencytype' => $frequencytype,
+    'enquirerName'=>''
   );
 
 //echo "Form submitted successfully!";

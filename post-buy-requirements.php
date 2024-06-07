@@ -24,7 +24,7 @@ include_once "header-sub.php";
        function closePopup() {
     document.getElementById("popup-card-otp").style.display = "none";
   }
-  function submitRequirement(formdata){
+  function submitRequirement(formdata,data){
   var productname=document.getElementById("productName").value;
   
   var quantity=document.getElementById("quantity").value;
@@ -51,9 +51,12 @@ include_once "header-sub.php";
 
        // formdata.frequencytype=lol;
        var url="<?php echo API_URL?>api/enquiries";
+
+      
        console.log(url);
        const myObject1 = new StorageService();
       var token=myObject1.getItem('userAccessToken');
+
 fetch(url, {
     method: "POST",
     headers: {
@@ -78,7 +81,7 @@ fetch(url, {
         }
     })
     ;
-  console.log(payload);
+  console.log(data);
   }
 </script>
 
@@ -211,7 +214,7 @@ fetch(url, {
                        myObject.setItem('userMobile', mobileNumber);
                        myObject.setItem('login', mobileNumber);
                        myObject.setItem('userFname', "User");
-                       submitRequirement(formdata);
+                       submitRequirement(formdata,data);
     
                     },
                     error: function (xhr, status, error) {
@@ -249,7 +252,7 @@ fetch(url, {
                        myObject1.setItem('userMobile', mobileNumber);
                        myObject1.setItem('login', mobileNumber);
                        myObject1.setItem('userFname', "User");
-                       submitRequirement(formdata);
+                       submitRequirement(formdata,data);
     
                     },
                     error: function (xhr, status, error) {
@@ -350,7 +353,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       'quantity' => $quantity,
       'unit' => $quantityUnit,
       'status' => 'New',
-      'frequencytype' => $frequencytype
+      'frequencytype' => $frequencytype,
+      'enquirerName'=>''
     );
 
   //echo "Form submitted successfully!";

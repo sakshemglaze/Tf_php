@@ -30,7 +30,92 @@ $aproodproduct=get(
   ['isFeatured' => true]
 );
 $aproodproduct1 = json_decode($aproodproduct);
-
+$schema = '{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.tradersfind.com/#organization",
+      "name": "Interconnect Marketing Management L.L.C",
+      "url": "https://www.tradersfind.com/seller/interconnect-marketing-management-llc",
+      "sameAs": [
+        "https://www.facebook.com/tradersfindb2bportal/",
+        "https://www.linkedin.com/company/tradersfind/",
+        "https://x.com/tradersfind/"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "@id": "https://www.tradersfind.com/#logo",
+        "url": "https://www.tradersfind.com/assets/images/TradersFind.webp",
+        "caption": "Tradersfind.com by Interconnect Marketing Management L.L.C"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.tradersfind.com/#website",
+      "url": "https://www.tradersfind.com/#",
+      "name": "Tradersfind.com",
+      "publisher": {
+        "@id": "https://www.tradersfind.com/#organization"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://www.tradersfind.com/search/{search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://www.tradersfind.com/#webpage",
+      "url": "https://www.tradersfind.com",
+      "inLanguage": "en-US",
+      "name": "Tradersfind.com by Interconnect Marketing Management L.L.C",
+      "isPartOf": {
+        "@id": "https://www.tradersfind.com/#website"
+      },
+      "about": {
+        "@id": "https://www.tradersfind.com/#organization"
+      },
+      "description": "Interconnect Marketing Management L.L.C handles Tradersfind.com, which is the UAE largest B2B Portal for businesses, products and services. A smart and efficient way to Search, Find and Connect with Businesses in UAE."
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.tradersfind.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Platinum Paint Trading LLC",
+          "item": "https://www.tradersfind.com/seller/platinum-paint-trading-llc"
+        }
+      ]
+    },
+    {
+      "@type": "LocalBusiness",
+      "name": "Platinum Paint Trading LLC",
+      "url": "https://www.tradersfind.com/seller/platinum-paint-trading-llc",
+      "image": "https://doc.tradersfind.com/images/65d5c1f63b598e4b0b81002d.webp",
+      "description": "Platinum Paint Trading LLC is based in Sharjah, providing the best quality paints and coatings. Contact Now!",
+      "telephone": "+971509884017",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Near Maza Signal,Industrial Area# 2 Sharjah,United Arab Emirates",
+        "addressRegion": "Sharjah",
+        "addressCountry": "United Arab Emirates"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "25.19",
+        "longitude": "55.24"
+      }
+    }
+  ]
+}';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -62,6 +147,7 @@ $aproodproduct1 = json_decode($aproodproduct);
           'twitterImage' => isset($data1[0]->twitterImage) ? API_URL . 'api/guest/imageContentDownload/' . $data1[0]->twitterImage.id : 'undefined',
           'twitterSite' => isset($data1[0]->twitterSite) && $data1[0]->twitterSite != '' ? $data1[0]->twitterSite : null,
           'twitterCard' => isset($data1[0]->twitterCard) && $data1[0]->twitterCard != '' ? $data1[0]->twitterCard : null,
+          'schemaDescription' => $schema,
        ];
       $seo->setSeoTags($SeoParams);
 
@@ -896,7 +982,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     'quantity' => $quantity,
     'unit' => $quantityUnit,
     'status' => 'New',
-    'frequencytype' => $frequencytype
+    'frequencytype' => $frequencytype,
+    'enquirerName'=>''
   );
 
 //echo "Form submitted successfully!";

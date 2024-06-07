@@ -20,7 +20,7 @@
     $letestBlog=get('api/guest/blogs', false, $queryParams);
     $latestBlogs=json_decode($letestBlog);
 
-
+    if(isset($blog)) {
     $SeoParams = [
         'title' => isset($blog->metaTitle) && $blog->metaTitle != '' ? $blog->metaTitle : $blog->productName . ' in ' . $blog->seller->state . ' - ' . $blog->sellerCompanyName,
         'metaTitle' => isset($blog->metaTitle) && $blog->metaTitle != '' ? $blog->metaTitle : $blog->productName . ' in ' . $blog->seller->state . ' - ' . $blog->sellerCompanyName,
@@ -39,6 +39,9 @@
  include_once 'services/seo.php';
   $seo = new seoService();
           $seo->setSeoTags($SeoParams);
+} else {
+
+}
 ?>
 </head>
 <body>
@@ -51,7 +54,7 @@ include_once "header-sub.php";
             <div class="mt-4 col-md-12 col-sm-12 col-xs-12 search-banner">
                 <a href="/">Home</a> >
                 <a href="/blog">Blogs</a> >
-                <a href="<?php echo $urlService->getBlogUrl($blog->title); ?>"><?php echo $blog->title; ?></a>
+                <a href="<?php echo $urlService->getBlogUrl($blog->title); ?>"><?php echo $blogtitle; ?></a>
             </div>
         </div>
     </section>
