@@ -1,6 +1,7 @@
 <html>
     <head>
-
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <?php include_once 'config.php'; ?>
 <?php
     $SeoParams = [
@@ -29,8 +30,8 @@ include_once "header-sub.php";
 </section>
 
 <section class="container">
-    <div class="row">
-        <div class="col-lg-8 mt-4 card-shadow rounded-2 bg-white p-2">
+    <div class="row">	
+        <div class="col-xl-8 mt-4 card-shadow rounded-2 bg-white p-2">
             <!--<h2 class="my-4 text-uppercase fw-bold">Latest Blog</h2>-->
             <?php
            include_once 'services/url.php';
@@ -126,7 +127,7 @@ include_once "header-sub.php";
                      //print_r($blog->blogUrl);
                     ?>
                    
-                    <div class="col-lg-6 mb-4 align-items-center front_blog">
+                    <div class="col-md-6 mb-4 align-items-center front_blog">
                         <div class="hello">
                             <?php if ($blog->image == null || $blog->image == 'null' || $blog->image == ''): ?>
                                 <a target="_blank" href="<?php echo BASE_URL.$urlService->getBlogUrl($blog->title); ?>">
@@ -142,10 +143,11 @@ include_once "header-sub.php";
                             <?php endif; ?>
                             <div class="front_blog2">
                                 <p><?php echo $blog->subTitle; ?></p>
-                                <h1 style="font-size: x-large;"><a href="<?php echo BASE_URL.$urlService->getBlogUrl(isset($blog->blogUrl)?$blog->blogUrl:$blog->title); ?>"><?php echo $blog->title; ?></a></h1>
+                                <h1 class="fs-5 text-center fw-bold mt-3"><a href="<?php echo BASE_URL.$urlService->getBlogUrl(isset($blog->blogUrl)?$blog->blogUrl:$blog->title); ?>"><?php echo $blog->title; ?></a></h1>
+
                                 <!-- <p class='roohit'></p> -->
                                     <?php //echo $desc; ?>
-                                <small class="mt-1 d-block"><?php echo $blog->createdBy; ?>, <?php echo date('d M y', strtotime($blog->createdDate)); ?></small>
+                                <small class="mt-1 d-block text-center"><?php echo $blog->createdBy; ?>, <?php echo date('d M y', strtotime($blog->createdDate)); ?></small>
                             </div>
                         </div>
                     </div>
@@ -156,15 +158,15 @@ include_once "header-sub.php";
             </div>
             <hr id="loadmoreblog1" />
         </div>
-         <div class="col-lg-4 mt-4">
+         <div class="col-xl-4 mt-4">
             <?php
            
                 $resultb= get('api/guest/blog-categories', true);
                 $blogcat=json_decode($resultb);
              
             ?>
-            <div class="card-shadow p-2 rounded-2 bg-white">
-                <h5 class="border-bottom pb-2 fw-bold">Group Categories</h5>
+            <div class="card-shadow p-2 rounded-2 bg-white blog_Categories">
+                <h5 class="border-bottom pb-2 fs-5 text-white p-2 fw-bold bg2">Group Categories</h5>
                 <ul class="category-filter flex-wrap mb-2"> 
                     <?php
                     foreach($blogcat as $bcat){

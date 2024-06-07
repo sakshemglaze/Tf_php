@@ -1,6 +1,7 @@
 <html lang="en">
     <head>
-
+	 <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <?php include_once "config.php";
     include_once 'services/url.php';
@@ -62,7 +63,7 @@ include_once "header-sub.php";
         <div class="col-lg-8 mt-4  card-shadow rounded-2 bg-white p-2">
             <div class="pageheader front_blog22">
                 <div class="row col-md-12">
-                    <h1 style="font-size: x-large;"><?php echo $blog->title; ?></h1>
+                    <h1 class="fw-bold fs-6"><?php echo $blog->title; ?></h1>
                 </div>
                 <div class="blogDate">
                     <p><?php echo date('d M Y', strtotime($blog->createdDate)); ?></p>

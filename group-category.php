@@ -88,12 +88,12 @@
     <div class="col-lg-12">
       <div class="row bg-white">
         <div class="col-lg-2 bg-grey" *ngIf="categoryDetails">
-          <div class="d-flex flex-wrap p-4 flex-column align-items-center h-100">
-            <div class="pro_image w-100">
+          <div class="d-flex flex-wrap p-2 flex-column align-items-center ">
+            <div class="pro_image w-100 mt-2">
               <img data-src="<?php echo IMAGE_URL . $data1->image->id;?>.webp" class="lazy w-100" alt="Group-Category" />
 
             </div>
-            <span class="fs-4 fwbold mt-4"><?php echo $data1->categoryName; ?></span>
+            <span class="fs-5 fwbold mt-2"><?php echo $data1->categoryName; ?></span>
           </div>
         </div>
         <div class="col-lg-10 position-relative">

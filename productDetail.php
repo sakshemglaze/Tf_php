@@ -272,7 +272,7 @@
       <div class="tab-content" id="pills-tabContent">
         <div class="tab-pane fade show active fs-5" id="pills-product" role="tabpanel"
           aria-labelledby="pills-product-tab" tabindex="0">
-          <h3 class="fwbold mt-4 fs-3">Product Specification</h3>
+          <h3 class="fwbold mt-4 fs-5">Product Specification</h3>
 
           <table class="table producttable fs-5">
          
@@ -290,16 +290,15 @@
                ?> 
           </table>
 
-          <h3 class="fwbold mt-4 fs-3">Product Description</h3>
+          <h3 class="fwbold mt-4 fs-5">Product Description</h3>
           <p >
            <?php print_r( $data1->productDescription); ?> </p>
         </div>
         <div class="tab-pane fade fs-5" id="pills-company" role="tabpanel" aria-labelledby="pills-company-tab"
           tabindex="0">
-          <h3 class="fwbold mt-4 fs-3">About the Company</h3>
-
+          <h3 class="fwbold mt-4 fs-5">About the Company</h3>
+		  <div class="table-response">
           <table class="table table-borderless" *ngIf="prodDetails">
-            
             <tbody>
               <td>
                 <b>Nature of Business </b><br />
@@ -342,8 +341,9 @@
               </td> -->
             </tbody>
           </table>
+		  </div>
           <?php if(isset($data1->seller)):?>
-          <div >
+          <div class="fwbold mt-4 fs-5">
           <?php echo isset($data1->seller->sellerCompanyName)?$data1->seller->sellerCompanyName:''; ?>
           </div>
           <div> <?php echo isset($data1->seller->sellerTagline)?$data1->seller->sellerTagline:''; ?>     </div><br>

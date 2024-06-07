@@ -61,7 +61,7 @@ include_once 'config.php';
   
   <?php
 foreach ($data1 as $category) {
-    echo '<div class="row  gy-4 bg-white">';
+    echo '<div class="row  gy-4 bg-white ">';
     echo '<div class="col-lg-12">';
     echo '<h3 class="text-center fwbold text-uppercase text-black-50"><a href="' . $urlService->getIndustryUrl($category->industryName, $category->id) .'">' . $category->industryName . '</a></h3>';
     echo '</div>';

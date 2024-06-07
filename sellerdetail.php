@@ -303,10 +303,10 @@ fetch(url, {
                       </button>
                   <?php endif;?>
                 </div>
-                <div class="col-lg-6 whatsappbtn">
+                <div class="col-lg-6 ">
                   
                   <a target="_blank" href="<?php echo $whatsappUrl->getProductToWhatsapp('', $data1[0]->id, $data1)?>"
-                    class=" btn py-2 btn-sm w-100">
+                    class=" btn py-2 btn-sm w-100 whatsappbtn">
                     Connect on whatsapp
                     
                   </a>
@@ -608,7 +608,7 @@ fetch(url, {
               </div>
 
 
-              <div class="row dushyant-llc">
+              <div class="row">
                 <div class="col-lg-12">
                   <div class="p-md-4 my-3">
                     <div class="card border-0 shadow-lg">
@@ -619,14 +619,14 @@ fetch(url, {
                       </div>
                       <div class="card-body px-md-5">
                         <p class="fs-5 mb-2"><?php echo $data1[0]->sellerCompanyName;?> </p>
-                        <h4 class="text-uppercase mb-4 fwbold fs-4">
+                        <h4 class=" mb-3 fw-semibold">
                           Tell us about your requirement
                         </h4>
                         <form method="post" id="postBuyreq">
                           <div class="row">
 
-                            <div class="col-lg-6">
-                              <label for="" class="form-label fs-5">Describe in few words *</label>
+                            <div class="col-lg-8">
+                              <label for="" class="form-label fw-semibold fs-5">Describe in few words *</label>
                               <textarea name="" name="description" class="form-control" id="" cols="30"
                                 rows="6"
                                 placeholder="Please include product name, order quantity, usage, special request if any in your inquiry."></textarea>
@@ -635,15 +635,14 @@ fetch(url, {
                             </button>-->
 
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                               <div class="row gy-4">
-                                <div class="col-lg-6">
-                                  <label for="" class="form-label  fs-4">Email ID *</label>
+                                <div class="col-lg-12">
+                                  <label for="" class="form-label fw-semibold fs-5">Email ID *</label>
                                   <input type="text" name="enquirerEmail" class="form-control"
                                     placeholder="Email ID" />
                                 </div>
-                                <div class="col-lg-6">
-                                  <label for="" class="form-label  fs-4">Mobile Number*</label>
+                                <div class="col-lg-12">
                                   <div class="input-group">
                                   <select name="countryCode" class="form-control mxw-50">
                                           
@@ -657,9 +656,9 @@ fetch(url, {
                                   </div>
                                 </div>
                                 <div class="row gy-4">
-                                  <div class="form-check mt-4">
+                                  <div class="form-check mt-0">
                                     <!-- <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked />-->
-                                    <label class="form-check-label" for="flexCheckChecked">
+                                    <label class="form-check-label fs-6" for="flexCheckChecked">
                                     <input type="checkbox" id="option1" name="options" value="option1">
                                       I agree to
                                       <a href="https://www.tradersfind.com/term-and-conditions" target="_blank"
@@ -667,10 +666,11 @@ fetch(url, {
                                     </label>
                                   </div>
                                   
-                                    <button 
-                                    class="btn-primary-gradiant custom-button-style">
-                                    SUBMIT REQUIREMENT
-                            </button>
+                                   
+
+							<div class="col-lg-12 mb-2">
+								<button (click)="this.requirementService.onClickSubmitRequirement()" class="btn-primary-gradiant px-md-5 py-2 rounded-10 fs-5 fwbold">SUBMIT REQUIREMENT</button>
+							</div>
 
                                 </div>
 

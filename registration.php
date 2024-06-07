@@ -46,7 +46,7 @@ $pager=false;
         <div class="col-lg-6  mb-4">
           <div class="card border-0 rounded-top-20 rounded-bottom-20">
             <div class="card-header bg-gradiant py-3 px-md-3 rounded-top-20 border-0 text-white">
-              <h5 class="fs-3 fwbold text-uppercase">Register your Company Free</h5>
+              <h5 class="fs-4 fwbold text-uppercase">Register your Company Free</h5>
               <p class="mb-0">Create Company Profile with very Simple Steps & Manage your Business.</p>
             </div>
             <div class="card-body ">
@@ -95,7 +95,7 @@ $pager=false;
             </label>
         </div>
     </div>
-    <button type="submit" class="btn-primary-gradiant px-md-5 py-2 rounded-10 fs-4 fwbold mb-4" >
+    <button type="submit" class="btn-primary-gradiant px-md-5 py-2 rounded-10 fs-5 fwbold mb-4" >
         CREATE ACCOUNT
     </button>
 </form>
@@ -192,7 +192,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           </div>
         </div>
         <div class="col-lg-6 mt-0 text-white customer">
-          <h4 class=" text-uppercase text-center fs-4 fwbold fw-bold ">SELL YOUR PRODUCTS OR SERVICES TO MILLIONS OF
+          <h4 class=" text-uppercase text-center fs-5 fwbold fw-bold ">SELL YOUR PRODUCTS OR SERVICES TO MILLIONS OF
             CUSTOMER !</h4>
           <h4 class=" text-center">Get your business registered with us at no cost</h4>
           <div class="mt-4 p-1 text-center rounded-1 bg-gradiant text-white fs-5 fwbold TradersFindB"> Get started with
