@@ -12,22 +12,13 @@
 <link rel="stylesheet" href="path/to/bootstrap-icons.css">
 
 <style>
- .popuppluscard {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 60%;
-  transform: translate(-50%, -50%);
-  width: auto;
-  max-height: 80vh; 
-  overflow-y: auto;
-  background-color: lightgray;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  z-index: 99999999;
-  
+.modal-dialog {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
 }
+
 </style>
 
 <div class="cardproduct card-shadow rounded-10 bg-white" style="border: 0.5px solid #ddd;">
