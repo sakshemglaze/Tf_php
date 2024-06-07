@@ -256,13 +256,13 @@ include_once 'config.php';
 </nav>
 <div style="text-align: center;">
 <?php if (isset($category )) { ?>
-  <h1 class="me-2 fwbold text-capitalize mb-0"><?php echo str_replace("-", " ", ($subcategory->subCategoryName)); ?>
+  <h1 class="me-2 fs-4 fwbold text-capitalize mb-0 text-info"><?php echo str_replace("-", " ", ($subcategory->subCategoryName)); ?>
 <?php } else { ?>
-  <h1 class="me-2 fwbold text-capitalize mb-0"><?php echo str_replace("-", " ", basename($parts[2])); ?>
+  <h1 class="me-2 fs-4 fwbold text-capitalize mb-0 text-info"><?php echo str_replace("-", " ", basename($parts[2])); ?>
 <?php } ?>
 
   <?php if ($location == null) {
-    echo '<span> in UAE</span>';
+    echo '<span class="text-danger"> in UAE</span>';
   } else {
     echo '<span> in ' . str_replace("-"," " ,$location).'</span>';
   } ?>

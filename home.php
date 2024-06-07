@@ -617,16 +617,16 @@ include_once 'post.php';
     EXPLORE PREMIUM SELLERS
   </h3>
   <div class="owl-carousel carousel-main4">
-    <div class="p-2 col-md-3">
+    <div class="p-2">
           <span class=""><img src="<?php echo BASE_URL; ?>assets/images/brands/101.png" width="302px" height="159"  alt="Seller"></span>
         </div>
-    <div class="p-2 col-md-3">
+    <div class="p-2">
           <span class=""><img src="<?php echo BASE_URL; ?>assets/images/brands/102.png" width="302px" height="159"alt="Seller"></span>
         </div>
-    <div class="p-2 col-md-3">
+    <div class="p-2">
           <span class=""><img src="<?php echo BASE_URL; ?>assets/images/brands/103.png" width="302px" height="159"  alt="Seller"></span>
         </div>
-  <div class="p-2 col-md-3">
+  <div class="p-2">
           <span class=""><img src="<?php echo BASE_URL; ?>assets/images/brands/104.png" width="302" height="159"  alt="Seller"></span>
         </div>
 </div>

@@ -66,28 +66,28 @@ fetch(url, {
       <div class="col-lg-12">
         <div class="p-md-4 my-3">
           <div class="card border-0 shadow-lg">
-            <div class="card-header text-center bg-gradiant">
-              <h4 class="mb-0 py-1 fs-3">
+            <div class="card-header text-center bg-gradiant ">
+              <h4 class="mb-0 py-1 fs-5 fw-bold">
                 INQUIRE FOR YOUR BUYING REQUIREMENT
               </h4>
             </div>
-            <div class="card-body p-md-5">
-              <h5 class="text-uppercase mb-5 fw-semibold">
+            <div class="card-body p-md-4">
+              <h5 class="text-uppercase mb-3 fw-semibold">
                 Tell us about your requirement
               </h5>
               <form method="post" id="postBuyreq">
               <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-8">
                   <label for="" class="form-label fw-semibold fs-5">Describe in few words *</label>
                   <textarea name=""  name="description" class="form-control" id="" cols="30" rows="6"
                     placeholder="Please include_once product name, order quantity, usage, special request if any in your inquery."></textarea>
-                  <button class="p-0 text-blue bg-transparent border-0 mt-3 fs-5">
+                  <button class="btn-primary-gradiant px-md-5 py-2 rounded-10 mt-3 mb-1 fs-5 fwbold">
                     + Add Attachment
                   </button>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-4">
                   <div class="row gy-4">
-                    <div class="col-lg-6">
+                    <div class="col-lg-12">
                       <label for="" class="form-label fw-semibold fs-5">Email ID*</label>
                       <input type="text" name="enquirerEmail" class="form-control" placeholder="Email ID" />
                     </div>
@@ -111,10 +111,10 @@ fetch(url, {
                         </label>
                       </div>
                     </div>
-                    <app-loadp *ngIf="requirementService.spannerval" style="height: 50%; width: 60%; margin-left: -5px;"></app-loadp>
+                    <!--<app-loadp *ngIf="requirementService.spannerval" style="height: 50%; width: 60%; margin-left: -5px;"></app-loadp>-->
                     <div class="col-lg-12">
                       <button (click)="this.requirementService.onClickSubmitRequirement()"
-              class="btn-primary-gradiant px-md-5 py-2 rounded-10 fs-5 fwbold mt-3 mb-3">Send Inquiry</button>
+              class="btn-primary-gradiant px-md-5 py-2 rounded-10 fs-5 fwbold">Send Inquiry</button>
             
                     </div>
                   </div>
