@@ -9,7 +9,7 @@ class seoService {
         if(substr($curl,-1) === '/') {
             $curl = 'https://www.tradersfind.com';
         }
-        $title = isset($seoParams['title']) ? $seoParams['title'] : 'UAE\'s Largest Online B2B Portal - TradersFind';
+        $title = isset($seoParams['title']) ? $seoParams['title'] : 'UAE Largest Online B2B Portal - TradersFind';
         $metaTitle = isset($seoParams['metaTitle']) ? $seoParams['metaTitle'] : 'UAEs Largest Online B2B Portal - TradersFind';
         $metaDescription = isset($seoParams['metaDescription']) ? $seoParams['metaDescription'] : 'TradersFind is UAEs Largest Online B2B Portal connecting buyers with suppliers. List of companies in UAE with contact details. Register Now!';
         $metaKeywords = isset($seoParams['metaKeywords']) ? $seoParams['metaKeywords'] : 'tradersfind, b2b portal, list of companies in uae, b2b marketplace, business directory, manufacturers in uae, suppliers in uae, buyers in uae, yellowpages uae, importers in uae, uae companies directory, b2b website, business marketplace, local business listings, business directory in uae';

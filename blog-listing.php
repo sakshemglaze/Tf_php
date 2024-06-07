@@ -110,7 +110,7 @@ include_once "header-sub.php";
                     ];
                 }
 
-                $apiResponse = getFilterBlog($payload, ["page" => 0, "size" => 8, "createdDate" => 'desc']);
+                $apiResponse = getFilterBlog($payload, ["page" => 0, "size" => 10, "createdDate" => 'desc']);
                 $isShowShimmer = false;
                 $blogList = json_decode($apiResponse);
                 return $blogList;
@@ -151,8 +151,9 @@ include_once "header-sub.php";
                 <?php } ?>
             </div>
             <div id="loadmoreblog">
-              
+
             </div>
+            <hr id="loadmoreblog1" />
         </div>
          <div class="col-lg-4 mt-4">
             <?php
@@ -167,7 +168,7 @@ include_once "header-sub.php";
                     <?php
                     foreach($blogcat as $bcat){
                     ?>
-                    <li><a href='blog'><?php  echo $bcat->categoryName?></li></a>
+                    <li><a href='#'><?php  echo $bcat->categoryName?></li></a>
                     <?php
                     }
                     ?>
@@ -207,7 +208,7 @@ function fetchBlogs() {
     const queryString = new URLSearchParams(pagination).toString();
     var url = "<?php echo API_URL?>api/guest/filter-blogs" + '?' + queryString;
     var token = myObject1.getItem('userAccessToken');
-    console.log(token);
+    //console.log(token);
 
     fetch(url, {
         method: "GET",
@@ -221,7 +222,7 @@ function fetchBlogs() {
             return response.json();
         })
         .then(function (data) {
-            console.log(data);
+            //console.log(data);
             //console.log(page);
            // loadedData = loadedData.concat(data);
             createBlogElements(data)
@@ -270,7 +271,7 @@ function createBlogElements(loadedData) {
             if (!blogData.image || blogData.image.image === 'null' || blogData.image.image === '') {
                 const imageLink = document.createElement("a");
                 imageLink.setAttribute("target", "_blank");
-                imageLink.setAttribute("href", BASE_URL + 'blog/' + blogData.title.trim().toLowerCase().replace(/[&,\s]+/g, '-'));
+                imageLink.setAttribute("href", 'blog/' + blogData.title.trim().toLowerCase().replace(/[&,\s]+/g, '-'));
 
                 const image = document.createElement("img");
                 image.setAttribute("src", IMAGE_URL + "YP-logo@2x.png");
@@ -283,7 +284,7 @@ function createBlogElements(loadedData) {
             // Create link for blog
             const blogLink = document.createElement("a");
             blogLink.setAttribute("target", "_blank");
-            blogLink.setAttribute("href", BASE_URL + 'blog/' + blogData.title.trim().toLowerCase().replace(/[&,\s]+/g, '-'));
+            blogLink.setAttribute("href", 'blog/' + blogData.title.trim().toLowerCase().replace(/[&,\s]+/g, '-'));
 
             // Create blog image if it exists
             if (blogData.image && blogData.image.id) {
@@ -310,7 +311,7 @@ function createBlogElements(loadedData) {
             const titleHeading = document.createElement("h1");
             titleHeading.setAttribute("style","font-size: x-large;");
             const titleLink = document.createElement("a");
-            titleLink.setAttribute("href", BASE_URL + 'blog/' + blogData.title.trim().toLowerCase().replace(/[&,\s]+/g, '-'));
+            titleLink.setAttribute("href", 'blog/' + blogData.title.trim().toLowerCase().replace(/[&,\s]+/g, '-'));
             titleLink.textContent = blogData.title;
             titleHeading.appendChild(titleLink);
             frontBlog2Div.appendChild(titleHeading);
@@ -334,6 +335,9 @@ function createBlogElements(loadedData) {
         // Append row container to the parent element
         parentElement.appendChild(rowContainer);
     }
+        //const marid = document.createElement("div");
+        //marid.class="loadmoreblog";
+        //parentElement.appendChild(marid);
 }
 
 function handleIntersection(entries, observer) {
@@ -350,7 +354,7 @@ const observer = new IntersectionObserver(handleIntersection, {
     threshold: 0.1
 });
 
-const bottomElement = document.getElementById('loadmoreblog');
+const bottomElement = document.getElementById('loadmoreblog1');
 
 observer.observe(bottomElement);
 
