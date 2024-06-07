@@ -52,10 +52,9 @@ include_once 'config.php';
     
     $filterDto->stateFilter=[ucwords(str_replace('-'," ",$location))];
   }
-else{
+  else{
   $location='';
-
-}
+  }
   //print_r($location);
   $location1 = str_replace('-',' ',$location);
   require_once 'post.php';
@@ -63,8 +62,6 @@ else{
         $location1 = 'UAE';
           $subcatName=basename($parts[2]);
           $subcategory = json_decode(get ( 'api/guest/products-subcategorie/' . $subcatName));
-         
-   
             $payload = array(
                 'searchText' => strtolower($subcategory->subCategoryName) ,
                 'searchTextType' => 'subcategory',
@@ -72,74 +69,45 @@ else{
             );  
             if(!isset($subcategory->subCategoryName)){
               $new_url = str_replace('/category/', '/search/', $currentUrl);
-    
               header('Location: ' . $new_url, true, 301);
               exit;
-            }else{
-
-           
-            $queryParams= array('page'=> $page, 'size'=> $size) ;          
-            $data1 =  postforprod(
+            } else {
+              $queryParams= array('page'=> $page, 'size'=> $size) ;          
+              $data1 =  postforprod(
               'api/new-search-products',
               $payload,
               true,
               $queryParams,
-              false
-            );
-           
-           $data=$data1['data'];
-           $totallength=$data1['xTotalCount'];
-          // print_r(gettype($data));
-           //print_r($data);
+              false );
+              $data=$data1['data'];
+              $totallength=$data1['xTotalCount'];
+              if($data['sponsoredProduct']!=null){
+                $length=count(($data['products']))+1;
+              } else {
+                $length = count(($data['products']));
+              }
 
-        if($data['sponsoredProduct']!=null){
-            $length=count(($data['products']))+1;
-        }else{
-              $length = count(($data['products']));
-          }
-    //print_r($data);
-
-    $category = json_decode(get(
-      'api/guest/products-categories-na/' . $subcategory->title, $queryParams
-    ));
-    if(isset($category[0]->title)){
-      $industry = json_decode(get(
-        'api/industries-na/' . $category[0]->title,$queryParams) );
-      }
-
-        //print_r(isset($subcategory) && $subcategory->metaDescription !='' ? str_replace('UAE',$location1,$subcategory->metaDescription) : 'Searching for ' . $subcategory->subCategoryName . ' at best price in ' . $location1 . '? Choose from a wide range of companies provide' . $subcategory->subCategoryName . ' online on Tradersfind.com');
-        // $SeoParams = [
-        //   'title' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('uae',$location1,strtolower($subcategory->metaTitle)) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com',
-        //   'metaTitle' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('uae',$location1,strtolower($subcategory->metaTitle)) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com',
-        //   'metaDescription' => isset($subcategory->subCategoryDescription) && $subcategory->subCategoryDescription !='' ? str_replace('uae',$location1,strtolower($subcategory->subCategoryDescription)) : 'Searching for ' . $subcategory->subCategoryName . ' at best price in ' . $location1 . '? Choose from a wide range of companies provide' . $subcategory->subCategoryName . ' online on Tradersfind.com',
-        //   'metaKeywords' => isset($subcategory->keywords) && $subcategory->keywords != '' ? str_replace('uae',$location1,strtolower($subcategory->keywords)) : $subcategory->subCategoryName . ', ' . $subcategory->subCategoryName . ' in '. $location1,
-        //   'fbTitle' => isset($subcategory->fbTitle) && $subcategory->fbTitle !='' ? str_replace('uae',$location1,strtolower($subcategory->fbTitle)) : null,
-        //   'fbDescription' => isset($subcategory->fbDescription) ? str_replace('uae',$location,strtolower($subcategory->fbDescription)) : null,
-        //   'fbImage' => isset($subcategory->fbImage) ? $subcategory->fbImage : '',
-        //   'fbUrl' => isset($subcategory->fbUrl) ? $subcategory->fbUrl : '',
-        //   'twitterTitle' => isset($subcategory->twitterTitle) && $subcategory->twitterTitle !='' ? str_replace('uae',$location1,strtolower($subcategory->twitterTitle)) : null,
-        //   'twitterDescription' => isset($subcategory->twitterDescription) ? $subcategory -> twitterDescription : null,
-        //   'twitterImage' => isset($subcategory->twitterImage) ? $subcategory->twitterImage : null,
-        //   'twitterSite' => isset($subcategory->twitterSite) ? $subcategory->twitterSite : '',
-        //   'twitterCard' => isset($subcategory->twitterCard) ? $subcategory->twitterCard : null,
-        //   'schemaDescription' => isset($subcategory->schemaDescription) ? $subcategory->schemaDescription : '',
-        //   ];
-        include_once 'catmetas.php';
-        //print_r("first if");
-      }
-  }
+              $category = json_decode(get(
+              'api/guest/products-categories-na/' . $subcategory->title, $queryParams
+                ));
+              if(isset($category[0]->title)){
+                $industry = json_decode(get(
+                  'api/industries-na/' . $category[0]->title,$queryParams) );
+                  }
+                include_once 'catmetas.php';
+               //print_r("first if");
+            }
+    }
   else if( $numParts==3 && basename($parts[1])=='search'){//will be change
             $subcatName=str_replace('-',' ',basename($parts[2]));
             $subcategory = json_decode(get ( 'api/guest/products-subcategorie/' . $subcatName));
 
-  $filterDto->productSubCategoryFilter = isset($_POST['productSubCategoryFilter'])?$_POST['productSubCategoryFilter']:null;
-
-
+            $filterDto->productSubCategoryFilter = isset($_POST['productSubCategoryFilter'])?$_POST['productSubCategoryFilter']:null;
             $payload = array(
               'searchText' => isset($subcategory) ? $subcategory->subCategoryName : $subcatName ,
               'searchTextType' => null,
               'filterDto' => $filterDto
-          );  
+              );  
         
           $queryParams= array('page'=> $page, 'size'=> $size) ;
         
@@ -200,6 +168,10 @@ else{
             );
             $data=$data1['data'];
             $totallength=$data1['xTotalCount'];
+            if ($totallength == 0) {
+              header("Location: /not-found");
+              exit();
+            }
               //$length = count(($data->products));              
                 //print_r($subcategory);
               $category = json_decode(get(
@@ -208,33 +180,15 @@ else{
              // print($subcategory->subCategoryName);
               
               $industry = json_decode(get(
-                'api/industries-na/' . $category[0]->title,$queryParams) );
-                
-              
-//print_r($subcategory->metaTitle);
-// $SeoParams = [
-//           'title' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('uae',$location1,strtolower($subcategory->metaTitle)) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com',
-//           'metaTitle' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('uae',$location1,strtolower($subcategory->metaTitle)) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com',
-//           'metaDescription' => isset($subcategory->subCategoryDescription) && $subcategory->subCategoryDescription !='' ? str_replace('uae',$location1,strtolower($subcategory->subCategoryDescription)) : 'Searching for ' . $subcategory->subCategoryName . ' at best price in ' . $location1 . '? Choose from a wide range of companies provide' . $subcategory->subCategoryName . ' online on Tradersfind.com',
-//           'metaKeywords' => isset($subcategory->keywords) && $subcategory->keywords != '' ? str_replace('uae',$location1,strtolower($subcategory->keywords)) : $subcategory->subCategoryName . ', ' . $subcategory->subCategoryName . ' in '. $location1,
-//           'fbTitle' => isset($subcategory->fbTitle) && $subcategory->fbTitle !='' ? str_replace('uae',$location1,strtolower($subcategory->fbTitle)) : null,
-//           'fbDescription' => isset($subcategory->fbDescription) ? str_replace('uae',$location,strtolower($subcategory->fbDescription)) : null,
-//           'fbImage' => isset($subcategory->fbImage) ? $subcategory->fbImage : '',
-//           'fbUrl' => isset($subcategory->fbUrl) ? $subcategory->fbUrl : '',
-//           'twitterTitle' => isset($subcategory->twitterTitle) && $subcategory->twitterTitle !='' ? str_replace('uae',$location1,strtolower($subcategory->twitterTitle)) : null,
-//           'twitterDescription' => isset($subcategory->twitterDescription) ? $subcategory -> twitterDescription : null,
-//           'twitterImage' => isset($subcategory->twitterImage) ? $subcategory->twitterImage : null,
-//           'twitterSite' => isset($subcategory->twitterSite) ? $subcategory->twitterSite : '',
-//           'twitterCard' => isset($subcategory->twitterCard) ? $subcategory->twitterCard : null,
-//           'schemaDescription' => isset($subcategory->schemaDescription) ? $subcategory->schemaDescription : '',
-//           ];
-include_once 'catmetas.php';
+                'api/industries-na/' . $category[0]->title,$queryParams) );   
+
+              include_once 'catmetas.php';
   //print_r("else");
           }
-        //  if ($length == 0) {
-        //         header("Location: /not-found.php");
-        //         exit();
-        //       }
+         if ($totallength == 0) {
+                 header("Location: /not-found");
+                 exit();
+               }
        // print_r($location);
 ?>
 <!DOCTYPE html>
@@ -256,10 +210,9 @@ include_once 'catmetas.php';
     
 </head>
 <body>
-
+ <?php    include_once "header-sub.php";              ?>
     <section class="container-fluid mt-1">
        <?php 
-       include_once "header-sub.php";
        include_once "banner.php";   
        ?>
        

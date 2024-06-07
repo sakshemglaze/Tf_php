@@ -67,19 +67,12 @@ include_once "header-sub.php";
             </div>
             
             <div class="blogContent blogContent2">
-
-                <div <?php if($blog->image != null && isset($blog->image->imageContent)): ?> <?php endif; ?>>
-         
-                   <img src="<?php echo IMAGE_URL.$blog->image->id.'.webp';?>" alt="<?php echo $blog->title; ?>">
-                </div>
-                <div <?php if($blog->image == null || $blog->image == 'null' || $blog->image == ''): ?>      <?php endif; ?>>
-                    <!-- <img class="img-fluid w-100" src="<?php echo BASE_URL;?>assets/images/YP-logo@2x.png"
-                        alt="<?php echo $blog->altText ? $blog->altText : 'blog image'; ?>" class="img-hw"> -->
-                </div>
-                <div>
-
-                </div>
-                <p><?php echo $blog->description; ?></p>
+              <?php if($blog->image == null || $blog->image == 'null' || $blog->image == ''): ?> 
+                <img class="img-fluid w-100" src="<?php echo BASE_URL;?>assets/images/tflogo.webp" alt="<?php echo $blog->altText ? $blog->altText : 'blog image'; ?>" class="img-hw">
+               <?php else: ?> 
+                <img src="<?php echo IMAGE_URL.$blog->image->id.'.webp';?>" alt="<?php echo $blog->title; ?>">
+               <?php endif; ?>
+               <p><?php echo $blog->description; ?></p>
             </div>
         </div>
         <div class="col-lg-4 mt-4">
@@ -91,9 +84,11 @@ include_once "header-sub.php";
                     <?php foreach($latestBlogs as $blg): ?>
                         <div class="blog">
                             <a href="<?php echo $urlService->getBlogUrl($blg->title); ?>" style="cursor: pointer;">
-
+                              <?php if ($blg->image == null || $blg->image == 'null' || $blg->image == ''): ?>
+                                <img src="assets/images/tflogo.webp" class="img-fluid" alt="<?php echo $blog->altText ? $blog->altText : 'blog image'; ?>" >
+                              <?php else: ?>  
                                 <img src="<?php echo IMAGE_URL. $blg->image->id.'.webp'; ?>"alt="<?php echo $blog->altText ? $blog->altText : 'blog imageeeeee'; ?>" class="img-fluid ">
-                                <img <?php if($blg->image == null || $blg->image == 'null' || $blg->image == ''): ?>src="assets/images/YP-logo@2x.png"class="img-fluid"alt="<?php echo $blog->altText ? $blog->altText : 'blog image'; ?>" <?php endif; ?>>
+                              <?php endif; ?>  
                                 <h5 class="mb-0"><?php echo $blg->title; ?></h5>
                                 <!-- <p class="line-clamp" [innerHTML]="blg.description | slice:0:250"></p></p>-->
                             </a>
