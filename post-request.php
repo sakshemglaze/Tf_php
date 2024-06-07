@@ -42,7 +42,7 @@ fetch(url, {
 <div class="container">
     <div class="row gy-1">
       <div class="col-lg-6">
-        <span class="fw-bold fs-3"><b>EASY SOURCING</b></span>
+        <span class="fw-bold fs-5"><b>EASY SOURCING</b></span>
         <p>An easy way to post your sourcing requests and get quotes.</p>
         <ul class="sellers_text">
           <li>One request, multiple quotes </li>
@@ -54,7 +54,7 @@ fetch(url, {
       </div>
       <div class="col-lg-6">
         <div class="card-transparent">
-          <span class="fs-4">Let us know what you need?</span>
+          <span class="fs-5 fw-bold">Let us know what you need?</span>
   
           <form method="post" id="postBuyreq">
             <input type="text" class="form-control" name="productName"
@@ -63,7 +63,7 @@ fetch(url, {
             <div class="row mt-1">
               <div class="col-md-6">
                 <div class="mb-3">
-                  <label>Quantity</label>
+                  <label class="fw-bold">Quantity</label>
                   <input type="text" class="form-control" name="quantity"
                     placeholder="Estimated Order Quantity">
   
@@ -71,7 +71,7 @@ fetch(url, {
               </div>
               <div class="col-md-6">
                 <div class="mb-3">
-                  <label for="quantityUnit">Unit</label>
+                  <label  class="fw-bold" for="quantityUnit">Unit</label>
                   <select id="quantityUnit" name="quantityUnit" class="form-control" placeholder="eg: Dozen, Piece(s), Tonr">
                       <!-- <option *ngFor="let unit of this.requirementService.units" [value]="unit">{{unit}}</option> -->
                       <?php

@@ -24,10 +24,10 @@
                 </span>
                 <div class="single-line"><h3 class="mt-1 fs-5">
                     <a href="/<?php echo $url->getProductUrl($product->productName, $product->id) ?>"
-                    class="border-bottom-1 text-blue"> <?php echo $product->productName ?>
+                    class="text-blue"> <?php echo $product->productName ?>
                 </a></h3> </div>
-                <hr />
-                <button onclick="openPopup1()"  class="btn-outline-gradiant btn btn-sm mt-1" >
+               
+                <button onclick="openPopup1()"  class="btn-primary-gradiant w-100 pt-2 pb-2 mt-1" >
                     <img src="assets/images/mail-solid.png" alt="enquiry" /> Send Enquiry
                 </button>
             </div>

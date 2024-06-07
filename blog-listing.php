@@ -1,6 +1,7 @@
 <html>
     <head>
-
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <?php include_once 'config.php'; ?>
 <?php
     $SeoParams = [
@@ -29,8 +30,8 @@ include_once "header-sub.php";
 </section>
 
 <section class="container">
-    <div class="row">
-        <div class="col-lg-8 mt-4 card-shadow rounded-2 bg-white p-2">
+    <div class="row">	
+        <div class="col-xl-8 mt-4 card-shadow rounded-2 bg-white p-2">
             <!--<h2 class="my-4 text-uppercase fw-bold">Latest Blog</h2>-->
             <?php
            include_once 'services/url.php';
@@ -110,7 +111,7 @@ include_once "header-sub.php";
                     ];
                 }
 
-                $apiResponse = getFilterBlog($payload, ["page" => 0, "size" => 8, "createdDate" => 'desc']);
+                $apiResponse = getFilterBlog($payload, ["page" => 0, "size" => 10, "createdDate" => 'desc']);
                 $isShowShimmer = false;
                 $blogList = json_decode($apiResponse);
                 return $blogList;
@@ -126,7 +127,7 @@ include_once "header-sub.php";
                      //print_r($blog->blogUrl);
                     ?>
                    
-                    <div class="col-lg-6 mb-4 align-items-center front_blog">
+                    <div class="col-md-6 mb-4 align-items-center front_blog">
                         <div class="hello">
                             <?php if ($blog->image == null || $blog->image == 'null' || $blog->image == ''): ?>
                                 <a target="_blank" href="<?php echo BASE_URL.$urlService->getBlogUrl($blog->title); ?>">
@@ -142,33 +143,35 @@ include_once "header-sub.php";
                             <?php endif; ?>
                             <div class="front_blog2">
                                 <p><?php echo $blog->subTitle; ?></p>
-                                <h1 style="font-size: x-large;"><a href="<?php echo BASE_URL.$urlService->getBlogUrl(isset($blog->blogUrl)?$blog->blogUrl:$blog->title); ?>"><?php echo $blog->title; ?></a></h1>
+                                <h1 class="fs-5 text-center fw-bold mt-3"><a href="<?php echo BASE_URL.$urlService->getBlogUrl(isset($blog->blogUrl)?$blog->blogUrl:$blog->title); ?>"><?php echo $blog->title; ?></a></h1>
+
                                 <!-- <p class='roohit'></p> -->
                                     <?php //echo $desc; ?>
-                                <small class="mt-1 d-block"><?php echo $blog->createdBy; ?>, <?php echo date('d M y', strtotime($blog->createdDate)); ?></small>
+                                <small class="mt-1 d-block text-center"><?php echo $blog->createdBy; ?>, <?php echo date('d M y', strtotime($blog->createdDate)); ?></small>
                             </div>
                         </div>
                     </div>
                 <?php } ?>
             </div>
             <div id="loadmoreblog">
-              
+
             </div>
+            <hr id="loadmoreblog1" />
         </div>
-         <div class="col-lg-4 mt-4">
+         <div class="col-xl-4 mt-4">
             <?php
            
                 $resultb= get('api/guest/blog-categories', true);
                 $blogcat=json_decode($resultb);
              
             ?>
-            <div class="card-shadow p-2 rounded-2 bg-white">
-                <h5 class="border-bottom pb-2 fw-bold">Group Categories</h5>
+            <div class="card-shadow p-2 rounded-2 bg-white blog_Categories">
+                <h5 class="border-bottom pb-2 fs-5 text-white p-2 fw-bold bg2">Group Categories</h5>
                 <ul class="category-filter flex-wrap mb-2"> 
                     <?php
                     foreach($blogcat as $bcat){
                     ?>
-                    <li><a href='blog'><?php  echo $bcat->categoryName?></li></a>
+                    <li><a href='#'><?php  echo $bcat->categoryName?></li></a>
                     <?php
                     }
                     ?>
@@ -208,7 +211,7 @@ function fetchBlogs() {
     const queryString = new URLSearchParams(pagination).toString();
     var url = "<?php echo API_URL?>api/guest/filter-blogs" + '?' + queryString;
     var token = myObject1.getItem('userAccessToken');
-    console.log(token);
+    //console.log(token);
 
     fetch(url, {
         method: "GET",
@@ -222,7 +225,7 @@ function fetchBlogs() {
             return response.json();
         })
         .then(function (data) {
-            console.log(data);
+            //console.log(data);
             //console.log(page);
            // loadedData = loadedData.concat(data);
             createBlogElements(data)
@@ -271,7 +274,7 @@ function createBlogElements(loadedData) {
             if (!blogData.image || blogData.image.image === 'null' || blogData.image.image === '') {
                 const imageLink = document.createElement("a");
                 imageLink.setAttribute("target", "_blank");
-                imageLink.setAttribute("href", BASE_URL + 'blog/' + blogData.title.trim().toLowerCase().replace(/[&,\s]+/g, '-'));
+                imageLink.setAttribute("href", 'blog/' + blogData.title.trim().toLowerCase().replace(/[&,\s]+/g, '-'));
 
                 const image = document.createElement("img");
                 image.setAttribute("src", IMAGE_URL + "YP-logo@2x.png");
@@ -284,7 +287,7 @@ function createBlogElements(loadedData) {
             // Create link for blog
             const blogLink = document.createElement("a");
             blogLink.setAttribute("target", "_blank");
-            blogLink.setAttribute("href", BASE_URL + 'blog/' + blogData.title.trim().toLowerCase().replace(/[&,\s]+/g, '-'));
+            blogLink.setAttribute("href", 'blog/' + blogData.title.trim().toLowerCase().replace(/[&,\s]+/g, '-'));
 
             // Create blog image if it exists
             if (blogData.image && blogData.image.id) {
@@ -311,7 +314,7 @@ function createBlogElements(loadedData) {
             const titleHeading = document.createElement("h1");
             titleHeading.setAttribute("style","font-size: x-large;");
             const titleLink = document.createElement("a");
-            titleLink.setAttribute("href", BASE_URL + 'blog/' + blogData.title.trim().toLowerCase().replace(/[&,\s]+/g, '-'));
+            titleLink.setAttribute("href", 'blog/' + blogData.title.trim().toLowerCase().replace(/[&,\s]+/g, '-'));
             titleLink.textContent = blogData.title;
             titleHeading.appendChild(titleLink);
             frontBlog2Div.appendChild(titleHeading);
@@ -335,6 +338,9 @@ function createBlogElements(loadedData) {
         // Append row container to the parent element
         parentElement.appendChild(rowContainer);
     }
+        //const marid = document.createElement("div");
+        //marid.class="loadmoreblog";
+        //parentElement.appendChild(marid);
 }
 
 function handleIntersection(entries, observer) {
@@ -351,7 +357,7 @@ const observer = new IntersectionObserver(handleIntersection, {
     threshold: 0.1
 });
 
-const bottomElement = document.getElementById('loadmoreblog');
+const bottomElement = document.getElementById('loadmoreblog1');
 
 observer.observe(bottomElement);
 

@@ -83,7 +83,7 @@ foreach ($data1 as $category) {
  if(count($category->productsCategories)>0){
  // print_r($category->productsCategories);
    $i= $i + 1;
-    echo '<div class="row  gy-4 bg-white">';
+    echo '<div class="row  gy-4 bg-white industy_1">';
     echo '<div class="col-lg-12">';
     echo '<h1 class="text-center fwbold text-uppercase text-black"><a href="' . $urlService->getIndustryUrl($category->industryName, $category->id) .'">' . $category->industryName . '</a></h1>';
     echo '</div>';
@@ -167,7 +167,7 @@ foreach ($data1 as $category) {
         }
 }
 ?>
-<div class="row  gy-4 bg-white" id="industriesContainer"> </div>
+<div class="  gy-4 bg-white" id="industriesContainer"> </div>
 </section>
 <input type="hidden" id="currentPage" value="<?php echo $page; ?>">
 
@@ -261,7 +261,7 @@ include_once "footer.php";
 function renderIndustries(industries) {
   industries.forEach(function(category) {
     var industryDiv = document.createElement('div');
-    industryDiv.classList.add('row', 'gy-4', 'bg-white');
+    industryDiv.classList.add('row', 'gy-4', 'bg-white', 'industy_1', 'industy_2' );
 
     var industryTitleDiv = document.createElement('div');
     industryTitleDiv.classList.add('col-lg-12');
@@ -412,7 +412,7 @@ function renderIndustries(industries) {
 
       var proImage = document.createElement('img');
       proImage.setAttribute('src', IMAGE_URL + cat.image.id + '.webp');
-      proImage.classList.add('lazy');
+      proImage.classList.add('lazy', 'img-cat');
       proImage.alt = 'Category';
       //proImage.width = '140px';
 

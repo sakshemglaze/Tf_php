@@ -30,7 +30,92 @@ $aproodproduct=get(
   ['isFeatured' => true]
 );
 $aproodproduct1 = json_decode($aproodproduct);
-
+$schema = '{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.tradersfind.com/#organization",
+      "name": "Interconnect Marketing Management L.L.C",
+      "url": "https://www.tradersfind.com/seller/interconnect-marketing-management-llc",
+      "sameAs": [
+        "https://www.facebook.com/tradersfindb2bportal/",
+        "https://www.linkedin.com/company/tradersfind/",
+        "https://x.com/tradersfind/"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "@id": "https://www.tradersfind.com/#logo",
+        "url": "https://www.tradersfind.com/assets/images/TradersFind.webp",
+        "caption": "Tradersfind.com by Interconnect Marketing Management L.L.C"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.tradersfind.com/#website",
+      "url": "https://www.tradersfind.com/#",
+      "name": "Tradersfind.com",
+      "publisher": {
+        "@id": "https://www.tradersfind.com/#organization"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://www.tradersfind.com/search/{search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://www.tradersfind.com/#webpage",
+      "url": "https://www.tradersfind.com",
+      "inLanguage": "en-US",
+      "name": "Tradersfind.com by Interconnect Marketing Management L.L.C",
+      "isPartOf": {
+        "@id": "https://www.tradersfind.com/#website"
+      },
+      "about": {
+        "@id": "https://www.tradersfind.com/#organization"
+      },
+      "description": "Interconnect Marketing Management L.L.C handles Tradersfind.com, which is the UAE largest B2B Portal for businesses, products and services. A smart and efficient way to Search, Find and Connect with Businesses in UAE."
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.tradersfind.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Platinum Paint Trading LLC",
+          "item": "https://www.tradersfind.com/seller/platinum-paint-trading-llc"
+        }
+      ]
+    },
+    {
+      "@type": "LocalBusiness",
+      "name": "Platinum Paint Trading LLC",
+      "url": "https://www.tradersfind.com/seller/platinum-paint-trading-llc",
+      "image": "https://doc.tradersfind.com/images/65d5c1f63b598e4b0b81002d.webp",
+      "description": "Platinum Paint Trading LLC is based in Sharjah, providing the best quality paints and coatings. Contact Now!",
+      "telephone": "+971509884017",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Near Maza Signal,Industrial Area# 2 Sharjah,United Arab Emirates",
+        "addressRegion": "Sharjah",
+        "addressCountry": "United Arab Emirates"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "25.19",
+        "longitude": "55.24"
+      }
+    }
+  ]
+}';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -62,6 +147,7 @@ $aproodproduct1 = json_decode($aproodproduct);
           'twitterImage' => isset($data1[0]->twitterImage) ? API_URL . 'api/guest/imageContentDownload/' . $data1[0]->twitterImage.id : 'undefined',
           'twitterSite' => isset($data1[0]->twitterSite) && $data1[0]->twitterSite != '' ? $data1[0]->twitterSite : null,
           'twitterCard' => isset($data1[0]->twitterCard) && $data1[0]->twitterCard != '' ? $data1[0]->twitterCard : null,
+          'schemaDescription' => $schema,
        ];
       $seo->setSeoTags($SeoParams);
 
@@ -217,10 +303,10 @@ fetch(url, {
                       </button>
                   <?php endif;?>
                 </div>
-                <div class="col-lg-6 whatsappbtn">
+                <div class="col-lg-6 ">
                   
                   <a target="_blank" href="<?php echo $whatsappUrl->getProductToWhatsapp('', $data1[0]->id, $data1)?>"
-                    class=" btn py-2 btn-sm w-100">
+                    class=" btn py-2 btn-sm w-100 whatsappbtn">
                     Connect on whatsapp
                     
                   </a>
@@ -522,7 +608,7 @@ fetch(url, {
               </div>
 
 
-              <div class="row dushyant-llc">
+              <div class="row">
                 <div class="col-lg-12">
                   <div class="p-md-4 my-3">
                     <div class="card border-0 shadow-lg">
@@ -533,14 +619,14 @@ fetch(url, {
                       </div>
                       <div class="card-body px-md-5">
                         <p class="fs-5 mb-2"><?php echo $data1[0]->sellerCompanyName;?> </p>
-                        <h4 class="text-uppercase mb-4 fwbold fs-4">
+                        <h4 class=" mb-3 fw-semibold">
                           Tell us about your requirement
                         </h4>
                         <form method="post" id="postBuyreq">
                           <div class="row">
 
-                            <div class="col-lg-6">
-                              <label for="" class="form-label fs-5">Describe in few words *</label>
+                            <div class="col-lg-8">
+                              <label for="" class="form-label fw-semibold fs-5">Describe in few words *</label>
                               <textarea name="" name="description" class="form-control" id="" cols="30"
                                 rows="6"
                                 placeholder="Please include product name, order quantity, usage, special request if any in your inquiry."></textarea>
@@ -549,15 +635,14 @@ fetch(url, {
                             </button>-->
 
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                               <div class="row gy-4">
-                                <div class="col-lg-6">
-                                  <label for="" class="form-label  fs-4">Email ID *</label>
+                                <div class="col-lg-12">
+                                  <label for="" class="form-label fw-semibold fs-5">Email ID *</label>
                                   <input type="text" name="enquirerEmail" class="form-control"
                                     placeholder="Email ID" />
                                 </div>
-                                <div class="col-lg-6">
-                                  <label for="" class="form-label  fs-4">Mobile Number*</label>
+                                <div class="col-lg-12">
                                   <div class="input-group">
                                   <select name="countryCode" class="form-control mxw-50">
                                           
@@ -571,9 +656,9 @@ fetch(url, {
                                   </div>
                                 </div>
                                 <div class="row gy-4">
-                                  <div class="form-check mt-4">
+                                  <div class="form-check mt-0">
                                     <!-- <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked />-->
-                                    <label class="form-check-label" for="flexCheckChecked">
+                                    <label class="form-check-label fs-6" for="flexCheckChecked">
                                     <input type="checkbox" id="option1" name="options" value="option1">
                                       I agree to
                                       <a href="https://www.tradersfind.com/term-and-conditions" target="_blank"
@@ -581,10 +666,11 @@ fetch(url, {
                                     </label>
                                   </div>
                                   
-                                    <button 
-                                    class="btn-primary-gradiant custom-button-style">
-                                    SUBMIT REQUIREMENT
-                            </button>
+                                   
+
+							<div class="col-lg-12 mb-2">
+								<button (click)="this.requirementService.onClickSubmitRequirement()" class="btn-primary-gradiant px-md-5 py-2 rounded-10 fs-5 fwbold">SUBMIT REQUIREMENT</button>
+							</div>
 
                                 </div>
 
