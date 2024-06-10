@@ -11,6 +11,16 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="path/to/bootstrap-icons.css">
 
+<style>
+.modal-dialog {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+</style>
+
 <div class="cardproduct card-shadow rounded-10 bg-white" style="border: 0.5px solid #ddd;">
     <div class="swiper ">
         <div class="swiper-wrapper">
@@ -148,7 +158,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="<?php echo $modalId; ?>Label">Related Subcategories</h5>
+                    <h5 class="modal-title" id="<?php echo $modalId; ?>Label">Related Categories</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
