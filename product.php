@@ -9,6 +9,7 @@
 
 ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css">
+
 <link rel="stylesheet" href="path/to/bootstrap-icons.css">
 <style>
 .modal-dialog {
@@ -224,7 +225,7 @@
                                     <button class="btn btn-sm btn-light w-100 d-center"  title="Seller_Phone" href="#">
                                         <img src="<?php echo BASE_URL ?>assets/images/phone.png" width="18" height="17" class="w-18 me-2"
                                             alt="Phone" /> <?php if(isset($prodData['seller'])) {
-                                            $maskedService->getMaskedNumber($prodData['seller']['sellerVirtualContactPhone']); }
+                                            $maskedService->getMaskedNumber($prodData['seller']); }
                                             ?>
                                        
                                     </button>

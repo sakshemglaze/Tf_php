@@ -52,9 +52,10 @@ include_once 'config.php';
     
     $filterDto->stateFilter=[ucwords(str_replace('-'," ",$location))];
   }
-  else{
+else{
   $location='';
-  }
+
+}
   //print_r($location);
   $location1 = str_replace('-',' ',$location);
   require_once 'post.php';
@@ -62,6 +63,8 @@ include_once 'config.php';
         $location1 = 'UAE';
           $subcatName=basename($parts[2]);
           $subcategory = json_decode(get ( 'api/guest/products-subcategorie/' . $subcatName));
+         
+   
             $payload = array(
                 'searchText' => strtolower($subcategory->subCategoryName) ,
                 'searchTextType' => 'subcategory',
@@ -69,45 +72,74 @@ include_once 'config.php';
             );  
             if(!isset($subcategory->subCategoryName)){
               $new_url = str_replace('/category/', '/search/', $currentUrl);
+    
               header('Location: ' . $new_url, true, 301);
               exit;
-            } else {
-              $queryParams= array('page'=> $page, 'size'=> $size) ;          
-              $data1 =  postforprod(
+            }else{
+
+           
+            $queryParams= array('page'=> $page, 'size'=> $size) ;          
+            $data1 =  postforprod(
               'api/new-search-products',
               $payload,
               true,
               $queryParams,
-              false );
-              $data=$data1['data'];
-              $totallength=$data1['xTotalCount'];
-              if($data['sponsoredProduct']!=null){
-                $length=count(($data['products']))+1;
-              } else {
-                $length = count(($data['products']));
-              }
+              false
+            );
+           
+           $data=$data1['data'];
+           $totallength=$data1['xTotalCount'];
+          // print_r(gettype($data));
+           //print_r($data);
 
-              $category = json_decode(get(
-              'api/guest/products-categories-na/' . $subcategory->title, $queryParams
-                ));
-              if(isset($category[0]->title)){
-                $industry = json_decode(get(
-                  'api/industries-na/' . $category[0]->title,$queryParams) );
-                  }
-                include_once 'catmetas.php';
-               //print_r("first if");
-            }
-    }
+        if($data['sponsoredProduct']!=null){
+            $length=count(($data['products']))+1;
+        }else{
+              $length = count(($data['products']));
+          }
+    //print_r($data);
+
+    $category = json_decode(get(
+      'api/guest/products-categories-na/' . $subcategory->title, $queryParams
+    ));
+    if(isset($category[0]->title)){
+      $industry = json_decode(get(
+        'api/industries-na/' . $category[0]->title,$queryParams) );
+      }
+
+        //print_r(isset($subcategory) && $subcategory->metaDescription !='' ? str_replace('UAE',$location1,$subcategory->metaDescription) : 'Searching for ' . $subcategory->subCategoryName . ' at best price in ' . $location1 . '? Choose from a wide range of companies provide' . $subcategory->subCategoryName . ' online on Tradersfind.com');
+        // $SeoParams = [
+        //   'title' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('uae',$location1,strtolower($subcategory->metaTitle)) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com',
+        //   'metaTitle' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('uae',$location1,strtolower($subcategory->metaTitle)) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com',
+        //   'metaDescription' => isset($subcategory->subCategoryDescription) && $subcategory->subCategoryDescription !='' ? str_replace('uae',$location1,strtolower($subcategory->subCategoryDescription)) : 'Searching for ' . $subcategory->subCategoryName . ' at best price in ' . $location1 . '? Choose from a wide range of companies provide' . $subcategory->subCategoryName . ' online on Tradersfind.com',
+        //   'metaKeywords' => isset($subcategory->keywords) && $subcategory->keywords != '' ? str_replace('uae',$location1,strtolower($subcategory->keywords)) : $subcategory->subCategoryName . ', ' . $subcategory->subCategoryName . ' in '. $location1,
+        //   'fbTitle' => isset($subcategory->fbTitle) && $subcategory->fbTitle !='' ? str_replace('uae',$location1,strtolower($subcategory->fbTitle)) : null,
+        //   'fbDescription' => isset($subcategory->fbDescription) ? str_replace('uae',$location,strtolower($subcategory->fbDescription)) : null,
+        //   'fbImage' => isset($subcategory->fbImage) ? $subcategory->fbImage : '',
+        //   'fbUrl' => isset($subcategory->fbUrl) ? $subcategory->fbUrl : '',
+        //   'twitterTitle' => isset($subcategory->twitterTitle) && $subcategory->twitterTitle !='' ? str_replace('uae',$location1,strtolower($subcategory->twitterTitle)) : null,
+        //   'twitterDescription' => isset($subcategory->twitterDescription) ? $subcategory -> twitterDescription : null,
+        //   'twitterImage' => isset($subcategory->twitterImage) ? $subcategory->twitterImage : null,
+        //   'twitterSite' => isset($subcategory->twitterSite) ? $subcategory->twitterSite : '',
+        //   'twitterCard' => isset($subcategory->twitterCard) ? $subcategory->twitterCard : null,
+        //   'schemaDescription' => isset($subcategory->schemaDescription) ? $subcategory->schemaDescription : '',
+        //   ];
+        include_once 'catmetas.php';
+        //print_r("first if");
+      }
+  }
   else if( $numParts==3 && basename($parts[1])=='search'){//will be change
             $subcatName=str_replace('-',' ',basename($parts[2]));
             $subcategory = json_decode(get ( 'api/guest/products-subcategorie/' . $subcatName));
 
-            $filterDto->productSubCategoryFilter = isset($_POST['productSubCategoryFilter'])?$_POST['productSubCategoryFilter']:null;
+  $filterDto->productSubCategoryFilter = isset($_POST['productSubCategoryFilter'])?$_POST['productSubCategoryFilter']:null;
+
+
             $payload = array(
               'searchText' => isset($subcategory) ? $subcategory->subCategoryName : $subcatName ,
               'searchTextType' => null,
               'filterDto' => $filterDto
-              );  
+          );  
         
           $queryParams= array('page'=> $page, 'size'=> $size) ;
         
@@ -168,10 +200,6 @@ include_once 'config.php';
             );
             $data=$data1['data'];
             $totallength=$data1['xTotalCount'];
-            if ($totallength == 0) {
-              header("Location: /not-found");
-              exit();
-            }
               //$length = count(($data->products));              
                 //print_r($subcategory);
               $category = json_decode(get(
@@ -180,15 +208,15 @@ include_once 'config.php';
              // print($subcategory->subCategoryName);
               
               $industry = json_decode(get(
-                'api/industries-na/' . $category[0]->title,$queryParams) );   
-
-              include_once 'catmetas.php';
+                'api/industries-na/' . $category[0]->title,$queryParams) );
+                
+include_once 'catmetas.php';
   //print_r("else");
           }
-         if ($totallength == 0) {
-                 header("Location: /not-found");
-                 exit();
-               }
+        //  if ($length == 0) {
+        //         header("Location: /not-found.php");
+        //         exit();
+        //       }
        // print_r($location);
 ?>
 <!DOCTYPE html>
@@ -210,9 +238,10 @@ include_once 'config.php';
     
 </head>
 <body>
- <?php    include_once "header-sub.php";              ?>
+
     <section class="container-fluid mt-1">
        <?php 
+       include_once "header-sub.php";
        include_once "banner.php";   
        ?>
        
@@ -256,13 +285,13 @@ include_once 'config.php';
 </nav>
 <div style="text-align: center;">
 <?php if (isset($category )) { ?>
-  <h1 class="me-2 fs-4 fwbold text-capitalize mb-0 text-info"><?php echo str_replace("-", " ", ($subcategory->subCategoryName)); ?>
+  <h1 class="me-2 fwbold text-capitalize mb-0"><?php echo str_replace("-", " ", ($subcategory->subCategoryName)); ?>
 <?php } else { ?>
-  <h1 class="me-2 fs-4 fwbold text-capitalize mb-0 text-info"><?php echo str_replace("-", " ", basename($parts[2])); ?>
+  <h1 class="me-2 fwbold text-capitalize mb-0"><?php echo str_replace("-", " ", basename($parts[2])); ?>
 <?php } ?>
 
   <?php if ($location == null) {
-    echo '<span class="text-danger"> in UAE</span>';
+    echo '<span> in UAE</span>';
   } else {
     echo '<span> in ' . str_replace("-"," " ,$location).'</span>';
   } ?>
@@ -565,6 +594,27 @@ fetch(url, {
                            <?php
                            if($data['sponsoredProduct']!=null){
                           $premiumprod=$data['sponsoredProduct'];
+                          $reletedselId=$premiumprod["id"] ;
+                           
+                          $getreltedprod1 = get('api/guest/products/by-seller-related/' . $reletedselId, true);
+                          $reletedSubCategorys = [];
+                          $arrayOfRelsubcats = [];
+                          $arrayRprod1 = json_decode($getreltedprod1);
+                          
+                          foreach ($arrayRprod1 as $index => $relProd) {
+                              //print_r(gettype($relProd));
+                              if (is_array($relProd) && count($relProd) != 0) {
+                                  foreach ($relProd as $Sprod) {
+                                      $arrayOfRelsubcats[] = $Sprod->productSubcategoryName;
+                                   
+                                  }
+                              }
+                          }
+                          
+                          
+                          $reletedSubCategoryS = array_unique($arrayOfRelsubcats);
+                          $modalId1 = 'popuppluscardModal1' . $indexr;
+
                           //print_r($premiumprod);
                         include_once "premiumProd.php";
                            }
@@ -870,7 +920,7 @@ let filterdto1 = <?php echo json_encode($filterDto); ?>;
 var urlParts = currentURL.split('/');
 var category=category = urlParts[3];
 
-console.log(searchtext);
+console.log(searchtext.replace('-',' '));
 console.log(filterdto1);
 function lod(){
  let payload= {};
@@ -879,7 +929,7 @@ if(category=='category'){
   
  
     payload= {
-    searchText: searchtext,
+    searchText: searchtext.replace('-',' '),
     searchTextType: 'subcategory',
     filterDto: filterdto1
      
@@ -887,7 +937,7 @@ if(category=='category'){
 
 }else{
   payload={
-    searchText: searchtext,
+    searchText: searchtext.replace('-',' '),
     searchTextType: null,
     filterDto: filterdto1
   }
