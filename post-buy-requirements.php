@@ -1,9 +1,6 @@
 <?php
 //ob_start();
 include_once 'config.php'; ?>
-<meta name="robots" content="index, follow">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/postbuyreq.css" />
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>asses/vendors/bootstrap/bootstrap.min.css">
 <script src="services/storegeService.js"></script>
@@ -90,7 +87,7 @@ fetch(url, {
     <div class="login-detailsBg shadow2">
       <div class="row">
         <!----Left---->
-        <div class="col-lg-8 line">
+        <div class="col-md-8 line">
           <div class="fs-3 fwbold Details">Requirement Details</div>
 
           <form method="post" id="postBuyreq">
@@ -331,8 +328,9 @@ function sendOtp($contenctNo,$formdata){
     }
   </script>";
   }else{
+    //print_r($data123);
   include_once 'otp.php';
- // echo $contenctNo;
+  //echo $contenctNo;
   echo '<script>document.getElementById("popup-card-otp").style.display = "block";</script>';
   }
 }
@@ -382,7 +380,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         <!---Left End---->
         <!---Right---->
-        <div class="col-lg-4">
+        <div class="col-md-4">
           <div class="fs-3 fwbold Details">Buyers Advantages?</div>
 
           <div class="media mt-3">

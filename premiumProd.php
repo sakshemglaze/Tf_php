@@ -76,10 +76,51 @@
                                     <?php endif; ?>
                                 </div>
                                 <div class="text-white mt-3">
+                                <?php if(count($reletedSubCategoryS)>0){?>
+    <span class="single-line">
+        <b>other categories: </b>
+        <?php
+             print_r( $reletedSubCategoryS[0]);                          
+        ?>
+
+        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#<?php echo $modalId1; ?>">
+            <span aria-hidden="true"><i class="bi bi-plus" style="font-size: 28px; "></i></span>
+        </button>
+    </span>
+
+    <!-- Modal -->
+    <div class="modal fade" id="<?php echo $modalId1; ?>" tabindex="-1" aria-labelledby="<?php echo $modalId1; ?>Label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="<?php echo $modalId1; ?>Label" style="color:black;">Other Categories</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <?php
+                    $formattedString = '';
+                    foreach ($reletedSubCategoryS as $index => $subcategory) {
+                        $url = $urlService->getCategoryUrl($subcategory);
+                        if ($index == 0) {
+                            $formattedString .= '<a href="' . $url . '">' . $subcategory . '</a>';
+                        } else {
+                            $formattedString .= ' <a  href="' . $url . '"> |' . $subcategory . '</a>';
+                        }
+                    }
+                    echo "<h5 style='margin-top: 20px;'>" . $formattedString . "</h5>";
+                    ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php }?>
+                                </div>
+                                <div class="text-white mt-3">
                                     <?php if (!empty($premiumprod['seller']['Brands'])) : ?>
                                         <span class="single-line"><b>Brand : </b> <?php echo $premiumprod['seller']['Brands'] ?><br> </span>
                                     <?php endif; ?>
                                 </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -134,7 +175,7 @@
             <img src="<?php echo BASE_URL?>assets/images/phone-white.png" alt="Premium_Phone" width="16" height="16" />
             <span class="btn-sm text-white" style="text-align: left;" >
                                         <?php 
-                                            $maskedService->getMaskedNumber($premiumprod['seller']['sellerVirtualContactPhone']);
+                                            $maskedService->getMaskedNumber($premiumprod['seller']);
                                             ?> </span>
         </div>
     </div>

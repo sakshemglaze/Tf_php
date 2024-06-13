@@ -2,6 +2,7 @@
 <?php include_once 'config.php'; 
     include_once 'services/url.php';
     include_once 'services/masked.php';
+    include_once 'post.php';
     $urlService = new UrlService(); 
 
     include_once "whatsapp.php";
@@ -29,6 +30,27 @@ foreach ($phpArray as $inde1 => $prod) {
             $indexr=$inde;
             if (is_object($onep) && isset($onep->id)) {
                 $prodData=$onep;
+
+                $reletedselId=$prodData->id ;
+                           
+                           $getreltedprod = get('api/guest/products/by-seller-related/' . $reletedselId, true);
+                           $reletedSubCategory = [];
+                           $arrayOfRelsubcat = [];
+                           $arrayRprod = json_decode($getreltedprod);
+                           
+                           foreach ($arrayRprod as $index => $relProd) {
+                               //print_r(gettype($relProd));
+                               if (is_array($relProd) && count($relProd) != 0) {
+                                   foreach ($relProd as $Sprod) {
+                                       $arrayOfRelsubcat[] = $Sprod->productSubcategoryName;
+                                    
+                                   }
+                               }
+                           }
+                           
+                           
+                           $reletedSubCategory = array_unique($arrayOfRelsubcat);
+                           $modalId = 'popuppluscardModal2' . $indexr;
                 //print_r($prodData);
                 ?>
                 <div class= "col-lg-6 ">
@@ -150,6 +172,47 @@ foreach ($phpArray as $inde1 => $prod) {
                                             </span>
                                             <?php } ?>
                                     </div>
+                                    <div class="d-flex small mt-1 single-line">
+                                    <?php if(count($reletedSubCategory)>0){?>
+    <span class="single-line">
+        <b>Related categories: </b>
+        <?php
+             print_r( $reletedSubCategory[0]);                          
+        ?>
+
+        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#<?php echo $modalId; ?>">
+            <span aria-hidden="true"><i class="bi bi-plus" style="font-size: 18px;"></i></span>
+        </button>
+    </span>
+
+    <!-- Modal -->
+    <div class="modal fade" id="<?php echo $modalId; ?>" tabindex="-1" aria-labelledby="<?php echo $modalId; ?>Label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="<?php echo $modalId; ?>Label">Related Categories</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <?php
+                    $formattedString = '';
+                    foreach ($reletedSubCategory as $index => $subcategory) {
+                        $url = $urlService->getCategoryUrl($subcategory);
+                        if ($index == 0) {
+                            $formattedString .= '<a href="' . $url . '">' . $subcategory . '</a>';
+                        } else {
+                            $formattedString .= ' | <a href="' . $url . '">' . $subcategory . '</a>';
+                        }
+                    }
+                    echo "<h5 style='margin-top: 20px;'>" . $formattedString . "</h5>";
+                    ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php }?>
+</div>
+
                                     <div class="d-flex small mt-1">
                              <?php if (isset($prodData->seller->Category ) ){ ?>
                               <b>Other Category: </b>
@@ -190,7 +253,7 @@ foreach ($phpArray as $inde1 => $prod) {
                                     <button class="btn btn-sm btn-light w-100 d-center"  title="Seller_Phone" href="#">
                                         <img src="<?php echo BASE_URL ?>assets/images/phone.png" width="18" height="17" class="w-18 me-2"
                                             alt="Phone" /> <?php if(isset($prodData->seller)) {
-                                            $maskedService->getMaskedNumber($prodData->seller->sellerVirtualContactPhone); }
+                                            $maskedService->getMaskedNumber($prodData->seller); }
                                             ?>
                                        
                                     </button>

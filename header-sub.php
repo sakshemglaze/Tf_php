@@ -8,7 +8,7 @@
     <div class="d-flex align-items-center position-relative flex-wrap">
 
         <a href="<?php echo BASE_URL; ?>" title="TradersFind" aria-label="TradersFind - Largest B2B online Portal">
-          <img src="<?php echo BASE_URL; ?>assets/images/TradersFind.webp" alt="TradersFind" class="order-1 inner_header_logo"  height="70" Rel="Nofollow" style=" width:110px !important;" />
+          <img src="<?php echo BASE_URL; ?>assets/images/TradersFind.webp" alt="TradersFind" class="order-1 inner_header_logo" width="110" height="70" Rel="Nofollow" />
         </a>
         <?php
       $currecntUrlHS=$_SERVER['REQUEST_URI'];
@@ -52,17 +52,17 @@ function submitform(){
 
     }
 </script>
-<form method="post" action="" id="homepageSearch" class="w-100 position-relative ms-auto mw-410 order-3 order-md-2 mt-1 ddd">
+<form method="post" action="" id="homepageSearch" class="w-100 position-relative ms-auto mw-600 order-3 order-md-2 mt-md-0 ddd">
 
-    <div class="input-group input-group-lg w-100 position-relative ms-auto mw-410 order-3 order-md-2 mt-2">
+    <div class="input-group input-group-lg w-100 position-relative ms-auto mw-600 order-3 order-md-2 mt-md-0">
           <input  autofocus type="text" class="form-control " id="search" name="searchText"  placeholder="What are you looking for.."
                   style="height: 45px; border-top-right-radius: 10px; border-bottom-right-radius: 10px;" autocomplete="off" >
 
           <div class="submit-button">
            
-            <button  type="submit" onclick="submitform()" class="btn-primary-gradiant w-100 h-100 ">
+            <button  type="submit" onclick="submitform()" class="btn-primary-gradiant w-100 h-100 px-2 px-lg-5">
               <img src="<?php echo BASE_URL; ?>assets/images/search-icon.png" width="18" class="me-lg-2" alt="search" />
-             <!-- <div class="d-none d-lg-inline">Search</div>-->
+              <div class="d-none d-lg-inline">Search</div>
             </button>
           </div>
           </div>

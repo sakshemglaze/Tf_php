@@ -9,7 +9,18 @@
 
 ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css">
-<link rel="stylesheet" href="path/to/bootstrap-icons.css">
+
+
+<style>
+.modal-dialog {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+</style>
+
 <div class="cardproduct card-shadow rounded-10 bg-white" style="border: 0.5px solid #ddd;">
     <div class="swiper ">
         <div class="swiper-wrapper">
@@ -147,7 +158,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="<?php echo $modalId; ?>Label">Related Subcategories</h5>
+                    <h5 class="modal-title" id="<?php echo $modalId; ?>Label">Related Categories</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -214,7 +225,7 @@
                                     <button class="btn btn-sm btn-light w-100 d-center"  title="Seller_Phone" href="#">
                                         <img src="<?php echo BASE_URL ?>assets/images/phone.png" width="18" height="17" class="w-18 me-2"
                                             alt="Phone" /> <?php if(isset($prodData['seller'])) {
-                                            $maskedService->getMaskedNumber($prodData['seller']['sellerVirtualContactPhone']); }
+                                            $maskedService->getMaskedNumber($prodData['seller']); }
                                             ?>
                                        
                                     </button>
