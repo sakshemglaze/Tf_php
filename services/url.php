@@ -13,16 +13,16 @@ public function __construct() {
 }
 
 public function getIndustryUrl($indName,$iid) {
-  $url = 'industry/' . preg_replace('/[&,\s]+/', '-', strtolower($indName)); // . '/' . $iid;
+  $url = 'industry/' . preg_replace('/[&,\s]+/', '-', strtolower($indName));
   return $url;
 }
-public function getProductUrl($pname) {
-  $url = 'product/' . preg_replace('/[&,\s]+/', '-', strtolower(trim($pname)));
+public function getProductUrl($pname,$pid) {
+  $url = 'product/' . preg_replace('/[&,\s]+/', '-', strtolower(trim($pname)))."/".$pid;
   return $url;
 }
 
-public function getGroupCategoryUrl($name,$id) {
-  $url = 'group-category/' . preg_replace('/[&,\s]+/', '-', strtolower(trim($name))); // . '/' . $id;
+public function getGroupCategoryUrl($name,$gid) {
+  $url = 'group-category/' . preg_replace('/[&,\s]+/', '-', strtolower(trim($name)));
   return $url;
 }
 
