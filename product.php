@@ -10,7 +10,7 @@
 ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css">
 
-
+<link rel="stylesheet" href="path/to/bootstrap-icons.css">
 <style>
 .modal-dialog {
     display: flex;
