@@ -25,6 +25,7 @@ include_once 'config.php';
     $currentUrl = $_SERVER['REQUEST_URI'];
     $parts = explode('/', $currentUrl);
     $numParts = count($parts);
+   
    //print_r($numParts);
     if($numParts>=4){
     $category1 = basename($parts[2]); // Extract the category part
@@ -64,7 +65,7 @@ else{
           $subcatName=basename($parts[2]);
           $subcategory = json_decode(get ( 'api/guest/products-subcategorie/' . $subcatName));
          
-   
+  
             $payload = array(
                 'searchText' => strtolower($subcategory->subCategoryName) ,
                 'searchTextType' => 'subcategory',
@@ -417,7 +418,7 @@ if (isset($category )&&isset($subcategory->shortDescription) && $subcategory->sh
 <br>
 
 <?php $subcategorys=$data['subCategories'];
-
+ 
 ?>
 </section>
 <div class="row gy-2">
@@ -869,11 +870,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <section class="easysource my-4 py-2" >
             <?php
              include_once "post-request.php";
+           
               ?>
                </section>
          
           <div class="row">
           <p class="search-product-text">
+
         <div class="cat-desc" id="cat-desc" style="display:none;">
         <?php
         if($location=="" && isset($subcategory->categoryDescriptionPage)){

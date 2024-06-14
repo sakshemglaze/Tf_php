@@ -1,238 +1,133 @@
 <?php
-$schema = '{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Organization",
-      "@id": "https://www.tradersfind.com/#organization",
-      "name": "Interconnect Marketing Management L.L.C",
-      "url": "https://www.tradersfind.com/seller/interconnect-marketing-management-llc",
-      "sameAs": [
-        "https://www.facebook.com/tradersfindb2bportal/",
-        "https://www.linkedin.com/company/tradersfind/",
-        "https://x.com/tradersfind/"
-      ],
-      "logo": {
-        "@type": "ImageObject",
-        "@id": "https://www.tradersfind.com/#logo",
-        "url": "https://www.tradersfind.com/assets/images/TradersFind.webp",
-        "caption": "Tradersfind.com by Interconnect Marketing Management L.L.C"
-      }
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://www.tradersfind.com/#website",
-      "url": "https://www.tradersfind.com/#",
-      "name": "Tradersfind.com",
-      "publisher": {
-        "@id": "https://www.tradersfind.com/#organization"
-      },
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://www.tradersfind.com/search/{search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
-    },
-    {
-      "@type": "WebPage",
-      "@id": "https://www.tradersfind.com/#webpage",
-      "url": "https://www.tradersfind.com",
-      "inLanguage": "en-US",
-      "name": "Tradersfind.com by Interconnect Marketing Management L.L.C",
-      "isPartOf": {
-        "@id": "https://www.tradersfind.com/#website"
-      },
-      "about": {
-        "@id": "https://www.tradersfind.com/#organization"
-      },
-      "description": "Interconnect Marketing Management L.L.C handles Tradersfind.com, which is the UAE largest B2B Portal for businesses, products and services. A smart and efficient way to Search, Find and Connect with Businesses in UAE."
-    },
-    {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://www.tradersfind.com"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Furniture & Supplies",
-          "item": "https://www.tradersfind.com/industry/furniture-supplies"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "Kitchen & Dining Furniture",
-          "item": "https://www.tradersfind.com/group-category/kitchen-dining-furniture"
-        },
-        {
-          "@type": "ListItem",
-          "position": 4,
-          "name": "Kitchen Racks",
-          "item": "https://www.tradersfind.com/category/kitchen-racks"
+$jsonOutput12 = [];
+
+foreach ($data as $inde1 => $prod) {
+    if (is_array($prod)) {
+        $catagoryscemapros = [];
+        foreach ($prod as $inde => $onep) {
+            if (is_array($onep) && isset($onep['productName'])) {
+                $prodData = $onep;
+                if(isset($prodData['images']) && count($prodData['images']) > 0){
+                  $newsto = IMAGE_URL . $prodData['images'][0]['id'] . ".webp";
+                }else{
+                  $newsto = BASE_URL . "assets/images/TradersFind.webp";
+                }
+                $catagoryscemapros[] = [
+                    "@type" => "ListItem",
+                    "position" => $inde,
+                    "item" => [
+                      "@type" => "Product",
+                      "url" => 'https://www.tradersfind.com/product/' . str_replace(" ", "-", strtolower($prodData['productName'])) . '/' . urlencode($prodData['id']),
+                      "name" => $prodData['productName'],
+                      "image" => $newsto, // Assuming $newsto contains the URL to the image
+                      "description" => isset($prodData['productDescription']) ? $prodData['productDescription'] : "",
+                      "brand" => [
+                          "@type" => "Brand",
+                          "name" => isset($prodData['brand']) ? $prodData['brand'] : ""
+                      ]
+                ]
+                ];
+            }
         }
-      ]
-    },
-    {
-      "@type": "ItemList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "item": {
-            "@type": "Product",
-            "url": "https://www.tradersfind.com/product/kitchen-corner-rack/64e0b3ea3db0454195b7cc45",
-            "name": "Kitchen Corner Rack",
-            "image": "https://example.com/path/to/image.jpg",
-            "description": "Maximize corner space with this versatile kitchen corner rack.",
-            "brand": {
-              "@type": "Brand",
-              "name": "BrandName1"
-            }
-          }
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "item": {
-            "@type": "Product",
-            "url": "https://www.tradersfind.com/product/green-epoxy-wire-kitchen-shelf/65cf46dc5a9dc92cac556b48",
-            "name": "Green Epoxy Wire Kitchen Shelf",
-            "image": "https://example.com/path/to/image.jpg",
-            "description": "Durable and stylish, perfect for storing dishes and kitchen supplies.",
-            "brand": {
-              "@type": "Brand",
-              "name": "BrandName2"
-            }
-          }
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "item": {
-            "@type": "Product",
-            "url": "https://www.tradersfind.com/product/kitchen-wall-rack/65c5e44bb4987b39b7a64970",
-            "name": "Kitchen Wall Rack",
-            "image": "https://example.com/path/to/image.jpg",
-            "description": "Save counter space with this wall-mounted kitchen rack.",
-            "brand": {
-              "@type": "Brand",
-              "name": "BrandName3"
-            }
-          }
-        },
-        {
-          "@type": "ListItem",
-          "position": 4,
-          "item": {
-            "@type": "Product",
-            "url": "https://www.tradersfind.com/product/kitchen-wall-rack/65c5e44bb4987b39b7a64970",
-            "name": "Kitchen Wall Rack",
-            "image": "https://example.com/path/to/image.jpg",
-            "description": "Save counter space with this wall-mounted kitchen rack.",
-            "brand": {
-              "@type": "Brand",
-              "name": "BrandName4"
-            }
-          }
-        },
-        {
-          "@type": "ListItem",
-          "position": 5,
-          "item": {
-            "@type": "Product",
-            "url": "https://www.tradersfind.com/product/kitchen-wall-rack/65c5e44bb4987b39b7a64970",
-            "name": "Kitchen Wall Rack",
-            "image": "https://example.com/path/to/image.jpg",
-            "description": "Save counter space with this wall-mounted kitchen rack.",
-            "brand": {
-              "@type": "Brand",
-              "name": "BrandName5"
-            }
-          }
-        },
-        {
-          "@type": "ListItem",
-          "position": 6,
-          "item": {
-            "@type": "Product",
-            "url": "https://www.tradersfind.com/product/kitchen-wall-rack/65c5e44bb4987b39b7a64970",
-            "name": "Kitchen Wall Rack",
-            "image": "https://example.com/path/to/image.jpg",
-            "description": "Save counter space with this wall-mounted kitchen rack.",
-            "brand": {
-              "@type": "Brand",
-              "name": "BrandName6"
-            }
-          }
-        },
-        {
-          "@type": "ListItem",
-          "position": 7,
-          "item": {
-            "@type": "Product",
-            "url": "https://www.tradersfind.com/product/kitchen-wall-rack/65c5e44bb4987b39b7a64970",
-            "name": "Kitchen Wall Rack",
-            "image": "https://example.com/path/to/image.jpg",
-            "description": "Save counter space with this wall-mounted kitchen rack.",
-            "brand": {
-              "@type": "Brand",
-              "name": "BrandName7"
-            }
-          }
-        },
-        {
-          "@type": "ListItem",
-          "position": 8,
-          "item": {
-            "@type": "Product",
-            "url": "https://www.tradersfind.com/product/kitchen-wall-rack/65c5e44bb4987b39b7a64970",
-            "name": "Kitchen Wall Rack",
-            "image": "https://example.com/path/to/image.jpg",
-            "description": "Save counter space with this wall-mounted kitchen rack.",
-            "brand": {
-              "@type": "Brand",
-              "name": "BrandName8"
-            }
-          }
-        },
-        {
-          "@type": "ListItem",
-          "position": 9,
-          "item": {
-            "@type": "Product",
-            "url": "https://www.tradersfind.com/product/kitchen-wall-rack/65c5e44bb4987b39b7a64970",
-            "name": "Kitchen Wall Rack",
-            "image": "https://example.com/path/to/image.jpg",
-            "description": "Save counter space with this wall-mounted kitchen rack.",
-            "brand": {
-              "@type": "Brand",
-              "name": "BrandName9"
-            }
-          }
-        },
-        {
-          "@type": "ListItem",
-          "position": 10,
-          "item": {
-            "@type": "Product",
-            "url": "https://www.tradersfind.com/product/kitchen-wall-rack/65c5e44bb4987b39b7a64970",
-            "name": "Kitchen Wall Rack",
-            "image": "https://example.com/path/to/image.jpg",
-            "description": "Save counter space with this wall-mounted kitchen rack.",
-            "brand": {
-              "@type": "Brand",
-              "name": "BrandName10"
-            }
-          }
-        }
-      ]
+       // print_r($catagoryscemapros);
+        // Encode the current category schema products into JSON without escaping slashes
+        $jsonOutput12[] =json_decode(json_encode($catagoryscemapros));
+        
     }
-  ]
-}';
+}
+
+$jsonOutput12 = json_encode($jsonOutput12, JSON_UNESCAPED_SLASHES);
+//print_r($jsonOutput12);
+// Construct the schema array
+$schema = [
+    "@context" => "https://schema.org",
+    "@graph" => [
+        [
+            "@type" => "Organization",
+            "@id" => "https://www.tradersfind.com/#organization",
+            "name" => "Interconnect Marketing Management L.L.C",
+            "url" => "https://www.tradersfind.com/seller/interconnect-marketing-management-llc",
+            "sameAs" => [
+                "https://www.facebook.com/tradersfindb2bportal/",
+                "https://www.linkedin.com/company/tradersfind/",
+                "https://x.com/tradersfind/"
+            ],
+            "logo" => [
+                "@type" => "ImageObject",
+                "@id" => "https://www.tradersfind.com/#logo",
+                "url" => "https://www.tradersfind.com/assets/images/TradersFind.webp",
+                "caption" => "Tradersfind.com by Interconnect Marketing Management L.L.C"
+            ]
+        ],
+        [
+            "@type" => "WebSite",
+            "@id" => "https://www.tradersfind.com/#website",
+            "url" => "https://www.tradersfind.com/#",
+            "name" => "Tradersfind.com",
+            "publisher" => [
+                "@id" => "https://www.tradersfind.com/#organization"
+            ],
+            "potentialAction" => [
+                "@type" => "SearchAction",
+                "target" => "https://www.tradersfind.com/search/{search_term_string}",
+                "query-input" => "required name=search_term_string"
+            ]
+        ],
+        [
+            "@type" => "WebPage",
+            "@id" => "https://www.tradersfind.com/#webpage",
+            "url" => "https://www.tradersfind.com",
+            "inLanguage" => "en-US",
+            "name" => "Tradersfind.com by Interconnect Marketing Management L.L.C",
+            "isPartOf" => [
+                "@id" => "https://www.tradersfind.com/#website"
+            ],
+            "about" => [
+                "@id" => "https://www.tradersfind.com/#organization"
+            ],
+            "description" => "Interconnect Marketing Management L.L.C handles Tradersfind.com, which is the UAE largest B2B Portal for businesses, products and services. A smart and efficient way to Search, Find and Connect with Businesses in UAE."
+        ],
+        [
+            "@type" => "BreadcrumbList",
+            "itemListElement" => [
+                [
+                    "@type" => "ListItem",
+                    "position" => 1,
+                    "name" => "Home",
+                    "item" => "https://www.tradersfind.com"
+                ],
+                [
+                    "@type" => "ListItem",
+                    "position" => 2,
+                    "name" => $industry[0]->industryName,
+                    "item" => "https://www.tradersfind.com/industry/" . preg_replace('/[\s&]+/', '-', strtolower($industry[0]->industryName))
+                ],
+                [
+                    "@type" => "ListItem",
+                    "position" => 3,
+                    "name" => $category[0]->categoryName,
+                    "item" => "https://www.tradersfind.com/group-category/" . preg_replace('/[\s&]+/', '-', strtolower($category[0]->categoryName))
+                ],
+                [
+                    "@type" => "ListItem",
+                    "position" => 4,
+                    "name" => $subcatName,
+                    "item" => "https://www.tradersfind.com/category/" . preg_replace('/[\s&]+/', '-', $subcatName)
+                ]
+            ]
+        ],
+        [
+            "@type" => "ItemList",
+            "itemListElement" => json_decode($jsonOutput12) // Embed directly without encoding
+        ]
+    ]
+];
+
+// Output the schema as a JSON string
+//echo json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+
+
+
 
 if($location1==null || $location1=='UAE' || !isset($subcategory->locations)){
   $SeoParams = [
@@ -249,7 +144,7 @@ if($location1==null || $location1=='UAE' || !isset($subcategory->locations)){
     'twitterImage' => isset($subcategory->twitterImage) ? $subcategory->twitterImage : null,
     'twitterSite' => isset($subcategory->twitterSite) ? $subcategory->twitterSite : '',
     'twitterCard' => isset($subcategory->twitterCard) ? $subcategory->twitterCard : null,
-    'schemaDescription' => isset($subcategory->schemaDescription) ? $subcategory->schemaDescription : $schema,
+    'schemaDescription' => isset($subcategory->schemaDescription) ? $subcategory->schemaDescription : json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT),
     ];
 
     }else{

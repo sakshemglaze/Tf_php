@@ -10,7 +10,7 @@
 ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css">
 
-<link rel="stylesheet" href="path/to/bootstrap-icons.css">
+
 <style>
 .modal-dialog {
     display: flex;
@@ -143,7 +143,7 @@
                                     <div class="d-flex small mt-1 single-line">
                                     <?php if(count($reletedSubCategory)>0){?>
     <span class="single-line">
-        <b>Related categories: </b>
+        <b>Other categories: </b>
         <?php
              print_r( $reletedSubCategory[0]);                          
         ?>
@@ -158,7 +158,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="<?php echo $modalId; ?>Label">Related Categories</h5>
+                    <h5 class="modal-title" id="<?php echo $modalId; ?>Label">Other Categories</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
