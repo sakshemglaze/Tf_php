@@ -25,6 +25,7 @@ include_once 'config.php';
     $currentUrl = $_SERVER['REQUEST_URI'];
     $parts = explode('/', $currentUrl);
     $numParts = count($parts);
+   
    //print_r($numParts);
     if($numParts>=4){
     $category1 = basename($parts[2]); // Extract the category part
@@ -64,7 +65,7 @@ else{
           $subcatName=basename($parts[2]);
           $subcategory = json_decode(get ( 'api/guest/products-subcategorie/' . $subcatName));
          
-   
+  
             $payload = array(
                 'searchText' => strtolower($subcategory->subCategoryName) ,
                 'searchTextType' => 'subcategory',
@@ -417,7 +418,7 @@ if (isset($category )&&isset($subcategory->shortDescription) && $subcategory->sh
 <br>
 
 <?php $subcategorys=$data['subCategories'];
-
+ 
 ?>
 </section>
 <div class="row gy-2">
@@ -592,6 +593,7 @@ fetch(url, {
 </script>
 
                            <?php
+                            
                            if($data['sponsoredProduct']!=null){
                           $premiumprod=$data['sponsoredProduct'];
                           $reletedselId=$premiumprod["id"] ;
@@ -619,6 +621,7 @@ fetch(url, {
                         include_once "premiumProd.php";
                            }
                            //print_r($data);
+                        
               foreach ($data as $inde1 => $prod) {
                 
                 if (is_array($prod)) {
@@ -667,6 +670,7 @@ fetch(url, {
                     <?php
                 }
             }
+      
           ?>
        <div id="productList"> </div>
 <div id="result" ></div>
@@ -862,18 +866,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   ?>
           <div class="text-center my-2" >     
           <button  id="loadMoreBtn"  onclick="lod()"class="btn-primary-gradiant rounded-2 btn-auto" style="display: inline-block;"> LOAD MORE RESULTS ... </button>
-         <?php } ?>
+        
+          <?php } ?>
         </div>
        
 
           <section class="easysource my-4 py-2" >
             <?php
              include_once "post-request.php";
+           
               ?>
                </section>
          
           <div class="row">
           <p class="search-product-text">
+
         <div class="cat-desc" id="cat-desc" style="display:none;">
         <?php
         if($location=="" && isset($subcategory->categoryDescriptionPage)){

@@ -175,7 +175,7 @@ foreach ($phpArray as $inde1 => $prod) {
                                     <div class="d-flex small mt-1 single-line">
                                     <?php if(count($reletedSubCategory)>0){?>
     <span class="single-line">
-        <b>Related categories: </b>
+        <b>Other categories: </b>
         <?php
              print_r( $reletedSubCategory[0]);                          
         ?>
@@ -190,7 +190,7 @@ foreach ($phpArray as $inde1 => $prod) {
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="<?php echo $modalId; ?>Label">Related Categories</h5>
+                    <h5 class="modal-title" id="<?php echo $modalId; ?>Label">Other Categories</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">

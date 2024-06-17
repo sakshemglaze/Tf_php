@@ -141,7 +141,7 @@
                                     <div class="d-flex small mt-1 single-line">
                                     <?php if(count($reletedSubCategory)>0){?>
     <span class="single-line">
-        <b>Related categories: </b>
+        <b>Other categories: </b>
         <?php
              print_r( $reletedSubCategory[0]);                          
         ?>
@@ -156,18 +156,18 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="<?php echo $modalId; ?>Label">Related Categories</h5>
+                    <h5 class="modal-title" id="<?php echo $modalId; ?>Label">Other Categories</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <?php
                     $formattedString = '';
-                    foreach ($reletedSubCategory as $index => $subcategory) {
-                        $url = $urlService->getCategoryUrl($subcategory);
+                    foreach ($reletedSubCategory as $index => $subcategory1) {
+                        $url = $urlService->getCategoryUrl($subcategory1);
                         if ($index == 0) {
-                            $formattedString .= '<a href="' . $url . '">' . $subcategory . '</a>';
+                            $formattedString .= '<a href="' . $url . '">' . $subcategory1 . '</a>';
                         } else {
-                            $formattedString .= ' | <a href="' . $url . '">' . $subcategory . '</a>';
+                            $formattedString .= ' | <a href="' . $url . '">' . $subcategory1 . '</a>';
                         }
                     }
                     echo "<h5 style='margin-top: 20px;'>" . $formattedString . "</h5>";
