@@ -593,6 +593,7 @@ fetch(url, {
 </script>
 
                            <?php
+                            
                            if($data['sponsoredProduct']!=null){
                           $premiumprod=$data['sponsoredProduct'];
                           $reletedselId=$premiumprod["id"] ;
@@ -620,6 +621,7 @@ fetch(url, {
                         include_once "premiumProd.php";
                            }
                            //print_r($data);
+                        
               foreach ($data as $inde1 => $prod) {
                 
                 if (is_array($prod)) {
@@ -668,6 +670,7 @@ fetch(url, {
                     <?php
                 }
             }
+      
           ?>
        <div id="productList"> </div>
 <div id="result" ></div>
@@ -863,7 +866,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   ?>
           <div class="text-center my-2" >     
           <button  id="loadMoreBtn"  onclick="lod()"class="btn-primary-gradiant rounded-2 btn-auto" style="display: inline-block;"> LOAD MORE RESULTS ... </button>
-         <?php } ?>
+        
+          <?php } ?>
         </div>
        
 
