@@ -99,12 +99,12 @@
                 <div class="modal-body">
                     <?php
                     $formattedString = '';
-                    foreach ($reletedSubCategoryS as $index => $subcategory) {
-                        $url = $urlService->getCategoryUrl($subcategory);
+                    foreach ($reletedSubCategoryS as $index => $subcategory2) {
+                        $url = $urlService->getCategoryUrl($subcategory2);
                         if ($index == 0) {
-                            $formattedString .= '<a href="' . $url . '">' . $subcategory . '</a>';
+                            $formattedString .= '<a href="' . $url . '">' . $subcategory2 . '</a>';
                         } else {
-                            $formattedString .= ' <a  href="' . $url . '"> |' . $subcategory . '</a>';
+                            $formattedString .= ' <a  href="' . $url . '"> |' . $subcategory2 . '</a>';
                         }
                     }
                     echo "<h5 style='margin-top: 20px;'>" . $formattedString . "</h5>";

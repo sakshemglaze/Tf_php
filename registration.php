@@ -46,7 +46,7 @@ $pager=false;
         <div class="col-lg-6  mb-4">
           <div class="card border-0 rounded-top-20 rounded-bottom-20">
             <div class="card-header bg-gradiant py-3 px-md-3 rounded-top-20 border-0 text-white">
-              <h5 class="fs-4 fwbold text-uppercase">Register your Company Free</h5>
+              <h5 class="fs-3 fwbold text-uppercase">Register your Company Free</h5>
               <p class="mb-0">Create Company Profile with very Simple Steps & Manage your Business.</p>
             </div>
             <div class="card-body ">
@@ -95,7 +95,7 @@ $pager=false;
             </label>
         </div>
     </div>
-    <button type="submit" class="btn-primary-gradiant px-md-5 py-2 rounded-10 fs-5 fwbold mb-4" >
+    <button type="submit" class="btn-primary-gradiant px-md-5 py-2 rounded-10 fs-4 fwbold mb-4" >
         CREATE ACCOUNT
     </button>
 </form>
@@ -192,7 +192,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           </div>
         </div>
         <div class="col-lg-6 mt-0 text-white customer">
-          <h4 class=" text-uppercase text-center fs-5 fwbold fw-bold ">SELL YOUR PRODUCTS OR SERVICES TO MILLIONS OF
+          <h4 class=" text-uppercase text-center fs-4 fwbold fw-bold ">SELL YOUR PRODUCTS OR SERVICES TO MILLIONS OF
             CUSTOMER !</h4>
           <h4 class=" text-center">Get your business registered with us at no cost</h4>
           <div class="mt-4 p-1 text-center rounded-1 bg-gradiant text-white fs-5 fwbold TradersFindB"> Get started with
@@ -475,12 +475,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               </h2>
               <div id="collapseOne" class="accordion-collapse" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                  <strong>This is the first item's accordion body.</strong> It is shown by default, until the
-                  collapse plugin adds the appropriate classes that we use to style each element. These
-                  classes control the overall appearance, as well as the showing and hiding via CSS
-                  transitions. You can modify any of this with custom CSS or overriding our default variables.
-                  It's also worth noting that just about any HTML can go within the
-                  <code>.accordion-body</code>, though the transition does limit overflow.
+                 <p>
+                 TradersFind is an inclusive online marketplace catering to both individuals and businesses,
+                  be it small or large, across diverse industries. It offers a platform for selling products 
+                  or services without any size or industry restrictions.
+                 </p>
                 </div>
               </div>
             </div>
@@ -514,12 +513,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               </h2>
               <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                  <strong>This is the third item's accordion body.</strong> It is hidden by default, until the
-                  collapse plugin adds the appropriate classes that we use to style each element. These
-                  classes control the overall appearance, as well as the showing and hiding via CSS
-                  transitions. You can modify any of this with custom CSS or overriding our default variables.
-                  It's also worth noting that just about any HTML can go within the
-                  <code>.accordion-body</code>, though the transition does limit overflow.
+               <li>Visit the TradersFind homepage.</li> 
+               <li> Find the 'Join Free' button located on the top left-hand corner of the page.</li>
+               <li>Click on the 'Join Free' button, which will take you to the Registration Page.</li>        
+               <li>Enter your necessary information such as your name, email, mobile number, company name, product/service, and address.</li>         
+               <li>After that, click on the 'Create Account' button</li>
                 </div>
               </div>
             </div>
@@ -532,12 +530,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               </h2>
               <div id="collapsefour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                  <strong>This is the third item's accordion body.</strong> It is hidden by default, until the
-                  collapse plugin adds the appropriate classes that we use to style each element. These
-                  classes control the overall appearance, as well as the showing and hiding via CSS
-                  transitions. You can modify any of this with custom CSS or overriding our default variables.
-                  It's also worth noting that just about any HTML can go within the
-                  <code>.accordion-body</code>, though the transition does limit overflow.
+                  <p>
+                  TradersFind can assist you in growing your business by offering a way to link up with the 
+                  suitable buyers and sellers from different industries. This platform also allows you to look
+                   for relevant products or services, connect with suppliers or customers, and increase your 
+                   chances of doing business.
+                  </p>
                 </div>
               </div>
             </div>
@@ -550,12 +548,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               </h2>
               <div id="collapsefive" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                  <strong>This is the third item's accordion body.</strong> It is hidden by default, until the
-                  collapse plugin adds the appropriate classes that we use to style each element. These
-                  classes control the overall appearance, as well as the showing and hiding via CSS
-                  transitions. You can modify any of this with custom CSS or overriding our default variables.
-                  It's also worth noting that just about any HTML can go within the
-                  <code>.accordion-body</code>, though the transition does limit overflow.
+               <p>
+               The registration on Traders Find is absolutely free. Also, TradersFind offers paid packages
+                which include several benefits and features that will help you to attract more visitors.
+                 To know more, Enquire Now.
+               </p>
                 </div>
               </div>
             </div>

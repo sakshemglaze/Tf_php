@@ -162,12 +162,12 @@
                 <div class="modal-body">
                     <?php
                     $formattedString = '';
-                    foreach ($reletedSubCategory as $index => $subcategory) {
-                        $url = $urlService->getCategoryUrl($subcategory);
+                    foreach ($reletedSubCategory as $index => $subcategory1) {
+                        $url = $urlService->getCategoryUrl($subcategory1);
                         if ($index == 0) {
-                            $formattedString .= '<a href="' . $url . '">' . $subcategory . '</a>';
+                            $formattedString .= '<a href="' . $url . '">' . $subcategory1 . '</a>';
                         } else {
-                            $formattedString .= ' | <a href="' . $url . '">' . $subcategory . '</a>';
+                            $formattedString .= ' | <a href="' . $url . '">' . $subcategory1 . '</a>';
                         }
                     }
                     echo "<h5 style='margin-top: 20px;'>" . $formattedString . "</h5>";
