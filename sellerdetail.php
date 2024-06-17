@@ -467,10 +467,12 @@ fetch(url, {
               <div class="row">
                 <div class="fw mix-container home-gallery">
 
-                <?php foreach ( $aproodproduct1->products as $index => $product): ?>
+                <?php foreach ( $aproodproduct1->products as $index => $product): 
+                  //print_r($product->isFeatured);
+                  ?>
                   
     <div class="mix valves">
-       <?php if(isset($product->isFeatured) ):?>
+       <?php if(isset($product->isFeatured) && $product->isFeatured == "1" ):?>
                     <img class="inside" src="<?php echo BASE_URL; ?>assets/images/Star_listing.png" alt="verified_image" width="80" height="30" />       
                     <?php endif;?>
                     <?php if(isset($product->sponsoredKeywords) && $product->sponsoredKeywords[0]!=''):?>

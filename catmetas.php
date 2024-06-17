@@ -249,7 +249,7 @@ if($location1==null || $location1=='UAE' || !isset($subcategory->locations)){
     'twitterImage' => isset($subcategory->twitterImage) ? $subcategory->twitterImage : null,
     'twitterSite' => isset($subcategory->twitterSite) ? $subcategory->twitterSite : '',
     'twitterCard' => isset($subcategory->twitterCard) ? $subcategory->twitterCard : null,
-    'schemaDescription' => isset($subcategory->schemaDescription) ? $subcategory->schemaDescription : $schema,
+    'schemaDescription' => isset($subcategory->schemaDescription) ? $subcategory->schemaDescription : '',
     ];
 
     }else{

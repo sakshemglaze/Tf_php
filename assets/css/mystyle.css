@@ -401,6 +401,14 @@ ul.socialmedia li {
     margin-top: -57px;
 }
 
+.inside {
+    position: absolute;
+    z-index: 99;
+    margin-left: 5px;
+    margin-top: 5px;
+}
+.home-gallery {position: relative;}
+
 @media (max-width: 1224px) {
     .category-hover img {
         max-width: 100px;
@@ -447,12 +455,7 @@ ul.socialmedia li {
         position: relative;
     }
 
-    .inside {
-        position: absolute;
-        z-index: 9;
-        left: 15px;
-        top: 14px;
-    }
+
 
     .controls button {
         padding: 7px !important;

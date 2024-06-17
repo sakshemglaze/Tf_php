@@ -213,10 +213,10 @@ else{
 include_once 'catmetas.php';
   //print_r("else");
           }
-        //  if ($length == 0) {
-        //         header("Location: /not-found.php");
-        //         exit();
-        //       }
+          if ($totallength == 0) {
+                 header("Location: /not-found");
+                 exit();
+               }
        // print_r($location);
 ?>
 <!DOCTYPE html>
