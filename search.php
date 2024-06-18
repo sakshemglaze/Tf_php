@@ -302,13 +302,16 @@ include_once 'catmetas.php';
 <div class="sortdescription-card" id="sortdescription-card" style="display:none"> 
   <p><?php if(isset($subcategory->locations)){
       foreach($subcategory->locations as $Sdlocation){
-   
-        if($Sdlocation->location==$location1 && isset($Sdlocation->shortDescription) && $Sdlocation->shortDescription !=''){
+        //print_r($location1);
+        //print_r($Sdlocation->location);
+        if(strtolower($Sdlocation->location)==strtolower($location1) && isset($Sdlocation->shortDescription) && $Sdlocation->shortDescription !=''){
           $shortDescription=$Sdlocation->shortDescription;
         }elseif(isset($subcategory->shortDescription) && $location==''){
+          //print_r("1");
           $shortDescription = $subcategory->shortDescription; 
      
         }else{
+          //print_r("2");
           $shortDescription = "<p>
           Find the best {$subcategory->subCategoryName} in $location1 at competitive prices. Discover a wide range of
           {$subcategory->subCategoryName} from top companies, manufacturers, dealers, and distributors across $location1.
@@ -320,13 +323,14 @@ include_once 'catmetas.php';
           sourcing and get the best prices on high-quality {$subcategory->subCategoryName} products in $location1. TradersFind offers 
           you a variety of {$subcategory->subCategoryName} options from verified companies that will fulfill your requirements at most 
           competitive prices.
-      </p>";
+          </p>";
         }
-      }}elseif(isset($subcategory->shortDescription) && $location==''){
-        $shortDescription = $subcategory->shortDescription; 
-      
-      }else{
-     
+      }
+    }elseif(isset($subcategory->shortDescription) && $location==''){
+      //print_r("3");
+        $shortDescription = $subcategory->shortDescription;  
+     }else{
+      //print_r("4");
         $shortDescription = "<p>
             Find the best {$subcategory->subCategoryName} in $location1 at competitive prices. Discover a wide range of
             {$subcategory->subCategoryName} from top companies, manufacturers, dealers, and distributors across $location1.

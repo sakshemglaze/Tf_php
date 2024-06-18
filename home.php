@@ -22,7 +22,7 @@
     {
       "@type": "WebSite",
       "@id": "https://www.tradersfind.com/#website",
-      "url": "https://www.tradersfind.com/",
+      "url": "https://www.tradersfind.com",
       "name": "Tradersfind.com",
       "publisher": {
         "@id": "https://www.tradersfind.com/#organization"
