@@ -312,7 +312,8 @@ function createBlogElements(loadedData) {
 
             // Create heading for blog title
             const titleHeading = document.createElement("h1");
-            titleHeading.setAttribute("style","font-size: x-large;");
+            titleHeading.className = "fs-5 text-center fw-bold mt-3";
+            //titleHeading.setAttribute("style","font-size: x-large;");
             const titleLink = document.createElement("a");
             titleLink.setAttribute("href", 'blog/' + blogData.title.trim().toLowerCase().replace(/[&,\s]+/g, '-'));
             titleLink.textContent = blogData.title;
@@ -321,7 +322,7 @@ function createBlogElements(loadedData) {
 
             // Create small tag for author and date
             const smallTag = document.createElement("small");
-            smallTag.className = "mt-1 d-block";
+            smallTag.className = "mt-1 d-block text-center";
             smallTag.textContent = blogData.createdBy + ", " + new Date(blogData.createdDate).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
             frontBlog2Div.appendChild(smallTag);
 
