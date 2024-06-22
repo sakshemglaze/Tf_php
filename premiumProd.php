@@ -7,7 +7,7 @@
     $whatsappUrl=new WhatsappUrl();
 ?>
 
-<div class="bg-gradiant rounded-20 position-relative shadow-sm mb-4">
+    <div class="bg-gradiant rounded-20 position-relative shadow-sm mb-4">
         <div class="premium_listing">
             <img src="<?php echo BASE_URL; ?>assets/images/verifiedw2.png" alt="verified_image" width="80" height="30" />
             <img src="<?php echo BASE_URL; ?>assets/images/Premium_listing.png" alt="Premium_listing" width="80" height="30" style="margin-left: 90px;" />
@@ -76,44 +76,42 @@
                                     <?php endif; ?>
                                 </div>
                                 <div class="text-white mt-3">
-                                <?php if(count($reletedSubCategoryS)>0){?>
-    <span class="single-line">
-        <b>Other Categories: </b>
-        <?php
-             print_r( $reletedSubCategoryS[0]);                          
-        ?>
+                                    <?php if(count($reletedSubCategoryS)>0){?>
+                                     <span class="single-line">
+                                     <b>other categories: </b>
+                                     <?php
+                                     print_r( $reletedSubCategoryS[0]);                          
+                                     ?>
 
-        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#<?php echo $modalId1; ?>">
-            <span aria-hidden="true"><i class="bi bi-plus" style="font-size: 20px; "></i></span>
-        </button>
-    </span>
-
-    <!-- Modal -->
-    <div class="modal fade" id="<?php echo $modalId1; ?>" tabindex="-1" aria-labelledby="<?php echo $modalId1; ?>Label" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="<?php echo $modalId1; ?>Label" style="color:black;">Other Categories</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <?php
-                    $formattedString = '';
-                    foreach ($reletedSubCategoryS as $index => $subcategory2) {
-                        $url = $urlService->getCategoryUrl($subcategory2);
-                        if ($index == 0) {
-                            $formattedString .= '<a href="' . $url . '">' . $subcategory2 . '</a>';
-                        } else {
-                            $formattedString .= ' <a  href="' . $url . '"> |' . $subcategory2 . '</a>';
-                        }
-                    }
-                    echo "<div style='margin-top: 5px;'>" . $formattedString . "</div>";
-                    ?>
-                </div>
-            </div>
-        </div>
-    </div>
-    <?php }?>
+                                     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#<?php echo $modalId1; ?>">
+                                        <span aria-hidden="true"><i class="bi bi-plus" style="font-size: 28px; "></i></span>
+                                    </button>
+                                    </span>
+                                    <div class="modal fade" id="<?php echo $modalId1; ?>" tabindex="-1" aria-labelledby="<?php echo $modalId1; ?>Label" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="<?php echo $modalId1; ?>Label" style="color:black;">Other Categories</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <?php
+                                                    $formattedString = '';
+                                                    foreach ($reletedSubCategoryS as $index => $subcategory2) {
+                                                    $url = $urlService->getCategoryUrl($subcategory2);
+                                                    if ($index == 0) {
+                                                    $formattedString .= '<a href="' . $url . '">' . $subcategory2 . '</a>';
+                                                    } else {
+                                                    $formattedString .= ' <a  href="' . $url . '"> |' . $subcategory2 . '</a>';
+                                                    }
+                                                    }
+                                                    echo "<h5 style='margin-top: 20px;'>" . $formattedString . "</h5>";
+                                                    ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <?php }?>
                                 </div>
                                 <div class="text-white mt-3">
                                     <?php if (!empty($premiumprod['seller']['Brands'])) : ?>
@@ -148,65 +146,67 @@
                         </h3 <?php endif;?>>
                         <div class="row gx-3 mt-1 gy-4">
                             <?php if(isset($premiumprod['seller'])):?>
-    <div class="col-6">
-        <div class="">
-            <div class="card-body pt-0 text-center">
-            <img src="<?php echo BASE_URL?>image.php?image=<?php echo $premiumprod['seller']['logo']['id']?>" alt="<?php echo $premiumprod['seller']['sellerCompanyName'] ?>" class="img-fluid rounded-10" style="width:160px;" >
-                <?php
-                //$id = !empty($premiumprod['seller->logo) ? $premiumprod['seller->logo->id : null;
-                //$prodName = !empty($premiumprod['seller->sellerCompanyName) ? $premiumprod['seller->sellerCompanyName: $premiumprod['productName;
-               //$class='img-fluid rounded-10';
-               ?>
-            </div>
-        </div>
-    </div>
-    <div class="col-6" style="vertical-align: middle;">
-        <div class="grid2" style="line-height:30px">
-            <img src="<?php echo BASE_URL?>assets/images/location-white.png" alt="location" width="15" height="17" />
-            <a href="#" target="_blank">
-                <?php if (!empty($premiumprod['seller']['mainMarkets']) && count($premiumprod['seller']['mainMarkets']) > 0 && (!empty($premiumprod['seller']['mainMarkets'][0]) || $premiumprod['seller']['mainMarkets'][0] !== null)) : ?>
-                    <span class="service-area text-white"><?php echo implode(', ', $premiumprod['seller']['mainMarkets']) ?></span>
-                <?php elseif ((!empty($premiumprod['seller']['mainMarkets']) && count($premiumprod['seller']['mainMarkets']) == 0) || (isset($premiumprod['seller']['mainMarkets'][0]) && ($premiumprod['seller']['mainMarkets'][0] == null || $premiumprod['seller']['mainMarkets'][0] == '')) && ($premiumprod['seller']['country'] || $premiumprod['seller']['state'] || $premiumprod['seller']['city'])) : ?>
-                    <span class="service-area"><?php echo $premiumprod['seller']['city'] ? $premiumprod['seller']['city']. ", " : "" ?><?php echo $premiumprod['seller']['state'] ? $premiumprod['seller']['state']. ", " : "" ?><?php echo $premiumprod['seller']['country'] ? $premiumprod['seller']['country'] : "" ?></span>
-                <?php endif; ?>
-            </a>
-            <img src="<?php echo BASE_URL?>assets/images/crown-white.png" width="18" height="12" alt="Premium Seller" />
-            Premium Seller
-            <img src="<?php echo BASE_URL?>assets/images/phone-white.png" alt="Premium_Phone" width="16" height="16" />
-            <span class="btn-sm text-white" style="text-align: left;" >
+                            <div class="col-6">
+                                <div class="">
+                                    <div class="card-body pt-0 text-center">
+                                        <img src="<?php echo BASE_URL?>image.php?image=<?php echo $premiumprod['seller']['logo']['id']?>" alt="<?php echo $premiumprod['seller']['sellerCompanyName'] ?>" class="img-fluid rounded-10" style="width:160px;" >
+                                        <?php
+                                        //$id = !empty($premiumprod['seller->logo) ? $premiumprod['seller->logo->id : null;
+                                        //$prodName = !empty($premiumprod['seller->sellerCompanyName) ? $premiumprod['seller->sellerCompanyName: $premiumprod['productName;
+                                        //$class='img-fluid rounded-10';
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6" style="vertical-align: middle;">
+                                <div class="grid2" style="line-height:30px">
+                                    <img src="<?php echo BASE_URL?>assets/images/location-white.png" alt="location" width="15" height="17" />
+                                        <a href="#" target="_blank">
+                                            <?php if (!empty($premiumprod['seller']['mainMarkets']) && count($premiumprod['seller']['mainMarkets']) > 0 && (!empty($premiumprod['seller']['mainMarkets'][0]) || $premiumprod['seller']['mainMarkets'][0] !== null)) : ?>
+                                            <span class="service-area text-white"><?php echo implode(', ', $premiumprod['seller']['mainMarkets']) ?>
+                                            </span>
+                                            <?php elseif ((!empty($premiumprod['seller']['mainMarkets']) && count($premiumprod['seller']['mainMarkets']) == 0) || (isset($premiumprod['seller']['mainMarkets'][0]) && ($premiumprod['seller']['mainMarkets'][0] == null || $premiumprod['seller']['mainMarkets'][0] == '')) && ($premiumprod['seller']['country'] || $premiumprod['seller']['state'] || $premiumprod['seller']['city'])) : ?>
+                                            <span class="service-area"><?php echo $premiumprod['seller']['city'] ? $premiumprod['seller']['city']. ", " : "" ?><?php echo $premiumprod['seller']['state'] ? $premiumprod['seller']['state']. ", " : "" ?><?php echo $premiumprod['seller']['country'] ? $premiumprod['seller']['country'] : "" ?>
+                                            </span>
+                                            <?php endif; ?>
+                                        </a>
+                                    <img src="<?php echo BASE_URL?>assets/images/crown-white.png" width="18" height="12" alt="Premium Seller" />
+                                        Premium Seller
+                                    <img src="<?php echo BASE_URL?>assets/images/phone-white.png" alt="Premium_Phone" width="16" height="16" />
+                                        <span class="btn-sm text-white" style="text-align: left;" >
                                         <?php 
-                                            $maskedService->getMaskedNumber($premiumprod['seller']);
-                                            ?> </span>
-        </div>
-    </div>
-
-    <div class="col-sm-6 whatsappbtn ">
-        <a href=" <?php echo $whatsappUrl->getProductToWhatsapp($premiumprod['productName'],$premiumprod['id'],$premiumprod['seller'])?>" target="_blank" class="btn btn-sm w-100">
-            Connect on whatsapp
-        </a>
-    </div>
-    <?php endif;?>
-    <div class="col-sm-6 btn-outline-gradiant">
-        <button onclick="openPopup()" class="btn btn-sm w-100 d-center text-white">
-            <img src="<?php echo BASE_URL?>assets/images/mail-solid.png" alt="Mail" width="17" height="9" /> Send Inquiry
-        </button>
-    </div>
+                                        $maskedService->getMaskedNumber($premiumprod['seller']);
+                                        ?>
+                                        </span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 whatsappbtn ">
+                                <a href=" <?php echo $whatsappUrl->getProductToWhatsapp($premiumprod['productName'],$premiumprod['id'],$premiumprod['seller'])?>" target="_blank" class="btn btn-sm w-100">
+                                Connect on whatsapp
+                                </a>
+                            </div>
+                            <?php endif;?>
+                            <div class="col-sm-6 btn-outline-gradiant">
+                                <button onclick="openPopup()" class="btn btn-sm w-100 d-center text-white">
+                                 <img src="<?php echo BASE_URL?>assets/images/mail-solid.png" alt="Mail" width="17" height="9" /> Send Inquiry
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-                </div>
     <!-- JavaScript code to open the popup card -->
     <script>
         function openPopup() {
             document.getElementById("popup-card").style.display = "block";
         }
     </script>
-  <script>
-  // Function to open the popup card
-  function openPopup() {
-    document.getElementById("popup-card").style.display = "block";
-  }
-</script>
-<script src="<?php echo BASE_URL; ?>assets/js/lazy-load.js"></script>
+    <script>
+    // Function to open the popup card
+    function openPopup() {
+        document.getElementById("popup-card").style.display = "block";
+    }
+    </script>
+    <script src="<?php echo BASE_URL; ?>assets/js/lazy-load.js"></script>
