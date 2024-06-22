@@ -155,7 +155,6 @@
                                         <?php
                                         print_r( $reletedSubCategory[0]);                          
                                         ?>
-
                                     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#<?php echo $modalId; ?>">
                                         <span aria-hidden="true"><i class="bi bi-plus" style="font-size: 18px;"></i></span>
                                     </button>

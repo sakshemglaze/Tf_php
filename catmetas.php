@@ -14,13 +14,13 @@ foreach ($data as $inde1 => $prod) {
                 }
                 $catagoryscemapros[] = [
                     "@type" => "ListItem",
-                    "position" => $inde,
+                    "position" => $inde+1,
                     "item" => [
                       "@type" => "Product",
-                      "url" => 'https://www.tradersfind.com/product/' . str_replace(" ", "-", strtolower($prodData['productName'])) . '/' . urlencode($prodData['id']),
                       "name" => $prodData['productName'],
+                      "url" => 'https://www.tradersfind.com/product/' . str_replace(" ", "-", strtolower($prodData['productName'])) . '/' . urlencode($prodData['id']),
                       "image" => $newsto, // Assuming $newsto contains the URL to the image
-                      "description" => isset($prodData['productDescription']) ? $prodData['productDescription'] : "",
+                      //"description" => isset($prodData['productDescription']) ? $prodData['productDescription'] : "",
                       "brand" => [
                           "@type" => "Brand",
                           "name" => isset($prodData['brand']) ? $prodData['brand'] : ""
@@ -31,14 +31,21 @@ foreach ($data as $inde1 => $prod) {
         }
        // print_r($catagoryscemapros);
         // Encode the current category schema products into JSON without escaping slashes
-        $jsonOutput12[] =json_decode(json_encode($catagoryscemapros));
-        
+        $jsonOutput12 =json_decode(json_encode($catagoryscemapros));
     }
+    break;
 }
 
 $jsonOutput12 = json_encode($jsonOutput12, JSON_UNESCAPED_SLASHES);
 //print_r($jsonOutput12);
+//print_r($location1);
 // Construct the schema array
+if($location1 == 'UAE' || $location1 == '') { 
+    $categoryUrl = preg_replace('/[\s&]+/', '-', $subcatName) ;
+} else { 
+    $categoryUrl = preg_replace('/[\s&]+/', '-', $subcatName) . '/' . preg_replace('/[\s&]+/', '-', $location1) ;
+    }
+//print_r($categoryUrl);
 $schema = [
     "@context" => "https://schema.org",
     "@graph" => [
@@ -112,7 +119,7 @@ $schema = [
                     "@type" => "ListItem",
                     "position" => 4,
                     "name" => $subcatName,
-                    "item" => "https://www.tradersfind.com/category/" . preg_replace('/[\s&]+/', '-', $subcatName)
+                    "item" => "https://www.tradersfind.com/category/" . $categoryUrl 
                 ]
             ]
         ],

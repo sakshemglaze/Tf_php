@@ -198,10 +198,10 @@ else{
 include_once 'catmetas.php';
   //print_r("else");
           }
-        //  if ($length == 0) {
-        //         header("Location: /not-found.php");
-        //         exit();
-        //       }
+          if ($totallength == 0) {
+                 header("Location: /not-found");
+                 exit();
+               }
        // print_r($location);
 ?>
 <!DOCTYPE html >
@@ -271,7 +271,6 @@ include_once 'catmetas.php';
          <?php } else { ?>
         <h1 class="me-2 fwbold text-capitalize mb-0"><?php echo str_replace("-", " ", basename($parts[2])); ?>
           <?php } ?>
-
           <?php if ($location == null) {
             echo '<span> in UAE</span>';
           } else {

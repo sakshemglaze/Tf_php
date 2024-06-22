@@ -22,7 +22,7 @@ class WhatsappUrl {
         if (!empty($sellermobile)) {
             $whatsappNo = $sellermobile;
         }
-        $sproductUrl="https://www.tradersfind.com/product/". str_replace(' ', '-',strtolower($prodName)).'/'.$id;
+        $sproductUrl=" https://www.tradersfind.com/product/". str_replace(' ', '-',strtolower($prodName)).'/'.$id;
         // Assuming this function exists
 
         if (!empty($prodName)) {
@@ -53,7 +53,7 @@ class WhatsappUrl {
         if (!empty($sellermobile)) {
             $whatsappNo = $sellermobile;
         }
-       $sproductUrl="https://www.tradersfind.com/product/". str_replace(' ', '-',strtolower($prodName)).'/'.$id;
+       $sproductUrl=" https://www.tradersfind.com/product/". str_replace(' ', '-',strtolower($prodName)).'/'.$id;
         if (!empty($prodName)) {
             return "https://api.whatsapp.com/send?phone=" . $whatsappNo . "&text=I am interested in " . 
                 urlencode($prodName) . $sproductUrl ;// . $appendUrl;

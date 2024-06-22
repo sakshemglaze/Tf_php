@@ -101,8 +101,8 @@ $schemaseller=[
       "@type"=> "LocalBusiness",
       "name"=> ''.$data1[0]->sellerCompanyName.'',
       "url"=> ''.'https://www.tradersfind.com/seller/'.$urlService->getSellerUrl($data1[0]->sellerCompanyName,'').'',
-      "image"=>''.'https://doc.tradersfind.com/images/'.$data1[0]->logo->id.'webp'.'',
-      'description' => isset($data1[0]->metaDescription) && $data1[0]->metaDescription != '' ? $data1[0]->metaDescription : $data1[0]->sellerCompanyName.' is a leading company of '.$productNames.' located in '.$data1[0]->city.','.$data1[0]->sellerState.','.$data1[0]->country,
+      "image"=>''.'https://doc.tradersfind.com/images/'.$data1[0]->logo->id.'.webp'.'',
+      'description' => isset($data1[0]->metaDescription) && $data1[0]->metaDescription != '' ? $data1[0]->metaDescription : $data1[0]->sellerCompanyName.' is a leading company of '.$productName.' located in '.$data1[0]->city.','.$data1[0]->sellerState.','.$data1[0]->country,
       "telephone"=> isset($data1[0]->sellerCompanyNumber)?$data1[0]->sellerCompanyNumber:"",
       "address"=> [
         "@type"=> "PostalAddress",
@@ -557,10 +557,12 @@ fetch(url, {
               <div class="row">
                 <div class="fw mix-container home-gallery">
 
-                <?php foreach ( $aproodproduct1->products as $index => $product): ?>
+                <?php foreach ( $aproodproduct1->products as $index => $product): 
+                  //print_r($product->isFeatured);
+                  ?>
                   
     <div class="mix valves">
-       <?php if(isset($product->isFeatured) ):?>
+       <?php if(isset($product->isFeatured) && $product->isFeatured == "1" ):?>
                     <img class="inside" src="<?php echo BASE_URL; ?>assets/images/Star_listing.png" alt="verified_image" width="80" height="30" />       
                     <?php endif;?>
                     <?php if(isset($product->sponsoredKeywords) && $product->sponsoredKeywords[0]!=''):?>
