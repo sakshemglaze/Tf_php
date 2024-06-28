@@ -198,10 +198,10 @@ else{
 include_once 'catmetas.php';
   //print_r("else");
           }
-          if ($totallength == 0) {
-                 header("Location: /not-found");
-                 exit();
-               }
+        //  if ($length == 0) {
+        //         header("Location: /not-found.php");
+        //         exit();
+        //       }
        // print_r($location);
 ?>
 <!DOCTYPE html >
@@ -271,6 +271,7 @@ include_once 'catmetas.php';
          <?php } else { ?>
         <h1 class="me-2 fwbold text-capitalize mb-0"><?php echo str_replace("-", " ", basename($parts[2])); ?>
           <?php } ?>
+
           <?php if ($location == null) {
             echo '<span> in UAE</span>';
           } else {
@@ -885,7 +886,7 @@ include_once 'catmetas.php';
     
     
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "/test.php", true);
+        xhr.open("POST", "/loadMoreProducts.php", true);
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.onreadystatechange = function() {
           if (xhr.readyState === XMLHttpRequest.DONE) {

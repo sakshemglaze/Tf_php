@@ -139,7 +139,7 @@
                         <h3 class="text-uppercase fwbold fs-6 mt-0" <?php if(isset($premiumprod['seller'])):?>>
                             <u>
                                 <a href="/<?php echo $urlService->getSellerUrl($premiumprod['seller']['sellerCompanyName'], $premiumprod['seller']['id']) ?>" target="_blank" class="text-white fs-5" title="<?php echo $premiumprod['seller']['sellerCompanyName'] ?>">
-                                    <?php echo strlen($premiumprod['seller']['sellerCompanyName']) > 40 ? substr($premiumprod['seller']['sellerCompanyName'], 0, $SAWidth) : $premiumprod['seller']['sellerCompanyName'] ?>
+                                    <?php echo strlen($premiumprod['seller']['sellerCompanyName']) > 40 ? substr($premiumprod['seller']['sellerCompanyName'], 0, 40) : $premiumprod['seller']['sellerCompanyName'] ?>
                                     <?php if (strlen($premiumprod['seller']['sellerCompanyName']) > 40) : ?>...<?php endif; ?>
                                 </a>
                             </u>
