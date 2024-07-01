@@ -358,8 +358,8 @@ include_once 'catmetas.php';
             </button>';
   
   
-        }else if(isset($subcategory->locations)&& $location!=''){
-   
+        }else if(isset($subcategory->locations)&& $location!='' &&$subcategory->locations[0]->location !=null ){  
+    //print_r($subcategory->locations[0]->location);
           foreach($subcategory->locations as $Sdlocation){
    
             if(strtolower(isset($Sdlocation->location)?$Sdlocation->location:'')==strtolower($location1) && isset($Sdlocation->shortDescription) && $Sdlocation->shortDescription!='' ){
