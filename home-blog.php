@@ -13,7 +13,7 @@ $urlService = new UrlService();
  
   foreach(array_slice($jblog,0,3) as $blog){
   
-    $blogimg='https://d1o1xqr29l8ebx.cloudfront.net/images/'.$blog->image->id.'.webp';
+    $blogimg=IMAGE_URL.$blog->image->id.'.webp';
   ?>
       <div class="col-lg-4 border_img" >
         <a href="<?php echo BASE_URL.$urlService->getBlogUrl($blog->title);?>">

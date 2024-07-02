@@ -79,7 +79,7 @@ $schema = [
             "about" => [
                 "@id" => "https://www.tradersfind.com/#organization"
             ],
-            "description" => "Interconnect Marketing Management L.L.C handles Tradersfind.com, which is the UAE largest B2B Portal for businesses, products and services. A smart and efficient way to Search, Find and Connect with Businesses in UAE."
+            "description" => "Interconnect Marketing Management L.L.C handles Tradersfind.com, which is the UAE's largest B2B Portal for businesses, products, and services. A smart and efficient way to Search, Find and Connect with Businesses in UAE."
         ],
         [
             "@type" => "BreadcrumbList",
@@ -94,42 +94,42 @@ $schema = [
                     "@type" => "ListItem",
                     "position" => 2,
                     "name" => $industry[0]->industryName,
-                    "item" => "https://www.tradersfind.com/industry/" . preg_replace('/[\s&]+/', '-', strtolower($industry[0]->industryName))
+                    "item" => "https://www.tradersfind.com/industry/" . preg_replace('/[&,\s]+/', '-', strtolower($industry[0]->industryName))
                 ],
                 [
                     "@type" => "ListItem",
                     "position" => 3,
                     "name" => $category[0]->categoryName,
-                    "item" => "https://www.tradersfind.com/group-category/" . preg_replace('/[\s&]+/', '-', strtolower($category[0]->categoryName))
+                    "item" => "https://www.tradersfind.com/group-category/" . preg_replace('/[&,\s]+/', '-', strtolower($category[0]->categoryName))
                 ],
                 [
                     "@type" => "ListItem",
                     "position" => 4,
-                    "name" => str_replace('-',' ',ucwords($subcatName)),
-                    "item" => "https://www.tradersfind.com/category/" . preg_replace('/[\s&]+/', '-', $subcatName)
-                ]
-                , [
+                    "name" => str_replace('-', ' ', ucwords($subcatName)),
+                    "item" => "https://www.tradersfind.com/category/" . preg_replace('/[&,\s]+/', '-', $subcatName)
+                ],
+                ... (ucwords($location1) !== 'UAE' ? [[
                     "@type" => "ListItem",
                     "position" => 5,
                     "name" => ucwords($location1),
-                    "item" => "https://www.tradersfind.com/category/" . preg_replace('/[\s&]+/', '-', $subcatName).'/'.preg_replace('/[\s&]+/', '-',$location1)
-                ]
+                    "item" => "https://www.tradersfind.com/category/" . preg_replace('/[&,\s]+/', '-', $subcatName) . '/' . preg_replace('/[\s&]+/', '-', $location1)
+                ]] : [])
             ]
         ],
-        [
-            "@type"=> "CollectionPage",
-            "@id"=> "https://www.tradersfind.com/category/".  preg_replace('/[\s&]+/', '-',strtolower($subcatName)).'#collectionpage',
-            "name"=>  str_replace('-',' ',ucwords($subcatName)),
-            "description"=>  $subcategory->subCategoryDescription,
-            "url"=> "https://www.tradersfind.com/category/".  preg_replace('/[\s&]+/', '-',strtolower($subcatName))
-        ],
-      
+       [
+            "@type" => "CollectionPage",
+            "@id" => "https://www.tradersfind.com/category/" . preg_replace('/[&,\s]+/', '-', strtolower($subcatName)) . '#collectionpage',
+            "name" => str_replace('-', ' ', ucwords($subcatName)),
+            "description" => $subcategory->subCategoryDescription,
+            "url" => "https://www.tradersfind.com/category/" . preg_replace('/[&,\s]+/', '-', strtolower($subcatName)) . ($location1 == "UAE" ? '' : '/' . preg_replace('/[&,\s]+/', '-', $location1))
+       ],
         [
             "@type" => "ItemList",
-            "itemListElement" => json_decode($jsonOutput12) // Embed directly without encoding
+            "itemListElement" => json_decode($jsonOutput12, true) // Decode JSON string to an array
         ]
     ]
 ];
+
 
 //print_r($schema);
 // Output the schema as a JSON string
