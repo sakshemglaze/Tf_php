@@ -1,6 +1,6 @@
 <?php
 $jsonOutput12 = [];
-
+//print_r($subcategory);
 foreach ($data as $inde1 => $prod) {
     if (is_array($prod)) {
         $catagoryscemapros = [];
@@ -15,37 +15,24 @@ foreach ($data as $inde1 => $prod) {
                 $catagoryscemapros[] = [
                     "@type" => "ListItem",
                     "position" => $inde+1,
-                    "item" => [
-                      "@type" => "Product",
-                      "name" => $prodData['productName'],
-                      "url" => 'https://www.tradersfind.com/product/' . str_replace(" ", "-", strtolower($prodData['productName'])) . '/' . urlencode($prodData['id']),
-                      "image" => $newsto, // Assuming $newsto contains the URL to the image
-                      //"description" => isset($prodData['productDescription']) ? $prodData['productDescription'] : "",
-                      "brand" => [
-                          "@type" => "Brand",
-                          "name" => isset($prodData['brand']) ? $prodData['brand'] : ""
-                      ]
-                ]
+                    "name" => $prodData['productName'],
+                    "url" => 'https://www.tradersfind.com/product/' . preg_replace('/[\s&]+/', "-", strtolower($prodData['productName'])) . '/' . urlencode($prodData['id']),
+                    "image"=> $newsto
                 ];
             }
+
         }
+
        // print_r($catagoryscemapros);
         // Encode the current category schema products into JSON without escaping slashes
         $jsonOutput12 =json_decode(json_encode($catagoryscemapros));
+        break;
     }
-    break;
 }
 
 $jsonOutput12 = json_encode($jsonOutput12, JSON_UNESCAPED_SLASHES);
 //print_r($jsonOutput12);
-//print_r($location1);
 // Construct the schema array
-if($location1 == 'UAE' || $location1 == '') { 
-    $categoryUrl = preg_replace('/[\s&]+/', '-', $subcatName) ;
-} else { 
-    $categoryUrl = preg_replace('/[\s&]+/', '-', $subcatName) . '/' . preg_replace('/[\s&]+/', '-', $location1) ;
-    }
-//print_r($categoryUrl);
 $schema = [
     "@context" => "https://schema.org",
     "@graph" => [
@@ -118,11 +105,25 @@ $schema = [
                 [
                     "@type" => "ListItem",
                     "position" => 4,
-                    "name" => $subcatName,
-                    "item" => "https://www.tradersfind.com/category/" . $categoryUrl 
+                    "name" => str_replace('-',' ',ucwords($subcatName)),
+                    "item" => "https://www.tradersfind.com/category/" . preg_replace('/[\s&]+/', '-', $subcatName)
+                ]
+                , [
+                    "@type" => "ListItem",
+                    "position" => 5,
+                    "name" => ucwords($location1),
+                    "item" => "https://www.tradersfind.com/category/" . preg_replace('/[\s&]+/', '-', $subcatName).'/'.preg_replace('/[\s&]+/', '-',$location1)
                 ]
             ]
         ],
+        [
+            "@type"=> "CollectionPage",
+            "@id"=> "https://www.tradersfind.com/category/".  preg_replace('/[\s&]+/', '-',strtolower($subcatName)).'#collectionpage',
+            "name"=>  str_replace('-',' ',ucwords($subcatName)),
+            "description"=>  $subcategory->subCategoryDescription,
+            "url"=> "https://www.tradersfind.com/category/".  preg_replace('/[\s&]+/', '-',strtolower($subcatName))
+        ],
+      
         [
             "@type" => "ItemList",
             "itemListElement" => json_decode($jsonOutput12) // Embed directly without encoding
@@ -130,6 +131,7 @@ $schema = [
     ]
 ];
 
+//print_r($schema);
 // Output the schema as a JSON string
 //echo json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
 
@@ -157,19 +159,21 @@ if($location1==null || $location1=='UAE' || !isset($subcategory->locations)){
     }else{
     	$loc1 = '0';
       foreach($subcategory->locations as $Mlocation){
-        if(strtolower($Mlocation->location)==strtolower($location1)){
-          $SeoParams=seoSeter($Mlocation,$location1,$subcategory);
+        
+        if($Mlocation->location!=null && strtolower($Mlocation->location)==strtolower($location1)){
+          $SeoParams=seoSeter($Mlocation,$location1,$subcategory,$schema);
 	$loc1 = '1';
           break;
         }
       } 
 	if ($loc1 == '0') {
-	 $SeoParams=seoSeter($location1,$location1,$subcategory);
+	 $SeoParams=seoSeter($location1,$location1,$subcategory,$schema);
 	}
         }
-
-        function seoSeter($Flocation,$location1,$subcategory){
-        return  $SeoParams = [
+  
+function seoSeter($Flocation,$location1,$subcategory,$schema){
+         
+  return  $SeoParams = [
             'title' => isset($Flocation->metatitle) && $Flocation->metatitle != '' ?$Flocation->metatitle : $subcategory->subCategoryName . ' at best price in ' . $location1. ' on Tradersfind.com',
             'metaTitle' => isset($Flocation->metatitle) && $Flocation->metatitle != '' ? $Flocation->metatitle : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com',
             'metaDescription' => isset($Flocation->description) && $Flocation->description !='' ? $Flocation->description : 'Searching for ' . $subcategory->subCategoryName . ' at best price in ' . $location1 . '? Choose from a wide range of companies provide' . $subcategory->subCategoryName . ' online on Tradersfind.com',
@@ -183,8 +187,10 @@ if($location1==null || $location1=='UAE' || !isset($subcategory->locations)){
             'twitterImage' => isset($subcategory->twitterImage) ? $subcategory->twitterImage : null,
             'twitterSite' => isset($subcategory->twitterSite) ? $subcategory->twitterSite : '',
             'twitterCard' => isset($subcategory->twitterCard) ? $subcategory->twitterCard : null,
-            'schemaDescription' => isset($subcategory->schemaDescription) ? $subcategory->schemaDescription : $schema,
+            'schemaDescription' => isset($subcategory->schemaDescription) ? $subcategory->schemaDescription : json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT),
+
             ];
+           
         }
        
           ?> 

@@ -62,7 +62,7 @@ include_once "header-sub.php";
 <section class="container-fluid ">
   <?php include_once "banner.php"; ?>
 </section>
-<section class="p-3 pt-0 pb-0">
+<section class="p-3">
   <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="/">TradersFind </a></li>
@@ -77,7 +77,9 @@ include_once "header-sub.php";
         <div class="col-ld-12 text-center">
             <h1 class="border-center fs-1"><?php echo $data1[0]->industryName; ?></h1>
         </div>
-    
+        <div class="col-lg-12">
+            <br>
+        </div>
 
         <?php 
             $filteredCategories = array_filter($data1[0]->productsCategories, function($record) {
@@ -116,5 +118,5 @@ include_once "inquiry.php";
 
 include_once "footer.php";
 ?>
-                                    </body>
-                                    </html>
+</body>
+</html>

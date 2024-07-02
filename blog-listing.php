@@ -120,7 +120,7 @@ include_once "header-sub.php";
             $blogList = onChangeFilter();
             
             ?>
-            <div class="row">
+            <div class="row" id="blogs">
                 
                 <?php foreach ($blogList as $blog){
                      // $desc = custom_mb_strimwidth($blog->description, 0, 250, '...');
@@ -171,21 +171,38 @@ include_once "header-sub.php";
                     <?php
                     foreach($blogcat as $bcat){
                     ?>
-                    <li><a href='#'><?php  echo $bcat->categoryName?></li></a>
+                    <li><button class="btn btn-primary-gradiant  btn-lg" onclick="blogfilter('<?php echo $bcat->id?>')"><?php  echo $bcat->categoryName?></button></li>
                     <?php
                     }
                     ?>
                 </ul>
             </div>
         </div>
-    
     </div>
-  
 </section>
 <script src="services/storegeService.js"></script>
 
 
 <script>
+
+function blogfilter( catna){
+    console.log("filter works "+catna)
+    $.ajax({
+                url: 'blogfilter.php',
+                type: 'GET',
+                data: { category_name: catna },
+                success: function(response) {
+                    console.log(response);
+                    $('#blogs').html(response);
+                },
+                error: function(xhr, status, error) {
+                console.error("AJAX Error: " + status + error); // Debugging
+               }
+            });
+           
+        }
+
+
 
 let urlService ="<?php new UrlService() ?>"
 //let loadedData=[];
