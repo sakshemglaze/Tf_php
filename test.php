@@ -104,13 +104,13 @@ foreach ($phpArray as $inde1 => $prod) {
                                     <div class="fs-8 ">
                                         <ul role="list" class="list_box">
                                             <?php if (!empty($prodData->productDescription)) { ?>
-                                                  <?php foreach (array_slice(json_decode($prodData->specifications, true), 0, 4) as $spec) { ?>
+                                                  <?php foreach (array_slice(json_decode($prodData->specifications, true), 0, 2) as $spec) { ?>
                                                       <li role="listitem" tabindex="0" class="single-line small">
                                                         <span><b><?php echo $spec['SpecificationName']; ?> :</b> <?php echo $spec['SpecValue']; ?></span>
                                                       </li>
                                                   <?php } ?>
                                             <?php } else { ?>
-                                                  <?php foreach (array_slice(json_decode($prodData->specifications, true), 0, 4) as $spec) { ?>
+                                                  <?php foreach (array_slice(json_decode($prodData->specifications, true), 0, 2) as $spec) { ?>
                                                      <li role="listitem" tabindex="0" class="single-line small">
                                                        <span><b><?php echo $spec['SpecificationName']; ?> :</b> <?php echo $spec['SpecValue']; ?></span>
                                                     </li>

@@ -180,7 +180,7 @@
                                                 $formattedString .= ' | <a href="' . $url . '">' . $subcategory1 . '</a>';
                                                 }
                                                 }
-                                                echo "<h5 style='margin-top: 20px;'>" . $formattedString . "</h5>";
+                                                echo "<h5 style='margin-top: 5px;'>" . $formattedString . "</h5>";
                                                 ?>
                                             </div>
                                         </div>
