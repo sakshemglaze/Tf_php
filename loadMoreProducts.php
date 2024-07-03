@@ -37,18 +37,17 @@ foreach ($phpArray as $inde1 => $prod) {
                            $reletedSubCategory = [];
                            $arrayOfRelsubcat = [];
                            $arrayRprod = json_decode($getreltedprod);
-                           
-                           foreach ($arrayRprod as $index => $relProd) {
-                               //print_r(gettype($relProd));
-                               if (is_array($relProd) && count($relProd) != 0) {
-                                   foreach ($relProd as $Sprod) {
-                                       $arrayOfRelsubcat[] = $Sprod->productSubcategoryName;
-                                    
-                                   }
-                               }
+                           if($arrayRprod!=null){
+                            foreach ($arrayRprod as $index => $relProd) {
+                                //print_r(gettype($relProd));
+                                if (is_array($relProd) && count($relProd) != 0) {
+                                    foreach ($relProd as $Sprod) {
+                                        $arrayOfRelsubcat[] = $Sprod->productSubcategoryName;
+                                     
+                                    }
+                                }
+                            }
                            }
-                           
-                           
                            $reletedSubCategory = array_unique($arrayOfRelsubcat);
                            $modalId = 'popuppluscardModal2' . $indexr;
                 //print_r($prodData);

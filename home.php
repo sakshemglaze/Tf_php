@@ -1,55 +1,4 @@
 <?php include_once 'config.php'; 
- $schema = '{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Organization",
-      "@id": "https://www.tradersfind.com/#organization",
-      "name": "Interconnect Marketing Management L.L.C",
-      "url": "https://www.tradersfind.com/seller/interconnect-marketing-management-llc",
-      "sameAs": [
-        "https://www.facebook.com/tradersfindb2bportal/",
-        "https://www.linkedin.com/company/tradersfind/",
-        "https://x.com/tradersfind/"
-      ],
-      "logo": {
-        "@type": "ImageObject",
-        "@id": "https://www.tradersfind.com/#logo",
-        "url": "https://www.tradersfind.com/assets/images/TradersFind.webp",
-        "caption": "Tradersfind.com by Interconnect Marketing Management L.L.C"
-      }
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://www.tradersfind.com/#website",
-      "url": "https://www.tradersfind.com",
-      "name": "Tradersfind.com",
-      "publisher": {
-        "@id": "https://www.tradersfind.com/#organization"
-      },
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://www.tradersfind.com/search/{search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
-    },
-    {
-      "@type": "WebPage",
-      "@id": "https://www.tradersfind.com/#webpage",
-      "url": "https://www.tradersfind.com",
-      "inLanguage": "en-US",
-      "name": "Tradersfind.com by Interconnect Marketing Management L.L.C",
-      "isPartOf": {
-        "@id": "https://www.tradersfind.com/#website"
-      },
-      "about": {
-        "@id": "https://www.tradersfind.com/#organization"
-      },
-      "description": "Interconnect Marketing Management L.L.C handles Tradersfind.com, which is the UAE largest B2B Portal for businesses, products and services. A smart and efficient way to Search, Find and Connect with Businesses in UAE."
-    }
-  ]
-}';
-
   $SeoParams = [
     'title' => null,
     'metaTitle' => 'UAEs Largest Online B2B Portal - TradersFind',
@@ -64,7 +13,6 @@
                 'twitterImage' => null,
                 'twitterSite' => null,
                 'twitterCard' => null,
-                'schemaDescription' => $schema,
   ];
 ?>
 
@@ -669,16 +617,16 @@ include_once 'post.php';
     EXPLORE PREMIUM SELLERS
   </h3>
   <div class="owl-carousel carousel-main4">
-    <div class="p-2">
+    <div class="p-2 col-md-3">
           <span class=""><img src="<?php echo BASE_URL; ?>assets/images/brands/101.png" width="302px" height="159"  alt="Seller"></span>
         </div>
-    <div class="p-2">
+    <div class="p-2 col-md-3">
           <span class=""><img src="<?php echo BASE_URL; ?>assets/images/brands/102.png" width="302px" height="159"alt="Seller"></span>
         </div>
-    <div class="p-2">
+    <div class="p-2 col-md-3">
           <span class=""><img src="<?php echo BASE_URL; ?>assets/images/brands/103.png" width="302px" height="159"  alt="Seller"></span>
         </div>
-  <div class="p-2">
+  <div class="p-2 col-md-3">
           <span class=""><img src="<?php echo BASE_URL; ?>assets/images/brands/104.png" width="302" height="159"  alt="Seller"></span>
         </div>
 </div>
