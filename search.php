@@ -286,9 +286,22 @@ include_once 'catmetas.php';
 
           if(isset($subcategory->locations) && $location !=''){
             foreach($subcategory->locations as $Sdlocation){
-              if(strtolower($Sdlocation->location)==strtolower($location1) && isset($Sdlocation->shortDescription) && $Sdlocation->shortDescription !=''){
+              if(strtolower(isset($Sdlocation->location))==strtolower($location1) && isset($Sdlocation->shortDescription) && $Sdlocation->shortDescription !=''){
                 $shortDescription=$Sdlocation->shortDescription;
-              }else if(strtolower($Sdlocation->location)==strtolower($location1)){
+              }else if(strtolower(isset($Sdlocation->location))==strtolower($location1)){
+                $shortDescription = "<p>
+                Find the best {$subcategory->subCategoryName} in $location1 at competitive prices. Discover a wide range of
+                {$subcategory->subCategoryName} from top companies, manufacturers, dealers, and distributors across $location1.
+                Take advantage of exclusive bulk ordering discounts and connect with sellers directly to secure the best
+                deals. Whether you're looking for any other {$subcategory->subCategoryName} 
+                product in $location1, TradersFind makes it easy to find the perfect match for your business needs. 
+      
+                Contact us today, and we'll connect you with the leading {$subcategory->subCategoryName} provider in $location1. Simplify your
+                sourcing and get the best prices on high-quality {$subcategory->subCategoryName} products in $location1. TradersFind offers 
+                you a variety of {$subcategory->subCategoryName} options from verified companies that will fulfill your requirements at most 
+                competitive prices.</p>";
+              }
+              else{
                 $shortDescription = "<p>
                 Find the best {$subcategory->subCategoryName} in $location1 at competitive prices. Discover a wide range of
                 {$subcategory->subCategoryName} from top companies, manufacturers, dealers, and distributors across $location1.
@@ -303,7 +316,7 @@ include_once 'catmetas.php';
               }
             }
           }
-          elseif(isset($subcategory->shortDescription) && $location==''){
+          elseif(isset($subcategory->shortDescription) && $location=='' && $subcategory->shortDescription !=''){
     
             $shortDescription = $subcategory->shortDescription; 
     
@@ -342,7 +355,7 @@ include_once 'catmetas.php';
         </script>
       <span id='viewmorebutten'>
         <?php 
-        if (isset($category )&&isset($subcategory->shortDescription) && $location === '') {
+        if (isset($category )&&isset($subcategory->shortDescription) && $location === '' && $subcategory->shortDescription!='') {
           echo '<div class="two-line-containers">';
           //$shortenedDescription = substr($shortDescription, 0, 400);
             if (strlen($shortDescription) >= 400) {
