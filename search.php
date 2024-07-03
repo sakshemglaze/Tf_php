@@ -359,7 +359,7 @@ include_once 'catmetas.php';
   
   
         }else if(isset($subcategory->locations)&& $location!='' &&$subcategory->locations[0]->location !=null ){  
-    //print_r($subcategory->locations[0]->location);
+            //print_r($subcategory->locations[0]->location);
           foreach($subcategory->locations as $Sdlocation){
    
             if(strtolower(isset($Sdlocation->location)?$Sdlocation->location:'')==strtolower($location1) && isset($Sdlocation->shortDescription) && $Sdlocation->shortDescription!='' ){
@@ -595,7 +595,7 @@ include_once 'catmetas.php';
                   $reletedSubCategory = [];
                   $arrayOfRelsubcat = [];
                   $arrayRprod = json_decode($getreltedprod);
-                           
+                  if($arrayRprod!=null){      
                     foreach ($arrayRprod as $index => $relProd) {
                       //print_r(gettype($relProd));
                       if (is_array($relProd) && count($relProd) != 0) {
@@ -605,6 +605,7 @@ include_once 'catmetas.php';
                         }
                       }
                     }
+                  }
                       $reletedSubCategory = array_unique($arrayOfRelsubcat);
                       $modalId = 'popuppluscardModal' . $indexr;
                       ?>

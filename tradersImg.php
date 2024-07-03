@@ -7,7 +7,7 @@ $width = '';
 if ($id) {
     if (is_null($imageContent) || !isset($imageContent)) {
     
-      $imageContenth = 'https://d1o1xqr29l8ebx.cloudfront.net/images/'.$id .".webp";
+      $imageContenth = IMAGE_URL.$id .".webp";
     
     } else {
 
@@ -20,7 +20,7 @@ if ($id) {
         } else if ($tradImage->imageContent && !$tradImage->imageContentContentType) {
           $imageContenth = "data:image/webp;base64" . "," . $tradImage->imageContent;
         } else {
-          $imageContenth ='https://d1o1xqr29l8ebx.cloudfront.net/images/'.$id .".webp";
+          $imageContenth =IMAGE_URL.$id .".webp";
         }
       }
       
