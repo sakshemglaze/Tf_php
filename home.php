@@ -121,7 +121,7 @@ include "home-search.php"
     
     foreach($fin as $index=> $mbanner){
       
-      $midbanUrl='https://d1o1xqr29l8ebx.cloudfront.net/images/'.$mbanner->image->id.'.webp';
+      $midbanUrl=IMAGE_URL.$mbanner->image->id.'.webp';
         ?>
  
     
