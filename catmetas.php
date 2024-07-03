@@ -120,8 +120,8 @@ function getScame($jsonOutput12,$location1,$subcatName , $category,$industry, $m
         ],
        [
             "@type" => "CollectionPage",
-            "@id" => "https://www.tradersfind.com/category/" . preg_replace('/[&,\s]+/', '-', strtolower($subcatName)) . '#collectionpage',
-            "name" => str_replace('-', ' ', ucwords($subcatName)),
+            "@id" => "https://www.tradersfind.com/category/" . preg_replace('/[&,\s]+/', '-', strtolower($subcatName)) .(($location1=="UAE" ? '':'/'.preg_replace('/[&,\s]+/', '-', $location1))). '#collectionpage',
+            "name" => str_replace('-', ' ', ucwords($subcatName)).(($location1=="UAE"?'':' in '.$location1)),
             "description" => $metadescription,
             "url" => "https://www.tradersfind.com/category/" . preg_replace('/[&,\s]+/', '-', strtolower($subcatName)) . ($location1 == "UAE" ? '' : '/' . preg_replace('/[&,\s]+/', '-', $location1))
        ],
