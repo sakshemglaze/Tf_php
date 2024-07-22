@@ -38,24 +38,26 @@ include_once 'config.php';
       public $productSubCategoryFilter;
   }
   $filterDto = new FilterDTO();
-  if( $numParts==4){//will change
+  if( $numParts==4 && basename($parts[1])=='category'){//will change
+     // print_r("1111");
     $location= basename($parts[3]);//will change
   //  $subCategoryId=basename($parts[3]);//will change
     $filterDto->stateFilter=[ucwords(str_replace('-'," ",$location))];
     $name = str_replace("-", " ", $matches[1]);//neverchange
     //$id = str_replace("-", " ", $matches[3]);//will change
+   
   }else if($numParts==3 && $parts[1]=='search'){//will change
     $keyword=basename($parts[2]);//will change
   
   }else if(basename($parts[1])=='search' && $numParts==4 ){//will change
- 
+    //print_r("2222");
     $location= basename($parts[3]);//will change
-    
+    $keyword=basename($parts[2]);
     $filterDto->stateFilter=[ucwords(str_replace('-'," ",$location))];
   }
 else{
   $location='';
-
+  print_r("3333");
 }
   //print_r($location);
   $location1 = str_replace('-',' ',$location);
@@ -286,7 +288,8 @@ include_once 'catmetas.php';
 
           if(isset($subcategory->locations) && $location !=''){
             foreach($subcategory->locations as $Sdlocation){
-              if(strtolower(isset($Sdlocation->location))==strtolower($location1) && isset($Sdlocation->shortDescription) && $Sdlocation->shortDescription !=''){
+                 //print_r(strtolower(isset($Sdlocation->location)));
+              if(isset($Sdlocation->location) && strtolower($Sdlocation->location)==strtolower($location1) && isset($Sdlocation->shortDescription) && $Sdlocation->shortDescription !=''){
                 $shortDescription=$Sdlocation->shortDescription;
               }else if(strtolower(isset($Sdlocation->location))==strtolower($location1)){
                 $shortDescription = "<p>
@@ -300,6 +303,7 @@ include_once 'catmetas.php';
                 sourcing and get the best prices on high-quality {$subcategory->subCategoryName} products in $location1. TradersFind offers 
                 you a variety of {$subcategory->subCategoryName} options from verified companies that will fulfill your requirements at most 
                 competitive prices.</p>";
+               
               }
               else{
                 $shortDescription = "<p>
@@ -314,6 +318,7 @@ include_once 'catmetas.php';
                 you a variety of {$subcategory->subCategoryName} options from verified companies that will fulfill your requirements at most 
                 competitive prices.</p>";
               }
+              
             }
           }
           elseif(isset($subcategory->shortDescription) && $location=='' && $subcategory->shortDescription !=''){
@@ -373,15 +378,16 @@ include_once 'catmetas.php';
   
         }else if(isset($subcategory->locations)&& $location!='' && $subcategory->locations[0]->location !=null && $subcategory->locations[0]->location!='' ){  
             //print_r($subcategory->locations[0]->location);
-          foreach($subcategory->locations as $Sdlocation){
-   
-            if(strtolower(isset($Sdlocation->location)?$Sdlocation->location:'')==strtolower($location1) && isset($Sdlocation->shortDescription) && $Sdlocation->shortDescription!='' ){
-              echo $Sdlocation->shortDescription;
+            
+          foreach($subcategory->locations as $Sdlocation1){
+            
+            if(strtolower(isset($Sdlocation1->location)?$Sdlocation1->location:'')==strtolower($location1) && isset($Sdlocation1->shortDescription) && $Sdlocation1->shortDescription!='' ){
+              echo $Sdlocation1->shortDescription;
         
                 echo '<button style="color:brown; border: none;" onclick="readmoreSdesc()">
                   view more
                 </button>';
-            }else if(isset($subcategory->subCategoryName) && (isset($Sdlocation->location)?$Sdlocation->location:'')==strtolower($location1)) {
+            }else if(isset($subcategory->subCategoryName) && (isset($Sdlocation1->location)?$Sdlocation1->location:'')==strtolower($location1)) {
               echo "<p>
                 Find the best $subcategory->subCategoryName in $location1 at competitive prices. Discover a wide range of
                 $subcategory->subCategoryName from top companies, manufacturers, dealers, and distributors across $location1.
@@ -393,6 +399,18 @@ include_once 'catmetas.php';
                 view more
                 </button>';
                 break;
+            }else{
+              echo "<p>
+                Find the best $subcategory->subCategoryName in $location1 at competitive prices. Discover a wide range of
+                $subcategory->subCategoryName from top companies, manufacturers, dealers, and distributors across $location1.
+                Take advantage of exclusive bulk ordering discounts and connect with sellers directly to secure the best
+                deals. Whether you're looking for any other  $subcategory->subCategoryName 
+                product in $location1, TradersFind makes it easy to find the perfect match for...
+              </p>";
+              echo '<button style="color:brown; border: none;" onclick="readmoreSdesc()">
+                view more
+              </button>';
+              break;
             }
           }
    
@@ -502,10 +520,13 @@ include_once 'catmetas.php';
                 
                   foreach(($data['states']) as $state){
                     if(!isset($category[0])){
+                      if($state!='Other'){
                     echo'<li >';
                       echo '<a href="' . BASE_URL . 'search/' . $keyword . '/' .str_replace(' ','-', $state) . '">' . $state . '</a>';
                     echo' </li>';
+                      }
                     }else{
+                      //print_r("here");
                       $location1 = str_replace("-"," ",$location);
                       if($state!='Other'){
                     echo'<li >';

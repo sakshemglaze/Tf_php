@@ -23,7 +23,7 @@ foreach ($data as $inde1 => $prod) {
 
         }
 
-       // print_r($catagoryscemapros);
+        // print_r($catagoryscemapros);
         // Encode the current category schema products into JSON without escaping slashes
         $jsonOutput12 =json_decode(json_encode($catagoryscemapros));
         break;
@@ -95,8 +95,8 @@ function getScame($jsonOutput12,$location1,$subcatName , $category,$industry, $m
                 [
                     "@type" => "ListItem",
                     "position" => 2,
-                    "name" => $industry[0]->industryName,
-                    "item" => "https://www.tradersfind.com/industry/" . preg_replace('/[&,\s]+/', '-', strtolower($industry[0]->industryName))
+                    "name" => isset($industry[0]->industryName)?$industry[0]->industryName:"",
+                    "item" => "https://www.tradersfind.com/industry/" . preg_replace('/[&,\s]+/', '-', strtolower(isset($industry[0]->industryName)?$industry[0]->industryName:""))
                 ],
                 [
                     "@type" => "ListItem",
@@ -144,7 +144,7 @@ $metadescription='';
 if($location1==null || $location1=='UAE'){
     //print_r("111111");
    $metadescription=isset($subcategory->subCategoryDescription) && $subcategory->subCategoryDescription !='' ? str_replace('uae',$location1,strtolower($subcategory->subCategoryDescription)) : 'Searching for ' . $subcategory->subCategoryName . ' at best price in ' . $location1 . '? Choose from a wide range of companies provide' . $subcategory->subCategoryName . ' online on Tradersfind.com';
-   $schema=getScame($jsonOutput12,$location1,$subcatName , $category,$industry, $metadescription);  
+   $schema=getScame($jsonOutput12,$location1,$subcatName , $category,isset($industry)?$industry:" ", $metadescription);  
    $SeoParams = [
     'title' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('uae',$location1,strtolower($subcategory->metaTitle)) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com',
     'metaTitle' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('uae',$location1,strtolower($subcategory->metaTitle)) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com',
@@ -168,7 +168,7 @@ if($location1==null || $location1=='UAE'){
         if(isset($subcategory->locations)){
             foreach($subcategory->locations as $Mlocation){
         
-                if($Mlocation->location!=null && $Flocation->description!=null && $Flocation->description!='' && strtolower($Mlocation->location)==strtolower($location1)){
+                if($Mlocation->location!=null && $Mlocation->description!=null && $Mlocation->description!='' && strtolower($Mlocation->location)==strtolower($location1)){
                     $metadescription= isset($Mlocation->description) && $Mlocation->description !='' ? $Mlocation->description : 'Searching for ' . $subcategory->subCategoryName . ' at best price in ' . $location1 . '? Choose from a wide range of companies provide' . $subcategory->subCategoryName . ' online on Tradersfind.com';
                     $schema=getScame($jsonOutput12,$location1,$subcatName , $category,$industry, $metadescription);  
                     $SeoParams=seoSeter($Mlocation,$location1,$subcategory,$schema);
