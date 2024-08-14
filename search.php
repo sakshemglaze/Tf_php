@@ -57,7 +57,7 @@ include_once 'config.php';
   }
 else{
   $location='';
-  print_r("3333");
+  //print_r("3333");
 }
   //print_r($location);
   $location1 = str_replace('-',' ',$location);
@@ -285,12 +285,15 @@ include_once 'catmetas.php';
       <div class="sortdescription-card" id="sortdescription-card" style="display:none"> 
   
         <p><?php
-
+          //print_r($location);
           if(isset($subcategory->locations) && $location !=''){
             foreach($subcategory->locations as $Sdlocation){
-                 //print_r(strtolower(isset($Sdlocation->location)));
+            //     print_r(strtolower($Sdlocation->location));
+            //     print_r($location1);
               if(isset($Sdlocation->location) && strtolower($Sdlocation->location)==strtolower($location1) && isset($Sdlocation->shortDescription) && $Sdlocation->shortDescription !=''){
                 $shortDescription=$Sdlocation->shortDescription;
+                //print_r('ok');
+                break;
               }else if(strtolower(isset($Sdlocation->location))==strtolower($location1)){
                 $shortDescription = "<p>
                 Find the best {$subcategory->subCategoryName} in $location1 at competitive prices. Discover a wide range of
@@ -303,7 +306,7 @@ include_once 'catmetas.php';
                 sourcing and get the best prices on high-quality {$subcategory->subCategoryName} products in $location1. TradersFind offers 
                 you a variety of {$subcategory->subCategoryName} options from verified companies that will fulfill your requirements at most 
                 competitive prices.</p>";
-               
+               break;
               }
               else{
                 $shortDescription = "<p>
@@ -322,9 +325,7 @@ include_once 'catmetas.php';
             }
           }
           elseif(isset($subcategory->shortDescription) && $location=='' && $subcategory->shortDescription !=''){
-    
             $shortDescription = $subcategory->shortDescription; 
-    
           }else{
       
             $shortDescription = "<p>
@@ -360,7 +361,7 @@ include_once 'catmetas.php';
         </script>
       <span id='viewmorebutten'>
         <?php 
-        if (isset($category )&&isset($subcategory->shortDescription) && $location === '' && $subcategory->shortDescription!='') {
+        if (isset($category ) && isset($subcategory->shortDescription) && $location === '' && $subcategory->shortDescription!='') {
           echo '<div class="two-line-containers">';
           //$shortenedDescription = substr($shortDescription, 0, 400);
             if (strlen($shortDescription) >= 400) {
@@ -374,45 +375,42 @@ include_once 'catmetas.php';
             echo '<button style="color:brown; border: none;" onclick="readmoreSdesc()">
               view more
             </button>';
-  
+            //print_r('11');
   
         }else if(isset($subcategory->locations)&& $location!='' && $subcategory->locations[0]->location !=null && $subcategory->locations[0]->location!='' ){  
             //print_r($subcategory->locations[0]->location);
-            
           foreach($subcategory->locations as $Sdlocation1){
-            
-            if(strtolower(isset($Sdlocation1->location)?$Sdlocation1->location:'')==strtolower($location1) && isset($Sdlocation1->shortDescription) && $Sdlocation1->shortDescription!='' ){
-              echo $Sdlocation1->shortDescription;
-        
-                echo '<button style="color:brown; border: none;" onclick="readmoreSdesc()">
-                  view more
-                </button>';
-            }else if(isset($subcategory->subCategoryName) && (isset($Sdlocation1->location)?$Sdlocation1->location:'')==strtolower($location1)) {
-              echo "<p>
-                Find the best $subcategory->subCategoryName in $location1 at competitive prices. Discover a wide range of
-                $subcategory->subCategoryName from top companies, manufacturers, dealers, and distributors across $location1.
-                Take advantage of exclusive bulk ordering discounts and connect with sellers directly to secure the best
-                deals. Whether you're looking for any other  $subcategory->subCategoryName 
-                product in $location1, TradersFind makes it easy to find the perfect match for...
-              </p>";
-              echo '<button style="color:brown; border: none;" onclick="readmoreSdesc()">
-                view more
-                </button>';
-                break;
-            }else{
-              echo "<p>
-                Find the best $subcategory->subCategoryName in $location1 at competitive prices. Discover a wide range of
-                $subcategory->subCategoryName from top companies, manufacturers, dealers, and distributors across $location1.
-                Take advantage of exclusive bulk ordering discounts and connect with sellers directly to secure the best
-                deals. Whether you're looking for any other  $subcategory->subCategoryName 
-                product in $location1, TradersFind makes it easy to find the perfect match for...
-              </p>";
-              echo '<button style="color:brown; border: none;" onclick="readmoreSdesc()">
-                view more
-              </button>';
+            //print_r($location1);
+            if(strtolower(isset($Sdlocation1->location)? $Sdlocation1->location:'')==strtolower($location1) && isset($Sdlocation1->shortDescription) && $Sdlocation1->shortDescription!='' ){
+                
+              $shortDescription = $Sdlocation1->shortDescription;
               break;
-            }
+            }else if(isset($subcategory->subCategoryName) && strtolower(isset($Sdlocation1->location)?$Sdlocation1->location:'')==strtolower($location1)) {
+              
+              $shortDescription = "<p>
+                Find the best $subcategory->subCategoryName in $location1 at competitive prices. Discover a wide range of
+                $subcategory->subCategoryName from top companies, manufacturers, dealers, and distributors across $location1.
+                Take advantage of exclusive bulk ordering discounts and connect with sellers directly to secure the best
+                deals. Whether you're looking for any other  $subcategory->subCategoryName 
+                product in $location1, TradersFind makes it easy to find the perfect match for...
+              </p>";
+              break;
+            }else{
+            
+              $shortDescription = "<p>
+                Find the best $subcategory->subCategoryName in $location1 at competitive prices. Discover a wide range of
+                $subcategory->subCategoryName from top companies, manufacturers, dealers, and distributors across $location1.
+                Take advantage of exclusive bulk ordering discounts and connect with sellers directly to secure the best
+                deals. Whether you're looking for any other  $subcategory->subCategoryName 
+                product in $location1, TradersFind makes it easy to find the perfect match for...
+              </p>";
+             
+            } 
           }
+          echo $shortDescription; 
+          echo '<p><button style="color:brown; border: none;" onclick="readmoreSdesc()">
+                 view more
+                </button></p>';
    
         }else{
           if(isset($subcategory->subCategoryName)){

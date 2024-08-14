@@ -78,13 +78,13 @@
                                 <div class="text-white mt-3">
                                     <?php if(count($reletedSubCategoryS)>0){?>
                                      <span class="single-line">
-                                     <b>other categories: </b>
+                                     <b>Other Categories: </b>
                                      <?php
                                      print_r( $reletedSubCategoryS[0]);                          
                                      ?>
 
                                      <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#<?php echo $modalId1; ?>">
-                                        <span aria-hidden="true"><i class="bi bi-plus" style="font-size: 28px; "></i></span>
+                                        <span aria-hidden="true"><i class="bi bi-plus" style="font-size: 20px; "></i></span>
                                     </button>
                                     </span>
                                     <div class="modal fade" id="<?php echo $modalId1; ?>" tabindex="-1" aria-labelledby="<?php echo $modalId1; ?>Label" aria-hidden="true">
@@ -105,7 +105,7 @@
                                                     $formattedString .= ' <a  href="' . $url . '"> |' . $subcategory2 . '</a>';
                                                     }
                                                     }
-                                                    echo "<h5 style='margin-top: 20px;'>" . $formattedString . "</h5>";
+                                                    echo "<Div style='margin-top: 5px;'>" . $formattedString . "</Div>";
                                                     ?>
                                                 </div>
                                             </div>
