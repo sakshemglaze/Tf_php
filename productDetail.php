@@ -203,7 +203,7 @@
                       <?php $maskedService->getMaskedNumber($data1->seller); ?> </button>
                     <div class="d-flex align-items-center w-100 mt-3 gap-2">
                       <a
-                        href=" <?php echo $whatsappUrl->getProductToWhatsapp($data1->productName,$data1->id,get_object_vars($data1->seller))?>"
+                        href=" <?php echo $whatsappUrl->getProductToWhatsapp1($data1->productName,$data1->id,get_object_vars($data1->seller))?>"
                         class="whatsappbtn btn btn-sm w-100" target="_blank">
                         Connect on whatsapp
                       </a>

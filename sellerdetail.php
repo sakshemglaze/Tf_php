@@ -711,7 +711,7 @@ fetch(url, {
                     
                                 <div class=" col-lg-6 whatsappbtn">
                                 <a target="_blank"
-                                  href="https://api.whatsapp.com/send?phone=971569773623&text=Visited TradersFind Pages"
+                                href="<?php echo $whatsappUrl->getProductToWhatsapp('', $data1[0]->id, $data1) ?>"
                                   class=" btn btn-sm fs-6 py-2 fw-semibold w-100">
                                   Connect on whatsapp
                                 </a>

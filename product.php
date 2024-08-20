@@ -128,10 +128,14 @@
                                           <?php if(isset($prodData['seller'])) { $prodData['seller']['mainMarkets']; }
                                           ?>
                                         </span>
-                                        <span class="service-area ">
-                                            <?php if(isset($prodData['seller'])) {
-                                               print_r(  $prodData['seller']['state']);       }
-                                            ?>
+                                        <span class="service-area">
+                                          <?php 
+                                             if (isset($prodData['seller'])) {
+                                            $areas = $prodData['seller']['mainMarkets'];
+                                             // Use implode to concatenate areas with ' | ' as separator
+                                            echo implode(' | ', $areas);
+                                             }
+                                          ?>
                                         </span>
                                     </a>
                             </div>

@@ -7,11 +7,13 @@ class WhatsappUrl {
     public function getProductToWhatsapp($prodName, $id,$seller = [], $isPackage = false) {
         $sellermobile = "";
         $appendUrl = "";
-//print_r($seller);
+
        if (!empty($seller[0]->sellerWhatsappNumber1)) {
             $sellermobile = $seller[0]->sellerWhatsappNumber1;
+            print_r("hello");
         } elseif (!empty($seller[0]->sellerWhatsappNumber2)) {
             $sellermobile = $seller[0]->sellerWhatsappNumber2;
+            print_r("else");
         }
 
         if (!empty($sellermobile)) {
@@ -36,6 +38,8 @@ class WhatsappUrl {
     public function getProductToWhatsapp1($prodName, $id,$seller = [], $isPackage = false) {
         $sellermobile = "";
         $appendUrl = "";
+ 
+        print_r($seller['sellerWhatsappNumber1']);
 
         if (!empty($seller['sellerWhatsappNumber1']) && !empty($seller['sellerWhatsappNumber2'])) {
             $sellermobile = $seller['sellerWhatsappNumber1'] . "," . $seller['sellerWhatsappNumber2'];
