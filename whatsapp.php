@@ -10,10 +10,10 @@ class WhatsappUrl {
 
        if (!empty($seller[0]->sellerWhatsappNumber1)) {
             $sellermobile = $seller[0]->sellerWhatsappNumber1;
-            print_r("hello");
+            //print_r("hello");
         } elseif (!empty($seller[0]->sellerWhatsappNumber2)) {
             $sellermobile = $seller[0]->sellerWhatsappNumber2;
-            print_r("else");
+            //print_r("else");
         }
 
         if (!empty($sellermobile)) {
