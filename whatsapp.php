@@ -39,7 +39,7 @@ class WhatsappUrl {
         $sellermobile = "";
         $appendUrl = "";
  
-        print_r($seller['sellerWhatsappNumber1']);
+        //print_r($seller['sellerWhatsappNumber1']);
 
         if (!empty($seller['sellerWhatsappNumber1']) && !empty($seller['sellerWhatsappNumber2'])) {
             $sellermobile = $seller['sellerWhatsappNumber1'] . "," . $seller['sellerWhatsappNumber2'];

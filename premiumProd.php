@@ -181,7 +181,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-6 whatsappbtn ">
-                                <a href=" <?php echo $whatsappUrl->getProductToWhatsapp($premiumprod['productName'],$premiumprod['id'],$premiumprod['seller'])?>" target="_blank" class="btn btn-sm w-100">
+                                <a href=" <?php echo $whatsappUrl->getProductToWhatsapp1($premiumprod['productName'],$premiumprod['id'],$premiumprod['seller'])?>" target="_blank" class="btn btn-sm w-100">
                                 Connect on whatsapp
                                 </a>
                             </div>
