@@ -220,8 +220,8 @@ include_once 'catmetas.php';
   }
 ?>
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css" >
-    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
-    <script src="<?php echo BASE_URL;?>assets/js/jquery-3.6.1.min.js"> </script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="<?php echo BASE_URL;?>assets/js/jquery-3.6.1.min.js"> </script> -->
     
 </head>
 <body>
