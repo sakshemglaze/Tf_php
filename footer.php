@@ -1,13 +1,15 @@
 
 <?php include_once 'config.php'; ?>
 
+
+
 <footer class="footer pt-5 pb-1">
 
     <div class="container-fluid">
       <div class="row gy-5">
         <div class="col-lg-3  text-center">
           <img src="<?php echo BASE_URL; ?>assets/images/help-icon.webp" class="img-fluid" width="60" height="30" alt="help" />
-          <h4 class="my-4 text-white">Happy to help you!</h4>
+          <h4 class="my-4">Happy to help you!</h4>
           <ul class="mt-4 mb-5 footer_call gap-3">
             <li>
               <a href="tel:+971502943313" class="text-white"><img src="<?php echo BASE_URL; ?>assets/images/call-footer-icon.webp" width="20" height="20" alt="contact no" /> +971 502943313 </a>
@@ -125,6 +127,14 @@
       Copyright &copy; 2024 Interconnect Marketing Management L.L.C All rights reserved.
     </p>
   </footer>
+
+
+
 <script src='<?php echo BASE_URL; ?>assets/js/owl.carousel.min.js'></script>
 <script  src="<?php echo BASE_URL; ?>assets/js/script.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+
+
+
 
