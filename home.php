@@ -322,7 +322,7 @@ fetch(url, {
                 </div>
               </div>
             </div>
-            <textarea name="" class="form-control" cols="30" rows="3"
+            <textarea  class="form-control" cols="30" rows="3"
               placeholder="Product Description and Quantity" name="requirement"></textarea>
               <div class="row mt-3">
                 <div class="col-md-6">
@@ -504,9 +504,27 @@ function sendOtp($contenctNo,$formdata){
     }
   </script>";
   }else{
-  include_once 'otp.php';
- // echo $contenctNo;
-  echo '<script>document.getElementById("popup-card-otp").style.display = "block";</script>';
+    if(isset($data123->title) && $data123->title=='OTP Already generated for the phone'){
+
+      include_once 'otp.php';
+      //  //echo $contenctNo;
+      echo '<script>document.getElementById("popup-card-otp").style.display = "block";</script>';
+      $message="OTP Already generated for the phone";
+      $type="success";
+      echo "
+      <script>
+          $(document).ready(function() {
+              toastr.$type('$message');
+          });
+      </script>";
+
+      
+    }else{
+      //print_r($data123);
+      include_once 'otp.php';
+      //echo $contenctNo;
+      echo '<script>document.getElementById("popup-card-otp").style.display = "block";</script>';
+    }
   }
 }
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

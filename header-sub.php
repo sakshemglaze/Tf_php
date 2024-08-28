@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
 <link rel='stylesheet' href='<?php echo BASE_URL; ?>assets/css/mystyle.css'>
 <link rel='stylesheet' href='<?php echo BASE_URL; ?>assets/css/owl.carousel.css'>
- 
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 
 <header class="container-fluid shadow-sm border-bottom bg-white sticky-top inner_header1 ">
     <div class="d-flex align-items-center position-relative flex-wrap">
@@ -34,6 +34,11 @@
      
        
     }
+
+   
+.toast-message {background: #004c0e; padding: 15px ;  }
+#toast-container>div {padding: 0PX !important; margin-top: 65px !important}
+
 </style>
 <script>
 function submitform(){

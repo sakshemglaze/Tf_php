@@ -622,9 +622,27 @@ function sendOtp($contenctNo,$formdata){
     }
   </script>";
   }else{
-  include_once 'otp.php';
- // echo $contenctNo;
-  echo '<script>document.getElementById("popup-card-otp").style.display = "block";</script>';
+    if(isset($data123->title) && $data123->title=='OTP Already generated for the phone'){
+
+      include_once 'otp.php';
+      //  //echo $contenctNo;
+      echo '<script>document.getElementById("popup-card-otp").style.display = "block";</script>';
+      $message="OTP Already generated for this phone number";
+      $type="success";
+      echo "
+      <script>
+          $(document).ready(function() {
+              toastr.$type('$message');
+          });
+      </script>";
+
+      
+    }else{
+      //print_r($data123);
+      include_once 'otp.php';
+      //echo $contenctNo;
+      echo '<script>document.getElementById("popup-card-otp").style.display = "block";</script>';
+    }
   }
 }
       if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -638,8 +656,9 @@ function sendOtp($contenctNo,$formdata){
     $formdata = array(
       'enquirerContactNumber' => $countryCode . $contactNumber,
       'enquiryMessage' => $requirement,
-      'enquirer_email' => $enquirer_email,
-      'status' => 'New'
+      'enquirerEmail' => $enquirer_email,
+      'status' => 'New',
+      "enquirerName"=>""
     );
 
   //echo "Form submitted successfully!";
