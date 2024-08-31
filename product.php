@@ -16,6 +16,12 @@
     justify-content: center;
     min-height: 100vh;
 }
+.helloclass{
+    width: 100%;
+}
+.modal-dialog.helloclass {max-width: 900px; margin-top: 76px;}
+.helloclass .btn-close {margin-top: 4px;}
+.helloclass .modal-body {padding: 0px;}
 
 </style>
 
@@ -49,8 +55,8 @@
                                 <img src="<?php echo $newsto; ?>" alt="<?php echo $prodData['productName']?>" style="width: 160px;">
                                     <div class="d-flex mt-3 d-center">
                                
-                                        <button onclick="openPopup1()" class="btn-primary-gradiant btn btn-sm w-100 d-center">
-                                            Ask price</button>
+                                    <button class="btn-outline-gradiant btn btn-sm w-100 d-center" data-bs-toggle="modal" data-bs-target="#<?php echo $PmodalId; ?>">Ask Price </button>
+
                                     </div>
                             </div>
                         </div>
@@ -258,15 +264,190 @@
                         </div>
                         <div class="col-md-4 ">
                                  
-                            <button onclick="openPopup1()"class="btn-outline-gradiant btn btn-sm w-100 d-center">
+                            <!-- <button onclick="openPopup1()"class="btn-outline-gradiant btn btn-sm w-100 d-center">
                                 <img src="<?php echo BASE_URL ?>assets/images/mail-black.png" width="14" height="12"class="me-2 w-18" alt="Mail_" />
                                         Send Inquiry
-                            </button>
+                            </button> -->
                                     
+                            <button class="btn-outline-gradiant btn btn-sm w-100 d-center" data-bs-toggle="modal" data-bs-target="#<?php echo $PmodalId; ?>">Send Inquiry </button>
+
+
+                             <div class="modal fade" id="<?php echo $PmodalId; ?>" tabindex="-1" aria-labelledby="<?php echo $PmodalId; ?>Label" aria-hidden="true">
+                                <div class="modal-dialog helloclass">
+                                     <div class="modal-content">
+                                         <div class="modal-header">
+                                             <div class="modal-body">
+                                                    <section class="bg-gradiant1 login-title text-center text-white fwbold pb100">
+                                                     <div class="container">
+                                                     <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                     <span class="fs-3 pt20">Let Us know What you Need</span>
+                                                        <p class="mt-0 mb-0 ">Tell us your requirement. Get Instant quotes from Verified Sellers</p>
+
+                                                     </div>
+                                                    </section>
+
+                                                    <section class="">
+                                                    <div class="container">
+                                                        <div class="login-detailsBg shadow2">
+                                                            <div class="row">
+                                                               <div class="col-md-8 line">
+                                                                   <div class="fs-3 fwbold Details">Requirement Details</div>
+
+                                                                        <form method="post" id="<?php echo $PmodalId; ?>">
+                                                                            <div class="mb-3 mt-3" id="<?php echo $PmodalId; ?>">
+                                                                              <label>Product / Service</label>
+                                                                              <input type="text" id="<?php echo $PmodalId; ?>" class="form-control" name="productName"
+                                                                              placeholder="Products / Services you are looking for"
+                                                                              value="<?php echo $Mproductnameforenqry; ?>" 
+                                                                              required>
+                                                                                <div class="is-invalid">
+                                                                                  *Product/Service is required
+                                                                                </div>
+                                                                            </div>   
+                                                                            <div class="row">
+                                                                                <div class="col-md-6">
+                                                                                    <div class="mb-3">
+                                                                                       <label>Quantity</label>
+                                                                                       <input type="text" class="form-control" name="quantity"
+                                                                                         placeholder="Estimated Order Quantity">
+
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <div class="mb-3">
+                                                                                       <label>Unit</label>
+                                                                                        <select name="quantityUnit" class="form-control"
+                                                                                        placeholder="eg:  Dozen,  Piece(s),  Tonr">
+                                                                                        <?php
+                                                                                        $context = stream_context_create([
+                                                                                        'ssl' => [
+                                                                                         'verify_peer' => false,
+                                                                                        'verify_peer_name' => false,
+                                                                                         ],
+                                                                                         ]);
+                                                                                         $resUnit = file_get_contents(BASE_URL . 'assets/testingJson/Units.json', false, $context);
+                                                                                         $allunit=json_decode($resUnit);
+                                                                                         foreach($allunit as $unit){
+                                                                                        ?>
+                                                                                        <option value="<?php echo $unit;?>">
+                                                                                          <?php echo $unit;?>
+                                                                                        </option>
+                                                                                         <?php
+                                                                                          }
+                                                                                            ?>
+                                                                                         </select>
+
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-md-12">
+                                                                                    <div class="mb-3">
+                                                                                        <label>Describe your buying requirement</label>
+                                                                                        <textarea class="form-control" id="requirement" name="requirement" rows="2" placeholder="Describe your buying requirement"></textarea>
+
+
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row mt-1">
+                                                                                    <div class="col-md-6">
+                                                                                        <div class="mb-1"> &nbsp;&nbsp;&nbsp;&nbsp;
+                                                                                            <input type="radio" id="onetime" name="frequencytype" value="onetime" checked>&nbsp;&nbsp;<label for="onetime">One Time</label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-md-6">
+                                                                                        <div class="mb-1"> &nbsp;&nbsp;&nbsp;&nbsp;
+                                                                                           <input type="radio" id="recuring" name="frequencytype" value="recuring">&nbsp;&nbsp;<label for="recuring">Recurring</label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div> 
+                                                                                <div class="col-md-12">
+                                                                                    <div class="mb-3">
+                                                                                      <label>Mobile No.</label>
+                                                                                        <div class="input-group">
+
+
+                                                                                            <select name="countryCode" class="form-control mxw-50">
+                                          
+                                                                                               <option value="+971">+971 - United Arab Emirates.</option>
+                                                                                               <option value="+91">+91 - India</option>
+                                                                                            </select>
+                                                                                            <input type="number" name="contactNumber" class="form-control"
+                                                                                            placeholder="Mobile" required="number" />
+
+                                                                                        </div>
+
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <p>
+                                                                              I agree to all the <a href="https://www.tradersfind.com/term-and-conditions" target="_blank" class="text-danger"> Terms of Use </a> stated by TradersFind.com
+                                                                            </p>
+                                                                            <button 
+                                                                             class="btn-primary-gradiant px-md-5 py-2 rounded-10 fs-5 fwbold mb-3">Submit
+                                                                             Requirement
+                                                                            </button>
+
+                                                                        </form>
+                   
+                                                                    </div>
+               
+                                                                    <div class="col-md-4">
+                                                                        <div class="fs-3 fwbold Details">Buyers Advantages?                                                   
+                                                                        </div>
+                                                                        <div class="media mt-3">
+                                                                            <div class="media-left media-middle">
+                                                                              <a href="#">
+                                                                                <img class="media-object" src="<?php echo BASE_URL ?>assets/images/login-icon1.jpg">
+                                                                              </a>
+                                                                            </div>
+                                                                            <div class="media-body">
+                                                                                <span class="media-heading fwbold  mb-0">Immediate Responses</span>
+                                                                                 <p class="mt-0 mb-0">Get instant response from sellers.</p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="media ">
+                                                                            <div class="media-left media-middle">
+                                                                             <a href="#">
+                                                                               <img class="media-object" src="<?php echo BASE_URL ?>assets/images/login-icon2.jpg">
+                                                                             </a>
+                                                                            </div>
+                                                                            <div class="media-body">
+                                                                            <span class="media-heading fwbold  mb-0">Genuine Sellers</span>
+                                                                            <p class="mt-0 mb-0">Verified sellers that meet your needs.</p>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="media ">
+                                                                        <div class="media-left media-middle">
+                                                                           <a href="#">
+                                                                            <img class="media-object" src="<?php echo BASE_URL ?>assets/images/login-icon3.jpg">
+                                                                           </a>
+                                                                    </div>
+                                                                    <div class="media-body">
+                                                                      <span class="media-heading fwbold  mb-0">Multiple Choices</span>
+                                                                      <p class="mt-0 mb-0">Get the power to choose the best!</p>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+               
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                    </section>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>           
+                                </div>
+                                     
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
  </div>
@@ -276,24 +457,11 @@
  include 'enquery.php';
  ?>
 
-<div class="modal fade modal-center" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Title</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p>
-            </div>
-        </div>
-    </div>
-</div>
-
 <script>
-  
+   function closePopup1() {
+    document.getElementById("popup-card").style.display = "none";
+  }
+
   function onclickplus(){
     document.getElementById("popuppluscard").style.display = "block";
   }

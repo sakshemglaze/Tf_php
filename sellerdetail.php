@@ -32,92 +32,7 @@ $aproodproduct=get(
 );
 $aproodproduct1 = json_decode($aproodproduct);
 
-$schemaseller=[
-  "@context"=> "https://schema.org",
-  "@graph"=> [
-    [
-      "@type"=> "Organization",
-      "@id"=> "https://www.tradersfind.com/#organization",
-      "name"=> "Interconnect Marketing Management L.L.C",
-      "url"=> "https://www.tradersfind.com/seller/interconnect-marketing-management-llc",
-      "sameAs"=> [
-        "https://www.facebook.com/tradersfindb2bportal/",
-        "https://www.linkedin.com/company/tradersfind/",
-        "https://x.com/tradersfind/"
-      ],
-      "logo"=> [
-        "@type"=> "ImageObject",
-        "@id"=> "https://www.tradersfind.com/#logo",
-        "url"=> "https://www.tradersfind.com/assets/images/TradersFind.webp",
-        "caption"=> "Tradersfind.com by Interconnect Marketing Management L.L.C"
-      ]
-      ],
-    [
-      "@type"=> "WebSite",
-      "@id"=> "https://www.tradersfind.com/#website",
-      "url"=> "https://www.tradersfind.com/#",
-      "name"=> "Tradersfind.com",
-      "publisher"=> [
-        "@id"=> "https://www.tradersfind.com/#organization"
-      ],
-      "potentialAction"=> [
-        "@type"=> "SearchAction",
-        "target"=> "https://www.tradersfind.com/search/{search_term_string}",
-        "query-input"=> "required name=search_term_string"
-      ]
-      ],
-    [
-      "@type"=> "WebPage",
-      "@id"=> "https://www.tradersfind.com/#webpage",
-      "url"=> "https://www.tradersfind.com",
-      "inLanguage"=> "en-US",
-      "name"=> "Tradersfind.com by Interconnect Marketing Management L.L.C",
-      "isPartOf"=> [
-        "@id"=> "https://www.tradersfind.com/#website"
-      ],
-      "about"=> [
-        "@id"=> "https://www.tradersfind.com/#organization"
-      ],
-      "description"=> "Interconnect Marketing Management L.L.C handles Tradersfind.com, which is the UAE's largest B2B Portal for businesses, products and services. A smart and efficient way to Search, Find and Connect with Businesses in UAE.'"
-    ],
-    [
-      "@type"=> "BreadcrumbList",
-      "itemListElement"=> [
-        [
-          "@type"=> "ListItem",
-          "position"=> 1,
-          "name"=> "Home",
-          "item"=> "https://www.tradersfind.com"
-        ],
-        [
-          "@type"=> "ListItem",
-          "position"=> 2,
-          "name"=> ''.$data1[0]->sellerCompanyName.'',
-          "item"=> "https://www.tradersfind.com/seller/".$urlService->getSellerUrl($data1[0]->sellerCompanyName,''),
-        ]
-      ]
-        ],
-    [
-      "@type"=> "LocalBusiness",
-      "name"=> ''.$data1[0]->sellerCompanyName.'',
-      "url"=> ''.'https://www.tradersfind.com/seller/'.$urlService->getSellerUrl($data1[0]->sellerCompanyName,'').'',
-      "image"=>''.'https://doc.tradersfind.com/images/'.$data1[0]->logo->id.'.webp'.'',
-      'description' => isset($data1[0]->metaDescription) && $data1[0]->metaDescription != '' ? $data1[0]->metaDescription : $data1[0]->sellerCompanyName.' is a leading company of '.$productName.' located in '.$data1[0]->city.','.$data1[0]->sellerState.','.$data1[0]->country,
-      "telephone"=> isset($data1[0]->sellerCompanyNumber)?$data1[0]->sellerCompanyNumber:"",
-      "address"=> [
-        "@type"=> "PostalAddress",
-        "streetAddress"=> ''.$data1[0]->address.','.$data1[0]->city.'',
-        "addressRegion"=> ''.$data1[0]->sellerState.'',
-        "addressCountry"=> ''.$data1[0]->country.''
-      ],     
-      "geo"=> [
-        "@type"=> "GeoCoordinates",
-        "latitude"=> ''.$data1[0]->coordinates[0].'',
-        "longitude"=> $data1[0]->coordinates[1].''
-      ]
-    ]
-  ]
-      ];
+
 //print_r($schemaseller);
 
 ?>
@@ -139,6 +54,92 @@ $schemaseller=[
       }
      
     }
+    $schemaseller=[
+      "@context"=> "https://schema.org",
+      "@graph"=> [
+        [
+          "@type"=> "Organization",
+          "@id"=> "https://www.tradersfind.com/#organization",
+          "name"=> "Interconnect Marketing Management L.L.C",
+          "url"=> "https://www.tradersfind.com/seller/interconnect-marketing-management-llc",
+          "sameAs"=> [
+            "https://www.facebook.com/tradersfindb2bportal/",
+            "https://www.linkedin.com/company/tradersfind/",
+            "https://x.com/tradersfind/"
+          ],
+          "logo"=> [
+            "@type"=> "ImageObject",
+            "@id"=> "https://www.tradersfind.com/#logo",
+            "url"=> "https://www.tradersfind.com/assets/images/TradersFind.webp",
+            "caption"=> "Tradersfind.com by Interconnect Marketing Management L.L.C"
+          ]
+          ],
+        [
+          "@type"=> "WebSite",
+          "@id"=> "https://www.tradersfind.com/#website",
+          "url"=> "https://www.tradersfind.com/#",
+          "name"=> "Tradersfind.com",
+          "publisher"=> [
+            "@id"=> "https://www.tradersfind.com/#organization"
+          ],
+          "potentialAction"=> [
+            "@type"=> "SearchAction",
+            "target"=> "https://www.tradersfind.com/search/{search_term_string}",
+            "query-input"=> "required name=search_term_string"
+          ]
+          ],
+        [
+          "@type"=> "WebPage",
+          "@id"=> "https://www.tradersfind.com/#webpage",
+          "url"=> "https://www.tradersfind.com",
+          "inLanguage"=> "en-US",
+          "name"=> "Tradersfind.com by Interconnect Marketing Management L.L.C",
+          "isPartOf"=> [
+            "@id"=> "https://www.tradersfind.com/#website"
+          ],
+          "about"=> [
+            "@id"=> "https://www.tradersfind.com/#organization"
+          ],
+          "description"=> "Interconnect Marketing Management L.L.C handles Tradersfind.com, which is the UAE's largest B2B Portal for businesses, products and services. A smart and efficient way to Search, Find and Connect with Businesses in UAE.'"
+        ],
+        [
+          "@type"=> "BreadcrumbList",
+          "itemListElement"=> [
+            [
+              "@type"=> "ListItem",
+              "position"=> 1,
+              "name"=> "Home",
+              "item"=> "https://www.tradersfind.com"
+            ],
+            [
+              "@type"=> "ListItem",
+              "position"=> 2,
+              "name"=> ''.$data1[0]->sellerCompanyName.'',
+              "item"=> "https://www.tradersfind.com/seller/".$urlService->getSellerUrl($data1[0]->sellerCompanyName,''),
+            ]
+          ]
+            ],
+        [
+          "@type"=> "LocalBusiness",
+          "name"=> ''.$data1[0]->sellerCompanyName.'',
+          "url"=> ''.'https://www.tradersfind.com/seller/'.$urlService->getSellerUrl($data1[0]->sellerCompanyName,'').'',
+          "image"=>''.'https://doc.tradersfind.com/images/'.$data1[0]->logo->id.'.webp'.'',
+          'description' => isset($data1[0]->metaDescription) && $data1[0]->metaDescription != '' ? $data1[0]->metaDescription : $data1[0]->sellerCompanyName.' is a leading company of '.$productNames.' located in '.$data1[0]->city.','.$data1[0]->sellerState.','.$data1[0]->country,
+          "telephone"=> isset($data1[0]->sellerCompanyNumber)?$data1[0]->sellerCompanyNumber:"",
+          "address"=> [
+            "@type"=> "PostalAddress",
+            "streetAddress"=> ''.$data1[0]->address.','.$data1[0]->city.'',
+            "addressRegion"=> ''.$data1[0]->sellerState.'',
+            "addressCountry"=> ''.$data1[0]->country.''
+          ],     
+          "geo"=> [
+            "@type"=> "GeoCoordinates",
+            "latitude"=> ''.$data1[0]->coordinates[0].'',
+            "longitude"=> $data1[0]->coordinates[1].''
+          ]
+        ]
+      ]
+          ];
    // print_r($productNames);
       $SeoParams = [
           'title' => isset($data1[0]->metaTitle) && $data1[0]->metaTitle != '' ? $data1[0]->metaTitle : $data1[0]->sellerCompanyName,
@@ -1014,7 +1015,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     'productName' => $productName,
     'quantity' => $quantity,
     'unit' => $quantityUnit,
-    'status' => 'New',
+    'status' => 'Pending for Approval',
     'frequencytype' => $frequencytype,
     'enquirerName'=>''
   );

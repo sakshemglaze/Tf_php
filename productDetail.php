@@ -657,7 +657,7 @@ function sendOtp($contenctNo,$formdata){
       'enquirerContactNumber' => $countryCode . $contactNumber,
       'enquiryMessage' => $requirement,
       'enquirerEmail' => $enquirer_email,
-      'status' => 'New',
+      'status' => 'Pending for Approval',
       "enquirerName"=>""
     );
 
@@ -684,7 +684,7 @@ function sendOtp($contenctNo,$formdata){
       'productName' => $productName,
       'quantity' => $quantity,
       'unit' => $quantityUnit,
-      'status' => 'New',
+      'status' => 'Pending for Approval',
       'frequencytype' => $frequencytype,
       'enquirerName'=>''
     );

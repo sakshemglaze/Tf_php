@@ -1,5 +1,5 @@
 <?php include_once 'config.php'; ?>
-<div id="popup-card" class="popup-card" style="display: none;">
+<div id="popup-card" class="popup-card" style="display: none;" >
 
 
 <section class="bg-gradiant1 login-title text-center text-white fwbold pb100">
@@ -19,15 +19,16 @@
                 <div class="col-md-8 line">
                     <div class="fs-3 fwbold Details">Requirement Details</div>
 
-                    <form method="post" id="postBuyreq">
-                        <div class="mb-3 mt-3">
+                    <form method="post" id="<?php echo $PmodalId; ?>">
+                        <div class="mb-3 mt-3" id="<?php echo $PmodalId; ?>">
                             <label>Product / Service</label>
-                            <input type="text" class="form-control" name="productName"
-                                placeholder="Products / Services you are looking for" required>
-                            <div class="is-invalid" >
+                            <input type="text" id="<?php echo $PmodalId; ?>" class="form-control" name="productName"
+                                 placeholder="Products / Services you are looking for" 
+                                  required>
+                            <div class="is-invalid">
                                 *Product/Service is required
                             </div>
-                        </div>
+                        </div>   
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
