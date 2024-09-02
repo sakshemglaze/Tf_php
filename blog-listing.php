@@ -161,19 +161,20 @@ include_once "header-sub.php";
          <div class="col-xl-4 mt-4">
             <?php
            
-                $resultb= get('api/guest/blog-categories', true);
-                $blogcat=json_decode($resultb);
+               // $resultb= get('api/guest/blog-categories', true);
+                //$blogcat=json_decode($resultb);
              
             ?>
             <div class="card-shadow p-2 rounded-2 bg-white blog_Categories">
                 <h5 class="border-bottom pb-2 fs-5 text-white p-2 fw-bold bg2">Group Categories</h5>
                 <ul class="category-filter flex-wrap mb-2"> 
                     <?php
-                    foreach($blogcat as $bcat){
+                   // print_r($blogcat);
+                    //foreach($blogcat as $bcat){
                     ?>
-                    <li><button class="btn btn-primary-gradiant  btn-lg" onclick="blogfilter('<?php echo $bcat->id?>')"><?php  echo $bcat->categoryName?></button></li>
+                    <!-- <li><button class="btn btn-primary-gradiant  btn-lg" ></button></li> -->
                     <?php
-                    }
+                   // }
                     ?>
                 </ul>
             </div>

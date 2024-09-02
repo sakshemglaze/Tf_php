@@ -258,7 +258,6 @@ fetch(url, {
                     <?php if (isset($data1[0]->logo)): ?>
                     <span >
                       <img src="https://doc.tradersfind.com/images/<?php echo $data1[0]->logo->id;?>.webp" alt="seller">  
-                    <app-logo [name]="seller?seller.sellerCompanyName:'Traders Find'" *ngIf="!seller.logo"></app-logo>
                   
                       </span>
                       <?php endif;?>
@@ -515,6 +514,7 @@ fetch(url, {
                 </div>
               </div>
             </div>
+            <?php if (isset($data1[0]->isVerifiedSeller) && $data1[0]->isVerifiedSeller): ?>
 
             <div class="col-lg-3">
               <div class="d-flex align-items-center justify-content-md-center">
@@ -525,14 +525,18 @@ fetch(url, {
                 </div>
               </div>
             </div>
-
+            <?php endif; ?>
             <div class="col-lg-3">
               <!--*ngIf="seller.youtubeLink">-->
               <div class="d-flex align-items-center justify-content-md-center">
                 <img src="<?php echo BASE_URL;?>assets/images/icon__9.png" alt="seller" class="me-3" />
                 <div class="text-start lh-sm">
                   <h3 class="text-black-50 mb-0 fs-4 "></h3>
-                  <a target="_blank" href="<?php echo$data1[0]->youtubeLink; ?>">Company Video</a>
+                  <?php if (!empty($data1[0]->youtubeLink)): ?>
+                  <a target="_blank" href="<?php echo $data1[0]->youtubeLink; ?>">Company Video</a>
+                  <?php else: ?>
+                      <span>Company Video</span>
+                  <?php endif; ?>
                 </div>
               </div>
             </div>

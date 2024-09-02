@@ -85,7 +85,7 @@ include_once 'header-sub.php';
                 <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                   <div class="accordion-body">
                     <ul style="list-style-type: disc;">
-                    <li>Go to TradersFind.com’s Homepage
+                    <li>Go to TradersFind.com’s Homepage </li>
                     <li>In the search bar, write the name of the product you are looking for</li>
                     <li>Click on the search button </li>
 Note: Add a relevant name to get a relevant product in the search result.
@@ -102,7 +102,7 @@ Note: Add a relevant name to get a relevant product in the search result.
                   </button>
                 </h2>
                 <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                  <div class="accordion-body fs-18">
+                  <div class="accordion-body ">
                     <ul style="list-style-type: disc;">
                       <li>TradersFind homepage has different categories of products from various industries.</li>
                       <li>Click on "All Categories" to see a larger list and choose from there.</li>

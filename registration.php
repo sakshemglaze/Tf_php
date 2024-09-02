@@ -491,7 +491,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </button>
               </h2>
               <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                <div class="accordion-body fs-18">
+                <div class="accordion-body ">
                   <p class="mb-2 ">To successfully register on TradersFind.Com, you need:</p>
                   <ul>
                     <li>• Email id</li>
@@ -549,7 +549,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <div id="collapsefive" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                <p>
-               The registration on Traders Find is absolutely free. Also, TradersFind offers paid packages
+               The registration on Tradersfind is absolutely free. Also, TradersFind offers paid packages
                 which include several benefits and features that will help you to attract more visitors.
                  To know more, Enquire Now.
                </p>

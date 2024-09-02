@@ -143,12 +143,12 @@ $metadescription='';
 
 if($location1==null || $location1=='UAE'){
     //print_r("111111");
-   $metadescription=isset($subcategory->subCategoryDescription) && $subcategory->subCategoryDescription !='' ? str_replace('uae',$location1,strtolower($subcategory->subCategoryDescription)) : 'Searching for ' . $subcategory->subCategoryName . ' at best price in ' . $location1 . '? Choose from a wide range of companies provide' . $subcategory->subCategoryName . ' online on Tradersfind.com';
+   $metadescription=isset($subcategory->subCategoryDescription) && $subcategory->subCategoryDescription !='' ? str_replace('uae',$location1,strtolower($subcategory->subCategoryDescription)) : 'Searching for ' . $subcategory->subCategoryName . ' at best price in ' . $location1 . '? Choose from a wide range of companies provide ' . $subcategory->subCategoryName . ' online on Tradersfind.com';
    $schema=getScame($jsonOutput12,$location1,$subcatName , $category,isset($industry)?$industry:" ", $metadescription);  
    $SeoParams = [
-    'title' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('uae',$location1,strtolower($subcategory->metaTitle)) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' On Tradersfind.com',
-    'metaTitle' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('uae',$location1,strtolower($subcategory->metaTitle)) : ucwords($subcategory->subCategoryName) . ' at best price in ' . ucwords($location1) . ' on Tradersfind.com',
-    'metaDescription' => isset($subcategory->subCategoryDescription) && $subcategory->subCategoryDescription !='' ? str_replace('uae',$location1,strtolower($subcategory->subCategoryDescription)) : 'Searching for ' . $subcategory->subCategoryName . ' at best price in ' . $location1 . '? Choose from a wide range of companies provide' . $subcategory->subCategoryName . ' online on Tradersfind.com',
+    'title' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('UAE',$location1,$subcategory->metaTitle) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' On Tradersfind.com',
+    'metaTitle' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('UAE',$location1,$subcategory->metaTitle) : ucwords($subcategory->subCategoryName) . ' at best price in ' . ucwords($location1) . ' on Tradersfind.com',
+    'metaDescription' => isset($subcategory->subCategoryDescription) && $subcategory->subCategoryDescription !='' ?  str_replace('UAE',$location1,$subcategory->subCategoryDescription) : 'Searching for ' . $subcategory->subCategoryName . ' at best price in ' . $location1 . '? Choose from a wide range of companies provide ' . $subcategory->subCategoryName . ' online on Tradersfind.com',
     'metaKeywords' => isset($subcategory->keywords) && $subcategory->keywords != '' ? str_replace('uae',$location1,strtolower($subcategory->keywords)) : $subcategory->subCategoryName . ', ' . $subcategory->subCategoryName . ' in '. $location1,
     'fbTitle' => isset($subcategory->fbTitle) && $subcategory->fbTitle !='' ? str_replace('uae',$location1,strtolower($subcategory->fbTitle)) : null,
     'fbDescription' => isset($subcategory->fbDescription) ? str_replace('uae',$location,strtolower($subcategory->fbDescription)) : null,
@@ -169,7 +169,7 @@ if($location1==null || $location1=='UAE'){
             foreach($subcategory->locations as $Mlocation){
         
                 if($Mlocation->location!=null && $Mlocation->description!=null && $Mlocation->description!='' && strtolower($Mlocation->location)==strtolower($location1)){
-                    $metadescription= isset($Mlocation->description) && $Mlocation->description !='' ? $Mlocation->description : 'Searching for ' . $subcategory->subCategoryName . ' at best price in ' . $location1 . '? Choose from a wide range of companies provide' . $subcategory->subCategoryName . ' online on Tradersfind.com';
+                    $metadescription= isset($Mlocation->description) && $Mlocation->description !='' ? $Mlocation->description : 'Searching for ' . $subcategory->subCategoryName . ' at best price in ' . $location1 . '? Choose from a wide range of companies provide ' . $subcategory->subCategoryName . ' online on Tradersfind.com';
                     $schema=getScame($jsonOutput12,$location1,$subcatName , $category,$industry, $metadescription);  
                     $SeoParams=seoSeter($Mlocation,$location1,$subcategory,$schema);
 
@@ -180,7 +180,7 @@ if($location1==null || $location1=='UAE'){
         }
       
 	if ($loc1 == '0') {
-     $metadescription= isset($subcategory->subCategoryDescription) && $subcategory->subCategoryDescription !='' ? str_replace('uae',$location1,strtolower($subcategory->subCategoryDescription)) : 'Searching for ' . $subcategory->subCategoryName . ' at best price in ' . $location1 . '? Choose from a wide range of companies provide' . $subcategory->subCategoryName . ' online on Tradersfind.com';
+     $metadescription= isset($subcategory->subCategoryDescription) && $subcategory->subCategoryDescription !='' ? str_replace('uae',$location1,strtolower($subcategory->subCategoryDescription)) : 'Searching for ' . $subcategory->subCategoryName . ' at best price in ' . $location1 . '? Choose from a wide range of companies provide ' . $subcategory->subCategoryName . ' online on Tradersfind.com';
      $schema=getScame($jsonOutput12,$location1,$subcatName , $category,$industry, $metadescription);  
      $SeoParams=seoSeter1($location1,$location1,$subcategory,$schema);
 
@@ -190,7 +190,7 @@ if($location1==null || $location1=='UAE'){
 function seoSeter($Flocation,$location1,$subcategory,$schema){
     //     print_r($subcategory);
     $title = isset($Flocation->metatitle) && $Flocation->metatitle != '' ? $Flocation->metatitle : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com';
-    $description = isset($Flocation->description) && $Flocation->description !='' ? $Flocation->description : 'Searching for ' . $subcategory->subCategoryName . ' at best price in ' . $location1 . '? Choose from a wide range of companies provide' . $subcategory->subCategoryName . ' online on Tradersfind.com';
+    $description = isset($Flocation->description) && $Flocation->description !='' ? $Flocation->description : 'Searching for ' . $subcategory->subCategoryName . ' at best price in ' . $location1 . '? Choose from a wide range of companies provide ' . $subcategory->subCategoryName . ' online on Tradersfind.com';
     return  $SeoParams = [
             'title' => isset($Flocation->metatitle) && $Flocation->metatitle != '' ?$Flocation->metatitle : $subcategory->subCategoryName . ' at best price in ' . $location1. ' on Tradersfind.com',
             'metaTitle' => $title,
@@ -214,9 +214,9 @@ function seoSeter($Flocation,$location1,$subcategory,$schema){
         function seoSeter1($Flocation,$location1,$subcategory,$schema){
            // print_r("333333");
          return   $SeoParams = [
-                'title' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('uae',$location1,strtolower($subcategory->metaTitle)) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com',
-                'metaTitle' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('uae',$location1,strtolower($subcategory->metaTitle)) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com',
-                'metaDescription' => isset($subcategory->subCategoryDescription) && $subcategory->subCategoryDescription !='' ? str_replace('uae',$location1,strtolower($subcategory->subCategoryDescription)) : 'Searching for ' . $subcategory->subCategoryName . ' at best price in ' . $location1 . '? Choose from a wide range of companies provide' . $subcategory->subCategoryName . ' online on Tradersfind.com',
+                'title' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('UAE',$location1,$subcategory->metaTitle) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com',
+                'metaTitle' => isset($subcategory->metaTitle) && $subcategory->metaTitle != '' ? str_replace('UAE',ucwords($location1),$subcategory->metaTitle) : $subcategory->subCategoryName . ' at best price in ' . $location1 . ' on Tradersfind.com',
+                'metaDescription' => isset($subcategory->subCategoryDescription) && $subcategory->subCategoryDescription !='' ? str_replace('UAE',ucwords($location1),$subcategory->subCategoryDescription) : 'Searching for ' . $subcategory->subCategoryName . ' at best price in ' . $location1 . '? Choose from a wide range of companies provide ' . $subcategory->subCategoryName . ' online on Tradersfind.com',
                 'metaKeywords' => isset($subcategory->keywords) && $subcategory->keywords != '' ? str_replace('uae',$location1,strtolower($subcategory->keywords)) : $subcategory->subCategoryName . ', ' . $subcategory->subCategoryName . ' in '. $location1,
                 'fbTitle' => (isset($subcategory->fbTitle) && $subcategory->fbTitle) !='' ? str_replace('uae',$location1,strtolower($subcategory->fbTitle)) : null,
                 'fbDescription' => isset($subcategory->fbDescription) ? str_replace('uae',$location1,strtolower($subcategory->fbDescription)) : null,

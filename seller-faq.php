@@ -1128,7 +1128,7 @@ $SeoParams = [
                 </h2>
                 <div id="collapse88" class="accordion-collapse collapse" data-bs-parent="#accordionExample7">
                   <div class="accordion-body"> 
-                    Here are the steps to upgrade to premium membership on ‘Traders Find’: 
+                    Here are the steps to upgrade to premium membership on ‘Tradersfind’: 
                     <ul style="list-style-type: disc;">
                       <li>Visit the ‘TradersFind’ website.  </li>
                       <li>Click on the Whatsapp’ button on Header Section.</li>

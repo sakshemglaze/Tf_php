@@ -146,7 +146,7 @@
                                     </a>
                             </div>
                             <div class="d-flex small mt-1 single-line">
-                                     <?php if( $prodData['brand']){?>
+                                     <?php if( isset($prodData['brand']) && $prodData['brand'] !=''){?>
                                     <span  class="single-line"> <b>Brands : </b> 
                                         <?php
                                            print_r( $prodData['brand']);
