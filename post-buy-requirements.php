@@ -32,19 +32,19 @@ include_once "header-sub.php";
   var contactNumber=document.getElementById("contactNumber").value;
   
 //console.log(productname);
-        let payload = {
-          enquirerName: 'Atulyadav',
-          enquirerContactNumber: countryCode+contactNumber,
-          enquirerEmail:'atul@sakshemit.com',
-          enquiryMessage: requirement,
-          productName:productname,
-          quantity: quantity,
-          unit: Unit,
-          buyer: { id: '651266a6be013b38a26b35bf' },
-          status: 'New',
-          frequencytype: lol
-        }
-        document.getElementById("postBuyreq").reset();
+        // let payload = {
+        //   enquirerName: 'Atulyadav',
+        //   enquirerContactNumber: countryCode+contactNumber,
+        //   enquirerEmail:'atul@sakshemit.com',
+        //   enquiryMessage: requirement,
+        //   productName:productname,
+        //   quantity: quantity,
+        //   unit: Unit,
+        //   buyer: { id: '651266a6be013b38a26b35bf' },
+        //   status: 'New',
+        //   frequencytype: lol
+        // }
+        // document.getElementById("postBuyreq").reset();
 
        // formdata.frequencytype=lol;
        var url="<?php echo API_URL?>api/enquiries";

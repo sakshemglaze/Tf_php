@@ -80,7 +80,7 @@ fetch(url, {
                 <div class="col-lg-6">
                   <label for="" class="form-label fw-semibold fs-5">Describe in few words *</label>
                   <textarea name=""  name="description" class="form-control" id="" cols="30" rows="6"
-                    placeholder="Please include_once product name, order quantity, usage, special request if any in your inquery."></textarea>
+                  placeholder="Please provide the product name, order quantity, intended usage, and any special requests or details you would like to include."></textarea>
                 </div>
                 <div class="col-lg-6">
                   <div class="row gy-4">
@@ -111,7 +111,7 @@ fetch(url, {
                     <!-- <app-loadp *ngIf="requirementService.spannerval" style="height: 50%; width: 60%; margin-left: -5px;"></app-loadp> -->
                     <div class="col-lg-12">
                       <button (click)="this.requirementService.onClickSubmitRequirement()"
-              class="btn-primary-gradiant px-md-5 py-2 rounded-10 fs-5 fwbold mt-3 mb-3">Send Inquiry</button>
+              class="btn-primary-gradiant px-md-5 py-2 rounded-10 fs-5 fwbold mt-3 mb-3">Send Inquiry </button>
             
                     </div>
                   </div>
@@ -283,7 +283,7 @@ function sendOtp($contenctNo,$formdata){
       'enquirerContactNumber' => $countryCode . $contactNumber,
       'enquiryMessage' => $requirement,
       'enquirer_email' => $enquirer_email,
-      'status' => 'New',
+      'status' => 'Pending for Approval',
       'attechmentDoc'=>$attechmentDoc,
     );
 

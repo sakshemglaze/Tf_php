@@ -105,14 +105,14 @@
                <?php echo $data1->productName ?>
               </h1>
               <span class="fwbold fs-3 text-red">
-                <?php if (isset($data1->Price) && (isset($data1->maxPrice) == null || isset($data1->maxPrice) == '')) : ?>
+                <?php if (isset($data1->Price) && $data1->Price !=0 && (isset($data1->maxPrice) == null || isset($data1->maxPrice) == '' )) : ?>
                   <strong>Price:</strong> <?php echo $prodDetails['price']; ?>
                 <?php endif; ?>
-                <?php if (isset($data1->maxPrice) && (isset($data1->Price) == null || isset($data1->Price) == '')) : ?> 
+                <?php if (isset($data1->maxPrice) && $data1->maxPrice !=0 && (isset($data1->Price) == null || isset($data1->Price) == '')) : ?> 
                 <strong>Price:</strong><?php echo $data1->maxPrice; 
                 endif; ?> 
 
-                <?php if (isset($data1->price) && isset($data1->price) != '' && isset($data1->maxPrice) && isset($data1->maxPrice) != '') : ?>  
+                <?php if (isset($data1->price) && isset($data1->price) != '' && isset($data1->maxPrice) && isset($data1->maxPrice) != '' && isset($data1->maxPrice) == 0) : ?>  
                   <strong>Price:</strong> <?php echo $data1->price . '-' . $data1->maxPrice; ?> <?php endif; ?>
                 <?php if ($data1->currency != '') : ?>  
                  <?php echo $data1->currency?> / Piece
@@ -188,7 +188,7 @@
                     <?php if($data1->seller->sellerTrustStamp==1):?>
                       <div class="d-flex align-items-center me-3">
                         <img src="<?php echo BASE_URL; ?>assets/images/crown.png" class="me-1" alt="premium" />
-                        <span>Premium Supplier</span>
+                        <span>Premium Seller</span>
                       </div>
                       <?php endif;?>
                       <?php if($data1->seller->isVerifiedSeller==1):?>
@@ -657,7 +657,7 @@ function sendOtp($contenctNo,$formdata){
       'enquirerContactNumber' => $countryCode . $contactNumber,
       'enquiryMessage' => $requirement,
       'enquirerEmail' => $enquirer_email,
-      'status' => 'New',
+      'status' => 'Pending for Approval',
       "enquirerName"=>""
     );
 
@@ -684,7 +684,7 @@ function sendOtp($contenctNo,$formdata){
       'productName' => $productName,
       'quantity' => $quantity,
       'unit' => $quantityUnit,
-      'status' => 'New',
+      'status' => 'Pending for Approval',
       'frequencytype' => $frequencytype,
       'enquirerName'=>''
     );

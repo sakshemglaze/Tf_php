@@ -544,7 +544,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     'productName' => $productName,
     'quantity' => $quantity,
     'unit' => $quantityUnit,
-    'status' => 'New',
+    'status' => 'Pending for Approval',
     'frequencytype' => $frequencytype,
     'enquirerName'=>''
   );

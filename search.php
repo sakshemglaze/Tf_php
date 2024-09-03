@@ -617,6 +617,7 @@ include_once 'catmetas.php';
             ?>
             <div id="data-container" class="row gy-4">
               <?php
+               $productnameforenqry='';
               foreach ($prod as $inde => $onep) {
                 $indexr=$inde;
                         
@@ -626,6 +627,7 @@ include_once 'catmetas.php';
                   $getreltedprod = get('api/guest/products/by-seller-related/' . $reletedselId, true);
                   $reletedSubCategory = [];
                   $arrayOfRelsubcat = [];
+                 
                   $arrayRprod = json_decode($getreltedprod);
                   if($arrayRprod!=null){      
                     foreach ($arrayRprod as $index => $relProd) {
@@ -633,16 +635,20 @@ include_once 'catmetas.php';
                       if (is_array($relProd) && count($relProd) != 0) {
                         foreach ($relProd as $Sprod) {
                           $arrayOfRelsubcat[] = $Sprod->productSubcategoryName;
-                                    
+                         
                         }
                       }
                     }
                   }
+
+                      
                       $reletedSubCategory = array_unique($arrayOfRelsubcat);
                       $modalId = 'popuppluscardModal' . $indexr;
                       ?>
                       <div class= "col-lg-6 ">
                         <?php
+                        $Mproductnameforenqry=$onep['productName'];
+                        $PmodalId='popuppluscardModalproduct' . $indexr;
                         include 'product.php';  
                         ?>
                       </div>
@@ -826,9 +832,10 @@ include_once 'catmetas.php';
               'productName' => $productName,
               'quantity' => $quantity,
               'unit' => $quantityUnit,
-              'status' => 'New',
+              'status' => "Pending for Approval",
               'frequencytype' => $frequencytype,
               'enquirerName'=>''
+              
             );
 
   

@@ -83,7 +83,7 @@ foreach ($data1 as $category) {
  if(count($category->productsCategories)>0){
  // print_r($category->productsCategories);
    $i= $i + 1;
-    echo '<div class="row  gy-4 bg-white industy_1">';
+    echo '<div class="row  gy-4 bg-white">';
     echo '<div class="col-lg-12">';
     echo '<h1 class="text-center fwbold text-uppercase text-black"><a href="' . $urlService->getIndustryUrl($category->industryName, $category->id) .'">' . $category->industryName . '</a></h1>';
     echo '</div>';
@@ -114,7 +114,12 @@ foreach ($data1 as $category) {
      // print_r($cat->productsSubcategories);
         echo '<div class="col-lg-4">';
         echo '<div class="d-flex align-items-center gap-2">';
-        $catImage = IMAGE_URL . $cat->image->id . ".webp";
+        if(isset($cat->image->id)){
+          $catImage = IMAGE_URL . $cat->image->id . ".webp";
+        }else{
+          $catImage="https://www.tradersfind.com/assets/images/TradersFind.webp";
+        }
+       
         echo '<a href="' . $urlService->getGroupCategoryUrl($cat->categoryName, $cat->id) . '"> <img data-src="' . $catImage . '" class="lazy" alt="Category" width="140px" /> </a>';
         echo '<div class="inddetails">';
         echo '<h2 class="fs-6 fwbold"><a href="' . $urlService->getGroupCategoryUrl($cat->categoryName, $cat->id) . '" title="' . $cat->categoryName . '">' . $cat->categoryName . '</a></h2>';
@@ -149,7 +154,12 @@ foreach ($data1 as $category) {
             echo '<li>';
               echo '<a href="' . $urlService->getGroupCategoryUrl($cat->categoryName, $cat->id) . '" class="align-items-center flex-row d-flex gap-3 flex-wrap flex-md-nowrap  justify-content-md-start">';
                 echo '<div class="pro_image">';
-                  echo'<img data-src="' . IMAGE_URL . $cat->image->id . '.webp" class="lazy"' . 'alt="Category" width="140px"/>';
+                if(isset($cat->image->id)){
+                  $picId= IMAGE_URL . $cat->image->id . ".webp";
+                }else{
+                  $picId="https://www.tradersfind.com/assets/images/TradersFind.webp";
+                }
+                  echo'<img data-src="' . $picId . '" class="lazy"' . 'alt="Category" width="140px"/>';
                 echo'</div>';
                 echo'<h2 class="fs-6 fw-bold">' . $cat->categoryName .'</h2>';
               echo'</a>';
@@ -167,7 +177,7 @@ foreach ($data1 as $category) {
         }
 }
 ?>
-<div class="  gy-4 bg-white" id="industriesContainer"> </div>
+<div class="row  gy-4 bg-white" id="industriesContainer"> </div>
 </section>
 <input type="hidden" id="currentPage" value="<?php echo $page; ?>">
 
@@ -261,7 +271,7 @@ include_once "footer.php";
 function renderIndustries(industries) {
   industries.forEach(function(category) {
     var industryDiv = document.createElement('div');
-    industryDiv.classList.add('row', 'gy-4', 'bg-white', 'industy_1', 'industy_2' );
+    industryDiv.classList.add('row', 'gy-4', 'bg-white');
 
     var industryTitleDiv = document.createElement('div');
     industryTitleDiv.classList.add('col-lg-12');
@@ -412,7 +422,7 @@ function renderIndustries(industries) {
 
       var proImage = document.createElement('img');
       proImage.setAttribute('src', IMAGE_URL + cat.image.id + '.webp');
-      proImage.classList.add('lazy', 'img-cat');
+      proImage.classList.add('lazy');
       proImage.alt = 'Category';
       //proImage.width = '140px';
 
