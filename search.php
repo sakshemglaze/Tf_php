@@ -437,57 +437,31 @@ include_once 'catmetas.php';
           <div class="card card-shadow myUL border-0">
             <?php if(count($subcategorys) > 1) { ?>
             <div class="card-body">
-              <div class="row">
+              <!-- <div class="row">
                 <div class="col">
                   <button class="btn btn-success btn-sm" onclick="applyFilter()">Apply Filter</button>
                 </div>
                 <div class="col">
                   <button class="btn btn-danger btn-sm" onclick="clearFilter()">Clear Filter</button>
                 </div>
-              </div>
-              <label for="subCategories"><u>Categories</u></label>  
+              </div> -->
+              <label for="subCategories"><u> <h4>Related Categories</h4></u></label>  
               <div class="left_slide_card_body">
-                <?php foreach($subcategorys as $subcate) { ?>
-                <div class="form-check">
-       
-                <input class="form-check-input" onclick="filterSubcat('<?php echo $subcate;?>')" type="checkbox" value="<?php echo $subcate; ?>"/>
-                <label class="form-check-label"><?php echo $subcate; ?></label>
-  
-              </div>
+              <?php foreach($subcategorys as $subcate) { 
+                $urlforfiltercat = $urlService->getCategoryUrl($subcate);
+              ?>
+                <div class="form-check my-2">
+                  <a href="<?php echo "/" . $urlforfiltercat; ?>" class="text-decoration-none">
+                    <label class="form-check-label"><?php echo $subcate; ?></label>
+                  </a>
+                </div>
               <?php } ?>
+
             </div>
           </div>
           <?php } ?>
         </div>
 
-        <script>
-          var selectedSubcategories = [];
-          function filterSubcat(subcategory) {
-            var index = selectedSubcategories.indexOf(subcategory);
-            if (index === -1) {
-            selectedSubcategories.push(subcategory);
-            } else {
-            selectedSubcategories.splice(index, 1);
-            }
-          }
-
-          function applyFilter() {
-
-            console.log(selectedSubcategories);
-            window.location.href =  window.location.href;
-            document.getElementById('productSubCategoryFilter').value = selectedSubcategories;
-    
-          }
-
-          function clearFilter() {
-            selectedSubcategories = [];
-            // Uncheck all checkboxes
-            var checkboxes = document.querySelectorAll('.form-check-input');
-            checkboxes.forEach(function(checkbox) {
-              checkbox.checked = false;
-            });
-          }
-        </script>
         <?php
         //$imagePath = $isMobile ? 'assets/images/poster1.webp' : 'assets/images/poster1.gif';
         if(!$isMobile ) {
