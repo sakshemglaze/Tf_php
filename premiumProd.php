@@ -87,30 +87,7 @@
                                         <span aria-hidden="true"><i class="bi bi-plus" style="font-size: 20px; "></i></span>
                                     </button>
                                     </span>
-                                    <div class="modal fade" id="<?php echo $modalId1; ?>" tabindex="-1" aria-labelledby="<?php echo $modalId1; ?>Label" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="<?php echo $modalId1; ?>Label" style="color:black;">Other Categories</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <?php
-                                                    $formattedString = '';
-                                                    foreach ($reletedSubCategoryS as $index => $subcategory2) {
-                                                    $url = $urlService->getCategoryUrl($subcategory2);
-                                                    if ($index == 0) {
-                                                    $formattedString .= '<a href="' . $url . '">' . $subcategory2 . '</a>';
-                                                    } else {
-                                                    $formattedString .= ' <a  href="' . $url . '"> |' . $subcategory2 . '</a>';
-                                                    }
-                                                    }
-                                                    echo "<Div style='margin-top: 5px;'>" . $formattedString . "</Div>";
-                                                    ?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                   
                                      <?php }?>
                                 </div>
                                 <div class="text-white mt-3">
@@ -197,6 +174,9 @@
             </div>
         </div>
     </div>
+   
+
+                                     
     <!-- JavaScript code to open the popup card -->
     <script>
         function openPopup() {

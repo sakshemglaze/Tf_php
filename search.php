@@ -437,57 +437,31 @@ include_once 'catmetas.php';
           <div class="card card-shadow myUL border-0">
             <?php if(count($subcategorys) > 1) { ?>
             <div class="card-body">
-              <div class="row">
+              <!-- <div class="row">
                 <div class="col">
                   <button class="btn btn-success btn-sm" onclick="applyFilter()">Apply Filter</button>
                 </div>
                 <div class="col">
                   <button class="btn btn-danger btn-sm" onclick="clearFilter()">Clear Filter</button>
                 </div>
-              </div>
-              <label for="subCategories"><u>Categories</u></label>  
+              </div> -->
+              <label for="subCategories"><u> <h4>Related Categories</h4></u></label>  
               <div class="left_slide_card_body">
-                <?php foreach($subcategorys as $subcate) { ?>
-                <div class="form-check">
-       
-                <input class="form-check-input" onclick="filterSubcat('<?php echo $subcate;?>')" type="checkbox" value="<?php echo $subcate; ?>"/>
-                <label class="form-check-label"><?php echo $subcate; ?></label>
-  
-              </div>
+              <?php foreach($subcategorys as $subcate) { 
+                $urlforfiltercat = $urlService->getCategoryUrl($subcate);
+              ?>
+                <div class="form-check my-2">
+                  <a href="<?php echo "/" . $urlforfiltercat; ?>" class="text-decoration-none">
+                    <label class="form-check-label"><?php echo $subcate; ?></label>
+                  </a>
+                </div>
               <?php } ?>
+
             </div>
           </div>
           <?php } ?>
         </div>
 
-        <script>
-          var selectedSubcategories = [];
-          function filterSubcat(subcategory) {
-            var index = selectedSubcategories.indexOf(subcategory);
-            if (index === -1) {
-            selectedSubcategories.push(subcategory);
-            } else {
-            selectedSubcategories.splice(index, 1);
-            }
-          }
-
-          function applyFilter() {
-
-            console.log(selectedSubcategories);
-            window.location.href =  window.location.href;
-            document.getElementById('productSubCategoryFilter').value = selectedSubcategories;
-    
-          }
-
-          function clearFilter() {
-            selectedSubcategories = [];
-            // Uncheck all checkboxes
-            var checkboxes = document.querySelectorAll('.form-check-input');
-            checkboxes.forEach(function(checkbox) {
-              checkbox.checked = false;
-            });
-          }
-        </script>
         <?php
         //$imagePath = $isMobile ? 'assets/images/poster1.webp' : 'assets/images/poster1.gif';
         if(!$isMobile ) {
@@ -580,34 +554,93 @@ include_once 'catmetas.php';
           }
         </script>
 
-        <?php
-                            
-        if($data['sponsoredProduct']!=null){
-        $premiumprod=$data['sponsoredProduct'];
-        $reletedselId=$premiumprod["id"] ;
-                           
-        $getreltedprod1 = get('api/guest/products/by-seller-related/' . $reletedselId, true);
-        $reletedSubCategorys = [];
-        $arrayOfRelsubcats = [];
-        $arrayRprod1 = json_decode($getreltedprod1);
-                          
-        foreach ($arrayRprod1 as $index => $relProd) {
-            //print_r(gettype($relProd));
-            if (is_array($relProd) && count($relProd) != 0) {
-                  foreach ($relProd as $Sprod) {
-                      $arrayOfRelsubcats[] = $Sprod->productSubcategoryName;
-                                   
-                }
-            }
-        }
-                          
-                          
-        $reletedSubCategoryS = array_unique($arrayOfRelsubcats);
-        $modalId1 = 'popuppluscardModal1' . $indexr;
+<?php
+if ($data['sponsoredProductList'] != null) {
+    $premiumprods = $data['sponsoredProductList'];
+    $modalId1 = '';
+    $relatedSubcategoriesByProduct = []; // Store related subcategories for each product
 
-        //print_r($premiumprod);
-        include_once "premiumProd.php";
+    echo '<div class="owl-carousel carousel-main1">';
+
+    foreach ($premiumprods as $indexs => $premiumprod) {
+        echo "<div>";
+
+        // Print product ID for debugging
+        //print_r($premiumprod["id"]);
+
+        // Ensure there's valid data before proceeding
+        if (!empty($premiumprod)) {
+            $reletedselId = $premiumprod["id"];
+
+            // Fetch related products by seller
+            $getreltedprod1 = get('api/guest/products/by-seller-related/' . $reletedselId, true);
+
+            $reletedSubCategorys = [];
+            $arrayOfRelsubcats = [];
+            $arrayRprod1 = json_decode($getreltedprod1);
+
+            if (!empty($arrayRprod1)) {
+                foreach ($arrayRprod1 as $index => $relProd) {
+                    if (is_array($relProd) && count($relProd) != 0) {
+                        foreach ($relProd as $Sprod) {
+                            $arrayOfRelsubcats[] = $Sprod->productSubcategoryName;
+                        }
+                    }
+                }
+                $reletedSubCategoryS = array_unique($arrayOfRelsubcats);
+                
+                // Save the subcategories for this specific product
+                $relatedSubcategoriesByProduct[$indexs] = $reletedSubCategoryS;
+
+                // Assign a unique modal ID for each item in the carousel
+                $modalId1 = 'popuppluscardModal1_' . $indexs;
+            }
+
+            // Include premium product data
+            include "premiumProd.php";
         }
+        echo "</div>";
+    }
+
+    echo "</div>";
+?>
+
+<!-- Modal Template for each product -->
+<?php foreach ($premiumprods as $indexs => $premiumprod): ?>
+    <?php 
+    $modalId1 = 'popuppluscardModal1_' . $indexs; 
+    $reletedSubCategoryS = isset($relatedSubcategoriesByProduct[$indexs]) ? $relatedSubcategoriesByProduct[$indexs] : [];
+    ?>
+    <div class="modal fade" id="<?php echo $modalId1; ?>" tabindex="-2" aria-labelledby="<?php echo $modalId1; ?>Label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="<?php echo $modalId1; ?>Label" style="color:black;">Other Categories</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <?php
+                    $formattedString = '';
+                    if (!empty($reletedSubCategoryS)) {
+                        foreach ($reletedSubCategoryS as $index => $subcategory2) {
+                            $url = $urlService->getCategoryUrl($subcategory2);
+                            if ($index == 0) {
+                                $formattedString .= '<a href="' . $url . '">' . $subcategory2 . '</a>';
+                            } else {
+                                $formattedString .= ' <a href="' . $url . '"> |' . $subcategory2 . '</a>';
+                            }
+                        }
+                    }
+                    echo "<div style='margin-top: 5px;'>" . $formattedString . "</div>";
+                    ?>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
+<?php } 
+
+        
         //print_r($data);
                         
         foreach ($data as $inde1 => $prod) {

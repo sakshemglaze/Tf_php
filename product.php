@@ -185,9 +185,9 @@
                                                 foreach ($reletedSubCategory as $index => $subcategory1) {
                                                 $url = $urlService->getCategoryUrl($subcategory1);
                                                     if ($index == 0) {
-                                                $formattedString .= '<a href="' . $url . '">' . $subcategory1 . '</a>';
+                                                $formattedString .= '<a href="/' . $url . '">' . $subcategory1 . '</a>';
                                                 } else {
-                                                $formattedString .= ' | <a href="' . $url . '">' . $subcategory1 . '</a>';
+                                                $formattedString .= ' | <a href="/' . $url . '">' . $subcategory1 . '</a>';
                                                 }
                                                 }
                                                 echo "<h5 style='margin-top: 5px;'>" . $formattedString . "</h5>";
