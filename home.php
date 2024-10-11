@@ -61,9 +61,9 @@ include "home-search.php"
     <?php
     include_once "post.php";
     $midBanner=get('api/guest/banners-by-header',false,false);
-    $fin=json_decode($midBanner);
+    $midBanners=json_decode($midBanner);
     
-    foreach($fin as $index=> $mbanner){
+    foreach($midBanners as $index=> $mbanner){
       
       $midbanUrl=IMAGE_URL.$mbanner->image->id.'.webp';
         ?>
@@ -604,7 +604,7 @@ include_once 'post.php';
            
             // Output item content here, you can access $items[$j] to get each item
             echo '<div class="position-relative bg-transparent swiper2 p-2">';
-            echo '<img src="'.BASE_URL . $items[$j] . '" width="209" height="80" alt="" class="w-100 img-fluid" />';           
+            echo '<img src="'.BASE_URL . $items[$j] . '" width="209" height="80" alt="'.$state[$j].'" class="w-100 img-fluid" />';           
             echo '<a href="/search/'.strtolower(str_replace(" ","-",
             $state[$j])).'">';
             echo '<h4>' . $state[$j] . '</h4>';
@@ -716,26 +716,26 @@ include_once 'post.php';
 
     <div class="owl-carousel carousel-main">
         <span class="brand-box brand-box2">
-          <img src="<?php echo BASE_URL; ?>assets/images/brands/1.png" width="180" height="48" class="" alt="brand" />
+          <img src="<?php echo BASE_URL; ?>assets/images/brands/1.png" width="180" height="48" class="" alt="brand1" />
         </span>
         <span class="brand-box brand-box2">
-          <img src="<?php echo BASE_URL; ?>assets/images/brands/2.png" width="185" height="124" class="" alt="" />
+          <img src="<?php echo BASE_URL; ?>assets/images/brands/2.png" width="185" height="124" class="" alt="brand2" />
         </span>
         <span class="brand-box brand-box2">
           <img src="<?php echo BASE_URL; ?>assets/images/brands/3.png" width="185" height="124" class=""
-               alt="brand" />
+               alt="brand3" />
         </span>
         <span class="brand-box brand-box2">
           <img src="<?php echo BASE_URL; ?>assets/images/brands/4.png" width="185" height="124" class=""
-               alt="brand" />
+               alt="brand4" />
         </span>
         <span class="brand-box brand-box2">
           <img src="<?php echo BASE_URL; ?>assets/images/brands/5.png" width="185" height="124" class=""
-               alt="brand" />
+               alt="brand5" />
         </span>
         <span class="brand-box brand-box2">
           <img src="<?php echo BASE_URL; ?>assets/images/brands/6.png" width="185" height="124" class=""
-               alt="brand" />
+               alt="brand6" />
         </span>
 </div>    
 </section>

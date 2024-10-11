@@ -57,7 +57,7 @@
           <img src="<?php echo BASE_URL; ?>assets/images/whatsapp-chat.webp" alt="login" width="186" height="44" /></a>
         <div class="login-button-top" *ngIf="this.userName==''">
         <a href="<?php echo BASE_URL ?>register-your-business">Add Your Business</a>&nbsp;
-<img src="<?php echo BASE_URL; ?>assets/images/business.png" alt="" width="16" height="16" />
+<img src="<?php echo BASE_URL; ?>assets/images/business.png" alt="business" width="16" height="16" />
 
         </div>  
         </div>

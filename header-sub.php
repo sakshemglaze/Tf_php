@@ -191,7 +191,7 @@ function submitform(){
           <img src="<?php echo BASE_URL; ?>assets/images/whatsapp-chat.webp" alt="Whatsapp_chat" style="height: 46px;"></a>
         <div class="login-button-top d-flex align-items-center mw-200" *ngIf="!this.storageService.getItem('login')">
         <a href="<?php echo BASE_URL ?>register-your-business">Add Your Business</a>&nbsp;
-        <img src="<?php echo BASE_URL; ?>assets/images/business.png" alt="" width="16" height="16" />
+        <img src="<?php echo BASE_URL; ?>assets/images/business.png" alt="business" width="16" height="16" />
         </div>
 </div>
 </div>
