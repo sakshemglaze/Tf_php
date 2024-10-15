@@ -29,7 +29,6 @@
             <li><a href="https://www.instagram.com/tradersfind" target="_blank"><img src="<?php echo BASE_URL; ?>assets/images/instagram.webp" width="100%" height="100%" alt="Instagram" /></a> </li>
             <li><a href="https://twitter.com/tradersfind" target="_blank"><img src="<?php echo BASE_URL; ?>assets/images/twitter_icon.webp"  width="100%" height="100%" alt="Twitter" /></a> </li>
             <li><a href="https://pinterest.com/tradersfind" target="_blank"><img src="<?php echo BASE_URL; ?>assets/images/pinterest.webp" width="100%" height="100%" alt="Pinterest" /></a> </li>
-            <li><a href="https://www.linkedin.com/company/tradersfind" target="_blank"><img src="<?php echo BASE_URL; ?>assets/images/LinkedIn_icon.webp" width="100%" height="100%" alt="Pinterest" /></a> </li>
             <li><a href="https://www.youtube.com/@TradersFind" target="_blank"><img src="<?php echo BASE_URL; ?>assets/images/youtube.webp" width="100%" height="100%" alt="Pinterest" /></a> </li>
           </ul>
         </div>
