@@ -40,8 +40,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
 <?php
-include "header.php";
-include "home-search.php"
+ function isMobilehome() {
+  return preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
+}
+$headerCheck=isMobilehome();
+if($headerCheck){
+ // include "header.php";
+  //include "home-search.php";
+   include "header-mobile.php";
+   $numberofBlog=1;
+}else{
+  // include "header-mobile.php";
+  include "header.php";
+  include "home-search.php";
+  $numberofBlog=3;
+}
+
+
 ?>
 
 
@@ -260,331 +275,11 @@ fetch(url, {
   //console.log(payload);
   }
 </script>
-<section class="easysource my-4 py-2">
-  <div class="container">
-    <div class="row gy-4">
-      <div class="col-lg-6">
-        <h3><b>CONNECT WITH VERIFIED SELLERS FOR YOUR REQUIREMENTS</b></h3>
-        <p class="mb-3"><br>Provide your specific service & product requirements & connect with verified sellers for your specific
-          needs.</p>
 
-        <ul class="sellers_text">
-          <li>Time and Effort Saving </li>
-          <li>Connect with Verified Sellers</li>
-          <li>Assured Product Quality</li>
-          <li>Competitive Pricing</li>
-        </ul>
-        <br>
-        <a  href="<?php echo  BASE_URL ?>about-us" title="Learn More" class="mt-5"><b>Learn More </b></a>
-      </div>
-      <div class="col-lg-6">
-        <div class="card-transparent">
-          <h3 class="fs-4">Let us know what you need</h3>
-          <form method="post" id="postBuyreq">
-
-            <input type="text" class="form-control" name="productName"
-              placeholder="Product Name / Service" />
-            <div class="row mt-1">
-              <div class="col-md-6">
-                <div class="mb-3">
-            
-                  <label>Quantity</label>
-                  <input type="text" class="form-control" name="quantity"
-                    placeholder="Estimated Order Quantity">
-
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="mb-3">
-                  <label for="unit">Unit</label>
-                  <select name="quantityUnit" class="form-control"
-                    placeholder="eg:  Dozen,  Piece(s),  Tonr">
-                    <?php
-                 
-                 $context = stream_context_create([
-                  'ssl' => [
-                      'verify_peer' => false,
-                      'verify_peer_name' => false,
-                  ],
-              ]);
-              $resUnit = file_get_contents(BASE_URL . 'assets/testingJson/Units.json', false, $context);
-
-                      $allunit=json_decode($resUnit);
-                      foreach($allunit as $unit){
-                             ?>
-                             <option value="<?php echo $unit;?>">
-                            <?php echo $unit;?>
-                            </option>
-                             <?php
-                      }
-                      ?>                  </select>
-
-                </div>
-              </div>
-            </div>
-            <textarea  class="form-control" cols="30" rows="3"
-              placeholder="Product Description and Quantity" name="requirement"></textarea>
-              <div class="row mt-3">
-                <div class="col-md-6">
-                  <div class="mb-3"> &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="radio" id="onetime" name="frequencytype" value="onetime" checked>&nbsp;&nbsp;<label for="onetime">One Time</label>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="mb-3"> &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="radio" id="recuring" name="frequencytype" value="recuring">&nbsp;&nbsp;<label for="recuring">Recurring</label>
-                  </div>
-                </div>
-              </div>
-            <div class="row mt-1">
-              <div class="col-lg-6">
-                <div class="input-group">
-
-                  <select area-label="countryCode" name="countryCode" class="form-control mxw-50">
-                
-                  <?php
-                      $rescuntrycode=file_get_contents( BASE_URL.'assets/testingJson/country_codes_v1.json',false, $context);
-                      $allcuntrycode=json_decode($rescuntrycode);
-                      foreach($allcuntrycode as $unit){
-                             ?>
-                             <option value="<?php echo $unit->code;?>">
-                            <?php echo $unit->code.'-'.$unit->name;?>
-                            </option>
-                             <?php
-                      }
-                      ?>
-                  
-                    
-                  </select>
-
-                  <input type="number" name="contactNumber" class="form-control" placeholder="Mobile"
-                    required="number" />
-                </div>
-              </div>
-              <!--<app-loadp *ngIf="requirementService.spannerval" style="height: 50%; width: 60%; margin-left: -5px;"></app-loadp>-->
-              <div class="col-lg-6">
-                <button class="btn-primary-gradiant w-100 rounded-2 mt10">
-                  Post Your Request
-                </button>
-              </div>
-            </div>
-          </form>
-          <script>
-              var lol='';
-    var frequencytype=document.getElementsByName('frequencytype');
-  frequencytype.forEach(function(radioButton) {
-        radioButton.addEventListener('change', function() {
-            var selectedValue = this.value;
-            lol=selectedValue;
-            console.log(selectedValue); // Log the selected value
-        });
-    });
-
-   function otpLogin(otpAuthData, mobileNumber,formdata) {
-    console.log(mobileNumber);
-      const myObject = new StorageService();
-      $.ajax({
-        url: "https://api.tradersfind.com/api/authenticate-otp",
-  method: "POST",
-  dataType: "json",
-  contentType: "application/json",
-  data: JSON.stringify(otpAuthData),
-  success: function (data) {
-                       console.log(data);
-                       myObject.setItem('userAccessToken', data['id_token']);
-                       myObject.setItem('isLoggedIn', '1');
-                       myObject.setItem('loggedVia', 'mobile');
-                       myObject.setItem('userData', mobileNumber);
-                       myObject.setItem('userMobile', mobileNumber);
-                       myObject.setItem('login', mobileNumber);
-                       myObject.setItem('userFname', "User");
-                       submitRequirement(formdata);
-    
-                    },
-                    error: function (xhr, status, error) {
-                        console.error(xhr.responseText);
-                    }
-                });
-      
-    }
-    function otpRegister(otpAuthData, mobileNumber,formdata){
-     
-      const myObject1 = new StorageService();
-      $.ajax({
-        url: "https://api.tradersfind.com/api/register-otp",
-  method: "POST",
-  dataType: "json",
-  contentType: "application/json",
-  data: JSON.stringify(otpAuthData),
-  success: function (data) {
-                       console.log(data);
-                       myObject1.setItem('userAccessToken', data['id_token']);
-                       myObject1.setItem('isLoggedIn', '1');
-                       myObject1.setItem('loggedVia', 'mobile');
-                       myObject1.setItem('userData', mobileNumber);
-                       myObject1.setItem('userMobile', mobileNumber);
-                       myObject1.setItem('login', mobileNumber);
-                       myObject1.setItem('userFname', "User");
-                       submitRequirement(formdata);
-    
-                    },
-                    error: function (xhr, status, error) {
-                      console.log("test reg")
-                        console.error(xhr.responseText);
-                    }
-                });
-  }
-    
-    
-
-    function verifyOtp(event,mobnumber,formdata){
-           // var otm=document.getElementById('otp').value;
-           // console.log(mobnumber);
-           var newmobnum='+'+mobnumber;
-           let otpAuthData = {
-              phone: newmobnum,
-              otpValue: event,
-              login: newmobnum,
-              isMobileLogin: true,
-              langKey: "en"
-    };
-           var otpres='';
-            $.ajax({
-                    url: "https://api.tradersfind.com/api/guest/users/"+'+'+mobnumber,
-                    dataType: "json",
-                    data: { },
-                    success: function (data) {
-                       
-                        if (data != "NotFound") {
-          //console.log(otpAuthData,mobileNumber)
-          otpLogin(otpAuthData, newmobnum,formdata);
-          console.log("1");
-        }
-        else {
-          otpRegister(otpAuthData, newmobnum,formdata);
-          console.log("2");
-        }
-                    },
-                    error: function (xhr, status, error) {
-                        if(xhr.responseText!='NotFound'){
-                          otpLogin(otpAuthData, newmobnum,formdata);
-                        }else{
-                          console.log("tttttttttt");
-                          otpRegister(otpAuthData, newmobnum,formdata);
-                        }
-                    }
-                });
-            closePopup();
-
-        }
-
-       function startfomsubmition(){
-
-        }
-          </script>
-
-<?php
-function sendOtp($contenctNo,$formdata){
- 
-
-  $payload=array('phone'=> $contenctNo, 'loginmethod'=>'WHATSAPP');
-  $data123=post(
-  'api/otps',
-  $payload,
-  false,
-  //isWhatsapp ? { type: 'whatsapp' } : {type: 'email'},
-  array("type"=> 'WHATSAPP'),
-  false);
-  //print_r($data123->title);
-  if(isset($data123->title)&& $data123->title=='ContactNo not Valid.'){
-   
-    echo "<script>
-    if(confirm('Please click on OK and send a message (Register Me) on our whatsapp number (+971569773623) to register.')) {
-        window.open('https://api.whatsapp.com/send?phone=971569773623&text=Register%20Me', '_blank');
-    }
-  </script>";
-  }else{
-    if(isset($data123->title) && $data123->title=='OTP Already generated for the phone'){
-
-      include_once 'otp.php';
-      //  //echo $contenctNo;
-      echo '<script>document.getElementById("popup-card-otp").style.display = "block";</script>';
-      $message="OTP Already generated for the phone";
-      $type="success";
-      echo "
-      <script>
-          $(document).ready(function() {
-              toastr.$type('$message');
-          });
-      </script>";
-
-      
-    }else{
-      //print_r($data123);
-      include_once 'otp.php';
-      //echo $contenctNo;
-      echo '<script>document.getElementById("popup-card-otp").style.display = "block";</script>';
-    }
-  }
-}
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  // Retrieve form data
-  if(isset($_POST['productName'])&isset($_POST['contactNumber'])){
-  $productName = $_POST['productName'];
-  $quantity = $_POST['quantity'];
-  $quantityUnit = $_POST['quantityUnit'];
-  $requirement = $_POST['requirement'];
-  $frequencytype = $_POST['frequencytype'];
-  $countryCode = $_POST['countryCode'];
-  $contactNumber = $_POST['contactNumber'];
-  
-  $formdata = array(
-    'enquirerContactNumber' => $countryCode . $contactNumber,
-    'enquiryMessage' => $requirement,
-    'productName' => $productName,
-    'quantity' => $quantity,
-    'unit' => $quantityUnit,
-    'status' => 'Pending for Approval',
-    'frequencytype' => $frequencytype,
-    'enquirerName'=>''
-  );
-
-//echo "Form submitted successfully!";
-// echo $productName;
-// header("Location: post-buy-requirements");
-$contenctNo=$countryCode.$contactNumber;
-include_once 'post.php';
-//print_r($contenctNo);
-
-  $respons=sendOtp($contenctNo,$formdata);
-}else{
-  if(isset($_POST['search']) && $_POST['search']!=''){
-    if(isset($_POST['location']) && $_POST['location']!='' && $_POST['location']!='UAE'){
-      $redirect_url = str_replace(' ','-',(BASE_URL.'search/'.$_POST['search'].'/'.$_POST['location']));
-      echo '<script>window.location.href = "'.$redirect_url.'";</script>';
-    }else{
-    $redirect_url = str_replace(' ','-',(BASE_URL.'search/'.$_POST['search']));
-   echo '<script>window.location.href = "'.$redirect_url.'";</script>';
-    }
-  }
-
-}
-} else {
-
- 
-}
-?>
-
-
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <section class="bg-grey bg-grey_22 p-4 my-5">
   <h3 class="border-center text-center mb-4">FIND SELLERS FROM TOP EMIRATES </h3>
-  <div class="owl-carousel carousel-main4">
+  <div class="owl-carousel carousel-main4 ">
     <?php
    $items=array('assets/images/c1.png','./assets/images/c2.png',
    './assets/images/c3.png','./assets/images/c4.png',
@@ -630,7 +325,7 @@ include_once 'post.php';
   <h3 class="border-center text-center mb-4">
     EXPLORE PREMIUM SELLERS
   </h3>
-  <div class="owl-carousel carousel-main4">
+  <div class="owl-carousel carousel-main4 border-center text-center">
     <div class="p-2 col-md-3">
           <span class=""><img src="<?php echo BASE_URL; ?>assets/images/brands/101.png" width="302px" height="159"  alt="Seller"></span>
         </div>
@@ -647,7 +342,7 @@ include_once 'post.php';
   
 </section>
 
-<section class="my-5 logo_slider">
+<!-- <section class="my-5 logo_slider">
   <h3 class="border-center text-center mb-5">
     WHAT OUR HAPPY CLIENTS SAY ABOUT US
   </h3>
@@ -708,7 +403,7 @@ include_once 'post.php';
 
           </div>
   </div>
-</section>
+</section> -->
 
 <section class="bg-grey bg-grey_22 p-4 my-5 logo_slider">
   <h3 class="border-center text-center mb-5">EXPLORE PREMIUM BRANDS</h3>

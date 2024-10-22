@@ -11,7 +11,7 @@ $urlService = new UrlService();
   $blogs=get('api/guest/homeblogs' .'?page=' . '0' . '&size=' .'5', true);
   $jblog=json_decode($blogs);
  
-  foreach(array_slice($jblog,0,3) as $blog){
+  foreach(array_slice($jblog,0,$numberofBlog) as $blog){
   
     $blogimg=IMAGE_URL.$blog->image->id.'.webp';
   ?>

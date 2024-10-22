@@ -222,11 +222,23 @@ include_once 'catmetas.php';
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css" >
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="<?php echo BASE_URL;?>assets/js/jquery-3.6.1.min.js"> </script> -->
-    
+   
 </head>
 <body>
  <section class="container-fluid mt-1">
        <?php 
+      function isMobile() {
+        return preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
+    }
+    
+    // Set $webPageName based on device type
+    if (isMobile()) {
+        $webPageName = 'Search Product Top';
+    } else {
+        $webPageName = 'Search Product Top';
+    }
+    
+    //echo $webPageName;
        include_once "header-sub.php";
        include_once "banner.php";   
        ?>
@@ -285,11 +297,11 @@ include_once 'catmetas.php';
       <div class="sortdescription-card" id="sortdescription-card" style="display:none"> 
   
         <p><?php
-          //print_r($location);
+          
           if(isset($subcategory->locations) && $location !=''){
             foreach($subcategory->locations as $Sdlocation){
-            //     print_r(strtolower($Sdlocation->location));
-            //     print_r($location1);
+           
+           
               if(isset($Sdlocation->location) && strtolower($Sdlocation->location)==strtolower($location1) && isset($Sdlocation->shortDescription) && $Sdlocation->shortDescription !=''){
                 $shortDescription=$Sdlocation->shortDescription;
                 //print_r('ok');
@@ -372,9 +384,7 @@ include_once 'catmetas.php';
               echo '<div id="full-desc" style="display: inline;">' . $shortDescription . '</div>';
             }
           echo '</div>';
-            echo '<button style="color:brown; border: none;" onclick="readmoreSdesc()">
-              view more
-            </button>';
+           
             //print_r('11');
   
         }else if(isset($subcategory->locations)&& $location!='' && $subcategory->locations[0]->location !=null && $subcategory->locations[0]->location!='' ){  
@@ -408,9 +418,7 @@ include_once 'catmetas.php';
             } 
           }
           echo $shortDescription; 
-          echo '<p><button style="color:brown; border: none;" onclick="readmoreSdesc()">
-                 view more
-                </button></p>';
+       
    
         }else{
           if(isset($subcategory->subCategoryName)){
@@ -421,12 +429,12 @@ include_once 'catmetas.php';
               deals. Whether you're looking for any other  $subcategory->subCategoryName 
               product in $location1, TradersFind makes it easy to find the perfect match for...
             </p>";
-            echo '<button style="color:brown; border: none;" onclick="readmoreSdesc()">
-              view more
-            </button>';
+           
           }
         } ?>
- 
+            <button style="color:brown; border: none;" onclick="readmoreSdesc()">
+              view more
+            </button>
       </span>
         <br>
         <?php $subcategorys=$data['subCategories'];
@@ -445,7 +453,7 @@ include_once 'catmetas.php';
                   <button class="btn btn-danger btn-sm" onclick="clearFilter()">Clear Filter</button>
                 </div>
               </div> -->
-              <label for="subCategories"><u> <h4>Related Categories</h4></u></label>  
+              <label for="subCategories"><u> Related Categories</u></label>  
               <div class="left_slide_card_body">
               <?php foreach($subcategorys as $subcate) { 
                 $urlforfiltercat = $urlService->getCategoryUrl($subcate);
@@ -488,8 +496,7 @@ include_once 'catmetas.php';
                   }else{
                   echo '<li ><a href="'.BASE_URL.$urlService->getSubcategoryAllLocUrl($category[0]->categoryName,$subcatName,'all',1) .'" >All UAE</a></li>';
                  
-                  }
-                
+                  }                
                   foreach(($data['states']) as $state){
                     if(!isset($category[0])){
                       if($state!='Other'){
@@ -886,12 +893,18 @@ if ($data['sponsoredProductList'] != null) {
 
         ?>
         <div class="post-request-text ">
-          <?php if($totallength>10){
+          <?php 
+         
+          if($size=5 && $totallength>5){
           ?>
           <div class="text-center my-2" >     
             <button  id="loadMoreBtn"  onclick="lod()"class="btn-primary-gradiant rounded-2 btn-auto" style="display: inline-block;"> LOAD MORE RESULTS ... </button>
         
-            <?php } ?>
+            <?php } else if($totallength>10){
+              ?>
+                          <button  id="loadMoreBtn"  onclick="lod()"class="btn-primary-gradiant rounded-2 btn-auto" style="display: inline-block;"> LOAD MORE RESULTS ... </button>
+             <?php
+              }?>
           </div>
           <section class="easysource my-4 py-2" >
             <?php
@@ -933,8 +946,23 @@ if ($data['sponsoredProductList'] != null) {
       </div>
     </section>
     <script>
+      function isMobileN1() {
+  return /android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos/i.test(navigator.userAgent);
+                }
+      let checkdevise=isMobileN1();
       let page=1;
-      let size=1;
+      
+      let size;
+      let lodsize=1;
+
+      let maxlodsize;
+      if(checkdevise){
+        size=0.5;
+        maxlodsize=5;
+      }else{
+        size=1;
+        maxlodsize=10;
+      }
       var searchtext = "<?php echo isset($subcategory->subCategoryName)?$subcategory->subCategoryName:$subcatName; ?>";
 
       let filterdto1 = <?php echo json_encode($filterDto); ?>;
@@ -994,9 +1022,9 @@ if ($data['sponsoredProductList'] != null) {
       console.error(error);
       });
       page++;
-      size++;
+      lodsize++;
       var tot="<?php echo $totallength;?>"
-      if(tot<=size*10){
+      if(tot<=lodsize*maxlodsize ){
       document.getElementById("loadMoreBtn").style.display='none';
       }
      }
