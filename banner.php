@@ -6,7 +6,7 @@
     <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
         <div class="carousel-inner">
           <?php          
-	//$webPageName = 'Search Product Top';
+	$webPageName = 'Search Product Top';
           require_once 'post.php';
            $responseBanner = post('api/keywords-banner', array($name, $webPageName));
 print_r('w4');
