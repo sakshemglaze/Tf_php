@@ -8,28 +8,29 @@
     <div class="container-fluid">
       <div class="row gy-5">
         <div class="col-lg-3  text-center">
-          <img src="<?php echo BASE_URL; ?>assets/images/help-icon.webp" class="img-fluid" width="60" height="30" alt="help" />
+          <img src="<?php echo BASE_URL; ?>assets/images/help-icon.svg" class="img-fluid" width="60" height="30" alt="help" />
           <h4 class="my-4">Happy to help you!</h4>
           <ul class="mt-4 mb-5 footer_call gap-3">
             <li>
               <a href="tel:+971502943313" class="text-white"><img src="<?php echo BASE_URL; ?>assets/images/call-footer-icon.webp" width="20" height="20" alt="contact no" /> +971 502943313 </a>
             </li>
             <li class="my-1">
-              <a href="tel:+971569773623" class="text-white"><img src="<?php echo BASE_URL; ?>assets/images/whatsapp-footer-icon.webp" width="20" height="20" alt="whatsapp" />
+              <a href="tel:+971569773623" class="text-white"><img src="<?php echo BASE_URL; ?>assets/images/whatsapp-footer-icon.svg" width="20" height="20" alt="whatsapp" />
                 +971 569773623</a>
             </li>
             <li>
-              <a href="tel:+97143465220" class="text-white"><img src="<?php echo BASE_URL; ?>assets/images/mail-footer-icon.webp" width="20" height="15" alt="support no" />
+              <a href="tel:+97143465220" class="text-white"><img src="<?php echo BASE_URL; ?>assets/images/mail-footer-icon.svg" width="20" height="15" alt="support no" />
                 support&#64;tradersfind.com</a>
             </li>
           </ul>
           <!--<small>Keep in touch:</small>-->
           <ul class="d-flex gap-2 justify-content-center footer_social mt-2">
-            <li><a href="https://www.facebook.com/tradersfindb2bportal" target="_blank"><img src="<?php echo BASE_URL; ?>assets/images/facebook.webp" width="100%" height="100%" alt="facebook" /></a></li>
-            <li><a href="https://www.instagram.com/tradersfind" target="_blank"><img src="<?php echo BASE_URL; ?>assets/images/instagram.webp" width="100%" height="100%" alt="Instagram" /></a> </li>
-            <li><a href="https://twitter.com/tradersfind" target="_blank"><img src="<?php echo BASE_URL; ?>assets/images/twitter_icon.webp"  width="100%" height="100%" alt="Twitter" /></a> </li>
-            <li><a href="https://pinterest.com/tradersfind" target="_blank"><img src="<?php echo BASE_URL; ?>assets/images/pinterest.webp" width="100%" height="100%" alt="Pinterest" /></a> </li>
-            <li><a href="https://www.youtube.com/@TradersFind" target="_blank"><img src="<?php echo BASE_URL; ?>assets/images/youtube.webp" width="100%" height="100%" alt="Pinterest" /></a> </li>
+            <li><a href="https://www.facebook.com/tradersfindb2bportal" target="_blank"><img src="<?php echo BASE_URL; ?>assets/images/facebook.svg" width="100%" height="100%" alt="facebook" /></a></li>
+            <li><a href="https://www.instagram.com/tradersfind" target="_blank"><img src="<?php echo BASE_URL; ?>assets/images/instagram.svg" width="100%" height="100%" alt="Instagram" /></a> </li>
+            <li><a href="https://twitter.com/tradersfind" target="_blank"><img src="<?php echo BASE_URL; ?>assets/images/twitter_icon.svg"  width="100%" height="100%" alt="Twitter" /></a> </li>
+            <li><a href="https://pinterest.com/tradersfind" target="_blank"><img src="<?php echo BASE_URL; ?>assets/images/pinterest.svg" width="100%" height="100%" alt="Pinterest" /></a> </li>
+            <!-- <li><a href="https://www.linkedin.com/company/tradersfind" target="_blank"><img src="<?php echo BASE_URL; ?>assets/images/LinkedIn_icon.webp" width="100%" height="100%" alt="Pinterest" /></a> </li> -->
+            <li><a href="https://www.youtube.com/@TradersFind" target="_blank"><img src="<?php echo BASE_URL; ?>assets/images/youtube.svg" width="100%" height="100%" alt="Pinterest" /></a> </li>
           </ul>
         </div>
         <div class="col-lg-9 footer_menu">

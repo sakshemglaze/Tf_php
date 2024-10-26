@@ -281,9 +281,9 @@ fetch(url, {
   <h3 class="border-center text-center mb-4">FIND SELLERS FROM TOP EMIRATES </h3>
   <div class="owl-carousel carousel-main4 ">
     <?php
-   $items=array('assets/images/c1.png','./assets/images/c2.png',
-   './assets/images/c3.png','./assets/images/c4.png',
-   './assets/images/c5.png','./assets/images/c1.png','./assets/images/c3.png');
+   $items=array('assets/images/c1.webp','./assets/images/c2.webp',
+   './assets/images/c3.webp','./assets/images/c4.webp',
+   './assets/images/c5.webp','./assets/images/c1.webp','./assets/images/c3.webp');
    $state=array('DUBAI','ABU DHABI','SHARJAH','AJMAN','FUJAIRAH','RAS AL KHAIMAH','UMM AL QUWAIN');
     $totalItems = count($items);
     $itemsPerSlide = 4;
@@ -327,16 +327,16 @@ fetch(url, {
   </h3>
   <div class="owl-carousel carousel-main4 border-center text-center">
     <div class="p-2 col-md-3">
-          <span class=""><img src="<?php echo BASE_URL; ?>assets/images/brands/101.png" width="302px" height="159"  alt="Seller"></span>
+          <span class=""><img src="<?php echo BASE_URL; ?>assets/images/brands/101.webp" width="302px" height="159"  alt="Seller"></span>
         </div>
     <div class="p-2 col-md-3">
-          <span class=""><img src="<?php echo BASE_URL; ?>assets/images/brands/102.png" width="302px" height="159"alt="Seller"></span>
+          <span class=""><img src="<?php echo BASE_URL; ?>assets/images/brands/102.webp" width="302px" height="159"alt="Seller"></span>
         </div>
     <div class="p-2 col-md-3">
-          <span class=""><img src="<?php echo BASE_URL; ?>assets/images/brands/103.png" width="302px" height="159"  alt="Seller"></span>
+          <span class=""><img src="<?php echo BASE_URL; ?>assets/images/brands/103.webp" width="302px" height="159"  alt="Seller"></span>
         </div>
   <div class="p-2 col-md-3">
-          <span class=""><img src="<?php echo BASE_URL; ?>assets/images/brands/104.png" width="302" height="159"  alt="Seller"></span>
+          <span class=""><img src="<?php echo BASE_URL; ?>assets/images/brands/104.webp" width="302" height="159"  alt="Seller"></span>
         </div>
 </div>
   
@@ -411,25 +411,37 @@ fetch(url, {
 
     <div class="owl-carousel carousel-main">
         <span class="brand-box brand-box2">
-          <img src="<?php echo BASE_URL; ?>assets/images/brands/1.png" width="180" height="48" class="" alt="brand1" />
+          <img src="<?php echo BASE_URL; ?>assets/images/brands/Atlas_color.webp" width="180" height="148" class="" alt="brand1" />
         </span>
         <span class="brand-box brand-box2">
-          <img src="<?php echo BASE_URL; ?>assets/images/brands/2.png" width="185" height="124" class="" alt="brand2" />
+          <img src="<?php echo BASE_URL; ?>assets/images/brands/avk-logo.webp" width="165" height="64" class="" alt="brand2" />
         </span>
         <span class="brand-box brand-box2">
-          <img src="<?php echo BASE_URL; ?>assets/images/brands/3.png" width="185" height="124" class=""
+          <img src="<?php echo BASE_URL; ?>assets/images/brands/georg-fischer-ag.webp" width="185" height="104" class=""
                alt="brand3" />
         </span>
         <span class="brand-box brand-box2">
-          <img src="<?php echo BASE_URL; ?>assets/images/brands/4.png" width="185" height="124" class=""
+          <img src="<?php echo BASE_URL; ?>assets/images/brands/KSB-solutions-for-life.webp" width="185" height="84" class=""
                alt="brand4" />
         </span>
         <span class="brand-box brand-box2">
-          <img src="<?php echo BASE_URL; ?>assets/images/brands/5.png" width="185" height="124" class=""
+          <img src="<?php echo BASE_URL; ?>assets/images/brands/vicrautic.webp" width="170" height="64" class=""
                alt="brand5" />
         </span>
         <span class="brand-box brand-box2">
-          <img src="<?php echo BASE_URL; ?>assets/images/brands/6.png" width="185" height="124" class=""
+          <img src="<?php echo BASE_URL; ?>assets/images/brands/emerson.webp" width="165" height="94" class=""
+               alt="brand6" />
+        </span>
+        <span class="brand-box brand-box2">
+          <img src="<?php echo BASE_URL; ?>assets/images/brands/pngaaa.com.webp" width="170" height="90" class=""
+               alt="brand6" />
+        </span>
+        <span class="brand-box brand-box2">
+          <img src="<?php echo BASE_URL; ?>assets/images/brands/Sika_NoClaim_pos_rgb_30.webp" width="185" height="124" class=""
+               alt="brand6" />
+        </span>
+        <span class="brand-box brand-box2">
+          <img src="<?php echo BASE_URL; ?>assets/images/brands/th_loctite.webp" width="185" height="124" class=""
                alt="brand6" />
         </span>
 </div>    
