@@ -152,7 +152,7 @@
 
                     <h2 class="fwbold fs-4 mt-3">
                       <?php if($data1->seller && $data1->seller->sellerCompanyName ) : ?>
-                     <a href="/<?php echo $urlpro->getSellerUrl($data1->seller->sellerUrl,$data1->seller->id) ?>" target="_blank" class="text-blue"> <?php echo $data1->seller->sellerCompanyName ?> </a></h2>
+                     <a href="/<?php echo $urlpro->getSellerUrl(!empty($data1->seller->sellerUrl) ? $data1->seller->sellerUrl : $data1->seller->sellerCompanyName,$data1->seller->id) ?>" target="_blank" class="text-blue"> <?php echo $data1->seller->sellerCompanyName ?> </a></h2>
                      <?php endif; ?>
                     <div class="fs-5 mt-2">
                       <img class="me-2" src="<?php echo BASE_URL; ?>assets/images/location-3.svg" width="15" alt="location" />
@@ -188,7 +188,7 @@
                     <?php if($data1->seller->sellerTrustStamp==1):?>
                       <div class="d-flex align-items-center me-3">
                         <img src="<?php echo BASE_URL; ?>assets/images/crown.png" class="me-1" alt="premium" />
-                        <span>Premium Seller</span>
+                        <span>Premium Supplier</span>
                       </div>
                       <?php endif;?>
                       <?php if($data1->seller->isVerifiedSeller==1):?>
@@ -203,7 +203,7 @@
                       <?php $maskedService->getMaskedNumber($data1->seller); ?> </button>
                     <div class="d-flex align-items-center w-100 mt-3 gap-2">
                       <a
-                        href=" <?php echo $whatsappUrl->getProductToWhatsapp1($data1->productName,$data1->id,get_object_vars($data1->seller))?>"
+                        href=" <?php echo $whatsappUrl->getProductToWhatsapp($data1->productName,$data1->id,get_object_vars($data1->seller))?>"
                         class="whatsappbtn btn btn-sm w-100" target="_blank">
                         Connect on whatsapp
                       </a>
@@ -622,27 +622,9 @@ function sendOtp($contenctNo,$formdata){
     }
   </script>";
   }else{
-    if(isset($data123->title) && $data123->title=='OTP Already generated for the phone'){
-
-      include_once 'otp.php';
-      //  //echo $contenctNo;
-      echo '<script>document.getElementById("popup-card-otp").style.display = "block";</script>';
-      $message="OTP Already generated for this phone number";
-      $type="success";
-      echo "
-      <script>
-          $(document).ready(function() {
-              toastr.$type('$message');
-          });
-      </script>";
-
-      
-    }else{
-      //print_r($data123);
-      include_once 'otp.php';
-      //echo $contenctNo;
-      echo '<script>document.getElementById("popup-card-otp").style.display = "block";</script>';
-    }
+  include_once 'otp.php';
+ // echo $contenctNo;
+  echo '<script>document.getElementById("popup-card-otp").style.display = "block";</script>';
   }
 }
       if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -656,9 +638,8 @@ function sendOtp($contenctNo,$formdata){
     $formdata = array(
       'enquirerContactNumber' => $countryCode . $contactNumber,
       'enquiryMessage' => $requirement,
-      'enquirerEmail' => $enquirer_email,
-      'status' => 'Pending for Approval',
-      "enquirerName"=>""
+      'enquirer_email' => $enquirer_email,
+      'status' => 'New'
     );
 
   //echo "Form submitted successfully!";
@@ -684,7 +665,7 @@ function sendOtp($contenctNo,$formdata){
       'productName' => $productName,
       'quantity' => $quantity,
       'unit' => $quantityUnit,
-      'status' => 'Pending for Approval',
+      'status' => 'New',
       'frequencytype' => $frequencytype,
       'enquirerName'=>''
     );
