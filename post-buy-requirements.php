@@ -1,8 +1,6 @@
 <?php
 //ob_start();
 include_once 'config.php'; ?>
-<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/postbuyreq.css" />
-<link rel="stylesheet" href="<?php echo BASE_URL; ?>asses/vendors/bootstrap/bootstrap.min.css">
 <script src="services/storegeService.js"></script>
 
 <?php

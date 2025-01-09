@@ -16,6 +16,7 @@
               );
               
               $data1 = json_decode($data);
+              //print_r($data1);
               $new_url = '/not-found';
 
               if(!isset($data1[0]->id)){
@@ -23,8 +24,13 @@
               exit;
               }
              // $data = findActive($data1);
-           // print_r($data1[0]->linkedinUrl);
-              
+            //print_r($data1[0]->logo);
+              if (isset($data1[0]->logo)){ 
+                $logo = $data1[0]->logo->id . '.webp';
+              } else {
+                $logo = 'logo.webp';
+              }  
+
 $aproodproduct=get(
   'api/guest/products/by-seller/' . $data1[0]->id,
   false,
@@ -45,16 +51,13 @@ $aproodproduct1 = json_decode($aproodproduct);
     <?php
     $productNames='';
     foreach ($aproodproduct1->products as $index => $product) {
-        
-     
-    
       if ($index < count($aproodproduct1->products) - 1 && $index<2) {
         $productNames .= $product->productName;
           $productNames .= ", ";
       }
-     
     }
-    $schemaseller=[
+    if (!empty($data1[0]->city) & !empty($data1[0]->state) & !empty($data1[0]->country) & !empty($data1[0]->sellerState)) {
+      $schemaseller=[
       "@context"=> "https://schema.org",
       "@graph"=> [
         [
@@ -115,16 +118,16 @@ $aproodproduct1 = json_decode($aproodproduct);
               "@type"=> "ListItem",
               "position"=> 2,
               "name"=> ''.$data1[0]->sellerCompanyName.'',
-              "item"=> "https://www.tradersfind.com/seller/".$urlService->getSellerUrl($data1[0]->sellerCompanyName,''),
+              "item"=> "https://www.tradersfind.com/".$urlService->getSellerUrl(isset($data1[0]->sellerUrl)?$data1[0]->sellerUrl:$data1[0]->sellerCompanyName,''),
             ]
           ]
             ],
         [
           "@type"=> "LocalBusiness",
           "name"=> ''.$data1[0]->sellerCompanyName.'',
-          "url"=> ''.'https://www.tradersfind.com/seller/'.$urlService->getSellerUrl($data1[0]->sellerCompanyName,'').'',
-          "image"=>''.'https://doc.tradersfind.com/images/'.$data1[0]->logo->id.'.webp'.'',
-          'description' => isset($data1[0]->metaDescription) && $data1[0]->metaDescription != '' ? $data1[0]->metaDescription : $data1[0]->sellerCompanyName.' is a leading company of '.$productNames.' located in '.$data1[0]->city.','.$data1[0]->sellerState.','.$data1[0]->country,
+          "url"=> ''.'https://www.tradersfind.com/'.$urlService->getSellerUrl(isset($data1[0]->sellerUrl)?$data1[0]->sellerUrl:$data1[0]->sellerCompanyName,'').'',
+          "image"=>''.'https://doc.tradersfind.com/images/'. $logo .'',
+          'description' => isset($data1[0]->metaDescription) && $data1[0]->metaDescription != '' ? $data1[0]->metaDescription : $data1[0]->sellerCompanyName.' is a leading company of '.$productNames.' located in '. $data1[0]->city .','.$data1[0]->sellerState.','.$data1[0]->country,
           "telephone"=> isset($data1[0]->sellerCompanyNumber)?$data1[0]->sellerCompanyNumber:"",
           "address"=> [
             "@type"=> "PostalAddress",
@@ -140,7 +143,7 @@ $aproodproduct1 = json_decode($aproodproduct);
         ]
       ]
           ];
-   // print_r($productNames);
+      //print_r($data1[0]);
       $SeoParams = [
           'title' => isset($data1[0]->metaTitle) && $data1[0]->metaTitle != '' ? $data1[0]->metaTitle : $data1[0]->sellerCompanyName,
           'metaTitle' => isset($data1[0]->metaTitle) && $data1[0]->metaTitle != '' ? $data1[0]->metaTitle : $data1[0]->sellerCompanyName.' in '.$data1[0]->city.','.$data1[0]->sellerState.','.$data1[0]->country,
@@ -159,7 +162,7 @@ $aproodproduct1 = json_decode($aproodproduct);
 
         ];
       $seo->setSeoTags($SeoParams);
-
+    }    
       include_once 'services/masked.php';
       $maskedService = new MaskingService();
 
@@ -255,12 +258,10 @@ fetch(url, {
                 <div class="">
                   <div class="card-body card-body3">
                     <span>
-                    <?php if (isset($data1[0]->logo)): ?>
-                    <span >
-                      <img src="https://doc.tradersfind.com/images/<?php echo $data1[0]->logo->id;?>.webp" alt="seller">  
+                      <span >
+                      <img src="https://doc.tradersfind.com/images/<?php echo $logo;?>" alt="seller">  
                   
                       </span>
-                      <?php endif;?>
                   </div>
                 </div>
 
@@ -269,8 +270,8 @@ fetch(url, {
                   <div class="d-flex align-items-start mt-3">
                     <img src="<?php echo BASE_URL?>assets/images/location3.png" width="28" alt="location" />
                     <p class="mb-0 ms-2 text-black"><span>
-                      <?php echo $data1[0]->address.','.$data1[0]->city;?> <br />
-                      <?php echo $data1[0]->sellerState.','. $data1[0]->country;?> </span>
+                      <?php echo (isset($data1[0]->address) ? $data1[0]->address : '') .','. (isset($data1[0]->city) ? $data1[0]->city :'');?> <br />
+                      <?php echo (isset($data1[0]->sellerState) ? $data1[0]->sellerState : '').','. (isset($data1[0]->country) ? $data1[0]->country : '');?> </span>
                     </p>
                   </div>
                   <div class="d-flex mt-3 gap-3">
@@ -298,7 +299,7 @@ fetch(url, {
               <div class="row gy-2">
                 <div class="col-lg-12 text-center">
                  <?php
-                 if($data1[0]->sellerVirtualContactPhone &&
+                 if(isset($data1[0]->sellerVirtualContactPhone) &&
                  $data1[0]->sellerVirtualContactPhone != null &&
                  $data1[0]->sellerVirtualContactPhone != ''):
                  ?>
@@ -406,7 +407,7 @@ fetch(url, {
           <h2 class="fwbold mt-5 fs-3 mb-5 border-center text-center">
             Seller Profile
           </h2>
-          <div><?php echo $data1[0]->sellerTagline; ?></div>
+          <div><?php echo (isset($data1[0]->sellerTagline) ? $data1[0]->sellerTagline : ''); ?></div>
 
           <div class="fs-4 px-md-5">
 
@@ -450,8 +451,8 @@ fetch(url, {
               <div class="d-flex align-items-center justify-content-md-center">
                 <img src="<?php echo BASE_URL;?>assets/images/icon__3.png" alt="seller" class="me-3" />
                 <div class="text-start lh-sm" *ngIf="seller">
-                  <a href="<?php echo$data1[0]->sellerWebsite; ?>" target="_blank">
-                    <h3 class="text-black-50 mb-0 fs-4 fwbold" style="text-transform: capitalize;"><?php echo $data1[0]->sellerCompanyName.' Website';?>
+                <a href="<?php $website = isset($data1[0]->sellerWebsite) ? $data1[0]->sellerWebsite : 'https://www.tradersfind.com' ; echo (strpos($website, 'https://') !== 0) ? 'https://' . $website : $website; ?>" target="_blank">
+                    <h3 class="text-black-50 mb-0 fs-4 fwbold" style="text-transform: capitalize;"><?php echo $data1[0]->sellerCompanyName.'Website';?>
                        </h3>
                     <!--{{seller.sellerWebsite }}-->
                   </a>
@@ -476,7 +477,7 @@ fetch(url, {
                 <img src="<?php echo BASE_URL;?>assets/images/icon__5.png" alt="seller" class="me-3" />
                 <div class="text-start lh-sm">
                   <h3 class="text-black-50 mb-0 fs-4 fwbold">Trade License</h3>
-                  <?php  echo$data1[0]->tradeLicenseNumber;?>
+                  <?php  echo isset($data1[0]->tradeLicenseNumber) ? $data1[0]->tradeLicenseNumber : '';?>
                     
                  
                 </div>
@@ -492,7 +493,7 @@ fetch(url, {
                     <?php endif;?>
                   </span>
                   
-                  <span ><?php if(!isset($data1[0]->mainMarkets)):?><?php echo $data1[0]->sellerState.',' .$data1[0]->sellerCountry ; ?>
+                  <span ><?php if(!isset($data1[0]->mainMarkets)):?><?php echo (isset($data1[0]->sellerState) ? $data1[0]->sellerState : '').',' . (isset($data1[0]->sellerCountry) ? $data1[0]->sellerCountry : '') ; ?>
                     <?php endif;?>
                   </span>
                 </div>
@@ -573,7 +574,7 @@ fetch(url, {
                     <?php if(isset($product->sponsoredKeywords) && $product->sponsoredKeywords[0]!=''):?>
                       <img class="inside" src="<?php echo BASE_URL; ?>assets/images/Premium_listing.png" alt="Premium_listing" width="80" height="30" style="margin-left: 90px;" />
                     <?php endif;?>
-        <a href="<?php echo BASE_URL. $urlService->getProductUrl($product->productName,$product->id);?>" class="thumb-a">
+        <a href="<?php echo BASE_URL. $urlService->getProductUrl(isset($product->productUrl)?$product->productUrl:$product->productName,$product->id);?>" class="thumb-a">
             <div class="item-hover">
       
                 <div class="hover-text">
@@ -582,15 +583,12 @@ fetch(url, {
             </div>
             
             <div class="item-img">
-               <img  src="https://doc.tradersfind.com/images/<?php echo $product->images[0]->id; ?>.webp" alt="<?php echo $product->productName;?>" style="width: 140px;">
+               <img  src="https://doc.tradersfind.com/images/<?php echo isset($product->images[0]) ? $product->images[0]->id : 'logo'; ?>.webp" alt="<?php echo $product->productName;?>" style="width: 140px;">
               </div>
         </a>
     </div>
 <?php endforeach; 
 ?>
-
-
-
                 </div>
               </div>
             </div>

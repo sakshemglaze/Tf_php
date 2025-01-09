@@ -15,15 +15,16 @@
 <div class="row">
     <?php
     if(isset($datap->products)){
+        //print_r($datap->products);
      foreach ($datap->products as $product): ?>
     <div class="col-lg-3">
         <div class="card border-0 shadow-sm" style="margin:10px">
             <div class="card-body text-center">
                 <span class="border1 p-3 text-center w-100 d-block rounded-10">
-                 <img src="/image.php?image=<?php echo $product->images[0]->id?>" alt="<?php echo $product->productName ?>" width="140" />
+                 <img src="/image.php?image=<?php echo $product->images[0]->id?>" alt="<?php echo $product->productName  ?>" width="140" />
                 </span>
                 <div class="single-line"><h3 class="mt-1 fs-5">
-                    <a href="/<?php echo $url->getProductUrl($product->productName, $product->id) ?>"
+                    <a href="/<?php echo $url->getProductUrl(isset($product->productUrl) ? $product->productUrl:$product->productName, $product->id) ?>"
                     class="text-blue"> <?php echo $product->productName ?>
                 </a></h3> </div>
                

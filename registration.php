@@ -262,7 +262,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           </ul>
         </div>
         <div class="col-lg-6">
-          <img src="assets/images/join-icon_6.jpg" alt="register now" class="img-fluid">
+          <img src="assets/images/join-icon6.jpg" alt="register now" class="img-fluid">
         </div>
       </div>
     </div>

@@ -117,7 +117,7 @@ foreach ($phpArray as $inde1 => $prod) {
                                                   <?php } ?>
                                              <?php } ?>
                                          </ul>
-                                         <a href="/<?php echo $urlService->getProductUrl($prodData->productName, $prodData->id)?>" title="Product Page" target="_blank"  ><p style="color: palevioletred;">View more...</p> </a>
+                                         <a href="/<?php echo $urlService->getProductUrl(isset($prodData->productUrl)?$prodData->productUrl:$prodData->productName, $prodData->id)?>" title="Product Page" target="_blank"  ><p style="color: palevioletred;">View more...</p> </a>
                                     </div>
 
 

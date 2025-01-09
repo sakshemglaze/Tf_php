@@ -34,7 +34,7 @@
                 exit;
               }
               //$data = findActive($data1);
-              //print_r($data1->seller->logo->id);
+              //print_r($data1);
 //     SEO Attributes setting ..................
               //print_r($data1->metaKeywords);
         $SeoParams = [
@@ -96,15 +96,15 @@
               <?php if ($data1 != null ) : ?>
               <div class="fotorama" data-nav="thumbs" data-thumbmargin="20" data-width="100%" data-allowfullscreen="true"
                  data-height="auto" data-ratio="800/600">
-                         <img class="rounded-10" src="https://doc.tradersfind.com/images/<?php echo isset($data1->images[0]->id)?$data1->images[0]->id:''; ?>.webp" alt="<?php echo $data1->productName ?>" width="240" height="240" >
+                         <img class="rounded-10" src="https://doc.tradersfind.com/images/<?php echo isset($data1->images[0]->id)?$data1->images[0]->id:'logo'; ?>.webp" alt="<?php echo $data1->productName ?>" width="240" height="240" >
              </div>
              <?php endif; ?>
             </div>
             <div class="col-lg-5">
-              <h1 class="fwbold fs-3" *ngIf="prodDetails">
-               <?php echo $data1->productName ?>
+              <h1 class="fwbold fs-4" *ngIf="prodDetails">
+               <?php echo $data1->productName . ' - ' . $data1->sellerCompanyName ?>
               </h1>
-              <span class="fwbold fs-3 text-red">
+              <span class="fwbold fs-4 text-red">
                 <?php if (isset($data1->Price) && $data1->Price !=0 && (isset($data1->maxPrice) == null || isset($data1->maxPrice) == '' )) : ?>
                   <strong>Price:</strong> <?php echo $prodDetails['price']; ?>
                 <?php endif; ?>
@@ -147,7 +147,7 @@
                 <div class="card-body bg-grey3">
                   <div class="d-flex flex-column align-items-center">
                     <span class="bg-white px-3 rounded-10 py-2">
-                      <img src="https://doc.tradersfind.com/images/<?php echo $data1->seller->logo->id; ?>.webp" alt="<?php echo $data1->seller->sellerCompanyName; ?>"width="160" >
+                      <img src="https://doc.tradersfind.com/images/<?php echo isset($data1->seller->logo) ? $data1->seller->logo->id : 'logo'; ?>.webp" alt="<?php echo $data1->seller->sellerCompanyName; ?>"width="160" >
                     </span>
 
                     <h2 class="fwbold fs-4 mt-3">
@@ -347,7 +347,7 @@
           <?php echo isset($data1->seller->sellerCompanyName)?$data1->seller->sellerCompanyName:''; ?>
           </div>
           <div> <?php echo isset($data1->seller->sellerTagline)?$data1->seller->sellerTagline:''; ?>     </div><br>
-          <a href="/<?php echo $url->getSellerUrl($data1->seller->sellerCompanyName,$data1->seller->id) ?>" target="_blank" title="<?php echo $data1->seller->sellerCompanyName?>" target="_blank"
+          <a href="/<?php echo $url->getSellerUrl(!empty($data1->seller->sellerUrl) ? $data1->seller->sellerUrl : $data1->seller->sellerCompanyName,$data1->seller->id) ?>" target="_blank" title="<?php echo $data1->seller->sellerCompanyName?>" target="_blank"
             class="btn-primary-gradiant rounded-10 mt-4 px-md-5">
             View more
           </a>

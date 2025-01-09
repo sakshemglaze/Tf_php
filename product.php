@@ -6,6 +6,7 @@
     include_once "whatsapp.php";
     $whatsappUrl=new WhatsappUrl();
     $maskedService = new MaskingService();
+    //print_r($prodData['productUrl'])
 
 ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css">
@@ -93,7 +94,7 @@
                                             <?php } ?>
                                             <?php } ?>
                                 </ul>
-                                         <a href="/<?php echo $urlService->getProductUrl($prodData['productName'], $prodData['id'])?>" title="Product Page" target="_blank"  ><p style="color: palevioletred;">View more...</p> </a>
+                                         <a href="/<?php echo $urlService->getProductUrl(isset($prodData->productUrl)?$prodData->productUrl:$prodData['productName'], $prodData['id'])?>" title="Product Page" target="_blank"  ><p style="color: palevioletred;">View more...</p> </a>
                             </div>
                                 <br>
                             <div class="d-flex mt-1 about_text2 small">
@@ -102,7 +103,8 @@
                                         Company:
                                     </b>
                                         <a href="/<?php if(isset($prodData['seller'])) {
-                                            echo $urlService->getSellerUrl($prodData['seller']['sellerCompanyName'],$prodData['seller']['id']); } ?>" style="color: palevioletred;" target="_blank"> 
+                                            
+                                            echo $urlService->getSellerUrl(!empty($prodData['seller']['sellerUrl']) ? $prodData['seller']['sellerUrl'] : $prodData['seller']['sellerCompanyName'],$prodData['seller']['id']); } ?>" style="color: palevioletred;" target="_blank"> 
                                             <h3 class="single-line">
                                                 <font size="2" style="color: palevioletred;">
                                                 <?php if(isset($prodData['seller'])) { print_r($prodData['seller']['sellerCompanyName']); } ?>
@@ -131,12 +133,12 @@
                                     </b>
                                     <a  target="_blank">
                                         <span class="service-area ">
-                                          <?php if(isset($prodData['seller'])) { $prodData['seller']['mainMarkets']; }
+                                          <?php if(isset($prodData['seller']) && !empty($prodData['seller']['mainMarkets'])) { $prodData['seller']['mainMarkets']; }
                                           ?>
                                         </span>
                                         <span class="service-area">
                                           <?php 
-                                             if (isset($prodData['seller'])) {
+                                            if(isset($prodData['seller']) && !empty($prodData['seller']['mainMarkets'])) {
                                             $areas = $prodData['seller']['mainMarkets'];
                                              // Use implode to concatenate areas with ' | ' as separator
                                             echo implode(' | ', $areas);
