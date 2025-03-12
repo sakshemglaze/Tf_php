@@ -9,16 +9,17 @@
 	$webPageName = 'Search Product Top';
           require_once 'post.php';
            $responseBanner = post('api/keywords-banner', array($name, $webPageName));
-print_r('w4');
+//print_r('w4');
            foreach($responseBanner as $index => $ban){
             $banner = $ban;
               ?>
               <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">
    
               <?php
+	//print_r($banner->link);
             $newban = "https://doc.tradersfind.com/images/" . $banner->image->id . ".webp";
            
-            echo '<img src="' . $newban . '" alt="Banner Image" width="100%">';
+            echo '<a href="' . $banner->link . '" target="_blank"> <img src="' . $newban . '" alt="Banner Image" width="100%"> </a>';
             ?>
             </div>
             <?php

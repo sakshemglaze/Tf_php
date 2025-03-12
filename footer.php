@@ -25,11 +25,12 @@
           </ul>
           <!--<small>Keep in touch:</small>-->
           <ul class="d-flex gap-2 justify-content-center footer_social mt-2">
-            <li><a href="https://www.facebook.com/tradersfindb2bportal" target="_blank"><img src="<?php echo BASE_URL; ?>assets/images/facebook.webp" width="100%" height="100%" alt="facebook" /></a></li>
-            <li><a href="https://www.instagram.com/tradersfind" target="_blank"><img src="<?php echo BASE_URL; ?>assets/images/instagram.webp" width="100%" height="100%" alt="Instagram" /></a> </li>
-            <li><a href="https://twitter.com/tradersfind" target="_blank"><img src="<?php echo BASE_URL; ?>assets/images/twitter_icon.webp"  width="100%" height="100%" alt="Twitter" /></a> </li>
-            <li><a href="https://pinterest.com/tradersfind" target="_blank"><img src="<?php echo BASE_URL; ?>assets/images/pinterest.webp" width="100%" height="100%" alt="Pinterest" /></a> </li>
-            <li><a href="https://www.youtube.com/@TradersFind" target="_blank"><img src="<?php echo BASE_URL; ?>assets/images/youtube.webp" width="100%" height="100%" alt="Pinterest" /></a> </li>
+            <li><a href="https://www.facebook.com/tradersfindb2bportal" target="_blank"><img src="<?php echo BASE_URL; ?>assets/images/facebook.webp" alt="facebook" /></a></li>
+            <li><a href="https://www.instagram.com/tradersfind" target="_blank"><img src="<?php echo BASE_URL; ?>assets/images/instagram.webp" alt="Instagram" /></a> </li>
+            <li><a href="https://twitter.com/tradersfind" target="_blank"><img src="<?php echo BASE_URL; ?>assets/images/twitter_icon.webp"  alt="Twitter" /></a> </li>
+            <li><a href="https://pinterest.com/tradersfind" target="_blank"><img src="<?php echo BASE_URL; ?>assets/images/pinterest.webp" alt="Pinterest" /></a> </li>
+            <li><a href="https://www.linkedin.com/company/tradersfind" target="_blank"><img src="<?php echo BASE_URL; ?>assets/images/LinkedIn_icon.webp" alt="Pinterest" /></a> </li>
+            <li><a href="https://www.youtube.com/@TradersFind" target="_blank"><img src="<?php echo BASE_URL; ?>assets/images/youtube.webp" alt="Pinterest" /></a> </li>
           </ul>
         </div>
         <div class="col-lg-9 footer_menu">

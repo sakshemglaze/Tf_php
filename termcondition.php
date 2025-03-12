@@ -33,7 +33,7 @@ include_once "header-sub.php";
 <section class="mt-4 mb-4">
   <div class="container">
     <div class="row">
-      <h2 class="border-center text-center fs-2"><span class="text-info">Terms & </span><span class="text-danger">Conditions</span></h2>
+      <H1 class="border-center text-center fs-2"><span class="text-info">Terms & </span><span class="text-danger">Conditions</span></H1>
       <div class="fs-18 pt-4 text-center">
         <p>
           Interconnect Marketing Management L.L.C presents the Terms and Conditions for using the website ‘TradersFind’. By using this website, you agree to abide by the terms and conditions outlined in this document. It is important to read and understand these terms before using the website.

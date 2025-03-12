@@ -63,7 +63,7 @@
                         </div>
                         <div class="col-md-7 position-relative p-3">
                             <div class="single-line">
-                                    <a href="/<?php echo $urlService->getProductUrl(isset($prodData['productUrl'])?$prodData['productUrl']:$prodData['productName'],$prodData['id']) ?>" target="_blank" title="Product Page">
+                                    <a href="/<?php echo $urlService->getProductUrl((isset($prodData['productUrl']) && !empty($prodData['productUrl']))?$prodData['productUrl']:$prodData['productName'],$prodData['id']) ?>" target="_blank" title="Product Page">
                                         <h2 class="fs-5 about_text2" style="color:rgb(216, 71, 119);">
                                         <?php    
                                         print_r( $prodData['productName']);
@@ -94,7 +94,7 @@
                                             <?php } ?>
                                             <?php } ?>
                                 </ul>
-                                         <a href="/<?php echo $urlService->getProductUrl(isset($prodData->productUrl)?$prodData->productUrl:$prodData['productName'], $prodData['id'])?>" title="Product Page" target="_blank"  ><p style="color: palevioletred;">View more...</p> </a>
+                                         <a href="/<?php echo $urlService->getProductUrl((isset($prodData->productUrl) && !empty($prodData->productUrl))?$prodData->productUrl:$prodData['productName'], $prodData['id'])?>" title="Product Page" target="_blank"  ><p style="color: palevioletred;">View more...</p> </a>
                             </div>
                                 <br>
                             <div class="d-flex mt-1 about_text2 small">
@@ -411,7 +411,7 @@
                                                                         <div class="media ">
                                                                             <div class="media-left media-middle">
                                                                              <a href="#">
-                                                                               <img class="media-object" src="<?php echo BASE_URL ?>assets/images/login-icon2.jpg">
+                                                                               <img class="media-object" src="<?php echo BASE_URL ?>assets/images/login-icon2.jpg" alt="Worker pushing handcart, carrying boxes, warehouse.">
                                                                              </a>
                                                                             </div>
                                                                             <div class="media-body">
@@ -423,7 +423,7 @@
                                                                     <div class="media ">
                                                                         <div class="media-left media-middle">
                                                                            <a href="#">
-                                                                            <img class="media-object" src="<?php echo BASE_URL ?>assets/images/login-icon3.jpg">
+                                                                            <img class="media-object" src="<?php echo BASE_URL ?>assets/images/login-icon3.jpg" alt="Checklist displays items, on red-blue gradient.">
                                                                            </a>
                                                                     </div>
                                                                     <div class="media-body">

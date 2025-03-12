@@ -10,10 +10,27 @@
     $currentUrl=$_SERVER['REQUEST_URI'];
     $urlparts=explode('/',$currentUrl);
     $blogUrl=end($urlparts);
-
+   // print_r($blogUrl);
+    $redirects = [
+        "sheikh-zayed-grand-mosque-in-abu-dhabi-–-how-it’s-made" => "sheikh-zayed-grand-mosque-in-abu-dhabi-how-its-made",
+        "sheikh-zayed-grand-mosque-in-abu-dhabi-%E2%80%93-how-it%E2%80%99s-made" => "sheikh-zayed-grand-mosque-in-abu-dhabi-how-its-made",
+        "louvre-abu-dhabi-%e2%80%93-an-architectural-wonder" => "louvre-abu-dhabi-an-architectural-wonder",
+        "looking-to-buy-real-estate-in-dubai-here's-all-that-you-should-know" => "looking-to-buy-real-estate-in-dubai-heres-all-that-you-should-know"
+    ];
+    if (array_key_exists($blogUrl, $redirects)) {
+        $blogUrl = $redirects[$blogUrl];
+       // print_r("----");
+        header('Location: ' . BASE_URL . "blog/" . $blogUrl , true, 301);
+      }
+     // exit();
     include_once "post.php";
     $blogtitle=str_replace('-',' ',$blogUrl);
     $blogp= get('api/guest/blogs-by-title', false,['blogTitle' => $blogtitle]);
+    //print_r('Value ' . $blogp);
+    if (!isset($blogp) or $blogp == 'Error fetching data') {
+        header("Location: /not-found.php");
+                 exit();
+    }
     $blog=json_decode($blogp);
     $size=5;
     $queryParams=['size'=> $size, 'sort'=> "createdDate,desc" ];
@@ -54,7 +71,7 @@ include_once "header-sub.php";
             <div class="mt-4 col-md-12 col-sm-12 col-xs-12 search-banner">
                 <a href="/">Home</a> >
                 <a href="/blog">Blogs</a> >
-                <a href="<?php echo $urlService->getBlogUrl($blog->title); ?>"><?php echo $blog->title; ?></a>
+                <?php echo $blog->title; ?>
             </div>
         </div>
     </section>
@@ -87,7 +104,7 @@ include_once "header-sub.php";
                 <?php if($latestBlogs): ?>
                     <?php foreach($latestBlogs as $blg): ?>
                         <div class="blog">
-                            <a href="<?php echo $urlService->getBlogUrl($blg->title); ?>" style="cursor: pointer;">
+                            <a href="<?php echo $urlService->getBlogUrl(isset($blg->blogUrl)?$blg->blogUrl:$blg->title); ?>" style="cursor: pointer;">
                               <?php if ($blg->image == null || $blg->image == 'null' || $blg->image == ''): ?>
                                 <img src="assets/images/tflogo.webp" class="img-fluid" alt="<?php echo $blog->altText ? $blog->altText : 'blog image'; ?>" >
                               <?php else: ?>  

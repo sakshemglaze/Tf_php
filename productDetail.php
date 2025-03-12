@@ -19,6 +19,22 @@
 
             $id = end($parts);
             $name = prev($parts);
+            $arr_index = $name . "/" . $id;
+            $redirects = [
+              "tank-cleaning-operation/658d0612b18fdb667407b721" => "al-tank-cleaning-services/658d0612b18fdb667407b721",
+              "power-calibrator/65aa502a4f0ca7130c256673" => "voltage-calibrator/65aa502a4f0ca7130c256673",
+              "air-cargo-services/656455ff5370fd4cc01dcdd9" => "cargo-services/656455ff5370fd4cc01dcdd9",
+              "hp-used-laptop/657990f65370fd4cc01e0dda" => "used-laptop/657990f65370fd4cc01e0dda",
+              "underground-fuel-storage-tanks/65325c71adb96c40987e5b6b" => "underground-fuel-storage-tanks/672c54f7bab0c13b100f2705",
+              "used-laptop/6579785f5370fd4cc01e0cc0" => "reliable-used-laptop/6579785f5370fd4cc01e0cc0"
+            ];
+            if (array_key_exists($arr_index, $redirects)) {
+              $parts = explode("/",$redirects[$arr_index]);
+              $id = end($parts);
+              $name = prev($parts);
+              header('Location: ' . BASE_URL . "product/" . $name . "/" . $id , true, 301);
+            }
+            
             require_once 'post.php';
         $data =  get(
                 'api/guest/products/'.$name.'/'.$id, 
@@ -356,7 +372,7 @@
        
       </div>
     </div>
-    <script src="services/storegeService.js"></script>
+    <script src="<?php echo BASE_URL;?>services/storegeService.js"></script>
     <script>
        function closePopup() {
     document.getElementById("popup-card-otp").style.display = "none";

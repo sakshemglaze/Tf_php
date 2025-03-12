@@ -96,7 +96,7 @@ foreach ($phpArray as $inde1 => $prod) {
                          
     
                                     <div class="single-line">
-                                    <a href="/<?php echo $urlService->getProductUrl(isset($prodData->productUrl)?$prodData->productUrl:$prodData->productName,$prodData->id) ?>" target="_blank" title="Product Page">
+                                    <a href="/<?php echo $urlService->getProductUrl((isset($prodData->productUrl) && !empty($prodData->productUrl))?$prodData->productUrl:$prodData->productName,$prodData->id) ?>" target="_blank" title="Product Page">
                                             <h2 class="fs-5 about_text2" style="color:rgb(216, 71, 119);">
                                             <?php    
                                             print_r( $prodData->productName);
@@ -398,7 +398,7 @@ foreach ($phpArray as $inde1 => $prod) {
                                            <div class="media mt-3">
                                                <div class="media-left media-middle">
                                                  <a href="#">
-                                                   <img class="media-object" src="<?php echo BASE_URL ?>assets/images/login-icon1.jpg">
+                                                   <img class="media-object" src="<?php echo BASE_URL ?>assets/images/login-icon1.jpg" alt="Stopwatch speeds across gradient background.">
                                                  </a>
                                                </div>
                                                <div class="media-body">
@@ -409,7 +409,7 @@ foreach ($phpArray as $inde1 => $prod) {
                                            <div class="media ">
                                                <div class="media-left media-middle">
                                                 <a href="#">
-                                                  <img class="media-object" src="<?php echo BASE_URL ?>assets/images/login-icon2.jpg">
+                                                  <img class="media-object" src="<?php echo BASE_URL ?>assets/images/login-icon2.jpg" alt="Worker pushing handcart, carrying boxes, warehouse.">
                                                 </a>
                                                </div>
                                                <div class="media-body">
@@ -421,7 +421,7 @@ foreach ($phpArray as $inde1 => $prod) {
                                        <div class="media ">
                                            <div class="media-left media-middle">
                                               <a href="#">
-                                               <img class="media-object" src="<?php echo BASE_URL ?>assets/images/login-icon3.jpg">
+                                               <img class="media-object" src="<?php echo BASE_URL ?>assets/images/login-icon3.jpg" alt="Checklist displays items, on red-blue gradient.">
                                               </a>
                                        </div>
                                        <div class="media-body">

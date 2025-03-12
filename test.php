@@ -94,7 +94,7 @@ foreach ($phpArray as $inde1 => $prod) {
                          
     
                                     <div class="single-line">
-                                    <a href="/<?php echo $urlService->getProductUrl(isset($prodData->productUrl)?$prodData->productUrl:$prodData->productName,$prodData->id) ?>" target="_blank" title="Product Page">
+                                    <a href="/<?php echo $urlService->getProductUrl((isset($prodData->productUrl) && !empty($prodData->productUrl))?$prodData->productUrl:$prodData->productName,$prodData->id) ?>" target="_blank" title="Product Page">
                                             <h2 class="fs-5 about_text2" style="color:rgb(216, 71, 119);">
                                             <?php    
                                             print_r( $prodData->productName);
@@ -117,7 +117,7 @@ foreach ($phpArray as $inde1 => $prod) {
                                                   <?php } ?>
                                              <?php } ?>
                                          </ul>
-                                         <a href="/<?php echo $urlService->getProductUrl(isset($prodData->productUrl)?$prodData->productUrl:$prodData->productName, $prodData->id)?>" title="Product Page" target="_blank"  ><p style="color: palevioletred;">View more...</p> </a>
+                                         <a href="/<?php echo $urlService->getProductUrl((isset($prodData->productUrl) && !empty($prodData->productUrl) )?$prodData->productUrl:$prodData->productName, $prodData->id)?>" title="Product Page" target="_blank"  ><p style="color: palevioletred;">View more...</p> </a>
                                     </div>
 
 

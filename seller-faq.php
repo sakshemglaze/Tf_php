@@ -42,7 +42,7 @@ $SeoParams = [
 <section class="tabBg">
   <div class="container">
     <div class="row ">
-      <div class="btn-primary-gradiant btn-primary-gradiant rounded-0 py-3"></div>
+      <div class="btn-primary-gradiant btn-primary-gradiant rounded-0 py-3"><H1>Seller's FAQ </H1></div>
     </div>
   </div>
   <div class="container shadow2">

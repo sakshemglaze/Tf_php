@@ -24,7 +24,7 @@
                  <img src="/image.php?image=<?php echo $product->images[0]->id?>" alt="<?php echo $product->productName  ?>" width="140" />
                 </span>
                 <div class="single-line"><h3 class="mt-1 fs-5">
-                    <a href="/<?php echo $url->getProductUrl(isset($product->productUrl) ? $product->productUrl:$product->productName, $product->id) ?>"
+                    <a href="/<?php echo $url->getProductUrl((isset($product->productUrl) && !empty($product->productUrl)) ? $product->productUrl:$product->productName, $product->id) ?>"
                     class="text-blue"> <?php echo $product->productName ?>
                 </a></h3> </div>
                

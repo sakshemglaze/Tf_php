@@ -10,6 +10,82 @@
             $currenturl= $_SERVER['REQUEST_URI'];
             $urlpart=explode('/',$currenturl);
             $companyName= $matches[1]; //($urlpart);
+// Redirect old code to new code
+          $redirects = [
+              "adel-achrafi-trading-est" => "adel-achrafi-trading-est.",
+              "al-afraah-hydraulic-machine-and-spare-parts-trading-llc" => "al-afraah-hydraulic-machine-and-spare-parts-trading-l.l.c",
+              "alan-technology-llc" => "alan-technology-l.l.c",
+              "al-borj-plastic-industries-co-llc" => "al-borj-plastic-industries-co.-llc",
+              "al-hoty-stanger-laboratory-llc" => "al-hoty-stanger-laboratory-llc.",
+              "al-jenaidi-building-materials-trading-llc" => "al-jenaidi-building-materials-trading-l.l.c.",
+              "al-mahrain-bldg-mat.-tr.co-llc" => "al-mahrain-bldg-mat-tr-co-llc",
+              "alpha-rubbers-wholesale-trading-llc" => "alpha-rubbers-wholesale-trading-l.l.c",
+              "alphatronic-machinery-trading-co-llc" => "alphatronic-machinery-trading-co.-llc.",
+              "alsafeer-publishing-and-advertising-est" => "alsafeer-publishing-and-advertising-est.",
+              "al-shirawi-facilities-management-llc" => "al-shirawi-facilities-management-l.l.c.",
+              "al-taher-chemicals-trading-llc" => "al-taher-chemicals-trading-llc.",
+              "aqua-sure-water-treatment-equipment" => "aqua-sure-water-treatment-equipment-trading-llc",
+              "arcave-architecture-and-interiors-llc" => "arcave-architecture-and-interiors-design-llc",
+              "aster-online-m-e" => "aster-online-m.e.",
+              "atlas-copco-middle-east-fze" => "atlas-copco-services-middle-east",
+              "barajeel-conditioning-equipment-trading-llc" => "barajeel-conditioning-equipment-trading-l.l.c",
+              "fitout-international" => "fit-out-international",
+              "burj-al-dar" => "burj-al-dar-ac-unit-fix-contracting-and-tech-contracting",
+              "cheeky-monkeys" => "cheeky-monkeys-playland",
+              "cicon-epoxy-and-steel-cutting-plant" => "cicon-building-materials-llc",
+              "cleantech-gulf-cleaning-equipment" => "cleantech-gulf-hq",
+              "control-electrical-accessories-co-llc" => "control-electrical-accessories-co.-llc",
+              "daliya-trading-co" => "daliya-trading-co.",
+              "day-to-day-hypermarket" => "day-to-day",
+              "delta-oilfield-services-llc" => "delta-oilfield-services-l.l.c",
+              "dewan-architects-plus-engineers" => "dewan-architects-+-engineers",
+              "discover-energy-general-trading-llc" => "discover-energy-general-trading-l.l.c",
+              "dr-sai-ganesh-medical-center" => "dr.-sai-ganesh-medical-center",
+              "dubaistore-com" => "dubaistore.com",
+              "emaar-international-ind-llc" => "emaar-international-ind.-llc",
+              "emirates-moto-dubai" => "emirates-moto",
+              "falcon-group-mechanical-services-llc" => "falcon-mechanical-services-llc",
+              "farahat-and-co-sharjah" => "farahat-and-co",
+              "fix-and-go-tyres-and-accessories-trading-co-llc" => "fix-and-go-tyres-and-accessories-trading-co.-llc",
+              "golden-key-electrical-and-sanitary-ware-tr-llc" => "golden-key-electrical-and-sanitary-ware-tr.-llc",
+              "ice-cube-air-conditioning-trading-llc" => "ice-cube-air-conditioning-trading-l.l.c",
+              "jafep-middle-east" => "jafep",
+              "jaleel-general-trading-llc" => "jaleel-general-trading-l.l.c.",
+              "k-d-industries-inc" => "k.d.-industries-inc.",
+              "ksl-logistic-services-llc-rak" => "ksl-logistic-services-llc",
+              "leader-grate-llc" => "leader-grate-l.l.c.",
+              "manafeth-medical-and-mobility" => "manafeth-mobility-and-medical",
+              "misar-trading-co-llc" => "misar-trading-co.-llc",
+              "muzaco-print-and-pack" => "muzaco-print-and-pack-design",
+              "nat-conveyors-and-automations" => "nat-conveyors-and-automation",
+              "noor-al-barakah-building" => "noor-al-barakah-bldg-cleaning-services",
+              "onspot-painting-services" => "onspot-technical-services",
+              "perm-alert-leak-detection" => "permalert-leak-detection",
+              "pool-tech-swimming-pools-installation-co-llc" => "pool-tech-swimming-pools-installation-co.-llc",
+              "promotionalae" => "promotional.ae",
+              "qmi-foundation" => "qmi-building-metal-products-manufacturing-llc",
+              "reliable-allies-llc" => "reliable-allies-general-trading-llc",
+              "sadeqeen-brothers-general-trading-co-llc" => "sadeqeen-brothers-general-trading-co.-llc",
+              "saif-al-noor-international-shipping-forwarding-and-land-transport-llc" => "saif-al-noor-international-shipping-forwarding-and-land-transport-l.l.c",
+              "sam-building-contracting-llc" => "sam-building-contracting-l.l.c.",
+              "seamaster-maritime-llc" => "seamaster-maritime-l.l.c.",
+              "sibeltech" => "sibel-tech",
+              "ultra-power-generators-dealer-service" => "ultra-power-generators-fzc",
+              "union-cement-company-psc" => "union-cement-company-(p.s.c.)",
+              "universe-middle-east-general-trading-l.l.c" => "universe-middle-east-general-trading-llc",
+              "veetech" => "veetech-instrumentation-and-control-service-llc",
+              "ventum-mep-air-conditioning-l.l.c" => "ventum-mep-air-conditioning-llc",
+              "diya-al-shams-metal-tr-llc" => "diya-al-shams-metal-tr.-l.l.c",
+              "gulf-manufacturing-co-llc" => "gulf-manufacturing-co.-llc",
+              "uncle's-shop" => "uncles-shop",
+              "seth-int'l" => "seth-intl",
+              "z'neem-pharmacy" => "zneem-pharmacy"
+          ];
+          if (array_key_exists($companyName, $redirects)) {
+            $companyName = $redirects[$companyName];
+            header('Location: ' . BASE_URL . "seller/" . $companyName , true, 301);
+          }
+          //print_r($companyName);
             require_once 'post.php';
         $data =  get(
                 'api/guest/search-sellers-company-name/'.$companyName
@@ -20,8 +96,8 @@
               $new_url = '/not-found';
 
               if(!isset($data1[0]->id)){
-              header('Location: ' . $new_url, true, 301);
-              exit;
+               header('Location: ' . $new_url, true, 301);
+               exit;
               }
              // $data = findActive($data1);
             //print_r($data1[0]->logo);
@@ -208,7 +284,7 @@ $aproodproduct1 = json_decode($aproodproduct);
     </ol>
   </nav>
 </section>
-<script src="services/storegeService.js"></script>
+<script src="<?php echo BASE_URL;?>services/storegeService.js"></script>
 <script>
        function closePopup() {
     document.getElementById("popup-card-otp").style.display = "none";
@@ -574,7 +650,7 @@ fetch(url, {
                     <?php if(isset($product->sponsoredKeywords) && $product->sponsoredKeywords[0]!=''):?>
                       <img class="inside" src="<?php echo BASE_URL; ?>assets/images/Premium_listing.png" alt="Premium_listing" width="80" height="30" style="margin-left: 90px;" />
                     <?php endif;?>
-        <a href="<?php echo BASE_URL. $urlService->getProductUrl(isset($product->productUrl)?$product->productUrl:$product->productName,$product->id);?>" class="thumb-a">
+        <a href="<?php echo BASE_URL. $urlService->getProductUrl((isset($product->productUrl) && !empty($product->productUrl))?$product->productUrl:$product->productName,$product->id);?>" class="thumb-a">
             <div class="item-hover">
       
                 <div class="hover-text">
