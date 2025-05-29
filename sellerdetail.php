@@ -381,7 +381,7 @@ fetch(url, {
                  ?>
                   <!--<a class="btn btn-light">-->
                     <button class="btn btn-light w-100 d-center"  title="Seller_Phone" href="#">
-                    <img src="<?php echo BASE_URL;?>assets/images/phone.png" width="16" alt="phone" />
+                    <img src="<?php echo BASE_URL; ?>assets/images/phone.png" width="16" alt="phone" />
                      <?php $maskedService->getMaskedNumber($data1[0]); ?>
    
                       </button>
@@ -782,7 +782,7 @@ fetch(url, {
                               <p class="fs-14"> <?php echo isset($data1[0]->designation);?> </p>
                               <div class="d-flex align-items-center gap-3 ">
                                 <button class="btn btn-sm btn-light  py-2 fw-semibold bg-grey w-100">
-                                  <img src="assets/images/phone.png" width="16" alt="phone" />
+                                  <img src="<?php echo BASE_URL; ?>assets/images/phone.png" width="16" alt="phone" />
                                  <?php $maskedService->getMaskedNumber($data1[0]); ?>
                     </button>
 

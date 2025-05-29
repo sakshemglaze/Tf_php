@@ -75,7 +75,7 @@ include "home-search.php"
     <div class="col">
       <div class="swiper2">
         <div class="position-relative bg-transparent new_img_11">
-          <img src="<?php echo BASE_URL; ?>assets/images/brands/new1.webp" alt="Post Buy Requirements" width="271" height="193" class="w-100 img-fluid" />
+          <img src="<?php echo B_URL; ?>assets/images/brands/new1.webp" alt="Post Buy Requirements" width="271" height="193" class="w-100 img-fluid" />
           <div class="hading2">
             <p>Looking for a <br> product ?</p>
             <a href="<?php echo  BASE_URL ?>post-buy-requirements">Post Buy Requirement</a>
@@ -83,7 +83,7 @@ include "home-search.php"
         </div>
 
         <div class="position-relative   py-1	 bg-transparent new_img_11">
-          <img src="<?php echo BASE_URL; ?>assets/images/brands/new2.webp" alt="Grow Business" width="271" height="193" class="w-100 img-fluid" />
+          <img src="<?php echo B_URL; ?>assets/images/brands/new2.webp" alt="Grow Business" width="271" height="193" class="w-100 img-fluid" />
           <div class="hading2">
             <p>Want to grow your <br> business 10X Faster?</p>
             <a href="<?php echo  BASE_URL ?>register-your-business">Sell on TradersFind</a>
@@ -299,7 +299,7 @@ fetch(url, {
                       'verify_peer_name' => false,
                   ],
               ]);
-              $resUnit = file_get_contents(BASE_URL . 'assets/testingJson/Units.json', false, $context);
+              $resUnit = file_get_contents(B_URL . 'assets/testingJson/Units.json', false, $context);
 
                       $allunit=json_decode($resUnit);
                       foreach($allunit as $unit){
@@ -335,7 +335,7 @@ fetch(url, {
                   <select area-label="countryCode" name="countryCode" class="form-control mxw-50">
                 
                   <?php
-                      $rescuntrycode=file_get_contents( BASE_URL.'assets/testingJson/country_codes_v1.json',false, $context);
+                      $rescuntrycode=file_get_contents( B_URL.'assets/testingJson/country_codes_v1.json',false, $context);
                       $allcuntrycode=json_decode($rescuntrycode);
                       foreach($allcuntrycode as $unit){
                              ?>
@@ -596,7 +596,7 @@ include_once 'post.php';
            
             // Output item content here, you can access $items[$j] to get each item
             echo '<div class="position-relative bg-transparent swiper2 p-2">';
-            echo '<img src="'.BASE_URL . $items[$j] . '" width="209" height="80" alt="'.$state[$j].'" class="w-100 img-fluid" />';           
+            echo '<img src="'.B_URL . $items[$j] . '" width="209" height="80" alt="'.$state[$j].'" class="w-100 img-fluid" />';           
             echo '<a href="/search/'.strtolower(str_replace(" ","-",
             $state[$j])).'">';
             echo '<h4>' . $state[$j] . '</h4>';
@@ -624,16 +624,16 @@ include_once 'post.php';
   </h3>
   <div class="owl-carousel carousel-main4">
     <div class="p-2 col-md-3">
-          <span class=""><img src="<?php echo BASE_URL; ?>assets/images/brands/101.png" width="302px" height="159"  alt="Seller"></span>
+          <span class=""><img src="<?php echo B_URL; ?>assets/images/brands/101.png" width="302px" height="159"  alt="Seller"></span>
         </div>
     <div class="p-2 col-md-3">
-          <span class=""><img src="<?php echo BASE_URL; ?>assets/images/brands/102.png" width="302px" height="159"alt="Seller"></span>
+          <span class=""><img src="<?php echo B_URL; ?>assets/images/brands/102.png" width="302px" height="159"alt="Seller"></span>
         </div>
     <div class="p-2 col-md-3">
-          <span class=""><img src="<?php echo BASE_URL; ?>assets/images/brands/103.png" width="302px" height="159"  alt="Seller"></span>
+          <span class=""><img src="<?php echo B_URL; ?>assets/images/brands/103.png" width="302px" height="159"  alt="Seller"></span>
         </div>
   <div class="p-2 col-md-3">
-          <span class=""><img src="<?php echo BASE_URL; ?>assets/images/brands/104.png" width="302" height="159"  alt="Seller"></span>
+          <span class=""><img src="<?php echo B_URL; ?>assets/images/brands/104.png" width="302" height="159"  alt="Seller"></span>
         </div>
 </div>
   
@@ -650,12 +650,12 @@ include_once 'post.php';
               <div class="card-body">
                 <div class="row">
                   <div class="col-3">
-                    <img src="<?php echo BASE_URL; ?>assets/images/client.png" class="img-fluid w-100" alt="Happy Client" width="165" height="162">
+                    <img src="<?php echo B_URL; ?>assets/images/client.png" class="img-fluid w-100" alt="Happy Client" width="165" height="162">
                   </div>
                   <div class="col-9">
                     <h4>Mr. Imtiaz</h4>
                     <div class="d-flex gap-4 align-items-center mb-3">
-                      <img src="<?php echo BASE_URL; ?>assets/images/location-2.png" alt="location" width="25" height="28">
+                      <img src="<?php echo B_URL; ?>assets/images/location-2.png" alt="location" width="25" height="28">
                       <address class="mb-0"> UAE, Dubai</address>
                       <div class="clientTime">8 Months</div>
 
@@ -676,12 +676,12 @@ include_once 'post.php';
             <div class="card-body">
               <div class="row">
                 <div class="col-3">
-                  <img src="<?php echo BASE_URL; ?>assets/images/client.png" class="img-fluid w-100" alt="Happy Client" width="165" height="162">
+                  <img src="<?php echo B_URL; ?>assets/images/client.png" class="img-fluid w-100" alt="Happy Client" width="165" height="162">
                 </div>
                 <div class="col-9">
                   <h4>Mr. Ahmed Ali</h4>
                   <div class="d-flex gap-4 align-items-center mb-3">
-                    <img src="<?php echo BASE_URL; ?>assets/images/location-2.png" alt="location" width="25" height="28">
+                    <img src="<?php echo B_URL; ?>assets/images/location-2.png" alt="location" width="25" height="28">
                     <address class="mb-0"> UAE, Abu Dhabi</address>
                     <div class="clientTime">3 Months</div>
 
@@ -708,25 +708,25 @@ include_once 'post.php';
 
     <div class="owl-carousel carousel-main">
         <span class="brand-box brand-box2">
-          <img src="<?php echo BASE_URL; ?>assets/images/brands/1.png" width="180" height="48" class="" alt="brand1" />
+          <img src="<?php echo B_URL; ?>assets/images/brands/1.png" width="180" height="48" class="" alt="brand1" />
         </span>
         <span class="brand-box brand-box2">
-          <img src="<?php echo BASE_URL; ?>assets/images/brands/2.png" width="185" height="124" class="" alt="brand2" />
+          <img src="<?php echo B_URL; ?>assets/images/brands/2.png" width="185" height="124" class="" alt="brand2" />
         </span>
         <span class="brand-box brand-box2">
-          <img src="<?php echo BASE_URL; ?>assets/images/brands/3.png" width="185" height="124" class=""
+          <img src="<?php echo B_URL; ?>assets/images/brands/3.png" width="185" height="124" class=""
                alt="brand3" />
         </span>
         <span class="brand-box brand-box2">
-          <img src="<?php echo BASE_URL; ?>assets/images/brands/4.png" width="185" height="124" class=""
+          <img src="<?php echo B_URL; ?>assets/images/brands/4.png" width="185" height="124" class=""
                alt="brand4" />
         </span>
         <span class="brand-box brand-box2">
-          <img src="<?php echo BASE_URL; ?>assets/images/brands/5.png" width="185" height="124" class=""
+          <img src="<?php echo B_URL; ?>assets/images/brands/5.png" width="185" height="124" class=""
                alt="brand5" />
         </span>
         <span class="brand-box brand-box2">
-          <img src="<?php echo BASE_URL; ?>assets/images/brands/6.png" width="185" height="124" class=""
+          <img src="<?php echo B_URL; ?>assets/images/brands/6.png" width="185" height="124" class=""
                alt="brand6" />
         </span>
 </div>    

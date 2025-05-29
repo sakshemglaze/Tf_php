@@ -3,7 +3,6 @@
 <head>
 <?php 
  include_once 'config.php'; 
- 
  include_once 'services/url.php';
  $urlpro = new UrlService();
 ?>

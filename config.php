@@ -13,7 +13,7 @@ define('B_URL', '/tf_result');
 */
 
   define('BASE_URL', 'http://localhost/');
-  define('IMAGE_URL', 'https://doc.tradersfind.com/images/');
+  define('IMAGE_URL', 'https://d1o1xqr29l8ebx.cloudfront.net/images/');
   define('API_URL','https://api.tradersfind.com');
-  define('B_URL', '');
+  define('B_URL', 'https://d1o1xqr29l8ebx.cloudfront.net/'); // for assets folder
 ?>

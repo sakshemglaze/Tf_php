@@ -17,7 +17,7 @@
    
               <?php
 	//print_r($banner->link);
-            $newban = "https://doc.tradersfind.com/images/" . $banner->image->id . ".webp";
+            $newban = IMAGE_URL . $banner->image->id . ".webp";
            
             echo '<a href="' . $banner->link . '" target="_blank"> <img src="' . $newban . '" alt="Banner Image" width="100%"> </a>';
             ?>
