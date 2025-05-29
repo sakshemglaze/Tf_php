@@ -72,11 +72,11 @@ include_once 'config.php';
       </li>
     </ol>
   </nav>
+        <H1 class="text-center fwbold text-uppercase text-black"> Industry </H1>
 </section>
 
 <section class="container-fluid ">
   <!-- third row -->
-  
   <?php
   $i = 0;
 foreach ($data1 as $category) {
@@ -85,7 +85,8 @@ foreach ($data1 as $category) {
    $i= $i + 1;
     echo '<div class="row  gy-4 bg-white">';
     echo '<div class="col-lg-12">';
-    echo '<h1 class="text-center fwbold text-uppercase text-black"><a href="' . $urlService->getIndustryUrl($category->industryName, $category->id) .'">' . $category->industryName . '</a></h1>';
+    echo '<div class="text-center fwbold text-uppercase text-black">
+    <a href="' . $urlService->getIndustryUrl($category->industryName, $category->id) .'"><font size=3>' . $category->industryName . '</font></a></div>';
     echo '</div>';
     echo '<div class="col-lg-3 text-center">';
     if (!empty($category->image)) { 
@@ -220,7 +221,7 @@ include_once "footer.php";
         industryDiv.classList.add('row', 'gy-4', 'bg-white');
         var industryTitleDiv = document.createElement('div');
           industryTitleDiv.classList.add('col-lg-12');
-          var industryTitle = document.createElement('h1');
+          var industryTitle = document.createElement('div');
           industryTitle.classList.add('text-black','fwbold','text-center', 'text-uppercase');
           var industryTitleLink = document.createElement('a');
           industryTitleLink.href = '';
@@ -276,13 +277,13 @@ function renderIndustries(industries) {
     var industryTitleDiv = document.createElement('div');
     industryTitleDiv.classList.add('col-lg-12');
 
-    var industryTitle = document.createElement('h1');
+    var industryTitle = document.createElement('div');
     industryTitle.classList.add('text-black','fwbold','text-center', 'text-uppercase');
     var industryTitleLink = document.createElement('a');
     industryTitleLink.href = urlService.getIndustryUrl(category.industryName, category.id);
     industryTitleLink.textContent = category.industryName;
     industryTitleLink.classList.add('text-center', 'fwbold', 'text-uppercase', 'text-black');
-
+    
     industryTitle.appendChild(industryTitleLink);
     industryTitleDiv.appendChild(industryTitle);
     industryDiv.appendChild(industryTitleDiv);
@@ -321,7 +322,7 @@ function renderIndustries(industries) {
     var storecat = cat.productsSubcategories;
     var hasTrueSubcat = storecat.some(function(subcat1) {
         if (subcat1.status !== 'false') {
-            console.log("hyy from if");
+            //console.log("hyy from if");
             count++; // Increment the counter
             if (count <= 6){ return true
             }

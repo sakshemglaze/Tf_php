@@ -1,5 +1,5 @@
 <?php include_once 'config.php'; ?>
-<script src="services/storegeService.js"></script>
+<script src="<?php echo BASE_URL;?>services/storegeService.js"></script>
 <script>
        function closePopup() {
     document.getElementById("popup-card-otp").style.display = "none";

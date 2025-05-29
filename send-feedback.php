@@ -71,7 +71,7 @@ $SeoParams = [
     <section class="feedbackBg mb-5 mt-5">
         <div class="container">
             <div class="text-center px-md-5 ">
-                <h2 class="border-center text-center fs-2"> <span class="text-info">TradersFind </span> <span class="text-danger">Feedback Form </span></h2>
+                <h1 class="border-center text-center fs-2"> <span class="text-info">TradersFind </span> <span class="text-danger">Feedback Form </span></h1>
                 <p class="fs-5 py-3 fwbold ">Kindly utilize the form provided below to share your valuable feedback with us. Your input is pivotal in enhancing the user experience we offer. Thank you for taking the time to help us improve.</p>
             </div>
 

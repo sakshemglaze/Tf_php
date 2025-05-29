@@ -65,7 +65,7 @@
                                         <p class="about_text about_text2"><b>Description: </b><?php echo $premiumprod['productDescription'] ?></p>
                                     </div>
                                 <?php endif; ?>
-                                <a href="<?php echo $urlService->getProductUrl($premiumprod['productName'],$premiumprod['id']) ?>" target="_blank" title="<?php echo isset($premiumprod['seller'])?$premiumprod['seller']['sellerCompanyName']:'' ?>" class="fwbold d-block" style="padding-left: 82px; color: yellow;">
+                                <a href="/<?php echo $urlService->getProductUrl((isset($premiumprod['productUrl']) && !empty($premiumprod['productUrl'])) ?$premiumprod['productUrl']: $premiumprod['productName'],$premiumprod['id']) ?>" target="_blank" title="<?php echo isset($premiumprod['seller'])?$premiumprod['seller']['sellerCompanyName']:'' ?>" class="fwbold d-block" style="padding-left: 82px; color: yellow;">
                                     ...View more
                                 </a>
                                 <div class="text-white mt-3">

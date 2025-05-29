@@ -17,7 +17,7 @@ include_once 'config.php';
     $indexr=0;
     $page=0;
     if ($isMobile) {
-      $size = 5;
+      $size = 10;
     } else {
       $size=10;
     }
@@ -100,26 +100,23 @@ else{
         }else{
               $length = count(($data['products']));
           }
-    //print_r($data);
+        //print_r($data);
 
-    $category = json_decode(get(
-      'api/guest/products-categories-na/' . $subcategory->title, $queryParams
-    ));
-    if(isset($category[0]->title)){
-      $industry = json_decode(get(
+        $category = json_decode(get(
+        'api/guest/products-categories-na/' . $subcategory->title, $queryParams));
+        if(isset($category[0]->title)){
+        $industry = json_decode(get(
         'api/industries-na/' . $category[0]->title,$queryParams) );
-      }
-
-        
+        }
         include_once 'catmetas.php';
         //print_r("first if");
-      }
-  }
+     }
+    }
   else if( $numParts==3 && basename($parts[1])=='search'){//will be change
             $subcatName=str_replace('-',' ',basename($parts[2]));
             $subcategory = json_decode(get ( 'api/guest/products-subcategorie/' . $subcatName));
 
-  $filterDto->productSubCategoryFilter = isset($_POST['productSubCategoryFilter'])?$_POST['productSubCategoryFilter']:null;
+          $filterDto->productSubCategoryFilter = isset($_POST['productSubCategoryFilter'])?$_POST['productSubCategoryFilter']:null;
 
 
             $payload = array(
@@ -164,27 +161,35 @@ else{
           $totallength=$data1['xTotalCount'];
            // $length = count(($data->products));
             //print_r('Welcome search 1 4');
-          }
+    }
          
-          else{
+  else{
+      //print_r("8888");
             $subcatName=basename($parts[2]);
             $subcategory = json_decode(get ( 'api/guest/products-subcategorie/' . $subcatName));
-            $payload = array(
+            if(!isset($subcategory->subCategoryName)){
+              $new_url = str_replace('/category/', '/search/', $currentUrl);
+    
+              header('Location: ' . $new_url, true, 301);
+              exit;
+            } else {
+              $payload = array(
                 'searchText' => isset($subcategory) ? $subcategory->subCategoryName : $subcatName  ,
                 'searchTextType' => 'subcategory',
                 'filterDto' => $filterDto
-            );  
+              );
+                
+              //print_r($subcategory);
+              //print_r($payload);
+              $queryParams= array('page'=> $page, 'size'=> $size) ;
           
-            //print_r($payload);
-            $queryParams= array('page'=> $page, 'size'=> $size) ;
-          
-            $data1 =  postforprod(
+              $data1 =  postforprod(
               'api/new-search-products',
               $payload,
               true,
               $queryParams,
               false
-            );
+               );
             $data=$data1['data'];
             $totallength=$data1['xTotalCount'];
               //$length = count(($data->products));              
@@ -192,14 +197,20 @@ else{
               $category = json_decode(get(
                 'api/guest/products-categories-na/' . $subcategory->title, $queryParams
               ));
-             // print($subcategory->subCategoryName);
+              if(!isset($category[0]->title)){
+                $new_url = str_replace('/category/', '/search/', $currentUrl);
+      
+                header('Location: ' . $new_url, true, 301);
+                exit;
+              } 
+              // print($subcategory->subCategoryName);
               
               $industry = json_decode(get(
                 'api/industries-na/' . $category[0]->title,$queryParams) );
                 
-include_once 'catmetas.php';
-  //print_r("else");
-          }
+             include_once 'catmetas.php';
+          }//print_r("else");
+    }
         //  if ($length == 0) {
         //         header("Location: /not-found.php");
         //         exit();
@@ -660,7 +671,7 @@ if ($data['sponsoredProductList'] != null) {
                   $getreltedprod = get('api/guest/products/by-seller-related/' . $reletedselId, true);
                   $reletedSubCategory = [];
                   $arrayOfRelsubcat = [];
-                 
+                 //print_r($prodData);
                   $arrayRprod = json_decode($getreltedprod);
                   if($arrayRprod!=null){      
                     foreach ($arrayRprod as $index => $relProd) {

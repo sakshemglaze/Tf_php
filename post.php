@@ -1,6 +1,6 @@
 <?php
-include_once 'config.php';
-function getItem($item) {
+    include_once 'config.php';
+    function getItem($item) {
                
                $value = $_COOKIE[$item] ?? null;
                if ($value !== null) {
@@ -9,10 +9,10 @@ function getItem($item) {
                } else {
                    return $value;
                }
-          return null;
-       }
+            return null;
+    }
         
-       function post($url, $request, $observeResponseFlag = false, $queryParams = null, $authRequired = false, $responseType = null) {
+    function post($url, $request, $observeResponseFlag = false, $queryParams = null, $authRequired = false, $responseType = null) {
         $token = getItem("userAccessToken");
     
         $headers = array(
@@ -26,9 +26,11 @@ function getItem($item) {
         if ($queryParams) {
             $url .= '?' . http_build_query($queryParams);
         }
-    
+        
+        $start = microtime(true);
+
         $ch = curl_init(API_URL . $url);
-    
+
         $postData = json_encode($request);
     
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
@@ -38,18 +40,26 @@ function getItem($item) {
         //curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         $response = curl_exec($ch);
         $data=json_decode($response);
+
+        $info = curl_getinfo($ch);
+        $duration = microtime(true) - $start;
+	    $logLine = date('Y-m-d H:i:s') . " - API {$info['url']} took {$duration}s\n";
+	    error_log($logLine, 3, "/var/www/tradersfind.com/api_times.log");
+
         if ($responseType === 'json') {
             // Decode JSON response
             $decodedResponse = json_decode($response, true);
             return $decodedResponse;
         }
-    
         return $data;
+        //curl_close($ch);
+
     }
     
 
-       function get($url, $observeResponseFlag = false, $queryParams = null, $authRequired = false, $responseType = null) {
-       
+    function get($url, $observeResponseFlag = false, $queryParams = null, $authRequired = false, $responseType = null) {
+        $start = microtime(true);
+
         $token = getItem("userAccessToken");
         
         $headers = array(
@@ -82,7 +92,6 @@ function getItem($item) {
             ]
         ];
         
-      
         if ($observeResponseFlag) {
             $contextOptions['http']['header'] .= "\r\n" . 'observe: response';
         }
@@ -90,13 +99,13 @@ function getItem($item) {
         
         }
         
-        
         $context = stream_context_create($contextOptions);
-        
-      
         $response = @file_get_contents($urlWithQuery, false, $context);
         
-        
+        $duration = microtime(true) - $start;
+	    $logLine = date('Y-m-d H:i:s') . " - API {$urlWithQuery} took {$duration}ss\n";
+	    error_log($logLine, 3, "/var/www/tradersfind.com/api_times.log");
+
         if ($response === false) {
             return "Error fetching data";
         } else {
@@ -118,7 +127,9 @@ function getItem($item) {
         if ($queryParams) {
             $url .= '?' . http_build_query($queryParams);
         }
-    
+        
+        $start = microtime(true);
+
         $ch = curl_init(API_URL . $url);
     
         $postData = json_encode($request);
@@ -143,7 +154,13 @@ function getItem($item) {
                 break;
             }
         }
-    
+        $info = curl_getinfo($ch);
+
+        $duration = microtime(true) - $start;
+        //print_r("API {$info['url']} took {$duration}s");
+        $logLine = date('Y-m-d H:i:s') . " - API {$info['url']} took {$duration}s. \n";
+	    error_log($logLine, 3, "/var/www/tradersfind.com/api_times.log");
+
         // Decode JSON response if needed
         if ($xTotalCount !=null) {
             $body = substr($response, $headerSize);
@@ -156,4 +173,4 @@ function getItem($item) {
     }
     
     
-       ?>
+?>

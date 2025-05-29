@@ -1,9 +1,7 @@
 <?php
 //ob_start();
 include_once 'config.php'; ?>
-<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/postbuyreq.css" />
-<link rel="stylesheet" href="<?php echo BASE_URL; ?>asses/vendors/bootstrap/bootstrap.min.css">
-<script src="services/storegeService.js"></script>
+<script src="<?php echo BASE_URL;?>services/storegeService.js"></script>
 
 <?php
 include_once "header-sub.php";
@@ -12,7 +10,7 @@ include_once "header-sub.php";
 <p-toast></p-toast>
 <section class="bg-gradiant1 login-title text-center text-white fwbold pb100">
   <div class="container">
-    <h2 class="fs-3 pt20">Let Us know What you Need</h2>
+    <spam class="fs-3 pt20">Let Us know What you Need</spam>
     <p class="mt-0 mb-0 ">Tell us your requirement. Get Instant quotes from Verified Sellers</p>
   </div>
 </section>
@@ -88,7 +86,7 @@ fetch(url, {
       <div class="row">
         <!----Left---->
         <div class="col-md-8 line">
-          <div class="fs-3 fwbold Details">Requirement Details</div>
+          <div class="fs-3 fwbold Details"><H1>Requirement Details</H1></div>
 
           <form method="post" id="postBuyreq">
             <div class="mb-3 mt-3">
@@ -406,7 +404,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="media-left media-middle">
               <a href="#">
 
-                <img class="media-object" src="<?php echo  BASE_URL ?>assets/images/login-icon1.jpg">
+                <img class="media-object" src="<?php echo  BASE_URL ?>assets/images/login-icon1.jpg" alt="Stopwatch speeds across gradient background.">
 
               </a>
             </div>
@@ -420,7 +418,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="media-left media-middle">
               <a href="#">
 
-                <img class="media-object" src="<?php echo  BASE_URL ?>assets/images/login-icon2.jpg">
+                <img class="media-object" src="<?php echo  BASE_URL ?>assets/images/login-icon2.jpg" alt="Worker pushing handcart, carrying boxes, warehouse.">
 
               </a>
             </div>
@@ -434,7 +432,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="media-left media-middle">
               <a href="#">
 
-                <img class="media-object" src="<?php echo  BASE_URL ?>assets/images/login-icon3.jpg">
+                <img class="media-object" src="<?php echo  BASE_URL ?>assets/images/login-icon3.jpg" alt="Checklist displays items, on red-blue gradient.">
 
               </a>
             </div>

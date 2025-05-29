@@ -1,14 +1,14 @@
 <?php include_once 'config.php'; ?>
-<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
-<link rel='stylesheet' href='<?php echo BASE_URL; ?>assets/css/mystyle.css'>
-<link rel='stylesheet' href='<?php echo BASE_URL; ?>assets/css/owl.carousel.css'>
+<link rel="stylesheet" href="<?php echo B_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
+<link rel='stylesheet' href='<?php echo B_URL; ?>assets/css/mystyle.css'>
+<link rel='stylesheet' href='<?php echo B_URL; ?>assets/css/owl.carousel.css'>
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 
 <header class="container-fluid shadow-sm border-bottom bg-white sticky-top inner_header1 ">
     <div class="d-flex align-items-center position-relative flex-wrap">
 
         <a href="<?php echo BASE_URL; ?>" title="TradersFind" aria-label="TradersFind - Largest B2B online Portal">
-          <img src="<?php echo BASE_URL; ?>assets/images/TradersFind.webp" alt="TradersFind" class="order-1 inner_header_logo" width="110" height="70" Rel="Nofollow" />
+          <img src="<?php echo B_URL; ?>assets/images/TradersFind.webp" alt="TradersFind" class="order-1 inner_header_logo" width="110" height="70" Rel="Nofollow" />
         </a>
         <?php
       $currecntUrlHS=$_SERVER['REQUEST_URI'];
@@ -57,6 +57,7 @@ function submitform(){
 
     }
 </script>
+
 <form method="post" action="" id="homepageSearch" class="w-100 position-relative ms-auto mw-600 order-3 order-md-2 mt-md-0 ddd">
 
     <div class="input-group input-group-lg w-100 position-relative ms-auto mw-600 order-3 order-md-2 mt-md-0">
@@ -66,7 +67,7 @@ function submitform(){
           <div class="submit-button">
            
             <button  type="submit" onclick="submitform()" class="btn-primary-gradiant w-100 h-100 px-2 px-lg-5">
-              <img src="<?php echo BASE_URL; ?>assets/images/search-icon.png" width="18" class="me-lg-2" alt="search" />
+              <img src="<?php echo B_URL; ?>assets/images/search-icon.png" width="18" class="me-lg-2" alt="search" />
               <div class="d-none d-lg-inline">Search</div>
             </button>
           </div>
@@ -91,7 +92,7 @@ function submitform(){
     <div class="form-control " id="option_com"></div>
 </ul>
                
-<script src="<?php echo BASE_URL;?>assets/js/jquery-3.6.1.min.js"> </script>
+<script src="<?php echo B_URL;?>assets/js/jquery-3.6.1.min.js"> </script>
 <script>
     $(document).ready(function () {
         $('#search').keyup(function () {
@@ -188,7 +189,7 @@ function submitform(){
 </form>
     <div class="sidemenu align-items-center order-4 inner_header">
         <a href="https://api.whatsapp.com/send?phone=971569773623&text=Browsed TradersFind" class="mx-4" title="Whatsapp_chat" aria-label="Chat with Tradersfind support team" target="_blank">
-          <img src="<?php echo BASE_URL; ?>assets/images/whatsapp-chat.webp" alt="Whatsapp_chat" style="height: 46px;"></a>
+          <img src="<?php echo B_URL; ?>assets/images/whatsapp-chat.webp" alt="Whatsapp_chat" style="height: 46px;"></a>
         <div class="login-button-top d-flex align-items-center mw-200" *ngIf="!this.storageService.getItem('login')">
         <a href="<?php echo BASE_URL ?>register-your-business">Add Your Business</a>&nbsp;
         <img src="<?php echo BASE_URL; ?>assets/images/business.png" alt="business" width="16" height="16" />

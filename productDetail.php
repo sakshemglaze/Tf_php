@@ -3,7 +3,6 @@
 <head>
 <?php 
  include_once 'config.php'; 
- 
  include_once 'services/url.php';
  $urlpro = new UrlService();
 ?>
@@ -19,6 +18,22 @@
 
             $id = end($parts);
             $name = prev($parts);
+            $arr_index = $name . "/" . $id;
+            $redirects = [
+              "tank-cleaning-operation/658d0612b18fdb667407b721" => "al-tank-cleaning-services/658d0612b18fdb667407b721",
+              "power-calibrator/65aa502a4f0ca7130c256673" => "voltage-calibrator/65aa502a4f0ca7130c256673",
+              "air-cargo-services/656455ff5370fd4cc01dcdd9" => "cargo-services/656455ff5370fd4cc01dcdd9",
+              "hp-used-laptop/657990f65370fd4cc01e0dda" => "used-laptop/657990f65370fd4cc01e0dda",
+              "underground-fuel-storage-tanks/65325c71adb96c40987e5b6b" => "underground-fuel-storage-tanks/672c54f7bab0c13b100f2705",
+              "used-laptop/6579785f5370fd4cc01e0cc0" => "reliable-used-laptop/6579785f5370fd4cc01e0cc0"
+            ];
+            if (array_key_exists($arr_index, $redirects)) {
+              $parts = explode("/",$redirects[$arr_index]);
+              $id = end($parts);
+              $name = prev($parts);
+              header('Location: ' . BASE_URL . "product/" . $name . "/" . $id , true, 301);
+            }
+            
             require_once 'post.php';
         $data =  get(
                 'api/guest/products/'.$name.'/'.$id, 
@@ -34,7 +49,7 @@
                 exit;
               }
               //$data = findActive($data1);
-              //print_r($data1->seller->logo->id);
+              //print_r($data1);
 //     SEO Attributes setting ..................
               //print_r($data1->metaKeywords);
         $SeoParams = [
@@ -96,15 +111,15 @@
               <?php if ($data1 != null ) : ?>
               <div class="fotorama" data-nav="thumbs" data-thumbmargin="20" data-width="100%" data-allowfullscreen="true"
                  data-height="auto" data-ratio="800/600">
-                         <img class="rounded-10" src="https://doc.tradersfind.com/images/<?php echo isset($data1->images[0]->id)?$data1->images[0]->id:''; ?>.webp" alt="<?php echo $data1->productName ?>" width="240" height="240" >
+                         <img class="rounded-10" src="https://doc.tradersfind.com/images/<?php echo isset($data1->images[0]->id)?$data1->images[0]->id:'logo'; ?>.webp" alt="<?php echo $data1->productName ?>" width="240" height="240" >
              </div>
              <?php endif; ?>
             </div>
             <div class="col-lg-5">
-              <h1 class="fwbold fs-3" *ngIf="prodDetails">
-               <?php echo $data1->productName ?>
+              <h1 class="fwbold fs-4" *ngIf="prodDetails">
+               <?php echo $data1->productName . ' - ' . $data1->sellerCompanyName ?>
               </h1>
-              <span class="fwbold fs-3 text-red">
+              <span class="fwbold fs-4 text-red">
                 <?php if (isset($data1->Price) && $data1->Price !=0 && (isset($data1->maxPrice) == null || isset($data1->maxPrice) == '' )) : ?>
                   <strong>Price:</strong> <?php echo $prodDetails['price']; ?>
                 <?php endif; ?>
@@ -147,7 +162,7 @@
                 <div class="card-body bg-grey3">
                   <div class="d-flex flex-column align-items-center">
                     <span class="bg-white px-3 rounded-10 py-2">
-                      <img src="https://doc.tradersfind.com/images/<?php echo $data1->seller->logo->id; ?>.webp" alt="<?php echo $data1->seller->sellerCompanyName; ?>"width="160" >
+                      <img src="https://doc.tradersfind.com/images/<?php echo isset($data1->seller->logo) ? $data1->seller->logo->id : 'logo'; ?>.webp" alt="<?php echo $data1->seller->sellerCompanyName; ?>"width="160" >
                     </span>
 
                     <h2 class="fwbold fs-4 mt-3">
@@ -347,7 +362,7 @@
           <?php echo isset($data1->seller->sellerCompanyName)?$data1->seller->sellerCompanyName:''; ?>
           </div>
           <div> <?php echo isset($data1->seller->sellerTagline)?$data1->seller->sellerTagline:''; ?>     </div><br>
-          <a href="/<?php echo $url->getSellerUrl($data1->seller->sellerCompanyName,$data1->seller->id) ?>" target="_blank" title="<?php echo $data1->seller->sellerCompanyName?>" target="_blank"
+          <a href="/<?php echo $url->getSellerUrl(!empty($data1->seller->sellerUrl) ? $data1->seller->sellerUrl : $data1->seller->sellerCompanyName,$data1->seller->id) ?>" target="_blank" title="<?php echo $data1->seller->sellerCompanyName?>" target="_blank"
             class="btn-primary-gradiant rounded-10 mt-4 px-md-5">
             View more
           </a>
@@ -356,7 +371,7 @@
        
       </div>
     </div>
-    <script src="services/storegeService.js"></script>
+    <script src="<?php echo BASE_URL;?>services/storegeService.js"></script>
     <script>
        function closePopup() {
     document.getElementById("popup-card-otp").style.display = "none";

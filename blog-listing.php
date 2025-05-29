@@ -30,6 +30,15 @@ include_once "header-sub.php";
 </section>
 
 <section class="container">
+    <section class="search-breadcrumb">
+        <div class="row">
+            <div class="mt-4 col-md-12 col-sm-12 col-xs-12 search-banner">
+                <a href="/">Home</a> >
+                Blogs  <h1 class="text-center fwbold text-uppercase text-black"> Blogs </h1>
+            </div>
+        </div>
+    </section>
+
     <div class="row">	
         <div class="col-xl-8 mt-4 card-shadow rounded-2 bg-white p-2">
             <!--<h2 class="my-4 text-uppercase fw-bold">Latest Blog</h2>-->
@@ -130,11 +139,11 @@ include_once "header-sub.php";
                     <div class="col-md-6 mb-4 align-items-center front_blog">
                         <div class="hello">
                             <?php if ($blog->image == null || $blog->image == 'null' || $blog->image == ''): ?>
-                                <a target="_blank" href="<?php echo BASE_URL.$urlService->getBlogUrl($blog->title); ?>">
+                                <a target="_blank" href="<?php echo BASE_URL.$urlService->getBlogUrl(isset($blog->blogUrl)?$blog->blogUrl:$blog->title); ?>">
                                     <img src="<?php echo BASE_URL; ?>assets/images/tflogo.webp" alt="<?= $blog->altText ? $blog->altText : 'blog image' ?>">
                                 </a>
                             <?php else : ?>
-                            <a target="_blank" href="<?php echo BASE_URL.$urlService->getBlogUrl($blog->title); ?>">
+                            <a target="_blank" href="<?php echo BASE_URL.$urlService->getBlogUrl(isset($blog->blogUrl)?$blog->blogUrl:$blog->title); ?>">
                                 <?php if (isset($blog->image)) {
                                 $blogimgurl = IMAGE_URL . $blog->image->id . '.webp'; }
                                 ?>
@@ -143,7 +152,7 @@ include_once "header-sub.php";
                             <?php endif; ?>
                             <div class="front_blog2">
                                 <p><?php echo $blog->subTitle; ?></p>
-                                <h1 class="fs-5 text-center fw-bold mt-3"><a href="<?php echo BASE_URL.$urlService->getBlogUrl(isset($blog->blogUrl)?$blog->blogUrl:$blog->title); ?>"><?php echo $blog->title; ?></a></h1>
+                                <spam class="fs-5 text-center fw-bold mt-3"><a href="<?php echo BASE_URL.$urlService->getBlogUrl(isset($blog->blogUrl)?$blog->blogUrl:$blog->title); ?>"><?php echo $blog->title; ?></a></spam>
 
                                 <!-- <p class='roohit'></p> -->
                                     <?php //echo $desc; ?>
@@ -161,27 +170,26 @@ include_once "header-sub.php";
          <div class="col-xl-4 mt-4">
             <?php
            
-               // $resultb= get('api/guest/blog-categories', true);
-                //$blogcat=json_decode($resultb);
+                $resultb= get('api/guest/blog-categories', true);
+                $blogcat=json_decode($resultb);
              
             ?>
             <div class="card-shadow p-2 rounded-2 bg-white blog_Categories">
                 <h5 class="border-bottom pb-2 fs-5 text-white p-2 fw-bold bg2">Group Categories</h5>
                 <ul class="category-filter flex-wrap mb-2"> 
                     <?php
-                   // print_r($blogcat);
-                    //foreach($blogcat as $bcat){
+                    foreach($blogcat as $bcat){
                     ?>
-                    <!-- <li><button class="btn btn-primary-gradiant  btn-lg" ></button></li> -->
+                    <li><button class="btn btn-primary-gradiant  btn-lg" onclick="blogfilter('<?php echo $bcat->id?>')"><?php  echo $bcat->categoryName?></button></li>
                     <?php
-                   // }
+                    }
                     ?>
                 </ul>
             </div>
         </div>
     </div>
 </section>
-<script src="services/storegeService.js"></script>
+<script src="<?php echo BASE_URL;?>services/storegeService.js"></script>
 
 
 <script>
@@ -329,7 +337,7 @@ function createBlogElements(loadedData) {
             frontBlog2Div.appendChild(subtitleParagraph);
 
             // Create heading for blog title
-            const titleHeading = document.createElement("h1");
+            const titleHeading = document.createElement("spam");
             titleHeading.className = "fs-5 text-center fw-bold mt-3";
             //titleHeading.setAttribute("style","font-size: x-large;");
             const titleLink = document.createElement("a");
