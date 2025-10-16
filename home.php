@@ -32,8 +32,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
 <?php
-include "header.php";
-include "home-search.php"
+ function isMobilehome() {
+  return preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
+}
+$headerCheck=isMobilehome();
+if($headerCheck){
+ // include "header.php";
+  //include "home-search.php";
+   include "header-mobile.php";
+   $numberofBlog=1;
+}else{
+  // include "header-mobile.php";
+  include "header.php";
+  include "home-search.php";
+  $numberofBlog=3;
+}
+
+
 ?>
 
 
@@ -470,117 +485,13 @@ fetch(url, {
 
         }
 
-       function startfomsubmition(){
-
-        }
-          </script>
-
-<?php
-function sendOtp($contenctNo,$formdata){
- 
-
-  $payload=array('phone'=> $contenctNo, 'loginmethod'=>'WHATSAPP');
-  $data123=post(
-  'api/otps',
-  $payload,
-  false,
-  //isWhatsapp ? { type: 'whatsapp' } : {type: 'email'},
-  array("type"=> 'WHATSAPP'),
-  false);
-  //print_r($data123->title);
-  if(isset($data123->title)&& $data123->title=='ContactNo not Valid.'){
-   
-    echo "<script>
-    if(confirm('Please click on OK and send a message (Register Me) on our whatsapp number (+971569773623) to register.')) {
-        window.open('https://api.whatsapp.com/send?phone=971569773623&text=Register%20Me', '_blank');
-    }
-  </script>";
-  }else{
-    if(isset($data123->title) && $data123->title=='OTP Already generated for the phone'){
-
-      include_once 'otp.php';
-      //  //echo $contenctNo;
-      echo '<script>document.getElementById("popup-card-otp").style.display = "block";</script>';
-      $message="OTP Already generated for the phone";
-      $type="success";
-      echo "
-      <script>
-          $(document).ready(function() {
-              toastr.$type('$message');
-          });
-      </script>";
-
-      
-    }else{
-      //print_r($data123);
-      include_once 'otp.php';
-      //echo $contenctNo;
-      echo '<script>document.getElementById("popup-card-otp").style.display = "block";</script>';
-    }
-  }
-}
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  // Retrieve form data
-  if(isset($_POST['productName'])&isset($_POST['contactNumber'])){
-  $productName = $_POST['productName'];
-  $quantity = $_POST['quantity'];
-  $quantityUnit = $_POST['quantityUnit'];
-  $requirement = $_POST['requirement'];
-  $frequencytype = $_POST['frequencytype'];
-  $countryCode = $_POST['countryCode'];
-  $contactNumber = $_POST['contactNumber'];
-  
-  $formdata = array(
-    'enquirerContactNumber' => $countryCode . $contactNumber,
-    'enquiryMessage' => $requirement,
-    'productName' => $productName,
-    'quantity' => $quantity,
-    'unit' => $quantityUnit,
-    'status' => 'Pending for Approval',
-    'frequencytype' => $frequencytype,
-    'enquirerName'=>''
-  );
-
-//echo "Form submitted successfully!";
-// echo $productName;
-// header("Location: post-buy-requirements");
-$contenctNo=$countryCode.$contactNumber;
-include_once 'post.php';
-//print_r($contenctNo);
-
-  $respons=sendOtp($contenctNo,$formdata);
-}else{
-  if(isset($_POST['search']) && $_POST['search']!=''){
-    if(isset($_POST['location']) && $_POST['location']!='' && $_POST['location']!='UAE'){
-      $redirect_url = str_replace(' ','-',(BASE_URL.'search/'.$_POST['search'].'/'.$_POST['location']));
-      echo '<script>window.location.href = "'.$redirect_url.'";</script>';
-    }else{
-    $redirect_url = str_replace(' ','-',(BASE_URL.'search/'.$_POST['search']));
-   echo '<script>window.location.href = "'.$redirect_url.'";</script>';
-    }
-  }
-
-}
-} else {
-
- 
-}
-?>
-
-
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section class="bg-grey bg-grey_22 p-4 my-5">
   <h3 class="border-center text-center mb-4">FIND SELLERS FROM TOP EMIRATES </h3>
-  <div class="owl-carousel carousel-main4">
+  <div class="owl-carousel carousel-main4 ">
     <?php
-   $items=array('assets/images/c1.png','./assets/images/c2.png',
-   './assets/images/c3.png','./assets/images/c4.png',
-   './assets/images/c5.png','./assets/images/c1.png','./assets/images/c3.png');
+   $items=array('assets/images/c1.webp','./assets/images/c2.webp',
+   './assets/images/c3.webp','./assets/images/c4.webp',
+   './assets/images/c5.webp','./assets/images/c1.webp','./assets/images/c3.webp');
    $state=array('DUBAI','ABU DHABI','SHARJAH','AJMAN','FUJAIRAH','RAS AL KHAIMAH','UMM AL QUWAIN');
     $totalItems = count($items);
     $itemsPerSlide = 4;
@@ -622,7 +533,7 @@ include_once 'post.php';
   <h3 class="border-center text-center mb-4">
     EXPLORE PREMIUM SELLERS
   </h3>
-  <div class="owl-carousel carousel-main4">
+  <div class="owl-carousel carousel-main4 border-center text-center">
     <div class="p-2 col-md-3">
           <span class=""><img src="<?php echo B_URL; ?>assets/images/brands/101.png" width="302px" height="159"  alt="Seller"></span>
         </div>
@@ -639,7 +550,7 @@ include_once 'post.php';
   
 </section>
 
-<section class="my-5 logo_slider">
+<!-- <section class="my-5 logo_slider">
   <h3 class="border-center text-center mb-5">
     WHAT OUR HAPPY CLIENTS SAY ABOUT US
   </h3>
@@ -700,7 +611,7 @@ include_once 'post.php';
 
           </div>
   </div>
-</section>
+</section> -->
 
 <section class="bg-grey bg-grey_22 p-4 my-5 logo_slider">
   <h3 class="border-center text-center mb-5">EXPLORE PREMIUM BRANDS</h3>

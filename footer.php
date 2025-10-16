@@ -6,6 +6,7 @@
       <div class="row gy-5">
         <div class="col-lg-3  text-center">
           <img src="<?php echo B_URL; ?>assets/images/help-icon.webp" class="img-fluid" width="60" height="30" alt="help" />
+
           <h4 class="my-4">Happy to help you!</h4>
           <ul class="mt-4 mb-5 footer_call gap-3">
             <li>

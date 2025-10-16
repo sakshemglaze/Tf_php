@@ -1,4 +1,4 @@
-<div class="categories card-shadow rounded-10">
+<div class="categories categories2   card-shadow rounded-10">
     <div class="d-flex align-items-center ps-2 mb-3">
       <img src="<?php echo BASE_URL?>assets/images/Category-icon2.png" alt="Industry" width="19" height="12"  />
       <h4 class="mb-0 ms-3 fw-semibold">Categories</h4>
@@ -10,12 +10,13 @@
       //print_r($industrys);
       
       $industry = array();
-      array_push($industry, array("House Keeping Services", "6450d5651381f473d7f9da4d", "./assets/images/industry/House-Keeping-Services.jpg"));
-array_push($industry, array("Travel, Tourism & Hotels", "6450d5651381f473d7f9da64", "./assets/images/industry/Travel,-Tourism-&-Hotels.jpg"));
-array_push($industry, array("Architecture & Interiors", "6450d5651381f473d7f9da30", "./assets/images/industry/Architecture-&-Interiors.jpg"));
-array_push($industry, array("Building & Construction", "6450d5651381f473d7f9da65", "./assets/images/industry/Building-&-Constructio.jpg"));
-array_push($industry, array("Chemicals, Dyes & Solvents", "6450d5651381f473d7f9da37", "./assets/images/industry/Chemicals,-Dyes-&-Solvents.jpg"));
-array_push($industry, array("Industrial Supplies", "6450d5651381f473d7f9da51", "./assets/images/industry/Industrial_Supplies.jpg"));
+      array_push($industry, array("Electrical Equipment", "6450d5651381f473d7f9da3e", "./assets/images/industry/Electrical-Equipment.svg"));
+array_push($industry, array("Financial & Legal Services", "6450d5651381f473d7f9da43", "./assets/images/industry/Financial-&-Legal-Services.svg"));
+array_push($industry, array("Engineering Services", "6450d5651381f473d7f9da40", "./assets/images/industry/Engineering-Services.svg"));
+array_push($industry, array("Building & Construction", "6450d5651381f473d7f9da65", "./assets/images/industry/Building-&-Construction.svg"));
+array_push($industry, array("Industrial Plants & Machinery", "6450d5651381f473d7f9da50", "./assets/images/industry/Industrial-Plants-&-Machinery.svg"));
+array_push($industry, array("Kitchen Utensils & Appliances", "6450d5651381f473d7f9da53", "./assets/images/industry/Kitchen-Utensils-&-Appliances.svg"));
+array_push($industry, array("Packaging Machines & Goods", "6450d5651381f473d7f9da5a", "./assets/images/industry/Packaging-Machines-&-Goods.svg"));
 
       ?>
     <ul>
@@ -49,7 +50,7 @@ array_push($industry, array("Industrial Supplies", "6450d5651381f473d7f9da51", "
   
       <li class="has-category"> <h5>
         <a href="industry">
-          <span><img src="<?php echo BASE_URL?>assets/images/browse-icon.png" alt="browse-icon" width="30" height="30" /></span>
+          <span><img src="<?php echo BASE_URL?>assets/images/all-category.svg" alt="browse-icon" width="30" height="30" /></span>
           &nbsp;All Categories
         </a> </h5>
   
