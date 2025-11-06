@@ -21,7 +21,7 @@
         <div class="card border-0 shadow-sm" style="margin:10px">
             <div class="card-body text-center">
                 <span class="border1 p-3 text-center w-100 d-block rounded-10">
-                 <img src="/image.php?image=<?php echo $product->images[0]->id?>" alt="<?php echo $product->productName  ?>" width="140" />
+                 <img src="/image.php?image=<?php echo isset($product->images[0]->id) ? $product->images[0]->id : '\images\TradersFind.webp'?>" alt="<?php echo $product->productName  ?>" width="140" />
                 </span>
                 <div class="single-line"><h3 class="mt-1 fs-5">
                     <a href="/<?php echo $url->getProductUrl((isset($product->productUrl) && !empty($product->productUrl)) ? $product->productUrl:$product->productName, $product->id) ?>"

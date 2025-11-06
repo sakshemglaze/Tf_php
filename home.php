@@ -299,7 +299,7 @@ fetch(url, {
                       'verify_peer_name' => false,
                   ],
               ]);
-              $resUnit = file_get_contents(B_URL . 'assets/testingJson/Units.json', false, $context);
+              $resUnit = file_get_contents(BASE_URL . 'assets/testingJson/Units.json', false, $context);
 
                       $allunit=json_decode($resUnit);
                       foreach($allunit as $unit){
@@ -335,7 +335,7 @@ fetch(url, {
                   <select area-label="countryCode" name="countryCode" class="form-control mxw-50">
                 
                   <?php
-                      $rescuntrycode=file_get_contents( B_URL.'assets/testingJson/country_codes_v1.json',false, $context);
+                      $rescuntrycode=file_get_contents( BASE_URL.'assets/testingJson/country_codes_v1.json',false, $context);
                       $allcuntrycode=json_decode($rescuntrycode);
                       foreach($allcuntrycode as $unit){
                              ?>
