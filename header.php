@@ -1,3 +1,4 @@
+<script src="<?php echo B_URL; ?>assets/js/global.js"></script>
 <?php include_once 'config.php'; ?>
 
 <link rel="stylesheet" href="<?php echo B_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">

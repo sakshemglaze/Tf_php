@@ -32,7 +32,7 @@
            // console.log("success"+event+lol);
            
             $.ajax({
-                    url: "https://api.tradersfind.com/api/guest/users/"+lolnumber,
+                    url: API_BASE_URL + "api/guest/users/"+lolnumber,
                     dataType: "json",
                     data: { },
                     success: function (data) {

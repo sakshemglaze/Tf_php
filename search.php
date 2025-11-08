@@ -723,7 +723,7 @@ if ($data['sponsoredProductList'] != null) {
             console.log(mobileNumber);
             const myObject = new StorageService();
             $.ajax({
-              url: "https://api.tradersfind.com/api/authenticate-otp",
+              url: API_URL . "api/authenticate-otp",
               method: "POST",
               dataType: "json",
               contentType: "application/json",
@@ -749,7 +749,7 @@ if ($data['sponsoredProductList'] != null) {
           function otpRegister(otpAuthData, mobileNumber,formdata){
             const myObject1 = new StorageService();
             $.ajax({
-              url: "https://api.tradersfind.com/api/register-otp",
+              url: API_BASE_URL + "api/register-otp",
               method: "POST",
               dataType: "json",
               contentType: "application/json",
@@ -785,7 +785,7 @@ if ($data['sponsoredProductList'] != null) {
             };
             var otpres='';
             $.ajax({
-                  url: "https://api.tradersfind.com/api/guest/users/"+'+'+mobnumber,
+                  url: API_BASE_URL + "api/guest/users/"+'+'+mobnumber,
                   dataType: "json",
                   data: { },
                   success: function (data) {
