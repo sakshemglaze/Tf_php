@@ -1,4 +1,6 @@
-<?php include_once 'config.php'; ?>
+<?php include_once 'config.php'; 
+$PmodalId = 'enquiryFormModal';
+?>
 <div id="popup-card" class="popup-card" style="display: none;" >
 
 

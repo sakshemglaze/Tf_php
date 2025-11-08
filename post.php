@@ -44,7 +44,7 @@
         $info = curl_getinfo($ch);
         $duration = microtime(true) - $start;
 	    $logLine = date('Y-m-d H:i:s') . " - API {$info['url']} took {$duration}s\n";
-	    error_log($logLine, 3, "/var/www/tradersfind.com/api_times.log");
+	    error_log($logLine, 3, "api_times.log");
 
         if ($responseType === 'json') {
             // Decode JSON response
@@ -104,7 +104,7 @@
         
         $duration = microtime(true) - $start;
 	    $logLine = date('Y-m-d H:i:s') . " - API {$urlWithQuery} took {$duration}ss\n";
-	    error_log($logLine, 3, "/var/www/tradersfind.com/api_times.log");
+	    error_log($logLine, 3, "api_times.log");
 
         if ($response === false) {
             return "Error fetching data";
@@ -159,7 +159,7 @@
         $duration = microtime(true) - $start;
         //print_r("API {$info['url']} took {$duration}s");
         $logLine = date('Y-m-d H:i:s') . " - API {$info['url']} took {$duration}s. \n";
-	    error_log($logLine, 3, "/var/www/tradersfind.com/api_times.log");
+	    error_log($logLine, 3, "api_times.log");
 
         // Decode JSON response if needed
         if ($xTotalCount !=null) {

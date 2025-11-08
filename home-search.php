@@ -116,7 +116,7 @@
             var searchText = $(this).val();
             if (searchText.length >= 3) {
                 $.ajax({
-                    url: "https://api.tradersfind.com/api/search-suggestions",
+                    url: API_BASE_URL + "api/search-suggestions",
                     dataType: "json",
                     data: { searchText: searchText },
                     success: function (data) {

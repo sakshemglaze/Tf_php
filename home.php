@@ -314,7 +314,7 @@ fetch(url, {
                       'verify_peer_name' => false,
                   ],
               ]);
-              $resUnit = file_get_contents(B_URL . 'assets/testingJson/Units.json', false, $context);
+              $resUnit = file_get_contents(BASE_URL . 'assets/testingJson/Units.json', false, $context);
 
                       $allunit=json_decode($resUnit);
                       foreach($allunit as $unit){
@@ -350,7 +350,7 @@ fetch(url, {
                   <select area-label="countryCode" name="countryCode" class="form-control mxw-50">
                 
                   <?php
-                      $rescuntrycode=file_get_contents( B_URL.'assets/testingJson/country_codes_v1.json',false, $context);
+                      $rescuntrycode=file_get_contents( BASE_URL.'assets/testingJson/country_codes_v1.json',false, $context);
                       $allcuntrycode=json_decode($rescuntrycode);
                       foreach($allcuntrycode as $unit){
                              ?>
@@ -391,7 +391,7 @@ fetch(url, {
     console.log(mobileNumber);
       const myObject = new StorageService();
       $.ajax({
-        url: "https://api.tradersfind.com/api/authenticate-otp",
+        url: API_BASE_URL + "api/authenticate-otp",
   method: "POST",
   dataType: "json",
   contentType: "application/json",
@@ -418,7 +418,7 @@ fetch(url, {
      
       const myObject1 = new StorageService();
       $.ajax({
-        url: "https://api.tradersfind.com/api/register-otp",
+        url: API_BASE_URL + "api/register-otp",
   method: "POST",
   dataType: "json",
   contentType: "application/json",
@@ -441,8 +441,6 @@ fetch(url, {
                     }
                 });
   }
-    
-    
 
     function verifyOtp(event,mobnumber,formdata){
            // var otm=document.getElementById('otp').value;
@@ -457,7 +455,7 @@ fetch(url, {
     };
            var otpres='';
             $.ajax({
-                    url: "https://api.tradersfind.com/api/guest/users/"+'+'+mobnumber,
+                    url: API_BASE_URL + "api/guest/users/"+'+'+mobnumber,
                     dataType: "json",
                     data: { },
                     success: function (data) {

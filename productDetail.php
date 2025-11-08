@@ -56,7 +56,7 @@
           'title' => isset($data1->metaTitle) && $data1->metaTitle != '' ? $data1->metaTitle : $data1->productName . ' in ' .( isset($data1->seller->state)?$data1->seller->state:"" ). ' - ' . $data1->sellerCompanyName,
           'metaTitle' => isset($data1->metaTitle) && $data1->metaTitle != '' ? $data1->metaTitle : $data1->productName . ' in ' .(isset($data1->seller->state)?$data1->seller->state:'') . ' - ' . $data1->sellerCompanyName,
           'metaDescription' => isset($data1->metaDescription) && $data1->metaDescription != '' ? $data1->metaDescription : $data1->sellerCompanyName . ' - Offering ' . $data1->productName . ' in ' . (isset($data1->seller->state)?$data1->seller->state:'') . '. Get the best quality at the best price.',
-          'metaKeywords' => isset($data1->metaKeywords) && $data1->metaKeywords != '' & $data1->metaKeywords[0] !='' ? implode(',', $data1->metaKeywords) : $data1->productName . ', ' . $data1->productName . ' in ' . $data1->seller->state . ', ' . $data1->productName . ' in UAE',
+          'metaKeywords' => isset($data1->metaKeywords) && $data1->metaKeywords != '' & $data1->metaKeywords[0] !='' ? implode(',', $data1->metaKeywords) : $data1->productName . ', ' . $data1->productName . ' in ' . (isset($data1->seller->state)?$data1->seller->state:'') . ', ' . $data1->productName . ' in UAE',
           'fbTitle' => isset($data1->fbTitle) && $data1->fbTitle != '' ? $data1->fbTitle : $data1->productName,
           'fbDescription' => isset($data1->fbDescription) && $data1->fbDescription != '' ? $data1->fbDescription : $data1->productDescription,
           'fbImage' => isset($data1->fbImage) ? API_URL . 'api/guest/imageContentDownload/' . $data1->fbImage.id : 'undefined',
@@ -506,7 +506,7 @@ fetch(url, {
     console.log(mobileNumber);
       const myObject = new StorageService();
       $.ajax({
-        url: "https://api.tradersfind.com/api/authenticate-otp",
+        url: API_BASE_URL + "api/authenticate-otp",
   method: "POST",
   dataType: "json",
   contentType: "application/json",
@@ -544,7 +544,7 @@ fetch(url, {
      
       const myObject1 = new StorageService();
       $.ajax({
-        url: "https://api.tradersfind.com/api/register-otp",
+        url: API_BASE_URL + "api/register-otp",
   method: "POST",
   dataType: "json",
   contentType: "application/json",
@@ -583,7 +583,7 @@ fetch(url, {
     };
            var otpres='';
             $.ajax({
-                    url: "https://api.tradersfind.com/api/guest/users/"+'+'+mobnumber,
+                    url: API_BASE_URL + "api/guest/users/"+'+'+mobnumber,
                     dataType: "json",
                     data: { },
                     success: function (data) {

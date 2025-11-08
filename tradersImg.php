@@ -1,6 +1,10 @@
 <?php include_once 'config.php'; ?>
 
 <?php
+$id = isset($_GET['id']) ? $_GET['id'] : '';
+$imageContent = isset($_GET['imageContent']) ? $_GET['imageContent'] : null;
+$prodName = isset($_GET['prodName']) ? htmlspecialchars($_GET['prodName']) : '';
+$class = isset($_GET['class']) ? htmlspecialchars($_GET['class']) : 'img-fluid';    
 
 $width = '';
 

@@ -381,7 +381,7 @@ fetch(url, {
                  ?>
                   <!--<a class="btn btn-light">-->
                     <button class="btn btn-light w-100 d-center"  title="Seller_Phone" href="#">
-                    <img src="<?php echo BASE_URL; ?>assets/images/phone.png" width="16" alt="phone" />
+                    <img src="<?php echo BASE_URL;?>assets/images/phone.png" width="16" alt="phone" />
                      <?php $maskedService->getMaskedNumber($data1[0]); ?>
    
                       </button>
@@ -782,7 +782,7 @@ fetch(url, {
                               <p class="fs-14"> <?php echo isset($data1[0]->designation);?> </p>
                               <div class="d-flex align-items-center gap-3 ">
                                 <button class="btn btn-sm btn-light  py-2 fw-semibold bg-grey w-100">
-                                  <img src="<?php echo BASE_URL; ?>assets/images/phone.png" width="16" alt="phone" />
+                                  <img src="assets/images/phone.png" width="16" alt="phone" />
                                  <?php $maskedService->getMaskedNumber($data1[0]); ?>
                     </button>
 
@@ -922,7 +922,7 @@ fetch(url, {
     console.log(mobileNumber);
       const myObject = new StorageService();
       $.ajax({
-        url: "https://api.tradersfind.com/api/authenticate-otp",
+        url: API_BASE_URL + "api/authenticate-otp",
   method: "POST",
   dataType: "json",
   contentType: "application/json",
@@ -960,7 +960,7 @@ fetch(url, {
      
       const myObject1 = new StorageService();
       $.ajax({
-        url: "https://api.tradersfind.com/api/register-otp",
+        url: API_BASE_URL + "api/register-otp",
   method: "POST",
   dataType: "json",
   contentType: "application/json",
@@ -999,7 +999,7 @@ fetch(url, {
     };
            var otpres='';
             $.ajax({
-                    url: "https://api.tradersfind.com/api/guest/users/"+'+'+mobnumber,
+                    url: API_BASE_URL + "api/guest/users/"+'+'+mobnumber,
                     dataType: "json",
                     data: { },
                     success: function (data) {
