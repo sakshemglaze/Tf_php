@@ -46,7 +46,7 @@ $pager=false;
         <div class="col-lg-6  mb-4">
           <div class="card border-0 rounded-top-20 rounded-bottom-20">
             <div class="card-header bg-gradiant py-3 px-md-3 rounded-top-20 border-0 text-white">
-              <h5 class="fs-3 fwbold text-uppercase">Register your Company Free</h5>
+              <h1 class="fs-3 fwbold text-uppercase">Register your Company Free</h1>
               <p class="mb-0">Create Company Profile with very Simple Steps & Manage your Business.</p>
             </div>
             <div class="card-body ">
@@ -262,7 +262,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           </ul>
         </div>
         <div class="col-lg-6">
-          <img src="assets/images/join-icon_6.jpg" alt="register now" class="img-fluid">
+          <img src="assets/images/join-icon6.jpg" alt="register now" class="img-fluid">
         </div>
       </div>
     </div>

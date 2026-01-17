@@ -1,8 +1,9 @@
+<script src="<?php echo B_URL; ?>assets/js/global.js"></script>
 <?php include_once 'config.php'; ?>
 
-<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
-<link rel='stylesheet' href='<?php echo BASE_URL; ?>assets/css/owl.carousel.css'>
-<link rel='stylesheet' href='<?php echo BASE_URL; ?>assets/css/mystyle.css'>
+<link rel="stylesheet" href="<?php echo B_URL; ?>assets/vendors/bootstrap/bootstrap.min.css">
+<link rel='stylesheet' href='<?php echo B_URL; ?>assets/css/owl.carousel.css'>
+<link rel='stylesheet' href='<?php echo B_URL; ?>assets/css/mystyle.css'>
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 
  
@@ -13,7 +14,7 @@
  
 <nav class="navbar sticky-top navbar-expand-lg bg-white">
     <div class="container-fluid">
-      <a class="navbar-brand" href="<?php echo BASE_URL; ?>"><img src="<?php echo BASE_URL; ?>assets/images/TradersFind.webp" alt="TradersFind" width="110" height="70" />
+      <a class="navbar-brand" href="<?php echo BASE_URL; ?>"><img src="<?php echo B_URL; ?>assets/images/TradersFind.webp" alt="TradersFind" width="110" height="70" />
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,10 +55,10 @@
           </li>
         </ul>
         <a target="_blank" href="https://api.whatsapp.com/send?phone=971569773623&text=Browsed TradersFind" title="Whatsapp Chat" class="mx-4 whatsappBg">
-          <img src="<?php echo BASE_URL; ?>assets/images/whatsapp-chat.webp" alt="login" width="186" height="44" /></a>
+          <img src="<?php echo B_URL; ?>assets/images/whatsapp-chat.webp" alt="login" width="186" height="44" /></a>
         <div class="login-button-top" *ngIf="this.userName==''">
         <a href="<?php echo BASE_URL ?>register-your-business">Add Your Business</a>&nbsp;
-<img src="<?php echo BASE_URL; ?>assets/images/business.png" alt="business" width="16" height="16" />
+<img src="<?php echo B_URL; ?>assets/images/business.png" alt="business" width="16" height="16" />
 
         </div>  
         </div>
@@ -65,6 +66,6 @@
       </div>
     </div>
   </nav>
-  <script src="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.bundle.min.js"></script>
+  <script src="<?php echo B_URL; ?>assets/vendors/bootstrap/bootstrap.bundle.min.js"></script>
 
   

@@ -18,10 +18,12 @@ $SeoParams = [
 <html lang="en">
   <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<?php 
+  <?php 
         include_once 'services/seo.php';
         $seo = new seoService();
-        $seo->setSeoTags($SeoParams); ?>
+        $seo->setSeoTags($SeoParams); 
+        //include_once 'services/gtm.php';
+  ?>
 
 </head>
 <body>
@@ -45,7 +47,7 @@ include_once 'header-sub.php';
 <section class="tabBg">
   <div class="container">
     <div class="row ">
-      <div class="btn-primary-gradiant btn-primary-gradiant rounded-0 py-3"></div>
+      <div class="btn-primary-gradiant btn-primary-gradiant rounded-0 py-3"><H1> Buyer's FAQ </H1></div>
     </div>
   </div>
   <div class="container shadow2">

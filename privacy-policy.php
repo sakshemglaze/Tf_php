@@ -32,7 +32,7 @@ include_once "header-sub.php";
 <section class="mt-4 mb-4">
   <div class="container">
     <div class="row">
-      <h2 class="border-center text-center fs-2"><span class="text-info">Privacy </span><span class="text-danger">Policy</span></h2>
+      <h1 class="border-center text-center fs-2"><span class="text-info">Privacy </span><span class="text-danger">Policy</span></h1>
 
       <div class="fs-18 pt-4 text-justify">
         <p>Interconnect Marketing Management L.L.C presents TradersFind, an online platform that primarily serves online businesses for facilitating electronic commerce and typically does not require the collection of personal information of individuals. We acknowledge the significance of privacy and the importance of preserving the confidentiality of personal data. This Privacy Policy is applicable to all products and services provided by TradersFind, and it describes how we may collect, use, and reveal information about the users of our sites.</p>

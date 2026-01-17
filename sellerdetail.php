@@ -10,21 +10,103 @@
             $currenturl= $_SERVER['REQUEST_URI'];
             $urlpart=explode('/',$currenturl);
             $companyName= $matches[1]; //($urlpart);
+// Redirect old code to new code
+          $redirects = [
+              "adel-achrafi-trading-est" => "adel-achrafi-trading-est.",
+              "al-afraah-hydraulic-machine-and-spare-parts-trading-llc" => "al-afraah-hydraulic-machine-and-spare-parts-trading-l.l.c",
+              "alan-technology-llc" => "alan-technology-l.l.c",
+              "al-borj-plastic-industries-co-llc" => "al-borj-plastic-industries-co.-llc",
+              "al-hoty-stanger-laboratory-llc" => "al-hoty-stanger-laboratory-llc.",
+              "al-jenaidi-building-materials-trading-llc" => "al-jenaidi-building-materials-trading-l.l.c.",
+              "al-mahrain-bldg-mat.-tr.co-llc" => "al-mahrain-bldg-mat-tr-co-llc",
+              "alpha-rubbers-wholesale-trading-llc" => "alpha-rubbers-wholesale-trading-l.l.c",
+              "alphatronic-machinery-trading-co-llc" => "alphatronic-machinery-trading-co.-llc.",
+              "alsafeer-publishing-and-advertising-est" => "alsafeer-publishing-and-advertising-est.",
+              "al-shirawi-facilities-management-llc" => "al-shirawi-facilities-management-l.l.c.",
+              "al-taher-chemicals-trading-llc" => "al-taher-chemicals-trading-llc.",
+              "aqua-sure-water-treatment-equipment" => "aqua-sure-water-treatment-equipment-trading-llc",
+              "arcave-architecture-and-interiors-llc" => "arcave-architecture-and-interiors-design-llc",
+              "aster-online-m-e" => "aster-online-m.e.",
+              "atlas-copco-middle-east-fze" => "atlas-copco-services-middle-east",
+              "barajeel-conditioning-equipment-trading-llc" => "barajeel-conditioning-equipment-trading-l.l.c",
+              "fitout-international" => "fit-out-international",
+              "burj-al-dar" => "burj-al-dar-ac-unit-fix-contracting-and-tech-contracting",
+              "cheeky-monkeys" => "cheeky-monkeys-playland",
+              "cicon-epoxy-and-steel-cutting-plant" => "cicon-building-materials-llc",
+              "cleantech-gulf-cleaning-equipment" => "cleantech-gulf-hq",
+              "control-electrical-accessories-co-llc" => "control-electrical-accessories-co.-llc",
+              "daliya-trading-co" => "daliya-trading-co.",
+              "day-to-day-hypermarket" => "day-to-day",
+              "delta-oilfield-services-llc" => "delta-oilfield-services-l.l.c",
+              "dewan-architects-plus-engineers" => "dewan-architects-+-engineers",
+              "discover-energy-general-trading-llc" => "discover-energy-general-trading-l.l.c",
+              "dr-sai-ganesh-medical-center" => "dr.-sai-ganesh-medical-center",
+              "dubaistore-com" => "dubaistore.com",
+              "emaar-international-ind-llc" => "emaar-international-ind.-llc",
+              "emirates-moto-dubai" => "emirates-moto",
+              "falcon-group-mechanical-services-llc" => "falcon-mechanical-services-llc",
+              "farahat-and-co-sharjah" => "farahat-and-co",
+              "fix-and-go-tyres-and-accessories-trading-co-llc" => "fix-and-go-tyres-and-accessories-trading-co.-llc",
+              "golden-key-electrical-and-sanitary-ware-tr-llc" => "golden-key-electrical-and-sanitary-ware-tr.-llc",
+              "ice-cube-air-conditioning-trading-llc" => "ice-cube-air-conditioning-trading-l.l.c",
+              "jafep-middle-east" => "jafep",
+              "jaleel-general-trading-llc" => "jaleel-general-trading-l.l.c.",
+              "k-d-industries-inc" => "k.d.-industries-inc.",
+              "ksl-logistic-services-llc-rak" => "ksl-logistic-services-llc",
+              "leader-grate-llc" => "leader-grate-l.l.c.",
+              "manafeth-medical-and-mobility" => "manafeth-mobility-and-medical",
+              "misar-trading-co-llc" => "misar-trading-co.-llc",
+              "muzaco-print-and-pack" => "muzaco-print-and-pack-design",
+              "nat-conveyors-and-automations" => "nat-conveyors-and-automation",
+              "noor-al-barakah-building" => "noor-al-barakah-bldg-cleaning-services",
+              "onspot-painting-services" => "onspot-technical-services",
+              "perm-alert-leak-detection" => "permalert-leak-detection",
+              "pool-tech-swimming-pools-installation-co-llc" => "pool-tech-swimming-pools-installation-co.-llc",
+              "promotionalae" => "promotional.ae",
+              "qmi-foundation" => "qmi-building-metal-products-manufacturing-llc",
+              "reliable-allies-llc" => "reliable-allies-general-trading-llc",
+              "sadeqeen-brothers-general-trading-co-llc" => "sadeqeen-brothers-general-trading-co.-llc",
+              "saif-al-noor-international-shipping-forwarding-and-land-transport-llc" => "saif-al-noor-international-shipping-forwarding-and-land-transport-l.l.c",
+              "sam-building-contracting-llc" => "sam-building-contracting-l.l.c.",
+              "seamaster-maritime-llc" => "seamaster-maritime-l.l.c.",
+              "sibeltech" => "sibel-tech",
+              "ultra-power-generators-dealer-service" => "ultra-power-generators-fzc",
+              "union-cement-company-psc" => "union-cement-company-(p.s.c.)",
+              "universe-middle-east-general-trading-l.l.c" => "universe-middle-east-general-trading-llc",
+              "veetech" => "veetech-instrumentation-and-control-service-llc",
+              "ventum-mep-air-conditioning-l.l.c" => "ventum-mep-air-conditioning-llc",
+              "diya-al-shams-metal-tr-llc" => "diya-al-shams-metal-tr.-l.l.c",
+              "gulf-manufacturing-co-llc" => "gulf-manufacturing-co.-llc",
+              "uncle's-shop" => "uncles-shop",
+              "seth-int'l" => "seth-intl",
+              "z'neem-pharmacy" => "zneem-pharmacy"
+          ];
+          if (array_key_exists($companyName, $redirects)) {
+            $companyName = $redirects[$companyName];
+            header('Location: ' . BASE_URL . "seller/" . $companyName , true, 301);
+          }
+          //print_r($companyName);
             require_once 'post.php';
         $data =  get(
                 'api/guest/search-sellers-company-name/'.$companyName
               );
               
               $data1 = json_decode($data);
+              //print_r($data1);
               $new_url = '/not-found';
 
               if(!isset($data1[0]->id)){
-              header('Location: ' . $new_url, true, 301);
-              exit;
+               header('Location: ' . $new_url, true, 301);
+               exit;
               }
              // $data = findActive($data1);
-           // print_r($data1[0]->linkedinUrl);
-              
+            //print_r($data1[0]->logo);
+              if (isset($data1[0]->logo)){ 
+                $logo = $data1[0]->logo->id . '.webp';
+              } else {
+                $logo = 'logo.webp';
+              }  
+
 $aproodproduct=get(
   'api/guest/products/by-seller/' . $data1[0]->id,
   false,
@@ -45,16 +127,13 @@ $aproodproduct1 = json_decode($aproodproduct);
     <?php
     $productNames='';
     foreach ($aproodproduct1->products as $index => $product) {
-        
-     
-    
       if ($index < count($aproodproduct1->products) - 1 && $index<2) {
         $productNames .= $product->productName;
           $productNames .= ", ";
       }
-     
     }
-    $schemaseller=[
+    if (!empty($data1[0]->city) & !empty($data1[0]->state) & !empty($data1[0]->country) & !empty($data1[0]->sellerState)) {
+      $schemaseller=[
       "@context"=> "https://schema.org",
       "@graph"=> [
         [
@@ -115,16 +194,16 @@ $aproodproduct1 = json_decode($aproodproduct);
               "@type"=> "ListItem",
               "position"=> 2,
               "name"=> ''.$data1[0]->sellerCompanyName.'',
-              "item"=> "https://www.tradersfind.com/seller/".$urlService->getSellerUrl($data1[0]->sellerCompanyName,''),
+              "item"=> "https://www.tradersfind.com/".$urlService->getSellerUrl(isset($data1[0]->sellerUrl)?$data1[0]->sellerUrl:$data1[0]->sellerCompanyName,''),
             ]
           ]
             ],
         [
           "@type"=> "LocalBusiness",
           "name"=> ''.$data1[0]->sellerCompanyName.'',
-          "url"=> ''.'https://www.tradersfind.com/seller/'.$urlService->getSellerUrl($data1[0]->sellerCompanyName,'').'',
-          "image"=>''.'https://doc.tradersfind.com/images/'.$data1[0]->logo->id.'.webp'.'',
-          'description' => isset($data1[0]->metaDescription) && $data1[0]->metaDescription != '' ? $data1[0]->metaDescription : $data1[0]->sellerCompanyName.' is a leading company of '.$productNames.' located in '.$data1[0]->city.','.$data1[0]->sellerState.','.$data1[0]->country,
+          "url"=> ''.'https://www.tradersfind.com/'.$urlService->getSellerUrl(isset($data1[0]->sellerUrl)?$data1[0]->sellerUrl:$data1[0]->sellerCompanyName,'').'',
+          "image"=>''.'https://doc.tradersfind.com/images/'. $logo .'',
+          'description' => isset($data1[0]->metaDescription) && $data1[0]->metaDescription != '' ? $data1[0]->metaDescription : $data1[0]->sellerCompanyName.' is a leading company of '.$productNames.' located in '. $data1[0]->city .','.$data1[0]->sellerState.','.$data1[0]->country,
           "telephone"=> isset($data1[0]->sellerCompanyNumber)?$data1[0]->sellerCompanyNumber:"",
           "address"=> [
             "@type"=> "PostalAddress",
@@ -140,7 +219,7 @@ $aproodproduct1 = json_decode($aproodproduct);
         ]
       ]
           ];
-   // print_r($productNames);
+      //print_r($data1[0]);
       $SeoParams = [
           'title' => isset($data1[0]->metaTitle) && $data1[0]->metaTitle != '' ? $data1[0]->metaTitle : $data1[0]->sellerCompanyName,
           'metaTitle' => isset($data1[0]->metaTitle) && $data1[0]->metaTitle != '' ? $data1[0]->metaTitle : $data1[0]->sellerCompanyName.' in '.$data1[0]->city.','.$data1[0]->sellerState.','.$data1[0]->country,
@@ -159,7 +238,7 @@ $aproodproduct1 = json_decode($aproodproduct);
 
         ];
       $seo->setSeoTags($SeoParams);
-
+    }    
       include_once 'services/masked.php';
       $maskedService = new MaskingService();
 
@@ -205,7 +284,7 @@ $aproodproduct1 = json_decode($aproodproduct);
     </ol>
   </nav>
 </section>
-<script src="services/storegeService.js"></script>
+<script src="<?php echo BASE_URL;?>services/storegeService.js"></script>
 <script>
        function closePopup() {
     document.getElementById("popup-card-otp").style.display = "none";
@@ -255,12 +334,10 @@ fetch(url, {
                 <div class="">
                   <div class="card-body card-body3">
                     <span>
-                    <?php if (isset($data1[0]->logo)): ?>
-                    <span >
-                      <img src="https://doc.tradersfind.com/images/<?php echo $data1[0]->logo->id;?>.webp" alt="seller">  
+                      <span >
+                      <img src="https://doc.tradersfind.com/images/<?php echo $logo;?>" alt="seller">  
                   
                       </span>
-                      <?php endif;?>
                   </div>
                 </div>
 
@@ -269,8 +346,8 @@ fetch(url, {
                   <div class="d-flex align-items-start mt-3">
                     <img src="<?php echo BASE_URL?>assets/images/location3.png" width="28" alt="location" />
                     <p class="mb-0 ms-2 text-black"><span>
-                      <?php echo $data1[0]->address.','.$data1[0]->city;?> <br />
-                      <?php echo $data1[0]->sellerState.','. $data1[0]->country;?> </span>
+                      <?php echo (isset($data1[0]->address) ? $data1[0]->address : '') .','. (isset($data1[0]->city) ? $data1[0]->city :'');?> <br />
+                      <?php echo (isset($data1[0]->sellerState) ? $data1[0]->sellerState : '').','. (isset($data1[0]->country) ? $data1[0]->country : '');?> </span>
                     </p>
                   </div>
                   <div class="d-flex mt-3 gap-3">
@@ -298,7 +375,7 @@ fetch(url, {
               <div class="row gy-2">
                 <div class="col-lg-12 text-center">
                  <?php
-                 if($data1[0]->sellerVirtualContactPhone &&
+                 if(isset($data1[0]->sellerVirtualContactPhone) &&
                  $data1[0]->sellerVirtualContactPhone != null &&
                  $data1[0]->sellerVirtualContactPhone != ''):
                  ?>
@@ -406,7 +483,7 @@ fetch(url, {
           <h2 class="fwbold mt-5 fs-3 mb-5 border-center text-center">
             Seller Profile
           </h2>
-          <div><?php echo $data1[0]->sellerTagline; ?></div>
+          <div><?php echo (isset($data1[0]->sellerTagline) ? $data1[0]->sellerTagline : ''); ?></div>
 
           <div class="fs-4 px-md-5">
 
@@ -450,8 +527,8 @@ fetch(url, {
               <div class="d-flex align-items-center justify-content-md-center">
                 <img src="<?php echo BASE_URL;?>assets/images/icon__3.png" alt="seller" class="me-3" />
                 <div class="text-start lh-sm" *ngIf="seller">
-                  <a href="<?php echo$data1[0]->sellerWebsite; ?>" target="_blank">
-                    <h3 class="text-black-50 mb-0 fs-4 fwbold" style="text-transform: capitalize;"><?php echo $data1[0]->sellerCompanyName.' Website';?>
+                <a href="<?php $website = isset($data1[0]->sellerWebsite) ? $data1[0]->sellerWebsite : 'https://www.tradersfind.com' ; echo (strpos($website, 'https://') !== 0) ? 'https://' . $website : $website; ?>" target="_blank">
+                    <h3 class="text-black-50 mb-0 fs-4 fwbold" style="text-transform: capitalize;"><?php echo $data1[0]->sellerCompanyName.'Website';?>
                        </h3>
                     <!--{{seller.sellerWebsite }}-->
                   </a>
@@ -476,7 +553,7 @@ fetch(url, {
                 <img src="<?php echo BASE_URL;?>assets/images/icon__5.png" alt="seller" class="me-3" />
                 <div class="text-start lh-sm">
                   <h3 class="text-black-50 mb-0 fs-4 fwbold">Trade License</h3>
-                  <?php  echo$data1[0]->tradeLicenseNumber;?>
+                  <?php  echo isset($data1[0]->tradeLicenseNumber) ? $data1[0]->tradeLicenseNumber : '';?>
                     
                  
                 </div>
@@ -492,7 +569,7 @@ fetch(url, {
                     <?php endif;?>
                   </span>
                   
-                  <span ><?php if(!isset($data1[0]->mainMarkets)):?><?php echo $data1[0]->sellerState.',' .$data1[0]->sellerCountry ; ?>
+                  <span ><?php if(!isset($data1[0]->mainMarkets)):?><?php echo (isset($data1[0]->sellerState) ? $data1[0]->sellerState : '').',' . (isset($data1[0]->sellerCountry) ? $data1[0]->sellerCountry : '') ; ?>
                     <?php endif;?>
                   </span>
                 </div>
@@ -573,7 +650,7 @@ fetch(url, {
                     <?php if(isset($product->sponsoredKeywords) && $product->sponsoredKeywords[0]!=''):?>
                       <img class="inside" src="<?php echo BASE_URL; ?>assets/images/Premium_listing.png" alt="Premium_listing" width="80" height="30" style="margin-left: 90px;" />
                     <?php endif;?>
-        <a href="<?php echo BASE_URL. $urlService->getProductUrl($product->productName,$product->id);?>" class="thumb-a">
+        <a href="<?php echo BASE_URL. $urlService->getProductUrl((isset($product->productUrl) && !empty($product->productUrl))?$product->productUrl:$product->productName,$product->id);?>" class="thumb-a">
             <div class="item-hover">
       
                 <div class="hover-text">
@@ -582,15 +659,12 @@ fetch(url, {
             </div>
             
             <div class="item-img">
-               <img  src="https://doc.tradersfind.com/images/<?php echo $product->images[0]->id; ?>.webp" alt="<?php echo $product->productName;?>" style="width: 140px;">
+               <img  src="https://doc.tradersfind.com/images/<?php echo isset($product->images[0]) ? $product->images[0]->id : 'logo'; ?>.webp" alt="<?php echo $product->productName;?>" style="width: 140px;">
               </div>
         </a>
     </div>
 <?php endforeach; 
 ?>
-
-
-
                 </div>
               </div>
             </div>
@@ -848,7 +922,7 @@ fetch(url, {
     console.log(mobileNumber);
       const myObject = new StorageService();
       $.ajax({
-        url: "https://api.tradersfind.com/api/authenticate-otp",
+        url: API_BASE_URL + "api/authenticate-otp",
   method: "POST",
   dataType: "json",
   contentType: "application/json",
@@ -886,7 +960,7 @@ fetch(url, {
      
       const myObject1 = new StorageService();
       $.ajax({
-        url: "https://api.tradersfind.com/api/register-otp",
+        url: API_BASE_URL + "api/register-otp",
   method: "POST",
   dataType: "json",
   contentType: "application/json",
@@ -925,7 +999,7 @@ fetch(url, {
     };
            var otpres='';
             $.ajax({
-                    url: "https://api.tradersfind.com/api/guest/users/"+'+'+mobnumber,
+                    url: API_BASE_URL + "api/guest/users/"+'+'+mobnumber,
                     dataType: "json",
                     data: { },
                     success: function (data) {

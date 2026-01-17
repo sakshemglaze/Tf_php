@@ -75,7 +75,7 @@ $SeoParams = [
         <div class="media mt-3">
           <div class="media-left media-middle">
             <a href="#">
-              <img class="media-object" src="<?php echo BASE_URL; ?>assets/images/join-icon11.jpg">
+              <img class="media-object" src="<?php echo BASE_URL; ?>assets/images/join-icon11.jpg" alt="Heart held gently, in hand, on gradient background.">
             </a>
           </div>
           <div class="media-body">
@@ -89,7 +89,7 @@ $SeoParams = [
         <div class="media ">
           <div class="media-left media-middle">
             <a href="#">
-              <img class="media-object" src="<?php echo BASE_URL; ?>assets/images/join-icon12.jpg">
+              <img class="media-object" src="<?php echo BASE_URL; ?>assets/images/join-icon12.jpg" alt="Target centered on red-blue gradient.">
             </a>
           </div>
           <div class="media-body">
@@ -112,7 +112,7 @@ Innovation: We encourage creative thinking and the exploration of new possibilit
         <div class="media">
           <div class="media-left media-middle">
             <a href="#">
-              <img class="media-object" src="<?php echo BASE_URL; ?>assets/images/join-icon13.jpg">
+              <img class="media-object" src="<?php echo BASE_URL; ?>assets/images/join-icon13.jpg" alt="Telescope sits on tripod, red-blue circle.">
             </a>
           </div>
           <div class="media-body">

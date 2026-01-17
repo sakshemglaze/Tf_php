@@ -19,19 +19,11 @@
 <html lang="en">
   <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<?php 
+  <?php 
         include_once 'services/seo.php';
         $seo = new seoService();
-        $seo->setSeoTags($SeoParams); ?>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-TRQH674');</script>
-<!-- End Google Tag Manager -->
-
-
+        $seo->setSeoTags($SeoParams); 
+  ?>
 </head>
 <body>   
  <!-- Google Tag Manager (noscript) -->
@@ -98,7 +90,7 @@ if($headerCheck){
     <div class="col">
       <div class="swiper2">
         <div class="position-relative bg-transparent new_img_11">
-          <img src="<?php echo BASE_URL; ?>assets/images/brands/new1.webp" alt="Post Buy Requirements" width="271" height="193" class="w-100 img-fluid" />
+          <img src="<?php echo B_URL; ?>assets/images/brands/new1.webp" alt="Post Buy Requirements" width="271" height="193" class="w-100 img-fluid" />
           <div class="hading2">
             <p>Looking for a <br> product ?</p>
             <a href="<?php echo  BASE_URL ?>post-buy-requirements">Post Buy Requirement</a>
@@ -106,7 +98,7 @@ if($headerCheck){
         </div>
 
         <div class="position-relative   py-1	 bg-transparent new_img_11">
-          <img src="<?php echo BASE_URL; ?>assets/images/brands/new2.webp" alt="Grow Business" width="271" height="193" class="w-100 img-fluid" />
+          <img src="<?php echo B_URL; ?>assets/images/brands/new2.webp" alt="Grow Business" width="271" height="193" class="w-100 img-fluid" />
           <div class="hading2">
             <p>Want to grow your <br> business 10X Faster?</p>
             <a href="<?php echo  BASE_URL ?>register-your-business">Sell on TradersFind</a>
@@ -214,7 +206,7 @@ if($headerCheck){
   </div>          
       
 </section>
-<script src="services/storegeService.js"></script>
+<script src="<?php echo BASE_URL; ?>services/storegeService.js"></script>
 <script>
        function closePopup() {
     document.getElementById("popup-card-otp").style.display = "none";
@@ -275,7 +267,221 @@ fetch(url, {
   //console.log(payload);
   }
 </script>
+<section class="easysource my-4 py-2">
+  <div class="container">
+    <div class="row gy-4">
+      <div class="col-lg-6">
+        <h3><b>CONNECT WITH VERIFIED SELLERS FOR YOUR REQUIREMENTS</b></h3>
+        <p class="mb-3"><br>Provide your specific service & product requirements & connect with verified sellers for your specific
+          needs.</p>
 
+        <ul class="sellers_text">
+          <li>Time and Effort Saving </li>
+          <li>Connect with Verified Sellers</li>
+          <li>Assured Product Quality</li>
+          <li>Competitive Pricing</li>
+        </ul>
+        <br>
+        <a  href="<?php echo  BASE_URL ?>about-us" title="Learn More" class="mt-5"><b>Learn More </b></a>
+      </div>
+      <div class="col-lg-6">
+        <div class="card-transparent">
+          <h3 class="fs-4">Let us know what you need</h3>
+          <form method="post" id="postBuyreq">
+
+            <input type="text" class="form-control" name="productName"
+              placeholder="Product Name / Service" />
+            <div class="row mt-1">
+              <div class="col-md-6">
+                <div class="mb-3">
+            
+                  <label>Quantity</label>
+                  <input type="text" class="form-control" name="quantity"
+                    placeholder="Estimated Order Quantity">
+
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="unit">Unit</label>
+                  <select name="quantityUnit" class="form-control"
+                    placeholder="eg:  Dozen,  Piece(s),  Tonr">
+                    <?php
+                 
+                 $context = stream_context_create([
+                  'ssl' => [
+                      'verify_peer' => false,
+                      'verify_peer_name' => false,
+                  ],
+              ]);
+              $resUnit = file_get_contents(BASE_URL . 'assets/testingJson/Units.json', false, $context);
+
+                      $allunit=json_decode($resUnit);
+                      foreach($allunit as $unit){
+                             ?>
+                             <option value="<?php echo $unit;?>">
+                            <?php echo $unit;?>
+                            </option>
+                             <?php
+                      }
+                      ?>                  </select>
+
+                </div>
+              </div>
+            </div>
+            <textarea  class="form-control" cols="30" rows="3"
+              placeholder="Product Description and Quantity" name="requirement"></textarea>
+              <div class="row mt-3">
+                <div class="col-md-6">
+                  <div class="mb-3"> &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio" id="onetime" name="frequencytype" value="onetime" checked>&nbsp;&nbsp;<label for="onetime">One Time</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3"> &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio" id="recuring" name="frequencytype" value="recuring">&nbsp;&nbsp;<label for="recuring">Recurring</label>
+                  </div>
+                </div>
+              </div>
+            <div class="row mt-1">
+              <div class="col-lg-6">
+                <div class="input-group">
+
+                  <select area-label="countryCode" name="countryCode" class="form-control mxw-50">
+                
+                  <?php
+                      $rescuntrycode=file_get_contents( BASE_URL.'assets/testingJson/country_codes_v1.json',false, $context);
+                      $allcuntrycode=json_decode($rescuntrycode);
+                      foreach($allcuntrycode as $unit){
+                             ?>
+                             <option value="<?php echo $unit->code;?>">
+                            <?php echo $unit->code.'-'.$unit->name;?>
+                            </option>
+                             <?php
+                      }
+                      ?>
+                  
+                    
+                  </select>
+
+                  <input type="number" name="contactNumber" class="form-control" placeholder="Mobile"
+                    required="number" />
+                </div>
+              </div>
+              <!--<app-loadp *ngIf="requirementService.spannerval" style="height: 50%; width: 60%; margin-left: -5px;"></app-loadp>-->
+              <div class="col-lg-6">
+                <button class="btn-primary-gradiant w-100 rounded-2 mt10">
+                  Post Your Request
+                </button>
+              </div>
+            </div>
+          </form>
+          <script>
+              var lol='';
+    var frequencytype=document.getElementsByName('frequencytype');
+  frequencytype.forEach(function(radioButton) {
+        radioButton.addEventListener('change', function() {
+            var selectedValue = this.value;
+            lol=selectedValue;
+            console.log(selectedValue); // Log the selected value
+        });
+    });
+
+   function otpLogin(otpAuthData, mobileNumber,formdata) {
+    console.log(mobileNumber);
+      const myObject = new StorageService();
+      $.ajax({
+        url: API_BASE_URL + "api/authenticate-otp",
+  method: "POST",
+  dataType: "json",
+  contentType: "application/json",
+  data: JSON.stringify(otpAuthData),
+  success: function (data) {
+                       console.log(data);
+                       myObject.setItem('userAccessToken', data['id_token']);
+                       myObject.setItem('isLoggedIn', '1');
+                       myObject.setItem('loggedVia', 'mobile');
+                       myObject.setItem('userData', mobileNumber);
+                       myObject.setItem('userMobile', mobileNumber);
+                       myObject.setItem('login', mobileNumber);
+                       myObject.setItem('userFname', "User");
+                       submitRequirement(formdata);
+    
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+      
+    }
+    function otpRegister(otpAuthData, mobileNumber,formdata){
+     
+      const myObject1 = new StorageService();
+      $.ajax({
+        url: API_BASE_URL + "api/register-otp",
+  method: "POST",
+  dataType: "json",
+  contentType: "application/json",
+  data: JSON.stringify(otpAuthData),
+  success: function (data) {
+                       console.log(data);
+                       myObject1.setItem('userAccessToken', data['id_token']);
+                       myObject1.setItem('isLoggedIn', '1');
+                       myObject1.setItem('loggedVia', 'mobile');
+                       myObject1.setItem('userData', mobileNumber);
+                       myObject1.setItem('userMobile', mobileNumber);
+                       myObject1.setItem('login', mobileNumber);
+                       myObject1.setItem('userFname', "User");
+                       submitRequirement(formdata);
+    
+                    },
+                    error: function (xhr, status, error) {
+                      console.log("test reg")
+                        console.error(xhr.responseText);
+                    }
+                });
+  }
+
+    function verifyOtp(event,mobnumber,formdata){
+           // var otm=document.getElementById('otp').value;
+           // console.log(mobnumber);
+           var newmobnum='+'+mobnumber;
+           let otpAuthData = {
+              phone: newmobnum,
+              otpValue: event,
+              login: newmobnum,
+              isMobileLogin: true,
+              langKey: "en"
+    };
+           var otpres='';
+            $.ajax({
+                    url: API_BASE_URL + "api/guest/users/"+'+'+mobnumber,
+                    dataType: "json",
+                    data: { },
+                    success: function (data) {
+                       
+                        if (data != "NotFound") {
+          //console.log(otpAuthData,mobileNumber)
+          otpLogin(otpAuthData, newmobnum,formdata);
+          console.log("1");
+        }
+        else {
+          otpRegister(otpAuthData, newmobnum,formdata);
+          console.log("2");
+        }
+                    },
+                    error: function (xhr, status, error) {
+                        if(xhr.responseText!='NotFound'){
+                          otpLogin(otpAuthData, newmobnum,formdata);
+                        }else{
+                          console.log("tttttttttt");
+                          otpRegister(otpAuthData, newmobnum,formdata);
+                        }
+                    }
+                });
+            closePopup();
+
+        }
 
 <section class="bg-grey bg-grey_22 p-4 my-5">
   <h3 class="border-center text-center mb-4">FIND SELLERS FROM TOP EMIRATES </h3>
@@ -299,7 +505,7 @@ fetch(url, {
            
             // Output item content here, you can access $items[$j] to get each item
             echo '<div class="position-relative bg-transparent swiper2 p-2">';
-            echo '<img src="'.BASE_URL . $items[$j] . '" width="209" height="80" alt="'.$state[$j].'" class="w-100 img-fluid" />';           
+            echo '<img src="'.B_URL . $items[$j] . '" width="209" height="80" alt="'.$state[$j].'" class="w-100 img-fluid" />';           
             echo '<a href="/search/'.strtolower(str_replace(" ","-",
             $state[$j])).'">';
             echo '<h4>' . $state[$j] . '</h4>';
@@ -327,16 +533,16 @@ fetch(url, {
   </h3>
   <div class="owl-carousel carousel-main4 border-center text-center">
     <div class="p-2 col-md-3">
-          <span class=""><img src="<?php echo BASE_URL; ?>assets/images/brands/101.webp" width="302px" height="159"  alt="Seller"></span>
+          <span class=""><img src="<?php echo B_URL; ?>assets/images/brands/101.png" width="302px" height="159"  alt="Seller"></span>
         </div>
     <div class="p-2 col-md-3">
-          <span class=""><img src="<?php echo BASE_URL; ?>assets/images/brands/102.webp" width="302px" height="159"alt="Seller"></span>
+          <span class=""><img src="<?php echo B_URL; ?>assets/images/brands/102.png" width="302px" height="159"alt="Seller"></span>
         </div>
     <div class="p-2 col-md-3">
-          <span class=""><img src="<?php echo BASE_URL; ?>assets/images/brands/103.webp" width="302px" height="159"  alt="Seller"></span>
+          <span class=""><img src="<?php echo B_URL; ?>assets/images/brands/103.png" width="302px" height="159"  alt="Seller"></span>
         </div>
   <div class="p-2 col-md-3">
-          <span class=""><img src="<?php echo BASE_URL; ?>assets/images/brands/104.webp" width="302" height="159"  alt="Seller"></span>
+          <span class=""><img src="<?php echo B_URL; ?>assets/images/brands/104.png" width="302" height="159"  alt="Seller"></span>
         </div>
 </div>
   
@@ -353,12 +559,12 @@ fetch(url, {
               <div class="card-body">
                 <div class="row">
                   <div class="col-3">
-                    <img src="<?php echo BASE_URL; ?>assets/images/client.png" class="img-fluid w-100" alt="Happy Client" width="165" height="162">
+                    <img src="<?php echo B_URL; ?>assets/images/client.png" class="img-fluid w-100" alt="Happy Client" width="165" height="162">
                   </div>
                   <div class="col-9">
                     <h4>Mr. Imtiaz</h4>
                     <div class="d-flex gap-4 align-items-center mb-3">
-                      <img src="<?php echo BASE_URL; ?>assets/images/location-2.png" alt="location" width="25" height="28">
+                      <img src="<?php echo B_URL; ?>assets/images/location-2.png" alt="location" width="25" height="28">
                       <address class="mb-0"> UAE, Dubai</address>
                       <div class="clientTime">8 Months</div>
 
@@ -379,12 +585,12 @@ fetch(url, {
             <div class="card-body">
               <div class="row">
                 <div class="col-3">
-                  <img src="<?php echo BASE_URL; ?>assets/images/client.png" class="img-fluid w-100" alt="Happy Client" width="165" height="162">
+                  <img src="<?php echo B_URL; ?>assets/images/client.png" class="img-fluid w-100" alt="Happy Client" width="165" height="162">
                 </div>
                 <div class="col-9">
                   <h4>Mr. Ahmed Ali</h4>
                   <div class="d-flex gap-4 align-items-center mb-3">
-                    <img src="<?php echo BASE_URL; ?>assets/images/location-2.png" alt="location" width="25" height="28">
+                    <img src="<?php echo B_URL; ?>assets/images/location-2.png" alt="location" width="25" height="28">
                     <address class="mb-0"> UAE, Abu Dhabi</address>
                     <div class="clientTime">3 Months</div>
 
@@ -411,37 +617,25 @@ fetch(url, {
 
     <div class="owl-carousel carousel-main">
         <span class="brand-box brand-box2">
-          <img src="<?php echo BASE_URL; ?>assets/images/brands/Atlas_color.webp" width="180" height="148" class="" alt="brand1" />
+          <img src="<?php echo B_URL; ?>assets/images/brands/1.png" width="180" height="48" class="" alt="brand1" />
         </span>
         <span class="brand-box brand-box2">
-          <img src="<?php echo BASE_URL; ?>assets/images/brands/avk-logo.webp" width="165" height="64" class="" alt="brand2" />
+          <img src="<?php echo B_URL; ?>assets/images/brands/2.png" width="185" height="124" class="" alt="brand2" />
         </span>
         <span class="brand-box brand-box2">
-          <img src="<?php echo BASE_URL; ?>assets/images/brands/georg-fischer-ag.webp" width="185" height="104" class=""
+          <img src="<?php echo B_URL; ?>assets/images/brands/3.png" width="185" height="124" class=""
                alt="brand3" />
         </span>
         <span class="brand-box brand-box2">
-          <img src="<?php echo BASE_URL; ?>assets/images/brands/KSB-solutions-for-life.webp" width="185" height="84" class=""
+          <img src="<?php echo B_URL; ?>assets/images/brands/4.png" width="185" height="124" class=""
                alt="brand4" />
         </span>
         <span class="brand-box brand-box2">
-          <img src="<?php echo BASE_URL; ?>assets/images/brands/vicrautic.webp" width="170" height="64" class=""
+          <img src="<?php echo B_URL; ?>assets/images/brands/5.png" width="185" height="124" class=""
                alt="brand5" />
         </span>
         <span class="brand-box brand-box2">
-          <img src="<?php echo BASE_URL; ?>assets/images/brands/emerson.webp" width="165" height="94" class=""
-               alt="brand6" />
-        </span>
-        <span class="brand-box brand-box2">
-          <img src="<?php echo BASE_URL; ?>assets/images/brands/pngaaa.com.webp" width="170" height="90" class=""
-               alt="brand6" />
-        </span>
-        <span class="brand-box brand-box2">
-          <img src="<?php echo BASE_URL; ?>assets/images/brands/Sika_NoClaim_pos_rgb_30.webp" width="185" height="124" class=""
-               alt="brand6" />
-        </span>
-        <span class="brand-box brand-box2">
-          <img src="<?php echo BASE_URL; ?>assets/images/brands/th_loctite.webp" width="185" height="124" class=""
+          <img src="<?php echo B_URL; ?>assets/images/brands/6.png" width="185" height="124" class=""
                alt="brand6" />
         </span>
 </div>    

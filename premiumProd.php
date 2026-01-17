@@ -65,7 +65,7 @@
                                         <p class="about_text about_text2"><b>Description: </b><?php echo $premiumprod['productDescription'] ?></p>
                                     </div>
                                 <?php endif; ?>
-                                <a href="<?php echo $urlService->getProductUrl($premiumprod['productName'],$premiumprod['id']) ?>" target="_blank" title="<?php echo isset($premiumprod['seller'])?$premiumprod['seller']['sellerCompanyName']:'' ?>" class="fwbold d-block" style="padding-left: 82px; color: yellow;">
+                                <a href="/<?php echo $urlService->getProductUrl((isset($premiumprod['productUrl']) && !empty($premiumprod['productUrl'])) ?$premiumprod['productUrl']: $premiumprod['productName'],$premiumprod['id']) ?>" target="_blank" title="<?php echo isset($premiumprod['seller'])?$premiumprod['seller']['sellerCompanyName']:'' ?>" class="fwbold d-block" style="padding-left: 82px; color: yellow;">
                                     ...View more
                                 </a>
                                 <div class="text-white mt-3">
@@ -100,19 +100,21 @@
                         </div>
                     </div>
                     <div class="col-lg-5 mt-0 text-white">
-                        <span class="verified2">
-                            <?php if ($premiumprod['rating'] === 1) : ?>
-                                <img src="<?php echo BASE_URL; ?>assets/images/level/lw1.png" alt="Rating1" width="15" height="20"/>
-                            <?php elseif ($premiumprod['rating'] === 2) : ?>
-                                <img src="<?php echo BASE_URL; ?>assets/images/level/lw2.png" alt="Rating2" width="15" height="20"/>
-                            <?php elseif ($premiumprod['rating'] === 3) : ?>
-                                <img src="<?php echo BASE_URL; ?>assets/images/level/lw3.png" alt="Rating3" width="15" height="20"/>
-                            <?php elseif ($premiumprod['rating'] === 4) : ?>
-                                <img src="<?php echo BASE_URL; ?>assets/images/level/lw4.png" alt="Rating4" width="15" height="20"/>
-                            <?php elseif ($premiumprod['rating'] === 5) : ?>
-                                <img src="<?php echo BASE_URL; ?>assets/images/level/lw5.png" alt="Rating5" width="15" height="20"/>
-                            <?php endif; ?>
-                        </span>
+                        <?php if (isset($premiumprod['rating']) && $premiumprod['rating']) : ?>
+                            <span class="verified2">
+                                <?php if ($premiumprod['rating'] === 1) : ?>
+                                    <img src="<?php echo BASE_URL; ?>assets/images/level/lw1.png" alt="Rating1" width="15" height="20"/>
+                                <?php elseif ($premiumprod['rating'] === 2) : ?>
+                                    <img src="<?php echo BASE_URL; ?>assets/images/level/lw2.png" alt="Rating2" width="15" height="20"/>
+                                <?php elseif ($premiumprod['rating'] === 3) : ?>
+                                    <img src="<?php echo BASE_URL; ?>assets/images/level/lw3.png" alt="Rating3" width="15" height="20"/>
+                                <?php elseif ($premiumprod['rating'] === 4) : ?>
+                                    <img src="<?php echo BASE_URL; ?>assets/images/level/lw4.png" alt="Rating4" width="15" height="20"/>
+                                <?php elseif ($premiumprod['rating'] === 5) : ?>
+                                    <img src="<?php echo BASE_URL; ?>assets/images/level/lw5.png" alt="Rating5" width="15" height="20"/>
+                                <?php endif; ?>
+                            </span>
+                        <?php endif; ?>
                         <h3 class="text-uppercase fwbold fs-6 mt-0" <?php if(isset($premiumprod['seller'])):?>>
                             <u>
                                 <a href="/<?php echo $urlService->getSellerUrl($premiumprod['seller']['sellerCompanyName'], $premiumprod['seller']['id']) ?>" target="_blank" class="text-white fs-5" title="<?php echo $premiumprod['seller']['sellerCompanyName'] ?>">

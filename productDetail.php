@@ -3,7 +3,6 @@
 <head>
 <?php 
  include_once 'config.php'; 
- 
  include_once 'services/url.php';
  $urlpro = new UrlService();
 ?>
@@ -19,6 +18,22 @@
 
             $id = end($parts);
             $name = prev($parts);
+            $arr_index = $name . "/" . $id;
+            $redirects = [
+              "tank-cleaning-operation/658d0612b18fdb667407b721" => "al-tank-cleaning-services/658d0612b18fdb667407b721",
+              "power-calibrator/65aa502a4f0ca7130c256673" => "voltage-calibrator/65aa502a4f0ca7130c256673",
+              "air-cargo-services/656455ff5370fd4cc01dcdd9" => "cargo-services/656455ff5370fd4cc01dcdd9",
+              "hp-used-laptop/657990f65370fd4cc01e0dda" => "used-laptop/657990f65370fd4cc01e0dda",
+              "underground-fuel-storage-tanks/65325c71adb96c40987e5b6b" => "underground-fuel-storage-tanks/672c54f7bab0c13b100f2705",
+              "used-laptop/6579785f5370fd4cc01e0cc0" => "reliable-used-laptop/6579785f5370fd4cc01e0cc0"
+            ];
+            if (array_key_exists($arr_index, $redirects)) {
+              $parts = explode("/",$redirects[$arr_index]);
+              $id = end($parts);
+              $name = prev($parts);
+              header('Location: ' . BASE_URL . "product/" . $name . "/" . $id , true, 301);
+            }
+            
             require_once 'post.php';
         $data =  get(
                 'api/guest/products/'.$name.'/'.$id, 
@@ -34,14 +49,14 @@
                 exit;
               }
               //$data = findActive($data1);
-              //print_r($data1->seller->logo->id);
+              //print_r($data1);
 //     SEO Attributes setting ..................
               //print_r($data1->metaKeywords);
         $SeoParams = [
           'title' => isset($data1->metaTitle) && $data1->metaTitle != '' ? $data1->metaTitle : $data1->productName . ' in ' .( isset($data1->seller->state)?$data1->seller->state:"" ). ' - ' . $data1->sellerCompanyName,
           'metaTitle' => isset($data1->metaTitle) && $data1->metaTitle != '' ? $data1->metaTitle : $data1->productName . ' in ' .(isset($data1->seller->state)?$data1->seller->state:'') . ' - ' . $data1->sellerCompanyName,
           'metaDescription' => isset($data1->metaDescription) && $data1->metaDescription != '' ? $data1->metaDescription : $data1->sellerCompanyName . ' - Offering ' . $data1->productName . ' in ' . (isset($data1->seller->state)?$data1->seller->state:'') . '. Get the best quality at the best price.',
-          'metaKeywords' => isset($data1->metaKeywords) && $data1->metaKeywords != '' & $data1->metaKeywords[0] !='' ? implode(',', $data1->metaKeywords) : $data1->productName . ', ' . $data1->productName . ' in ' . $data1->seller->state . ', ' . $data1->productName . ' in UAE',
+          'metaKeywords' => isset($data1->metaKeywords) && $data1->metaKeywords != '' & $data1->metaKeywords[0] !='' ? implode(',', $data1->metaKeywords) : $data1->productName . ', ' . $data1->productName . ' in ' . (isset($data1->seller->state)?$data1->seller->state:'') . ', ' . $data1->productName . ' in UAE',
           'fbTitle' => isset($data1->fbTitle) && $data1->fbTitle != '' ? $data1->fbTitle : $data1->productName,
           'fbDescription' => isset($data1->fbDescription) && $data1->fbDescription != '' ? $data1->fbDescription : $data1->productDescription,
           'fbImage' => isset($data1->fbImage) ? API_URL . 'api/guest/imageContentDownload/' . $data1->fbImage.id : 'undefined',
@@ -96,15 +111,15 @@
               <?php if ($data1 != null ) : ?>
               <div class="fotorama" data-nav="thumbs" data-thumbmargin="20" data-width="100%" data-allowfullscreen="true"
                  data-height="auto" data-ratio="800/600">
-                         <img class="rounded-10" src="https://doc.tradersfind.com/images/<?php echo isset($data1->images[0]->id)?$data1->images[0]->id:''; ?>.webp" alt="<?php echo $data1->productName ?>" width="240" height="240" >
+                         <img class="rounded-10" src="https://doc.tradersfind.com/images/<?php echo isset($data1->images[0]->id)?$data1->images[0]->id:'logo'; ?>.webp" alt="<?php echo $data1->productName ?>" width="240" height="240" >
              </div>
              <?php endif; ?>
             </div>
             <div class="col-lg-5">
-              <h1 class="fwbold fs-3" *ngIf="prodDetails">
-               <?php echo $data1->productName ?>
+              <h1 class="fwbold fs-4" *ngIf="prodDetails">
+               <?php echo $data1->productName . ' - ' . $data1->sellerCompanyName ?>
               </h1>
-              <span class="fwbold fs-3 text-red">
+              <span class="fwbold fs-4 text-red">
                 <?php if (isset($data1->Price) && $data1->Price !=0 && (isset($data1->maxPrice) == null || isset($data1->maxPrice) == '' )) : ?>
                   <strong>Price:</strong> <?php echo $prodDetails['price']; ?>
                 <?php endif; ?>
@@ -147,12 +162,12 @@
                 <div class="card-body bg-grey3">
                   <div class="d-flex flex-column align-items-center">
                     <span class="bg-white px-3 rounded-10 py-2">
-                      <img src="https://doc.tradersfind.com/images/<?php echo $data1->seller->logo->id; ?>.webp" alt="<?php echo $data1->seller->sellerCompanyName; ?>"width="160" >
+                      <img src="https://doc.tradersfind.com/images/<?php echo isset($data1->seller->logo) ? $data1->seller->logo->id : 'logo'; ?>.webp" alt="<?php echo $data1->seller->sellerCompanyName; ?>"width="160" >
                     </span>
 
                     <h2 class="fwbold fs-4 mt-3">
                       <?php if($data1->seller && $data1->seller->sellerCompanyName ) : ?>
-                     <a href="/<?php echo $urlpro->getSellerUrl($data1->seller->sellerUrl,$data1->seller->id) ?>" target="_blank" class="text-blue"> <?php echo $data1->seller->sellerCompanyName ?> </a></h2>
+                     <a href="/<?php echo $urlpro->getSellerUrl(!empty($data1->seller->sellerUrl) ? $data1->seller->sellerUrl : $data1->seller->sellerCompanyName,$data1->seller->id) ?>" target="_blank" class="text-blue"> <?php echo $data1->seller->sellerCompanyName ?> </a></h2>
                      <?php endif; ?>
                     <div class="fs-5 mt-2">
                       <img class="me-2" src="<?php echo BASE_URL; ?>assets/images/location-3.svg" width="15" alt="location" />
@@ -188,7 +203,7 @@
                     <?php if($data1->seller->sellerTrustStamp==1):?>
                       <div class="d-flex align-items-center me-3">
                         <img src="<?php echo BASE_URL; ?>assets/images/crown.png" class="me-1" alt="premium" />
-                        <span>Premium Seller</span>
+                        <span>Premium Supplier</span>
                       </div>
                       <?php endif;?>
                       <?php if($data1->seller->isVerifiedSeller==1):?>
@@ -203,7 +218,7 @@
                       <?php $maskedService->getMaskedNumber($data1->seller); ?> </button>
                     <div class="d-flex align-items-center w-100 mt-3 gap-2">
                       <a
-                        href=" <?php echo $whatsappUrl->getProductToWhatsapp1($data1->productName,$data1->id,get_object_vars($data1->seller))?>"
+                        href=" <?php echo $whatsappUrl->getProductToWhatsapp($data1->productName,$data1->id,get_object_vars($data1->seller))?>"
                         class="whatsappbtn btn btn-sm w-100" target="_blank">
                         Connect on whatsapp
                       </a>
@@ -347,7 +362,7 @@
           <?php echo isset($data1->seller->sellerCompanyName)?$data1->seller->sellerCompanyName:''; ?>
           </div>
           <div> <?php echo isset($data1->seller->sellerTagline)?$data1->seller->sellerTagline:''; ?>     </div><br>
-          <a href="/<?php echo $url->getSellerUrl($data1->seller->sellerCompanyName,$data1->seller->id) ?>" target="_blank" title="<?php echo $data1->seller->sellerCompanyName?>" target="_blank"
+          <a href="/<?php echo $url->getSellerUrl(!empty($data1->seller->sellerUrl) ? $data1->seller->sellerUrl : $data1->seller->sellerCompanyName,$data1->seller->id) ?>" target="_blank" title="<?php echo $data1->seller->sellerCompanyName?>" target="_blank"
             class="btn-primary-gradiant rounded-10 mt-4 px-md-5">
             View more
           </a>
@@ -356,7 +371,7 @@
        
       </div>
     </div>
-    <script src="services/storegeService.js"></script>
+    <script src="<?php echo BASE_URL;?>services/storegeService.js"></script>
     <script>
        function closePopup() {
     document.getElementById("popup-card-otp").style.display = "none";
@@ -491,7 +506,7 @@ fetch(url, {
     console.log(mobileNumber);
       const myObject = new StorageService();
       $.ajax({
-        url: "https://api.tradersfind.com/api/authenticate-otp",
+        url: API_BASE_URL + "api/authenticate-otp",
   method: "POST",
   dataType: "json",
   contentType: "application/json",
@@ -529,7 +544,7 @@ fetch(url, {
      
       const myObject1 = new StorageService();
       $.ajax({
-        url: "https://api.tradersfind.com/api/register-otp",
+        url: API_BASE_URL + "api/register-otp",
   method: "POST",
   dataType: "json",
   contentType: "application/json",
@@ -568,7 +583,7 @@ fetch(url, {
     };
            var otpres='';
             $.ajax({
-                    url: "https://api.tradersfind.com/api/guest/users/"+'+'+mobnumber,
+                    url: API_BASE_URL + "api/guest/users/"+'+'+mobnumber,
                     dataType: "json",
                     data: { },
                     success: function (data) {
@@ -622,27 +637,9 @@ function sendOtp($contenctNo,$formdata){
     }
   </script>";
   }else{
-    if(isset($data123->title) && $data123->title=='OTP Already generated for the phone'){
-
-      include_once 'otp.php';
-      //  //echo $contenctNo;
-      echo '<script>document.getElementById("popup-card-otp").style.display = "block";</script>';
-      $message="OTP Already generated for this phone number";
-      $type="success";
-      echo "
-      <script>
-          $(document).ready(function() {
-              toastr.$type('$message');
-          });
-      </script>";
-
-      
-    }else{
-      //print_r($data123);
-      include_once 'otp.php';
-      //echo $contenctNo;
-      echo '<script>document.getElementById("popup-card-otp").style.display = "block";</script>';
-    }
+  include_once 'otp.php';
+ // echo $contenctNo;
+  echo '<script>document.getElementById("popup-card-otp").style.display = "block";</script>';
   }
 }
       if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -656,9 +653,8 @@ function sendOtp($contenctNo,$formdata){
     $formdata = array(
       'enquirerContactNumber' => $countryCode . $contactNumber,
       'enquiryMessage' => $requirement,
-      'enquirerEmail' => $enquirer_email,
-      'status' => 'Pending for Approval',
-      "enquirerName"=>""
+      'enquirer_email' => $enquirer_email,
+      'status' => 'New'
     );
 
   //echo "Form submitted successfully!";
@@ -684,7 +680,7 @@ function sendOtp($contenctNo,$formdata){
       'productName' => $productName,
       'quantity' => $quantity,
       'unit' => $quantityUnit,
-      'status' => 'Pending for Approval',
+      'status' => 'New',
       'frequencytype' => $frequencytype,
       'enquirerName'=>''
     );

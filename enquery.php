@@ -1,4 +1,6 @@
-<?php include_once 'config.php'; ?>
+<?php include_once 'config.php'; 
+$PmodalId = 'enquiryFormModal';
+?>
 <div id="popup-card" class="popup-card" style="display: none;" >
 
 
@@ -122,7 +124,7 @@
                     <div class="media mt-3">
                         <div class="media-left media-middle">
                             <a href="#">
-                                <img class="media-object" src="<?php echo BASE_URL ?>assets/images/login-icon1.jpg">
+                                <img class="media-object" src="<?php echo BASE_URL ?>assets/images/login-icon1.jpg" alt="Stopwatch speeds across gradient background.">
                             </a>
                         </div>
                         <div class="media-body">
@@ -134,7 +136,7 @@
                     <div class="media ">
                         <div class="media-left media-middle">
                             <a href="#">
-                                <img class="media-object" src="<?php echo BASE_URL ?>assets/images/login-icon2.jpg">
+                                <img class="media-object" src="<?php echo BASE_URL ?>assets/images/login-icon2.jpg" alt="Worker pushing handcart, carrying boxes, warehouse.">
                             </a>
                         </div>
                         <div class="media-body">
@@ -146,7 +148,7 @@
                     <div class="media ">
                         <div class="media-left media-middle">
                             <a href="#">
-                                <img class="media-object" src="<?php echo BASE_URL ?>assets/images/login-icon3.jpg">
+                                <img class="media-object" src="<?php echo BASE_URL ?>assets/images/login-icon3.jpg" alt="Checklist displays items, on red-blue gradient.">
                             </a>
                         </div>
                         <div class="media-body">

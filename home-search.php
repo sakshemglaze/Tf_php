@@ -31,7 +31,7 @@
 
                         <div class="input-group mb-3 w-100 position-relative">
                             <span class="input-group-text bg-white" id="basic-addon1"><img
-                                    src="<?php echo BASE_URL?>assets/images/location-3.png" width="16" height="17" alt="location" class="me-lg-3 me-2 img-fluid" />
+                                    src="<?php echo B_URL?>assets/images/location-3.png" width="16" height="17" alt="location" class="me-lg-3 me-2 img-fluid" />
                                <?php
                                 $areas = array(
                                     "UAE",
@@ -109,14 +109,14 @@
 </ul>
 
 <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
-<script src="<?php echo BASE_URL;?>assets/js/jquery-3.6.1.min.js"> </script>
+<script src="<?php echo B_URL;?>assets/js/jquery-3.6.1.min.js"> </script>
 <script>
     $(document).ready(function () {
         $('#search').keyup(function () {
             var searchText = $(this).val();
             if (searchText.length >= 3) {
                 $.ajax({
-                    url: "https://api.tradersfind.com/api/search-suggestions",
+                    url: API_BASE_URL + "api/search-suggestions",
                     dataType: "json",
                     data: { searchText: searchText },
                     success: function (data) {
@@ -229,4 +229,4 @@
         </div>
     </div>
 </section>
-<script src="<?php echo BASE_URL; ?>assets/vendors/bootstrap/bootstrap.bundle.min.js"></script>
+<script src="<?php echo B_URL; ?>assets/vendors/bootstrap/bootstrap.bundle.min.js"></script>
